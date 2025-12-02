@@ -7,7 +7,7 @@
                 <!-- Back Button -->
                 <Link
                     :href="route('agency.flight-requests.index')"
-                    class="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6"
+                    class="inline-flex items-center text-brand-red-600 hover:text-blue-800 mb-6"
                 >
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -132,7 +132,7 @@
                                                     v-model="form.airline_name"
                                                     type="text"
                                                     placeholder="e.g., Emirates"
-                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                                                     required
                                                 />
                                                 <div v-if="form.errors.airline_name" class="text-red-600 text-sm mt-1">
@@ -148,7 +148,7 @@
                                                     v-model="form.flight_number"
                                                     type="text"
                                                     placeholder="e.g., EK582"
-                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                                                     required
                                                 />
                                                 <div v-if="form.errors.flight_number" class="text-red-600 text-sm mt-1">
@@ -172,7 +172,7 @@
                                                     min="0"
                                                     step="100"
                                                     placeholder="e.g., 75000"
-                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                                                     required
                                                 />
                                                 <div v-if="form.errors.quoted_price" class="text-red-600 text-sm mt-1">
@@ -188,7 +188,7 @@
                                                     v-model="form.valid_until"
                                                     type="date"
                                                     :min="getTomorrowDate()"
-                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                                                     required
                                                 />
                                                 <div v-if="form.errors.valid_until" class="text-red-600 text-sm mt-1">
@@ -205,7 +205,7 @@
                                                 v-model="form.price_breakdown"
                                                 rows="4"
                                                 placeholder="Break down the pricing:&#10;Base fare: ৳50,000&#10;Taxes & fees: ৳15,000&#10;Baggage: ৳5,000&#10;Service charge: ৳5,000&#10;Total: ৳75,000"
-                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                                                 required
                                             ></textarea>
                                             <div v-if="form.errors.price_breakdown" class="text-red-600 text-sm mt-1">
@@ -221,7 +221,7 @@
                                             v-model="form.flight_details"
                                             rows="6"
                                             placeholder="Provide complete flight details:&#10;&#10;Departure: DAC 10:30 AM&#10;Arrival: DXB 2:45 PM (same day)&#10;Duration: 5h 15m&#10;Aircraft: Boeing 777-300ER&#10;Layovers: Direct flight (no layovers)&#10;Baggage: 30kg checked + 7kg cabin&#10;Meal: Complimentary&#10;&#10;Return (if applicable):&#10;Departure: DXB 8:00 PM&#10;Arrival: DAC 2:15 AM (next day)&#10;..."
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                                             required
                                         ></textarea>
                                         <div v-if="form.errors.flight_details" class="text-red-600 text-sm mt-1">
@@ -238,7 +238,7 @@
                                             v-model="form.notes"
                                             rows="3"
                                             placeholder="Any additional information for the customer..."
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                                         ></textarea>
                                     </div>
 
@@ -253,7 +253,7 @@
                                         <button
                                             type="submit"
                                             :disabled="form.processing"
-                                            class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
+                                            class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50"
                                         >
                                             <span v-if="!form.processing">
                                                 {{ existingQuote ? 'Update Quote' : 'Submit Quote' }}

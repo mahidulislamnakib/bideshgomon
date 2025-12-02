@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Review Verification Request" />
         
@@ -25,7 +25,7 @@
                             'px-4 py-2 rounded-full text-sm font-medium',
                             request.status === 'approved' ? 'bg-green-100 text-green-800' :
                             request.status === 'rejected' ? 'bg-red-100 text-red-800' :
-                            request.status === 'under_review' ? 'bg-blue-100 text-blue-800' :
+                            request.status === 'under_review' ? 'bg-red-100 text-brand-red-600' :
                             request.status === 'requires_changes' ? 'bg-orange-100 text-orange-800' :
                             'bg-yellow-100 text-yellow-800'
                         ]"
@@ -92,8 +92,8 @@
                                         <p class="text-sm text-red-700 mt-1">{{ doc.rejection_reason }}</p>
                                     </div>
 
-                                    <div v-if="doc.notes" class="mt-2 p-3 bg-blue-50 rounded">
-                                        <p class="text-sm text-blue-900">Notes:</p>
+                                    <div v-if="doc.notes" class="mt-2 p-3 bg-red-50 rounded">
+                                        <p class="text-sm text-red-900">Notes:</p>
                                         <p class="text-sm text-blue-700 mt-1">{{ doc.notes }}</p>
                                     </div>
 
@@ -104,7 +104,7 @@
                                             <textarea
                                                 v-model="documentForms[doc.id].notes"
                                                 rows="2"
-                                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                                 placeholder="Any notes about this document..."
                                             ></textarea>
                                         </div>
@@ -113,7 +113,7 @@
                                             <textarea
                                                 v-model="documentForms[doc.id].rejection_reason"
                                                 rows="2"
-                                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                                 placeholder="Explain why this document is being rejected..."
                                             ></textarea>
                                         </div>
@@ -137,7 +137,7 @@
                             <a
                                 :href="`/storage/${doc.file_path}`"
                                 target="_blank"
-                                class="ml-4 text-indigo-600 hover:text-indigo-800 text-sm font-medium"
+                                class="ml-4 text-brand-red-600 hover:text-brand-red-600 text-sm font-medium"
                             >
                                 View
                             </a>
@@ -156,7 +156,7 @@
                             id="status"
                             v-model="statusForm.status"
                             required
-                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                         >
                             <option value="under_review">Under Review</option>
                             <option value="approved">Approved</option>
@@ -171,7 +171,7 @@
                             id="admin_notes"
                             v-model="statusForm.admin_notes"
                             rows="4"
-                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             placeholder="Internal notes about this verification..."
                         ></textarea>
                     </div>
@@ -183,7 +183,7 @@
                             v-model="statusForm.rejection_reason"
                             rows="4"
                             required
-                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             placeholder="Explain why the verification is being rejected..."
                         ></textarea>
                     </div>
@@ -198,7 +198,7 @@
                     <button
                         type="submit"
                         :disabled="processing"
-                        class="w-full px-4 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-50"
+                        class="w-full px-4 py-3 bg-brand-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50"
                     >
                         {{ processing ? 'Updating...' : 'Update Status' }}
                     </button>

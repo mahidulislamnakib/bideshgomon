@@ -9,14 +9,14 @@
                         <div class="flex justify-between items-center mb-6">
                             <div class="flex items-center gap-3">
                                 <div class="p-2 bg-sky-100 rounded-lg">
-                                    <CalendarDaysIcon class="w-8 h-8 text-sky-600" />
+                                    <CalendarDaysIcon class="w-8 h-8 text-brand-red-600" />
                                 </div>
                                 <div>
                                     <h2 class="text-2xl font-bold text-gray-900">My Appointments</h2>
                                     <p class="text-sm text-gray-600">Manage your appointments</p>
                                 </div>
                             </div>
-                            <Link :href="route('appointments.create')" class="inline-flex items-center gap-2 px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 font-medium transition-colors">
+                            <Link :href="route('appointments.create')" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 font-medium transition-colors">
                                 <PlusIcon class="w-5 h-5" />
                                 Book Appointment
                             </Link>
@@ -26,7 +26,7 @@
                         <div class="mb-6 flex flex-wrap gap-3">
                             <div class="flex items-center gap-2">
                                 <FunnelIcon class="w-4 h-4 text-gray-500" />
-                                <select v-model="filterStatus" @change="applyFilters" class="rounded-lg border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
+                                <select v-model="filterStatus" @change="applyFilters" class="rounded-lg border-gray-300 shadow-sm focus:border-sky-500 focus:ring-brand-red-600">
                                     <option value="">All Status</option>
                                     <option value="pending">Pending</option>
                                     <option value="confirmed">Confirmed</option>
@@ -35,7 +35,7 @@
                                 </select>
                             </div>
 
-                            <select v-model="filterType" @change="applyFilters" class="rounded-lg border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500">
+                            <select v-model="filterType" @change="applyFilters" class="rounded-lg border-gray-300 shadow-sm focus:border-sky-500 focus:ring-brand-red-600">
                                 <option value="">All Types</option>
                                 <option value="office_visit">Office Visit</option>
                                 <option value="online_meeting">Online Meeting</option>
@@ -57,11 +57,11 @@
                                         </div>
                                         <div class="flex flex-wrap items-center gap-4 mb-2">
                                             <div class="flex items-center text-gray-700">
-                                                <CalendarIcon class="w-5 h-5 mr-2 text-sky-600" />
+                                                <CalendarIcon class="w-5 h-5 mr-2 text-brand-red-600" />
                                                 <span class="font-semibold">{{ formatDate(appointment.appointment_date) }}</span>
                                             </div>
                                             <div class="flex items-center text-gray-700">
-                                                <ClockIcon class="w-5 h-5 mr-2 text-sky-600" />
+                                                <ClockIcon class="w-5 h-5 mr-2 text-brand-red-600" />
                                                 <span class="font-semibold">{{ appointment.appointment_time }}</span>
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <ChevronRightIcon class="w-5 h-5 text-gray-400 group-hover:text-sky-600 transition-colors" />
+                                        <ChevronRightIcon class="w-5 h-5 text-gray-400 group-hover:text-brand-red-600 transition-colors" />
                                     </div>
                                 </div>
                             </Link>
@@ -85,7 +85,7 @@
                             <h3 class="mt-2 text-sm font-medium text-gray-900">No appointments</h3>
                             <p class="mt-1 text-sm text-gray-500">Get started by booking your first appointment.</p>
                             <div class="mt-6">
-                                <Link :href="route('appointments.create')" class="inline-flex items-center gap-2 px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 font-medium transition-colors">
+                                <Link :href="route('appointments.create')" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 font-medium transition-colors">
                                     <PlusIcon class="w-5 h-5" />
                                     Book Appointment
                                 </Link>
@@ -177,11 +177,6 @@ const purposeLabel = (purpose) => {
     return labels[purpose] || purpose;
 };
 
-const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
-};
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
+const { formatDate } = useBangladeshFormat();
 </script>

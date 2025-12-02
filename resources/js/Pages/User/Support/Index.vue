@@ -33,7 +33,7 @@
 
                         <!-- Filters -->
                         <div class="mb-6 flex flex-wrap gap-4">
-                            <select v-model="filterStatus" @change="applyFilters" class="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <select v-model="filterStatus" @change="applyFilters" class="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600">
                                 <option value="">All Status</option>
                                 <option value="open">Open</option>
                                 <option value="in_progress">In Progress</option>
@@ -42,7 +42,7 @@
                                 <option value="closed">Closed</option>
                             </select>
 
-                            <select v-model="filterCategory" @change="applyFilters" class="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <select v-model="filterCategory" @change="applyFilters" class="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600">
                                 <option value="">All Categories</option>
                                 <option value="visa">🛂 Visa & Immigration</option>
                                 <option value="jobs">💼 Jobs & Applications</option>
@@ -71,16 +71,16 @@
                                                     {{ categoryLabel(ticket.category) }}
                                                 </span>
                                             </div>
-                                            <h3 class="font-display font-bold text-lg text-gray-900 mb-rhythm-xs group-hover:text-ocean-600 transition-colors">{{ ticket.subject }}</h3>
+                                            <h3 class="font-display font-bold text-lg text-gray-900 mb-rhythm-xs group-hover:text-brand-red-600 transition-colors">{{ ticket.subject }}</h3>
                                             <p class="text-sm text-gray-600 line-clamp-2 mb-rhythm-sm">{{ ticket.message }}</p>
                                             <div class="flex items-center gap-4 text-xs text-gray-500">
                                                 <span>Created: {{ formatDate(ticket.created_at) }}</span>
-                                                <span v-if="ticket.replies_count > 0" class="font-medium text-ocean-600">{{ ticket.replies_count }} replies</span>
+                                                <span v-if="ticket.replies_count > 0" class="font-medium text-brand-red-600">{{ ticket.replies_count }} replies</span>
                                                 <span v-if="ticket.assigned_to">Assigned to: {{ ticket.assigned_to.name }}</span>
                                             </div>
                                         </div>
                                         <div class="flex-shrink-0">
-                                            <svg class="w-5 h-5 text-gray-400 group-hover:text-ocean-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-5 h-5 text-gray-400 group-hover:text-brand-red-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                             </svg>
                                         </div>
@@ -90,7 +90,7 @@
                         </div>
 
                         <RhythmicCard v-else variant="light" class="text-center py-rhythm-xl">
-                            <div class="w-16 h-16 bg-ocean-500 rounded-full flex items-center justify-center mx-auto mb-rhythm-md shadow-rhythmic-md">
+                            <div class="w-16 h-16 bg-brand-red-600 rounded-full flex items-center justify-center mx-auto mb-rhythm-md shadow-rhythmic-md">
                                 <ChatBubbleLeftRightIcon class="w-8 h-8 text-white" />
                             </div>
                             <h3 class="font-display font-bold text-lg text-gray-900 mb-rhythm-xs">No support tickets yet</h3>
@@ -196,13 +196,6 @@ const categoryLabel = (category) => {
     return labels[category] || category;
 };
 
-const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    });
-};
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
+const { formatDate } = useBangladeshFormat();
 </script>

@@ -81,8 +81,6 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
 })->name('welcome');
 
@@ -102,6 +100,15 @@ Route::middleware('auth')->get('/profile/assessment/recommendations', [\App\Http
     ->name('profile.assessment.recommendations');
 Route::middleware('auth')->get('/profile/assessment/score-breakdown', [\App\Http\Controllers\ProfileAssessmentController::class, 'scoreBreakdown'])
     ->name('profile.assessment.score-breakdown');
+
+// Demo/Testing Routes (Development Only)
+Route::middleware('auth')->get('/demo/phone-input', function () {
+    return Inertia::render('Demo/PhoneInput');
+})->name('demo.phone-input');
+
+Route::get('/demo/airbnb-design', function () {
+    return Inertia::render('AirbnbHome');
+})->name('demo.airbnb');
 
 // Role-based dashboard routing
 Route::get('/dashboard', function () {
@@ -529,7 +536,13 @@ Route::middleware('auth')->group(function () {
         // Security Information
         Route::get('/security', [\App\Http\Controllers\Api\UserProfile\UserSecurityInformationController::class, 'show'])->name('security.show');
         Route::post('/security', [\App\Http\Controllers\Api\UserProfile\UserSecurityInformationController::class, 'store'])->name('security.store');
+        Route::put('/security', [\App\Http\Controllers\Api\UserProfile\UserSecurityInformationController::class, 'update'])->name('security.update');
         Route::delete('/security', [\App\Http\Controllers\Api\UserProfile\UserSecurityInformationController::class, 'destroy'])->name('security.destroy');
+
+        // User Documents (Profile Documents Management)
+        Route::post('/documents', [\App\Http\Controllers\Api\UserProfile\UserDocumentController::class, 'store'])->name('documents.store');
+        Route::get('/documents/{id}/download', [\App\Http\Controllers\Api\UserProfile\UserDocumentController::class, 'download'])->name('documents.download');
+        Route::delete('/documents/{id}', [\App\Http\Controllers\Api\UserProfile\UserDocumentController::class, 'destroy'])->name('documents.destroy');
 
         // Education
         Route::get('/education', [\App\Http\Controllers\Profile\UserEducationController::class, 'index'])->name('education.index');
@@ -927,6 +940,17 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     
     // Data Management
     Route::prefix('data')->name('data.')->group(function () {
+        // Data Management Dashboard
+        Route::get('/', function () {
+            return Inertia::render('Admin/DataManagement/Index', [
+                'stats' => [
+                    'geographic' => 227,  // Countries + Cities + Airports + Currencies
+                    'professional' => 283, // Skills + Degrees + Languages + Job Categories
+                    'content' => 72       // Service Categories + Blog Categories + Tags
+                ]
+            ]);
+        })->name('index');
+        
         // Countries Management
         Route::resource('countries', \App\Http\Controllers\Admin\DataManagement\CountryController::class);
         Route::post('/countries/{country}/toggle-status', [\App\Http\Controllers\Admin\DataManagement\CountryController::class, 'toggleStatus'])->name('countries.toggle-status');

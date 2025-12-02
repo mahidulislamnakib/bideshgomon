@@ -108,7 +108,7 @@ const getRiskLevel = () => {
     const score = props.securityInformation.risk_score || 0;
     if (score >= 75) return { text: 'High Risk', color: 'text-red-600 bg-red-50' };
     if (score >= 50) return { text: 'Medium Risk', color: 'text-yellow-600 bg-yellow-50' };
-    if (score >= 25) return { text: 'Low Risk', color: 'text-blue-600 bg-blue-50' };
+    if (score >= 25) return { text: 'Low Risk', color: 'text-brand-red-600 bg-blue-50' };
     return { text: 'Minimal Risk', color: 'text-green-600 bg-green-50' };
 };
 
@@ -287,7 +287,7 @@ const getProficiencyLabel = (level) => {
 
                 <!-- Phone Numbers -->
                 <div id="phones" class="bg-white dark:bg-gray-800 shadow-md sm:rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 scroll-mt-20">
-                    <div class="h-1 bg-sky-500"></div>
+                    <div class="h-1 bg-brand-red-600"></div>
                     <div class="p-4 sm:p-6">
                         <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                             <span class="text-2xl">📱</span>
@@ -303,14 +303,14 @@ const getProficiencyLabel = (level) => {
                                             </span>
                                         </div>
                                         <div class="flex-1 min-w-0">
-                                            <a :href="`tel:${phone.country_code}${phone.phone_number}`" class="text-base font-semibold text-gray-900 dark:text-gray-100 hover:text-sky-600 dark:hover:text-sky-400">
+                                            <a :href="`tel:${phone.country_code}${phone.phone_number}`" class="text-base font-semibold text-gray-900 dark:text-gray-100 hover:text-brand-red-600 dark:hover:text-sky-400">
                                                 {{ phone.country_code }} {{ phone.phone_number }}
                                             </a>
                                             <div class="text-xs text-gray-600 dark:text-gray-400 capitalize mt-0.5">{{ phone.phone_type }}</div>
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-end gap-1">
-                                        <span v-if="phone.is_primary" class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-600 text-white">
+                                        <span v-if="phone.is_primary" class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-brand-red-600 text-white">
                                             Primary
                                         </span>
                                         <span v-if="phone.is_verified" class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-600 text-white">
@@ -323,7 +323,7 @@ const getProficiencyLabel = (level) => {
                         <div v-else class="text-center py-12 bg-gray-50 dark:bg-gray-900/50 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700">
                             <span class="text-5xl block mb-3">📱</span>
                             <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">No phone numbers added yet</p>
-                            <Link :href="route('profile.edit', { section: 'phone' })" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors touch-manipulation">
+                            <Link :href="route('profile.edit', { section: 'phone' })" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors touch-manipulation">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                 </svg>
@@ -335,7 +335,7 @@ const getProficiencyLabel = (level) => {
 
                 <!-- Education & Qualifications -->
                 <div id="education" class="bg-white dark:bg-gray-800 shadow-md sm:rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 scroll-mt-20">
-                    <div class="h-1 bg-blue-500"></div>
+                    <div class="h-1 bg-brand-red-600"></div>
                     <div class="p-4 sm:p-6">
                         <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                             <span class="text-2xl">🎓</span>
@@ -379,7 +379,7 @@ const getProficiencyLabel = (level) => {
                         <div v-else class="text-center py-12 bg-gray-50 dark:bg-gray-900/50 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700">
                             <span class="text-5xl block mb-3">📚</span>
                             <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">No education records added yet</p>
-                            <Link :href="route('profile.edit', { section: 'education' })" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors touch-manipulation">
+                            <Link :href="route('profile.edit', { section: 'education' })" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors touch-manipulation">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                 </svg>
@@ -430,7 +430,7 @@ const getProficiencyLabel = (level) => {
                         <div v-else class="text-center py-12 bg-gray-50 dark:bg-gray-900/50 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700">
                         <span class="text-5xl block mb-3">💼</span>
                         <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">No work experience added yet</p>
-                        <Link :href="route('profile.edit', { section: 'experience' })" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors touch-manipulation">
+                        <Link :href="route('profile.edit', { section: 'experience' })" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors touch-manipulation">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                             </svg>
@@ -441,7 +441,7 @@ const getProficiencyLabel = (level) => {
 
                 <!-- Skills & Expertise -->
                 <div id="skills" class="bg-white dark:bg-gray-800 shadow-md sm:rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 scroll-mt-20">
-                    <div class="h-1 bg-teal-500"></div>
+                    <div class="h-1 bg-brand-red-600"></div>
                     <div class="p-4 sm:p-6">
                         <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                             <span class="text-2xl">⚡</span>
@@ -451,7 +451,7 @@ const getProficiencyLabel = (level) => {
                             <div v-for="userSkill in skills" :key="userSkill.id" class="bg-teal-50 border border-teal-200 rounded-lg p-4">
                                 <div class="flex justify-between items-start mb-2">
                                     <h4 class="font-semibold text-gray-900 text-sm">{{ userSkill.skill?.name || 'N/A' }}</h4>
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-teal-600 text-white capitalize">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-red-600 text-white capitalize">
                                         {{ userSkill.proficiency_level }}
                                     </span>
                                 </div>
@@ -469,7 +469,7 @@ const getProficiencyLabel = (level) => {
                         <div v-else class="text-center py-12 bg-gray-50 dark:bg-gray-900/50 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700">
                             <span class="text-5xl block mb-3">🛠️</span>
                             <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">No skills added yet</p>
-                            <Link :href="route('profile.edit', { section: 'skills' })" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors touch-manipulation">
+                            <Link :href="route('profile.edit', { section: 'skills' })" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors touch-manipulation">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                 </svg>
@@ -481,7 +481,7 @@ const getProficiencyLabel = (level) => {
 
                 <!-- Travel History -->
                 <div id="travel" class="bg-white dark:bg-gray-800 shadow-md sm:rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 scroll-mt-20">
-                    <div class="h-1 bg-sky-500"></div>
+                    <div class="h-1 bg-brand-red-600"></div>
                     <div class="p-4 sm:p-6">
                         <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                             <span class="text-2xl">✈️</span>
@@ -494,7 +494,7 @@ const getProficiencyLabel = (level) => {
                                         <h4 class="font-semibold text-gray-900 text-sm">{{ travel.country_visited }}</h4>
                                         <p class="text-xs text-gray-600 mt-0.5">{{ travel.city_visited }}</p>
                                     </div>
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-sky-600 text-white capitalize flex-shrink-0">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-red-600 text-white capitalize flex-shrink-0">
                                         {{ travel.purpose }}
                                     </span>
                                 </div>
@@ -529,7 +529,7 @@ const getProficiencyLabel = (level) => {
                         <div v-else class="text-center py-12 bg-gray-50 dark:bg-gray-900/50 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700">
                             <span class="text-5xl block mb-3">🌍</span>
                             <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">No travel history recorded yet</p>
-                            <Link :href="route('profile.edit', { section: 'travel' })" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors touch-manipulation">
+                            <Link :href="route('profile.edit', { section: 'travel' })" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors touch-manipulation">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                 </svg>
@@ -598,7 +598,7 @@ const getProficiencyLabel = (level) => {
                         <div v-else class="text-center py-12 bg-gray-50 dark:bg-gray-900/50 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700">
                             <span class="text-5xl block mb-3">🏠</span>
                             <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">No address information added yet</p>
-                            <Link :href="route('profile.edit', { section: 'address' })" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors touch-manipulation">
+                            <Link :href="route('profile.edit', { section: 'address' })" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors touch-manipulation">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                 </svg>
@@ -610,7 +610,7 @@ const getProficiencyLabel = (level) => {
 
                 <!-- Documents -->
                 <div id="documents" class="bg-white dark:bg-gray-800 shadow-md sm:rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 scroll-mt-20">
-                    <div class="h-1 bg-blue-500"></div>
+                    <div class="h-1 bg-brand-red-600"></div>
                     <div class="p-4 sm:p-6">
                         <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                             <span class="text-2xl">📄</span>
@@ -649,7 +649,7 @@ const getProficiencyLabel = (level) => {
                         <div v-else class="text-center py-12 bg-gray-50 dark:bg-gray-900/50 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700">
                             <span class="text-5xl block mb-3">📝</span>
                             <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">No documents added yet</p>
-                            <Link :href="route('profile.edit', { section: 'documents' })" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors touch-manipulation">
+                            <Link :href="route('profile.edit', { section: 'documents' })" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors touch-manipulation">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                 </svg>
@@ -705,7 +705,7 @@ const getProficiencyLabel = (level) => {
                         <div v-else class="text-center py-12 bg-gray-50 dark:bg-gray-900/50 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700">
                             <span class="text-5xl block mb-3">👪</span>
                             <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">No family members added yet</p>
-                            <Link :href="route('profile.edit', { section: 'family' })" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors touch-manipulation">
+                            <Link :href="route('profile.edit', { section: 'family' })" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors touch-manipulation">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                 </svg>
@@ -785,7 +785,7 @@ const getProficiencyLabel = (level) => {
                         <div v-else class="text-center py-12 bg-gray-50 dark:bg-gray-900/50 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700">
                             <span class="text-5xl block mb-3">💳</span>
                             <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">No financial information provided yet</p>
-                            <Link :href="route('profile.edit', { section: 'financial' })" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors touch-manipulation">
+                            <Link :href="route('profile.edit', { section: 'financial' })" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors touch-manipulation">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                 </svg>
@@ -797,7 +797,7 @@ const getProficiencyLabel = (level) => {
 
                 <!-- Language Proficiency -->
                 <div id="languages" class="bg-white dark:bg-gray-800 shadow-md sm:rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 scroll-mt-20">
-                    <div class="h-1 bg-blue-500"></div>
+                    <div class="h-1 bg-brand-red-600"></div>
                     <div class="p-4 sm:p-6">
                         <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                             <span class="text-2xl">🗣️</span>
@@ -810,7 +810,7 @@ const getProficiencyLabel = (level) => {
                                         <h4 class="font-semibold text-gray-900 text-sm">{{ language.language_name }}</h4>
                                         <p class="text-xs text-gray-600 mt-0.5">{{ getProficiencyLabel(language.proficiency) }}</p>
                                     </div>
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-600 text-white capitalize flex-shrink-0">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-red-600 text-white capitalize flex-shrink-0">
                                         {{ language.proficiency }}
                                     </span>
                                 </div>
@@ -851,7 +851,7 @@ const getProficiencyLabel = (level) => {
                         <div v-else class="text-center py-12 bg-gray-50 dark:bg-gray-900/50 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700">
                             <span class="text-5xl block mb-3">🌐</span>
                             <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">No languages added yet</p>
-                            <Link :href="route('profile.edit', { section: 'languages' })" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors touch-manipulation">
+                            <Link :href="route('profile.edit', { section: 'languages' })" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors touch-manipulation">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                 </svg>
@@ -942,7 +942,7 @@ const getProficiencyLabel = (level) => {
                                                 class="h-3 rounded-full transition-all duration-500"
                                                 :class="{
                                                     'bg-green-500': securityInformation.risk_score < 25,
-                                                    'bg-blue-500': securityInformation.risk_score >= 25 && securityInformation.risk_score < 50,
+                                                    'bg-brand-red-600': securityInformation.risk_score >= 25 && securityInformation.risk_score < 50,
                                                     'bg-yellow-500': securityInformation.risk_score >= 50 && securityInformation.risk_score < 75,
                                                     'bg-red-500': securityInformation.risk_score >= 75
                                                 }"
@@ -956,7 +956,7 @@ const getProficiencyLabel = (level) => {
                         <div v-else class="text-center py-12 bg-gray-50 dark:bg-gray-900/50 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700">
                             <span class="text-5xl block mb-3">🔒</span>
                             <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">No security information provided yet</p>
-                            <Link :href="route('profile.edit', { section: 'security' })" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors touch-manipulation">
+                            <Link :href="route('profile.edit', { section: 'security' })" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors touch-manipulation">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                 </svg>

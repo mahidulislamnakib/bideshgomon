@@ -12,7 +12,7 @@
                     </div>
                     <Link
                         :href="route('flight-requests.create')"
-                        class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition inline-flex items-center"
+                        class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition inline-flex items-center"
                     >
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -28,7 +28,7 @@
                         :class="[
                             'pb-3 px-4 font-medium text-sm transition',
                             filter === 'all'
-                                ? 'border-b-2 border-blue-500 text-blue-600'
+                                ? 'border-b-2 border-blue-500 text-brand-red-600'
                                 : 'text-gray-500 hover:text-gray-700'
                         ]"
                     >
@@ -39,7 +39,7 @@
                         :class="[
                             'pb-3 px-4 font-medium text-sm transition',
                             filter === 'pending'
-                                ? 'border-b-2 border-blue-500 text-blue-600'
+                                ? 'border-b-2 border-blue-500 text-brand-red-600'
                                 : 'text-gray-500 hover:text-gray-700'
                         ]"
                     >
@@ -50,7 +50,7 @@
                         :class="[
                             'pb-3 px-4 font-medium text-sm transition',
                             filter === 'quoted'
-                                ? 'border-b-2 border-blue-500 text-blue-600'
+                                ? 'border-b-2 border-blue-500 text-brand-red-600'
                                 : 'text-gray-500 hover:text-gray-700'
                         ]"
                     >
@@ -61,7 +61,7 @@
                         :class="[
                             'pb-3 px-4 font-medium text-sm transition',
                             filter === 'completed'
-                                ? 'border-b-2 border-blue-500 text-blue-600'
+                                ? 'border-b-2 border-blue-500 text-brand-red-600'
                                 : 'text-gray-500 hover:text-gray-700'
                         ]"
                     >
@@ -72,7 +72,7 @@
                         :class="[
                             'pb-3 px-4 font-medium text-sm transition',
                             filter === 'cancelled'
-                                ? 'border-b-2 border-blue-500 text-blue-600'
+                                ? 'border-b-2 border-blue-500 text-brand-red-600'
                                 : 'text-gray-500 hover:text-gray-700'
                         ]"
                     >
@@ -136,7 +136,7 @@
                             <div class="ml-6 flex flex-col space-y-2">
                                 <Link
                                     :href="route('flight-requests.show', request.id)"
-                                    class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm text-center"
+                                    class="px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition text-sm text-center"
                                 >
                                     View Details
                                 </Link>
@@ -170,7 +170,7 @@
                     <p class="text-gray-600 mb-6">Submit your first flight request to get competitive quotes from agencies</p>
                     <Link
                         :href="route('flight-requests.create')"
-                        class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                        class="inline-flex items-center px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition"
                     >
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -193,7 +193,7 @@
                                 :class="[
                                     'px-4 py-2 border rounded-lg text-sm',
                                     link.active
-                                        ? 'bg-blue-600 text-white border-blue-600'
+                                        ? 'bg-brand-red-600 text-white border-blue-600'
                                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                                 ]"
                                 v-html="link.label"

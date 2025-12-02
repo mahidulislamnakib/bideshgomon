@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { useForm } from '@inertiajs/vue3';
 import { Head, Link } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -58,7 +58,7 @@ const submit = () => {
                         </label>
                         <select
                             v-model="form.location"
-                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             required
                         >
                             <option v-for="(label, value) in locations" :key="value" :value="value">
@@ -76,7 +76,7 @@ const submit = () => {
                         <input
                             v-model="form.label"
                             type="text"
-                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             placeholder="Home, Services, Contact, etc."
                             required
                         />
@@ -91,7 +91,7 @@ const submit = () => {
                             </label>
                             <select
                                 v-model="form.route_name"
-                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">Select a route...</option>
                                 <option v-for="route in availableRoutes" :key="route" :value="route">
@@ -109,7 +109,7 @@ const submit = () => {
                             <input
                                 v-model="form.url"
                                 type="text"
-                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 placeholder="/custom-page or https://example.com"
                             />
                             <p class="mt-1 text-xs text-gray-500">Only if route is not available</p>
@@ -125,7 +125,7 @@ const submit = () => {
                         <input
                             v-model="form.icon"
                             type="text"
-                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             placeholder="HomeIcon, BriefcaseIcon, etc."
                         />
                         <p class="mt-1 text-xs text-gray-500">Optional: Heroicons v2 outline icon name</p>
@@ -140,7 +140,7 @@ const submit = () => {
                             </label>
                             <select
                                 v-model="form.parent_id"
-                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option :value="null">None (Top Level)</option>
                                 <option v-for="parent in parentMenus" :key="parent.id" :value="parent.id">
@@ -157,7 +157,7 @@ const submit = () => {
                             <input
                                 v-model.number="form.order"
                                 type="number"
-                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 min="0"
                             />
                             <p class="mt-1 text-xs text-gray-500">Lower numbers appear first</p>
@@ -173,7 +173,7 @@ const submit = () => {
                             <input
                                 v-model="form.is_active"
                                 type="checkbox"
-                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded"
                             />
                             <label class="ml-2 block text-sm text-gray-700">
                                 Active (visible on website)
@@ -184,7 +184,7 @@ const submit = () => {
                             <input
                                 v-model="form.is_external"
                                 type="checkbox"
-                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded"
                             />
                             <label class="ml-2 block text-sm text-gray-700">
                                 External Link
@@ -197,7 +197,7 @@ const submit = () => {
                             </label>
                             <select
                                 v-model="form.target"
-                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="_self">Same Window (_self)</option>
                                 <option value="_blank">New Tab (_blank)</option>
@@ -216,7 +216,7 @@ const submit = () => {
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 transition-colors"
+                            class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50 transition-colors"
                         >
                             <CheckIcon class="h-5 w-5 mr-2" />
                             {{ form.processing ? 'Creating...' : 'Create Menu Item' }}

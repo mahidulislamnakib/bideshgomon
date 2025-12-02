@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref, computed } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -40,12 +40,12 @@ const deleteDocument = (id) => {
 
 const getCategoryBadgeColor = (categoryName) => {
     const colors = {
-        'Identity Documents': 'bg-blue-100 text-blue-800',
+        'Identity Documents': 'bg-red-100 text-brand-red-600',
         'Financial Documents': 'bg-green-100 text-green-800',
         'Employment Documents': 'bg-purple-100 text-purple-800',
         'Business Documents': 'bg-orange-100 text-orange-800',
         'Educational Documents': 'bg-pink-100 text-pink-800',
-        'Travel Documents': 'bg-indigo-100 text-indigo-800',
+        'Travel Documents': 'bg-red-100 text-brand-red-600',
         'Supporting Documents': 'bg-yellow-100 text-yellow-800',
         'Medical Documents': 'bg-red-100 text-red-800',
     };
@@ -67,7 +67,7 @@ const getCategoryBadgeColor = (categoryName) => {
                     </div>
                     <Link
                         :href="route('admin.master-documents.create')"
-                        class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150"
                     >
                         <PlusIcon class="w-4 h-4 mr-2" />
                         Add Document
@@ -86,7 +86,7 @@ const getCategoryBadgeColor = (categoryName) => {
                                     @keyup.enter="searchDocuments"
                                     type="text"
                                     placeholder="Search documents..."
-                                    class="pl-10 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    class="pl-10 w-full border-gray-300 rounded-md shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 />
                             </div>
                         </div>
@@ -96,7 +96,7 @@ const getCategoryBadgeColor = (categoryName) => {
                             <select
                                 v-model="selectedCategory"
                                 @change="searchDocuments"
-                                class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full border-gray-300 rounded-md shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Categories</option>
                                 <option v-for="category in categories" :key="category.id" :value="category.id">
@@ -173,7 +173,7 @@ const getCategoryBadgeColor = (categoryName) => {
                                     <div class="flex space-x-2">
                                         <span 
                                             v-if="document.translation_required"
-                                            class="inline-flex items-center px-2 py-1 text-xs font-medium rounded bg-blue-100 text-blue-800"
+                                            class="inline-flex items-center px-2 py-1 text-xs font-medium rounded bg-red-100 text-brand-red-600"
                                             title="Translation Required"
                                         >
                                             🌐 Translation
@@ -201,14 +201,14 @@ const getCategoryBadgeColor = (categoryName) => {
                                     <div class="flex justify-end space-x-2">
                                         <Link
                                             :href="route('admin.master-documents.show', document.id)"
-                                            class="text-indigo-600 hover:text-indigo-900"
+                                            class="text-brand-red-600 hover:text-red-900"
                                             title="View"
                                         >
                                             View
                                         </Link>
                                         <Link
                                             :href="route('admin.master-documents.edit', document.id)"
-                                            class="text-blue-600 hover:text-blue-900"
+                                            class="text-brand-red-600 hover:text-red-900"
                                             title="Edit"
                                         >
                                             <PencilIcon class="w-4 h-4" />
@@ -241,7 +241,7 @@ const getCategoryBadgeColor = (categoryName) => {
                                     :class="[
                                         'px-3 py-2 text-sm rounded-md',
                                         link.active
-                                            ? 'bg-indigo-600 text-white'
+                                            ? 'bg-brand-red-600 text-white'
                                             : link.url 
                                                 ? 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 cursor-pointer'
                                                 : 'bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed'

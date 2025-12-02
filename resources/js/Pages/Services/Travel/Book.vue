@@ -196,7 +196,7 @@ watch(() => form.consultant_id, (newVal) => {
                                                 <span class="text-xs text-gray-600 dark:text-gray-400 ml-1">{{ consultant.rating || '4.8' }} ({{ consultant.reviews || '120' }} reviews)</span>
                                             </div>
                                         </div>
-                                        <CheckCircleIcon v-if="form.consultant_id === consultant.id" class="h-6 w-6 text-ocean-600 flex-shrink-0" />
+                                        <CheckCircleIcon v-if="form.consultant_id === consultant.id" class="h-6 w-6 text-brand-red-600 flex-shrink-0" />
                                     </div>
                                 </label>
                             </div>
@@ -227,12 +227,12 @@ watch(() => form.consultant_id, (newVal) => {
                                     'text-gray-400 dark:text-gray-600 cursor-not-allowed': !day.isCurrentMonth,
                                     'text-gray-400 dark:text-gray-600 cursor-not-allowed opacity-50': day.isPast,
                                     'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white cursor-pointer': day.isCurrentMonth && !day.isPast && day.hasSlots,
-                                    'bg-ocean-600 text-white': selectedDate === day.dateStr,
+                                    'bg-brand-red-600 text-white': selectedDate === day.dateStr,
                                     'ring-2 ring-ocean-600': day.isToday && selectedDate !== day.dateStr,
                                     'cursor-not-allowed opacity-50': day.isCurrentMonth && !day.isPast && !day.hasSlots
                                 }">
                                     {{ day.day }}
-                                    <span v-if="day.hasSlots && selectedDate !== day.dateStr" class="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-ocean-600 rounded-full"></span>
+                                    <span v-if="day.hasSlots && selectedDate !== day.dateStr" class="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-brand-red-600 rounded-full"></span>
                                 </button>
                             </div>
 
@@ -268,7 +268,7 @@ watch(() => form.consultant_id, (newVal) => {
                                         <div class="flex items-center gap-3 flex-1">
                                             <VideoCameraIcon class="h-5 w-5 text-gray-400" />
                                             <span class="text-sm font-medium text-gray-900 dark:text-white">Online Meeting</span>
-                                            <CheckCircleIcon v-if="form.appointment_type === 'online_meeting'" class="h-5 w-5 text-ocean-600 ml-auto" />
+                                            <CheckCircleIcon v-if="form.appointment_type === 'online_meeting'" class="h-5 w-5 text-brand-red-600 ml-auto" />
                                         </div>
                                     </label>
                                     <label class="relative flex cursor-pointer rounded-lg border-2 p-3 focus:outline-none" :class="form.appointment_type === 'office_visit' ? 'border-ocean-600 bg-ocean-50 dark:bg-ocean-900/20' : 'border-gray-300 dark:border-gray-600 hover:border-ocean-300'">
@@ -276,7 +276,7 @@ watch(() => form.consultant_id, (newVal) => {
                                         <div class="flex items-center gap-3 flex-1">
                                             <MapPinIcon class="h-5 w-5 text-gray-400" />
                                             <span class="text-sm font-medium text-gray-900 dark:text-white">Office Visit</span>
-                                            <CheckCircleIcon v-if="form.appointment_type === 'office_visit'" class="h-5 w-5 text-ocean-600 ml-auto" />
+                                            <CheckCircleIcon v-if="form.appointment_type === 'office_visit'" class="h-5 w-5 text-brand-red-600 ml-auto" />
                                         </div>
                                     </label>
                                 </div>
@@ -285,7 +285,7 @@ watch(() => form.consultant_id, (newVal) => {
                             <!-- Purpose -->
                             <div class="mb-6">
                                 <label for="purpose" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Purpose</label>
-                                <select v-model="form.purpose" id="purpose" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-ocean-500 focus:border-ocean-500">
+                                <select v-model="form.purpose" id="purpose" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-ocean-500">
                                     <option value="travel_consultation">Travel Consultation</option>
                                     <option value="package_discussion">Package Discussion</option>
                                     <option value="visa_guidance">Visa Guidance</option>
@@ -297,7 +297,7 @@ watch(() => form.consultant_id, (newVal) => {
                             <!-- Notes -->
                             <div class="mb-6">
                                 <label for="notes" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Additional Notes (Optional)</label>
-                                <textarea v-model="form.notes" id="notes" rows="3" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-ocean-500 focus:border-ocean-500" placeholder="Tell us about your travel plans..."></textarea>
+                                <textarea v-model="form.notes" id="notes" rows="3" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-ocean-500" placeholder="Tell us about your travel plans..."></textarea>
                             </div>
 
                             <!-- Summary -->
@@ -320,7 +320,7 @@ watch(() => form.consultant_id, (newVal) => {
                             </div>
 
                             <!-- Submit Button -->
-                            <button @click="submit" type="button" :disabled="!form.consultant_id || !selectedDate || !selectedTime || form.processing" class="w-full bg-ocean-600 text-white px-4 py-3 rounded-lg hover:bg-ocean-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+                            <button @click="submit" type="button" :disabled="!form.consultant_id || !selectedDate || !selectedTime || form.processing" class="w-full bg-brand-red-600 text-white px-4 py-3 rounded-lg hover:bg-red-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed">
                                 <span v-if="form.processing">Booking...</span>
                                 <span v-else>Confirm Booking</span>
                             </button>

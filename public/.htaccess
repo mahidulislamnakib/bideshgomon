@@ -4,6 +4,13 @@
     </IfModule>
 
     RewriteEngine On
+    
+    # Disable caching for development (localhost only)
+    <IfModule mod_headers.c>
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </IfModule>
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

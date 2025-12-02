@@ -69,7 +69,7 @@ const formatMonth = (monthStr) => {
           <select
             v-model="selectedPeriod"
             @change="changePeriod(selectedPeriod)"
-            class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
           >
             <option value="7">Last 7 Days</option>
             <option value="30">Last 30 Days</option>
@@ -106,7 +106,7 @@ const formatMonth = (monthStr) => {
           <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div class="flex items-start justify-between">
               <div class="flex-shrink-0 p-3 bg-blue-100 rounded-lg">
-                <ClockIcon class="h-6 w-6 text-blue-600" />
+                <ClockIcon class="h-6 w-6 text-brand-red-600" />
               </div>
             </div>
             <div class="mt-4">
@@ -140,7 +140,7 @@ const formatMonth = (monthStr) => {
           <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div class="flex items-start justify-between">
               <div class="flex-shrink-0 p-3 bg-indigo-100 rounded-lg">
-                <ChartBarIcon class="h-6 w-6 text-indigo-600" />
+                <ChartBarIcon class="h-6 w-6 text-brand-red-600" />
               </div>
             </div>
             <div class="mt-4">
@@ -243,7 +243,7 @@ const formatMonth = (monthStr) => {
               >
                 <div class="flex items-center gap-3">
                   <div class="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">
-                    <span class="text-sm font-bold text-indigo-600">{{ index + 1 }}</span>
+                    <span class="text-sm font-bold text-brand-red-600">{{ index + 1 }}</span>
                   </div>
                   <div>
                     <p class="text-sm font-medium text-gray-900">
@@ -284,7 +284,7 @@ const formatMonth = (monthStr) => {
                   <td class="px-6 py-4 whitespace-nowrap">
                     <Link
                       :href="route('agency.applications.show', payment.id)"
-                      class="text-sm font-medium text-indigo-600 hover:text-indigo-900"
+                      class="text-sm font-medium text-brand-red-600 hover:text-red-900"
                     >
                       {{ payment.application_number }}
                     </Link>
@@ -341,7 +341,7 @@ const formatMonth = (monthStr) => {
                   <td class="px-6 py-4 whitespace-nowrap">
                     <Link
                       :href="route('agency.applications.show', completion.id)"
-                      class="text-sm font-medium text-indigo-600 hover:text-indigo-900"
+                      class="text-sm font-medium text-brand-red-600 hover:text-red-900"
                     >
                       {{ completion.application_number }}
                     </Link>

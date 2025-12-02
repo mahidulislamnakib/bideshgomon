@@ -121,7 +121,7 @@ const submit = () => {
     <section>
         <header class="mb-6">
             <div class="flex items-center gap-3 mb-2">
-                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shadow-sm">
+                <div class="w-10 h-10 rounded-xl bg-brand-red-600 flex items-center justify-center shadow-sm">
                     <UserCircleIcon class="h-6 w-6 text-white" />
                 </div>
                 <div>
@@ -227,7 +227,7 @@ const submit = () => {
                             :href="route('verification.send')"
                             method="post"
                             as="button"
-                            class="rounded-md text-sm md:text-base text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            class="rounded-md text-sm md:text-base text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2"
                         >
                             Click here to re-send the verification email.
                         </Link>
@@ -269,7 +269,7 @@ const submit = () => {
                 <button
                     @click="submit"
                     :disabled="form.processing"
-                    class="w-full bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-200 active:scale-98 touch-manipulation flex items-center justify-center gap-2"
+                    class="w-full bg-brand-red-600 hover:bg-red-700 active:bg-indigo-800 disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-200 active:scale-98 touch-manipulation flex items-center justify-center gap-2"
                     type="button"
                 >
                     <svg v-if="form.processing" class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

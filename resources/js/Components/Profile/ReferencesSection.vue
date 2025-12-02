@@ -96,7 +96,7 @@ const personalReferences = computed(() =>
             <!-- Information Notice -->
             <div class="rounded-lg border border-blue-200 bg-blue-50 p-4">
                 <div class="flex items-start">
-                    <svg class="h-5 w-5 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="h-5 w-5 text-brand-red-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div>
@@ -116,19 +116,19 @@ const personalReferences = computed(() =>
             <div v-if="form.references.length > 0" class="grid gap-4 md:grid-cols-3">
                 <div class="rounded-lg border border-gray-200 bg-white p-4">
                     <div class="text-sm text-gray-600">Professional</div>
-                    <div class="mt-1 text-2xl font-semibold text-indigo-600">
+                    <div class="mt-1 text-2xl font-semibold text-brand-red-600">
                         {{ professionalReferences.length }}
                     </div>
                 </div>
                 <div class="rounded-lg border border-gray-200 bg-white p-4">
                     <div class="text-sm text-gray-600">Academic</div>
-                    <div class="mt-1 text-2xl font-semibold text-indigo-600">
+                    <div class="mt-1 text-2xl font-semibold text-brand-red-600">
                         {{ academicReferences.length }}
                     </div>
                 </div>
                 <div class="rounded-lg border border-gray-200 bg-white p-4">
                     <div class="text-sm text-gray-600">Personal</div>
-                    <div class="mt-1 text-2xl font-semibold text-indigo-600">
+                    <div class="mt-1 text-2xl font-semibold text-brand-red-600">
                         {{ personalReferences.length }}
                     </div>
                 </div>
@@ -143,7 +143,7 @@ const personalReferences = computed(() =>
                 >
                     <div class="mb-4 flex items-center justify-between">
                         <div class="flex items-center gap-3">
-                            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 text-sm font-semibold text-indigo-600">
+                            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 text-sm font-semibold text-brand-red-600">
                                 {{ index + 1 }}
                             </span>
                             <h4 class="text-base font-medium text-gray-900">
@@ -166,7 +166,7 @@ const personalReferences = computed(() =>
                             <select
                                 :id="`type-${index}`"
                                 v-model="reference.type"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                                 required
                             >
                                 <option v-for="type in referenceTypes" :key="type.value" :value="type.value">
@@ -197,7 +197,7 @@ const personalReferences = computed(() =>
                                 <select
                                     :id="`relationship-${index}`"
                                     v-model="reference.relationship"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                                     required
                                 >
                                     <option value="">Select relationship</option>
@@ -295,7 +295,7 @@ const personalReferences = computed(() =>
                                 :id="`contact-${index}`"
                                 v-model="reference.can_contact"
                                 type="checkbox"
-                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                class="h-4 w-4 rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                             />
                             <label :for="`contact-${index}`" class="ml-2 text-sm text-gray-700">
                                 Permission granted to contact this reference

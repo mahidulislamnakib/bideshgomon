@@ -82,7 +82,7 @@ const formatDate = (date) => {
                     </div>
                     <Link
                         :href="route('profile.hajj-umrah.create')"
-                        class="inline-flex items-center justify-center px-4 py-2 bg-indigo-600 border border-transparent rounded-lg font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors w-full sm:w-auto"
+                        class="inline-flex items-center justify-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-lg font-semibold text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 transition-colors w-full sm:w-auto"
                     >
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -191,7 +191,7 @@ const formatDate = (date) => {
                                 <div class="flex sm:flex-col gap-2 sm:ml-4">
                                     <Link
                                         :href="route('profile.hajj-umrah.show', application.id)"
-                                        class="inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                                        class="inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 transition-colors"
                                     >
                                         View Details
                                     </Link>
@@ -217,7 +217,7 @@ const formatDate = (date) => {
                             :class="[
                                 'px-4 py-2 text-sm font-medium rounded-lg transition-colors',
                                 link.active
-                                    ? 'bg-indigo-600 text-white'
+                                    ? 'bg-brand-red-600 text-white'
                                     : link.url
                                     ? 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
                                     : 'bg-gray-100 text-gray-400 cursor-not-allowed',
@@ -237,7 +237,7 @@ const formatDate = (date) => {
                     <div class="mt-6">
                         <Link
                             :href="route('profile.hajj-umrah.create')"
-                            class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-lg font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                            class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-lg font-semibold text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 transition-colors"
                         >
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />

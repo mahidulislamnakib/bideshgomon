@@ -9,7 +9,7 @@
                         <div class="flex items-center justify-between mb-6">
                             <div class="flex items-center gap-3">
                                 <div class="p-2 bg-sky-100 rounded-lg">
-                                    <CalendarDaysIcon class="w-8 h-8 text-sky-600" />
+                                    <CalendarDaysIcon class="w-8 h-8 text-brand-red-600" />
                                 </div>
                                 <h2 class="text-2xl font-bold text-gray-900">Book Appointment</h2>
                             </div>
@@ -34,7 +34,7 @@
                                                 <span class="mt-1 flex items-center text-sm text-gray-500">In-person meeting</span>
                                             </div>
                                         </div>
-                                        <CheckCircleIcon v-if="form.appointment_type === 'office_visit'" class="h-6 w-6 text-sky-600" />
+                                        <CheckCircleIcon v-if="form.appointment_type === 'office_visit'" class="h-6 w-6 text-brand-red-600" />
                                     </label>
 
                                     <label class="relative flex cursor-pointer rounded-xl border-2 p-4 focus:outline-none" :class="form.appointment_type === 'online_meeting' ? 'border-sky-600 bg-sky-50' : 'border-gray-300 hover:border-sky-300'">
@@ -45,7 +45,7 @@
                                                 <span class="mt-1 flex items-center text-sm text-gray-500">Video call</span>
                                             </div>
                                         </div>
-                                        <CheckCircleIcon v-if="form.appointment_type === 'online_meeting'" class="h-6 w-6 text-sky-600" />
+                                        <CheckCircleIcon v-if="form.appointment_type === 'online_meeting'" class="h-6 w-6 text-brand-red-600" />
                                     </label>
                                 </div>
                                 <p v-if="form.errors.appointment_type" class="mt-1 text-sm text-red-600">{{ form.errors.appointment_type }}</p>
@@ -64,7 +64,7 @@
                                     :min="minDate"
                                     :max="maxDate"
                                     @change="loadTimeSlotsForDate"
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"
+                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-sky-500 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.appointment_date }"
                                     required
                                 />
@@ -103,7 +103,7 @@
                                 <select
                                     id="purpose"
                                     v-model="form.purpose"
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"
+                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-sky-500 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.purpose }"
                                     required
                                 >
@@ -126,7 +126,7 @@
                                     id="notes"
                                     v-model="form.notes"
                                     rows="4"
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"
+                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-sky-500 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.notes }"
                                     placeholder="Any specific requirements or topics you'd like to discuss..."
                                 ></textarea>
@@ -141,7 +141,7 @@
                                 <button
                                     type="submit"
                                     :disabled="form.processing || !canSubmit"
-                                    class="inline-flex items-center gap-2 px-6 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 font-medium transition-colors"
+                                    class="inline-flex items-center gap-2 px-6 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 font-medium transition-colors"
                                     :class="{ 'opacity-50 cursor-not-allowed': form.processing || !canSubmit }"
                                 >
                                     <CalendarDaysIcon v-if="!form.processing" class="w-5 h-5" />

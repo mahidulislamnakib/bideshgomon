@@ -2,6 +2,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { useForm, router } from '@inertiajs/vue3'
 import axios from 'axios'
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat'
 
 // Import components
 import Modal from '@/Components/Modal.vue'
@@ -220,10 +221,7 @@ const calculateDuration = (startDate, endDate, isCurrent) => {
 }
 
 // Format date for display
-const formatDate = (date) => {
-  if (!date) return 'N/A'
-  return new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })
-}
+const { formatDate } = useBangladeshFormat();
 
 // Sort by start date (most recent first)
 const sortedWorkList = computed(() => {
@@ -287,10 +285,10 @@ const sortedWorkList = computed(() => {
           <div class="flex items-start justify-between gap-3 mb-2">
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2 mb-1">
-                <BriefcaseIcon class="w-6 h-6 md:w-7 md:h-7 text-indigo-600 dark:text-indigo-400 flex-shrink-0" />
+                <BriefcaseIcon class="w-6 h-6 md:w-7 md:h-7 text-brand-red-600 dark:text-indigo-400 flex-shrink-0" />
                 <h3 class="text-base font-bold text-gray-900 dark:text-white truncate">{{ work.job_title }}</h3>
               </div>
-              <p class="text-sm font-semibold text-indigo-600 dark:text-indigo-400">{{ work.company_name }}</p>
+              <p class="text-sm font-semibold text-brand-red-600 dark:text-indigo-400">{{ work.company_name }}</p>
             </div>
             <span
               v-if="work.is_current_employment"
@@ -319,7 +317,7 @@ const sortedWorkList = computed(() => {
               </svg>
               <span>{{ formatDate(work.start_date) }} - {{ work.is_current_employment ? 'Present' : formatDate(work.end_date) }}</span>
             </div>
-            <div class="flex items-center gap-2 text-sm font-medium text-indigo-600 dark:text-indigo-400">
+            <div class="flex items-center gap-2 text-sm font-medium text-brand-red-600 dark:text-indigo-400">
               <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -385,7 +383,7 @@ const sortedWorkList = computed(() => {
       <!-- Add More Button -->
       <button
         @click="openModal()"
-        class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-base"
+        class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-brand-red-600 hover:bg-red-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-base"
       >
         <PlusIcon class="h-5 w-5" />
         <span>ADD MORE EXPERIENCE</span>
@@ -434,7 +432,7 @@ const sortedWorkList = computed(() => {
               <select
                 id="employment_type"
                 v-model="form.value.employment_type"
-                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
               >
                 <option value="">Select Type</option>
                 <option v-for="type in employmentTypes" :key="type" :value="type">{{ type }}</option>
@@ -447,7 +445,7 @@ const sortedWorkList = computed(() => {
               <select
                 id="job_category"
                 v-model="form.value.job_category"
-                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
               >
                 <option value="">Select Category</option>
                 <option v-for="category in jobCategories" :key="category" :value="category">{{ category }}</option>
@@ -499,7 +497,7 @@ const sortedWorkList = computed(() => {
               <select
                 id="country"
                 v-model="form.value.country"
-                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
                 required
               >
                 <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
@@ -526,7 +524,7 @@ const sortedWorkList = computed(() => {
               id="responsibilities"
               v-model="form.value.responsibilities"
               rows="3"
-              class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+              class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
               placeholder="Describe your main responsibilities and duties..."
             ></textarea>
             <InputError class="mt-2" :message="formErrors.responsibilities" />
@@ -539,7 +537,7 @@ const sortedWorkList = computed(() => {
               id="achievements"
               v-model="form.value.achievements"
               rows="2"
-              class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+              class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
               placeholder="Notable achievements, awards, or accomplishments..."
             ></textarea>
             <InputError class="mt-2" :message="formErrors.achievements" />

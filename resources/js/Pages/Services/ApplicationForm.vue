@@ -274,7 +274,7 @@ const cancelApplication = () => {
           class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6"
         >
           <div class="flex items-start">
-            <InformationCircleIcon class="h-5 w-5 text-blue-600 mt-0.5 mr-3 flex-shrink-0" />
+            <InformationCircleIcon class="h-5 w-5 text-brand-red-600 mt-0.5 mr-3 flex-shrink-0" />
             <div>
               <h3 class="text-sm font-medium text-blue-900">Auto-filled from your profile</h3>
               <p class="text-sm text-blue-700 mt-1">
@@ -332,7 +332,7 @@ const cancelApplication = () => {
               <input
                 type="checkbox"
                 v-model="saveToProfile"
-                class="mt-1 rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                class="mt-1 rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-primary-500 focus:ring-brand-red-600"
               />
               <span class="ml-3">
                 <span class="text-sm font-medium text-gray-900">

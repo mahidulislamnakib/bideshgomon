@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <Head :title="`${assignment.agency.name} - ${assignment.country}`" />
 
     <AdminLayout>
@@ -166,7 +166,7 @@
                         <div class="bg-white rounded-lg shadow p-6">
                             <div class="flex items-center justify-between mb-4">
                                 <h2 class="text-xl font-semibold text-gray-900">Assigned Visa Requirements</h2>
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+                                <span class="px-3 py-1 bg-red-100 text-brand-red-600 text-sm font-medium rounded-full">
                                     {{ requirements.length }} requirements
                                 </span>
                             </div>
@@ -195,7 +195,7 @@
                                         </div>
                                         <Link
                                             :href="route('admin.visa-requirements.show', requirement.id)"
-                                            class="text-indigo-600 hover:text-indigo-900 text-sm font-medium"
+                                            class="text-brand-red-600 hover:text-red-900 text-sm font-medium"
                                         >
                                             View Details
                                         </Link>
@@ -249,7 +249,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm text-gray-600">Platform Earnings</p>
-                                    <p class="text-xl font-bold text-indigo-600">৳{{ formatNumber(assignment.platform_earnings || 0) }}</p>
+                                    <p class="text-xl font-bold text-brand-red-600">৳{{ formatNumber(assignment.platform_earnings || 0) }}</p>
                                 </div>
                                 <div class="pt-4 border-t border-gray-200">
                                     <p class="text-sm text-gray-600">Agency Earnings</p>

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Flight Requests Management" />
 
@@ -20,9 +20,9 @@
                         <div class="text-sm text-yellow-700 mb-1">Pending</div>
                         <div class="text-2xl font-bold text-yellow-900">{{ stats.pending }}</div>
                     </div>
-                    <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6">
+                    <div class="bg-red-50 rounded-lg shadow-sm border border-red-200 p-6">
                         <div class="text-sm text-blue-700 mb-1">Assigned</div>
-                        <div class="text-2xl font-bold text-blue-900">{{ stats.assigned }}</div>
+                        <div class="text-2xl font-bold text-red-900">{{ stats.assigned }}</div>
                     </div>
                     <div class="bg-purple-50 rounded-lg shadow-sm border border-purple-200 p-6">
                         <div class="text-sm text-purple-700 mb-1">Quoted</div>
@@ -44,7 +44,7 @@
                                 :class="[
                                     'px-4 py-2 rounded-lg text-sm font-medium transition',
                                     filter === 'all'
-                                        ? 'bg-blue-600 text-white'
+                                        ? 'bg-brand-red-600 text-white'
                                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 ]"
                             >
@@ -55,7 +55,7 @@
                                 :class="[
                                     'px-4 py-2 rounded-lg text-sm font-medium transition',
                                     filter === 'pending'
-                                        ? 'bg-blue-600 text-white'
+                                        ? 'bg-brand-red-600 text-white'
                                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 ]"
                             >
@@ -66,7 +66,7 @@
                                 :class="[
                                     'px-4 py-2 rounded-lg text-sm font-medium transition',
                                     filter === 'assigned'
-                                        ? 'bg-blue-600 text-white'
+                                        ? 'bg-brand-red-600 text-white'
                                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 ]"
                             >
@@ -77,7 +77,7 @@
                                 :class="[
                                     'px-4 py-2 rounded-lg text-sm font-medium transition',
                                     filter === 'quoted'
-                                        ? 'bg-blue-600 text-white'
+                                        ? 'bg-brand-red-600 text-white'
                                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 ]"
                             >
@@ -91,11 +91,11 @@
                                 v-model="searchQuery"
                                 type="text"
                                 placeholder="Search by reference, route, user..."
-                                class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                             />
                             <button
                                 @click="search"
-                                class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                                class="px-6 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition"
                             >
                                 Search
                             </button>
@@ -107,7 +107,7 @@
                         <span class="text-sm text-gray-600">{{ selectedRequests.length }} selected</span>
                         <select
                             v-model="bulkAssignAgency"
-                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                         >
                             <option value="">Select agency...</option>
                             <option v-for="agency in agencies" :key="agency.id" :value="agency.id">
@@ -140,7 +140,7 @@
                                         type="checkbox"
                                         @change="toggleAll"
                                         :checked="allSelected"
-                                        class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                        class="w-4 h-4 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
                                     />
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -179,7 +179,7 @@
                                         type="checkbox"
                                         v-model="selectedRequests"
                                         :value="request.id"
-                                        class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                        class="w-4 h-4 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
                                     />
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -221,7 +221,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                                     <Link
                                         :href="route('admin.flight-requests.show', request.id)"
-                                        class="text-blue-600 hover:text-blue-900"
+                                        class="text-brand-red-600 hover:text-red-900"
                                     >
                                         View
                                     </Link>
@@ -252,7 +252,7 @@
                                 :class="[
                                     'px-4 py-2 border rounded-lg text-sm',
                                     link.active
-                                        ? 'bg-blue-600 text-white border-blue-600'
+                                        ? 'bg-brand-red-600 text-white border-brand-red-600'
                                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                                 ]"
                                 v-html="link.label"
@@ -271,7 +271,7 @@
                         
                         <select
                             v-model="assignModal.agencyId"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent mb-4"
                         >
                             <option value="">Select agency...</option>
                             <option v-for="agency in agencies" :key="agency.id" :value="agency.id">
@@ -289,7 +289,7 @@
                             <button
                                 @click="assignRequest"
                                 :disabled="!assignModal.agencyId"
-                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
+                                class="px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50"
                             >
                                 Assign
                             </button>

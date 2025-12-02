@@ -171,7 +171,7 @@ const formatDate = (date) => {
         <header class="mb-rhythm-lg">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center shadow-sm">
+                    <div class="w-10 h-10 rounded-xl bg-brand-red-600 flex items-center justify-center shadow-sm">
                         <GlobeAltIcon class="w-6 h-6 text-white" />
                     </div>
                     <div>

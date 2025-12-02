@@ -15,7 +15,7 @@
                     <!-- Business Information -->
                     <div class="bg-white shadow-sm rounded-lg p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <BuildingOfficeIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                            <BuildingOfficeIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                             Business Information
                         </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
@@ -25,7 +25,7 @@
                                     v-model="form.company_name" 
                                     type="text" 
                                     required
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                                 <p v-if="form.errors.company_name" class="mt-1 text-sm text-red-600">{{ form.errors.company_name }}</p>
                             </div>
@@ -35,7 +35,7 @@
                                 <input 
                                     v-model="form.registration_number" 
                                     type="text" 
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -46,7 +46,7 @@
                                     type="number" 
                                     :max="currentYear"
                                     min="1900"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -55,7 +55,7 @@
                                 <input 
                                     v-model="form.license_number" 
                                     type="text" 
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -64,7 +64,7 @@
                                 <input 
                                     v-model="form.license_expiry" 
                                     type="date" 
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -75,7 +75,7 @@
                                     rows="4" 
                                     required
                                     placeholder="Describe your agency's services and expertise..."
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                                 ></textarea>
                                 <p v-if="form.errors.description" class="mt-1 text-sm text-red-600">{{ form.errors.description }}</p>
                             </div>
@@ -85,7 +85,7 @@
                     <!-- Agency Type Selection -->
                     <div class="bg-white shadow-sm rounded-lg p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <TagIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                            <TagIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                             Agency Type *
                         </h3>
                         <p class="text-sm text-gray-600 mb-4">Select the category that best describes your agency's primary services</p>
@@ -128,7 +128,7 @@
                     <div class="bg-white shadow-sm rounded-lg p-4 sm:p-6">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                <ClipboardDocumentListIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                                <ClipboardDocumentListIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                                 Services Offered
                             </h3>
                             <span class="text-sm text-gray-600">
@@ -144,7 +144,7 @@
                                     <button 
                                         type="button"
                                         @click="toggleCategoryServices(category)"
-                                        class="text-xs text-indigo-600 hover:text-indigo-700 font-medium"
+                                        class="text-xs text-brand-red-600 hover:text-indigo-700 font-medium"
                                     >
                                         {{ isCategorySelected(category) ? 'Deselect All' : 'Select All' }}
                                     </button>
@@ -159,7 +159,7 @@
                                             type="checkbox" 
                                             :value="service.id" 
                                             v-model="form.services_offered"
-                                            class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" 
+                                            class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600" 
                                         />
                                         <span class="text-sm text-gray-700">{{ service.name }}</span>
                                     </label>
@@ -171,7 +171,7 @@
                     <!-- Logo Upload -->
                     <div class="bg-white shadow-sm rounded-lg p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <PhotoIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                            <PhotoIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                             Agency Logo
                         </h3>
                         <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
@@ -186,7 +186,7 @@
                                     class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" 
                                 />
                                 <p class="mt-1 text-xs text-gray-500">JPG or PNG, max 2MB</p>
-                                <p v-if="logoUploading" class="mt-1 text-sm text-indigo-600">Uploading...</p>
+                                <p v-if="logoUploading" class="mt-1 text-sm text-brand-red-600">Uploading...</p>
                                 <p v-if="logoError" class="mt-1 text-sm text-red-600">{{ logoError }}</p>
                             </div>
                         </div>
@@ -195,7 +195,7 @@
                     <!-- Contact Information -->
                     <div class="bg-white shadow-sm rounded-lg p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <PhoneIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                            <PhoneIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                             Contact Information
                         </h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -206,7 +206,7 @@
                                     type="tel" 
                                     required
                                     placeholder="01712-345678"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -216,7 +216,7 @@
                                     v-model="form.whatsapp" 
                                     type="tel" 
                                     placeholder="01712-345678"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -226,7 +226,7 @@
                                     v-model="form.email" 
                                     type="email" 
                                     required
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -236,7 +236,7 @@
                                     v-model="form.website" 
                                     type="url" 
                                     placeholder="https://example.com"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -247,7 +247,7 @@
                                     rows="2" 
                                     required
                                     placeholder="Street address, district, division"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                                 ></textarea>
                             </div>
 
@@ -257,7 +257,7 @@
                                     v-model="form.city" 
                                     type="text" 
                                     required
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -266,7 +266,7 @@
                                 <input 
                                     v-model="form.postal_code" 
                                     type="text" 
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
                         </div>
@@ -275,7 +275,7 @@
                     <!-- Social Media -->
                     <div class="bg-white shadow-sm rounded-lg p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <GlobeAltIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                            <GlobeAltIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                             Social Media Links
                         </h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -285,7 +285,7 @@
                                     v-model="form.facebook_url" 
                                     type="url" 
                                     placeholder="https://facebook.com/yourpage"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -295,7 +295,7 @@
                                     v-model="form.linkedin_url" 
                                     type="url" 
                                     placeholder="https://linkedin.com/company/yourcompany"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -305,7 +305,7 @@
                                     v-model="form.twitter_url" 
                                     type="url" 
                                     placeholder="https://twitter.com/yourhandle"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -315,7 +315,7 @@
                                     v-model="form.instagram_url" 
                                     type="url" 
                                     placeholder="https://instagram.com/yourhandle"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
                         </div>
@@ -324,7 +324,7 @@
                     <!-- Countries Expertise -->
                     <div class="bg-white shadow-sm rounded-lg p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <MapIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                            <MapIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                             Countries Expertise
                         </h3>
                         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
@@ -337,7 +337,7 @@
                                     type="checkbox" 
                                     :value="country" 
                                     v-model="form.countries_expertise"
-                                    class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" 
+                                    class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600" 
                                 />
                                 <span class="text-sm text-gray-700">{{ country }}</span>
                             </label>
@@ -347,7 +347,7 @@
                     <!-- Languages Spoken -->
                     <div class="bg-white shadow-sm rounded-lg p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <LanguageIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                            <LanguageIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                             Languages Spoken
                         </h3>
                         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -360,7 +360,7 @@
                                     type="checkbox" 
                                     :value="language" 
                                     v-model="form.languages_spoken"
-                                    class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" 
+                                    class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600" 
                                 />
                                 <span class="text-sm text-gray-700">{{ language }}</span>
                             </label>
@@ -370,7 +370,7 @@
                     <!-- Team Information -->
                     <div class="bg-white shadow-sm rounded-lg p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <UserGroupIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                            <UserGroupIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                             Team Information
                         </h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -381,7 +381,7 @@
                                     type="number" 
                                     min="1"
                                     placeholder="Number of team members"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -391,7 +391,7 @@
                                     v-model="form.office_hours" 
                                     type="text" 
                                     placeholder="e.g., Mon-Fri 9AM-6PM"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
                         </div>
@@ -400,7 +400,7 @@
                     <!-- Office Images -->
                     <div class="bg-white shadow-sm rounded-lg p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <CameraIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                            <CameraIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                             Office Images
                         </h3>
                         <div v-if="agency.office_images && agency.office_images.length > 0" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 mb-4">
@@ -424,7 +424,7 @@
                                 class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" 
                             />
                             <p class="mt-1 text-xs text-gray-500">JPG or PNG, max 10 images, 5MB each</p>
-                            <p v-if="imagesUploading" class="mt-1 text-sm text-indigo-600">Uploading...</p>
+                            <p v-if="imagesUploading" class="mt-1 text-sm text-brand-red-600">Uploading...</p>
                             <p v-if="imagesError" class="mt-1 text-sm text-red-600">{{ imagesError }}</p>
                         </div>
                     </div>
@@ -432,7 +432,7 @@
                     <!-- Statistics -->
                     <div class="bg-white shadow-sm rounded-lg p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <ChartBarIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                            <ChartBarIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                             Statistics
                         </h3>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
@@ -442,7 +442,7 @@
                                     v-model.number="form.total_clients" 
                                     type="number" 
                                     min="0"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -452,7 +452,7 @@
                                     v-model.number="form.successful_applications" 
                                     type="number" 
                                     min="0"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
                                 />
                             </div>
 
@@ -471,7 +471,7 @@
                     <!-- SEO -->
                     <div class="bg-white shadow-sm rounded-lg p-4 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <MagnifyingGlassIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                            <MagnifyingGlassIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                             SEO & Marketing
                         </h3>
                         <div>
@@ -481,7 +481,7 @@
                                 rows="2" 
                                 maxlength="160"
                                 placeholder="Brief description for search engines (max 160 characters)"
-                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                             ></textarea>
                             <p class="mt-1 text-xs text-gray-500">{{ form.meta_description?.length || 0 }}/160 characters</p>
                         </div>
@@ -498,7 +498,7 @@
                         <button 
                             type="submit" 
                             :disabled="form.processing"
-                            class="px-6 py-2.5 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="px-6 py-2.5 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             <span v-if="form.processing">Saving...</span>
                             <span v-else>Save Changes</span>

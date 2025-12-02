@@ -134,7 +134,7 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Browse Services
                                             </DropdownLink>
-                                            <DropdownLink :href="route('user.applications.index')" icon-class="text-indigo-600">
+                                            <DropdownLink :href="route('user.applications.index')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <ClipboardDocumentCheckIcon class="w-5 h-5" />
                                                 </template>
@@ -186,7 +186,7 @@ const leaveImpersonation = () => {
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink :href="route('profile.edit')" icon-class="text-ocean-600">
+                                        <DropdownLink :href="route('profile.edit')" icon-class="text-brand-red-600">
                                             <template #icon>
                                                 <UserIcon class="w-5 h-5" />
                                             </template>
@@ -198,7 +198,7 @@ const leaveImpersonation = () => {
                                             </template>
                                             AI
                                         </DropdownLink>
-                                        <DropdownLink :href="route('profile.public.settings')" icon-class="text-sky-600">
+                                        <DropdownLink :href="route('profile.public.settings')" icon-class="text-brand-red-600">
                                             <template #icon>
                                                 <GlobeAltIcon class="w-5 h-5" />
                                             </template>
@@ -215,7 +215,7 @@ const leaveImpersonation = () => {
                                         <template v-if="isAdmin">
                                             <div class="border-t border-gray-100 my-1"></div>
                                             <div class="px-4 py-2 text-xs text-gray-400 uppercase font-semibold tracking-wider">Admin</div>
-                                            <DropdownLink :href="route('admin.dashboard')" icon-class="text-ocean-600">
+                                            <DropdownLink :href="route('admin.dashboard')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <ChartBarIcon class="w-5 h-5" />
                                                 </template>
@@ -227,7 +227,7 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Services
                                             </DropdownLink>
-                                            <DropdownLink :href="route('admin.visa-requirements.index')" icon-class="text-sky-600">
+                                            <DropdownLink :href="route('admin.visa-requirements.index')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <DocumentTextIcon class="w-5 h-5" />
                                                 </template>
@@ -245,7 +245,7 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Hotels
                                             </DropdownLink>
-                                            <DropdownLink :href="route('admin.visa-applications.index')" icon-class="text-sky-600">
+                                            <DropdownLink :href="route('admin.visa-applications.index')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <DocumentTextIcon class="w-5 h-5" />
                                                 </template>
@@ -257,7 +257,7 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Jobs
                                             </DropdownLink>
-                                            <DropdownLink :href="route('admin.applications.index')" icon-class="text-ocean-600">
+                                            <DropdownLink :href="route('admin.applications.index')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <DocumentTextIcon class="w-5 h-5" />
                                                 </template>
@@ -269,7 +269,7 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Users
                                             </DropdownLink>
-                                            <DropdownLink :href="route('admin.analytics.index')" icon-class="text-sky-600">
+                                            <DropdownLink :href="route('admin.analytics.index')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <ChartBarIcon class="w-5 h-5" />
                                                 </template>
@@ -287,7 +287,7 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Settings
                                             </DropdownLink>
-                                                <DropdownLink :href="route('admin.documents.verify.index')" icon-class="text-sky-600">
+                                                <DropdownLink :href="route('admin.documents.verify.index')" icon-class="text-brand-red-600">
                                                     <template #icon>
                                                         <DocumentTextIcon class="w-5 h-5" />
                                                     </template>
@@ -305,7 +305,7 @@ const leaveImpersonation = () => {
                                         <template v-else-if="isAgency">
                                             <div class="border-t border-gray-100 my-1"></div>
                                             <div class="px-4 py-2 text-xs text-gray-400 uppercase font-semibold tracking-wider">Agency Panel</div>
-                                            <DropdownLink :href="route('agency.dashboard')" icon-class="text-ocean-600">
+                                            <DropdownLink :href="route('agency.dashboard')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <ChartBarIcon class="w-5 h-5" />
                                                 </template>
@@ -317,7 +317,7 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Countries
                                             </DropdownLink>
-                                            <DropdownLink :href="route('agency.applications.index')" icon-class="text-sky-600">
+                                            <DropdownLink :href="route('agency.applications.index')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <DocumentTextIcon class="w-5 h-5" />
                                                 </template>
@@ -329,7 +329,7 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Earnings
                                             </DropdownLink>
-                                            <DropdownLink :href="route('agency.profile.show')" icon-class="text-indigo-600">
+                                            <DropdownLink :href="route('agency.profile.show')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <BuildingOfficeIcon class="w-5 h-5" />
                                                 </template>
@@ -342,7 +342,7 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Team
                                             </DropdownLink>
-                                            <DropdownLink :href="route('agency.visa-management.index')" icon-class="text-blue-600">
+                                            <DropdownLink :href="route('agency.visa-management.index')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <DocumentCheckIcon class="w-5 h-5" />
                                                 </template>
@@ -354,7 +354,7 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Flight Requests
                                             </DropdownLink>
-                                            <DropdownLink :href="route('agency.verification.index')" icon-class="text-teal-600">
+                                            <DropdownLink :href="route('agency.verification.index')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <ShieldCheckIcon class="w-5 h-5" />
                                                 </template>
@@ -366,7 +366,7 @@ const leaveImpersonation = () => {
                                         <template v-else>
                                             <!-- Suggestions feature not available for regular users yet -->
                                             <div class="border-t border-gray-100 my-1"></div>
-                                            <DropdownLink :href="route('document-scanner.index')" icon-class="text-sky-600">
+                                            <DropdownLink :href="route('document-scanner.index')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <DocumentMagnifyingGlassIcon class="w-5 h-5" />
                                                 </template>
@@ -378,13 +378,13 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Wallet
                                             </DropdownLink>
-                                            <DropdownLink :href="route('referral.index')" icon-class="text-ocean-600">
+                                            <DropdownLink :href="route('referral.index')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <UserGroupIcon class="w-5 h-5" />
                                                 </template>
                                                 Referrals
                                             </DropdownLink>
-                                            <DropdownLink :href="route('appointments.index')" icon-class="text-sky-600">
+                                            <DropdownLink :href="route('appointments.index')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <CalendarIcon class="w-5 h-5" />
                                                 </template>
@@ -402,7 +402,7 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Events
                                             </DropdownLink>
-                                            <DropdownLink :href="route('faqs.index')" icon-class="text-ocean-600">
+                                            <DropdownLink :href="route('faqs.index')" icon-class="text-brand-red-600">
                                                 <template #icon>
                                                     <QuestionMarkCircleIcon class="w-5 h-5" />
                                                 </template>
@@ -498,7 +498,7 @@ const leaveImpersonation = () => {
                             Services
                         </ResponsiveNavLink>
                         
-                        <ResponsiveNavLink :href="route('user.applications.index')" :active="route().current('user.applications.*')" icon-class="text-indigo-600">
+                        <ResponsiveNavLink :href="route('user.applications.index')" :active="route().current('user.applications.*')" icon-class="text-brand-red-600">
                             <template #icon>
                                 <ClipboardDocumentCheckIcon class="w-5 h-5" />
                             </template>
@@ -508,7 +508,7 @@ const leaveImpersonation = () => {
                         <ResponsiveNavLink
                             :href="route('jobs.index')"
                             :active="route().current('jobs.*')"
-                            icon-class="text-blue-600"
+                            icon-class="text-brand-red-600"
                         >
                             <template #icon>
                                 <BriefcaseIcon class="w-5 h-5" />
@@ -522,7 +522,7 @@ const leaveImpersonation = () => {
                             <div class="px-3 py-2">
                                 <div class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Admin</div>
                             </div>
-                            <ResponsiveNavLink :href="route('admin.dashboard')" icon-class="text-ocean-600">
+                            <ResponsiveNavLink :href="route('admin.dashboard')" icon-class="text-brand-red-600">
                                 <template #icon>
                                     <ChartBarIcon class="w-5 h-5" />
                                 </template>
@@ -534,7 +534,7 @@ const leaveImpersonation = () => {
                                 </template>
                                 Services
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('admin.visa-requirements.index')" icon-class="text-sky-600">
+                            <ResponsiveNavLink :href="route('admin.visa-requirements.index')" icon-class="text-brand-red-600">
                                 <template #icon>
                                     <DocumentTextIcon class="w-5 h-5" />
                                 </template>
@@ -555,7 +555,7 @@ const leaveImpersonation = () => {
                                 </template>
                                 Hotels
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('admin.visa-applications.index')" icon-class="text-sky-600">
+                            <ResponsiveNavLink :href="route('admin.visa-applications.index')" icon-class="text-brand-red-600">
                                 <template #icon>
                                     <DocumentTextIcon class="w-5 h-5" />
                                 </template>
@@ -570,7 +570,7 @@ const leaveImpersonation = () => {
                                 </template>
                                 Jobs
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('admin.applications.index')" icon-class="text-ocean-600">
+                            <ResponsiveNavLink :href="route('admin.applications.index')" icon-class="text-brand-red-600">
                                 <template #icon>
                                     <DocumentTextIcon class="w-5 h-5" />
                                 </template>
@@ -582,7 +582,7 @@ const leaveImpersonation = () => {
                                 </template>
                                 Users
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('admin.analytics.index')" icon-class="text-sky-600">
+                            <ResponsiveNavLink :href="route('admin.analytics.index')" icon-class="text-brand-red-600">
                                 <template #icon>
                                     <ChartBarIcon class="w-5 h-5" />
                                 </template>
@@ -608,7 +608,7 @@ const leaveImpersonation = () => {
                             <div class="px-3 py-2">
                                 <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Agency Panel</div>
                             </div>
-                            <ResponsiveNavLink :href="route('agency.dashboard')" icon-class="text-ocean-600">
+                            <ResponsiveNavLink :href="route('agency.dashboard')" icon-class="text-brand-red-600">
                                 <template #icon>
                                     <ChartBarIcon class="w-5 h-5" />
                                 </template>
@@ -620,7 +620,7 @@ const leaveImpersonation = () => {
                                 </template>
                                 Countries
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('agency.applications.index')" icon-class="text-sky-600">
+                            <ResponsiveNavLink :href="route('agency.applications.index')" icon-class="text-brand-red-600">
                                 <template #icon>
                                     <DocumentTextIcon class="w-5 h-5" />
                                 </template>
@@ -632,7 +632,7 @@ const leaveImpersonation = () => {
                                 </template>
                                 Earnings
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('agency.profile.show')" icon-class="text-indigo-600">
+                            <ResponsiveNavLink :href="route('agency.profile.show')" icon-class="text-brand-red-600">
                                 <template #icon>
                                     <BuildingOfficeIcon class="w-5 h-5" />
                                 </template>
@@ -645,7 +645,7 @@ const leaveImpersonation = () => {
                                 </template>
                                 Team
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('agency.visa-management.index')" icon-class="text-blue-600">
+                            <ResponsiveNavLink :href="route('agency.visa-management.index')" icon-class="text-brand-red-600">
                                 <template #icon>
                                     <DocumentCheckIcon class="w-5 h-5" />
                                 </template>
@@ -657,7 +657,7 @@ const leaveImpersonation = () => {
                                 </template>
                                 Flight Requests
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('agency.verification.index')" icon-class="text-teal-600">
+                            <ResponsiveNavLink :href="route('agency.verification.index')" icon-class="text-brand-red-600">
                                 <template #icon>
                                     <ShieldCheckIcon class="w-5 h-5" />
                                 </template>
@@ -682,7 +682,7 @@ const leaveImpersonation = () => {
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')" icon-class="text-ocean-600">
+                            <ResponsiveNavLink :href="route('profile.edit')" icon-class="text-brand-red-600">
                                 <template #icon>
                                     <UserIcon class="w-5 h-5" />
                                 </template>
@@ -698,13 +698,13 @@ const leaveImpersonation = () => {
                                     </template>
                                     Wallet
                                 </ResponsiveNavLink>
-                                <ResponsiveNavLink :href="route('referral.index')" icon-class="text-ocean-600">
+                                <ResponsiveNavLink :href="route('referral.index')" icon-class="text-brand-red-600">
                                     <template #icon>
                                         <UserGroupIcon class="w-5 h-5" />
                                     </template>
                                     Referrals
                                 </ResponsiveNavLink>
-                                <ResponsiveNavLink :href="route('appointments.index')" icon-class="text-sky-600">
+                                <ResponsiveNavLink :href="route('appointments.index')" icon-class="text-brand-red-600">
                                     <template #icon>
                                         <CalendarIcon class="w-5 h-5" />
                                     </template>
@@ -722,7 +722,7 @@ const leaveImpersonation = () => {
                                     </template>
                                     Events
                                 </ResponsiveNavLink>
-                                <ResponsiveNavLink :href="route('faqs.index')" icon-class="text-ocean-600">
+                                <ResponsiveNavLink :href="route('faqs.index')" icon-class="text-brand-red-600">
                                     <template #icon>
                                         <QuestionMarkCircleIcon class="w-5 h-5" />
                                     </template>

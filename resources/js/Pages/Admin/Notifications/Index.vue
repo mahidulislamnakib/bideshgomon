@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 import { useForm } from '@inertiajs/vue3'
 import { useBangladeshFormat } from '@/Composables/useBangladeshFormat'
@@ -76,7 +76,7 @@ function submit() {
             <input v-model="form.user_ids" type="text" class="w-full border rounded p-2" placeholder="e.g. 1,2,5" />
             <p v-if="form.errors.user_ids" class="text-xs text-red-600 mt-1">{{ form.errors.user_ids }}</p>
           </div>
-          <button :disabled="form.processing" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm disabled:opacity-50">Send Broadcast</button>
+          <button :disabled="form.processing" class="bg-brand-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm disabled:opacity-50">Send Broadcast</button>
           <p v-if="form.recentlySuccessful" class="text-green-600 text-xs">Broadcast sent.</p>
         </form>
       </div>
@@ -108,7 +108,7 @@ export default {
   methods: {
     badgeClass(priority) {
       return {
-        'bg-blue-100 text-blue-700': priority === 'normal',
+        'bg-red-100 text-blue-700': priority === 'normal',
         'bg-yellow-100 text-yellow-800': priority === 'high',
         'bg-red-100 text-red-800': priority === 'critical'
       }

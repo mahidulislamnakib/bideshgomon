@@ -11,7 +11,7 @@
         <!-- Upload Section -->
         <div class="bg-white rounded-lg border-2 border-dashed border-indigo-300 p-6">
             <div class="flex items-center gap-3 mb-4">
-                <div class="p-2 bg-indigo-600 rounded-lg">
+                <div class="p-2 bg-brand-red-600 rounded-lg">
                     <CloudArrowUpIcon class="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -31,7 +31,7 @@
                             type="text"
                             required
                             placeholder="e.g., Passport Copy"
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
                         />
                     </div>
 
@@ -42,7 +42,7 @@
                         <select
                             v-model="uploadForm.document_type"
                             required
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
                         >
                             <option value="">Select type...</option>
                             <option v-for="(label, value) in documentTypes" :key="value" :value="value">
@@ -60,7 +60,7 @@
                         v-model="uploadForm.description"
                         rows="2"
                         placeholder="Optional description..."
-                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
                     ></textarea>
                 </div>
 
@@ -72,7 +72,7 @@
                         <input
                             v-model="uploadForm.issue_date"
                             type="date"
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
                         />
                     </div>
 
@@ -83,7 +83,7 @@
                         <input
                             v-model="uploadForm.expiry_date"
                             type="date"
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
                         />
                     </div>
 
@@ -95,7 +95,7 @@
                             v-model="uploadForm.document_number"
                             type="text"
                             placeholder="e.g., A12345678"
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
                         />
                     </div>
 
@@ -107,7 +107,7 @@
                             v-model="uploadForm.issuing_authority"
                             type="text"
                             placeholder="e.g., DIP, Bangladesh"
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
                         />
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                     <button
                         type="submit"
                         :disabled="uploadForm.processing || !uploadForm.file"
-                        class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center gap-2"
+                        class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center gap-2"
                     >
                         <CloudArrowUpIcon class="w-5 h-5" />
                         <span v-if="!uploadForm.processing">Upload Document</span>
@@ -154,7 +154,7 @@
                         :class="[
                             'px-3 py-1 rounded-lg text-sm font-medium transition',
                             filter === filterType
-                                ? 'bg-blue-600 text-white'
+                                ? 'bg-brand-red-600 text-white'
                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         ]"
                     >
@@ -246,7 +246,7 @@
                         <div class="flex gap-2 ml-4">
                             <button
                                 @click="downloadDocument(doc)"
-                                class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                                class="p-2 text-brand-red-600 hover:bg-blue-50 rounded-lg transition"
                                 title="Download"
                             >
                                 <ArrowDownTrayIcon class="w-5 h-5" />
@@ -280,7 +280,7 @@
         <div class="grid md:grid-cols-4 gap-4">
             <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
                 <div class="flex items-center gap-3 mb-2">
-                    <div class="p-2 bg-blue-600 rounded-lg">
+                    <div class="p-2 bg-brand-red-600 rounded-lg">
                         <DocumentTextIcon class="w-5 h-5 text-white" />
                     </div>
                     <div class="text-2xl font-bold text-blue-700">{{ documents.length }}</div>
@@ -337,10 +337,14 @@ const props = defineProps({
     userProfile: {
         type: Object,
         required: true
+    },
+    userDocuments: {
+        type: Array,
+        default: () => []
     }
 });
 
-const documents = ref(props.userProfile.documents || []);
+const documents = ref(props.userDocuments || []);
 const filter = ref('all');
 
 const documentTypes = {
@@ -375,18 +379,21 @@ const handleFileSelect = (event) => {
 };
 
 const uploadDocument = () => {
-    uploadForm.post(route('documents.store'), {
+    uploadForm.post(route('profile.documents.store'), {
         preserveScroll: true,
         onSuccess: () => {
             uploadForm.reset();
             // Refresh documents list
             window.location.reload();
+        },
+        onError: (errors) => {
+            console.error('Upload failed:', errors);
         }
     });
 };
 
 const downloadDocument = (doc) => {
-    window.location.href = route('documents.download', doc.id);
+    window.location.href = route('profile.documents.download', doc.id);
 };
 
 const toggleSharing = (doc) => {
@@ -396,10 +403,13 @@ const toggleSharing = (doc) => {
 
 const deleteDocument = (doc) => {
     if (confirm('Are you sure you want to delete this document?')) {
-        useForm({}).delete(route('documents.destroy', doc.id), {
+        useForm({}).delete(route('profile.documents.destroy', doc.id), {
             preserveScroll: true,
             onSuccess: () => {
                 documents.value = documents.value.filter(d => d.id !== doc.id);
+            },
+            onError: (errors) => {
+                console.error('Delete failed:', errors);
             }
         });
     }
@@ -444,15 +454,15 @@ const formatDate = (date) => {
 
 const getDocumentColor = (type) => {
     const colors = {
-        'passport': 'bg-blue-600',
+        'passport': 'bg-brand-red-600',
         'visa': 'bg-purple-600',
-        'nid': 'bg-indigo-600',
+        'nid': 'bg-brand-red-600',
         'birth_certificate': 'bg-pink-600',
         'driving_license': 'bg-green-600',
         'educational_certificate': 'bg-yellow-600',
         'work_permit': 'bg-orange-600',
-        'bank_statement': 'bg-cyan-600',
-        'police_clearance': 'bg-teal-600',
+        'bank_statement': 'bg-brand-red-600',
+        'police_clearance': 'bg-brand-red-600',
         'medical_certificate': 'bg-red-600',
         'insurance': 'bg-violet-600',
         'reference_letter': 'bg-emerald-600',

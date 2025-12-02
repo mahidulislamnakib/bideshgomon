@@ -66,7 +66,7 @@ const handleSearch = () => {
               />
               <button
                 type="submit"
-                class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition"
               >
                 <MagnifyingGlassIcon class="h-5 w-5" />
               </button>
@@ -86,10 +86,10 @@ const handleSearch = () => {
             >
               <component
                 :is="page.icon"
-                class="h-6 w-6 text-blue-600 mr-3 flex-shrink-0 group-hover:scale-110 transition"
+                class="h-6 w-6 text-brand-red-600 mr-3 flex-shrink-0 group-hover:scale-110 transition"
               />
               <div class="text-left">
-                <p class="font-semibold text-gray-900 group-hover:text-blue-600 transition">
+                <p class="font-semibold text-gray-900 group-hover:text-brand-red-600 transition">
                   {{ page.name }}
                 </p>
                 <p class="text-sm text-gray-600">{{ page.description }}</p>
@@ -146,7 +146,7 @@ const handleSearch = () => {
         <!-- Footer Note -->
         <p class="mt-8 text-sm text-gray-500">
           If you believe this is an error, please 
-          <a href="mailto:support@bideshgomon.com?subject=404 Error Report" class="text-blue-600 hover:underline">
+          <a href="mailto:support@bideshgomon.com?subject=404 Error Report" class="text-brand-red-600 hover:underline">
             report this issue
           </a>
         </p>
@@ -155,17 +155,4 @@ const handleSearch = () => {
   </div>
 </template>
 
-<style scoped>
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
 
-.animate-bounce {
-  animation: bounce 2s infinite;
-}
-</style>

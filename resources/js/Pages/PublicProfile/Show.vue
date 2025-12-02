@@ -94,7 +94,7 @@ const canShowQR = (platform) => {
     <div class="min-h-screen bg-gray-50 py-12">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header Card -->
-            <div class="bg-blue-600 rounded-xl shadow-lg overflow-hidden mb-8 border-2 border-blue-700">
+            <div class="bg-brand-red-600 rounded-xl shadow-lg overflow-hidden mb-8 border-2 border-blue-700">
                 <div class="p-8 text-white">
                     <div class="flex items-start justify-between">
                         <div>
@@ -122,7 +122,7 @@ const canShowQR = (platform) => {
             <div v-if="hasBasicInfo" class="bg-white rounded-lg shadow mb-6">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex items-center">
-                        <UserIcon class="h-6 w-6 text-indigo-600 mr-3" />
+                        <UserIcon class="h-6 w-6 text-brand-red-600 mr-3" />
                         <h2 class="text-xl font-bold text-gray-900">Basic Information</h2>
                     </div>
                 </div>
@@ -156,7 +156,7 @@ const canShowQR = (platform) => {
             <div v-if="hasEducation" class="bg-white rounded-lg shadow mb-6">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex items-center">
-                        <AcademicCapIcon class="h-6 w-6 text-indigo-600 mr-3" />
+                        <AcademicCapIcon class="h-6 w-6 text-brand-red-600 mr-3" />
                         <h2 class="text-xl font-bold text-gray-900">Education</h2>
                     </div>
                 </div>
@@ -164,7 +164,7 @@ const canShowQR = (platform) => {
                     <div class="space-y-6">
                         <div v-for="(edu, index) in profile.education" :key="index" class="border-l-4 border-indigo-500 pl-4">
                             <h3 class="text-lg font-semibold text-gray-900 capitalize">{{ edu.degree_level }}</h3>
-                            <p class="text-indigo-600 font-medium">{{ edu.institution_name }}</p>
+                            <p class="text-brand-red-600 font-medium">{{ edu.institution_name }}</p>
                             <p class="text-gray-600">{{ edu.field_of_study }}</p>
                             <div class="mt-2 flex items-center text-sm text-gray-500">
                                 <span>{{ edu.start_date }} - {{ edu.end_date }}</span>
@@ -180,7 +180,7 @@ const canShowQR = (platform) => {
             <div v-if="hasWorkExperience" class="bg-white rounded-lg shadow mb-6">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex items-center">
-                        <BriefcaseIcon class="h-6 w-6 text-indigo-600 mr-3" />
+                        <BriefcaseIcon class="h-6 w-6 text-brand-red-600 mr-3" />
                         <h2 class="text-xl font-bold text-gray-900">Work Experience</h2>
                     </div>
                 </div>
@@ -201,7 +201,7 @@ const canShowQR = (platform) => {
             <div v-if="hasLanguages" class="bg-white rounded-lg shadow mb-6">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex items-center">
-                        <ChatBubbleLeftRightIcon class="h-6 w-6 text-indigo-600 mr-3" />
+                        <ChatBubbleLeftRightIcon class="h-6 w-6 text-brand-red-600 mr-3" />
                         <h2 class="text-xl font-bold text-gray-900">Languages</h2>
                     </div>
                 </div>
@@ -245,7 +245,7 @@ const canShowQR = (platform) => {
             <div v-if="hasSocialLinks" class="bg-white rounded-lg shadow mb-6">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex items-center">
-                        <ShareIcon class="h-6 w-6 text-indigo-600 mr-3" />
+                        <ShareIcon class="h-6 w-6 text-brand-red-600 mr-3" />
                         <h2 class="text-xl font-bold text-gray-900">Connect With Me</h2>
                     </div>
                 </div>
@@ -290,7 +290,7 @@ const canShowQR = (platform) => {
             <div v-if="hasTravelHistory" class="bg-white rounded-lg shadow mb-6">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex items-center">
-                        <GlobeAltIcon class="h-6 w-6 text-indigo-600 mr-3" />
+                        <GlobeAltIcon class="h-6 w-6 text-brand-red-600 mr-3" />
                         <h2 class="text-xl font-bold text-gray-900">Travel History</h2>
                     </div>
                 </div>
@@ -308,7 +308,7 @@ const canShowQR = (platform) => {
 
             <!-- Footer -->
             <div class="text-center py-8 text-gray-500">
-                <p>Powered by <span class="font-semibold text-indigo-600">BideshGomon</span></p>
+                <p>Powered by <span class="font-semibold text-brand-red-600">BideshGomon</span></p>
                 <p class="text-sm mt-2">Professional Profile Platform for Bangladesh</p>
             </div>
         </div>

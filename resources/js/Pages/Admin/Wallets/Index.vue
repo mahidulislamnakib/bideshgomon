@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { 
@@ -74,7 +74,7 @@ const getStatusIcon = (status) => {
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0 bg-blue-500 rounded-md p-3">
+                                <div class="flex-shrink-0 bg-red-500 rounded-md p-3">
                                     <WalletIcon class="h-6 w-6 text-white" />
                                 </div>
                                 <div class="ml-4">
@@ -116,7 +116,7 @@ const getStatusIcon = (status) => {
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+                                <div class="flex-shrink-0 bg-brand-red-600 rounded-md p-3">
                                     <CurrencyDollarIcon class="h-6 w-6 text-white" />
                                 </div>
                                 <div class="ml-4">
@@ -142,7 +142,7 @@ const getStatusIcon = (status) => {
                                         v-model="searchForm.search"
                                         type="text"
                                         placeholder="Search by user name or email..."
-                                        class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                                        class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600 dark:bg-gray-700 dark:text-white"
                                     />
                                     <MagnifyingGlassIcon class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
                                 </div>
@@ -155,7 +155,7 @@ const getStatusIcon = (status) => {
                                 <select
                                     id="status"
                                     v-model="searchForm.status"
-                                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600 dark:bg-gray-700 dark:text-white"
                                 >
                                     <option value="">All Statuses</option>
                                     <option value="active">Active</option>
@@ -167,7 +167,7 @@ const getStatusIcon = (status) => {
                             <div class="flex space-x-2">
                                 <button
                                     type="submit"
-                                    class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600"
                                 >
                                     Search
                                 </button>
@@ -237,7 +237,7 @@ const getStatusIcon = (status) => {
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                 <Link 
                                                     :href="route('admin.wallets.show', wallet.id)" 
-                                                    class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                                                    class="text-brand-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-indigo-300"
                                                 >
                                                     View Details
                                                 </Link>
@@ -258,7 +258,7 @@ const getStatusIcon = (status) => {
                                             v-if="link.url"
                                             :href="link.url"
                                             :class="{
-                                                'bg-indigo-600 text-white': link.active,
+                                                'bg-brand-red-600 text-white': link.active,
                                                 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600': !link.active
                                             }"
                                             class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm"
@@ -267,7 +267,7 @@ const getStatusIcon = (status) => {
                                         <span
                                             v-else
                                             :class="{
-                                                'bg-indigo-600 text-white': link.active,
+                                                'bg-brand-red-600 text-white': link.active,
                                                 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300': !link.active
                                             }"
                                             class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm opacity-50 cursor-not-allowed"

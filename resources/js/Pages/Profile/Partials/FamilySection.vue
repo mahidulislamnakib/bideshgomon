@@ -143,7 +143,33 @@ const submitForm = () => {
 
   // Create FormData for file upload
   const formData = new FormData()
-  const fields = ['relationship', 'full_name', 'date_of_birth', 'occupation', 'phone', 'email', 'address', 'is_dependent', 'is_traveling_with_applicant', 'relationship_proof']
+  const fields = [
+    'relationship', 
+    'full_name', 
+    'date_of_birth', 
+    'place_of_birth',
+    'gender', // CRITICAL: Added for validation
+    'nationality', // CRITICAL: Added for validation
+    'current_country',
+    'current_city',
+    'occupation',
+    'employer',
+    'annual_income_bdt',
+    'education_level',
+    'marital_status',
+    'is_dependent', 
+    'lives_with_user',
+    'will_accompany_travel',
+    'passport_number',
+    'visa_status',
+    'deceased',
+    'deceased_date',
+    'contact_phone',
+    'contact_email',
+    'emergency_contact',
+    'relationship_proof',
+    'notes'
+  ]
   
   fields.forEach(key => {
     if (key === 'relationship_proof' && form[key]) {

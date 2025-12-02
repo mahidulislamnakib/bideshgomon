@@ -20,7 +20,7 @@
                         <select
                             v-model="filters.service"
                             @change="applyFilters"
-                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"
+                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-brand-red-600"
                         >
                             <option value="">All Services</option>
                             <option v-for="service in services" :key="service.id" :value="service.slug">
@@ -37,7 +37,7 @@
                             @change="applyFilters"
                             type="number"
                             placeholder="0"
-                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"
+                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-brand-red-600"
                         />
                     </div>
 
@@ -49,7 +49,7 @@
                             @change="applyFilters"
                             type="number"
                             placeholder="100000"
-                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500"
+                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-brand-red-600"
                         />
                     </div>
 
@@ -60,7 +60,7 @@
                                 v-model="filters.popular_first"
                                 @change="applyFilters"
                                 type="checkbox"
-                                class="rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                             />
                             <span class="text-sm font-medium text-gray-700">Popular First</span>
                         </label>
@@ -96,7 +96,7 @@
                     </button>
                     <button
                         @click="clearAllFilters"
-                        class="text-sm text-sky-600 hover:text-sky-700 font-medium"
+                        class="text-sm text-brand-red-600 hover:text-sky-700 font-medium"
                     >
                         Clear All
                     </button>
@@ -110,7 +110,7 @@
                 <p class="mt-1 text-sm text-gray-500">Try adjusting your filters</p>
                 <button
                     @click="clearAllFilters"
-                    class="mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700"
+                    class="mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700"
                 >
                     Clear Filters
                 </button>
@@ -147,7 +147,7 @@
                                         <p class="text-xs text-gray-500">{{ pkg.service_module.name }}</p>
 
                                         <!-- Price -->
-                                        <div class="text-2xl font-bold text-sky-600">
+                                        <div class="text-2xl font-bold text-brand-red-600">
                                             ৳{{ pkg.price.toLocaleString() }}
                                             <span v-if="pkg.price_unit !== 'fixed'" class="text-sm text-gray-500">
                                                 / {{ pkg.price_unit.replace('_', ' ') }}
@@ -168,7 +168,7 @@
                                         <!-- CTA Button -->
                                         <Link
                                             :href="route('packages.show', pkg.slug)"
-                                            class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 w-full"
+                                            class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 w-full"
                                         >
                                             View Details
                                         </Link>
@@ -243,7 +243,7 @@
                         <p class="text-sm text-gray-600">{{ pkg.service_module.name }}</p>
                         
                         <div class="mt-4">
-                            <div class="text-3xl font-bold text-sky-600">
+                            <div class="text-3xl font-bold text-brand-red-600">
                                 ৳{{ pkg.price.toLocaleString() }}
                                 <span v-if="pkg.price_unit !== 'fixed'" class="text-base text-gray-500">
                                     / {{ pkg.price_unit.replace('_', ' ') }}
@@ -281,7 +281,7 @@
                         <!-- CTA -->
                         <Link
                             :href="route('packages.show', pkg.slug)"
-                            class="block text-center px-4 py-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700"
+                            class="block text-center px-4 py-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700"
                         >
                             View Full Details
                         </Link>

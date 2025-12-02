@@ -212,11 +212,11 @@ const submitForm = () => {
 
     <!-- Bank Account Card -->
     <div v-if="form.bank_name" class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700">
-      <div class="h-1 bg-blue-600"></div>
+      <div class="h-1 bg-brand-red-600"></div>
       <div class="p-4">
         <div class="flex items-start gap-3 mb-4">
           <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
-            <BanknotesIcon class="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <BanknotesIcon class="w-5 h-5 text-brand-red-600 dark:text-blue-400" />
           </div>
           <div class="flex-1 min-w-0">
             <h3 class="text-base font-semibold text-gray-900 dark:text-white">{{ form.bank_name }}</h3>
@@ -244,11 +244,11 @@ const submitForm = () => {
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <!-- Property Card -->
       <div v-if="form.property_value_bdt" class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700">
-        <div class="h-1 bg-blue-600"></div>
+        <div class="h-1 bg-brand-red-600"></div>
         <div class="p-4">
           <div class="flex items-center gap-3 mb-3">
             <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-              <HomeIcon class="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <HomeIcon class="w-5 h-5 text-brand-red-600 dark:text-blue-400" />
             </div>
             <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Property</h3>
           </div>
@@ -274,11 +274,11 @@ const submitForm = () => {
 
       <!-- Investment Card -->
       <div v-if="form.investment_value_bdt" class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700">
-        <div class="h-1 bg-teal-600"></div>
+        <div class="h-1 bg-brand-red-600"></div>
         <div class="p-4">
           <div class="flex items-center gap-3 mb-3">
             <div class="w-10 h-10 rounded-lg bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center">
-              <ChartBarIcon class="w-5 h-5 text-teal-600 dark:text-teal-400" />
+              <ChartBarIcon class="w-5 h-5 text-brand-red-600 dark:text-teal-400" />
             </div>
             <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Investments</h3>
           </div>
@@ -406,7 +406,7 @@ const submitForm = () => {
           <!-- Bank Details Section -->
           <div class="space-y-4">
             <h3 class="text-base font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-              <BanknotesIcon class="w-5 h-5 text-blue-600" />
+              <BanknotesIcon class="w-5 h-5 text-brand-red-600" />
               Bank Account Details
             </h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -468,7 +468,7 @@ const submitForm = () => {
           <!-- Assets Section -->
           <div class="space-y-4">
             <h3 class="text-base font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-              <HomeIcon class="w-5 h-5 text-blue-600" />
+              <HomeIcon class="w-5 h-5 text-brand-red-600" />
               Assets & Property
             </h3>
             

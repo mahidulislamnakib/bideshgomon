@@ -203,7 +203,7 @@ const getSubjectLabel = (subjectType) => {
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <Link
                                         :href="route('admin.activity-log.show', activity.id)"
-                                        class="text-ocean-600 hover:text-ocean-900 inline-flex items-center gap-1"
+                                        class="text-brand-red-600 hover:text-red-900 inline-flex items-center gap-1"
                                     >
                                         <EyeIcon class="h-4 w-4" />
                                         View
@@ -234,7 +234,7 @@ const getSubjectLabel = (subjectType) => {
                                 :class="[
                                     'px-3 py-2 text-sm font-medium rounded-md transition-colors',
                                     link.active
-                                        ? 'bg-ocean-500 text-white'
+                                        ? 'bg-brand-red-600 text-white'
                                         : link.url
                                         ? 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
                                         : 'bg-gray-100 text-gray-400 cursor-not-allowed'

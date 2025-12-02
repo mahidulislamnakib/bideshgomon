@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { Head } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { useTranslations } from '@/Composables/useTranslations';
@@ -45,7 +45,7 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                         </h2>
                         <div class="flex items-center gap-4">
                             <span class="text-gray-700 dark:text-gray-300">Current Language:</span>
-                            <span class="px-4 py-2 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 rounded-lg font-semibold flex items-center gap-2">
+                            <span class="px-4 py-2 bg-red-100 dark:bg-indigo-900 text-brand-red-600 dark:text-indigo-200 rounded-lg font-semibold flex items-center gap-2">
                                 <span v-if="locale === 'en'" v-html="flagUK"></span>
                                 <span v-else v-html="flagBD"></span>
                                 <span>{{ locale === 'en' ? 'English' : 'বাংলা' }}</span>
@@ -99,7 +99,7 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                             ⚡ Action Buttons
                         </h3>
                         <div class="flex flex-wrap gap-3">
-                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                            <button class="px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700">
                                 {{ trans('ui.create') }}
                             </button>
                             <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
@@ -114,7 +114,7 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                             <button class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
                                 {{ trans('ui.cancel') }}
                             </button>
-                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                            <button class="px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700">
                                 {{ trans('ui.search') }}
                             </button>
                         </div>
@@ -137,7 +137,7 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                             <span class="px-3 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 rounded-full text-sm">
                                 {{ trans('ui.pending') }}
                             </span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full text-sm">
+                            <span class="px-3 py-1 bg-red-100 text-brand-red-600 dark:bg-blue-900 dark:text-blue-200 rounded-full text-sm">
                                 {{ trans('ui.approved') }}
                             </span>
                             <span class="px-3 py-1 bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 rounded-full text-sm">
@@ -172,8 +172,8 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                                     ⚠ {{ trans('ui.warning') }}
                                 </p>
                             </div>
-                            <div class="p-4 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded">
-                                <p class="text-blue-800 dark:text-blue-200">
+                            <div class="p-4 bg-red-50 dark:bg-blue-900/20 border-l-4 border-brand-red-600 rounded">
+                                <p class="text-brand-red-600 dark:text-blue-200">
                                     ℹ {{ trans('ui.info') }}
                                 </p>
                             </div>
@@ -226,7 +226,7 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                             <div class="flex gap-3">
                                 <button 
                                     type="submit" 
-                                    class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+                                    class="px-6 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700"
                                 >
                                     {{ trans('ui.submit') }}
                                 </button>
@@ -294,8 +294,8 @@ $request-&gt;validate([
                         </div>
 
                         <!-- Pro Tip -->
-                        <div class="mt-6 p-4 bg-indigo-50 dark:bg-indigo-900/20 border-l-4 border-indigo-500 rounded">
-                            <p class="text-sm text-indigo-800 dark:text-indigo-200">
+                        <div class="mt-6 p-4 bg-red-50 dark:bg-indigo-900/20 border-l-4 border-brand-red-600 rounded">
+                            <p class="text-sm text-brand-red-600 dark:text-indigo-200">
                                 <span class="font-semibold">💡 Pro Tip:</span>
                                 {{ locale === 'en' 
                                     ? 'Switch to Bengali using the language switcher in the top right corner to see all these labels change instantly!'

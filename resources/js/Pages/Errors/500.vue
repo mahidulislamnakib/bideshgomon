@@ -118,7 +118,7 @@ const maintenanceReason = 'System Upgrade'
         <!-- Email Notification Signup -->
         <div class="bg-white shadow-lg rounded-lg p-8 mb-8">
           <div class="text-center mb-6">
-            <EnvelopeIcon class="h-12 w-12 text-blue-600 mx-auto mb-3" />
+            <EnvelopeIcon class="h-12 w-12 text-brand-red-600 mx-auto mb-3" />
             <h3 class="text-xl font-bold text-gray-900 mb-2">Get Notified When We're Back</h3>
             <p class="text-gray-600">
               We'll send you an email as soon as the maintenance is complete.
@@ -200,7 +200,7 @@ const maintenanceReason = 'System Upgrade'
           <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a
               href="mailto:support@bideshgomon.com"
-              class="inline-flex items-center justify-center px-5 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+              class="inline-flex items-center justify-center px-5 py-2 bg-brand-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
             >
               <EnvelopeIcon class="h-5 w-5 mr-2" />
               Email Support
@@ -228,30 +228,4 @@ const maintenanceReason = 'System Upgrade'
   </div>
 </template>
 
-<style scoped>
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
 
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-bounce {
-  animation: bounce 1s infinite;
-}
-</style>

@@ -43,7 +43,7 @@ const breadcrumbSchema = computed(() => {
                 <Link
                     v-if="!item.current"
                     :href="item.url"
-                    class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-ocean-600 transition-colors"
+                    class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-brand-red-600 transition-colors"
                     itemprop="item"
                 >
                     <span itemprop="name">{{ item.title }}</span>

@@ -148,7 +148,7 @@ const submitQuote = () => {
             <!-- User Info -->
             <div class="flex items-start gap-3">
               <div class="flex-shrink-0 p-2 bg-blue-100 rounded-lg">
-                <UserIcon class="h-5 w-5 text-blue-600" />
+                <UserIcon class="h-5 w-5 text-brand-red-600" />
               </div>
               <div>
                 <p class="text-xs text-gray-500 font-medium">Applicant</p>
@@ -160,7 +160,7 @@ const submitQuote = () => {
             <!-- Service -->
             <div class="flex items-start gap-3">
               <div class="flex-shrink-0 p-2 bg-indigo-100 rounded-lg">
-                <DocumentTextIcon class="h-5 w-5 text-indigo-600" />
+                <DocumentTextIcon class="h-5 w-5 text-brand-red-600" />
               </div>
               <div>
                 <p class="text-xs text-gray-500 font-medium">Service</p>
@@ -226,7 +226,7 @@ const submitQuote = () => {
 
             <div class="flex items-start gap-3">
               <div class="flex-shrink-0 p-2 bg-blue-100 rounded-lg">
-                <ClockIcon class="h-5 w-5 text-blue-600" />
+                <ClockIcon class="h-5 w-5 text-brand-red-600" />
               </div>
               <div>
                 <p class="text-xs text-gray-500 font-medium">Processing Time</p>
@@ -288,7 +288,7 @@ const submitQuote = () => {
                 v-if="document.file_path"
                 :href="`/storage/${document.file_path}`"
                 target="_blank"
-                class="text-sm font-medium text-indigo-600 hover:text-indigo-900"
+                class="text-sm font-medium text-brand-red-600 hover:text-red-900"
               >
                 View
               </a>
@@ -319,7 +319,7 @@ const submitQuote = () => {
                 step="0.01"
                 min="0"
                 required
-                class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
                 placeholder="0.00"
               />
             </div>
@@ -351,7 +351,7 @@ const submitQuote = () => {
               min="1"
               max="365"
               required
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
             />
             <p v-if="quoteForm.errors.processing_time_days" class="mt-1 text-sm text-red-600">
               {{ quoteForm.errors.processing_time_days }}
@@ -367,7 +367,7 @@ const submitQuote = () => {
               v-model="quoteForm.valid_until"
               type="date"
               required
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
             />
             <p v-if="quoteForm.errors.valid_until" class="mt-1 text-sm text-red-600">
               {{ quoteForm.errors.valid_until }}
@@ -382,7 +382,7 @@ const submitQuote = () => {
             <textarea
               v-model="quoteForm.quote_notes"
               rows="4"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
               placeholder="Any special instructions, conditions, or information for the client..."
             ></textarea>
             <p v-if="quoteForm.errors.quote_notes" class="mt-1 text-sm text-red-600">

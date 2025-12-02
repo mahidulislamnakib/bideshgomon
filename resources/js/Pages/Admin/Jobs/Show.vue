@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
@@ -60,19 +60,19 @@ const rejectJob = () => {
 };
 
 const categoryColors = {
-    hospitality: 'bg-blue-100 text-blue-800',
+    hospitality: 'bg-red-100 text-brand-red-600',
     construction: 'bg-orange-100 text-orange-800',
     healthcare: 'bg-green-100 text-green-800',
     it: 'bg-purple-100 text-purple-800',
     manufacturing: 'bg-gray-100 text-gray-800',
     education: 'bg-yellow-100 text-yellow-800',
     retail: 'bg-pink-100 text-pink-800',
-    transportation: 'bg-indigo-100 text-indigo-800',
+    transportation: 'bg-red-100 text-brand-red-600',
 };
 
 const statusColors = {
     pending: 'bg-yellow-100 text-yellow-800',
-    reviewed: 'bg-blue-100 text-blue-800',
+    reviewed: 'bg-red-100 text-brand-red-600',
     shortlisted: 'bg-green-100 text-green-800',
     rejected: 'bg-red-100 text-red-800',
     hired: 'bg-purple-100 text-purple-800',
@@ -226,7 +226,7 @@ const isExpired = () => {
                                 </button>
                                 <Link
                                     :href="route('admin.jobs.edit', job.id)"
-                                    class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors text-sm"
+                                    class="px-4 py-2 bg-brand-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-colors text-sm"
                                 >
                                     <PencilIcon class="h-4 w-4 inline mr-1" />
                                     Edit
@@ -270,7 +270,7 @@ const isExpired = () => {
                                     <span
                                         v-for="(skill, index) in job.skills_required"
                                         :key="index"
-                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium"
+                                        class="px-3 py-1 bg-red-100 text-indigo-700 rounded-full text-sm font-medium"
                                     >
                                         {{ skill }}
                                     </span>
@@ -299,7 +299,7 @@ const isExpired = () => {
                                 </h2>
                                 <Link
                                     :href="route('admin.applications.index', { job_id: job.id })"
-                                    class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm"
+                                    class="text-brand-red-600 hover:text-brand-red-600 font-semibold text-sm"
                                 >
                                     View All →
                                 </Link>
@@ -341,7 +341,7 @@ const isExpired = () => {
                                         </div>
                                         <Link
                                             :href="route('admin.applications.show', application.id)"
-                                            class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors font-semibold text-sm"
+                                            class="px-4 py-2 bg-red-50 text-brand-red-600 rounded-lg hover:bg-red-100 transition-colors font-semibold text-sm"
                                         >
                                             <EyeIcon class="h-4 w-4 inline mr-1" />
                                             View
@@ -394,13 +394,13 @@ const isExpired = () => {
 
                                     <div v-if="job.admin_approved_fee" class="mb-2">
                                         <p class="text-gray-500 text-xs">Admin Approved Fee</p>
-                                        <p class="font-bold text-indigo-600 text-lg">৳{{ Number(job.admin_approved_fee).toLocaleString() }}</p>
+                                        <p class="font-bold text-brand-red-600 text-lg">৳{{ Number(job.admin_approved_fee).toLocaleString() }}</p>
                                     </div>
 
-                                    <div v-if="job.processing_fee && job.processing_fee > 0" class="mt-3 pt-3 border-t border-gray-200 bg-indigo-50 -mx-4 px-4 py-2 rounded">
+                                    <div v-if="job.processing_fee && job.processing_fee > 0" class="mt-3 pt-3 border-t border-gray-200 bg-red-50 -mx-4 px-4 py-2 rounded">
                                         <p class="text-indigo-700 text-xs font-medium">Processing Fee (Admin Markup)</p>
                                         <p class="font-bold text-indigo-900 text-xl">+৳{{ Number(job.processing_fee).toLocaleString() }}</p>
-                                        <p class="text-indigo-600 text-xs mt-1">{{ ((job.processing_fee / job.agency_posted_fee) * 100).toFixed(1) }}% markup</p>
+                                        <p class="text-brand-red-600 text-xs mt-1">{{ ((job.processing_fee / job.agency_posted_fee) * 100).toFixed(1) }}% markup</p>
                                     </div>
                                 </div>
 
@@ -433,7 +433,7 @@ const isExpired = () => {
                         <!-- Salary & Compensation -->
                         <div class="bg-white rounded-2xl shadow-sm p-6">
                             <h3 class="text-md font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                                <CurrencyDollarIcon class="h-5 w-5 text-indigo-600" />
+                                <CurrencyDollarIcon class="h-5 w-5 text-brand-red-600" />
                                 Salary & Compensation
                             </h3>
                             <div class="space-y-3 text-sm">
@@ -484,7 +484,7 @@ const isExpired = () => {
                         <!-- Important Dates -->
                         <div class="bg-white rounded-2xl shadow-sm p-6">
                             <h3 class="text-md font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                                <CalendarIcon class="h-5 w-5 text-indigo-600" />
+                                <CalendarIcon class="h-5 w-5 text-brand-red-600" />
                                 Important Dates
                             </h3>
                             <div class="space-y-3 text-sm">
@@ -519,7 +519,7 @@ const isExpired = () => {
                                     <p class="text-gray-600">Email</p>
                                     <a
                                         :href="`mailto:${job.contact_email}`"
-                                        class="font-semibold text-indigo-600 hover:text-indigo-800"
+                                        class="font-semibold text-brand-red-600 hover:text-brand-red-600"
                                     >
                                         {{ job.contact_email }}
                                     </a>
@@ -528,7 +528,7 @@ const isExpired = () => {
                                     <p class="text-gray-600">Phone</p>
                                     <a
                                         :href="`tel:${job.contact_phone}`"
-                                        class="font-semibold text-indigo-600 hover:text-indigo-800"
+                                        class="font-semibold text-brand-red-600 hover:text-brand-red-600"
                                     >
                                         {{ job.contact_phone }}
                                     </a>
@@ -537,7 +537,7 @@ const isExpired = () => {
                         </div>
 
                         <!-- Statistics -->
-                        <div class="bg-indigo-600 rounded-lg shadow-sm p-6 text-white">
+                        <div class="bg-brand-red-600 rounded-lg shadow-sm p-6 text-white">
                             <h3 class="text-md font-semibold mb-4">Statistics</h3>
                             <div class="space-y-3">
                                 <div class="flex items-center justify-between">

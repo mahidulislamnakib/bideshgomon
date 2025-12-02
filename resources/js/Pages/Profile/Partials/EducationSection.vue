@@ -303,12 +303,12 @@ const formatDate = (dateString) => {
           <div class="flex items-start justify-between gap-3 mb-3">
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2 mb-1">
-                <AcademicCapIcon class="w-6 h-6 md:w-7 md:h-7 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                <AcademicCapIcon class="w-6 h-6 md:w-7 md:h-7 text-brand-red-600 dark:text-blue-400 flex-shrink-0" />
                 <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white truncate">
                   {{ edu.degree_name || edu.custom_degree || 'Degree' }}
                 </h3>
               </div>
-              <p class="text-sm sm:text-base font-semibold text-blue-600 dark:text-blue-400">
+              <p class="text-sm sm:text-base font-semibold text-brand-red-600 dark:text-blue-400">
                 {{ edu.institution_name || edu.custom_university || 'Institution' }}
               </p>
             </div>
@@ -391,7 +391,7 @@ const formatDate = (dateString) => {
       <div class="p-6 bg-white dark:bg-gray-800">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-100 dark:bg-blue-900/30 rounded-lg md:rounded-xl flex items-center justify-center">
-            <AcademicCapIcon class="w-7 h-7 md:w-8 md:h-8 text-blue-600 dark:text-blue-400" />
+            <AcademicCapIcon class="w-7 h-7 md:w-8 md:h-8 text-brand-red-600 dark:text-blue-400" />
           </div>
           <h2 class="text-xl font-bold text-gray-900 dark:text-white">
             {{ isEditMode ? 'Edit Education Record' : 'Add New Education' }}
@@ -427,7 +427,7 @@ const formatDate = (dateString) => {
               <select 
                 id="degree" 
                 v-model="form.value.degree" 
-                class="mt-1 block w-full py-3 px-4 text-base rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 shadow-sm touch-manipulation"
+                class="mt-1 block w-full py-3 px-4 text-base rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-brand-red-600 dark:focus:ring-brand-red-600 shadow-sm touch-manipulation"
                 required
               >
                 <option value="">Select Degree</option>
@@ -443,7 +443,7 @@ const formatDate = (dateString) => {
 
             <div>
               <InputLabel for="field_of_study" value="Field of Study" />
-                <select id="field_of_study" v-model="form.value.field_of_study" class="mt-1 block w-full py-3 px-4 text-base rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 shadow-sm touch-manipulation">
+                <select id="field_of_study" v-model="form.value.field_of_study" class="mt-1 block w-full py-3 px-4 text-base rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-brand-red-600 dark:focus:ring-brand-red-600 shadow-sm touch-manipulation">
                   <option value="">
                     Select Field of Study
                   </option>

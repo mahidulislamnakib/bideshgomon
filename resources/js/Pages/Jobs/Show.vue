@@ -74,7 +74,7 @@ const getJobTypeLabel = (type) => {
             <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
                 <Link
                     :href="route('jobs.index')"
-                    class="inline-flex items-center text-gray-600 hover:text-blue-600 mb-6 font-medium transition-colors"
+                    class="inline-flex items-center text-gray-600 hover:text-brand-red-600 mb-6 font-medium transition-colors"
                 >
                     <ArrowLeftIcon class="h-5 w-5 mr-2" />
                     Back to Jobs
@@ -87,15 +87,15 @@ const getJobTypeLabel = (type) => {
                         
                         <div class="flex flex-wrap gap-4 text-sm text-gray-600">
                             <div class="flex items-center font-medium">
-                                <MapPinIcon class="h-5 w-5 mr-2 text-blue-600" />
+                                <MapPinIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                                 {{ job.city }}, {{ job.country.name }}
                             </div>
                             <div class="flex items-center font-medium">
-                                <BriefcaseIcon class="h-5 w-5 mr-2 text-blue-600" />
+                                <BriefcaseIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                                 {{ getJobTypeLabel(job.job_type) }}
                             </div>
                             <div class="flex items-center font-medium">
-                                <CalendarIcon class="h-5 w-5 mr-2 text-blue-600" />
+                                <CalendarIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                                 Posted {{ new Date(job.published_at).toLocaleDateString() }}
                             </div>
                         </div>
@@ -105,7 +105,7 @@ const getJobTypeLabel = (type) => {
                         <button
                             v-if="!hasApplied"
                             @click="showApplicationModal = true"
-                            class="w-full sm:w-auto px-8 py-3.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                            class="w-full sm:w-auto px-8 py-3.5 bg-brand-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
                         >
                             <DocumentTextIcon class="h-5 w-5" />
                             <span>Apply Now</span>
@@ -134,7 +134,7 @@ const getJobTypeLabel = (type) => {
                                 <div class="text-sm text-gray-600 mt-1">per {{ job.salary_period }}</div>
                             </div>
                             <div class="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center border-2 border-blue-200">
-                                <CurrencyDollarIcon class="h-10 w-10 text-blue-600" />
+                                <CurrencyDollarIcon class="h-10 w-10 text-brand-red-600" />
                             </div>
                         </div>
                         
@@ -255,13 +255,13 @@ const getJobTypeLabel = (type) => {
                         <div class="space-y-2 text-sm">
                             <div v-if="job.contact_email">
                                 <div class="text-gray-500">Email</div>
-                                <a :href="`mailto:${job.contact_email}`" class="text-indigo-600 hover:text-indigo-700">
+                                <a :href="`mailto:${job.contact_email}`" class="text-brand-red-600 hover:text-indigo-700">
                                     {{ job.contact_email }}
                                 </a>
                             </div>
                             <div v-if="job.contact_phone">
                                 <div class="text-gray-500">Phone</div>
-                                <a :href="`tel:${job.contact_phone}`" class="text-indigo-600 hover:text-indigo-700">
+                                <a :href="`tel:${job.contact_phone}`" class="text-brand-red-600 hover:text-indigo-700">
                                     {{ job.contact_phone }}
                                 </a>
                             </div>
@@ -295,7 +295,7 @@ const getJobTypeLabel = (type) => {
 
                 <div class="inline-block w-full max-w-2xl my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-2xl rounded-3xl">
                     <!-- Modal Header -->
-                    <div class="bg-blue-600 px-6 py-5 border-b-2 border-blue-700">
+                    <div class="bg-brand-red-600 px-6 py-5 border-b-2 border-blue-700">
                         <div class="flex items-center justify-between">
                             <h3 class="text-xl font-bold text-white flex items-center">
                                 <DocumentTextIcon class="h-6 w-6 mr-2" />
@@ -311,7 +311,7 @@ const getJobTypeLabel = (type) => {
                     <form @submit.prevent="applyForJob" class="p-6">
                         <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                             <div class="flex items-start">
-                                <DocumentTextIcon class="h-5 w-5 text-blue-600 mt-0.5 mr-2" />
+                                <DocumentTextIcon class="h-5 w-5 text-brand-red-600 mt-0.5 mr-2" />
                                 <div class="text-sm text-blue-800">
                                     <div class="font-semibold mb-1">Application Fee: {{ job.application_fee > 0 ? `৳${Number(job.application_fee).toLocaleString()}` : 'Free' }}</div>
                                     <div v-if="job.application_fee > 0">The fee will be deducted from your wallet balance.</div>
@@ -328,7 +328,7 @@ const getJobTypeLabel = (type) => {
                                 v-model="form.cover_letter"
                                 rows="6"
                                 placeholder="Tell us why you're a great fit for this position..."
-                                class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                                class="w-full rounded-lg border-gray-300 focus:ring-brand-red-600 focus:border-blue-500"
                             ></textarea>
                             <div v-if="form.errors.cover_letter" class="text-red-600 text-sm mt-1">
                                 {{ form.errors.cover_letter }}
@@ -347,7 +347,7 @@ const getJobTypeLabel = (type) => {
                             <button
                                 type="submit"
                                 :disabled="form.processing"
-                                class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all shadow-lg disabled:opacity-50"
+                                class="flex-1 px-6 py-3 bg-brand-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition-all shadow-lg disabled:opacity-50"
                             >
                                 {{ form.processing ? 'Submitting...' : 'Submit Application' }}
                             </button>

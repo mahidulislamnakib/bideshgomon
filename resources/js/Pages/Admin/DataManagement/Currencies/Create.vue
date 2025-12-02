@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Add Currency" />
 
@@ -6,7 +6,7 @@
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
                 <div class="mb-6">
-                    <Link :href="route('admin.data.currencies.index')" class="text-sm text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 mb-2 inline-block">
+                    <Link :href="route('admin.data.currencies.index')" class="text-sm text-brand-red-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
                         ← Back to Currencies
                     </Link>
                     <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Add New Currency</h1>
@@ -27,7 +27,7 @@
                                 maxlength="3"
                                 required
                                 placeholder="USD"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 uppercase"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600 uppercase"
                                 :class="{ 'border-red-500': form.errors.code }"
                             />
                             <p v-if="form.errors.code" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.code }}</p>
@@ -45,7 +45,7 @@
                                 type="text"
                                 required
                                 placeholder="US Dollar"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
                                 :class="{ 'border-red-500': form.errors.name }"
                             />
                             <p v-if="form.errors.name" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.name }}</p>
@@ -62,7 +62,7 @@
                                 type="text"
                                 required
                                 placeholder="$"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
                                 :class="{ 'border-red-500': form.errors.symbol }"
                             />
                             <p v-if="form.errors.symbol" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.symbol }}</p>
@@ -81,7 +81,7 @@
                                 min="0"
                                 required
                                 placeholder="110.50"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
                                 :class="{ 'border-red-500': form.errors.exchange_rate_to_bdt }"
                             />
                             <p v-if="form.errors.exchange_rate_to_bdt" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.exchange_rate_to_bdt }}</p>
@@ -94,7 +94,7 @@
                                 <input
                                     v-model="form.is_active"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:ring-brand-red-600"
                                 />
                                 <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Active</span>
                             </label>
@@ -112,7 +112,7 @@
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors disabled:opacity-50"
+                            class="px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition-colors disabled:opacity-50"
                         >
                             {{ form.processing ? 'Saving...' : 'Save Currency' }}
                         </button>

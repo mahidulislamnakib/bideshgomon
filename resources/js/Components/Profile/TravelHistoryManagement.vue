@@ -6,12 +6,12 @@
                 <h1 class="text-3xl font-bold text-gray-900">Travel History</h1>
                 <p class="mt-1 text-sm text-gray-600">
                     Track all your international travels with entry/exit dates and duration.
-                    <span class="text-blue-600 font-semibold">Required by USA, UK, Australia, Canada.</span>
+                    <span class="text-brand-red-600 font-semibold">Required by USA, UK, Australia, Canada.</span>
                 </p>
             </div>
             <button
                 @click="addTravelHistory"
-                class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150"
+                class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150"
             >
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -99,7 +99,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <button @click="editTravelHistory(travel)" class="text-indigo-600 hover:text-indigo-900 mr-3">
+                                <button @click="editTravelHistory(travel)" class="text-brand-red-600 hover:text-red-900 mr-3">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                     </svg>
@@ -139,7 +139,7 @@
                                 <!-- Passport Selection -->
                                 <div class="col-span-2">
                                     <label class="block text-sm font-medium text-gray-700">Passport Used *</label>
-                                    <select v-model="form.user_passport_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <select v-model="form.user_passport_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600">
                                         <option value="">Select Passport</option>
                                         <option v-for="passport in passports" :key="passport.id" :value="passport.id">
                                             {{ passport.passport_number }} ({{ passport.issuing_country }})
@@ -151,7 +151,7 @@
                                 <!-- Visa Selection (Optional) -->
                                 <div class="col-span-2">
                                     <label class="block text-sm font-medium text-gray-700">Visa Used (if applicable)</label>
-                                    <select v-model="form.user_visa_history_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <select v-model="form.user_visa_history_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600">
                                         <option value="">No visa / Visa-free entry</option>
                                         <option v-for="visa in visaHistory" :key="visa.id" :value="visa.id">
                                             {{ visa.country }} - {{ visa.visa_type }} ({{ visa.visa_number || 'N/A' }})
@@ -162,20 +162,20 @@
                                 <!-- Country -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Country *</label>
-                                    <input v-model="form.country" type="text" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                    <input v-model="form.country" type="text" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                                     <p v-if="form.errors.country" class="mt-1 text-sm text-red-600">{{ form.errors.country }}</p>
                                 </div>
 
                                 <!-- City -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">City</label>
-                                    <input v-model="form.city" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                    <input v-model="form.city" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                                 </div>
 
                                 <!-- Purpose -->
                                 <div class="col-span-2">
                                     <label class="block text-sm font-medium text-gray-700">Purpose *</label>
-                                    <select v-model="form.purpose" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <select v-model="form.purpose" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600">
                                         <option value="tourism">Tourism</option>
                                         <option value="business">Business</option>
                                         <option value="education">Education</option>
@@ -188,14 +188,14 @@
                                 <!-- Entry Date -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Entry Date *</label>
-                                    <input v-model="form.entry_date" type="date" required @change="calculateDuration" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                    <input v-model="form.entry_date" type="date" required @change="calculateDuration" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                                     <p v-if="form.errors.entry_date" class="mt-1 text-sm text-red-600">{{ form.errors.entry_date }}</p>
                                 </div>
 
                                 <!-- Exit Date -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Exit Date *</label>
-                                    <input v-model="form.exit_date" type="date" required @change="calculateDuration" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                    <input v-model="form.exit_date" type="date" required @change="calculateDuration" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                                     <p v-if="form.errors.exit_date" class="mt-1 text-sm text-red-600">{{ form.errors.exit_date }}</p>
                                 </div>
 
@@ -211,13 +211,13 @@
                                 <!-- Visa Type Used -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Visa Type Used</label>
-                                    <input v-model="form.visa_type_used" type="text" placeholder="Tourist, Business, Student, etc." class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                    <input v-model="form.visa_type_used" type="text" placeholder="Tourist, Business, Student, etc." class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                                 </div>
 
                                 <!-- Accommodation Type -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Accommodation Type</label>
-                                    <select v-model="form.accommodation_type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <select v-model="form.accommodation_type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600">
                                         <option value="">Select Type</option>
                                         <option value="hotel">Hotel</option>
                                         <option value="hostel">Hostel</option>
@@ -232,13 +232,13 @@
                                 <!-- Accommodation Address -->
                                 <div class="col-span-2">
                                     <label class="block text-sm font-medium text-gray-700">Accommodation Address</label>
-                                    <textarea v-model="form.accommodation_address" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                                    <textarea v-model="form.accommodation_address" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"></textarea>
                                 </div>
 
                                 <!-- Transportation Mode -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Transportation Mode</label>
-                                    <select v-model="form.transportation_mode" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <select v-model="form.transportation_mode" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600">
                                         <option value="">Select Mode</option>
                                         <option value="air">Air</option>
                                         <option value="land">Land</option>
@@ -249,25 +249,25 @@
                                 <!-- Entry Port -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Entry Port</label>
-                                    <input v-model="form.entry_port" type="text" placeholder="Airport/Border name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                    <input v-model="form.entry_port" type="text" placeholder="Airport/Border name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                                 </div>
 
                                 <!-- Exit Port -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Exit Port</label>
-                                    <input v-model="form.exit_port" type="text" placeholder="Airport/Border name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                    <input v-model="form.exit_port" type="text" placeholder="Airport/Border name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                                 </div>
 
                                 <!-- Sponsoring Organization -->
                                 <div class="col-span-2">
                                     <label class="block text-sm font-medium text-gray-700">Sponsoring Organization (if any)</label>
-                                    <input v-model="form.sponsoring_organization" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                    <input v-model="form.sponsoring_organization" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                                 </div>
 
                                 <!-- Travel Companions -->
                                 <div class="col-span-2">
                                     <label class="block text-sm font-medium text-gray-700">Travel Companions</label>
-                                    <input v-model="form.travel_companions" type="text" placeholder="Names of companions (if any)" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                    <input v-model="form.travel_companions" type="text" placeholder="Names of companions (if any)" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                                 </div>
 
                                 <!-- Incidents or Violations (RED FLAG) -->
@@ -294,17 +294,17 @@
                                 <!-- Notes -->
                                 <div class="col-span-2">
                                     <label class="block text-sm font-medium text-gray-700">Additional Notes</label>
-                                    <textarea v-model="form.notes" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                                    <textarea v-model="form.notes" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"></textarea>
                                 </div>
                             </div>
                         </div>
 
                         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                            <button type="submit" :disabled="form.processing" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50">
+                            <button type="submit" :disabled="form.processing" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-brand-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50">
                                 <span v-if="form.processing">Saving...</span>
                                 <span v-else>{{ isEditing ? 'Update' : 'Save' }}</span>
                             </button>
-                            <button type="button" @click="showModal = false" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                            <button type="button" @click="showModal = false" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                 Cancel
                             </button>
                         </div>
@@ -342,7 +342,7 @@
                         <button type="button" @click="deleteTravelHistory" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
                             Delete
                         </button>
-                        <button type="button" @click="showDeleteModal = false" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        <button type="button" @click="showDeleteModal = false" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                             Cancel
                         </button>
                     </div>

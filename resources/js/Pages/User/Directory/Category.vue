@@ -32,7 +32,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <!-- Breadcrumb -->
             <nav class="flex items-center gap-2 text-sm text-gray-600 mb-8">
-                <Link :href="route('directory.index')" class="hover:text-blue-600">Directory</Link>
+                <Link :href="route('directory.index')" class="hover:text-brand-red-600">Directory</Link>
                 <ChevronRightIcon class="h-4 w-4" />
                 <span class="text-gray-900 font-medium">{{ category.name }}</span>
             </nav>
@@ -61,7 +61,7 @@
                     <!-- Content -->
                     <div class="p-5">
                         <!-- Name -->
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-brand-red-600 transition-colors line-clamp-2">
                             {{ directory.name }}
                         </h3>
 
@@ -83,7 +83,7 @@
                                 <EyeIcon class="h-4 w-4" />
                                 <span>{{ directory.view_count || 0 }} views</span>
                             </div>
-                            <span class="text-blue-600 text-sm font-medium group-hover:underline">
+                            <span class="text-brand-red-600 text-sm font-medium group-hover:underline">
                                 View Details →
                             </span>
                         </div>
@@ -98,7 +98,7 @@
                 <p class="text-gray-600 mb-4">There are currently no directories in this category.</p>
                 <Link
                     :href="route('directory.index')"
-                    class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                 >
                     Browse All Directories
                 </Link>

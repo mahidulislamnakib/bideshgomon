@@ -63,7 +63,7 @@ function handleFile(e) {
               <label for="is_primary" class="text-sm">Set as primary</label>
             </div>
           </div>
-          <button :disabled="form.processing" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded disabled:opacity-50">Upload</button>
+          <button :disabled="form.processing" class="bg-brand-red-600 hover:bg-red-700 text-white px-4 py-2 rounded disabled:opacity-50">Upload</button>
           <p v-if="form.recentlySuccessful" class="text-green-600 text-sm">Uploaded successfully.</p>
         </form>
       </div>
@@ -113,7 +113,7 @@ function handleFile(e) {
           <div class="mt-4 flex items-center justify-between" v-if="documents.links.length > 3">
             <div class="text-sm text-gray-600">Showing {{ documents.data.length }} of {{ documents.total }}</div>
             <div class="flex gap-1">
-              <Link v-for="l in documents.links" :key="l.url + l.label" :href="l.url" v-html="l.label" :class="['px-2 py-1 rounded text-xs', l.active ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700']" />
+              <Link v-for="l in documents.links" :key="l.url + l.label" :href="l.url" v-html="l.label" :class="['px-2 py-1 rounded text-xs', l.active ? 'bg-brand-red-600 text-white' : 'bg-gray-100 text-gray-700']" />
             </div>
           </div>
         </div>

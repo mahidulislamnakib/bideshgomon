@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
@@ -111,10 +111,10 @@ const getCategoryColor = (cat) => {
     const colors = {
         'hospitality': 'bg-purple-100 text-purple-700',
         'construction': 'bg-orange-100 text-orange-700',
-        'healthcare': 'bg-blue-100 text-blue-700',
+        'healthcare': 'bg-red-100 text-blue-700',
         'it': 'bg-green-100 text-green-700',
         'manufacturing': 'bg-gray-100 text-gray-700',
-        'education': 'bg-indigo-100 text-indigo-700',
+        'education': 'bg-red-100 text-indigo-700',
         'retail': 'bg-pink-100 text-pink-700',
         'transportation': 'bg-yellow-100 text-yellow-700',
     };
@@ -151,7 +151,7 @@ const getJobTypeLabel = (type) => {
                         </div>
                         <Link
                             :href="route('admin.jobs.create')"
-                            class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-all shadow-sm"
+                            class="inline-flex items-center px-6 py-3 bg-brand-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-all shadow-sm"
                         >
                             <PlusIcon class="h-5 w-5 mr-2" />
                             Create Job
@@ -200,7 +200,7 @@ const getJobTypeLabel = (type) => {
                                 @keyup.enter="performSearch"
                                 type="text"
                                 placeholder="Search jobs by title, company, or category..."
-                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                             />
                         </div>
                         <button
@@ -209,7 +209,7 @@ const getJobTypeLabel = (type) => {
                         >
                             <FunnelIcon class="h-5 w-5 mr-2" />
                             Filters
-                            <span v-if="hasActiveFilters" class="ml-2 px-2 py-0.5 bg-indigo-600 text-white text-xs rounded-full">Active</span>
+                            <span v-if="hasActiveFilters" class="ml-2 px-2 py-0.5 bg-brand-red-600 text-white text-xs rounded-full">Active</span>
                         </button>
                     </div>
 
@@ -221,7 +221,7 @@ const getJobTypeLabel = (type) => {
                                 <select
                                     v-model="country_id"
                                     @change="performSearch"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Countries</option>
                                     <option v-for="country in countries" :key="country.id" :value="country.id">
@@ -234,7 +234,7 @@ const getJobTypeLabel = (type) => {
                                 <select
                                     v-model="category"
                                     @change="performSearch"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Categories</option>
                                     <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
@@ -245,7 +245,7 @@ const getJobTypeLabel = (type) => {
                                 <select
                                     v-model="approval_status"
                                     @change="performSearch"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Approval Status</option>
                                     <option value="pending">⏳ Pending Review</option>
@@ -258,7 +258,7 @@ const getJobTypeLabel = (type) => {
                                 <select
                                     v-model="status"
                                     @change="performSearch"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Status</option>
                                     <option value="active">Active</option>
@@ -271,7 +271,7 @@ const getJobTypeLabel = (type) => {
                                 <select
                                     v-model="is_featured"
                                     @change="performSearch"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Jobs</option>
                                     <option value="1">Featured Only</option>
@@ -282,7 +282,7 @@ const getJobTypeLabel = (type) => {
                         <button
                             v-if="hasActiveFilters"
                             @click="clearFilters"
-                            class="mt-4 text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+                            class="mt-4 text-sm text-brand-red-600 hover:text-indigo-700 font-medium"
                         >
                             Clear all filters
                         </button>
@@ -290,7 +290,7 @@ const getJobTypeLabel = (type) => {
                 </div>
 
                 <!-- Bulk Actions -->
-                <div v-if="selectedJobs.length > 0" class="bg-indigo-50 rounded-xl p-4 mb-6 flex items-center justify-between">
+                <div v-if="selectedJobs.length > 0" class="bg-red-50 rounded-xl p-4 mb-6 flex items-center justify-between">
                     <span class="text-sm font-medium text-indigo-900">{{ selectedJobs.length }} job(s) selected</span>
                     <div class="flex gap-2">
                         <button
@@ -322,7 +322,7 @@ const getJobTypeLabel = (type) => {
                         <p class="text-gray-600 mb-6">Try adjusting your filters or create a new job posting</p>
                         <Link
                             :href="route('admin.jobs.create')"
-                            class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition-colors"
+                            class="inline-flex items-center px-6 py-3 bg-brand-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition-colors"
                         >
                             <PlusIcon class="h-5 w-5 mr-2" />
                             Create Job
@@ -340,7 +340,7 @@ const getJobTypeLabel = (type) => {
                                 type="checkbox"
                                 :checked="selectedJobs.includes(job.id)"
                                 @change="toggleJobSelection(job.id)"
-                                class="mt-1 h-5 w-5 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
+                                class="mt-1 h-5 w-5 text-brand-red-600 rounded border-gray-300 focus:ring-brand-red-600"
                             />
 
                             <!-- Job Content -->
@@ -392,7 +392,7 @@ const getJobTypeLabel = (type) => {
                                                 {{ job.views_count }} views
                                             </div>
                                             <!-- Processing Fee Indicator -->
-                                            <div v-if="job.processing_fee && job.processing_fee > 0" class="flex items-center text-indigo-600 font-semibold">
+                                            <div v-if="job.processing_fee && job.processing_fee > 0" class="flex items-center text-brand-red-600 font-semibold">
                                                 <CurrencyDollarIcon class="h-4 w-4 mr-1" />
                                                 +৳{{ Number(job.processing_fee).toLocaleString() }} fee
                                             </div>
@@ -402,7 +402,7 @@ const getJobTypeLabel = (type) => {
                                             <span :class="getCategoryColor(job.category)" class="px-3 py-1 text-xs font-medium rounded-full">
                                                 {{ job.category }}
                                             </span>
-                                            <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full">
+                                            <span class="px-3 py-1 bg-red-50 text-blue-700 text-xs font-medium rounded-full">
                                                 {{ getJobTypeLabel(job.job_type) }}
                                             </span>
                                             <span class="px-3 py-1 bg-gray-50 text-gray-700 text-xs font-medium rounded-full">
@@ -412,7 +412,7 @@ const getJobTypeLabel = (type) => {
                                                 {{ job.positions_available }} positions
                                             </span>
                                             <!-- Application Fee Display -->
-                                            <span v-if="job.application_fee > 0" class="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded-full">
+                                            <span v-if="job.application_fee > 0" class="px-3 py-1 bg-red-50 text-indigo-700 text-xs font-medium rounded-full">
                                                 Fee: ৳{{ Number(job.application_fee).toLocaleString() }}
                                             </span>
                                         </div>
@@ -422,14 +422,14 @@ const getJobTypeLabel = (type) => {
                                     <div class="flex items-center gap-2 ml-4">
                                         <Link
                                             :href="route('admin.jobs.show', job.id)"
-                                            class="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                                            class="p-2 text-brand-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                             title="View Details"
                                         >
                                             <EyeIcon class="h-5 w-5" />
                                         </Link>
                                         <Link
                                             :href="route('admin.jobs.edit', job.id)"
-                                            class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                            class="p-2 text-brand-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                             title="Edit Job"
                                         >
                                             <PencilIcon class="h-5 w-5" />
@@ -462,7 +462,7 @@ const getJobTypeLabel = (type) => {
                             :class="[
                                 'px-4 py-2 text-sm rounded-lg font-medium',
                                 link.active
-                                    ? 'bg-indigo-600 text-white'
+                                    ? 'bg-brand-red-600 text-white'
                                     : link.url
                                     ? 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
                                     : 'bg-gray-100 text-gray-400 cursor-not-allowed'

@@ -5,6 +5,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import RhythmicCard from '@/Components/Rhythmic/RhythmicCard.vue';
 import StatusBadge from '@/Components/Rhythmic/StatusBadge.vue';
 import FlowButton from '@/Components/Rhythmic/FlowButton.vue';
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
 import {
   ClockIcon,
   DocumentTextIcon,
@@ -20,6 +21,8 @@ const props = defineProps({
   applications: Object,
   stats: Object,
 });
+
+const { formatDate } = useBangladeshFormat();
 
 const getStatusColor = (status) => {
   const colors = {
@@ -57,7 +60,7 @@ const getStatusText = (status) => {
         </h2>
         <Link
           href="/services"
-          class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors"
+          class="inline-flex items-center px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors"
         >
           Browse Services
         </Link>
@@ -141,7 +144,7 @@ const getStatusText = (status) => {
                     </div>
                     <div class="flex items-center gap-1">
                       <ClockIcon class="h-4 w-4" />
-                      <span>{{ new Date(application.created_at).toLocaleDateString() }}</span>
+                      <span>{{ formatDate(application.created_at) }}</span>
                     </div>
                     <div v-if="application.quotes_count > 0" class="flex items-center gap-1">
                       <BuildingOfficeIcon class="h-4 w-4" />
@@ -156,7 +159,7 @@ const getStatusText = (status) => {
                     <span class="text-green-600 dark:text-green-400 font-medium">
                       {{ application.quotes_count }} quote{{ application.quotes_count !== 1 ? 's' : '' }} available - 
                     </span>
-                    <Link :href="`/my-applications/${application.id}/quotes`" class="text-indigo-600 dark:text-indigo-400 hover:underline">
+                    <Link :href="`/my-applications/${application.id}/quotes`" class="text-brand-red-600 dark:text-indigo-400 hover:underline">
                       Review quotes
                     </Link>
                   </div>
@@ -187,7 +190,7 @@ const getStatusText = (status) => {
               </p>
               <Link
                 href="/services"
-                class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors"
+                class="inline-flex items-center px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors"
               >
                 Browse Services
               </Link>

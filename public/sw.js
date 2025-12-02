@@ -1,26 +1,22 @@
-// Service Worker for BideshGomon PWA
-const CACHE_NAME = 'bideshgomon-v1';
-const OFFLINE_URL = '/offline';
-
-// Assets to cache immediately
-const PRECACHE_ASSETS = [
-  '/',
-  '/offline',
-  '/manifest.json',
-];
-
-// Install event - cache core assets
+// Service Worker - PERMANENTLY DISABLED
+// Auto-unregister and clear all caches
 self.addEventListener('install', (event) => {
-  console.log('[ServiceWorker] Install');
-  
+  event.waitUntil(self.skipWaiting());
+});
+
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('[ServiceWorker] Caching app shell');
-        return cache.addAll(PRECACHE_ASSETS);
-      })
-      .then(() => self.skipWaiting())
+    caches.keys()
+      .then(keys => Promise.all(keys.map(key => caches.delete(key))))
+      .then(() => self.registration.unregister())
+      .then(() => self.clients.matchAll())
+      .then(clients => clients.forEach(client => client.navigate(client.url)))
   );
+});
+
+// No fetch caching
+self.addEventListener('fetch', (event) => {
+  return;
 });
 
 // Activate event - clean up old caches

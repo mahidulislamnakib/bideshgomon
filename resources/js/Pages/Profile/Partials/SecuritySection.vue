@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { ref, computed } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import Modal from '@/Components/Modal.vue'
@@ -245,9 +245,9 @@ const securityStatus = computed(() => {
               <component 
                 :is="form.has_military_service ? CheckCircleIcon : XCircleIcon"
                 class="w-5 h-5"
-                :class="form.has_military_service ? 'text-blue-600' : 'text-gray-400'"
+                :class="form.has_military_service ? 'text-brand-red-600' : 'text-gray-400'"
               />
-              <span class="text-xs font-medium" :class="form.has_military_service ? 'text-blue-600' : 'text-gray-500'">
+              <span class="text-xs font-medium" :class="form.has_military_service ? 'text-brand-red-600' : 'text-gray-500'">
                 {{ form.has_military_service ? 'Served' : 'Not Served' }}
               </span>
             </div>
@@ -484,7 +484,7 @@ const securityStatus = computed(() => {
               <input
                 v-model="form.has_military_service"
                 type="checkbox"
-                class="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                class="w-5 h-5 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
               />
               <span class="text-sm font-medium text-gray-700 dark:text-gray-300">I have served in the military</span>
             </label>
@@ -495,7 +495,7 @@ const securityStatus = computed(() => {
                 id="military_service_details"
                 v-model="form.military_service_details"
                 rows="3"
-                class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-lg shadow-sm"
+                class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-blue-500 focus:ring-brand-red-600 rounded-lg shadow-sm"
                 style="font-size: 16px"
                 placeholder="Branch, rank, dates of service..."
               ></textarea>

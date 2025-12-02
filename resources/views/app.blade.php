@@ -22,6 +22,23 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=proxima-nova:400,500,600,700&display=swap" rel="stylesheet" />
+        
+        <!-- Tailwind CSS CDN (temporary workaround for PostCSS error) -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            'brand-red': {
+                                600: '#e4282b',
+                                700: '#c02326'
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
 
         <!-- Scripts -->
         @routes
@@ -31,6 +48,17 @@
             @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @endif
         @inertiaHead
+        
+        <!-- Disable Service Worker Permanently -->
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                    for(let registration of registrations) {
+                        registration.unregister();
+                    }
+                });
+            }
+        </script>
         
         <!-- Cache Buster -->
         <meta name="asset-version" content="{{ config('app.asset_version', time()) }}">

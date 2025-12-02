@@ -2,11 +2,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import { PencilSquareIcon, SparklesIcon, CheckCircleIcon, StarIcon, DocumentTextIcon } from '@heroicons/vue/24/outline';
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
 
 const props = defineProps({
     templates: Object,
     userCvs: Array,
 });
+
+const { formatDate } = useBangladeshFormat();
 
 const categoryNames = {
     'professional': 'Professional',
@@ -82,7 +85,7 @@ const categoryIcons = {
                             <DocumentTextIcon class="h-5 w-5 text-gray-400 flex-shrink-0 ml-2" />
                         </div>
                         <div class="mt-3 text-xs text-gray-500">
-                            Updated {{ new Date(cv.updated_at).toLocaleDateString() }}
+                            Updated {{ formatDate(cv.updated_at) }}
                         </div>
                     </Link>
                 </div>

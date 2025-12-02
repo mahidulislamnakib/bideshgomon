@@ -20,7 +20,7 @@
                                 @input="applyFilters"
                                 type="text" 
                                 placeholder="Agency name or location..."
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                             />
                         </div>
 
@@ -29,7 +29,7 @@
                             <select 
                                 v-model="filters.country"
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                             >
                                 <option value="">All Countries</option>
                                 <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
@@ -41,7 +41,7 @@
                             <select 
                                 v-model="filters.business_type"
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                             >
                                 <option value="">All Types</option>
                                 <option value="recruitment">Recruitment Agency</option>
@@ -57,7 +57,7 @@
                             <select 
                                 v-model="filters.min_rating"
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                             >
                                 <option value="">Any Rating</option>
                                 <option value="4">4+ Stars</option>
@@ -75,7 +75,7 @@
                             <select 
                                 v-model="filters.sort"
                                 @change="applyFilters"
-                                class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                             >
                                 <option value="featured">Featured</option>
                                 <option value="rating">Highest Rated</option>
@@ -111,7 +111,7 @@
                                         class="h-16 w-16 object-cover rounded-lg"
                                     />
                                     <div v-else class="h-16 w-16 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                        <BuildingOfficeIcon class="h-8 w-8 text-indigo-600" />
+                                        <BuildingOfficeIcon class="h-8 w-8 text-brand-red-600" />
                                     </div>
                                 </div>
                                 <div class="flex-1 min-w-0">
@@ -200,7 +200,7 @@
                                 :class="[
                                     'px-3 py-2 text-sm font-medium rounded-md',
                                     link.active 
-                                        ? 'bg-indigo-600 text-white' 
+                                        ? 'bg-brand-red-600 text-white' 
                                         : link.url 
                                             ? 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300' 
                                             : 'bg-gray-100 text-gray-400 cursor-not-allowed'

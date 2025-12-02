@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
@@ -10,7 +10,7 @@ const props = defineProps({
 const getStatusBadgeClass = (status) => {
     const classes = {
         pending: 'bg-yellow-100 text-yellow-800',
-        under_review: 'bg-blue-100 text-blue-800',
+        under_review: 'bg-red-100 text-brand-red-600',
         approved: 'bg-green-100 text-green-800',
         rejected: 'bg-red-100 text-red-800',
         requires_changes: 'bg-orange-100 text-orange-800',
@@ -80,10 +80,10 @@ const formatDate = (date) => {
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-600">Under Review</p>
-                                <p class="mt-2 text-3xl font-bold text-blue-600">{{ stats.under_review }}</p>
+                                <p class="mt-2 text-3xl font-bold text-brand-red-600">{{ stats.under_review }}</p>
                             </div>
-                            <div class="p-3 bg-blue-100 rounded-lg">
-                                <svg class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <div class="p-3 bg-red-100 rounded-lg">
+                                <svg class="h-8 w-8 text-brand-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
@@ -91,7 +91,7 @@ const formatDate = (date) => {
                         <div class="mt-4">
                             <Link
                                 :href="route('agency-verification.index', { status: 'under_review' })"
-                                class="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                                class="text-sm text-brand-red-600 hover:text-red-700 font-medium"
                             >
                                 View in review →
                             </Link>
@@ -196,7 +196,7 @@ const formatDate = (date) => {
                             <h3 class="text-lg font-semibold text-gray-900">Recent Verification Requests</h3>
                             <Link
                                 :href="route('agency-verification.index')"
-                                class="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                                class="text-sm text-brand-red-600 hover:text-red-700 font-medium"
                             >
                                 View all →
                             </Link>
@@ -242,7 +242,7 @@ const formatDate = (date) => {
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <Link
                                             :href="route('agency-verification.show', request.id)"
-                                            class="text-blue-600 hover:text-blue-900"
+                                            class="text-brand-red-600 hover:text-red-900"
                                         >
                                             Review
                                         </Link>

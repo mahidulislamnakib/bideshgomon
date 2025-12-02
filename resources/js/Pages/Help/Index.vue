@@ -46,13 +46,13 @@
                         class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-blue-500"
                     >
                         <div class="flex items-start">
-                            <div class="flex-shrink-0 p-3 bg-blue-100 rounded-xl group-hover:bg-blue-500 transition-colors">
-                                <DocumentTextIcon class="h-8 w-8 text-blue-600 group-hover:text-white transition-colors" />
+                            <div class="flex-shrink-0 p-3 bg-blue-100 rounded-xl group-hover:bg-brand-red-600 transition-colors">
+                                <DocumentTextIcon class="h-8 w-8 text-brand-red-600 group-hover:text-white transition-colors" />
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">ভিসা ও ইমিগ্রেশন</h3>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-red-600 transition-colors">ভিসা ও ইমিগ্রেশন</h3>
                                 <p class="text-gray-600 mb-3">ভিসা আবেদন, প্রক্রিয়া এবং প্রয়োজনীয় ডকুমেন্ট সম্পর্কে জানুন</p>
-                                <span class="inline-flex items-center text-blue-600 font-semibold text-sm">
+                                <span class="inline-flex items-center text-brand-red-600 font-semibold text-sm">
                                     বিস্তারিত দেখুন
                                     <ArrowRightIcon class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                                 </span>
@@ -126,13 +126,13 @@
                         class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-indigo-500"
                     >
                         <div class="flex items-start">
-                            <div class="flex-shrink-0 p-3 bg-indigo-100 rounded-xl group-hover:bg-indigo-500 transition-colors">
-                                <SparklesIcon class="h-8 w-8 text-indigo-600 group-hover:text-white transition-colors" />
+                            <div class="flex-shrink-0 p-3 bg-indigo-100 rounded-xl group-hover:bg-brand-red-600 transition-colors">
+                                <SparklesIcon class="h-8 w-8 text-brand-red-600 group-hover:text-white transition-colors" />
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">সেবা ও বুকিং</h3>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-red-600 transition-colors">সেবা ও বুকিং</h3>
                                 <p class="text-gray-600 mb-3">সেবা নির্বাচন, বুকিং এবং অ্যাপয়েন্টমেন্ট ম্যানেজমেন্ট</p>
-                                <span class="inline-flex items-center text-indigo-600 font-semibold text-sm">
+                                <span class="inline-flex items-center text-brand-red-600 font-semibold text-sm">
                                     বিস্তারিত দেখুন
                                     <ArrowRightIcon class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                                 </span>
@@ -209,7 +209,7 @@
                 <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">যোগাযোগের তথ্য</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="text-center">
-                        <PhoneIcon class="h-10 w-10 mx-auto mb-3 text-blue-600" />
+                        <PhoneIcon class="h-10 w-10 mx-auto mb-3 text-brand-red-600" />
                         <h3 class="font-semibold text-gray-900 mb-2">ফোন</h3>
                         <p class="text-gray-600">+880 1700-000000</p>
                         <p class="text-sm text-gray-500 mt-1">সকাল ৯টা - রাত ৮টা</p>
@@ -283,9 +283,9 @@ const categoryIcons = {
 const colorClasses = {
     blue: {
         bg: 'bg-blue-100',
-        hover: 'group-hover:bg-blue-500',
-        text: 'text-blue-600',
-        textHover: 'group-hover:text-blue-600',
+        hover: 'group-hover:bg-brand-red-600',
+        text: 'text-brand-red-600',
+        textHover: 'group-hover:text-brand-red-600',
         textWhite: 'group-hover:text-white',
         border: 'hover:border-blue-500',
     },
@@ -315,9 +315,9 @@ const colorClasses = {
     },
     indigo: {
         bg: 'bg-indigo-100',
-        hover: 'group-hover:bg-indigo-500',
-        text: 'text-indigo-600',
-        textHover: 'group-hover:text-indigo-600',
+        hover: 'group-hover:bg-brand-red-600',
+        text: 'text-brand-red-600',
+        textHover: 'group-hover:text-brand-red-600',
         textWhite: 'group-hover:text-white',
         border: 'hover:border-indigo-500',
     },

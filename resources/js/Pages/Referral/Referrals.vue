@@ -22,7 +22,7 @@ const { formatDate, formatTime } = useBangladeshFormat();
             <div class="flex items-center justify-between animate-fadeIn">
                 <div class="flex items-center gap-3">
                     <div class="p-2 bg-sky-100 rounded-lg">
-                        <UserGroupIcon class="h-8 w-8 text-sky-600" />
+                        <UserGroupIcon class="h-8 w-8 text-brand-red-600" />
                     </div>
                     <div>
                         <h2 class="text-2xl font-bold text-gray-900">
@@ -97,7 +97,7 @@ const { formatDate, formatTime } = useBangladeshFormat();
                             <!-- Pagination -->
                             <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-gray-200">
                                 <div class="text-sm text-gray-600 font-medium">
-                                    <span class="text-sky-600">{{ referrals.from }}</span> to <span class="text-sky-600">{{ referrals.to }}</span> of <span class="font-bold">{{ referrals.total }}</span> referrals
+                                    <span class="text-brand-red-600">{{ referrals.from }}</span> to <span class="text-brand-red-600">{{ referrals.to }}</span> of <span class="font-bold">{{ referrals.total }}</span> referrals
                                 </div>
                                 <div class="flex gap-1">
                                     <Link 
@@ -105,7 +105,7 @@ const { formatDate, formatTime } = useBangladeshFormat();
                                         :key="link.label"
                                         :href="link.url"
                                         :class="{
-                                            'bg-sky-600 text-white': link.active,
+                                            'bg-brand-red-600 text-white': link.active,
                                             'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300': !link.active,
                                             'opacity-50 cursor-not-allowed': !link.url
                                         }"

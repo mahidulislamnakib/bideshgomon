@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref } from 'vue'
 import { useForm, Link } from '@inertiajs/vue3'
 import AdminLayout from '@/Layouts/AdminLayout.vue'
@@ -36,8 +36,8 @@ const submit = () => {
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div class="flex-1">
             <div class="flex items-center gap-3 mb-3">
-              <div class="p-3 bg-indigo-100 rounded-lg">
-                <PlusIcon class="w-8 h-8 text-indigo-600" />
+              <div class="p-3 bg-red-100 rounded-lg">
+                <PlusIcon class="w-8 h-8 text-brand-red-600" />
               </div>
               <h1 class="text-4xl font-bold text-gray-900 tracking-tight">Create Campaign</h1>
             </div>
@@ -89,7 +89,7 @@ const submit = () => {
               :class="[
                 'flex items-center justify-center p-5 border-2 rounded-lg cursor-pointer transition-all',
                 form.type === type
-                  ? 'border-indigo-500 bg-indigo-50 shadow-md'
+                  ? 'border-brand-red-600 bg-red-50 shadow-md'
                   : 'border-gray-300 hover:border-indigo-400 hover:shadow-md',
               ]"
             >
@@ -156,7 +156,7 @@ const submit = () => {
               :class="[
                 'flex flex-wrap items-start p-5 border-2 rounded-lg cursor-pointer transition-all',
                 form.audience_type === type
-                  ? 'border-indigo-500 bg-indigo-50 shadow-md'
+                  ? 'border-brand-red-600 bg-red-50 shadow-md'
                   : 'border-gray-300 hover:border-indigo-400 hover:shadow-md',
               ]"
             >
@@ -188,9 +188,9 @@ const submit = () => {
         </div>
 
         <!-- Audience Filters (for segment) -->
-        <div v-if="form.audience_type === 'segment'" class="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+        <div v-if="form.audience_type === 'segment'" class="bg-red-50 p-6 rounded-lg border-2 border-red-200">
           <div class="flex items-center gap-2 mb-5">
-            <svg class="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-6 h-6 text-brand-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
             </svg>
             <label class="block text-lg font-bold text-gray-900">Comprehensive Segment Filters</label>
@@ -207,7 +207,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">User Status</label>
                 <select
                   v-model="form.audience_filters.status"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Status</option>
                   <option value="active">✅ Active</option>
@@ -219,7 +219,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Email Verified</label>
                 <select
                   v-model="form.audience_filters.email_verified"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any</option>
                   <option value="yes">✅ Verified</option>
@@ -235,7 +235,7 @@ const submit = () => {
                     min="18"
                     max="100"
                     placeholder="Min (18)"
-                    class="px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                    class="px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                   />
                   <input
                     v-model.number="form.audience_filters.age_max"
@@ -243,7 +243,7 @@ const submit = () => {
                     min="18"
                     max="100"
                     placeholder="Max (100)"
-                    class="px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                    class="px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                   />
                 </div>
               </div>
@@ -251,7 +251,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Gender</label>
                 <select
                   v-model="form.audience_filters.gender"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Gender</option>
                   <option value="male">👨 Male</option>
@@ -268,7 +268,7 @@ const submit = () => {
                     min="0"
                     max="100"
                     placeholder="Min %"
-                    class="px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                    class="px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                   />
                   <input
                     v-model.number="form.audience_filters.profile_completion_max"
@@ -276,7 +276,7 @@ const submit = () => {
                     min="0"
                     max="100"
                     placeholder="Max %"
-                    class="px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                    class="px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                   />
                 </div>
               </div>
@@ -284,7 +284,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">User Role</label>
                 <select
                   v-model="form.audience_filters.role"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Role</option>
                   <option value="user">👤 User</option>
@@ -305,7 +305,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Country</label>
                 <select
                   v-model="form.audience_filters.country"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Country</option>
                   <option value="BD">🇧🇩 Bangladesh</option>
@@ -319,7 +319,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Division (Bangladesh)</label>
                 <select
                   v-model="form.audience_filters.division"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Division</option>
                   <option value="Dhaka">Dhaka</option>
@@ -345,7 +345,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Has Application</label>
                 <select
                   v-model="form.audience_filters.has_application"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any</option>
                   <option value="yes">✅ Has Application</option>
@@ -356,7 +356,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Visa Type</label>
                 <select
                   v-model="form.audience_filters.visa_type"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Type</option>
                   <option value="tourist">🏖️ Tourist Visa</option>
@@ -371,7 +371,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Application Status</label>
                 <select
                   v-model="form.audience_filters.application_status"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Status</option>
                   <option value="pending">⏳ Pending</option>
@@ -385,7 +385,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Has Booking</label>
                 <select
                   v-model="form.audience_filters.has_booking"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any</option>
                   <option value="yes">✅ Has Booking</option>
@@ -405,7 +405,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Education Level</label>
                 <select
                   v-model="form.audience_filters.education_level"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Level</option>
                   <option value="high_school">🏫 High School</option>
@@ -419,7 +419,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Field of Study</label>
                 <select
                   v-model="form.audience_filters.field_of_study"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Field</option>
                   <option value="engineering">⚙️ Engineering</option>
@@ -440,7 +440,7 @@ const submit = () => {
                     max="9"
                     step="0.5"
                     placeholder="Min (0)"
-                    class="px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                    class="px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                   />
                   <input
                     v-model.number="form.audience_filters.ielts_max"
@@ -449,7 +449,7 @@ const submit = () => {
                     max="9"
                     step="0.5"
                     placeholder="Max (9)"
-                    class="px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                    class="px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                   />
                 </div>
               </div>
@@ -457,7 +457,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Language Proficiency</label>
                 <select
                   v-model="form.audience_filters.language_proficiency"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any</option>
                   <option value="beginner">🔰 Beginner</option>
@@ -479,7 +479,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Last Login</label>
                 <select
                   v-model="form.audience_filters.last_login"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Anytime</option>
                   <option value="today">📅 Today</option>
@@ -494,7 +494,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Registered</label>
                 <select
                   v-model="form.audience_filters.registered_period"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Anytime</option>
                   <option value="today">🆕 Today</option>
@@ -517,7 +517,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Email Engagement</label>
                 <select
                   v-model="form.audience_filters.email_engagement"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any</option>
                   <option value="opened">📧 Opened Recent Emails</option>
@@ -539,7 +539,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Travel Interests</label>
                 <select
                   v-model="form.audience_filters.travel_interest"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Interest</option>
                   <option value="tourism">🏖️ Tourism & Leisure</option>
@@ -554,7 +554,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Preferred Destinations</label>
                 <select
                   v-model="form.audience_filters.preferred_destination"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Destination</option>
                   <option value="europe">🇪🇺 Europe</option>
@@ -569,7 +569,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Budget Range (BDT)</label>
                 <select
                   v-model="form.audience_filters.budget_range"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Budget</option>
                   <option value="low">৳ Low (< ৳100,000)</option>
@@ -582,7 +582,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Communication Preference</label>
                 <select
                   v-model="form.audience_filters.communication_preference"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any</option>
                   <option value="email">📧 Email</option>
@@ -604,7 +604,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Customer Segment</label>
                 <select
                   v-model="form.audience_filters.customer_segment"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Segment</option>
                   <option value="vip">👑 VIP Customers</option>
@@ -619,7 +619,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Referral Status</label>
                 <select
                   v-model="form.audience_filters.referral_status"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any</option>
                   <option value="has_referred">🎁 Has Referred Others</option>
@@ -632,7 +632,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Booking History</label>
                 <select
                   v-model="form.audience_filters.booking_frequency"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any</option>
                   <option value="first_booking">🎯 First Booking</option>
@@ -646,7 +646,7 @@ const submit = () => {
                 <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1.5">Wallet Balance</label>
                 <select
                   v-model="form.audience_filters.wallet_balance"
-                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-red-600"
                 >
                   <option value="">Any Balance</option>
                   <option value="has_balance">💰 Has Balance (> ৳0)</option>
@@ -657,7 +657,7 @@ const submit = () => {
             </div>
           </div>
 
-          <div class="mt-5 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-800">
+          <div class="mt-5 p-4 bg-red-50 dark:bg-blue-900/30 rounded-lg border border-red-200 dark:border-blue-800">
             <p class="text-sm text-gray-700 dark:text-gray-300">
               <strong>💡 Pro Tip:</strong> Combine multiple filters to create highly targeted segments. 
               For example: "Active users from Dhaka division with tourist visa applications who haven't logged in this month" 
@@ -759,7 +759,7 @@ const submit = () => {
           <button
             type="submit"
             :disabled="form.processing"
-            class="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-all shadow-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            class="px-8 py-3.5 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition-all shadow-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {{ form.processing ? 'Creating...' : 'Create Campaign' }}
           </button>

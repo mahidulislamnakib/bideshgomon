@@ -49,7 +49,7 @@ const getStatusColor = (status) => {
                         <p class="mt-2 text-gray-600">Manage and track your hotel reservations</p>
                     </div>
                     <Link :href="route('hotels.index')" 
-                        class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
+                        class="bg-brand-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
                         + Book New Hotel
                     </Link>
                 </div>
@@ -61,7 +61,7 @@ const getStatusColor = (status) => {
                             :class="[
                                 'px-4 py-2 rounded-lg transition',
                                 currentStatus === 'all' 
-                                    ? 'bg-indigo-600 text-white' 
+                                    ? 'bg-brand-red-600 text-white' 
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             ]">
                             All Bookings ({{ statusCounts.all }})
@@ -70,7 +70,7 @@ const getStatusColor = (status) => {
                             :class="[
                                 'px-4 py-2 rounded-lg transition',
                                 currentStatus === 'upcoming' 
-                                    ? 'bg-indigo-600 text-white' 
+                                    ? 'bg-brand-red-600 text-white' 
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             ]">
                             Upcoming ({{ statusCounts.upcoming }})
@@ -79,7 +79,7 @@ const getStatusColor = (status) => {
                             :class="[
                                 'px-4 py-2 rounded-lg transition',
                                 currentStatus === 'active' 
-                                    ? 'bg-indigo-600 text-white' 
+                                    ? 'bg-brand-red-600 text-white' 
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             ]">
                             Active ({{ statusCounts.active }})
@@ -88,7 +88,7 @@ const getStatusColor = (status) => {
                             :class="[
                                 'px-4 py-2 rounded-lg transition',
                                 currentStatus === 'past' 
-                                    ? 'bg-indigo-600 text-white' 
+                                    ? 'bg-brand-red-600 text-white' 
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             ]">
                             Past ({{ statusCounts.past }})
@@ -97,7 +97,7 @@ const getStatusColor = (status) => {
                             :class="[
                                 'px-4 py-2 rounded-lg transition',
                                 currentStatus === 'cancelled' 
-                                    ? 'bg-indigo-600 text-white' 
+                                    ? 'bg-brand-red-600 text-white' 
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             ]">
                             Cancelled ({{ statusCounts.cancelled }})
@@ -154,7 +154,7 @@ const getStatusColor = (status) => {
                                 <div class="flex justify-between items-center pt-4 border-t">
                                     <div>
                                         <span class="text-sm text-gray-600">Total Paid:</span>
-                                        <p class="text-xl font-bold text-indigo-600">{{ formatPrice(booking.total_amount) }}</p>
+                                        <p class="text-xl font-bold text-brand-red-600">{{ formatPrice(booking.total_amount) }}</p>
                                     </div>
                                     <div class="flex space-x-3">
                                         <Link :href="route('hotels.bookings.show', booking.id)"
@@ -181,7 +181,7 @@ const getStatusColor = (status) => {
                     <h3 class="mt-4 text-lg font-semibold text-gray-900">No bookings found</h3>
                     <p class="mt-2 text-gray-600">You don't have any {{ currentStatus !== 'all' ? currentStatus : '' }} hotel bookings yet.</p>
                     <Link :href="route('hotels.index')" 
-                        class="mt-6 inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition">
+                        class="mt-6 inline-block bg-brand-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">
                         Browse Hotels
                     </Link>
                 </div>
@@ -196,7 +196,7 @@ const getStatusColor = (status) => {
                             :class="[
                                 'px-4 py-2 rounded-lg border transition',
                                 link.active 
-                                    ? 'bg-indigo-600 text-white border-indigo-600' 
+                                    ? 'bg-brand-red-600 text-white border-indigo-600' 
                                     : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50',
                                 !link.url && 'opacity-50 cursor-not-allowed'
                             ]"

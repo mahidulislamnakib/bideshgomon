@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Skill Categories Management" />
 
@@ -14,7 +14,7 @@
                         <div class="flex items-center space-x-3">
                             <Link
                                 :href="route('admin.data.skill-categories.bulk-upload')"
-                                class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
+                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
                             >
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -43,7 +43,7 @@
                                 v-model="form.search"
                                 type="text"
                                 placeholder="Search by name or slug..."
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
                                 @input="debouncedFilter"
                             />
                         </div>
@@ -52,7 +52,7 @@
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Status</label>
                             <select
                                 v-model="form.is_active"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
                                 @change="filter"
                             >
                                 <option value="">All Status</option>
@@ -130,7 +130,7 @@
                                         <div class="flex items-center justify-end space-x-2">
                                             <Link
                                                 :href="route('admin.data.skill-categories.edit', category.id)"
-                                                class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                                                class="text-brand-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-indigo-300"
                                             >
                                                 Edit
                                             </Link>

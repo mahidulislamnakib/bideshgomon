@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Agency Verification Requests" />
         
@@ -18,7 +18,7 @@
                             id="status"
                             v-model="filterForm.status"
                             @change="applyFilters"
-                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                         >
                             <option value="">All Statuses</option>
                             <option value="pending">Pending</option>
@@ -37,7 +37,7 @@
                             v-model="filterForm.search"
                             @input="applyFilters"
                             placeholder="Agency name..."
-                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                         />
                     </div>
 
@@ -78,7 +78,7 @@
                                         'px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full',
                                         request.status === 'approved' ? 'bg-green-100 text-green-800' :
                                         request.status === 'rejected' ? 'bg-red-100 text-red-800' :
-                                        request.status === 'under_review' ? 'bg-blue-100 text-blue-800' :
+                                        request.status === 'under_review' ? 'bg-red-100 text-brand-red-600' :
                                         request.status === 'requires_changes' ? 'bg-orange-100 text-orange-800' :
                                         'bg-yellow-100 text-yellow-800'
                                     ]"
@@ -95,7 +95,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <Link
                                     :href="route('admin.agency-verification.show', request.id)"
-                                    class="text-indigo-600 hover:text-indigo-900"
+                                    class="text-brand-red-600 hover:text-red-900"
                                 >
                                     Review
                                 </Link>

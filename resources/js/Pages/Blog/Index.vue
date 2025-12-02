@@ -18,7 +18,7 @@
                         v-model="searchQuery"
                         type="text"
                         placeholder="Search articles..."
-                        class="w-full px-4 py-3 pl-12 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        class="w-full px-4 py-3 pl-12 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                         @input="handleSearch"
                     />
                     <MagnifyingGlassIcon class="absolute left-4 top-3.5 h-5 w-5 text-gray-400" />

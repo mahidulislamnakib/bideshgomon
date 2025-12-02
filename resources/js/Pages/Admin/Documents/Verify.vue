@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref } from 'vue'
 import { Link, useForm } from '@inertiajs/vue3'
 import AdminLayout from '@/Layouts/AdminLayout.vue'
@@ -104,7 +104,7 @@ function isPdf(filename) {
                 <td class="px-3 py-2 text-sm">{{ doc.original_filename }}</td>
                 <td class="px-3 py-2 text-sm">{{ formatDate(doc.created_at) }}</td>
                 <td class="px-3 py-2 text-sm text-right space-x-2">
-                  <button @click="viewDocument(doc)" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1 rounded inline-flex items-center gap-1">
+                  <button @click="viewDocument(doc)" class="bg-brand-red-600 hover:bg-red-700 text-white text-xs px-3 py-1 rounded inline-flex items-center gap-1">
                     <EyeIcon class="h-3 w-3" />
                     View
                   </button>
@@ -123,7 +123,7 @@ function isPdf(filename) {
           <div class="mt-4 flex items-center justify-between" v-if="pending.links.length > 3">
             <div class="text-sm text-gray-600">Showing {{ pending.data.length }} of {{ pending.total }}</div>
             <div class="flex gap-1">
-              <Link v-for="l in pending.links" :key="l.url + l.label" :href="l.url" v-html="l.label" :class="['px-2 py-1 rounded text-xs', l.active ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700']" />
+              <Link v-for="l in pending.links" :key="l.url + l.label" :href="l.url" v-html="l.label" :class="['px-2 py-1 rounded text-xs', l.active ? 'bg-brand-red-600 text-white' : 'bg-gray-100 text-gray-700']" />
             </div>
           </div>
         </div>
@@ -198,7 +198,7 @@ function isPdf(filename) {
                 :href="getDocumentUrl(viewingDocument)"
                 target="_blank"
                 download
-                class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700"
               >
                 Download {{ viewingDocument.original_filename }}
               </a>

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <Head title="Assign Agency to Country" />
 
     <AdminLayout>
@@ -35,7 +35,7 @@
                                     <select 
                                         v-model="form.agency_id"
                                         required
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     >
                                         <option value="">Select an agency</option>
                                         <option v-for="agency in agencies" :key="agency.id" :value="agency.id">
@@ -57,7 +57,7 @@
                                             <input 
                                                 v-model="enableMultipleServices"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                             />
                                         </div>
                                         <div class="ml-3">
@@ -78,7 +78,7 @@
                                         v-model="selectedServiceModule"
                                         @change="onServiceModuleChange"
                                         required
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     >
                                         <option value="">Select a service</option>
                                         <option v-for="module in serviceModules" :key="module.id" :value="module.id">
@@ -94,7 +94,7 @@
                                                 v-model="selectedServiceModules"
                                                 :value="module.id"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                             />
                                             <label :for="'service-' + module.id" class="ml-2 text-sm text-gray-700">
                                                 {{ module.name }} <span class="text-gray-500">({{ module.service_type }})</span>
@@ -117,7 +117,7 @@
                                     <select 
                                         v-model="form.assignment_scope"
                                         required
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     >
                                         <option value="global">Global (All Countries)</option>
                                         <option value="country_specific">Country Specific</option>
@@ -140,7 +140,7 @@
                                             <input 
                                                 v-model="enableMultipleCountries"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                             />
                                         </div>
                                         <div class="ml-3">
@@ -162,7 +162,7 @@
                                         v-model="selectedCountry"
                                         @change="onCountryChange"
                                         :required="form.assignment_scope !== 'global'"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     >
                                         <option value="">Select a country</option>
                                         <option v-for="country in countries" :key="country.id" :value="country.id">
@@ -178,7 +178,7 @@
                                                 v-model="selectedCountries"
                                                 :value="country.id"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                             />
                                             <label :for="'country-' + country.id" class="ml-2 text-sm text-gray-700">
                                                 {{ country.name }} ({{ country.iso_code_2 }})
@@ -196,7 +196,7 @@
                                             v-model="form.country_code"
                                             type="text"
                                             readonly
-                                            class="w-full rounded-md border-gray-300 bg-gray-50 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 bg-gray-50 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                     </div>
 
@@ -206,7 +206,7 @@
                                             v-model="form.visa_type_id"
                                             @change="onVisaTypeChange"
                                             :required="form.assignment_scope === 'visa_specific'"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         >
                                             <option value="">Select visa type</option>
                                             <option v-for="type in visaTypes" :key="type.id" :value="type.id">
@@ -227,7 +227,7 @@
                                         <select 
                                             v-model="form.commission_type"
                                             required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         >
                                             <option value="percentage">Percentage</option>
                                             <option value="fixed">Fixed Amount</option>
@@ -243,7 +243,7 @@
                                             max="100"
                                             step="0.01"
                                             required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="e.g., 15"
                                         />
                                         <p class="mt-1 text-sm text-gray-500">Platform commission on agency earnings</p>
@@ -257,7 +257,7 @@
                                             min="0"
                                             step="0.01"
                                             required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="e.g., 5000"
                                         />
                                         <p class="mt-1 text-sm text-gray-500">Fixed amount per application</p>
@@ -274,7 +274,7 @@
                                             <input 
                                                 v-model="form.can_edit_requirements"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                             />
                                         </div>
                                         <div class="ml-3">
@@ -288,7 +288,7 @@
                                             <input 
                                                 v-model="form.can_set_fees"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                             />
                                         </div>
                                         <div class="ml-3">
@@ -302,7 +302,7 @@
                                             <input 
                                                 v-model="form.can_process_applications"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                             />
                                         </div>
                                         <div class="ml-3">
@@ -321,7 +321,7 @@
                                     <textarea 
                                         v-model="form.assignment_notes"
                                         rows="3"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         placeholder="Add any notes about this assignment..."
                                     />
                                 </div>
@@ -332,7 +332,7 @@
                                             <input 
                                                 v-model="form.auto_assign_requirements"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                             />
                                         </div>
                                         <div class="ml-3">
@@ -355,7 +355,7 @@
                             <button 
                                 type="submit"
                                 :disabled="form.processing"
-                                class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition disabled:opacity-50"
+                                class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 transition disabled:opacity-50"
                             >
                                 {{ form.processing ? 'Assigning...' : 'Assign Agency' }}
                             </button>

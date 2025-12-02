@@ -6,6 +6,7 @@ import ProgressWave from '@/Components/Rhythmic/ProgressWave.vue';
 import RhythmicCard from '@/Components/Rhythmic/RhythmicCard.vue';
 import FlowButton from '@/Components/Rhythmic/FlowButton.vue';
 import StatusBadge from '@/Components/Rhythmic/StatusBadge.vue';
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
 import {
   ArrowLeftIcon,
   ClockIcon,
@@ -21,6 +22,8 @@ import {
 const props = defineProps({
   application: Object,
 });
+
+const { formatDate } = useBangladeshFormat();
 
 const statusColor = computed(() => {
   const colors = {
@@ -135,19 +138,19 @@ const currentStep = computed(() => {
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="flex items-center gap-3">
               <div class="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                <CalendarIcon class="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                <CalendarIcon class="h-6 w-6 text-brand-red-600 dark:text-blue-400" />
               </div>
               <div>
                 <p class="text-sm text-gray-600 dark:text-gray-400">Submitted</p>
                 <p class="font-semibold text-gray-900 dark:text-white">
-                  {{ new Date(application.created_at).toLocaleDateString() }}
+                  {{ formatDate(application.created_at) }}
                 </p>
               </div>
             </div>
 
             <div class="flex items-center gap-3">
               <div class="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                <DocumentTextIcon class="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                <DocumentTextIcon class="h-6 w-6 text-brand-red-600 dark:text-blue-400" />
               </div>
               <div>
                 <p class="text-sm text-gray-600 dark:text-gray-400">Quotes Received</p>
@@ -258,7 +261,7 @@ const currentStep = computed(() => {
                 <Link
                   v-if="application.quotes?.length > 0"
                   :href="route('user.applications.quotes', application.id)"
-                  class="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
+                  class="text-brand-red-600 dark:text-blue-400 hover:underline text-sm font-medium"
                 >
                   View All →
                 </Link>

@@ -63,7 +63,7 @@ const selectClasses = computed(() => {
     'border',
     'rounded-md',
     'transition-all duration-200',
-    'focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600',
+    'focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:border-blue-600',
     'bg-white dark:bg-gray-700 dark:text-white',
     'disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 dark:disabled:bg-gray-800',
     'appearance-none',

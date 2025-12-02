@@ -5,10 +5,13 @@ import {
     DocumentTextIcon, PencilIcon, EyeIcon, 
     ArrowDownTrayIcon, TrashIcon, PlusIcon 
 } from '@heroicons/vue/24/outline';
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
 
 const props = defineProps({
     cvs: Object,
 });
+
+const { formatDate } = useBangladeshFormat();
 
 const deleteCv = (id) => {
     if (confirm('Are you sure you want to delete this CV? This action cannot be undone.')) {
@@ -22,7 +25,7 @@ const deleteCv = (id) => {
 
     <AuthenticatedLayout>
         <!-- Header with gradient -->
-        <div class="bg-sky-600 text-white">
+        <div class="bg-brand-red-600 text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
@@ -31,7 +34,7 @@ const deleteCv = (id) => {
                     </div>
                     <Link 
                         :href="route('cv-builder.index')"
-                        class="flex items-center justify-center space-x-2 bg-white text-blue-600 px-4 py-2.5 rounded-lg hover:bg-blue-50 transition-colors font-medium text-sm w-full sm:w-auto"
+                        class="flex items-center justify-center space-x-2 bg-white text-brand-red-600 px-4 py-2.5 rounded-lg hover:bg-blue-50 transition-colors font-medium text-sm w-full sm:w-auto"
                     >
                         <PlusIcon class="h-5 w-5" />
                         <span>Create New CV</span>
@@ -92,7 +95,7 @@ const deleteCv = (id) => {
                                     <span>{{ cv.download_count }} downloads</span>
                                 </div>
                                 <div class="text-gray-400">
-                                    Updated {{ new Date(cv.updated_at).toLocaleDateString() }}
+                                    Updated {{ formatDate(cv.updated_at) }}
                                 </div>
                             </div>
 
@@ -117,7 +120,7 @@ const deleteCv = (id) => {
                         <div class="grid grid-cols-2 lg:grid-cols-1 gap-2 w-full lg:w-auto lg:min-w-[140px]">
                             <Link 
                                 :href="route('cv-builder.preview', cv.id)"
-                                class="flex items-center justify-center space-x-2 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                                class="flex items-center justify-center space-x-2 px-4 py-2.5 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium"
                             >
                                 <EyeIcon class="h-4 w-4" />
                                 <span>Preview</span>
@@ -158,7 +161,7 @@ const deleteCv = (id) => {
                 <p class="mt-2 text-sm text-gray-500">Get started by creating your first professional CV.</p>
                 <Link 
                     :href="route('cv-builder.index')"
-                    class="inline-flex items-center space-x-2 mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                    class="inline-flex items-center space-x-2 mt-6 bg-brand-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors font-medium"
                 >
                     <PlusIcon class="h-5 w-5" />
                     <span>Create Your First CV</span>

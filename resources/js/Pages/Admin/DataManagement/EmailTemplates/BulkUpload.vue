@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <Head title="Bulk Upload Email Templates" />
   <AdminLayout>
     <div class="p-6">
@@ -16,12 +16,12 @@
               <label class="block text-sm font-medium text-gray-700 mb-2">
                 Select CSV File <span class="text-red-500">*</span>
               </label>
-              <input type="file" @change="handleFileChange" accept=".csv" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"/>
+              <input type="file" @change="handleFileChange" accept=".csv" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600"/>
               <p v-if="form.errors.file" class="mt-1 text-sm text-red-600">{{ form.errors.file }}</p>
             </div>
 
             <div class="flex gap-3">
-              <button type="submit" :disabled="form.processing" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50">
+              <button type="submit" :disabled="form.processing" class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50">
                 {{ form.processing ? 'Uploading...' : 'Upload & Process' }}
               </button>
               <Link :href="route('admin.data.email-templates.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
@@ -71,9 +71,9 @@
               </ul>
             </div>
 
-            <div class="bg-blue-50 border border-blue-200 rounded-md p-3">
-              <h3 class="font-medium text-blue-900 mb-2">Important Notes:</h3>
-              <ul class="list-disc list-inside text-blue-800 text-xs space-y-1">
+            <div class="bg-red-50 border border-red-200 rounded-md p-3">
+              <h3 class="font-medium text-red-900 mb-2">Important Notes:</h3>
+              <ul class="list-disc list-inside text-brand-red-600 text-xs space-y-1">
                 <li>Template names must be unique</li>
                 <li>Use double quotes for multi-line text in CSV</li>
                 <li>Variables should be in JSON format: ["name", "email"]</li>

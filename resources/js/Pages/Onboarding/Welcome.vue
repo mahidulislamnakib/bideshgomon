@@ -79,7 +79,7 @@ const skipForNow = () => {
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Hero Section -->
                 <div class="text-center mb-12">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-indigo-600 rounded-full mb-6">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-brand-red-600 rounded-full mb-6">
                         <RocketLaunchIcon class="h-10 w-10 text-white" />
                     </div>
                     <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
@@ -94,11 +94,11 @@ const skipForNow = () => {
                     <div class="max-w-md mx-auto">
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-sm font-medium text-gray-700">Profile Completion</span>
-                            <span class="text-sm font-bold text-indigo-600">{{ completionPercentage }}%</span>
+                            <span class="text-sm font-bold text-brand-red-600">{{ completionPercentage }}%</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                             <div 
-                                class="bg-indigo-600 h-3 rounded-full transition-all duration-500"
+                                class="bg-brand-red-600 h-3 rounded-full transition-all duration-500"
                                 :style="{ width: `${completionPercentage}%` }"
                             ></div>
                         </div>
@@ -141,9 +141,9 @@ const skipForNow = () => {
                         >
                             <div class="flex items-center gap-3 mb-4">
                                 <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                    <component :is="step.icon" class="h-6 w-6 text-indigo-600" />
+                                    <component :is="step.icon" class="h-6 w-6 text-brand-red-600" />
                                 </div>
-                                <div class="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                <div class="w-8 h-8 bg-brand-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
                                     {{ index + 1 }}
                                 </div>
                             </div>
@@ -156,7 +156,7 @@ const skipForNow = () => {
                                     :key="fieldIndex"
                                     class="text-xs text-gray-600 flex items-center gap-1"
                                 >
-                                    <span class="w-1 h-1 bg-indigo-600 rounded-full"></span>
+                                    <span class="w-1 h-1 bg-brand-red-600 rounded-full"></span>
                                     {{ field }}
                                 </div>
                             </div>
@@ -165,7 +165,7 @@ const skipForNow = () => {
                 </div>
 
                 <!-- CTA Buttons -->
-                <div class="bg-indigo-600 rounded-2xl p-8 text-center">
+                <div class="bg-brand-red-600 rounded-2xl p-8 text-center">
                     <h2 class="text-3xl font-bold text-white mb-4">
                         Ready to Get Started?
                     </h2>
@@ -175,14 +175,14 @@ const skipForNow = () => {
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                         <button
                             @click="startOnboarding"
-                            class="inline-flex items-center px-8 py-4 bg-white text-indigo-600 rounded-xl font-bold text-lg hover:bg-gray-50 transform hover:scale-105 transition shadow-lg"
+                            class="inline-flex items-center px-8 py-4 bg-white text-brand-red-600 rounded-xl font-bold text-lg hover:bg-gray-50 transform hover:scale-105 transition shadow-lg"
                         >
                             Complete My Profile Now
                             <ArrowRightIcon class="ml-2 h-5 w-5" />
                         </button>
                         <button
                             @click="skipForNow"
-                            class="inline-flex items-center px-8 py-4 bg-indigo-500 text-white rounded-xl font-semibold text-lg hover:bg-indigo-400 transition"
+                            class="inline-flex items-center px-8 py-4 bg-brand-red-600 text-white rounded-xl font-semibold text-lg hover:bg-indigo-400 transition"
                         >
                             I'll Do This Later
                         </button>
@@ -195,7 +195,7 @@ const skipForNow = () => {
                 <!-- Stats Footer -->
                 <div class="mt-12 grid grid-cols-3 gap-6 max-w-3xl mx-auto">
                     <div class="text-center">
-                        <div class="text-3xl font-bold text-indigo-600 mb-1">95%</div>
+                        <div class="text-3xl font-bold text-brand-red-600 mb-1">95%</div>
                         <div class="text-sm text-gray-600">Complete profiles get approved</div>
                     </div>
                     <div class="text-center">

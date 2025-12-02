@@ -6,22 +6,79 @@ use App\Http\Controllers\Controller;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Artisan;
 use Inertia\Inertia;
 
 class AdminSettingsController extends Controller
 {
+    /**
+     * Get settings groups with defaults to ensure UI always renders
+     */
+    private function getSettingsGroups(): array
+    {
+        $defaults = [
+            'general' => 'General Settings',
+            'branding' => 'Branding',
+            'contact' => 'Contact Information',
+            'email' => 'Email Configuration',
+            'features' => 'Feature Flags',
+            'modules' => 'Module Settings',
+            'jobs' => 'Jobs Settings',
+            'wallet' => 'Wallet Settings',
+            'seo' => 'SEO & Analytics',
+            'social' => 'Social Media',
+            'api' => 'API Keys',
+            'advanced' => 'Advanced Settings',
+        ];
+        
+        // Merge with database groups
+        $dbGroups = SiteSetting::distinct('group')
+            ->pluck('group')
+            ->filter() // Remove empty strings
+            ->mapWithKeys(function($group) {
+                return [$group => ucfirst(str_replace('_', ' ', $group))];
+            })
+            ->toArray();
+        
+        return array_merge($defaults, $dbGroups);
+    }
+
+    /**
+     * Ensure settings table has defaults
+     */
+    private function ensureDefaultSettings(): void
+    {
+        if (SiteSetting::count() === 0) {
+            Log::warning('Settings table is empty, seeding default settings');
+            Artisan::call('db:seed', ['--class' => 'SiteSettingsSeeder', '--force' => true]);
+        }
+    }
+
     public function index(Request $request)
     {
+        // Ensure settings exist before rendering
+        $this->ensureDefaultSettings();
+        
         $currentGroup = $request->get('group', 'general');
         
-        $settings = SiteSetting::orderBy('group')->orderBy('sort_order')->get();
+        // Force array conversion and ensure data is never null
+        $settings = SiteSetting::orderBy('group')
+            ->orderBy('sort_order')
+            ->get()
+            ->toArray();
+        
+        $groups = $this->getSettingsGroups();
 
-        return Inertia::render('Admin/Settings/Index', [
+        Log::info('Admin settings loaded', [
+            'settings_count' => count($settings),
+            'groups_count' => count($groups),
+            'current_group' => $currentGroup,
+        ]);
+
+        return Inertia::render('Admin/Settings/IndexAccordion', [
             'settings' => $settings,
             'currentGroup' => $currentGroup,
-            'groups' => SiteSetting::distinct('group')->pluck('group')->mapWithKeys(function($group) {
-                return [$group => ucfirst(str_replace('_', ' ', $group))];
-            }),
+            'groups' => $groups,
         ]);
     }
 

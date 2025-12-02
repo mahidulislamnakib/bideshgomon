@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Directory Categories" />
 
@@ -12,7 +12,7 @@
                     </div>
                     <Link
                         :href="route('admin.directory-categories.create')"
-                        class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150"
                     >
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
@@ -32,7 +32,7 @@
                                 @input="debouncedSearch"
                                 type="text"
                                 placeholder="Search categories..."
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             />
                         </div>
 
@@ -42,7 +42,7 @@
                             <select
                                 v-model="filters.status"
                                 @change="filterCategories"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Status</option>
                                 <option value="active">Active</option>
@@ -56,7 +56,7 @@
                             <select
                                 v-model="filters.sort"
                                 @change="filterCategories"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="sort_order">Sort Order</option>
                                 <option value="name">Name (A-Z)</option>
@@ -123,7 +123,7 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-brand-red-600">
                                             {{ category.directories_count || 0 }}
                                         </span>
                                     </td>
@@ -144,7 +144,7 @@
                                         <div class="flex justify-end space-x-2">
                                             <Link
                                                 :href="route('admin.directory-categories.edit', category.id)"
-                                                class="text-blue-600 hover:text-blue-900"
+                                                class="text-brand-red-600 hover:text-red-900"
                                                 title="Edit"
                                             >
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -177,7 +177,7 @@
                         <div class="mt-6">
                             <Link
                                 :href="route('admin.directory-categories.create')"
-                                class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700"
+                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
                             >
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>

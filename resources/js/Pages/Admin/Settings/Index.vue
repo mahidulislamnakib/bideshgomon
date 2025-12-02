@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref, computed } from 'vue';
 import { Head, useForm, Link } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -283,7 +283,7 @@ const updateSetting = (key, value) => {
                                 @click="switchTab(key)"
                                 :class="[
                                     activeTab === key
-                                        ? 'border-indigo-500 text-indigo-600'
+                                        ? 'border-brand-red-600 text-brand-red-600'
                                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
                                     'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 transition-colors'
                                 ]"
@@ -399,7 +399,7 @@ const updateSetting = (key, value) => {
                                                         :value="form.settings.find(s => s.key === setting.key)?.value"
                                                         @input="updateSetting(setting.key, $event.target.value)"
                                                         :placeholder="form.settings.find(s => s.key === setting.key)?.value ? '••••••••••••••••••••' : `Enter ${setting.key.split('_').pop()}`"
-                                                        class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm pr-10 font-mono"
+                                                        class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 text-sm pr-10 font-mono"
                                                     >
                                                     <button
                                                         type="button"
@@ -452,7 +452,7 @@ const updateSetting = (key, value) => {
                                                     @change="updateSetting(setting.key, $event.target.checked)"
                                                     class="sr-only peer"
                                                 >
-                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-red-600"></div>
                                                 <span class="ml-3 text-sm font-medium text-gray-900">
                                                     {{ form.settings.find(s => s.key === setting.key)?.value ? 'Enabled' : 'Disabled' }}
                                                 </span>
@@ -466,7 +466,7 @@ const updateSetting = (key, value) => {
                                                 :value="form.settings.find(s => s.key === setting.key)?.value"
                                                 @input="updateSetting(setting.key, $event.target.value)"
                                                 rows="4"
-                                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
                                             ></textarea>
                                         </div>
 
@@ -485,7 +485,7 @@ const updateSetting = (key, value) => {
                                                     :value="form.settings.find(s => s.key === setting.key)?.value"
                                                     @input="updateSetting(setting.key, $event.target.value)"
                                                     placeholder="#3B82F6"
-                                                    class="flex-1 rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm font-mono"
+                                                    class="flex-1 rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm font-mono"
                                                 >
                                             </div>
                                         </div>
@@ -498,7 +498,7 @@ const updateSetting = (key, value) => {
                                                 :value="form.settings.find(s => s.key === setting.key)?.value"
                                                 @input="updateSetting(setting.key, $event.target.value)"
                                                 :step="setting.type === 'number' ? 'any' : undefined"
-                                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
                                             >
                                         </div>
 
@@ -511,7 +511,7 @@ const updateSetting = (key, value) => {
                                                     :value="form.settings.find(s => s.key === setting.key)?.value"
                                                     @input="updateSetting(setting.key, $event.target.value)"
                                                     :placeholder="form.settings.find(s => s.key === setting.key)?.value ? '••••••••••••' : 'Enter secure value'"
-                                                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pr-10"
+                                                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm pr-10"
                                                 >
                                                 <button
                                                     type="button"
@@ -533,7 +533,7 @@ const updateSetting = (key, value) => {
                             <button
                                 type="submit"
                                 :disabled="form.processing"
-                                class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                             >
                                 <CheckIcon class="h-5 w-5 mr-2" />
                                 {{ form.processing ? 'Saving...' : 'Save Settings' }}
@@ -543,13 +543,13 @@ const updateSetting = (key, value) => {
                 </div>
 
                 <!-- Info Panel -->
-                <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div class="mt-6 bg-red-50 border border-red-200 rounded-lg p-4">
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <CogIcon class="h-5 w-5 text-blue-400" />
                         </div>
                         <div class="ml-3">
-                            <h3 class="text-sm font-medium text-blue-800">Settings Information</h3>
+                            <h3 class="text-sm font-medium text-brand-red-600">Settings Information</h3>
                             <div class="mt-2 text-sm text-blue-700">
                                 <ul class="list-disc list-inside space-y-1">
                                     <li>Settings marked as "Public" can be accessed by the frontend application</li>

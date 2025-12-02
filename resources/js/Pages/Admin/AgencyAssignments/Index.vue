@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Agency Country Assignments" />
 
@@ -15,7 +15,7 @@
                         </div>
                         <Link
                             :href="route('admin.agency-assignments.create')"
-                            class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition duration-150"
+                            class="inline-flex items-center px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition duration-150"
                         >
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -29,8 +29,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
-                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="flex-shrink-0 bg-red-100 rounded-md p-3">
+                                <svg class="w-6 h-6 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
@@ -92,7 +92,7 @@
                             <select
                                 v-model="filters.agency_id"
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Agencies</option>
                                 <option v-for="agency in agencies" :key="agency.id" :value="agency.id">
@@ -108,7 +108,7 @@
                                 @input="applyFilters"
                                 type="text"
                                 placeholder="Search by country..."
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             />
                         </div>
 
@@ -117,7 +117,7 @@
                             <select
                                 v-model="filters.is_active"
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Status</option>
                                 <option value="1">Active</option>
@@ -156,8 +156,8 @@
                             <tr v-for="assignment in assignments.data" :key="assignment.id" class="hover:bg-gray-50">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
-                                            <span class="text-blue-600 font-semibold text-sm">
+                                        <div class="flex-shrink-0 h-10 w-10 bg-red-100 rounded-full flex items-center justify-center">
+                                            <span class="text-brand-red-600 font-semibold text-sm">
                                                 {{ assignment.agency.name.substring(0, 2).toUpperCase() }}
                                             </span>
                                         </div>
@@ -202,7 +202,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <Link
                                         :href="route('admin.agency-assignments.show', assignment.id)"
-                                        class="text-blue-600 hover:text-blue-900 mr-3"
+                                        class="text-brand-red-600 hover:text-red-900 mr-3"
                                     >
                                         View
                                     </Link>
@@ -241,7 +241,7 @@
                                         v-if="link.url"
                                         :href="link.url"
                                         :class="{
-                                            'bg-blue-600 text-white': link.active,
+                                            'bg-brand-red-600 text-white': link.active,
                                             'bg-white text-gray-700 hover:bg-gray-50': !link.active
                                         }"
                                         class="px-3 py-2 text-sm font-medium rounded-md border border-gray-300"
@@ -267,7 +267,7 @@
                         <div class="mt-6">
                             <Link
                                 :href="route('admin.agency-assignments.create')"
-                                class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg"
+                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg"
                             >
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />

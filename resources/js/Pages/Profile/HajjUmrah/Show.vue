@@ -237,7 +237,7 @@ const formatDate = (date) => {
                                 <select
                                     id="destination_country_id"
                                     v-model="form.destination_country_id"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
                                     required
                                 >
                                     <option value="">Select destination country</option>
@@ -259,7 +259,7 @@ const formatDate = (date) => {
                                     type="date"
                                     id="intended_travel_date"
                                     v-model="form.intended_travel_date"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
                                     :min="new Date().toISOString().split('T')[0]"
                                 />
                                 <p v-if="errors.intended_travel_date" class="mt-2 text-sm text-red-600">
@@ -276,7 +276,7 @@ const formatDate = (date) => {
                                     type="number"
                                     id="duration_days"
                                     v-model="form.duration_days"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
                                     min="1"
                                     max="365"
                                     placeholder="e.g., 14"
@@ -294,7 +294,7 @@ const formatDate = (date) => {
                                 <select
                                     id="profession"
                                     v-model="form.profession"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
                                 >
                                     <option value="">Select your profession</option>
                                     <option v-for="profession in professions" :key="profession" :value="profession">
@@ -315,7 +315,7 @@ const formatDate = (date) => {
                                     id="user_notes"
                                     v-model="form.user_notes"
                                     rows="6"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
                                     placeholder="Any additional information or special requirements..."
                                 ></textarea>
                                 <p v-if="errors.user_notes" class="mt-2 text-sm text-red-600">
@@ -345,14 +345,14 @@ const formatDate = (date) => {
                                 v-if="isEditing"
                                 @click="toggleEdit"
                                 type="button"
-                                class="inline-flex items-center justify-center px-6 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                                class="inline-flex items-center justify-center px-6 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 transition-colors"
                             >
                                 Cancel
                             </button>
                             <button
                                 v-if="!isEditing && canEdit"
                                 @click="toggleEdit"
-                                class="inline-flex items-center justify-center px-6 py-2 bg-indigo-600 border border-transparent rounded-lg text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                                class="inline-flex items-center justify-center px-6 py-2 bg-brand-red-600 border border-transparent rounded-lg text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 transition-colors"
                             >
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -363,7 +363,7 @@ const formatDate = (date) => {
                                 v-if="isEditing"
                                 @click="saveChanges"
                                 :disabled="processing"
-                                class="inline-flex items-center justify-center px-6 py-2 bg-indigo-600 border border-transparent rounded-lg text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                class="inline-flex items-center justify-center px-6 py-2 bg-brand-red-600 border border-transparent rounded-lg text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                             >
                                 <svg v-if="processing" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

@@ -43,7 +43,7 @@ const barClasses = computed(() => {
     
     switch (props.variant) {
         case 'primary':
-            classes.push('bg-ocean-500')
+            classes.push('bg-brand-red-600')
             break
         case 'success':
             classes.push('bg-growth-500')

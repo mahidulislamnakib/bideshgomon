@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Bulk Upload Job Categories" />
 
@@ -6,7 +6,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
                 <div class="mb-6">
-                    <Link :href="route('admin.data.job-categories.index')" class="text-sm text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 mb-2 inline-block">
+                    <Link :href="route('admin.data.job-categories.index')" class="text-sm text-brand-red-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
                         ← Back to Job Categories
                     </Link>
                     <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Bulk Upload Job Categories</h1>
@@ -14,32 +14,32 @@
                 </div>
 
                 <!-- Instructions -->
-                <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-6">
-                    <h2 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">📋 CSV Upload Instructions</h2>
+                <div class="bg-red-50 dark:bg-blue-900/20 border border-red-200 dark:border-blue-800 rounded-lg p-6 mb-6">
+                    <h2 class="text-lg font-semibold text-red-900 dark:text-blue-100 mb-3">📋 CSV Upload Instructions</h2>
                     
-                    <div class="space-y-3 text-sm text-blue-800 dark:text-blue-200">
+                    <div class="space-y-3 text-sm text-brand-red-600 dark:text-blue-200">
                         <div>
                             <strong>Required Column:</strong>
                             <ul class="list-disc ml-6 mt-1 space-y-1">
-                                <li><code class="bg-blue-100 dark:bg-blue-800 px-1 rounded">name</code> - Category name in English (e.g., "Software Development")</li>
+                                <li><code class="bg-red-100 dark:bg-blue-800 px-1 rounded">name</code> - Category name in English (e.g., "Software Development")</li>
                             </ul>
                         </div>
 
                         <div>
                             <strong>Optional Columns:</strong>
                             <ul class="list-disc ml-6 mt-1 space-y-1">
-                                <li><code class="bg-blue-100 dark:bg-blue-800 px-1 rounded">parent_code</code> - Parent category slug for hierarchy (e.g., "information-technology")</li>
-                                <li><code class="bg-blue-100 dark:bg-blue-800 px-1 rounded">name_bn</code> - Category name in Bengali</li>
-                                <li><code class="bg-blue-100 dark:bg-blue-800 px-1 rounded">slug</code> - URL-friendly identifier (auto-generated if empty)</li>
-                                <li><code class="bg-blue-100 dark:bg-blue-800 px-1 rounded">description</code> - Brief description of the category</li>
-                                <li><code class="bg-blue-100 dark:bg-blue-800 px-1 rounded">order</code> - Display order (default: 0)</li>
-                                <li><code class="bg-blue-100 dark:bg-blue-800 px-1 rounded">is_active</code> - 1 for active, 0 for inactive (default: 1)</li>
+                                <li><code class="bg-red-100 dark:bg-blue-800 px-1 rounded">parent_code</code> - Parent category slug for hierarchy (e.g., "information-technology")</li>
+                                <li><code class="bg-red-100 dark:bg-blue-800 px-1 rounded">name_bn</code> - Category name in Bengali</li>
+                                <li><code class="bg-red-100 dark:bg-blue-800 px-1 rounded">slug</code> - URL-friendly identifier (auto-generated if empty)</li>
+                                <li><code class="bg-red-100 dark:bg-blue-800 px-1 rounded">description</code> - Brief description of the category</li>
+                                <li><code class="bg-red-100 dark:bg-blue-800 px-1 rounded">order</code> - Display order (default: 0)</li>
+                                <li><code class="bg-red-100 dark:bg-blue-800 px-1 rounded">is_active</code> - 1 for active, 0 for inactive (default: 1)</li>
                             </ul>
                         </div>
 
-                        <div class="bg-white dark:bg-blue-950 rounded p-3 border border-blue-200 dark:border-blue-700">
+                        <div class="bg-white dark:bg-blue-950 rounded p-3 border border-red-200 dark:border-blue-700">
                             <strong class="block mb-2">💡 Creating Hierarchical Categories:</strong>
-                            <p>Use the <code class="bg-blue-100 dark:bg-blue-800 px-1 rounded">parent_code</code> column to establish parent-child relationships:</p>
+                            <p>Use the <code class="bg-red-100 dark:bg-blue-800 px-1 rounded">parent_code</code> column to establish parent-child relationships:</p>
                             <ul class="list-disc ml-6 mt-2 space-y-1">
                                 <li><strong>Root categories:</strong> Leave <code>parent_code</code> empty</li>
                                 <li><strong>Child categories:</strong> Enter the parent's slug in <code>parent_code</code></li>
@@ -51,8 +51,8 @@
                         <div>
                             <strong>Sample Data:</strong>
                             <div class="mt-2 overflow-x-auto">
-                                <table class="min-w-full bg-white dark:bg-gray-900 text-xs border border-blue-200 dark:border-blue-700">
-                                    <thead class="bg-blue-100 dark:bg-blue-800">
+                                <table class="min-w-full bg-white dark:bg-gray-900 text-xs border border-red-200 dark:border-blue-700">
+                                    <thead class="bg-red-100 dark:bg-blue-800">
                                         <tr>
                                             <th class="px-3 py-2 border-r">parent_code</th>
                                             <th class="px-3 py-2 border-r">name</th>
@@ -73,7 +73,7 @@
                                             <td class="px-3 py-2 border-r">0</td>
                                             <td class="px-3 py-2">1</td>
                                         </tr>
-                                        <tr class="border-t bg-blue-50 dark:bg-blue-900/30">
+                                        <tr class="border-t bg-red-50 dark:bg-blue-900/30">
                                             <td class="px-3 py-2 border-r"><strong>information-technology</strong></td>
                                             <td class="px-3 py-2 border-r">Software Development</td>
                                             <td class="px-3 py-2 border-r">সফটওয়্যার উন্নয়ন</td>
@@ -82,7 +82,7 @@
                                             <td class="px-3 py-2 border-r">1</td>
                                             <td class="px-3 py-2">1</td>
                                         </tr>
-                                        <tr class="border-t bg-blue-50 dark:bg-blue-900/30">
+                                        <tr class="border-t bg-red-50 dark:bg-blue-900/30">
                                             <td class="px-3 py-2 border-r"><strong>information-technology</strong></td>
                                             <td class="px-3 py-2 border-r">Network Administration</td>
                                             <td class="px-3 py-2 border-r">নেটওয়ার্ক প্রশাসন</td>
@@ -133,7 +133,7 @@
                                 <button
                                     type="submit"
                                     :disabled="uploadForm.processing || !selectedFile"
-                                    class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    class="px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {{ uploadForm.processing ? 'Uploading...' : 'Upload & Import' }}
                                 </button>
@@ -169,9 +169,9 @@
                             <div class="text-2xl font-bold text-red-700 dark:text-red-400">{{ uploadResult.failed }}</div>
                             <div class="text-sm text-red-600 dark:text-red-300">Failed</div>
                         </div>
-                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                        <div class="bg-red-50 dark:bg-blue-900/20 border border-red-200 dark:border-blue-800 rounded-lg p-4">
                             <div class="text-2xl font-bold text-blue-700 dark:text-blue-400">{{ uploadResult.total }}</div>
-                            <div class="text-sm text-blue-600 dark:text-blue-300">Total Processed</div>
+                            <div class="text-sm text-brand-red-600 dark:text-blue-300">Total Processed</div>
                         </div>
                     </div>
 

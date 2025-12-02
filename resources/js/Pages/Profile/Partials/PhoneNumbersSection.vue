@@ -56,7 +56,7 @@ const phoneTypes = [
 ]
 
 // Country codes - will be loaded from database
-const countryCodes = ref([])
+const countryCodes = ref([{ code: '+880', name: 'Bangladesh', flag: '🇧🇩' }])
 const isLoadingCountries = ref(false)
 
 const primaryPhone = computed(() => {
@@ -245,8 +245,14 @@ const getVerificationBadge = (phone) => {
 }
 
 const getCountryFlag = (countryCode) => {
-    const country = countryCodes.find(c => c.code === countryCode)
+    if (!Array.isArray(countryCodes.value)) return '📱'
+    const country = countryCodes.value.find(c => c.code === countryCode)
     return country?.flag || '📱'
+}
+
+const getPhoneTypeIcon = (phoneType) => {
+    const type = phoneTypes.find(t => t.value === phoneType)
+    return type?.icon || '📞'
 }
 
 const sendVerificationCode = async (phone) => {
@@ -345,7 +351,7 @@ onMounted(() => {
         <!-- Section Header -->
         <div class="flex items-center justify-between mb-rhythm-md">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-cyan-600 flex items-center justify-center shadow-sm">
+                <div class="w-10 h-10 rounded-xl bg-brand-red-600 flex items-center justify-center shadow-sm">
                     <PhoneIcon class="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -382,38 +388,41 @@ onMounted(() => {
         </div>
 
         <!-- Phone Numbers List -->
-        <div v-if="phoneNumbers.length > 0" class="space-y-3">
+        <div v-if="phoneNumbers.length > 0" class="space-y-4">
             <div 
                 v-for="phone in phoneNumbers" 
                 :key="phone.id"
-                class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700"
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border-2 border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 transition-all duration-200"
             >
-                <div class="h-1 bg-blue-600"></div>
-                <div class="p-4">
-                    <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="h-1.5 bg-gradient-to-r from-indigo-500 to-blue-600"></div>
+                <div class="p-5">
+                    <div class="flex items-start justify-between gap-4 mb-4">
                         <div class="flex items-start gap-3 flex-1 min-w-0">
-                            <div class="w-10 h-10 rounded-lg bg-sky-100 dark:bg-sky-900/30 flex items-center justify-center flex-shrink-0">
-                                <span class="text-xl">{{ getCountryFlag(phone.country_code) }}</span>
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-100 to-blue-100 dark:from-indigo-900/40 dark:to-blue-900/40 flex items-center justify-center flex-shrink-0 shadow-sm">
+                                <span class="text-2xl">{{ getCountryFlag(phone.country_code) }}</span>
                             </div>
                             <div class="flex-1 min-w-0">
                                 <a 
                                     :href="`tel:${phone.country_code}${phone.phone_number}`"
-                                    class="text-base font-semibold text-gray-900 dark:text-white hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
+                                    class="text-lg font-bold text-gray-900 dark:text-white hover:text-brand-red-600 dark:hover:text-indigo-400 transition-colors block"
                                 >
                                     {{ phone.country_code }} {{ phone.phone_number }}
                                 </a>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-0.5">{{ phone.label }}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 flex items-center gap-1.5">
+                                    <span>{{ getPhoneTypeIcon(phone.phone_type) }}</span>
+                                    <span>{{ phone.label }}</span>
+                                </p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Badges -->
-                    <div class="flex flex-wrap gap-2 mb-3">
+                    <div class="flex flex-wrap gap-2 mb-4">
                         <span 
                             v-if="phone.is_primary" 
-                            class="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 text-xs font-medium rounded-md"
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 dark:from-blue-900/30 dark:to-indigo-900/30 dark:text-blue-300 text-xs font-semibold rounded-lg shadow-sm"
                         >
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
                             Primary
@@ -421,42 +430,42 @@ onMounted(() => {
 
                         <span 
                             :class="getVerificationBadge(phone).class"
-                            class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-md"
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg shadow-sm"
                         >
-                            <component :is="getVerificationBadge(phone).icon" class="w-3.5 h-3.5" />
+                            <component :is="getVerificationBadge(phone).icon" class="w-4 h-4" />
                             {{ getVerificationBadge(phone).text }}
                         </span>
                     </div>
 
                     <!-- Actions -->
-                    <div class="flex flex-col sm:flex-row gap-2">
+                    <div class="flex flex-col sm:flex-row gap-2.5">
                         <button
                             v-if="!phone.is_verified"
                             @click="sendVerificationCode(phone)"
-                            class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-all shadow-md disabled:opacity-50"
+                            class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-green-600 to-green-500 rounded-xl hover:from-green-700 hover:to-green-600 transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5"
                             :disabled="isSendingCode || isLoading"
-                            style="min-height: 44px"
+                            style="min-height: 48px"
                         >
-                            <CheckBadgeIcon class="w-4 h-4" />
-                            Verify
+                            <CheckBadgeIcon class="w-5 h-5" />
+                            <span>Verify Phone</span>
                         </button>
                         <button
                             @click="openEditModal(phone)"
-                            class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-900/20 rounded-lg hover:bg-sky-100 dark:hover:bg-sky-900/30 transition-colors"
+                            class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl hover:bg-indigo-100 dark:hover:bg-indigo-900/30 transition-all duration-200 shadow-sm border border-indigo-200 dark:border-indigo-800"
                             :disabled="isLoading"
-                            style="min-height: 44px"
+                            style="min-height: 48px"
                         >
-                            <PencilIcon class="w-4 h-4" />
-                            Edit
+                            <PencilIcon class="w-5 h-5" />
+                            <span>Edit</span>
                         </button>
                         <button
                             @click="openDeleteModal(phone.id)"
-                            class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors disabled:opacity-50"
+                            class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/20 rounded-xl hover:bg-red-100 dark:hover:bg-red-900/30 transition-all duration-200 shadow-sm border border-red-200 dark:border-red-800 disabled:opacity-50 disabled:cursor-not-allowed"
                             :disabled="isLoading || phoneNumbers.length === 1"
-                            style="min-height: 44px"
+                            style="min-height: 48px"
                         >
-                            <TrashIcon class="w-4 h-4" />
-                            Delete
+                            <TrashIcon class="w-5 h-5" />
+                            <span>Delete</span>
                         </button>
                     </div>
                 </div>
@@ -470,7 +479,7 @@ onMounted(() => {
             <p class="text-sm text-gray-500 dark:text-gray-500 mt-1">Add your contact numbers for communication</p>
             <button
                 @click="openAddModal"
-                class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-all shadow-md"
+                class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-brand-red-600 rounded-lg hover:bg-red-700 transition-all shadow-md"
                 style="min-height: 44px"
             >
                 <PlusIcon class="w-5 h-5" />
@@ -482,7 +491,7 @@ onMounted(() => {
         <Modal :show="showModal" @close="closeModal" max-width="2xl">
             <div class="p-6">
                 <div class="flex items-center gap-3 mb-6">
-                    <div class="w-12 h-12 rounded-xl bg-cyan-600 flex items-center justify-center">
+                    <div class="w-12 h-12 rounded-xl bg-brand-red-600 flex items-center justify-center">
                         <PhoneIcon class="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -502,7 +511,7 @@ onMounted(() => {
                         <div class="relative">
                             <select
                                 v-model="form.country_code"
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none bg-white dark:bg-gray-800 shadow-sm hover:border-gray-400 transition-colors cursor-pointer"
+                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500 appearance-none bg-white dark:bg-gray-800 shadow-sm hover:border-gray-400 transition-colors cursor-pointer"
                                 style="font-size: 15px; min-height: 48px; padding-right: 40px;"
                             >
                                 <option value="" disabled>Select country</option>
@@ -526,36 +535,44 @@ onMounted(() => {
 
                     <!-- Phone Number -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Phone Number <span class="text-red-500">*</span>
                         </label>
                         <input
                             v-model="form.phone_number"
                             type="tel"
                             placeholder="1712345678"
-                            class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600"
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500 shadow-sm hover:border-gray-400 transition-colors"
                             :class="{ 'border-red-500': errors.phone_number }"
-                            style="font-size: 16px; min-height: 44px"
+                            style="font-size: 16px; min-height: 48px"
                         />
                         <p v-if="errors.phone_number" class="text-xs text-red-600 dark:text-red-400 mt-1">
                             {{ errors.phone_number }}
                         </p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Enter phone number without country code</p>
                     </div>
 
                     <!-- Phone Type -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Phone Type <span class="text-red-500">*</span>
                         </label>
-                        <select
-                            v-model="form.phone_type"
-                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                            style="font-size: 16px; min-height: 44px"
-                        >
-                            <option v-for="type in phoneTypes" :key="type.value" :value="type.value">
-                                {{ type.icon }} {{ type.label }}
-                            </option>
-                        </select>
+                        <div class="relative">
+                            <select
+                                v-model="form.phone_type"
+                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500 appearance-none bg-white shadow-sm hover:border-gray-400 transition-colors cursor-pointer"
+                                style="font-size: 15px; min-height: 48px; padding-right: 40px;"
+                            >
+                                <option v-for="type in phoneTypes" :key="type.value" :value="type.value" class="py-2">
+                                    {{ type.icon }} {{ type.label }}
+                                </option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
                         <p v-if="errors.phone_type" class="text-xs text-red-600 dark:text-red-400 mt-1">
                             {{ errors.phone_type }}
                         </p>
@@ -563,16 +580,16 @@ onMounted(() => {
 
                     <!-- Label -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Label <span class="text-red-500">*</span>
                         </label>
                         <input
                             v-model="form.label"
                             type="text"
                             placeholder="e.g., Personal, Office, Emergency"
-                            class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600"
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500 shadow-sm hover:border-gray-400 transition-colors"
                             :class="{ 'border-red-500': errors.label }"
-                            style="font-size: 16px; min-height: 44px"
+                            style="font-size: 16px; min-height: 48px"
                         />
                         <p v-if="errors.label" class="text-xs text-red-600 dark:text-red-400 mt-1">
                             {{ errors.label }}
@@ -580,11 +597,11 @@ onMounted(() => {
                     </div>
 
                     <!-- Primary Checkbox -->
-                    <label class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg cursor-pointer" style="min-height: 44px">
+                    <label class="flex items-center gap-3 p-4 bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 rounded-xl cursor-pointer border border-indigo-200 dark:border-indigo-800 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors" style="min-height: 56px">
                         <input
                             v-model="form.is_primary"
                             type="checkbox"
-                            class="w-5 h-5 text-sky-600 border-gray-300 rounded focus:ring-sky-500"
+                            class="w-5 h-5 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600 cursor-pointer"
                         />
                         <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Set as primary phone number</span>
                     </label>
@@ -612,7 +629,7 @@ onMounted(() => {
                         </button>
                         <button
                             type="submit"
-                            class="w-full sm:w-auto px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md"
+                            class="w-full sm:w-auto px-6 py-3 text-sm font-medium text-white bg-brand-red-600 rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md"
                             style="min-height: 44px"
                             :disabled="isLoading"
                         >
@@ -713,7 +730,7 @@ onMounted(() => {
                         <button
                             type="button"
                             @click="resendVerificationCode"
-                            class="text-sm font-medium text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 disabled:opacity-50 transition-colors"
+                            class="text-sm font-medium text-brand-red-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 disabled:opacity-50 transition-colors"
                             :disabled="isSendingCode"
                         >
                             <span v-if="isSendingCode">Sending...</span>

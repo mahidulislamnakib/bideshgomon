@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
@@ -47,7 +47,7 @@ const submit = () => {
                                         v-model="form.name" 
                                         type="text" 
                                         required
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                     <div v-if="form.errors.name" class="text-red-600 text-sm mt-1">{{ form.errors.name }}</div>
                                 </div>
@@ -56,7 +56,7 @@ const submit = () => {
                                     <label class="block text-sm font-medium text-gray-700">Star Rating *</label>
                                     <select 
                                         v-model="form.star_rating" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     >
                                         <option :value="1">1 Star</option>
                                         <option :value="2">2 Stars</option>
@@ -70,7 +70,7 @@ const submit = () => {
                                     <label class="block text-sm font-medium text-gray-700">Property Type *</label>
                                     <select 
                                         v-model="form.property_type" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     >
                                         <option value="hotel">Hotel</option>
                                         <option value="resort">Resort</option>
@@ -86,7 +86,7 @@ const submit = () => {
                                         v-model="form.city" 
                                         type="text" 
                                         required
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                 </div>
 
@@ -95,7 +95,7 @@ const submit = () => {
                                     <textarea 
                                         v-model="form.description" 
                                         rows="3"
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     ></textarea>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@ const submit = () => {
                                         v-model="form.address" 
                                         type="text" 
                                         required
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                 </div>
 
@@ -120,7 +120,7 @@ const submit = () => {
                                     <input 
                                         v-model="form.area" 
                                         type="text" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                 </div>
 
@@ -129,7 +129,7 @@ const submit = () => {
                                     <input 
                                         v-model="form.country" 
                                         type="text" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                 </div>
                             </div>
@@ -144,7 +144,7 @@ const submit = () => {
                                     <input 
                                         v-model="form.phone" 
                                         type="text" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                 </div>
 
@@ -153,7 +153,7 @@ const submit = () => {
                                     <input 
                                         v-model="form.email" 
                                         type="email" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                 </div>
 
@@ -162,7 +162,7 @@ const submit = () => {
                                     <input 
                                         v-model="form.website" 
                                         type="url" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                 </div>
                             </div>
@@ -177,7 +177,7 @@ const submit = () => {
                                     <input 
                                         v-model="form.check_in_time" 
                                         type="time" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                 </div>
 
@@ -186,7 +186,7 @@ const submit = () => {
                                     <input 
                                         v-model="form.check_out_time" 
                                         type="time" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                 </div>
                             </div>
@@ -200,7 +200,7 @@ const submit = () => {
                                     <input 
                                         v-model="form.is_active" 
                                         type="checkbox" 
-                                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                     <span class="ml-2 text-sm text-gray-700">Active (Visible to users)</span>
                                 </label>
@@ -209,7 +209,7 @@ const submit = () => {
                                     <input 
                                         v-model="form.is_featured" 
                                         type="checkbox" 
-                                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                     <span class="ml-2 text-sm text-gray-700">Featured (Promoted hotel)</span>
                                 </label>
@@ -227,7 +227,7 @@ const submit = () => {
                             <button 
                                 type="submit" 
                                 :disabled="form.processing"
-                                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+                                class="px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
                             >
                                 {{ form.processing ? 'Creating...' : 'Create Hotel' }}
                             </button>

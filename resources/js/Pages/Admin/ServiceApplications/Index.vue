@@ -39,9 +39,9 @@ const statuses = [
 const getStatusColor = (status) => {
   const colors = {
     pending: 'bg-yellow-100 text-yellow-800',
-    quoted: 'bg-blue-100 text-blue-800',
+    quoted: 'bg-red-100 text-brand-red-600',
     accepted: 'bg-green-100 text-green-800',
-    in_progress: 'bg-indigo-100 text-indigo-800',
+    in_progress: 'bg-red-100 text-brand-red-600',
     completed: 'bg-green-100 text-green-800',
     cancelled: 'bg-red-100 text-red-800',
   };
@@ -86,7 +86,7 @@ const resetFilters = () => {
           <div class="mt-4 sm:mt-0">
             <button
               @click="filterApplications"
-              class="inline-flex items-center gap-x-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-all"
+              class="inline-flex items-center gap-x-2 rounded-lg bg-brand-red-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-red-600 transition-all"
             >
               <ArrowPathIcon class="h-5 w-5" />
               Refresh
@@ -111,7 +111,7 @@ const resetFilters = () => {
           <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-sm font-medium text-blue-600">Quoted</p>
+                <p class="text-sm font-medium text-brand-red-600">Quoted</p>
                 <p class="text-3xl font-bold text-gray-900">{{ stats?.quoted || 0 }}</p>
               </div>
               <DocumentTextIcon class="h-12 w-12 text-blue-400" />
@@ -121,10 +121,10 @@ const resetFilters = () => {
           <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-sm font-medium text-indigo-600">In Progress</p>
+                <p class="text-sm font-medium text-brand-red-600">In Progress</p>
                 <p class="text-3xl font-bold text-gray-900">{{ stats?.in_progress || 0 }}</p>
               </div>
-              <ArrowPathIcon class="h-12 w-12 text-indigo-400" />
+              <ArrowPathIcon class="h-12 w-12 text-red-400" />
             </div>
           </div>
 
@@ -157,7 +157,7 @@ const resetFilters = () => {
                   @keyup.enter="filterApplications"
                   type="text"
                   placeholder="Search by application number, user, service..."
-                  class="block w-full rounded-lg border-0 py-2.5 pl-10 pr-3 text-gray-900 dark:text-white dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                  class="block w-full rounded-lg border-0 py-2.5 pl-10 pr-3 text-gray-900 dark:text-white dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-brand-red-600 sm:text-sm"
                 />
               </div>
             </div>
@@ -167,7 +167,7 @@ const resetFilters = () => {
               <select
                 v-model="statusFilter"
                 @change="filterApplications"
-                class="block w-full rounded-lg border-0 py-2.5 text-gray-900 dark:text-white dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm"
+                class="block w-full rounded-lg border-0 py-2.5 text-gray-900 dark:text-white dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-brand-red-600 sm:text-sm"
               >
                 <option v-for="status in statuses" :key="status.value" :value="status.value">
                   {{ status.label }}
@@ -224,8 +224,8 @@ const resetFilters = () => {
                 >
                   <td class="px-6 py-4 whitespace-nowrap">
                     <div class="flex items-center">
-                      <div class="flex-shrink-0 h-10 w-10 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center">
-                        <DocumentTextIcon class="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+                      <div class="flex-shrink-0 h-10 w-10 bg-red-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center">
+                        <DocumentTextIcon class="h-6 w-6 text-brand-red-600 dark:text-red-400" />
                       </div>
                       <div class="ml-4">
                         <div class="text-sm font-medium text-gray-900 dark:text-white">
@@ -282,7 +282,7 @@ const resetFilters = () => {
                   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Link
                       :href="`/admin/service-applications/${application.id}`"
-                      class="inline-flex items-center gap-x-1.5 text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors"
+                      class="inline-flex items-center gap-x-1.5 text-brand-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-indigo-300 transition-colors"
                     >
                       <EyeIcon class="h-4 w-4" />
                       View

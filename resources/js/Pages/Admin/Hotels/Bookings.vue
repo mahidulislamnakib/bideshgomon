@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
@@ -40,7 +40,7 @@ const updateStatus = (bookingId, newStatus) => {
 const getStatusColor = (status) => {
     const colors = {
         pending: 'bg-yellow-100 text-yellow-800',
-        confirmed: 'bg-blue-100 text-blue-800',
+        confirmed: 'bg-red-100 text-brand-red-600',
         checked_in: 'bg-green-100 text-green-800',
         checked_out: 'bg-gray-100 text-gray-800',
         cancelled: 'bg-red-100 text-red-800',
@@ -52,7 +52,7 @@ const getPaymentStatusColor = (status) => {
     const colors = {
         pending: 'bg-yellow-100 text-yellow-800',
         paid: 'bg-green-100 text-green-800',
-        partially_paid: 'bg-blue-100 text-blue-800',
+        partially_paid: 'bg-red-100 text-brand-red-600',
         refunded: 'bg-purple-100 text-purple-800',
     };
     return colors[status] || 'bg-gray-100 text-gray-800';
@@ -74,16 +74,16 @@ const getPaymentStatusColor = (status) => {
 
                     <!-- Stats -->
                     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 p-6">
-                        <div class="bg-blue-50 p-4 rounded-lg">
-                            <div class="text-blue-600 text-xs font-medium">Total</div>
-                            <div class="text-xl font-bold text-blue-900">{{ stats.total_bookings }}</div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <div class="text-brand-red-600 text-xs font-medium">Total</div>
+                            <div class="text-xl font-bold text-red-900">{{ stats.total_bookings }}</div>
                         </div>
                         <div class="bg-yellow-50 p-4 rounded-lg">
                             <div class="text-yellow-600 text-xs font-medium">Pending</div>
                             <div class="text-xl font-bold text-yellow-900">{{ stats.pending }}</div>
                         </div>
-                        <div class="bg-indigo-50 p-4 rounded-lg">
-                            <div class="text-indigo-600 text-xs font-medium">Confirmed</div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <div class="text-brand-red-600 text-xs font-medium">Confirmed</div>
                             <div class="text-xl font-bold text-indigo-900">{{ stats.confirmed }}</div>
                         </div>
                         <div class="bg-green-50 p-4 rounded-lg">
@@ -232,7 +232,7 @@ const getPaymentStatusColor = (status) => {
                                             <div class="flex gap-2">
                                                 <Link
                                                     :href="route('admin.hotel-bookings.show', booking.id)"
-                                                    class="text-indigo-600 hover:text-indigo-900"
+                                                    class="text-brand-red-600 hover:text-red-900"
                                                 >
                                                     View
                                                 </Link>
@@ -246,7 +246,7 @@ const getPaymentStatusColor = (status) => {
                                                 <button
                                                     v-if="booking.status === 'confirmed'"
                                                     @click="updateStatus(booking.id, 'checked_in')"
-                                                    class="text-blue-600 hover:text-blue-900"
+                                                    class="text-brand-red-600 hover:text-red-900"
                                                 >
                                                     Check In
                                                 </button>
@@ -270,7 +270,7 @@ const getPaymentStatusColor = (status) => {
                                 v-for="(link, index) in bookings.links"
                                 :key="index"
                                 :href="link.url"
-                                :class="link.active ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
+                                :class="link.active ? 'bg-brand-red-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
                                 class="px-3 py-2 rounded border"
                                 v-html="link.label"
                             />

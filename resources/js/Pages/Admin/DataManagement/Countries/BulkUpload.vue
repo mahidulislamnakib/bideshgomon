@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Bulk Upload Countries" />
 
@@ -6,7 +6,7 @@
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
                 <div class="mb-6">
-                    <Link :href="route('admin.data.countries.index')" class="text-sm text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 mb-2 inline-block">
+                    <Link :href="route('admin.data.countries.index')" class="text-sm text-brand-red-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
                         ← Back to Countries
                     </Link>
                     <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Bulk Upload Countries</h1>
@@ -14,9 +14,9 @@
                 </div>
 
                 <!-- Instructions -->
-                <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-6">
-                    <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-300 mb-3">📋 Instructions</h3>
-                    <ol class="list-decimal list-inside space-y-2 text-sm text-blue-800 dark:text-blue-300">
+                <div class="bg-red-50 dark:bg-blue-900/20 border border-red-200 dark:border-blue-800 rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold text-red-900 dark:text-blue-300 mb-3">📋 Instructions</h3>
+                    <ol class="list-decimal list-inside space-y-2 text-sm text-brand-red-600 dark:text-blue-300">
                         <li>Download the CSV template below</li>
                         <li>Fill in your country data following the format</li>
                         <li>Upload the completed CSV file</li>
@@ -35,7 +35,7 @@
                         </div>
                         <a
                             :href="route('admin.data.countries.template')"
-                            class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
+                            class="inline-flex items-center px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
                         >
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -74,7 +74,7 @@
                         @dragover.prevent="dragOver = true"
                         @dragleave.prevent="dragOver = false"
                         @drop.prevent="handleDrop"
-                        :class="dragOver ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20' : 'border-gray-300 dark:border-gray-600'"
+                        :class="dragOver ? 'border-brand-red-600 bg-red-50 dark:bg-indigo-900/20' : 'border-gray-300 dark:border-gray-600'"
                         class="border-2 border-dashed rounded-lg p-12 text-center transition-colors"
                     >
                         <input
@@ -94,7 +94,7 @@
                                 <button
                                     type="button"
                                     @click="$refs.fileInput.click()"
-                                    class="text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 font-medium"
+                                    class="text-brand-red-600 hover:text-indigo-700 dark:text-red-400 font-medium"
                                 >
                                     browse
                                 </button>

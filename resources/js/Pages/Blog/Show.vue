@@ -81,7 +81,7 @@
                 <!-- Author Info -->
                 <div class="mt-12 pt-8 border-t">
                     <div class="flex items-center gap-4">
-                        <div class="h-16 w-16 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xl font-bold">
+                        <div class="h-16 w-16 rounded-full bg-brand-red-600 flex items-center justify-center text-white text-xl font-bold">
                             {{ post.author.name.charAt(0) }}
                         </div>
                         <div>
@@ -147,32 +147,4 @@ const formatNumber = (num) => {
 };
 </script>
 
-<style scoped>
-.prose {
-    @apply text-gray-800;
-}
 
-.prose h2 {
-    @apply text-2xl font-bold text-gray-900 mt-8 mb-4;
-}
-
-.prose h3 {
-    @apply text-xl font-bold text-gray-900 mt-6 mb-3;
-}
-
-.prose p {
-    @apply mb-4 leading-relaxed;
-}
-
-.prose ul, .prose ol {
-    @apply ml-6 mb-4;
-}
-
-.prose li {
-    @apply mb-2;
-}
-
-.prose a {
-    @apply text-blue-600 hover:text-blue-800 underline;
-}
-</style>

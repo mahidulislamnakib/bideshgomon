@@ -4,35 +4,22 @@ import { onMounted } from 'vue';
 import { useSettings } from '@/Composables/useSettings';
 import Header from '@/Components/Header.vue';
 import Footer from '@/Components/Footer.vue';
-import RhythmicCard from '@/Components/Rhythmic/RhythmicCard.vue';
-import FlowButton from '@/Components/Rhythmic/FlowButton.vue';
-import AnimatedSection from '@/Components/Rhythmic/AnimatedSection.vue';
-import StatusBadge from '@/Components/Rhythmic/StatusBadge.vue';
 import {
-    SparklesIcon,
     CheckCircleIcon,
-    ArrowRightIcon,
     GlobeAltIcon,
     BriefcaseIcon,
-    AcademicCapIcon,
     DocumentTextIcon,
     UserGroupIcon,
     ShieldCheckIcon,
     ClockIcon,
     CurrencyDollarIcon,
     StarIcon,
-    BuildingOffice2Icon,
     MapPinIcon,
     PaperAirplaneIcon,
-    LanguageIcon,
-    HeartIcon,
-    LightBulbIcon,
-    RocketLaunchIcon,
     TrophyIcon,
 } from '@heroicons/vue/24/outline';
 import {
     CheckBadgeIcon,
-    FireIcon,
 } from '@heroicons/vue/24/solid';
 
 const props = defineProps({
@@ -56,30 +43,22 @@ const features = [
     {
         icon: GlobeAltIcon,
         title: 'Visa Applications',
-        description: 'Apply for visas to 50+ countries with smart form auto-fill and document management.',
-        variant: 'ocean',
-        badge: 'Most Popular',
+        description: 'Apply for visas to 50+ countries with smart form auto-fill',
     },
     {
         icon: BriefcaseIcon,
         title: 'Job Opportunities',
-        description: 'Find and apply for jobs abroad with one-click applications and profile matching.',
-        variant: 'sky',
-        badge: 'High Demand',
+        description: 'Find and apply for jobs abroad with one-click applications',
     },
     {
         icon: PaperAirplaneIcon,
         title: 'Travel Services',
-        description: 'Book flights, hotels, and travel insurance seamlessly in one platform.',
-        variant: 'growth',
-        badge: 'Best Rates',
+        description: 'Book flights, hotels, and travel insurance seamlessly',
     },
     {
         icon: DocumentTextIcon,
         title: 'Document Services',
-        description: 'Generate CVs, translate documents, and manage all your applications efficiently.',
-        variant: 'sunrise',
-        badge: 'Professional',
+        description: 'Generate CVs, translate documents, and manage applications',
     },
 ];
 
@@ -93,10 +72,10 @@ const benefits = [
 ];
 
 const stats = [
-    { value: '50K+', label: 'Happy Users', icon: UserGroupIcon, color: 'text-blue-600' },
-    { value: '195', label: 'Countries', icon: MapPinIcon, color: 'text-blue-600' },
-    { value: '10K+', label: 'Successful Visas', icon: CheckBadgeIcon, color: 'text-green-600' },
-    { value: '98%', label: 'Success Rate', icon: TrophyIcon, color: 'text-orange-600' },
+    { value: '50K+', label: 'Happy Users', icon: UserGroupIcon },
+    { value: '195', label: 'Countries', icon: MapPinIcon },
+    { value: '10K+', label: 'Successful Visas', icon: CheckBadgeIcon },
+    { value: '98%', label: 'Success Rate', icon: TrophyIcon },
 ];
 
 const testimonials = [
@@ -131,350 +110,177 @@ const testimonials = [
         <!-- Header -->
         <Header :can-login="canLogin" :can-register="canRegister" />
 
-        <!-- Hero Section with Rhythmic Flow -->
-        <AnimatedSection
-            variant="ocean"
-            :blobs="true"
-            :animated="true"
-            badge="Your Gateway to Global Opportunities"
-            container="default"
-            class="pt-20 pb-12 sm:pt-24 md:pt-32 sm:pb-16 md:pb-24"
-        >
-            <div class="text-center animate-fade-in-up">
-                <!-- Heading with rhythmic typography -->
-                <h1 class="font-display font-bold text-rhythm mb-rhythm-lg leading-tight text-4xl sm:text-5xl md:text-6xl lg:text-display-xl">
-                    Go Abroad with
-                    <span class="text-ocean-600"> Confidence</span>
+        <!-- Hero Section -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                    Go Abroad with Confidence
                 </h1>
-
-                <p class="text-xl sm:text-2xl text-gray-700 mb-rhythm-2xl max-w-3xl mx-auto text-rhythm">
-                    All-in-one platform for visa applications, job search, travel booking, and document services. 
-                    Simplify your journey abroad with intelligent automation and expert guidance.
+                <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                    All-in-one platform for visa applications, job search, and travel booking
                 </p>
-
-                <!-- CTA Buttons with FlowButton -->
-                <div v-if="homepageWidgets.showHeroSearch" class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-rhythm-md mb-rhythm-2xl">
-                    <Link
-                        v-if="canRegister"
-                        :href="route('register')"
-                    >
-                        <FlowButton variant="sunrise" size="lg" class="group">
-                            <template #iconBefore>
-                                <RocketLaunchIcon class="h-5 w-5 group-hover:rotate-12 transition-transform" />
-                            </template>
-                            Get Started Free
-                            <template #iconAfter>
-                                <ArrowRightIcon class="h-5 w-5" />
-                            </template>
-                        </FlowButton>
+                <div v-if="homepageWidgets.showHeroSearch" class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <Link v-if="canRegister" :href="route('register')" class="w-full sm:w-auto px-8 py-3 bg-emerald-600 text-white text-center rounded-lg hover:bg-emerald-700 font-medium transition-colors">
+                        Get Started Free
                     </Link>
-                    <a href="#features">
-                        <FlowButton variant="outline" size="lg">
-                            <template #iconBefore>
-                                <LightBulbIcon class="h-5 w-5" />
-                            </template>
-                            Learn More
-                        </FlowButton>
+                    <a href="#features" class="w-full sm:w-auto px-8 py-3 border border-gray-300 text-center rounded-lg hover:bg-gray-50 font-medium transition-colors">
+                        Learn More
                     </a>
                 </div>
+            </div>
 
-                <!-- Stats with rhythmic spacing -->
-                <div v-if="homepageWidgets.showStats" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-rhythm-lg max-w-4xl mx-auto">
-                    <div v-for="stat in stats" :key="stat.label" class="text-center group animate-scale-in">
-                        <div class="mb-rhythm-md inline-flex items-center justify-center w-16 h-16 rounded-rhythm-xl bg-white shadow-rhythm group-hover:shadow-rhythm-xl transition-all duration-400 group-hover:scale-110">
-                            <component :is="stat.icon" :class="`h-8 w-8 ${stat.color}`" />
-                        </div>
-                        <div class="text-display-sm font-bold text-gray-900 mb-rhythm-xs">{{ stat.value }}</div>
-                        <div class="text-sm text-gray-600">{{ stat.label }}</div>
-                    </div>
+            <!-- Stats -->
+            <div v-if="homepageWidgets.showStats" class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16">
+                <div v-for="stat in stats" :key="stat.label" class="text-center">
+                    <div class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">{{ stat.value }}</div>
+                    <div class="text-xs md:text-sm text-gray-600">{{ stat.label }}</div>
                 </div>
             </div>
-        </AnimatedSection>
+        </div>
 
-        <!-- Features Section with RhythmicCard -->
-        <AnimatedSection
-            id="features"
-            title="Everything You Need in One Place"
-            subtitle="From visa applications to job searches, we've got all your international needs covered."
-            badge="Core Services"
-            :badgeIcon="SparklesIcon"
-            variant="light"
-            :animated="true"
-        >
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-rhythm-lg">
-                <RhythmicCard
-                    v-for="feature in features"
-                    :key="feature.title"
-                    :title="feature.title"
-                    :description="feature.description"
-                    :badge="feature.badge"
-                    :variant="feature.variant"
-                    size="md"
-                    class="animate-fade-in-up"
-                >
-                    <template #icon>
-                        <component :is="feature.icon" class="h-6 w-6" />
-                    </template>
-                    <template #footer>
-                        <div class="flex items-center text-sm font-semibold transition-colors duration-300"
-                             :class="{
-                                 'text-ocean-600': feature.variant === 'ocean',
-                                 'text-sky-600': feature.variant === 'sky',
-                                 'text-growth-600': feature.variant === 'growth',
-                                 'text-sunrise-600': feature.variant === 'sunrise',
-                             }"
-                        >
-                            Learn more
-                            <ArrowRightIcon class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                        </div>
-                    </template>
-                </RhythmicCard>
-            </div>
-        </AnimatedSection>
-
-        <!-- How It Works Section -->
-        <AnimatedSection
-            title="How It Works"
-            subtitle="Get started in 3 simple steps and take control of your international journey"
-            badge="Simple Process"
-            :badgeIcon="RocketLaunchIcon"
-            variant="light"
-            :pattern="true"
-            :animated="true"
-        >
-            <div class="grid md:grid-cols-3 gap-rhythm-2xl relative">
-                <!-- Connection Lines (Desktop) -->
-                <div class="hidden md:block absolute top-24 left-1/4 right-1/4 h-1 bg-ocean-200 rounded-full"></div>
-                
-                <!-- Step 1 -->
-                <RhythmicCard variant="growth" size="lg" class="relative">
-                    <!-- Step Number Badge -->
-                    <div class="absolute -top-6 left-1/2 -translate-x-1/2">
-                        <div class="w-14 h-14 bg-growth-500 text-white rounded-full flex items-center justify-center text-xl font-bold shadow-rhythm-lg animate-scale-in">
-                            1
-                        </div>
-                    </div>
-                    
-                    <template #icon>
-                        <UserGroupIcon class="h-10 w-10 text-growth-600 mt-rhythm-md" />
-                    </template>
-                    
-                    <h3 class="font-display font-bold text-2xl text-gray-900 mb-rhythm-sm text-center">
-                        Create Your Profile
-                    </h3>
-                    <p class="text-gray-600 text-center text-rhythm">
-                        Fill out your profile once with your personal details, education, work experience, and travel documents. Takes only 5 minutes!
-                    </p>
-                </RhythmicCard>
-
-                <!-- Step 2 -->
-                <RhythmicCard variant="ocean" size="lg" class="relative">
-                    <!-- Step Number Badge -->
-                    <div class="absolute -top-6 left-1/2 -translate-x-1/2">
-                        <div class="w-14 h-14 bg-ocean-500 text-white rounded-full flex items-center justify-center text-xl font-bold shadow-rhythm-lg animate-scale-in" style="animation-delay: 0.2s;">
-                            2
-                        </div>
-                    </div>
-                    
-                    <template #icon>
-                        <BuildingOffice2Icon class="h-10 w-10 text-ocean-600 mt-rhythm-md" />
-                    </template>
-                    
-                    <h3 class="font-display font-bold text-2xl text-gray-900 mb-rhythm-sm text-center">
-                        Choose Your Service
-                    </h3>
-                    <p class="text-gray-600 text-center text-rhythm">
-                        Browse visas, jobs, or travel services. Your profile data automatically fills all forms - no repetitive data entry!
-                    </p>
-                </RhythmicCard>
-
-                <!-- Step 3 -->
-                <RhythmicCard variant="sunrise" size="lg" class="relative">
-                    <!-- Step Number Badge -->
-                    <div class="absolute -top-6 left-1/2 -translate-x-1/2">
-                        <div class="w-14 h-14 bg-sunrise-500 text-white rounded-full flex items-center justify-center text-xl font-bold shadow-rhythm-lg animate-scale-in" style="animation-delay: 0.4s;">
-                            3
-                        </div>
-                    </div>
-                    
-                    <template #icon>
-                        <TrophyIcon class="h-10 w-10 text-sunrise-600 mt-rhythm-md" />
-                    </template>
-                    
-                    <h3 class="font-display font-bold text-2xl text-gray-900 mb-rhythm-sm text-center">
-                        Track & Success
-                    </h3>
-                    <p class="text-gray-600 text-center text-rhythm">
-                        Track all your applications in one dashboard. Get real-time updates and expert support throughout your journey.
-                    </p>
-                </RhythmicCard>
-            </div>
-        </AnimatedSection>
-
-        <!-- Benefits Section -->
-        <AnimatedSection
-            id="about"
-            title="Why Choose Bidesh Gomon?"
-            subtitle="We combine cutting-edge technology with personalized service to make your international journey seamless and stress-free."
-            badge="Why Choose Us"
-            :badgeIcon="LightBulbIcon"
-            variant="sunrise"
-            :animated="true"
-        >
-            <div class="grid lg:grid-cols-2 gap-rhythm-2xl items-center">
-                <!-- Benefits List -->
-                <div class="space-y-rhythm-md animate-fade-in-up">
-                    <div v-for="benefit in benefits" :key="benefit" class="flex items-start group">
-                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-growth-500 flex items-center justify-center mt-0.5 shadow-rhythm group-hover:shadow-rhythm-lg group-hover:scale-110 transition-all duration-400">
-                            <CheckCircleIcon class="h-5 w-5 text-white" />
-                        </div>
-                        <span class="ml-rhythm-md text-lg text-gray-700 text-rhythm group-hover:text-gray-900 transition-colors">{{ benefit }}</span>
-                    </div>
+        <!-- Features Section -->
+        <div id="features" class="bg-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Everything You Need</h2>
+                    <p class="text-base md:text-lg text-gray-600">From visa applications to job searches, we've got you covered</p>
                 </div>
                 
-                <!-- Feature Cards Grid -->
-                <div class="grid grid-cols-2 gap-rhythm-md animate-fade-in-up" style="animation-delay: 0.2s;">
-                    <RhythmicCard variant="growth" size="md" class="text-center">
-                        <template #icon>
-                            <ClockIcon class="h-8 w-8 text-growth-600" />
-                        </template>
-                        <h4 class="text-2xl font-bold text-gray-900 mb-rhythm-xs">Fast</h4>
-                        <p class="text-sm text-gray-600">Quick processing & approvals</p>
-                    </RhythmicCard>
-                    
-                    <RhythmicCard variant="ocean" size="md" class="text-center">
-                        <template #icon>
-                            <ShieldCheckIcon class="h-8 w-8 text-ocean-600" />
-                        </template>
-                        <h4 class="text-2xl font-bold text-gray-900 mb-rhythm-xs">Secure</h4>
-                        <p class="text-sm text-gray-600">Bank-level encryption</p>
-                    </RhythmicCard>
-                    
-                    <RhythmicCard variant="sky" size="md" class="text-center">
-                        <template #icon>
-                            <UserGroupIcon class="h-8 w-8 text-sky-600" />
-                        </template>
-                        <h4 class="text-2xl font-bold text-gray-900 mb-rhythm-xs">Expert</h4>
-                        <p class="text-sm text-gray-600">Professional guidance</p>
-                    </RhythmicCard>
-                    
-                    <RhythmicCard variant="sunrise" size="md" class="text-center">
-                        <template #icon>
-                            <CurrencyDollarIcon class="h-8 w-8 text-sunrise-600" />
-                        </template>
-                        <h4 class="text-2xl font-bold text-gray-900 mb-rhythm-xs">Affordable</h4>
-                        <p class="text-sm text-gray-600">Competitive pricing</p>
-                    </RhythmicCard>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div v-for="feature in features" :key="feature.title" class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow cursor-pointer">
+                        <div class="flex-shrink-0 mb-4 w-8 h-8">
+                            <component :is="feature.icon" class="w-full h-full text-emerald-600" />
+                        </div>
+                        <h3 class="font-semibold text-lg text-gray-900 mb-2">{{ feature.title }}</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">{{ feature.description }}</p>
+                    </div>
                 </div>
             </div>
-        </AnimatedSection>
+        </div>
 
-        <!-- Testimonials Section -->
-        <AnimatedSection
-            v-if="homepageWidgets.showTestimonials"
-            title="Loved by Thousands"
-            subtitle="See what our users have to say about their experience with Bidesh Gomon."
-            badge="Customer Reviews"
-            :badgeIcon="HeartIcon"
-            variant="light"
-            :animated="true"
-        >
-            <div class="grid md:grid-cols-3 gap-rhythm-lg">
-                <RhythmicCard
-                    v-for="testimonial in testimonials"
-                    :key="testimonial.name"
-                    variant="default"
-                    size="md"
-                    class="animate-fade-in-up"
-                >
-                    <!-- Quote Icon -->
-                    <div class="mb-rhythm-md">
-                        <svg class="h-8 w-8 text-growth-200" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                        </svg>
+        <!-- How It Works -->
+        <div class="bg-gray-50 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
+                    <p class="text-base md:text-lg text-gray-600">Get started in 3 simple steps</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl p-8 text-center shadow-sm">
+                        <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">1</div>
+                        <h3 class="font-semibold text-xl text-gray-900 mb-3">Create Profile</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">Fill your profile once with details, education, and documents</p>
                     </div>
                     
-                    <div class="flex items-center mb-rhythm-md">
-                        <img :src="testimonial.image" :alt="testimonial.name" class="w-14 h-14 rounded-full mr-rhythm-md ring-4 ring-growth-100 transition-all" />
-                        <div>
-                            <div class="font-bold text-gray-900">{{ testimonial.name }}</div>
-                            <div class="text-sm text-gray-600">{{ testimonial.role }}</div>
-                        </div>
+                    <div class="bg-white rounded-xl p-8 text-center shadow-sm">
+                        <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">2</div>
+                        <h3 class="font-semibold text-xl text-gray-900 mb-3">Choose Service</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">Browse visas, jobs, or travel. Auto-fill all forms</p>
                     </div>
                     
-                    <div class="flex mb-rhythm-md">
-                        <StarIcon v-for="i in testimonial.rating" :key="i" class="h-5 w-5 text-gold-400 fill-current" />
-                    </div>
-                    
-                    <p class="text-gray-600 text-rhythm italic mb-rhythm-md">"{{ testimonial.content }}"</p>
-                    
-                    <template #footer>
-                        <StatusBadge status="active" size="sm">
-                            <CheckBadgeIcon class="h-4 w-4 mr-1 inline-block" />
-                            Verified User
-                        </StatusBadge>
-                    </template>
-                </RhythmicCard>
-            </div>
-
-            <!-- Trust Indicators -->
-            <template #footer>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-rhythm-lg pt-rhythm-2xl animate-fade-in-up">
-                    <div class="text-center group">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-rhythm-xl shadow-rhythm mb-rhythm-md group-hover:shadow-rhythm-lg group-hover:scale-110 transition-all duration-400">
-                            <FireIcon class="h-8 w-8 text-sunrise-500" />
-                        </div>
-                        <div class="text-display-sm font-bold text-gray-900">4.9/5</div>
-                        <div class="text-sm text-gray-600">Average Rating</div>
-                    </div>
-                    <div class="text-center group">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-rhythm-xl shadow-rhythm mb-rhythm-md group-hover:shadow-rhythm-lg group-hover:scale-110 transition-all duration-400">
-                            <UserGroupIcon class="h-8 w-8 text-ocean-500" />
-                        </div>
-                        <div class="text-display-sm font-bold text-gray-900">50K+</div>
-                        <div class="text-sm text-gray-600">Active Users</div>
-                    </div>
-                    <div class="text-center group">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-rhythm-xl shadow-rhythm mb-rhythm-md group-hover:shadow-rhythm-lg group-hover:scale-110 transition-all duration-400">
-                            <TrophyIcon class="h-8 w-8 text-gold-500" />
-                        </div>
-                        <div class="text-display-sm font-bold text-gray-900">10K+</div>
-                        <div class="text-sm text-gray-600">Success Stories</div>
-                    </div>
-                    <div class="text-center group">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-rhythm-xl shadow-rhythm mb-rhythm-md group-hover:shadow-rhythm-lg group-hover:scale-110 transition-all duration-400">
-                            <ShieldCheckIcon class="h-8 w-8 text-growth-500" />
-                        </div>
-                        <div class="text-display-sm font-bold text-gray-900">100%</div>
-                        <div class="text-sm text-gray-600">Secure Platform</div>
+                    <div class="bg-white rounded-xl p-8 text-center shadow-sm">
+                        <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">3</div>
+                        <h3 class="font-semibold text-xl text-gray-900 mb-3">Track & Success</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">Track applications and get real-time updates</p>
                     </div>
                 </div>
-            </template>
-        </AnimatedSection>
+            </div>
+        </div>
 
-        <!-- CTA Section -->
-        <AnimatedSection
-            id="contact"
-            title="Ready to Start Your Journey?"
-            subtitle="Join thousands of successful applicants who trusted Bidesh Gomon with their international dreams."
-            variant="ocean"
-            :animated="true"
-            container="narrow"
-        >
-            <div class="text-center">
-                <Link v-if="canRegister" :href="route('register')">
-                    <FlowButton variant="outline" size="xl" class="bg-white border-2 border-white hover:bg-white/90 text-ocean-700">
-                        <template #iconBefore>
-                            <RocketLaunchIcon class="h-6 w-6" />
-                        </template>
-                        Create Free Account
-                        <template #iconAfter>
-                            <ArrowRightIcon class="h-6 w-6" />
-                        </template>
-                    </FlowButton>
+        <!-- Why Choose Us -->
+        <div class="bg-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Bidesh Gomon?</h2>
+                    <p class="text-base md:text-lg text-gray-600">We make your international journey seamless</p>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-4">
+                        <div v-for="benefit in benefits" :key="benefit" class="flex items-start gap-3">
+                            <div class="flex-shrink-0 mt-1 w-6 h-6">
+                                <CheckCircleIcon class="w-full h-full text-emerald-600" />
+                            </div>
+                            <span class="text-base text-gray-700">{{ benefit }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white rounded-xl border border-gray-200 p-6 text-center hover:shadow-lg transition-shadow">
+                            <div class="flex-shrink-0 mx-auto mb-3 w-10 h-10">
+                                <ClockIcon class="w-full h-full text-emerald-600" />
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-1">Fast</h4>
+                            <p class="text-xs text-gray-600">Quick processing</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl border border-gray-200 p-6 text-center hover:shadow-lg transition-shadow">
+                            <div class="flex-shrink-0 mx-auto mb-3 w-10 h-10">
+                                <ShieldCheckIcon class="w-full h-full text-emerald-600" />
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-1">Secure</h4>
+                            <p class="text-xs text-gray-600">Bank-level security</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl border border-gray-200 p-6 text-center hover:shadow-lg transition-shadow">
+                            <div class="flex-shrink-0 mx-auto mb-3 w-10 h-10">
+                                <UserGroupIcon class="w-full h-full text-emerald-600" />
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-1">Expert</h4>
+                            <p class="text-xs text-gray-600">Professional guidance</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl border border-gray-200 p-6 text-center hover:shadow-lg transition-shadow">
+                            <div class="flex-shrink-0 mx-auto mb-3 w-10 h-10">
+                                <CurrencyDollarIcon class="w-full h-full text-emerald-600" />
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-1">Affordable</h4>
+                            <p class="text-xs text-gray-600">Best pricing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div v-if="homepageWidgets.showTestimonials" class="bg-gray-50 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Loved by Thousands</h2>
+                    <p class="text-base md:text-lg text-gray-600">See what our users say</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div v-for="testimonial in testimonials" :key="testimonial.name" class="bg-white rounded-xl p-6 shadow-sm">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img :src="testimonial.image" :alt="testimonial.name" class="w-12 h-12 rounded-full flex-shrink-0" />
+                            <div class="min-w-0">
+                                <div class="font-semibold text-gray-900 text-sm">{{ testimonial.name }}</div>
+                                <div class="text-xs text-gray-600">{{ testimonial.role }}</div>
+                            </div>
+                        </div>
+                        <div class="flex mb-3 gap-1">
+                            <div v-for="i in testimonial.rating" :key="i" class="w-4 h-4">
+                                <StarIcon class="w-full h-full text-yellow-400 fill-current" />
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">"{{ testimonial.content }}"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-emerald-600 py-16">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Start Your Journey?</h2>
+                <p class="text-emerald-100 mb-8 text-base md:text-lg">Join thousands who trusted us</p>
+                <Link v-if="canRegister" :href="route('register')" class="inline-block px-8 py-3 bg-white text-emerald-600 rounded-lg hover:bg-gray-50 font-semibold transition-colors">
+                    Create Free Account
                 </Link>
             </div>
-        </AnimatedSection>
+        </div>
 
         <!-- Footer -->
         <Footer />

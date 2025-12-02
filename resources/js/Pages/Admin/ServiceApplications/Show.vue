@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref } from 'vue'
 import { Head, Link, router } from '@inertiajs/vue3'
 import AdminLayout from '@/Layouts/AdminLayout.vue'
@@ -76,7 +76,7 @@ const getStatusIcon = (status) => {
                     <div :class="[
                         'px-4 py-2 rounded-full text-sm font-semibold',
                         getStatusColor(application.status) === 'yellow' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
-                        getStatusColor(application.status) === 'blue' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                        getStatusColor(application.status) === 'blue' ? 'bg-red-100 text-brand-red-600 dark:bg-blue-900 dark:text-blue-200' :
                         getStatusColor(application.status) === 'purple' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200' :
                         getStatusColor(application.status) === 'green' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
                         'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
@@ -169,7 +169,7 @@ const getStatusIcon = (status) => {
                                                 'px-3 py-1 rounded-full text-xs font-semibold',
                                                 quote.status === 'accepted' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
                                                 quote.status === 'rejected' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' :
-                                                'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                                                'bg-red-100 text-brand-red-600 dark:bg-blue-900 dark:text-blue-200'
                                             ]">
                                                 {{ quote.status }}
                                             </span>
@@ -205,7 +205,7 @@ const getStatusIcon = (status) => {
                                     v-if="application.status === 'pending'"
                                     @click="updateStatus('in_progress')"
                                     :disabled="isUpdating"
-                                    class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition"
+                                    class="w-full px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 transition"
                                 >
                                     Mark In Progress
                                 </button>
@@ -251,8 +251,8 @@ const getStatusIcon = (status) => {
                                     
                                     <div v-if="application.quoted_at" class="flex gap-3">
                                         <div class="flex-shrink-0">
-                                            <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                                                <CurrencyDollarIcon class="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                                            <div class="w-8 h-8 rounded-full bg-red-100 dark:bg-blue-900 flex items-center justify-center">
+                                                <CurrencyDollarIcon class="w-5 h-5 text-brand-red-600 dark:text-blue-400" />
                                             </div>
                                         </div>
                                         <div>

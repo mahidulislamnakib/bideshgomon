@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref } from 'vue'
 import { Head, Link, router, useForm } from '@inertiajs/vue3'
 import AdminLayout from '@/Layouts/AdminLayout.vue'
@@ -41,7 +41,7 @@ const deleteTicket = (ticketId) => {
 
 const getStatusBadgeClass = (status) => {
     const classes = {
-        open: 'bg-blue-100 text-blue-800',
+        open: 'bg-red-100 text-brand-red-600',
         in_progress: 'bg-yellow-100 text-yellow-800',
         resolved: 'bg-green-100 text-green-800',
         closed: 'bg-gray-100 text-gray-800',
@@ -52,7 +52,7 @@ const getStatusBadgeClass = (status) => {
 const getPriorityBadgeClass = (priority) => {
     const classes = {
         low: 'bg-gray-100 text-gray-800',
-        medium: 'bg-blue-100 text-blue-800',
+        medium: 'bg-red-100 text-brand-red-600',
         high: 'bg-orange-100 text-orange-800',
         urgent: 'bg-red-100 text-red-800',
     }
@@ -76,7 +76,7 @@ const getPriorityBadgeClass = (priority) => {
                     <div class="mt-4 flex md:mt-0 md:ml-4">
                         <Link
                             :href="route('admin.support-tickets.create')"
-                            class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700"
+                            class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
                         >
                             <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -90,8 +90,8 @@ const getPriorityBadgeClass = (priority) => {
                 <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-6">
                     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-5">
                         <div class="flex items-center">
-                            <div class="flex-shrink-0 p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                                <svg class="h-6 w-6 text-blue-600 dark:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="flex-shrink-0 p-3 bg-red-100 dark:bg-blue-900 rounded-lg">
+                                <svg class="h-6 w-6 text-brand-red-600 dark:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                             </div>
@@ -154,7 +154,7 @@ const getPriorityBadgeClass = (priority) => {
                                 v-model="searchForm.search"
                                 type="text"
                                 placeholder="Search tickets..."
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-brand-red-600 focus:ring-brand-red-600"
                             />
                         </div>
 
@@ -162,7 +162,7 @@ const getPriorityBadgeClass = (priority) => {
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Status</label>
                             <select
                                 v-model="searchForm.status"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Statuses</option>
                                 <option value="open">Open</option>
@@ -176,7 +176,7 @@ const getPriorityBadgeClass = (priority) => {
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Priority</label>
                             <select
                                 v-model="searchForm.priority"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Priorities</option>
                                 <option value="low">Low</option>
@@ -190,7 +190,7 @@ const getPriorityBadgeClass = (priority) => {
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
                             <select
                                 v-model="searchForm.category"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Categories</option>
                                 <option value="technical">Technical</option>
@@ -204,7 +204,7 @@ const getPriorityBadgeClass = (priority) => {
                         <div class="flex items-end gap-3">
                             <button
                                 type="submit"
-                                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                                class="px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                             >
                                 Filter
                             </button>
@@ -264,13 +264,13 @@ const getPriorityBadgeClass = (priority) => {
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <Link
                                             :href="route('admin.support-tickets.show', ticket.id)"
-                                            class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-3"
+                                            class="text-brand-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-indigo-300 mr-3"
                                         >
                                             View
                                         </Link>
                                         <Link
                                             :href="route('admin.support-tickets.edit', ticket.id)"
-                                            class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 mr-3"
+                                            class="text-brand-red-600 hover:text-red-900 dark:text-blue-400 dark:hover:text-blue-300 mr-3"
                                         >
                                             Edit
                                         </Link>

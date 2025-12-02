@@ -211,6 +211,14 @@ class UserSecurityInformationController extends Controller
     }
 
     /**
+     * Update the user's security information (alias to store for PUT requests)
+     */
+    public function update(Request $request)
+    {
+        return $this->store($request);
+    }
+
+    /**
      * Delete the user's security information
      */
     public function destroy(Request $request)

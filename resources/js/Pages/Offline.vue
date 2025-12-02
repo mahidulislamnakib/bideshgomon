@@ -37,7 +37,7 @@
         <!-- Info -->
         <div class="space-y-4 mb-8">
           <div class="flex items-start space-x-3">
-            <svg class="w-5 h-5 text-indigo-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 text-brand-red-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             <p class="text-sm text-gray-600">
@@ -46,7 +46,7 @@
           </div>
 
           <div class="flex items-start space-x-3">
-            <svg class="w-5 h-5 text-indigo-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 text-brand-red-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             <p class="text-sm text-gray-600">
@@ -55,7 +55,7 @@
           </div>
 
           <div class="flex items-start space-x-3">
-            <svg class="w-5 h-5 text-indigo-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 text-brand-red-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             <p class="text-sm text-gray-600">
@@ -68,7 +68,7 @@
         <button
           @click="retryConnection"
           :disabled="isRetrying"
-          class="w-full flex items-center justify-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          class="w-full flex items-center justify-center px-6 py-3 bg-brand-red-600 text-white font-medium rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <svg v-if="isRetrying" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

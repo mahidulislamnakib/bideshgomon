@@ -12,14 +12,14 @@
                 @keydown.esc="closeSuggestions"
                 type="text"
                 :placeholder="placeholder"
-                class="block w-full px-4 pr-32 sm:pr-36 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm truncate"
+                class="block w-full px-4 pr-32 sm:pr-36 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:ring-2 focus:ring-brand-red-600 focus:border-transparent transition-all text-sm truncate"
             />
             <div class="absolute inset-y-0 right-1 flex items-center gap-1">
                 <!-- Filter Button -->
                 <button
                     @click="toggleFilters"
                     type="button"
-                    class="p-2 text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-200 flex-shrink-0"
+                    class="p-2 text-gray-500 hover:text-brand-red-600 dark:text-gray-400 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-200 flex-shrink-0"
                     title="Advanced Filters"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -31,7 +31,7 @@
                     @click="performSearch"
                     type="button"
                     :disabled="!searchQuery || searching"
-                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white text-xs sm:text-sm font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex-shrink-0"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand-red-600 hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white text-xs sm:text-sm font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex-shrink-0"
                 >
                     <svg v-if="!searching" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

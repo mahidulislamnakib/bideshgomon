@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <Head title="Create Visa Requirement" />
 
     <AdminLayout>
@@ -28,18 +28,18 @@
                     <form @submit.prevent="submitForm">
                         <div class="p-6 space-y-6">
                             <!-- Document Hub Notice -->
-                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                            <div class="bg-red-50 border-l-4 border-brand-red-600 p-4 mb-6">
                                 <div class="flex items-start">
                                     <div class="flex-shrink-0">
-                                        <svg class="h-5 w-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <svg class="h-5 w-5 text-brand-red-600" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
                                         </svg>
                                     </div>
                                     <div class="ml-3">
-                                        <h3 class="text-sm font-semibold text-blue-800">Using Legacy Document System</h3>
+                                        <h3 class="text-sm font-semibold text-brand-red-600">Using Legacy Document System</h3>
                                         <p class="mt-1 text-sm text-blue-700">
                                             This form uses the old text-based document system. For new requirements, consider using the 
-                                            <Link :href="route('admin.document-assignments.index')" class="font-semibold underline hover:text-blue-900">Document Hub System</Link> 
+                                            <Link :href="route('admin.document-assignments.index')" class="font-semibold underline hover:text-red-900">Document Hub System</Link> 
                                             for better management and standardization with ICAO, ISO, WHO, and UN standards.
                                         </p>
                                     </div>
@@ -56,7 +56,7 @@
                                             v-model="form.country_id"
                                             @change="updateCountryInfo"
                                             required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         >
                                             <option value="">Select a country</option>
                                             <option v-for="country in props.countries" :key="country.id" :value="country.id">
@@ -72,7 +72,7 @@
                                         <select 
                                             v-model="form.visa_type"
                                             required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         >
                                             <option value="">Select Type</option>
                                             <option value="tourist">Tourist Visa</option>
@@ -91,7 +91,7 @@
                                         <input 
                                             v-model="form.visa_category"
                                             type="text"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="e.g., B1/B2"
                                         />
                                     </div>
@@ -111,7 +111,7 @@
                                             v-model="form.required_documents_text"
                                             required
                                             rows="8"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 font-mono text-sm"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 font-mono text-sm"
                                             placeholder="Valid passport with Old Passport if available (minimum 6 months validity)&#10;Recent passport-size photograph (white background, without glasses)&#10;Recent bank statement (last 6 months) and bank solvency certificate&#10;TIN Certificate and Income Tax Certificate&#10;Tour itinerary&#10;Air-ticket booking&#10;Hotel booking confirmation&#10;Cover letter to the visa officer"
                                         />
                                         <p v-if="form.errors.required_documents" class="mt-1 text-sm text-red-600">{{ form.errors.required_documents }}</p>
@@ -128,7 +128,7 @@
                                             <label class="block text-sm font-medium text-gray-700 mb-2">Add Documents For:</label>
                                             <select 
                                                 v-model="selectedProfessionToAdd"
-                                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                                 @change="addProfessionSection"
                                             >
                                                 <option value="">Select a profession...</option>
@@ -157,7 +157,7 @@
                                             <textarea 
                                                 v-model="item.documents"
                                                 rows="5"
-                                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 font-mono text-sm"
+                                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 font-mono text-sm"
                                                 :placeholder="`Enter ${item.profession} documents (one per line):\nNOC from current employer\nEmployee ID card photo\nSalary certificate`"
                                             />
                                         </div>
@@ -170,7 +170,7 @@
                                         <textarea 
                                             v-model="form.eligibility_criteria"
                                             rows="3"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="Enter eligibility criteria..."
                                         />
                                     </div>
@@ -180,7 +180,7 @@
                                         <textarea 
                                             v-model="form.important_notes"
                                             rows="4"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="Special notes for all applicants...&#10;Example: If the applicant has visited this country previously, provide visa copy"
                                         />
                                     </div>
@@ -197,7 +197,7 @@
                                             v-model.number="form.min_bank_balance"
                                             type="number"
                                             min="0"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="e.g., 500000"
                                         />
                                     </div>
@@ -209,7 +209,7 @@
                                             type="number"
                                             min="1"
                                             max="12"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="e.g., 6"
                                         />
                                     </div>
@@ -219,7 +219,7 @@
                                         <textarea 
                                             v-model="form.financial_requirements"
                                             rows="3"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="Enter financial requirements..."
                                         />
                                     </div>
@@ -236,7 +236,7 @@
                                             v-model.number="form.government_fee"
                                             type="number"
                                             min="0"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="e.g., 16000"
                                         />
                                     </div>
@@ -247,7 +247,7 @@
                                             v-model.number="form.service_fee"
                                             type="number"
                                             min="0"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="e.g., 15000"
                                         />
                                     </div>
@@ -258,7 +258,7 @@
                                             v-model.number="form.processing_fee_standard"
                                             type="number"
                                             min="0"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="e.g., 5000"
                                         />
                                     </div>
@@ -275,7 +275,7 @@
                                             v-model.number="form.processing_days_standard"
                                             type="number"
                                             min="1"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="e.g., 15"
                                         />
                                     </div>
@@ -285,7 +285,7 @@
                                         <input 
                                             v-model="form.processing_time_info"
                                             type="text"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="e.g., 2-4 weeks"
                                         />
                                     </div>
@@ -300,7 +300,7 @@
                                         <input 
                                             v-model="form.interview_required"
                                             type="checkbox"
-                                            class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                            class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <label class="ml-2 text-sm font-medium text-gray-700">Interview Required</label>
                                     </div>
@@ -309,7 +309,7 @@
                                         <input 
                                             v-model="form.biometrics_required"
                                             type="checkbox"
-                                            class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                            class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <label class="ml-2 text-sm font-medium text-gray-700">Biometrics Required</label>
                                     </div>
@@ -318,7 +318,7 @@
                                         <input 
                                             v-model="form.is_active"
                                             type="checkbox"
-                                            class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                            class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <label class="ml-2 text-sm font-medium text-gray-700">Active</label>
                                     </div>
@@ -337,7 +337,7 @@
                             <button 
                                 type="submit"
                                 :disabled="form.processing"
-                                class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition disabled:opacity-50"
+                                class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 transition disabled:opacity-50"
                             >
                                 {{ form.processing ? 'Creating...' : 'Create Requirement' }}
                             </button>

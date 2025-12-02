@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ref, watch } from 'vue';
@@ -92,7 +92,7 @@ const submit = () => {
                                         v-model="form.title"
                                         type="text"
                                         required
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                         placeholder="e.g., Student Visa Application Workshop"
                                     />
                                     <div v-if="form.errors.title" class="text-red-600 text-sm mt-1">{{ form.errors.title }}</div>
@@ -103,7 +103,7 @@ const submit = () => {
                                     <input
                                         v-model="form.slug"
                                         type="text"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 font-mono text-sm"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 font-mono text-sm"
                                         placeholder="auto-generated from title"
                                     />
                                     <p class="text-xs text-gray-500 mt-1">Leave empty to auto-generate from title</p>
@@ -115,7 +115,7 @@ const submit = () => {
                                     <select
                                         v-model="form.event_type"
                                         required
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                     >
                                         <option value="seminar">Seminar</option>
                                         <option value="workshop">Workshop</option>
@@ -132,7 +132,7 @@ const submit = () => {
                                         v-model="form.description"
                                         required
                                         rows="5"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                         placeholder="Provide a detailed description of the event..."
                                     ></textarea>
                                     <div v-if="form.errors.description" class="text-red-600 text-sm mt-1">{{ form.errors.description }}</div>
@@ -151,7 +151,7 @@ const submit = () => {
                                         type="date"
                                         required
                                         :min="new Date().toISOString().split('T')[0]"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                     />
                                     <div v-if="form.errors.event_date" class="text-red-600 text-sm mt-1">{{ form.errors.event_date }}</div>
                                 </div>
@@ -162,7 +162,7 @@ const submit = () => {
                                         v-model="form.event_time"
                                         type="time"
                                         required
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                     />
                                     <div v-if="form.errors.event_time" class="text-red-600 text-sm mt-1">{{ form.errors.event_time }}</div>
                                 </div>
@@ -173,7 +173,7 @@ const submit = () => {
                                         v-model="form.end_date"
                                         type="date"
                                         :min="form.event_date || new Date().toISOString().split('T')[0]"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                     />
                                     <p class="text-xs text-gray-500 mt-1">For multi-day events</p>
                                     <div v-if="form.errors.end_date" class="text-red-600 text-sm mt-1">{{ form.errors.end_date }}</div>
@@ -184,7 +184,7 @@ const submit = () => {
                                     <input
                                         v-model="form.end_time"
                                         type="time"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                     />
                                     <div v-if="form.errors.end_time" class="text-red-600 text-sm mt-1">{{ form.errors.end_time }}</div>
                                 </div>
@@ -195,7 +195,7 @@ const submit = () => {
                                         v-model="form.registration_deadline"
                                         type="date"
                                         :max="form.event_date"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                     />
                                     <p class="text-xs text-gray-500 mt-1">Last date to register</p>
                                     <div v-if="form.errors.registration_deadline" class="text-red-600 text-sm mt-1">{{ form.errors.registration_deadline }}</div>
@@ -212,7 +212,7 @@ const submit = () => {
                                         v-model="form.is_online"
                                         type="checkbox"
                                         id="is_online"
-                                        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                        class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded"
                                     />
                                     <label for="is_online" class="ml-2 text-sm font-medium text-gray-700">
                                         This is an online event
@@ -224,7 +224,7 @@ const submit = () => {
                                     <input
                                         v-model="form.meeting_link"
                                         type="url"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                         placeholder="https://zoom.us/j/..."
                                     />
                                     <div v-if="form.errors.meeting_link" class="text-red-600 text-sm mt-1">{{ form.errors.meeting_link }}</div>
@@ -235,7 +235,7 @@ const submit = () => {
                                     <input
                                         v-model="form.location"
                                         type="text"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                         placeholder="e.g., Hotel Radisson, Dhaka"
                                     />
                                     <div v-if="form.errors.location" class="text-red-600 text-sm mt-1">{{ form.errors.location }}</div>
@@ -252,7 +252,7 @@ const submit = () => {
                                     type="file"
                                     accept="image/*"
                                     @change="handleImageChange"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 />
                                 <p class="text-xs text-gray-500 mt-1">Max size: 2MB (JPG, PNG, WebP)</p>
                                 <div v-if="form.errors.image" class="text-red-600 text-sm mt-1">{{ form.errors.image }}</div>
@@ -285,7 +285,7 @@ const submit = () => {
                                         v-model="form.max_participants"
                                         type="number"
                                         min="1"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                         placeholder="Leave empty for unlimited"
                                     />
                                     <p class="text-xs text-gray-500 mt-1">Maximum number of people who can register</p>
@@ -298,7 +298,7 @@ const submit = () => {
                                             v-model="form.is_featured"
                                             type="checkbox"
                                             id="is_featured"
-                                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                            class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded"
                                         />
                                         <label for="is_featured" class="ml-2 text-sm font-medium text-gray-700">
                                             Featured Event
@@ -310,7 +310,7 @@ const submit = () => {
                                             v-model="form.is_published"
                                             type="checkbox"
                                             id="is_published"
-                                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                            class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded"
                                         />
                                         <label for="is_published" class="ml-2 text-sm font-medium text-gray-700">
                                             Publish Immediately
@@ -331,7 +331,7 @@ const submit = () => {
                             <button
                                 type="submit"
                                 :disabled="form.processing"
-                                class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                                class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <span v-if="form.processing">Creating...</span>
                                 <span v-else>Create Event</span>

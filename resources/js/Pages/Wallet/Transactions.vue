@@ -49,7 +49,7 @@ const getTransactionSign = (transactionType) => {
         <template #header>
             <div class="flex justify-between items-center">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">Transaction History</h2>
-                <Link :href="route('wallet.index')" class="text-sm text-indigo-600 hover:text-indigo-800">
+                <Link :href="route('wallet.index')" class="text-sm text-brand-red-600 hover:text-indigo-800">
                     ← Back to Wallet
                 </Link>
             </div>
@@ -67,7 +67,7 @@ const getTransactionSign = (transactionType) => {
                                 v-model="search"
                                 type="text" 
                                 placeholder="Search description..."
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                                 @keyup.enter="filterTransactions"
                             />
                         </div>
@@ -75,7 +75,7 @@ const getTransactionSign = (transactionType) => {
                             <label class="block text-sm font-medium text-gray-700 mb-1">Type</label>
                             <select 
                                 v-model="type"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                                 @change="filterTransactions"
                             >
                                 <option value="">All Types</option>

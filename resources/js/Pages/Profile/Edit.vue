@@ -77,11 +77,13 @@ const props = defineProps({
     phoneNumbers: { type: Array, default: () => [] },
     passports: { type: Array, default: () => [] },
     visaHistory: { type: Array, default: () => [] },
+    userDocuments: { type: Array, default: () => [] },
     divisions: { type: Array, default: () => [] },
     countries: { type: Array, default: () => [] },
     degrees: { type: Array, default: () => [] },
     serviceCategories: { type: Array, default: () => [] },
     currencies: { type: Array, default: () => [] },
+    profileCompletion: { type: Object, default: () => ({ overall: 0, sections: {} }) },
     section: String, // Section from URL query parameter
 });
 
@@ -125,10 +127,35 @@ watch(() => props.section, (newSection) => {
     }
 });
 
-// Profile completion tracking
-const userRef = computed(() => props.user);
-const userProfileRef = computed(() => props.userProfile);
-const { completion, getCompletionColor, getCompletionBgColor } = useProfileCompletion(userRef, userProfileRef);
+// Profile completion tracking - use backend calculation for accuracy
+const completion = computed(() => {
+    const backendCompletion = props.profileCompletion?.overall || 0;
+    const sections = props.profileCompletion?.sections || {};
+    
+    // Count completed sections (those marked as completed in backend)
+    const completedCount = Object.values(sections).filter(s => s.completed).length;
+    const totalSections = Object.keys(sections).length;
+    
+    return {
+        percentage: backendCompletion,
+        completed: completedCount,
+        total: totalSections,
+        sections: sections,
+        isComplete: backendCompletion === 100,
+    };
+});
+
+const getCompletionColor = (percentage) => {
+    if (percentage >= 80) return 'text-green-600';
+    if (percentage >= 50) return 'text-yellow-600';
+    return 'text-orange-600';
+};
+
+const getCompletionBgColor = (percentage) => {
+    if (percentage >= 80) return 'bg-green-600';
+    if (percentage >= 50) return 'bg-yellow-600';
+    return 'bg-orange-600';
+};
 
 // Calculate completion per section for dynamic card colors
 const getSectionCompletion = (sectionId) => {
@@ -208,9 +235,7 @@ const getSectionCompletion = (sectionId) => {
             return props.travelHistory?.length > 0 ? 100 : 0;
         },
         'documents': () => {
-            // Documents section now tracks uploaded files, not passport fields
-            // Passport fields moved to dedicated Passport Management section
-            return 0; // TODO: implement document upload tracking
+            return props.userDocuments?.length > 0 ? 100 : 0;
         },
         'family': () => {
             return props.familyMembers?.length > 0 ? 100 : 0;
@@ -519,7 +544,7 @@ const backToCards = () => {
                 <button
                     v-if="activeSection"
                     @click="backToCards"
-                    class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                    class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
                 >
                     ← Back to Sections
                 </button>
@@ -535,7 +560,7 @@ const backToCards = () => {
                 >
                     <button
                         @click="backToCards"
-                        class="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-semibold text-base active:scale-95 transition-transform"
+                        class="flex items-center gap-2 text-brand-red-600 dark:text-indigo-400 font-semibold text-base active:scale-95 transition-transform"
                     >
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -564,7 +589,7 @@ const backToCards = () => {
                         </div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-3 relative overflow-hidden">
                             <div
-                                class="h-3 rounded-full transition-all duration-500 bg-indigo-600 relative overflow-hidden"
+                                class="h-3 rounded-full transition-all duration-500 bg-brand-red-600 relative overflow-hidden"
                                 :style="{ width: completion.percentage + '%' }"
                             >
                                 <div class="absolute inset-0 bg-white/20 animate-shimmer"></div>
@@ -572,9 +597,9 @@ const backToCards = () => {
                         </div>
                         <div class="flex items-start text-sm">
                             <span class="text-gray-600 dark:text-gray-400 leading-snug">
-                                {{ completion.completed }} of {{ completion.total }} essential fields completed
+                                {{ completion.completed }} of {{ completion.total }} profile sections completed
                                 <span v-if="!completion.isComplete" class="block text-gray-500 dark:text-gray-500 mt-1">
-                                    Complete your profile to unlock all features
+                                    Complete all sections to unlock full features
                                 </span>
                             </span>
                         </div>
@@ -1131,6 +1156,7 @@ const backToCards = () => {
                         <DocumentsManagement
                             v-if="activeSection === 'documents'"
                             :user-profile="userProfile"
+                            :user-documents="userDocuments"
                         />
 
                         <!-- Passport Management -->
@@ -1143,6 +1169,8 @@ const backToCards = () => {
                         <VisaHistoryManagement
                             v-if="activeSection === 'visa-history'"
                             :user-profile="userProfile"
+                            :visa-history="visaHistory"
+                            :passports="passports"
                         />
 
                         <!-- Security Section -->
@@ -1164,7 +1192,7 @@ const backToCards = () => {
                                     <div class="mt-6">
                                         <a
                                             :href="route('profile.public.settings')"
-                                            class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                                            class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
                                         >
                                             Manage Public Profile
                                         </a>
@@ -1201,7 +1229,7 @@ const backToCards = () => {
                     <div class="border-t border-gray-200 dark:border-gray-700 px-4 py-4 bg-gray-50 dark:bg-gray-900/50 md:hidden">
                         <button
                             @click="backToCards"
-                            class="w-full inline-flex items-center justify-center px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg font-semibold text-sm text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                            class="w-full inline-flex items-center justify-center px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg font-semibold text-sm text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
                         >
                             ← Back to All Sections
                         </button>
@@ -1211,55 +1239,4 @@ const backToCards = () => {
         </div>
     </AuthenticatedLayout>
 </template>
-
-<style scoped>
-/* Mobile-specific improvements */
-@media (max-width: 640px) {
-    /* Ensure modals don't overflow on mobile */
-    :deep(.max-w-2xl),
-    :deep(.max-w-3xl),
-    :deep(.max-w-xl) {
-        max-width: 100% !important;
-        margin: 0 !important;
-    }
-    
-    /* Better modal padding on mobile */
-    :deep(.modal-content) {
-        padding: 1rem !important;
-    }
-    
-    /* Stack form grids on mobile */
-    :deep(.grid.grid-cols-2),
-    :deep(.grid.grid-cols-3),
-    :deep(.md\\:grid-cols-2),
-    :deep(.md\\:grid-cols-3) {
-        grid-template-columns: 1fr !important;
-    }
-    
-    /* Better button sizing on mobile */
-    :deep(button),
-    :deep(.btn) {
-        min-height: 44px;
-        font-size: 0.875rem;
-    }
-    
-    /* Better input sizing */
-    :deep(input),
-    :deep(textarea),
-    :deep(select) {
-        font-size: 16px !important; /* Prevents zoom on iOS */
-    }
-}
-
-/* Improve section card spacing */
-:deep(.space-y-4 > *) {
-    margin-top: 1rem;
-}
-
-@media (min-width: 768px) {
-    :deep(.space-y-4 > *) {
-        margin-top: 1rem;
-    }
-}
-</style>
 

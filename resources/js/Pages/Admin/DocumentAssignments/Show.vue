@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref, computed } from 'vue';
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -96,7 +96,7 @@ const getRequirementsByType = (visaType, profession = null) => {
                     </div>
                     <button
                         @click="openAssignModal"
-                        class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700"
+                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
                     >
                         <PlusIcon class="w-4 h-4 mr-2" />
                         Assign Documents
@@ -114,7 +114,7 @@ const getRequirementsByType = (visaType, profession = null) => {
                                 :class="[
                                     'px-6 py-3 text-sm font-medium border-b-2 whitespace-nowrap',
                                     selectedVisaType === visaType
-                                        ? 'border-indigo-500 text-indigo-600'
+                                        ? 'border-brand-red-600 text-brand-red-600'
                                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                                 ]"
                             >
@@ -138,7 +138,7 @@ const getRequirementsByType = (visaType, profession = null) => {
                                         <div class="flex-1">
                                             <div class="font-medium text-gray-900">{{ req.document.document_name }}</div>
                                             <div class="text-sm text-gray-600 mt-1">
-                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-brand-red-600">
                                                     {{ req.document.category.name }}
                                                 </span>
                                                 <span v-if="req.document.international_standard" class="ml-2 text-gray-500 font-mono text-xs">
@@ -180,10 +180,10 @@ const getRequirementsByType = (visaType, profession = null) => {
                                 <div
                                     v-for="req in getRequirementsByType(selectedVisaType, profession)"
                                     :key="req.id"
-                                    class="flex items-center justify-between p-4 bg-indigo-50 rounded-lg"
+                                    class="flex items-center justify-between p-4 bg-red-50 rounded-lg"
                                 >
                                     <div class="flex items-center flex-1">
-                                        <DocumentTextIcon class="w-5 h-5 text-indigo-400 mr-3" />
+                                        <DocumentTextIcon class="w-5 h-5 text-red-400 mr-3" />
                                         <div class="flex-1">
                                             <div class="font-medium text-gray-900">{{ req.document.document_name }}</div>
                                             <div class="text-sm text-gray-600 mt-1">
@@ -266,7 +266,7 @@ const getRequirementsByType = (visaType, profession = null) => {
                                                 :value="doc.id"
                                                 :checked="selectedDocuments.includes(doc.id)"
                                                 @change="toggleDocument(doc.id)"
-                                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                             />
                                             <div class="ml-3 flex-1">
                                                 <div class="font-medium text-gray-900">{{ doc.document_name }}</div>
@@ -287,7 +287,7 @@ const getRequirementsByType = (visaType, profession = null) => {
                                 <button
                                     @click="bulkAssign"
                                     :disabled="selectedDocuments.length === 0 || form.processing"
-                                    class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-50"
+                                    class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50"
                                 >
                                     Assign {{ selectedDocuments.length }} Documents
                                 </button>

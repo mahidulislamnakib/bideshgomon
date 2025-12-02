@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <Head title="Edit Visa Requirement" />
 
     <AdminLayout>
@@ -45,7 +45,7 @@
                                             v-model="form.country"
                                             type="text"
                                             required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <p v-if="form.errors.country" class="mt-1 text-sm text-red-600">{{ form.errors.country }}</p>
                                     </div>
@@ -57,7 +57,7 @@
                                             type="text"
                                             required
                                             maxlength="3"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <p v-if="form.errors.country_code" class="mt-1 text-sm text-red-600">{{ form.errors.country_code }}</p>
                                     </div>
@@ -67,7 +67,7 @@
                                         <select 
                                             v-model="form.visa_type"
                                             required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         >
                                             <option value="tourist">Tourist Visa</option>
                                             <option value="business">Business Visa</option>
@@ -85,7 +85,7 @@
                                         <input 
                                             v-model="form.visa_category"
                                             type="text"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                             v-model="form.general_requirements"
                                             required
                                             rows="4"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <p v-if="form.errors.general_requirements" class="mt-1 text-sm text-red-600">{{ form.errors.general_requirements }}</p>
                                     </div>
@@ -111,7 +111,7 @@
                                         <textarea 
                                             v-model="form.eligibility_criteria"
                                             rows="3"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                     </div>
 
@@ -120,7 +120,7 @@
                                         <textarea 
                                             v-model="form.important_notes"
                                             rows="3"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@
                                             v-model.number="form.min_bank_balance"
                                             type="number"
                                             min="0"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                     </div>
 
@@ -147,7 +147,7 @@
                                             type="number"
                                             min="1"
                                             max="12"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                     </div>
 
@@ -156,7 +156,7 @@
                                         <textarea 
                                             v-model="form.financial_requirements"
                                             rows="3"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                     </div>
                                 </div>
@@ -172,7 +172,7 @@
                                             v-model.number="form.government_fee"
                                             type="number"
                                             min="0"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                     </div>
 
@@ -182,7 +182,7 @@
                                             v-model.number="form.service_fee"
                                             type="number"
                                             min="0"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                     </div>
 
@@ -192,7 +192,7 @@
                                             v-model.number="form.processing_fee_standard"
                                             type="number"
                                             min="0"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                     </div>
                                 </div>
@@ -208,7 +208,7 @@
                                             v-model.number="form.processing_days_standard"
                                             type="number"
                                             min="1"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                     </div>
 
@@ -217,7 +217,7 @@
                                         <input 
                                             v-model="form.processing_time_info"
                                             type="text"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                     </div>
                                 </div>
@@ -231,7 +231,7 @@
                                         <input 
                                             v-model="form.interview_required"
                                             type="checkbox"
-                                            class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                            class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <label class="ml-2 text-sm font-medium text-gray-700">Interview Required</label>
                                     </div>
@@ -240,7 +240,7 @@
                                         <input 
                                             v-model="form.biometrics_required"
                                             type="checkbox"
-                                            class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                            class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <label class="ml-2 text-sm font-medium text-gray-700">Biometrics Required</label>
                                     </div>
@@ -249,7 +249,7 @@
                                         <input 
                                             v-model="form.is_active"
                                             type="checkbox"
-                                            class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                            class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <label class="ml-2 text-sm font-medium text-gray-700">Active</label>
                                     </div>
@@ -276,7 +276,7 @@
                                 <button 
                                     type="submit"
                                     :disabled="form.processing"
-                                    class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition disabled:opacity-50"
+                                    class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 transition disabled:opacity-50"
                                 >
                                     {{ form.processing ? 'Updating...' : 'Update Requirement' }}
                                 </button>

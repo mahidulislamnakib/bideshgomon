@@ -246,7 +246,7 @@
                                 v-model="selectedFields"
                                 type="checkbox"
                                 :value="key"
-                                class="mt-1 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                class="mt-1 rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                             />
                             <div class="flex-1">
                                 <p class="font-medium text-gray-900 capitalize">{{ (key || '').replace(/_/g, ' ') }}</p>
@@ -266,7 +266,7 @@
                         <button
                             type="submit"
                             :disabled="selectedFields.length === 0 || applyForm.processing"
-                            class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            class="px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                         >
                             {{ applyForm.processing ? 'Applying...' : `Apply ${selectedFields.length} Field${selectedFields.length !== 1 ? 's' : ''}` }}
                         </button>
@@ -378,15 +378,8 @@ const getStatusColor = (status) => {
     return colors[status] || colors.pending;
 };
 
-const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    });
-};
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
+const { formatDate } = useBangladeshFormat();
 
 const formatFileSize = (bytes) => {
     if (bytes < 1024) return bytes + ' B';

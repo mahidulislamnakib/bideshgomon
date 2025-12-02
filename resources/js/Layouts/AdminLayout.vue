@@ -37,6 +37,7 @@ import {
   GiftIcon,
   BanknotesIcon,
   RectangleStackIcon,
+  CircleStackIcon,
   TableCellsIcon,
   TagIcon,
   EnvelopeIcon,
@@ -431,6 +432,14 @@ const navigation = [
 
   // ========== DATA MANAGEMENT ==========
   {
+    name: 'Data Management',
+    href: route('admin.data.index'),
+    icon: CircleStackIcon,
+    current: route().current('admin.data.index'),
+    section: 'data',
+    description: 'Central dashboard',
+  },
+  {
     name: 'Countries',
     href: route('admin.data.countries.index'),
     icon: GlobeAltIcon,
@@ -533,6 +542,46 @@ const navigation = [
     current: route().current('admin.data.blog-tags.*'),
     section: 'data',
     description: 'Blog keywords',
+  },
+  {
+    name: 'Bank Names',
+    href: route('admin.data.bank-names.index'),
+    icon: BuildingLibraryIcon,
+    current: route().current('admin.data.bank-names.*'),
+    section: 'data',
+    description: 'Bangladeshi banks',
+  },
+  {
+    name: 'Document Types',
+    href: route('admin.data.document-types.index'),
+    icon: DocumentTextIcon,
+    current: route().current('admin.data.document-types.*'),
+    section: 'data',
+    description: 'Required documents',
+  },
+  {
+    name: 'Institution Types',
+    href: route('admin.data.institution-types.index'),
+    icon: BuildingLibraryIcon,
+    current: route().current('admin.data.institution-types.*'),
+    section: 'data',
+    description: 'Educational institutions',
+  },
+  {
+    name: 'Relationship Types',
+    href: route('admin.data.relationship-types.index'),
+    icon: UserGroupIcon,
+    current: route().current('admin.data.relationship-types.*'),
+    section: 'data',
+    description: 'Family relationships',
+  },
+  {
+    name: 'Visa Types',
+    href: route('admin.data.visa-types.index'),
+    icon: DocumentTextIcon,
+    current: route().current('admin.data.visa-types.*'),
+    section: 'data',
+    description: 'Visa categories',
   },
   {
     name: 'FAQ Categories',
@@ -675,7 +724,7 @@ const navigationSections = {
             <!-- Header -->
             <div class="border-b border-gray-200 dark:border-gray-700 px-6 py-4">
               <div class="flex items-center gap-3">
-                <CommandLineIcon class="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+                <CommandLineIcon class="w-6 h-6 text-brand-red-600 dark:text-indigo-400" />
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                   Quick Navigation
                 </h3>
@@ -707,7 +756,7 @@ const navigationSections = {
                 >
                   <component
                     :is="item.icon"
-                    class="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-400"
+                    class="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-brand-red-600 dark:group-hover:text-indigo-400"
                   />
                   <span class="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">
                     {{ item.name }}
@@ -742,7 +791,7 @@ const navigationSections = {
         >
           <Link :href="route('admin.dashboard')" class="flex items-center">
             <ApplicationLogo class="h-8 w-auto" v-if="!sidebarCollapsed" />
-            <div v-else class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
+            <div v-else class="w-8 h-8 rounded-lg bg-brand-red-600 flex items-center justify-center">
               <SparklesIcon class="w-4 h-4 text-white" />
             </div>
           </Link>
@@ -780,7 +829,7 @@ const navigationSections = {
                 :href="route('admin.dashboard')"
                 :class="[
                   route().current('admin.dashboard')
-                    ? 'bg-indigo-600 text-white'
+                    ? 'bg-brand-red-600 text-white'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
                   sidebarCollapsed ? 'justify-center px-2' : 'px-3',
                   'group flex items-center gap-x-3 rounded-lg py-2.5 text-sm font-semibold transition-colors',
@@ -830,7 +879,7 @@ const navigationSections = {
                       :href="item.disabled ? '#' : item.href"
                       :class="[
                         item.current
-                          ? 'bg-indigo-600 text-white'
+                          ? 'bg-brand-red-600 text-white'
                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
                         sidebarCollapsed ? 'justify-center px-2' : 'px-3',
                         'group flex items-center gap-x-3 rounded-lg py-2.5 text-sm font-medium transition-colors',
@@ -852,7 +901,7 @@ const navigationSections = {
                       <!-- Badge Count (if any) -->
                       <span
                         v-if="item.badge && !sidebarCollapsed"
-                        class="px-2 py-0.5 text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-400 rounded-full"
+                        class="px-2 py-0.5 text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-brand-red-600/20 dark:text-indigo-400 rounded-full"
                       >
                         {{ item.badge }}
                       </span>
@@ -960,7 +1009,7 @@ const navigationSections = {
           <div class="flex items-center gap-2">
             <!-- Mobile Search Icon -->
             <button
-              class="lg:hidden p-2.5 text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-xl transition-all transform hover:scale-105"
+              class="lg:hidden p-2.5 text-gray-600 dark:text-gray-400 hover:text-brand-red-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-xl transition-all transform hover:scale-105"
               title="Search"
               @click="showMobileSearch = !showMobileSearch"
             >
@@ -997,7 +1046,7 @@ const navigationSections = {
                 >
                   <div class="relative">
                     <div
-                      class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-sm shadow-lg transform group-hover:scale-105 transition-transform border-2 border-blue-700"
+                      class="w-10 h-10 rounded-xl bg-brand-red-600 flex items-center justify-center text-white font-bold text-sm shadow-lg transform group-hover:scale-105 transition-transform border-2 border-blue-700"
                     >
                       {{ (user.name || '').charAt(0).toUpperCase() }}
                     </div>
@@ -1010,7 +1059,7 @@ const navigationSections = {
                     <span class="text-xs text-gray-500 dark:text-gray-400">{{ user.role?.name || 'Admin' }}</span>
                   </div>
                   <ChevronDownIcon
-                    class="hidden lg:block h-4 w-4 text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-all"
+                    class="hidden lg:block h-4 w-4 text-gray-400 group-hover:text-brand-red-600 dark:group-hover:text-indigo-400 transition-all"
                   />
                 </button>
               </template>
@@ -1032,7 +1081,7 @@ const navigationSections = {
                     :href="route(profileRoute)"
                     class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors"
                   >
-                    <UsersIcon class="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                    <UsersIcon class="w-5 h-5 text-brand-red-600 dark:text-indigo-400" />
                     <div class="flex flex-col">
                       <span class="font-medium">My Profile</span>
                       <span class="text-xs text-gray-500 dark:text-gray-400">View and edit your profile</span>
@@ -1071,7 +1120,7 @@ const navigationSections = {
             <div class="flex items-center justify-between mb-4">
               <div class="flex items-center gap-3">
                 <div
-                  class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center shadow-md border-2 border-blue-700"
+                  class="w-10 h-10 rounded-lg bg-brand-red-600 flex items-center justify-center shadow-md border-2 border-blue-700"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1158,7 +1207,7 @@ const navigationSections = {
             <div class="flex grow flex-col gap-y-3 overflow-y-auto bg-white pb-4">
               <!-- Mobile Logo -->
               <div
-                class="flex h-16 shrink-0 items-center justify-center bg-blue-600 px-4 border-b-2 border-blue-700"
+                class="flex h-16 shrink-0 items-center justify-center bg-brand-red-600 px-4 border-b-2 border-blue-700"
               >
                 <Link :href="route('admin.dashboard')">
                   <ApplicationLogo class="block h-10 w-auto brightness-0 invert" />
@@ -1244,55 +1293,3 @@ const navigationSections = {
     <SlowConnectionWarning />
   </div>
 </template>
-
-<style scoped>
-/* Custom Scrollbar - Modern & Beautiful */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #818cf8 0%, #a855f7 100%);
-  border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #6366f1 0%, #9333ea 100%);
-}
-
-/* Dark mode scrollbar */
-.dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #4f46e5 0%, #7c3aed 100%);
-}
-
-.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #6366f1 0%, #9333ea 100%);
-}
-
-/* Smooth Transitions */
-* {
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-/* Animations */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.sidebar-item {
-  animation: slideIn 0.3s ease-out;
-}
-</style>

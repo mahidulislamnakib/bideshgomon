@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -76,7 +76,7 @@ const submit = () => {
                                     v-model="form.title"
                                     type="text"
                                     required
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     @blur="generateSlug"
                                 />
                                 <p v-if="form.errors.title" class="mt-1 text-sm text-red-600">{{ form.errors.title }}</p>
@@ -95,7 +95,7 @@ const submit = () => {
                                         v-model="form.slug"
                                         type="text"
                                         required
-                                        class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                 </div>
                                 <p v-if="form.errors.slug" class="mt-1 text-sm text-red-600">{{ form.errors.slug }}</p>
@@ -110,7 +110,7 @@ const submit = () => {
                                     <select
                                         id="type"
                                         v-model="form.type"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     >
                                         <option v-for="(label, value) in pageTypes" :key="value" :value="value">
                                             {{ label }}
@@ -126,7 +126,7 @@ const submit = () => {
                                     <select
                                         id="template"
                                         v-model="form.template"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     >
                                         <option v-for="(label, value) in templates" :key="value" :value="value">
                                             {{ label }}
@@ -145,7 +145,7 @@ const submit = () => {
                                     v-model="form.content"
                                     rows="10"
                                     required
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 font-mono text-sm"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 font-mono text-sm"
                                     placeholder="Enter your page content here..."
                                 ></textarea>
                                 <p v-if="form.errors.content" class="mt-1 text-sm text-red-600">{{ form.errors.content }}</p>
@@ -166,7 +166,7 @@ const submit = () => {
                                     id="meta_title"
                                     v-model="form.meta_title"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     placeholder="Leave empty to use page title"
                                 />
                             </div>
@@ -179,7 +179,7 @@ const submit = () => {
                                     id="meta_description"
                                     v-model="form.meta_description"
                                     rows="3"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     placeholder="Brief description for search engines"
                                 ></textarea>
                             </div>
@@ -192,7 +192,7 @@ const submit = () => {
                                     id="meta_keywords"
                                     v-model="form.meta_keywords"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     placeholder="keyword1, keyword2, keyword3"
                                 />
                             </div>
@@ -209,7 +209,7 @@ const submit = () => {
                                     id="is_published"
                                     v-model="form.is_published"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                 />
                                 <label for="is_published" class="text-sm font-medium text-gray-700">
                                     Publish this page immediately
@@ -221,7 +221,7 @@ const submit = () => {
                                     id="show_in_menu"
                                     v-model="form.show_in_menu"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                 />
                                 <label for="show_in_menu" class="text-sm font-medium text-gray-700">
                                     Show in navigation menu
@@ -237,7 +237,7 @@ const submit = () => {
                                     v-model.number="form.menu_order"
                                     type="number"
                                     min="0"
-                                    class="w-32 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    class="w-32 rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 />
                                 <p class="mt-1 text-sm text-gray-500">Lower numbers appear first</p>
                             </div>
@@ -255,7 +255,7 @@ const submit = () => {
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            class="px-6 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                         >
                             {{ form.processing ? 'Creating...' : 'Create Page' }}
                         </button>

@@ -61,6 +61,26 @@ class ProfileController extends Controller
             'profileCompletion' => $user->calculateProfileCompletion(),
         ]);
     }    /**
+     * Ensure relationship returns array, never null or collection object
+     */
+    private function ensureArray($relationship)
+    {
+        if (is_null($relationship)) {
+            return [];
+        }
+        
+        if ($relationship instanceof \Illuminate\Database\Eloquent\Collection) {
+            return $relationship->values()->all();
+        }
+        
+        if (is_array($relationship)) {
+            return $relationship;
+        }
+        
+        return [];
+    }
+
+    /**
      * Display the user's profile form.
      */
     public function edit(Request $request): Response
@@ -91,6 +111,9 @@ class ProfileController extends Controller
             },
             'visaHistory' => function ($query) {
                 $query->orderBy('application_date', 'desc');
+            },
+            'userDocuments' => function ($query) {
+                $query->orderBy('created_at', 'desc');
             }
         ]);
 
@@ -100,37 +123,53 @@ class ProfileController extends Controller
             $user->load('profile'); // Reload the profile relationship
         }
         
-        // Ensure we have fresh profile data and log for debugging
+        // Ensure we have fresh profile data
         if ($user->profile) {
             $user->profile->refresh();
-            Log::info('Profile edit returning', [
-                'user_id' => $user->id,
-                'profile_names' => $user->profile->only(['first_name','middle_name','last_name','name_as_per_passport'])
-            ]);
         }
+
+        // Guarantee reference data exists
+        $divisions = get_bd_divisions();
+        $countries = \App\Models\Country::where('is_active', true)->orderBy('name')->get(['id', 'name', 'nationality'])->toArray();
+        $degrees = \App\Models\Degree::where('is_active', true)->orderBy('name')->get(['id', 'name'])->toArray();
+        $languages = \App\Models\Language::where('is_active', true)->orderBy('name')->get(['id', 'name'])->toArray();
+        $languageTests = \App\Models\LanguageTest::where('is_active', true)->orderBy('name')->get(['id', 'name', 'language_id'])->toArray();
+        $serviceCategories = \App\Models\ServiceCategory::where('is_active', true)->orderBy('name')->get(['id', 'name', 'icon'])->toArray();
+        $currencies = \App\Models\Currency::where('is_active', true)->orderBy('code')->get(['id', 'code', 'name', 'symbol'])->toArray();
+        
+        Log::info('Profile edit data check', [
+            'user_id' => $user->id,
+            'has_profile' => !is_null($user->profile),
+            'divisions_count' => count($divisions),
+            'countries_count' => count($countries),
+            'family_members_count' => count($this->ensureArray($user->familyMembers)),
+            'educations_count' => count($this->ensureArray($user->educations)),
+        ]);
 
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
             'user' => $user,
             'userProfile' => $user->profile,
-            'familyMembers' => $user->familyMembers ?? [],
-            'userLanguages' => $user->languages ?? [],
-            'languages' => \App\Models\Language::where('is_active', true)->orderBy('name')->get(['id', 'name']),
-            'languageTests' => \App\Models\LanguageTest::where('is_active', true)->orderBy('name')->get(['id', 'name', 'language_id']),
+            // CRITICAL: Always return arrays, never null
+            'familyMembers' => $this->ensureArray($user->familyMembers),
+            'userLanguages' => $this->ensureArray($user->languages),
+            'languages' => $languages,
+            'languageTests' => $languageTests,
             'securityInformation' => $user->securityInformation,
-            'educations' => $user->educations ?? [],
-            'workExperiences' => $user->workExperiences ?? [],
-            'skills' => $user->skills ?? [],
-            'travelHistory' => $user->travelHistory ?? [],
-            'phoneNumbers' => $user->phoneNumbers ?? [],
-            'passports' => $user->passports ?? [],
-            'visaHistory' => $user->visaHistory ?? [],
-            'divisions' => get_bd_divisions(),
-            'countries' => \App\Models\Country::where('is_active', true)->orderBy('name')->get(['id', 'name', 'nationality']),
-            'degrees' => \App\Models\Degree::where('is_active', true)->orderBy('name')->get(['id', 'name']),
-            'serviceCategories' => \App\Models\ServiceCategory::where('is_active', true)->orderBy('name')->get(['id', 'name', 'icon']),
-            'currencies' => \App\Models\Currency::where('is_active', true)->orderBy('code')->get(['id', 'code', 'name', 'symbol']),
+            'educations' => $this->ensureArray($user->educations),
+            'workExperiences' => $this->ensureArray($user->workExperiences),
+            'skills' => $this->ensureArray($user->skills),
+            'travelHistory' => $this->ensureArray($user->travelHistory),
+            'phoneNumbers' => $this->ensureArray($user->phoneNumbers),
+            'passports' => $this->ensureArray($user->passports),
+            'visaHistory' => $this->ensureArray($user->visaHistory),
+            'userDocuments' => $this->ensureArray($user->userDocuments),
+            'divisions' => $divisions,
+            'countries' => $countries,
+            'degrees' => $degrees,
+            'serviceCategories' => $serviceCategories,
+            'currencies' => $currencies,
             'profileCompletion' => $user->getProfileCompletionDetails(),
             'section' => $request->query('section'), // Pass section from query parameter
         ]);

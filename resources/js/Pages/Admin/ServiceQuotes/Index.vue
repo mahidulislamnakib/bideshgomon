@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -87,8 +87,8 @@ const formatCurrency = (amount) => {
                   {{ stats.total }}
                 </p>
               </div>
-              <div class="p-3 rounded-full bg-indigo-50 dark:bg-indigo-900/20">
-                <DocumentTextIcon class="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+              <div class="p-3 rounded-full bg-red-50 dark:bg-indigo-900/20">
+                <DocumentTextIcon class="h-6 w-6 text-brand-red-600 dark:text-red-400" />
               </div>
             </div>
           </div>
@@ -161,7 +161,7 @@ const formatCurrency = (amount) => {
                   @keyup.enter="searchQuotes"
                   type="text"
                   placeholder="Search by quote #, agency, or application #..."
-                  class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white"
+                  class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-700 dark:text-white"
                 />
               </div>
             </div>
@@ -170,7 +170,7 @@ const formatCurrency = (amount) => {
               <select
                 v-model="statusFilter"
                 @change="searchQuotes"
-                class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white"
+                class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-700 dark:text-white"
               >
                 <option value="">All Statuses</option>
                 <option value="pending">Pending</option>
@@ -180,7 +180,7 @@ const formatCurrency = (amount) => {
 
               <button
                 @click="searchQuotes"
-                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors flex items-center gap-2"
+                class="px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center gap-2"
               >
                 <FunnelIcon class="h-5 w-5" />
                 Filter
@@ -288,7 +288,7 @@ const formatCurrency = (amount) => {
                     <div class="flex items-center justify-end gap-2">
                       <Link
                         :href="route('admin.service-quotes.show', quote.id)"
-                        class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                        class="text-brand-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-indigo-300"
                       >
                         <EyeIcon class="h-5 w-5" />
                       </Link>

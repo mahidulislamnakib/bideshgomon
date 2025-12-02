@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
@@ -62,7 +62,7 @@ const formatDateTime = (dt) => dt ? new Date(dt).toLocaleString('en-US', { month
           </div>
           <button
             @click="exportCsv"
-            class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors duration-150"
+            class="inline-flex items-center px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors duration-150"
           >
             <ArrowDownTrayIcon class="w-4 h-4 mr-2" />
             Export CSV
@@ -102,7 +102,7 @@ const formatDateTime = (dt) => dt ? new Date(dt).toLocaleString('en-US', { month
           </div>
         </div>
         <div class="mt-4 flex items-center space-x-3">
-          <button @click="applyFilters" class="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors duration-150">Apply</button>
+          <button @click="applyFilters" class="px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors duration-150">Apply</button>
           <button @click="resetFilters" class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors duration-150">Reset</button>
         </div>
       </div>
@@ -155,7 +155,7 @@ const formatDateTime = (dt) => dt ? new Date(dt).toLocaleString('en-US', { month
         <div v-if="logs.links" class="px-4 pb-4 flex flex-wrap gap-2">
           <Link v-for="link in logs.links" :key="link.url || link.label" :href="link.url || '#'" v-html="link.label" :class="[
             'px-3 py-1 text-xs rounded-lg border',
-            link.active ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300',
+            link.active ? 'bg-brand-red-600 text-white border-brand-red-600' : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300',
             !link.url ? 'opacity-50 cursor-not-allowed' : ''
           ]" />
         </div>

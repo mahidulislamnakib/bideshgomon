@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\Models\FamilyMember;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -93,12 +94,23 @@ class FamilyMemberController extends Controller
         $validated['user_id'] = auth()->id();
 
         // Create the family member
-        $familyMember = FamilyMember::create($validated);
-
-        return response()->json([
-            'message' => 'Family member added successfully.',
-            'family_member' => $familyMember
-        ], 201);
+        try {
+            $familyMember = FamilyMember::create($validated);
+            
+            return response()->json([
+                'message' => 'Family member added successfully.',
+                'family_member' => $familyMember
+            ], 201);
+        } catch (\Exception $e) {
+            Log::error('Family member creation failed', [
+                'error' => $e->getMessage(),
+                'user_id' => auth()->id()
+            ]);
+            return response()->json([
+                'message' => 'Failed to add family member.',
+                'errors' => ['general' => [$e->getMessage()]]
+            ], 500);
+        }
     }
 
     /**

@@ -109,7 +109,7 @@ const clearSearch = () => {
           <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 sm:p-6">
             <div class="flex items-center">
               <div class="flex-shrink-0 p-2 sm:p-3 bg-blue-100 rounded-lg">
-                <BriefcaseIcon class="h-4 w-4 sm:h-6 sm:w-6 text-blue-600" />
+                <BriefcaseIcon class="h-4 w-4 sm:h-6 sm:w-6 text-brand-red-600" />
               </div>
               <div class="ml-2 sm:ml-4 min-w-0">
                 <p class="text-xs sm:text-sm font-medium text-gray-600 truncate">My Applications</p>
@@ -157,7 +157,7 @@ const clearSearch = () => {
                   :class="[
                     'px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-md transition-colors flex-1 sm:flex-none',
                     viewFilter === 'available'
-                      ? 'bg-white text-indigo-600 shadow-sm'
+                      ? 'bg-white text-brand-red-600 shadow-sm'
                       : 'text-gray-700 hover:text-gray-900'
                   ]"
                 >
@@ -168,7 +168,7 @@ const clearSearch = () => {
                   :class="[
                     'px-4 py-2 text-sm font-medium rounded-md transition-colors',
                     viewFilter === 'my'
-                      ? 'bg-white text-indigo-600 shadow-sm'
+                      ? 'bg-white text-brand-red-600 shadow-sm'
                       : 'text-gray-700 hover:text-gray-900'
                   ]"
                 >
@@ -184,7 +184,7 @@ const clearSearch = () => {
                   @keyup.enter="applyFilters"
                   type="text"
                   placeholder="Search by application number or user name..."
-                  class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
                 />
                 <button
                   v-if="searchQuery"
@@ -201,7 +201,7 @@ const clearSearch = () => {
                 <select
                   v-model="statusFilter"
                   @change="applyFilters"
-                  class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
                 >
                   <option value="all">All Status</option>
                   <option value="pending">Pending</option>
@@ -216,7 +216,7 @@ const clearSearch = () => {
               <!-- Search Button -->
               <button
                 @click="applyFilters"
-                class="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors"
+                class="px-6 py-2 bg-brand-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors"
               >
                 Search
               </button>
@@ -262,7 +262,7 @@ const clearSearch = () => {
                   <td class="px-6 py-4 whitespace-nowrap">
                     <div class="flex items-center">
                       <div class="flex-shrink-0 h-10 w-10 bg-indigo-100 rounded-lg flex items-center justify-center">
-                        <DocumentTextIcon class="h-5 w-5 text-indigo-600" />
+                        <DocumentTextIcon class="h-5 w-5 text-brand-red-600" />
                       </div>
                       <div class="ml-3">
                         <div class="text-sm font-medium text-gray-900">
@@ -312,7 +312,7 @@ const clearSearch = () => {
                     <div class="flex items-center justify-end gap-3">
                       <Link
                         :href="route('agency.applications.show', application.id)"
-                        class="inline-flex items-center gap-x-1.5 text-indigo-600 hover:text-indigo-900 font-medium"
+                        class="inline-flex items-center gap-x-1.5 text-brand-red-600 hover:text-red-900 font-medium"
                       >
                         <EyeIcon class="h-4 w-4" />
                         View

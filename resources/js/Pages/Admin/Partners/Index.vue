@@ -3,7 +3,7 @@
         <div class="mb-6">
             <div class="flex justify-between items-center">
                 <h1 class="text-3xl font-bold text-gray-800">Partners Management</h1>
-                <Link :href="route('admin.partners.create')" class="inline-flex items-center px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-lg transition-colors">
+                <Link :href="route('admin.partners.create')" class="inline-flex items-center px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                     </svg>
@@ -22,12 +22,12 @@
                         @input="search"
                         type="text" 
                         placeholder="Search partners..." 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                     />
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                    <select v-model="form.status" @change="search" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                    <select v-model="form.status" @change="search" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent">
                         <option value="all">All Status</option>
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
@@ -78,7 +78,7 @@
                             <div v-if="partner.name_bn" class="text-xs text-gray-500 mt-1">{{ partner.name_bn }}</div>
                         </td>
                         <td class="px-6 py-4">
-                            <a v-if="partner.website_url" :href="partner.website_url" target="_blank" class="text-sm text-primary-600 hover:text-primary-800 inline-flex items-center">
+                            <a v-if="partner.website_url" :href="partner.website_url" target="_blank" class="text-sm text-brand-red-600 hover:text-primary-800 inline-flex items-center">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                                 </svg>
@@ -87,7 +87,7 @@
                             <span v-else class="text-sm text-gray-400">-</span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                            <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-brand-red-600">
                                 {{ partner.partner_type }}
                             </span>
                         </td>
@@ -106,7 +106,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="flex items-center justify-end space-x-3">
-                                <Link :href="route('admin.partners.edit', partner.id)" class="text-primary-600 hover:text-primary-900 transition-colors">
+                                <Link :href="route('admin.partners.edit', partner.id)" class="text-brand-red-600 hover:text-red-900 transition-colors">
                                     Edit
                                 </Link>
                                 <button @click="confirmDelete(partner)" class="text-red-600 hover:text-red-900 transition-colors">

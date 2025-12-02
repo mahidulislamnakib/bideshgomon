@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <Head title="Degrees Management" />
   <AdminLayout>
     <div class="p-6">
@@ -9,7 +9,7 @@
 
       <!-- Actions Bar -->
       <div class="mb-6 flex flex-col sm:flex-row gap-4">
-        <Link :href="route('admin.data.degrees.create')" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700">
+        <Link :href="route('admin.data.degrees.create')" class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700">
           <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
           </svg>
@@ -36,12 +36,12 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
-            <input v-model="filters.search" type="text" placeholder="Search degrees..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" @input="debounceSearch"/>
+            <input v-model="filters.search" type="text" placeholder="Search degrees..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" @input="debounceSearch"/>
           </div>
 
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Level</label>
-            <select v-model="filters.level" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" @change="applyFilters">
+            <select v-model="filters.level" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" @change="applyFilters">
               <option value="">All Levels</option>
               <option value="Undergraduate">Undergraduate</option>
               <option value="Graduate">Graduate</option>
@@ -53,7 +53,7 @@
 
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <select v-model="filters.status" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" @change="applyFilters">
+            <select v-model="filters.status" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" @change="applyFilters">
               <option value="">All Status</option>
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
@@ -62,7 +62,7 @@
 
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Sort By</label>
-            <select v-model="filters.sort" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" @change="applyFilters">
+            <select v-model="filters.sort" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" @change="applyFilters">
               <option value="level">Level</option>
               <option value="name">Name</option>
               <option value="latest">Latest First</option>
@@ -98,9 +98,9 @@
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ degree.short_name }}</td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <span class="px-2 py-1 text-xs font-medium rounded-full" :class="{
-                  'bg-blue-100 text-blue-800': degree.level === 'Undergraduate',
+                  'bg-red-100 text-brand-red-600': degree.level === 'Undergraduate',
                   'bg-purple-100 text-purple-800': degree.level === 'Graduate',
-                  'bg-indigo-100 text-indigo-800': degree.level === 'Postgraduate',
+                  'bg-red-100 text-brand-red-600': degree.level === 'Postgraduate',
                   'bg-green-100 text-green-800': degree.level === 'Diploma',
                   'bg-yellow-100 text-yellow-800': degree.level === 'Certificate',
                   'bg-gray-100 text-gray-800': !['Undergraduate', 'Graduate', 'Postgraduate', 'Diploma', 'Certificate'].includes(degree.level)
@@ -115,7 +115,7 @@
                 </button>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <Link :href="route('admin.data.degrees.edit', degree.id)" class="text-blue-600 hover:text-blue-900 mr-3">Edit</Link>
+                <Link :href="route('admin.data.degrees.edit', degree.id)" class="text-brand-red-600 hover:text-red-900 mr-3">Edit</Link>
                 <button @click="confirmDelete(degree)" class="text-red-600 hover:text-red-900">Delete</button>
               </td>
             </tr>
@@ -144,13 +144,13 @@
                   :href="link.url"
                   v-html="link.label"
                   class="px-3 py-1 border rounded-md text-sm"
-                  :class="link.active ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'"
+                  :class="link.active ? 'bg-brand-red-600 text-white border-brand-red-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'"
                 />
                 <span
                   v-else
                   v-html="link.label"
                   class="px-3 py-1 border rounded-md text-sm opacity-50 cursor-not-allowed"
-                  :class="link.active ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300'"
+                  :class="link.active ? 'bg-brand-red-600 text-white border-brand-red-600' : 'bg-white text-gray-700 border-gray-300'"
                 />
               </template>
             </div>

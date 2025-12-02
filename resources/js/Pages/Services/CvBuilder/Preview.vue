@@ -5,10 +5,13 @@ import {
     ArrowLeftIcon, PencilIcon, ArrowDownTrayIcon, 
     EnvelopeIcon, PhoneIcon, MapPinIcon, GlobeAltIcon 
 } from '@heroicons/vue/24/outline';
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
 
 const props = defineProps({
     cv: Object,
 });
+
+const { formatDate } = useBangladeshFormat();
 
 const primaryColor = props.cv.cv_template.color_scheme.primary;
 const secondaryColor = props.cv.cv_template.color_scheme.secondary;
@@ -183,7 +186,7 @@ const secondaryColor = props.cv.cv_template.color_scheme.secondary;
                         <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
                             <div>{{ cv.view_count }} views</div>
                             <div>{{ cv.download_count }} downloads</div>
-                            <div class="w-full sm:w-auto">Last updated {{ new Date(cv.updated_at).toLocaleDateString() }}</div>
+                            <div class="w-full sm:w-auto">Last updated {{ formatDate(cv.updated_at) }}</div>
                         </div>
                     </div>
                 </div>

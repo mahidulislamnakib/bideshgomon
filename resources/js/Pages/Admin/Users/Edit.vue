@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { PencilSquareIcon, ArrowLeftIcon } from '@heroicons/vue/24/outline';
@@ -36,8 +36,8 @@ const submit = () => {
                     <div class="p-6">
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                    <PencilSquareIcon class="w-6 h-6 text-indigo-600" />
+                                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                                    <PencilSquareIcon class="w-6 h-6 text-brand-red-600" />
                                 </div>
                                 <div>
                                     <h2 class="text-2xl font-bold text-gray-900">Edit User</h2>
@@ -60,16 +60,16 @@ const submit = () => {
                     <form @submit.prevent="submit" class="p-6">
                         <div class="space-y-6">
                             <!-- User Info Badge -->
-                            <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+                            <div class="bg-red-50 border border-indigo-200 rounded-lg p-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                                    <div class="w-12 h-12 bg-brand-red-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
                                         {{ (user.name || '').charAt(0).toUpperCase() }}
                                     </div>
                                     <div>
                                         <div class="font-semibold text-gray-900">{{ user.name }}</div>
                                         <div class="text-sm text-gray-600">{{ user.email }}</div>
                                         <div class="flex gap-2 mt-1">
-                                            <span class="text-xs px-2 py-1 rounded bg-indigo-100 text-indigo-700">
+                                            <span class="text-xs px-2 py-1 rounded bg-red-100 text-indigo-700">
                                                 {{ user.role?.name || 'User' }}
                                             </span>
                                             <span v-if="user.suspended_at" class="text-xs px-2 py-1 rounded bg-red-100 text-red-800">
@@ -95,7 +95,7 @@ const submit = () => {
                                             v-model="form.name"
                                             type="text"
                                             required
-                                            class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-lg border-gray-300 focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="Enter full name"
                                         />
                                         <div v-if="form.errors.name" class="text-red-600 text-sm mt-1">
@@ -111,7 +111,7 @@ const submit = () => {
                                             v-model="form.email"
                                             type="email"
                                             required
-                                            class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-lg border-gray-300 focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="user@example.com"
                                         />
                                         <div v-if="form.errors.email" class="text-red-600 text-sm mt-1">
@@ -126,7 +126,7 @@ const submit = () => {
                                         <input
                                             v-model="form.phone"
                                             type="text"
-                                            class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-lg border-gray-300 focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="+880 1XXX-XXXXXX"
                                         />
                                         <div v-if="form.errors.phone" class="text-red-600 text-sm mt-1">
@@ -140,7 +140,7 @@ const submit = () => {
                                         </label>
                                         <select
                                             v-model="form.country_id"
-                                            class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-lg border-gray-300 focus:border-brand-red-600 focus:ring-brand-red-600"
                                         >
                                             <option value="">Select Country</option>
                                             <option v-for="country in countries" :key="country.id" :value="country.id">
@@ -166,7 +166,7 @@ const submit = () => {
                                         <input
                                             v-model="form.password"
                                             type="password"
-                                            class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-lg border-gray-300 focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="Enter new password"
                                         />
                                         <div v-if="form.errors.password" class="text-red-600 text-sm mt-1">
@@ -181,7 +181,7 @@ const submit = () => {
                                         <input
                                             v-model="form.password_confirmation"
                                             type="password"
-                                            class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-lg border-gray-300 focus:border-brand-red-600 focus:ring-brand-red-600"
                                             placeholder="Confirm new password"
                                         />
                                         <div v-if="form.errors.password_confirmation" class="text-red-600 text-sm mt-1">
@@ -202,7 +202,7 @@ const submit = () => {
                                         <select
                                             v-model="form.role_id"
                                             required
-                                            class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-lg border-gray-300 focus:border-brand-red-600 focus:ring-brand-red-600"
                                         >
                                             <option value="">Select Role</option>
                                             <option v-for="role in roles" :key="role.id" :value="role.id">
@@ -219,7 +219,7 @@ const submit = () => {
                                             <input
                                                 v-model="form.email_verified"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                             />
                                             <span class="text-sm text-gray-700">Email verified</span>
                                         </label>
@@ -264,7 +264,7 @@ const submit = () => {
                             <button
                                 type="submit"
                                 :disabled="form.processing"
-                                class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+                                class="px-6 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
                             >
                                 <span v-if="form.processing">Updating...</span>
                                 <span v-else>Update User</span>

@@ -69,7 +69,7 @@
                     <div class="p-6">
                         <div class="flex items-start gap-4">
                             <div class="flex-shrink-0">
-                                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold">
+                                <div class="w-10 h-10 bg-brand-red-600 rounded-full flex items-center justify-center text-white font-semibold">
                                     {{ (ticket.user.name || '').charAt(0).toUpperCase() }}
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                         <div class="flex items-start gap-4">
                             <div class="flex-shrink-0">
                                 <div 
-                                    :class="reply.is_staff_reply ? 'bg-green-600' : 'bg-blue-600'"
+                                    :class="reply.is_staff_reply ? 'bg-green-600' : 'bg-brand-red-600'"
                                     class="w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold"
                                 >
                                     {{ (reply.user.name || '').charAt(0).toUpperCase() }}
@@ -157,7 +157,7 @@
                                 <textarea
                                     v-model="replyForm.message"
                                     rows="4"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': replyForm.errors.message }"
                                     placeholder="Type your reply..."
                                     required
@@ -180,7 +180,7 @@
                                 <button
                                     type="submit"
                                     :disabled="replyForm.processing"
-                                    class="px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                    class="px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest hover:bg-red-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150"
                                     :class="{ 'opacity-50 cursor-not-allowed': replyForm.processing }"
                                 >
                                     <span v-if="replyForm.processing">{{ __('Sending...') }}</span>
@@ -216,7 +216,7 @@
                             <textarea
                                 v-model="ratingForm.feedback"
                                 rows="3"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
                                 placeholder="Tell us more about your experience..."
                             ></textarea>
                         </div>
@@ -365,13 +365,6 @@ const categoryLabel = (category) => {
     return labels[category] || category;
 };
 
-const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    });
-};
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
+const { formatDate, formatTime } = useBangladeshFormat();
 </script>

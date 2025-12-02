@@ -78,7 +78,7 @@
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-4">
                         <div class="flex items-center justify-between mb-6">
                             <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2">
-                                <svg class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg class="h-5 w-5 text-brand-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                                 </svg>
                                 Refine Search
@@ -98,7 +98,7 @@
                             <select
                                 v-model="selectedCategory"
                                 @change="filterByCategory(selectedCategory)"
-                                class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 shadow-sm"
+                                class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-brand-red-600 shadow-sm"
                             >
                                 <option :value="null">All Categories</option>
                                 <option
@@ -122,7 +122,7 @@
                             <select
                                 v-model="form.country"
                                 @change="applyFilters"
-                                class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 shadow-sm"
+                                class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-brand-red-600 shadow-sm"
                             >
                                 <option value="">All Countries</option>
                                 <option value="1">Bangladesh</option>
@@ -143,7 +143,7 @@
                                 @input="debouncedFilter"
                                 type="text"
                                 placeholder="e.g., Dhaka, London..."
-                                class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 shadow-sm"
+                                class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-brand-red-600 shadow-sm"
                             />
                         </div>
 
@@ -160,7 +160,7 @@
                             <select
                                 v-model="form.sort_by"
                                 @change="applyFilters"
-                                class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 shadow-sm"
+                                class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-brand-red-600 shadow-sm"
                             >
                                 <option value="name">Name (A-Z)</option>
                                 <option value="views">Most Popular</option>
@@ -182,7 +182,7 @@
                         <!-- Info Box -->
                         <div class="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-lg">
                             <div class="flex gap-3">
-                                <svg class="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg class="h-5 w-5 text-brand-red-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 <div>
@@ -215,7 +215,7 @@
                                 :class="[
                                     'px-3 py-2 rounded-md text-sm font-medium transition-all',
                                     viewMode === 'grid' 
-                                        ? 'bg-blue-600 text-white shadow-sm' 
+                                        ? 'bg-brand-red-600 text-white shadow-sm' 
                                         : 'text-gray-600 hover:bg-gray-100'
                                 ]"
                             >
@@ -228,7 +228,7 @@
                                 :class="[
                                     'px-3 py-2 rounded-md text-sm font-medium transition-all',
                                     viewMode === 'list' 
-                                        ? 'bg-blue-600 text-white shadow-sm' 
+                                        ? 'bg-brand-red-600 text-white shadow-sm' 
                                         : 'text-gray-600 hover:bg-gray-100'
                                 ]"
                             >
@@ -316,7 +316,7 @@
                             <!-- Content -->
                             <div class="p-5 flex flex-col flex-grow">
                                 <!-- Name -->
-                                <h3 class="text-base font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight h-[48px] overflow-hidden">
+                                <h3 class="text-base font-bold text-gray-900 mb-3 group-hover:text-brand-red-600 transition-colors line-clamp-2 leading-tight h-[48px] overflow-hidden">
                                     {{ directory.name }}
                                 </h3>
 
@@ -356,7 +356,7 @@
                                             <span class="font-medium">{{ formatNumber(directory.view_count || 0) }}</span>
                                         </div>
                                     </div>
-                                    <span class="inline-flex items-center gap-1.5 text-blue-600 text-sm font-semibold group-hover:gap-2 transition-all">
+                                    <span class="inline-flex items-center gap-1.5 text-brand-red-600 text-sm font-semibold group-hover:gap-2 transition-all">
                                         Details
                                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -393,7 +393,7 @@
                                 <div class="flex items-start justify-between mb-3">
                                     <div class="flex-1">
                                         <div class="flex items-center gap-3 mb-2">
-                                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-brand-red-600 transition-colors">
                                                 {{ directory.name }}
                                             </h3>
                                             <span
@@ -441,7 +441,7 @@
                         <div class="flex items-center justify-center gap-3">
                             <button
                                 @click="clearFilters"
-                                class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-semibold shadow-lg shadow-blue-500/30"
+                                class="inline-flex items-center gap-2 px-6 py-3 bg-brand-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-semibold shadow-lg shadow-blue-500/30"
                             >
                                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -599,32 +599,4 @@ const getCategoryStyle = (category, isSelected) => {
 };
 </script>
 
-<style scoped>
-/* Hide scrollbar but keep functionality */
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
 
-/* Smooth animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Grid hover effects */
-.group:hover .group-hover\:scale-105 {
-    transform: scale(1.05);
-}
-
-/* Snap scroll for horizontal categories */
-.snap-x {
-    scroll-snap-type: x mandatory;
-}
-.snap-start {
-    scroll-snap-align: start;
-}
-</style>

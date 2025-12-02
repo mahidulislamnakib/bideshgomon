@@ -55,7 +55,7 @@ const getStatusColor = (status) => {
                             </Link>
                             <Link
                                 :href="route('agency.applications.index')"
-                                class="inline-flex items-center justify-center px-4 py-2 bg-indigo-600 border border-transparent rounded-lg text-sm font-medium text-white hover:bg-indigo-700"
+                                class="inline-flex items-center justify-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-lg text-sm font-medium text-white hover:bg-red-700"
                             >
                                 <DocumentTextIcon class="w-5 h-5 mr-2" />
                                 All Applications
@@ -82,7 +82,7 @@ const getStatusColor = (status) => {
                     <div class="bg-white border border-gray-200 rounded-lg p-4 sm:p-6">
                         <div class="flex items-center justify-between mb-3 sm:mb-4">
                             <div class="bg-blue-100 p-2 sm:p-3 rounded-lg">
-                                <DocumentTextIcon class="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+                                <DocumentTextIcon class="w-5 h-5 sm:w-6 sm:h-6 text-brand-red-600" />
                             </div>
                         </div>
                         <p class="text-xs sm:text-sm font-medium text-gray-600 mb-1">Active</p>
@@ -130,7 +130,7 @@ const getStatusColor = (status) => {
                         </div>
                         <Link
                             :href="route('agency.applications.index', { filter: 'available' })"
-                            class="inline-flex items-center text-xs sm:text-sm font-medium text-indigo-600 hover:text-indigo-700 mt-3 sm:mt-4"
+                            class="inline-flex items-center text-xs sm:text-sm font-medium text-brand-red-600 hover:text-indigo-700 mt-3 sm:mt-4"
                         >
                             Browse available applications
                             <ArrowRightIcon class="w-3 h-3 sm:w-4 sm:h-4 ml-1" />
@@ -150,7 +150,7 @@ const getStatusColor = (status) => {
                         </div>
                         <Link
                             :href="route('agency.applications.index', { filter: 'quoted' })"
-                            class="inline-flex items-center text-xs sm:text-sm font-medium text-indigo-600 hover:text-indigo-700 mt-3 sm:mt-4"
+                            class="inline-flex items-center text-xs sm:text-sm font-medium text-brand-red-600 hover:text-indigo-700 mt-3 sm:mt-4"
                         >
                             View pending quotes
                             <ArrowRightIcon class="w-3 h-3 sm:w-4 sm:h-4 ml-1" />
@@ -195,7 +195,7 @@ const getStatusColor = (status) => {
                                         </span>
                                         <Link
                                             :href="route('agency.applications.show', app.id)"
-                                            class="inline-flex items-center text-xs sm:text-sm font-medium text-indigo-600 hover:text-indigo-700"
+                                            class="inline-flex items-center text-xs sm:text-sm font-medium text-brand-red-600 hover:text-indigo-700"
                                         >
                                             <span class="hidden sm:inline">View & Quote</span>
                                             <span class="sm:hidden">Quote</span>
@@ -247,7 +247,7 @@ const getStatusColor = (status) => {
                                         </span>
                                         <Link
                                             :href="route('agency.applications.show', app.id)"
-                                            class="inline-flex items-center text-xs sm:text-sm font-medium text-indigo-600 hover:text-indigo-700"
+                                            class="inline-flex items-center text-xs sm:text-sm font-medium text-brand-red-600 hover:text-indigo-700"
                                         >
                                             <span class="hidden sm:inline">View Details</span>
                                             <span class="sm:hidden">View</span>

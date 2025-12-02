@@ -169,7 +169,7 @@ const handleFileChange = (event) => {
         :required="field.is_required"
         :maxlength="field.max_length"
         :rows="field.rows || 4"
-        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-brand-red-600"
       />
       <p v-if="field.help_text" class="text-xs text-gray-500 mt-1">
         {{ field.help_text }}
@@ -186,7 +186,7 @@ const handleFileChange = (event) => {
         :id="field.field_name"
         v-model="fieldValue"
         :required="field.is_required"
-        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-brand-red-600"
       >
         <option value="">{{ placeholder }}</option>
         <option
@@ -220,7 +220,7 @@ const handleFileChange = (event) => {
             :value="option.value || option"
             v-model="fieldValue"
             :required="field.is_required"
-            class="rounded-full border-gray-300 text-primary-600 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+            class="rounded-full border-gray-300 text-brand-red-600 shadow-sm focus:border-primary-500 focus:ring-brand-red-600"
           />
           <span class="text-sm text-gray-700">{{ option.label || option }}</span>
         </label>
@@ -239,7 +239,7 @@ const handleFileChange = (event) => {
           :id="field.field_name"
           v-model="fieldValue"
           :required="field.is_required"
-          class="rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+          class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-primary-500 focus:ring-brand-red-600"
         />
         <span class="text-sm text-gray-700">
           {{ field.field_label }}
@@ -267,7 +267,7 @@ const handleFileChange = (event) => {
             type="checkbox"
             :value="option.value || option"
             v-model="fieldValue"
-            class="rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+            class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-primary-500 focus:ring-brand-red-600"
           />
           <span class="text-sm text-gray-700">{{ option.label || option }}</span>
         </label>

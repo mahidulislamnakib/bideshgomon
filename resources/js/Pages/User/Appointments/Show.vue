@@ -8,7 +8,7 @@
                 <RhythmicCard variant="sky" size="lg" class="mb-rhythm-lg">
                     <template #default>
                         <div class="flex items-center justify-between mb-rhythm-md">
-                            <Link :href="route('appointments.index')" class="inline-flex items-center gap-rhythm-xs text-sky-700 hover:text-sky-900 font-medium">
+                            <Link :href="route('appointments.index')" class="inline-flex items-center gap-rhythm-xs text-sky-700 hover:text-red-900 font-medium">
                                 <ArrowLeftIcon class="w-4 h-4" />
                                 {{ __('Back to Appointments') }}
                             </Link>
@@ -49,7 +49,7 @@
                                     <div>
                                         <div class="flex items-center text-gray-900 mb-rhythm-xs">
                                             <div class="p-rhythm-xs rounded-xl bg-sky-100 mr-rhythm-sm">
-                                                <CalendarDaysIcon class="w-5 h-5 text-sky-600" />
+                                                <CalendarDaysIcon class="w-5 h-5 text-brand-red-600" />
                                             </div>
                                             <span class="font-semibold text-lg">{{ formatDate(appointment.appointment_date) }}</span>
                                         </div>
@@ -57,7 +57,7 @@
                                     <div>
                                         <div class="flex items-center text-gray-900 mb-rhythm-xs">
                                             <div class="p-rhythm-xs rounded-xl bg-sky-100 mr-rhythm-sm">
-                                                <ClockIcon class="w-5 h-5 text-sky-600" />
+                                                <ClockIcon class="w-5 h-5 text-brand-red-600" />
                                             </div>
                                             <span class="font-semibold text-lg">{{ formatTime(appointment.appointment_time) }}</span>
                                         </div>
@@ -79,7 +79,7 @@
                                     </div>
                                     <div v-if="appointment.meeting_link && appointment.status === 'confirmed'" class="flex items-start">
                                         <span class="text-sm font-medium text-gray-600 w-32">{{ __('Meeting Link') }}:</span>
-                                        <a :href="appointment.meeting_link" target="_blank" class="text-sm text-blue-600 hover:text-blue-800 underline">
+                                        <a :href="appointment.meeting_link" target="_blank" class="text-sm text-brand-red-600 hover:text-blue-800 underline">
                                             {{ __('Join Meeting') }}
                                         </a>
                                     </div>
@@ -107,7 +107,7 @@
                             <div class="flex items-start">
                                 <div class="flex-shrink-0">
                                     <div class="w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center">
-                                        <ClockIconSolid class="w-4 h-4 text-sky-600" />
+                                        <ClockIconSolid class="w-4 h-4 text-brand-red-600" />
                                     </div>
                                 </div>
                                 <div class="ml-4">
@@ -131,7 +131,7 @@
                             <div v-if="appointment.completed_at" class="flex items-start">
                                 <div class="flex-shrink-0">
                                     <div class="w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center">
-                                        <CheckCircleIcon class="w-4 h-4 text-sky-600" />
+                                        <CheckCircleIcon class="w-4 h-4 text-brand-red-600" />
                                     </div>
                                 </div>
                                 <div class="ml-4">
@@ -300,30 +300,6 @@ const purposeLabel = (purpose) => {
     return labels[purpose] || purpose;
 };
 
-const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
-};
-
-const formatTime = (time) => {
-    const [hours, minutes] = time.split(':');
-    const hour = parseInt(hours);
-    const ampm = hour >= 12 ? 'PM' : 'AM';
-    const displayHour = hour > 12 ? hour - 12 : (hour === 0 ? 12 : hour);
-    return `${displayHour}:${minutes} ${ampm}`;
-};
-
-const formatDateTime = (datetime) => {
-    return new Date(datetime).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    });
-};
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
+const { formatDate, formatTime, formatDateTime } = useBangladeshFormat();
 </script>

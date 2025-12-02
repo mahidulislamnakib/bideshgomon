@@ -13,7 +13,14 @@ class ServiceModule extends Model
         'service_category_id',
         'name',
         'slug',
-        'service_type', // Added: query_based, api_based, premade, marketplace
+        'service_type',
+        'requires_form_submission',
+        'has_delivery_charges',
+        'default_delivery_charge',
+        'is_query_based',
+        'is_marketplace',
+        'supports_university_exclusivity',
+        'restricted_to_agency_type_id',
         'short_description',
         'full_description',
         'icon',
@@ -50,8 +57,14 @@ class ServiceModule extends Model
         'is_featured' => 'boolean',
         'coming_soon' => 'boolean',
         'requires_approval' => 'boolean',
+        'requires_form_submission' => 'boolean',
+        'has_delivery_charges' => 'boolean',
+        'is_query_based' => 'boolean',
+        'is_marketplace' => 'boolean',
+        'supports_university_exclusivity' => 'boolean',
         'launch_date' => 'date',
         'base_price' => 'decimal:2',
+        'default_delivery_charge' => 'decimal:2',
         'requirements' => 'array',
         'documents_required' => 'array',
         'processing_time' => 'array',
@@ -276,5 +289,92 @@ class ServiceModule extends Model
         }
 
         return round(($this->completions_count / $this->applications_count) * 100, 1);
+    }
+
+    /**
+     * Get restricted agency type relationship
+     */
+    public function restrictedToAgencyType(): BelongsTo
+    {
+        return $this->belongsTo(AgencyType::class, 'restricted_to_agency_type_id');
+    }
+
+    /**
+     * Check if service is restricted to a specific agency type
+     */
+    public function isRestrictedToAgencyType(): bool
+    {
+        return !is_null($this->restricted_to_agency_type_id);
+    }
+
+    /**
+     * Check if an agency can offer this service
+     */
+    public function canAgencyOffer(Agency $agency): bool
+    {
+        // Check if service is restricted to specific agency type
+        if ($this->isRestrictedToAgencyType()) {
+            return $agency->agency_type_id === $this->restricted_to_agency_type_id;
+        }
+
+        // Check if service is in agency's allowed service modules
+        $allowedModules = $agency->agencyType->allowed_service_modules ?? [];
+        return in_array($this->id, $allowedModules);
+    }
+
+    /**
+     * Check if service supports multiple agencies (marketplace model)
+     */
+    public function supportsMultipleAgencies(): bool
+    {
+        return $this->is_marketplace === true;
+    }
+
+    /**
+     * Check if service requires delivery
+     */
+    public function requiresDelivery(): bool
+    {
+        return $this->has_delivery_charges === true;
+    }
+
+    /**
+     * Check if service supports university exclusivity
+     */
+    public function hasUniversityExclusivity(): bool
+    {
+        return $this->supports_university_exclusivity === true;
+    }
+
+    /**
+     * Scope: Marketplace services (multiple agencies can compete)
+     */
+    public function scopeMarketplace($query)
+    {
+        return $query->where('is_marketplace', true);
+    }
+
+    /**
+     * Scope: Query-based services (require form submission)
+     */
+    public function scopeQueryBased($query)
+    {
+        return $query->where('is_query_based', true);
+    }
+
+    /**
+     * Scope: Services with delivery charges
+     */
+    public function scopeWithDelivery($query)
+    {
+        return $query->where('has_delivery_charges', true);
+    }
+
+    /**
+     * Scope: Services restricted to specific agency type
+     */
+    public function scopeRestrictedToAgencyType($query, $agencyTypeId)
+    {
+        return $query->where('restricted_to_agency_type_id', $agencyTypeId);
     }
 }

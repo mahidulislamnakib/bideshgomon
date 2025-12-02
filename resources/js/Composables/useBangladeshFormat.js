@@ -41,7 +41,8 @@ export function useBangladeshFormat() {
   }
 
   /**
-   * Format date in DD/MM/YYYY format (Bangladeshi standard)
+   * Format date in DD MM YYYY format (Bangladeshi standard with spaces)
+   * Example: 02 Dec 2025
    */
   const formatDate = (date, includeTime = false) => {
     if (!date) return ''
@@ -50,10 +51,11 @@ export function useBangladeshFormat() {
     if (isNaN(d.getTime())) return date
     
     const day = String(d.getDate()).padStart(2, '0')
-    const month = String(d.getMonth() + 1).padStart(2, '0')
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const month = monthNames[d.getMonth()]
     const year = d.getFullYear()
     
-    let formatted = `${day}/${month}/${year}`
+    let formatted = `${day} ${month} ${year}`
     
     if (includeTime) {
       let hours = d.getHours()
@@ -67,7 +69,8 @@ export function useBangladeshFormat() {
   }
 
   /**
-   * Parse DD/MM/YYYY format to YYYY-MM-DD for database/input[type=date]
+   * Parse DD MM YYYY format to YYYY-MM-DD for database/input[type=date]
+   * Accepts DD MM YYYY (spaces) or DD/MM/YYYY (slashes)
    */
   const parseDateToISO = (dateStr) => {
     if (!dateStr) return ''
@@ -77,12 +80,32 @@ export function useBangladeshFormat() {
       return dateStr
     }
     
-    // Parse DD/MM/YYYY format
-    const match = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/)
-    if (match) {
-      const day = match[1].padStart(2, '0')
-      const month = match[2].padStart(2, '0')
-      const year = match[3]
+    // Parse DD MM YYYY format (with spaces)
+    const spaceMatch = dateStr.match(/^(\d{1,2})\s+(\w+|\d{1,2})\s+(\d{4})$/)
+    if (spaceMatch) {
+      const day = spaceMatch[1].padStart(2, '0')
+      const monthStr = spaceMatch[2]
+      const year = spaceMatch[3]
+      
+      // Convert month name to number
+      const monthNames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+      let month
+      if (isNaN(monthStr)) {
+        const monthIndex = monthNames.indexOf(monthStr.toLowerCase().substring(0, 3))
+        month = String(monthIndex + 1).padStart(2, '0')
+      } else {
+        month = monthStr.padStart(2, '0')
+      }
+      
+      return `${year}-${month}-${day}`
+    }
+    
+    // Parse DD/MM/YYYY format (backward compatibility)
+    const slashMatch = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/)
+    if (slashMatch) {
+      const day = slashMatch[1].padStart(2, '0')
+      const month = slashMatch[2].padStart(2, '0')
+      const year = slashMatch[3]
       return `${year}-${month}-${day}`
     }
     

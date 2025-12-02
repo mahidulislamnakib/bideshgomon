@@ -24,7 +24,7 @@ const props = defineProps({
 });
 
 const formatCurrency = (amount) => {
-    return `à§³${parseFloat(amount).toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    return `?${parseFloat(amount).toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 };
 
 const formatDate = (date) => {
@@ -51,7 +51,7 @@ const formatDateTime = (date) => {
                 <div class="flex items-center justify-between">
                     <div>
                         <h1 class="font-display font-bold text-rhythm text-4xl sm:text-5xl">
-                            <span class="text-ocean-600">Admin</span> Dashboard
+                            <span class="text-brand-red-600">Admin</span> Dashboard
                         </h1>
                         <p class="text-ocean-200 mt-rhythm-sm text-lg">Monitor and manage your platform</p>
                     </div>
@@ -199,7 +199,7 @@ const formatDateTime = (date) => {
                     variant="sunrise"
                     size="md"
                     title="Support Tickets"
-                    :description="`${stats.support.open_tickets} open Â· ${stats.support.urgent_tickets} urgent`"
+                    :description="`${stats.support.open_tickets} open · ${stats.support.urgent_tickets} urgent`"
                     :badge="`+${stats.support.tickets_today} today`"
                 >
                     <template #icon>
@@ -215,7 +215,7 @@ const formatDateTime = (date) => {
                     variant="growth"
                     size="md"
                     title="Appointments"
-                    :description="`${stats.appointments.pending_appointments} pending Â· ${stats.appointments.confirmed_appointments} confirmed`"
+                    :description="`${stats.appointments.pending_appointments} pending · ${stats.appointments.confirmed_appointments} confirmed`"
                     :badge="`+${stats.appointments.appointments_today} today`"
                 >
                     <template #icon>
@@ -255,7 +255,7 @@ const formatDateTime = (date) => {
                     </div>
                     <Link
                         :href="route('admin.visa-applications.index')"
-                        class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors"
+                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors"
                     >
                         Manage Applications
                     </Link>
@@ -281,7 +281,7 @@ const formatDateTime = (date) => {
                             :href="route('admin.master-documents.index')"
                             class="flex items-center p-4 bg-white rounded-lg hover:shadow-md transition-all group border border-gray-200"
                         >
-                            <div class="p-3 bg-indigo-600 rounded-lg group-hover:bg-indigo-700 transition-colors">
+                            <div class="p-3 bg-brand-red-600 rounded-lg group-hover:bg-red-700 transition-colors">
                                 <DocumentTextIcon class="h-6 w-6 text-white" />
                             </div>
                             <div class="ml-3">
@@ -294,7 +294,7 @@ const formatDateTime = (date) => {
                             :href="route('admin.document-categories.index')"
                             class="flex items-center p-4 bg-white rounded-lg hover:shadow-md transition-all group border border-gray-200"
                         >
-                            <div class="p-3 bg-indigo-600 rounded-lg group-hover:bg-indigo-700 transition-colors">
+                            <div class="p-3 bg-brand-red-600 rounded-lg group-hover:bg-red-700 transition-colors">
                                 <RectangleStackIcon class="h-6 w-6 text-white" />
                             </div>
                             <div class="ml-3">
@@ -307,7 +307,7 @@ const formatDateTime = (date) => {
                             :href="route('admin.document-assignments.index')"
                             class="flex items-center p-4 bg-white rounded-lg hover:shadow-md transition-all group border border-gray-200"
                         >
-                            <div class="p-3 bg-indigo-600 rounded-lg group-hover:bg-indigo-700 transition-colors">
+                            <div class="p-3 bg-brand-red-600 rounded-lg group-hover:bg-red-700 transition-colors">
                                 <GlobeAltIcon class="h-6 w-6 text-white" />
                             </div>
                             <div class="ml-3">
@@ -339,8 +339,8 @@ const formatDateTime = (date) => {
                             :href="route('admin.visa-applications.index')"
                             class="flex items-center p-4 bg-white rounded-lg hover:shadow-md transition-all group border border-gray-200"
                         >
-                            <div class="p-3 bg-indigo-100 rounded-lg group-hover:bg-indigo-200 transition-colors">
-                                <ClipboardDocumentListIcon class="h-6 w-6 text-indigo-600" />
+                            <div class="p-3 bg-red-100 rounded-lg group-hover:bg-indigo-200 transition-colors">
+                                <ClipboardDocumentListIcon class="h-6 w-6 text-brand-red-600" />
                             </div>
                             <div class="ml-4">
                                 <p class="font-semibold text-gray-900">Visa Applications</p>
@@ -352,8 +352,8 @@ const formatDateTime = (date) => {
                             :href="route('admin.agency-assignments.index')"
                             class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all group"
                         >
-                            <div class="p-3 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                                <UserGroupIcon class="h-6 w-6 text-blue-600" />
+                            <div class="p-3 bg-red-100 rounded-lg group-hover:bg-blue-200 transition-colors">
+                                <UserGroupIcon class="h-6 w-6 text-brand-red-600" />
                             </div>
                             <div class="ml-4">
                                 <p class="font-semibold text-gray-900">Agency Assignments</p>
@@ -371,8 +371,8 @@ const formatDateTime = (date) => {
                             :href="route('admin.service-modules.index')"
                             class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all group"
                         >
-                            <div class="p-3 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                                <RectangleStackIcon class="h-6 w-6 text-blue-600" />
+                            <div class="p-3 bg-red-100 rounded-lg group-hover:bg-blue-200 transition-colors">
+                                <RectangleStackIcon class="h-6 w-6 text-brand-red-600" />
                             </div>
                             <div class="ml-4">
                                 <p class="font-semibold text-gray-900">Service Modules</p>
@@ -430,7 +430,7 @@ const formatDateTime = (date) => {
                             class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all group"
                         >
                             <div class="p-3 bg-sky-100 rounded-lg group-hover:bg-sky-200 transition-colors">
-                                <PaperAirplaneIcon class="h-6 w-6 text-sky-600" />
+                                <PaperAirplaneIcon class="h-6 w-6 text-brand-red-600" />
                             </div>
                             <div class="ml-4">
                                 <p class="font-semibold text-gray-900">Flight Requests</p>
@@ -461,8 +461,8 @@ const formatDateTime = (date) => {
                             :href="route('admin.jobs.index')"
                             class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all group"
                         >
-                            <div class="p-3 bg-indigo-100 rounded-lg group-hover:bg-indigo-200 transition-colors">
-                                <BriefcaseIcon class="h-6 w-6 text-indigo-600" />
+                            <div class="p-3 bg-red-100 rounded-lg group-hover:bg-indigo-200 transition-colors">
+                                <BriefcaseIcon class="h-6 w-6 text-brand-red-600" />
                             </div>
                             <div class="ml-4">
                                 <p class="font-semibold text-gray-900">Job Postings</p>
@@ -474,8 +474,8 @@ const formatDateTime = (date) => {
                             :href="route('admin.applications.index')"
                             class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all group"
                         >
-                            <div class="p-3 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                                <ClipboardDocumentListIcon class="h-6 w-6 text-blue-600" />
+                            <div class="p-3 bg-red-100 rounded-lg group-hover:bg-blue-200 transition-colors">
+                                <ClipboardDocumentListIcon class="h-6 w-6 text-brand-red-600" />
                             </div>
                             <div class="ml-4">
                                 <p class="font-semibold text-gray-900">Job Applications</p>
@@ -566,7 +566,7 @@ const formatDateTime = (date) => {
                             <div class="w-20 text-sm text-gray-600">{{ data.date }}</div>
                             <div class="flex-1 bg-gray-100 rounded-full h-8 overflow-hidden">
                                 <div 
-                                    class="bg-blue-600 h-full flex items-center justify-end pr-3 text-white text-sm font-medium transition-all duration-500"
+                                    class="bg-brand-red-600 h-full flex items-center justify-end pr-3 text-white text-sm font-medium transition-all duration-500"
                                     :style="{ width: `${Math.max((data.count / Math.max(...userChartData.map(d => d.count), 1)) * 100, 10)}%` }"
                                 >
                                     {{ data.count }}
@@ -635,16 +635,16 @@ const formatDateTime = (date) => {
                                     <span class="text-gray-400" v-else>Unknown</span>
                                 </td>
                                 <td class="px-3 py-2 text-gray-700">
-                                    <span class="line-clamp-2 max-w-xs block">{{ log.purpose || 'â€”' }}</span>
+                                    <span class="line-clamp-2 max-w-xs block">{{ log.purpose || '—' }}</span>
                                 </td>
                                 <td class="px-3 py-2 text-gray-600">{{ formatDateTime(log.started_at) }}</td>
                                 <td class="px-3 py-2 text-gray-600">
                                     <span v-if="log.ended_at">{{ formatDateTime(log.ended_at) }}</span>
-                                    <span v-else class="text-gray-400">â€”</span>
+                                    <span v-else class="text-gray-400">—</span>
                                 </td>
                                 <td class="px-3 py-2 text-gray-600">
                                     <span v-if="log.duration_minutes !== null">{{ log.duration_minutes }} min</span>
-                                    <span v-else class="text-gray-400">â€”</span>
+                                    <span v-else class="text-gray-400">—</span>
                                 </td>
                                 <td class="px-3 py-2">
                                     <span
@@ -756,14 +756,14 @@ const formatDateTime = (date) => {
                         >
                             <p class="font-medium text-gray-900 text-sm">{{ booking.user?.name || 'Unknown' }}</p>
                             <p class="text-xs text-gray-600 mt-1">{{ booking.hotel?.name || 'Hotel' }}</p>
-                            <p class="text-xs text-gray-500 mt-1">{{ booking.room?.type || 'Room' }} â€¢ {{ booking.booking_reference }}</p>
+                            <p class="text-xs text-gray-500 mt-1">{{ booking.room?.type || 'Room' }} • {{ booking.booking_reference }}</p>
                             <div class="flex items-center justify-between mt-2">
                                 <span 
                                     class="text-xs px-2 py-1 rounded-full"
                                     :class="{
                                         'bg-green-50 text-green-700': booking.status === 'confirmed',
                                         'bg-yellow-50 text-yellow-700': booking.status === 'pending',
-                                        'bg-blue-50 text-blue-700': booking.status === 'checked_in',
+                                        'bg-red-50 text-blue-700': booking.status === 'checked_in',
                                         'bg-gray-50 text-gray-700': booking.status === 'checked_out',
                                         'bg-red-50 text-red-700': booking.status === 'cancelled'
                                     }"
@@ -792,14 +792,14 @@ const formatDateTime = (date) => {
                             class="p-4 hover:bg-gray-50 transition-colors"
                         >
                             <p class="font-medium text-gray-900 text-sm">{{ application.user?.name || 'Unknown' }}</p>
-                            <p class="text-xs text-gray-600 mt-1">{{ application.destination_country }} â€¢ {{ application.visa_type }}</p>
+                            <p class="text-xs text-gray-600 mt-1">{{ application.destination_country }} • {{ application.visa_type }}</p>
                             <p class="text-xs text-gray-500 mt-1">{{ application.application_reference }}</p>
                             <div class="flex items-center justify-between mt-2">
                                 <span 
                                     class="text-xs px-2 py-1 rounded-full"
                                     :class="{
                                         'bg-green-50 text-green-700': application.status === 'approved',
-                                        'bg-blue-50 text-blue-700': application.status === 'submitted',
+                                        'bg-red-50 text-blue-700': application.status === 'submitted',
                                         'bg-yellow-50 text-yellow-700': application.status === 'under_review',
                                         'bg-orange-50 text-orange-700': application.status === 'documents_requested',
                                         'bg-purple-50 text-purple-700': application.status === 'interview_scheduled',

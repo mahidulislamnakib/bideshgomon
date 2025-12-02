@@ -124,7 +124,7 @@ const submitBooking = () => {
     <AuthenticatedLayout>
         <div class="min-h-screen bg-gray-50 pb-20">
             <!-- Header -->
-            <div class="bg-sky-600 text-white px-4 pt-6 pb-24">
+            <div class="bg-brand-red-600 text-white px-4 pt-6 pb-24">
                 <div class="max-w-4xl mx-auto">
                     <Link
                         :href="route('flight-booking.index')"
@@ -154,7 +154,7 @@ const submitBooking = () => {
                             </div>
                         </div>
                         <div class="text-right">
-                            <div class="text-xl font-bold text-sky-600">
+                            <div class="text-xl font-bold text-brand-red-600">
                                 {{ formatCurrency(pricing.base_fare) }}
                             </div>
                             <div class="text-xs text-gray-500">per person</div>
@@ -201,7 +201,7 @@ const submitBooking = () => {
                                 <div 
                                     :class="[
                                         'w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm',
-                                        currentStep >= step ? 'bg-sky-600 text-white' : 'bg-gray-200 text-gray-500'
+                                        currentStep >= step ? 'bg-brand-red-600 text-white' : 'bg-gray-200 text-gray-500'
                                     ]"
                                 >
                                     <CheckCircleIcon v-if="currentStep > step" class="h-5 w-5" />
@@ -220,7 +220,7 @@ const submitBooking = () => {
                                 v-if="step < 3"
                                 :class="[
                                     'flex-1 h-1 mx-2',
-                                    currentStep > step ? 'bg-sky-600' : 'bg-gray-200'
+                                    currentStep > step ? 'bg-brand-red-600' : 'bg-gray-200'
                                 ]"
                             ></div>
                         </div>
@@ -230,7 +230,7 @@ const submitBooking = () => {
                 <!-- Step 1: Passenger Information -->
                 <div v-show="currentStep === 1" class="bg-white rounded-2xl p-6 shadow-lg">
                     <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                        <UserIcon class="h-6 w-6 mr-2 text-sky-600" />
+                        <UserIcon class="h-6 w-6 mr-2 text-brand-red-600" />
                         Passenger Information
                     </h2>
                     
@@ -290,7 +290,7 @@ const submitBooking = () => {
                                     <input 
                                         type="checkbox"
                                         v-model="bookingForm.add_insurance"
-                                        class="w-5 h-5 text-sky-600 border-gray-300 rounded focus:ring-sky-500"
+                                        class="w-5 h-5 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
                                     />
                                     <span class="text-sm text-gray-700">Travel Insurance (৳1,500 per passenger)</span>
                                 </label>
@@ -311,7 +311,7 @@ const submitBooking = () => {
 
                     <button
                         @click="nextStep"
-                        class="w-full mt-6 bg-sky-600 text-white py-4 rounded-xl font-semibold hover:bg-sky-700 transition-all"
+                        class="w-full mt-6 bg-brand-red-600 text-white py-4 rounded-xl font-semibold hover:bg-red-700 transition-all"
                     >
                         Continue to Contact Details
                     </button>
@@ -370,7 +370,7 @@ const submitBooking = () => {
                         </button>
                         <button
                             @click="nextStep"
-                            class="flex-1 bg-sky-600 text-white py-4 rounded-xl font-semibold hover:bg-sky-700 transition-all"
+                            class="flex-1 bg-brand-red-600 text-white py-4 rounded-xl font-semibold hover:bg-red-700 transition-all"
                         >
                             Continue to Payment
                         </button>
@@ -406,7 +406,7 @@ const submitBooking = () => {
                             </div>
                             <div class="pt-3 border-t-2 border-gray-200 flex justify-between">
                                 <span class="font-bold text-gray-900">Total Amount</span>
-                                <span class="text-2xl font-bold text-sky-600">{{ formatCurrency(totalAmount) }}</span>
+                                <span class="text-2xl font-bold text-brand-red-600">{{ formatCurrency(totalAmount) }}</span>
                             </div>
                         </div>
                     </div>
@@ -414,7 +414,7 @@ const submitBooking = () => {
                     <!-- Wallet Payment -->
                     <div class="bg-white rounded-2xl p-6 shadow-lg">
                         <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                            <CreditCardIcon class="h-6 w-6 mr-2 text-sky-600" />
+                            <CreditCardIcon class="h-6 w-6 mr-2 text-brand-red-600" />
                             Payment Method
                         </h2>
                         
@@ -465,7 +465,7 @@ const submitBooking = () => {
                         <button
                             @click="submitBooking"
                             :disabled="!hasSufficientBalance || bookingForm.processing"
-                            class="flex-1 bg-sky-600 hover:bg-sky-700 text-white py-4 rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="flex-1 bg-brand-red-600 hover:bg-red-700 text-white py-4 rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {{ bookingForm.processing ? 'Processing...' : 'Confirm Booking' }}
                         </button>

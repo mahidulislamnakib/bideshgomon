@@ -1,9 +1,9 @@
-<template>
+﻿<template>
     <AdminLayout>
         <div class="px-4 sm:px-6 lg:px-8 py-8">
             <!-- Header -->
             <div class="mb-6">
-                <Link :href="route('admin.data.cv-templates.index')" class="text-sm font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 flex items-center gap-1 mb-4">
+                <Link :href="route('admin.data.cv-templates.index')" class="text-sm font-medium text-brand-red-600 hover:text-brand-red-600 dark:text-blue-400 flex items-center gap-1 mb-4">
                     <ChevronLeftIcon class="h-4 w-4" />
                     Back to CV Templates
                 </Link>
@@ -27,7 +27,7 @@
                                     <div class="space-y-1 text-center">
                                         <DocumentArrowUpIcon class="mx-auto h-12 w-12 text-gray-400" />
                                         <div class="flex text-sm text-gray-600 dark:text-gray-400">
-                                            <label for="file-upload" class="relative cursor-pointer rounded-md font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500">
+                                            <label for="file-upload" class="relative cursor-pointer rounded-md font-medium text-brand-red-600 dark:text-blue-400 hover:text-brand-red-600">
                                                 <span>Upload a file</span>
                                                 <input
                                                     id="file-upload"
@@ -55,7 +55,7 @@
                                 <button
                                     type="submit"
                                     :disabled="form.processing || !form.file"
-                                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
+                                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 disabled:opacity-50"
                                 >
                                     <ArrowUpTrayIcon class="-ml-1 mr-2 h-5 w-5" />
                                     <span v-if="form.processing">Uploading...</span>

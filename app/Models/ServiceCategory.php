@@ -31,6 +31,14 @@ class ServiceCategory extends Model
     }
 
     /**
+     * Alias for modules() - for consistency with naming
+     */
+    public function serviceModules(): HasMany
+    {
+        return $this->modules();
+    }
+
+    /**
      * Get active service modules only
      */
     public function activeModules(): HasMany

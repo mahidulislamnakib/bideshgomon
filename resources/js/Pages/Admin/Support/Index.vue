@@ -39,7 +39,7 @@
                             <div class="p-5">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <div class="rounded-md bg-blue-500 p-3">
+                                        <div class="rounded-md bg-red-500 p-3">
                                             <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                             </svg>
@@ -106,12 +106,12 @@
                                     v-model="searchQuery"
                                     type="text"
                                     placeholder="Search tickets..."
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-ocean-500 text-sm"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600 text-sm"
                                     @keyup.enter="applyFilters"
                                 />
                             </div>
                             <div>
-                                <select v-model="filterStatus" @change="applyFilters" class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-ocean-500 text-sm">
+                                <select v-model="filterStatus" @change="applyFilters" class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600 text-sm">
                                     <option value="">All Status</option>
                                     <option value="open">Open</option>
                                     <option value="in_progress">In Progress</option>
@@ -121,7 +121,7 @@
                                 </select>
                             </div>
                             <div>
-                                <select v-model="filterPriority" @change="applyFilters" class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-ocean-500 text-sm">
+                                <select v-model="filterPriority" @change="applyFilters" class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600 text-sm">
                                     <option value="">All Priority</option>
                                     <option value="low">Low</option>
                                     <option value="normal">Normal</option>
@@ -130,25 +130,25 @@
                                 </select>
                             </div>
                             <div>
-                                <select v-model="filterCategory" @change="applyFilters" class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-ocean-500 text-sm">
+                                <select v-model="filterCategory" @change="applyFilters" class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600 text-sm">
                                     <option value="">All Categories</option>
-                                    <option value="visa">🛂 Visa</option>
-                                    <option value="jobs">💼 Jobs</option>
-                                    <option value="account">👤 Account</option>
-                                    <option value="payment">💳 Payment</option>
-                                    <option value="services">🎯 Services</option>
-                                    <option value="technical">🔧 Technical</option>
+                                    <option value="visa">?? Visa</option>
+                                    <option value="jobs">?? Jobs</option>
+                                    <option value="account">?? Account</option>
+                                    <option value="payment">?? Payment</option>
+                                    <option value="services">?? Services</option>
+                                    <option value="technical">?? Technical</option>
                                 </select>
                             </div>
                             <div>
-                                <select v-model="filterAssigned" @change="applyFilters" class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-ocean-500 text-sm">
+                                <select v-model="filterAssigned" @change="applyFilters" class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600 text-sm">
                                     <option value="">All Tickets</option>
                                     <option value="me">Assigned to Me</option>
                                     <option value="unassigned">Unassigned</option>
                                 </select>
                             </div>
                             <div>
-                                <button @click="clearFilters" class="w-full inline-flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ocean-500">
+                                <button @click="clearFilters" class="w-full inline-flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600">
                                     Clear
                                 </button>
                             </div>
@@ -207,7 +207,7 @@
                                         {{ formatDate(ticket.created_at) }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <Link :href="route('admin.support-tickets.show', ticket.id)" class="text-ocean-600 hover:text-ocean-900">
+                                        <Link :href="route('admin.support-tickets.show', ticket.id)" class="text-brand-red-600 hover:text-red-900">
                                             View
                                         </Link>
                                     </td>
@@ -279,7 +279,7 @@ const clearFilters = () => {
 const statusClass = (status) => {
     const classes = {
         open: 'bg-green-100 text-green-800',
-        in_progress: 'bg-blue-100 text-blue-800',
+        in_progress: 'bg-red-100 text-brand-red-600',
         awaiting_reply: 'bg-yellow-100 text-yellow-800',
         resolved: 'bg-purple-100 text-purple-800',
         closed: 'bg-gray-100 text-gray-800',
@@ -302,7 +302,7 @@ const priorityClass = (priority) => {
     const classes = {
         urgent: 'bg-red-100 text-red-800',
         high: 'bg-orange-100 text-orange-800',
-        normal: 'bg-blue-100 text-blue-800',
+        normal: 'bg-red-100 text-brand-red-600',
         low: 'bg-gray-100 text-gray-800',
     };
     return classes[priority] || 'bg-gray-100 text-gray-800';
@@ -320,12 +320,12 @@ const priorityLabel = (priority) => {
 
 const categoryLabel = (category) => {
     const labels = {
-        visa: '🛂 Visa',
-        jobs: '💼 Jobs',
-        account: '👤 Account',
-        payment: '💳 Payment',
-        services: '🎯 Services',
-        technical: '🔧 Technical',
+        visa: '?? Visa',
+        jobs: '?? Jobs',
+        account: '?? Account',
+        payment: '?? Payment',
+        services: '?? Services',
+        technical: '?? Technical',
     };
     return labels[category] || category;
 };

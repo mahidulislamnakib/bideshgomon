@@ -73,16 +73,3 @@ onUnmounted(() => {
   window.removeEventListener('pwa:online', handleOnline);
 });
 </script>
-
-<style scoped>
-.slide-down-enter-active,
-.slide-down-leave-active {
-  transition: all 0.3s ease;
-}
-
-.slide-down-enter-from,
-.slide-down-leave-to {
-  transform: translateY(-100%);
-  opacity: 0;
-}
-</style>

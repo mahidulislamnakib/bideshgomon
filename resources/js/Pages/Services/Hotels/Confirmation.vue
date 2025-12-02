@@ -41,7 +41,7 @@ const printConfirmation = () => {
                         <!-- Booking Reference -->
                         <div class="text-center mb-8 p-4 bg-indigo-50 rounded-lg">
                             <p class="text-sm text-gray-600 mb-1">Booking Reference</p>
-                            <p class="text-3xl font-bold text-indigo-600">{{ booking.booking_reference }}</p>
+                            <p class="text-3xl font-bold text-brand-red-600">{{ booking.booking_reference }}</p>
                             <p class="text-sm text-gray-600 mt-2">Please save this reference number for your records</p>
                         </div>
 
@@ -146,13 +146,13 @@ const printConfirmation = () => {
                                 🖨️ Print Confirmation
                             </button>
                             <Link :href="route('hotels.my-bookings')"
-                                class="flex-1 bg-indigo-600 text-white py-3 px-6 rounded-lg hover:bg-indigo-700 transition text-center">
+                                class="flex-1 bg-brand-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition text-center">
                                 View All Bookings
                             </Link>
                         </div>
 
                         <div class="mt-6 text-center">
-                            <Link :href="route('hotels.index')" class="text-indigo-600 hover:text-indigo-800">
+                            <Link :href="route('hotels.index')" class="text-brand-red-600 hover:text-indigo-800">
                                 ← Back to Hotel Search
                             </Link>
                         </div>

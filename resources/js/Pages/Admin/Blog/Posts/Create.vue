@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <Head title="Create Blog Post" />
 
     <AdminLayout>
@@ -33,7 +33,7 @@
                                     v-model="form.title"
                                     type="text"
                                     placeholder="Enter post title..."
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     @input="generateSlug"
                                 />
                                 <p v-if="form.errors.title" class="mt-2 text-sm text-red-600">{{ form.errors.title }}</p>
@@ -51,7 +51,7 @@
                                         v-model="form.slug"
                                         type="text"
                                         placeholder="auto-generated"
-                                        class="flex-1 ml-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        class="flex-1 ml-1 rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                 </div>
                                 <p v-if="form.errors.slug" class="mt-2 text-sm text-red-600">{{ form.errors.slug }}</p>
@@ -67,7 +67,7 @@
                                     v-model="form.excerpt"
                                     rows="3"
                                     placeholder="Brief summary of the post..."
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 ></textarea>
                                 <p class="mt-1 text-xs text-gray-500">Short description shown in post listings</p>
                                 <p v-if="form.errors.excerpt" class="mt-2 text-sm text-red-600">{{ form.errors.excerpt }}</p>
@@ -83,7 +83,7 @@
                                     v-model="form.content"
                                     rows="20"
                                     placeholder="Write your post content here..."
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-mono text-sm"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 font-mono text-sm"
                                 ></textarea>
                                 <p class="mt-1 text-xs text-gray-500">Supports HTML and Markdown</p>
                                 <p v-if="form.errors.content" class="mt-2 text-sm text-red-600">{{ form.errors.content }}</p>
@@ -106,7 +106,7 @@
                                             v-model="form.meta_title"
                                             type="text"
                                             placeholder="SEO title (defaults to post title)"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <p class="mt-1 text-xs text-gray-500">{{ (form.meta_title || form.title).length }}/60 characters</p>
                                     </div>
@@ -120,7 +120,7 @@
                                             v-model="form.meta_description"
                                             rows="3"
                                             placeholder="SEO description for search engines"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         ></textarea>
                                         <p class="mt-1 text-xs text-gray-500">{{ (form.meta_description || '').length }}/160 characters</p>
                                     </div>
@@ -134,7 +134,7 @@
                                             v-model="form.meta_keywords"
                                             type="text"
                                             placeholder="keyword1, keyword2, keyword3"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <p class="mt-1 text-xs text-gray-500">Separate keywords with commas</p>
                                     </div>
@@ -156,7 +156,7 @@
                                         <select
                                             id="status"
                                             v-model="form.status"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         >
                                             <option value="draft">Draft</option>
                                             <option value="published">Published</option>
@@ -173,7 +173,7 @@
                                             id="published_at"
                                             v-model="form.published_at"
                                             type="datetime-local"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <p v-if="form.errors.published_at" class="mt-2 text-sm text-red-600">{{ form.errors.published_at }}</p>
                                     </div>
@@ -183,7 +183,7 @@
                                             id="is_featured"
                                             v-model="form.is_featured"
                                             type="checkbox"
-                                            class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                            class="h-4 w-4 rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <label for="is_featured" class="ml-2 block text-sm text-gray-700">
                                             Featured Post
@@ -200,7 +200,7 @@
                                 <select
                                     id="category_id"
                                     v-model="form.category_id"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 >
                                     <option value="">Select a category</option>
                                     <option v-for="category in categories" :key="category.id" :value="category.id">
@@ -220,7 +220,7 @@
                                             v-model="form.tags"
                                             type="checkbox"
                                             :value="tag.id"
-                                            class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                            class="h-4 w-4 rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <label :for="'tag-' + tag.id" class="ml-2 block text-sm text-gray-700">
                                             {{ tag.name }}
@@ -240,7 +240,7 @@
                                     v-model="form.featured_image"
                                     type="text"
                                     placeholder="https://example.com/image.jpg"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 />
                                 <p class="mt-1 text-xs text-gray-500">Enter image URL or upload to your CDN</p>
                                 
@@ -258,7 +258,7 @@
                                         v-model="form.image_credit"
                                         type="text"
                                         placeholder="Photo by John Doe"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     />
                                 </div>
                             </div>
@@ -269,7 +269,7 @@
                                     <button
                                         type="submit"
                                         :disabled="form.processing"
-                                        class="w-full inline-flex justify-center items-center px-4 py-3 bg-blue-600 border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150"
+                                        class="w-full inline-flex justify-center items-center px-4 py-3 bg-brand-red-600 border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest hover:bg-red-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150"
                                     >
                                         <CheckIcon v-if="!form.processing" class="h-5 w-5 mr-2" />
                                         <svg v-else class="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -281,7 +281,7 @@
 
                                     <Link
                                         :href="route('admin.blog.posts.index')"
-                                        class="w-full inline-flex justify-center items-center px-4 py-3 bg-white border border-gray-300 rounded-md font-semibold text-sm text-gray-700 uppercase tracking-widest hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                        class="w-full inline-flex justify-center items-center px-4 py-3 bg-white border border-gray-300 rounded-md font-semibold text-sm text-gray-700 uppercase tracking-widest hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2"
                                     >
                                         Cancel
                                     </Link>

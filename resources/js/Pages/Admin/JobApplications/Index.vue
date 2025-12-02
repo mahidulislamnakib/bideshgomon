@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
@@ -85,7 +85,7 @@ const exportApplications = () => {
 const getStatusBadge = (appStatus) => {
     const badges = {
         'pending': 'bg-yellow-100 text-yellow-700',
-        'reviewed': 'bg-blue-100 text-blue-700',
+        'reviewed': 'bg-red-100 text-blue-700',
         'shortlisted': 'bg-purple-100 text-purple-700',
         'rejected': 'bg-red-100 text-red-700',
         'hired': 'bg-green-100 text-green-700',
@@ -127,7 +127,7 @@ const formatDate = (date) => {
                         </div>
                         <button
                             @click="exportApplications"
-                            class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-all shadow-sm"
+                            class="inline-flex items-center px-6 py-3 bg-brand-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-all shadow-sm"
                         >
                             <ArrowDownTrayIcon class="h-5 w-5 mr-2" />
                             Export CSV
@@ -144,9 +144,9 @@ const formatDate = (date) => {
                             <div class="text-yellow-700 text-xs font-medium">Pending</div>
                             <div class="text-2xl font-bold text-yellow-900 mt-1">{{ stats.pending }}</div>
                         </div>
-                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3">
+                        <div class="bg-red-50 border border-red-200 rounded-xl p-3">
                             <div class="text-blue-700 text-xs font-medium">Reviewed</div>
-                            <div class="text-2xl font-bold text-blue-900 mt-1">{{ stats.reviewed }}</div>
+                            <div class="text-2xl font-bold text-red-900 mt-1">{{ stats.reviewed }}</div>
                         </div>
                         <div class="bg-purple-50 border border-purple-200 rounded-xl p-3">
                             <div class="text-purple-700 text-xs font-medium">Shortlisted</div>
@@ -176,7 +176,7 @@ const formatDate = (date) => {
                                 @keyup.enter="performSearch"
                                 type="text"
                                 placeholder="Search by applicant name or email..."
-                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                             />
                         </div>
                         <button
@@ -185,7 +185,7 @@ const formatDate = (date) => {
                         >
                             <FunnelIcon class="h-5 w-5 mr-2" />
                             Filters
-                            <span v-if="hasActiveFilters" class="ml-2 px-2 py-0.5 bg-blue-600 text-white text-xs rounded-full">Active</span>
+                            <span v-if="hasActiveFilters" class="ml-2 px-2 py-0.5 bg-brand-red-600 text-white text-xs rounded-full">Active</span>
                         </button>
                     </div>
 
@@ -197,7 +197,7 @@ const formatDate = (date) => {
                                 <select
                                     v-model="job_id"
                                     @change="performSearch"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Jobs</option>
                                     <option v-for="job in jobs" :key="job.id" :value="job.id">
@@ -210,7 +210,7 @@ const formatDate = (date) => {
                                 <select
                                     v-model="status"
                                     @change="performSearch"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Status</option>
                                     <option value="pending">Pending</option>
@@ -225,7 +225,7 @@ const formatDate = (date) => {
                                 <select
                                     v-model="payment_status"
                                     @change="performSearch"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Payments</option>
                                     <option value="paid">Paid</option>
@@ -237,7 +237,7 @@ const formatDate = (date) => {
                         <button
                             v-if="hasActiveFilters"
                             @click="clearFilters"
-                            class="mt-4 text-sm text-blue-600 hover:text-blue-700 font-medium"
+                            class="mt-4 text-sm text-brand-red-600 hover:text-red-700 font-medium"
                         >
                             Clear all filters
                         </button>
@@ -245,12 +245,12 @@ const formatDate = (date) => {
                 </div>
 
                 <!-- Bulk Actions -->
-                <div v-if="selectedApplications.length > 0" class="bg-blue-50 rounded-xl p-4 mb-6 flex items-center justify-between">
-                    <span class="text-sm font-medium text-blue-900">{{ selectedApplications.length }} application(s) selected</span>
+                <div v-if="selectedApplications.length > 0" class="bg-red-50 rounded-xl p-4 mb-6 flex items-center justify-between">
+                    <span class="text-sm font-medium text-red-900">{{ selectedApplications.length }} application(s) selected</span>
                     <div class="flex gap-2">
                         <button
                             @click="bulkUpdateStatus('reviewed')"
-                            class="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors"
+                            class="px-4 py-2 bg-brand-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors"
                         >
                             Mark Reviewed
                         </button>
@@ -294,7 +294,7 @@ const formatDate = (date) => {
                                 type="checkbox"
                                 :checked="selectedApplications.includes(app.id)"
                                 @change="toggleApplicationSelection(app.id)"
-                                class="mt-1 h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                                class="mt-1 h-5 w-5 text-brand-red-600 rounded border-gray-300 focus:ring-brand-red-600"
                             />
 
                             <!-- Application Content -->
@@ -332,7 +332,7 @@ const formatDate = (date) => {
                                             <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full">
                                                 {{ app.job_posting?.company_name }}
                                             </span>
-                                            <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full">
+                                            <span class="px-3 py-1 bg-red-50 text-blue-700 rounded-full">
                                                 {{ app.job_posting?.country?.name }}
                                             </span>
                                             <span v-if="app.user_cv" class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full flex items-center gap-1">
@@ -345,7 +345,7 @@ const formatDate = (date) => {
                                     <!-- Actions -->
                                     <Link
                                         :href="route('admin.applications.show', app.id)"
-                                        class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                        class="p-2 text-brand-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                         title="View Details"
                                     >
                                         <EyeIcon class="h-5 w-5" />
@@ -370,7 +370,7 @@ const formatDate = (date) => {
                             :class="[
                                 'px-4 py-2 text-sm rounded-lg font-medium',
                                 link.active
-                                    ? 'bg-blue-600 text-white'
+                                    ? 'bg-brand-red-600 text-white'
                                     : link.url
                                     ? 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
                                     : 'bg-gray-100 text-gray-400 cursor-not-allowed'

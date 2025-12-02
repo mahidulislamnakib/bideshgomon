@@ -34,7 +34,7 @@
                                 <div v-if="application.payment_status === 'pending'" class="text-right">
                                     <Link
                                         :href="route('visa.payment', application.id)"
-                                        class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
+                                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700"
                                     >
                                         Make Payment
                                     </Link>
@@ -153,7 +153,7 @@
                             <div v-else class="text-center py-8">
                                 <p class="text-sm text-gray-600">No documents uploaded yet</p>
                                 <button
-                                    class="mt-3 inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
+                                    class="mt-3 inline-flex items-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700"
                                 >
                                     Upload Documents
                                 </button>
@@ -285,11 +285,8 @@ const formatStatus = (status) => {
     return (status || '').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 };
 
-const formatDate = (dateString) => {
-    if (!dateString) return 'N/A';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-};
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
+const { formatDate } = useBangladeshFormat();
 
 const cancelApplication = () => {
     if (confirm('Are you sure you want to cancel this application?')) {

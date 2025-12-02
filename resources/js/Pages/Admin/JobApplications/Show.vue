@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
@@ -29,7 +29,7 @@ const updateStatus = () => {
 const getStatusBadge = (status) => {
     const badges = {
         'pending': 'bg-yellow-100 text-yellow-700',
-        'reviewed': 'bg-blue-100 text-blue-700',
+        'reviewed': 'bg-red-100 text-blue-700',
         'shortlisted': 'bg-purple-100 text-purple-700',
         'rejected': 'bg-red-100 text-red-700',
         'hired': 'bg-green-100 text-green-700',
@@ -113,7 +113,7 @@ const formatDate = (date) => {
                         <!-- Job Details -->
                         <div class="bg-white rounded-2xl shadow-sm p-6">
                             <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                                <BriefcaseIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                                <BriefcaseIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                                 Applied Position
                             </h2>
                             <div class="space-y-3">
@@ -147,7 +147,7 @@ const formatDate = (date) => {
                         <!-- Cover Letter -->
                         <div v-if="application.cover_letter" class="bg-white rounded-2xl shadow-sm p-6">
                             <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                                <DocumentTextIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                                <DocumentTextIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                                 Cover Letter
                             </h2>
                             <div class="bg-gray-50 rounded-lg p-4 text-gray-700 whitespace-pre-wrap">
@@ -158,14 +158,14 @@ const formatDate = (date) => {
                         <!-- Education -->
                         <div v-if="application.user?.educations?.length > 0" class="bg-white rounded-2xl shadow-sm p-6">
                             <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                                <AcademicCapIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                                <AcademicCapIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                                 Education
                             </h2>
                             <div class="space-y-4">
                                 <div
                                     v-for="edu in application.user.educations"
                                     :key="edu.id"
-                                    class="border-l-4 border-indigo-500 pl-4"
+                                    class="border-l-4 border-brand-red-600 pl-4"
                                 >
                                     <div class="font-semibold text-gray-900">{{ edu.degree }} in {{ edu.field_of_study }}</div>
                                     <div class="text-gray-600">{{ edu.institution_name }}</div>
@@ -177,7 +177,7 @@ const formatDate = (date) => {
                         <!-- Experience -->
                         <div v-if="application.user?.work_experiences?.length > 0" class="bg-white rounded-2xl shadow-sm p-6">
                             <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                                <BriefcaseIcon class="h-5 w-5 mr-2 text-indigo-600" />
+                                <BriefcaseIcon class="h-5 w-5 mr-2 text-brand-red-600" />
                                 Work Experience
                             </h2>
                             <div class="space-y-4">
@@ -205,7 +205,7 @@ const formatDate = (date) => {
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
                                     <select
                                         v-model="form.status"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                     >
                                         <option value="pending">Pending</option>
                                         <option value="reviewed">Reviewed</option>
@@ -220,7 +220,7 @@ const formatDate = (date) => {
                                     <textarea
                                         v-model="form.admin_notes"
                                         rows="4"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                         placeholder="Add internal notes about this application..."
                                     ></textarea>
                                 </div>
@@ -228,7 +228,7 @@ const formatDate = (date) => {
                                 <button
                                     type="submit"
                                     :disabled="form.processing"
-                                    class="w-full px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors disabled:opacity-50"
+                                    class="w-full px-6 py-3 bg-brand-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-colors disabled:opacity-50"
                                 >
                                     {{ form.processing ? 'Updating...' : 'Update Application' }}
                                 </button>
@@ -249,8 +249,8 @@ const formatDate = (date) => {
                                     </div>
                                 </div>
                                 <div v-if="application.reviewed_at" class="flex items-start">
-                                    <div class="p-2 bg-blue-100 rounded-full mr-3">
-                                        <CheckCircleIcon class="h-4 w-4 text-blue-600" />
+                                    <div class="p-2 bg-red-100 rounded-full mr-3">
+                                        <CheckCircleIcon class="h-4 w-4 text-brand-red-600" />
                                     </div>
                                     <div class="flex-1">
                                         <div class="font-medium text-gray-900">Reviewed by Admin</div>

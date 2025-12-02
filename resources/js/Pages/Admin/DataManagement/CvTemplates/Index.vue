@@ -12,7 +12,7 @@
                         <ArrowUpTrayIcon class="-ml-1 mr-2 h-5 w-5 text-gray-500 dark:text-gray-400" />
                         Bulk Upload
                     </Link>
-                    <Link :href="route('admin.data.cv-templates.create')" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                    <Link :href="route('admin.data.cv-templates.create')" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-red-600 hover:bg-red-700">
                         <PlusIcon class="-ml-1 mr-2 h-5 w-5" />
                         Add Template
                     </Link>
@@ -26,14 +26,14 @@
                         v-model="filters.search"
                         type="text"
                         placeholder="Search templates..."
-                        class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                         @input="debouncedSearch"
                     />
                 </div>
                 <div>
                     <select
                         v-model="filters.category"
-                        class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                         @change="applyFilters"
                     >
                         <option value="">All Categories</option>
@@ -47,7 +47,7 @@
                 <div>
                     <select
                         v-model="filters.is_premium"
-                        class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                         @change="applyFilters"
                     >
                         <option value="">All Types</option>
@@ -58,7 +58,7 @@
                 <div>
                     <select
                         v-model="filters.is_active"
-                        class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                         @change="applyFilters"
                     >
                         <option value="">All Status</option>
@@ -118,11 +118,11 @@
                             <td class="whitespace-nowrap px-3 py-4">
                                 <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium capitalize"
                                     :class="{
-                                        'bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/20 dark:bg-blue-500/10 dark:text-blue-400 dark:ring-blue-500/30': template.category === 'professional',
+                                        'bg-red-50 text-blue-700 ring-1 ring-inset ring-blue-600/20 dark:bg-red-500/10 dark:text-blue-400 dark:ring-brand-red-600/30': template.category === 'professional',
                                         'bg-purple-50 text-purple-700 ring-1 ring-inset ring-purple-600/20 dark:bg-purple-500/10 dark:text-purple-400 dark:ring-purple-500/30': template.category === 'creative',
                                         'bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20 dark:bg-green-500/10 dark:text-green-400 dark:ring-green-500/30': template.category === 'modern',
                                         'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-600/20 dark:bg-amber-500/10 dark:text-amber-400 dark:ring-amber-500/30': template.category === 'traditional',
-                                        'bg-indigo-50 text-indigo-700 ring-1 ring-inset ring-indigo-600/20 dark:bg-indigo-500/10 dark:text-indigo-400 dark:ring-indigo-500/30': template.category === 'academic',
+                                        'bg-red-50 text-indigo-700 ring-1 ring-inset ring-indigo-600/20 dark:bg-brand-red-600/10 dark:text-red-400 dark:ring-brand-red-600/30': template.category === 'academic',
                                         'bg-gray-50 text-gray-700 ring-1 ring-inset ring-gray-600/20 dark:bg-gray-500/10 dark:text-gray-400 dark:ring-gray-500/30': !['professional', 'creative', 'modern', 'traditional', 'academic'].includes(template.category)
                                     }">
                                     {{ template.category }}
@@ -138,7 +138,7 @@
                                 </span>
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900 dark:text-white">
-                                <span v-if="template.is_premium" class="font-medium">৳{{ formatNumber(template.price) }}</span>
+                                <span v-if="template.is_premium" class="font-medium">?{{ formatNumber(template.price) }}</span>
                                 <span v-else class="text-gray-500 dark:text-gray-400">Free</span>
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900 dark:text-white">
@@ -153,8 +153,8 @@
                             <td class="whitespace-nowrap px-3 py-4">
                                 <button
                                     @click="toggleStatus(template)"
-                                    class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
-                                    :class="template.is_active ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'"
+                                    class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2"
+                                    :class="template.is_active ? 'bg-brand-red-600' : 'bg-gray-200 dark:bg-gray-700'"
                                 >
                                     <span
                                         class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
@@ -164,7 +164,7 @@
                             </td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                 <div class="flex justify-end gap-2">
-                                    <Link :href="route('admin.data.cv-templates.edit', template.id)" class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300">
+                                    <Link :href="route('admin.data.cv-templates.edit', template.id)" class="text-brand-red-600 hover:text-red-900 dark:text-blue-400 dark:hover:text-blue-300">
                                         <PencilIcon class="h-5 w-5" />
                                     </Link>
                                     <button @click="confirmDelete(template)" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">

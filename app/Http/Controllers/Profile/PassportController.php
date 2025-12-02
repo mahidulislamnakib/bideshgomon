@@ -96,16 +96,16 @@ class PassportController extends Controller
 
         $validated = $request->validate([
             'passport_number' => [
-                'required',
+                'nullable',
                 'string',
                 'max:50',
                 'unique:user_passports,passport_number,' . $id . ',id,user_id,' . Auth::id()
             ],
-            'passport_type' => 'required|in:regular,diplomatic,official,service,emergency',
-            'issuing_country' => 'required|string|max:2',
+            'passport_type' => 'nullable|in:regular,diplomatic,official,service,emergency',
+            'issuing_country' => 'nullable|string|max:2',
             'issuing_authority' => 'nullable|string|max:255',
-            'issue_date' => 'required|date',
-            'expiry_date' => 'required|date|after:issue_date',
+            'issue_date' => 'nullable|date',
+            'expiry_date' => 'nullable|date|after_or_equal:issue_date',
             'place_of_issue' => 'nullable|string|max:255',
             'is_current_passport' => 'boolean',
             'is_lost_or_stolen' => 'boolean',

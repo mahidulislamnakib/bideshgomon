@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
@@ -59,11 +59,11 @@ const togglePublished = (eventId) => {
 
 const getEventTypeColor = (eventType) => {
     const colors = {
-        'seminar': 'bg-blue-100 text-blue-700',
+        'seminar': 'bg-red-100 text-blue-700',
         'workshop': 'bg-purple-100 text-purple-700',
         'webinar': 'bg-green-100 text-green-700',
         'fair': 'bg-orange-100 text-orange-700',
-        'consultation': 'bg-indigo-100 text-indigo-700',
+        'consultation': 'bg-red-100 text-indigo-700',
         'other': 'bg-gray-100 text-gray-700',
     };
     return colors[eventType?.toLowerCase()] || 'bg-gray-100 text-gray-700';
@@ -99,7 +99,7 @@ const getStatusBadge = (event) => {
                         </div>
                         <Link
                             :href="route('admin.events.create')"
-                            class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-all shadow-sm"
+                            class="inline-flex items-center px-6 py-3 bg-brand-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-all shadow-sm"
                         >
                             <PlusIcon class="h-5 w-5 mr-2" />
                             Create Event
@@ -122,12 +122,12 @@ const getStatusBadge = (event) => {
                                     @keyup.enter="performSearch"
                                     type="text"
                                     placeholder="Search events by title or location..."
-                                    class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                    class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                                 />
                             </div>
                             <button
                                 @click="performSearch"
-                                class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+                                class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
                             >
                                 Search
                             </button>
@@ -147,7 +147,7 @@ const getStatusBadge = (event) => {
                                 <select
                                     v-model="type"
                                     @change="performSearch"
-                                    class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Types</option>
                                     <option value="seminar">Seminar</option>
@@ -164,7 +164,7 @@ const getStatusBadge = (event) => {
                                 <select
                                     v-model="status"
                                     @change="performSearch"
-                                    class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Status</option>
                                     <option value="published">Published</option>
@@ -196,7 +196,7 @@ const getStatusBadge = (event) => {
                         <div class="mt-6">
                             <Link
                                 :href="route('admin.events.create')"
-                                class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700"
                             >
                                 <PlusIcon class="h-5 w-5 mr-2" />
                                 Create Event
@@ -299,14 +299,14 @@ const getStatusBadge = (event) => {
                                         <div class="flex items-center space-x-2">
                                             <Link
                                                 :href="route('admin.events.show', event.id)"
-                                                class="text-indigo-600 hover:text-indigo-900"
+                                                class="text-brand-red-600 hover:text-red-900"
                                                 title="View"
                                             >
                                                 <EyeIcon class="h-5 w-5" />
                                             </Link>
                                             <Link
                                                 :href="route('admin.events.edit', event.id)"
-                                                class="text-blue-600 hover:text-blue-900"
+                                                class="text-brand-red-600 hover:text-red-900"
                                                 title="Edit"
                                             >
                                                 <PencilIcon class="h-5 w-5" />
@@ -353,7 +353,7 @@ const getStatusBadge = (event) => {
                                     :key="link.label"
                                     :href="link.url"
                                     :class="{
-                                        'bg-indigo-600 text-white': link.active,
+                                        'bg-brand-red-600 text-white': link.active,
                                         'bg-white text-gray-700 hover:bg-gray-50': !link.active,
                                         'pointer-events-none opacity-50': !link.url
                                     }"

@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref, computed } from 'vue';
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -134,7 +134,7 @@ const getStatusText = (resource) => {
                     </div>
                     <Link
                         :href="route('admin.agency-resources.create')"
-                        class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 transition"
+                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 transition"
                     >
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -153,7 +153,7 @@ const getStatusText = (resource) => {
                                 @keyup.enter="applyFilters"
                                 type="text"
                                 placeholder="Resource name, agency..."
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             />
                         </div>
                         <div>
@@ -161,7 +161,7 @@ const getStatusText = (resource) => {
                             <select
                                 v-model="statusFilter"
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Status</option>
                                 <option value="pending">Pending Approval</option>
@@ -173,7 +173,7 @@ const getStatusText = (resource) => {
                             <select
                                 v-model="resourceTypeFilter"
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Types</option>
                                 <option v-for="(label, value) in resourceTypeLabels" :key="value" :value="value">
@@ -184,7 +184,7 @@ const getStatusText = (resource) => {
                         <div class="flex items-end gap-2">
                             <button
                                 @click="applyFilters"
-                                class="flex-1 px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 transition"
+                                class="flex-1 px-4 py-2 text-sm font-medium text-white bg-brand-red-600 rounded-md hover:bg-red-700 transition"
                             >
                                 Apply
                             </button>
@@ -328,7 +328,7 @@ const getStatusText = (resource) => {
                             <textarea
                                 v-model="approveForm.admin_notes"
                                 rows="3"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 placeholder="Add any notes about this approval..."
                             ></textarea>
                         </div>

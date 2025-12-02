@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -9,13 +9,13 @@
                             <div>
                                 <h2 class="text-2xl font-bold text-gray-800">{{ document.document_name }}</h2>
                                 <p class="mt-1 text-sm text-gray-600">
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-brand-red-600">
                                         {{ document.category?.name }}
                                     </span>
                                 </p>
                             </div>
                             <div class="flex items-center space-x-3">
-                                <Link :href="route('admin.master-documents.edit', document.id)" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition">
+                                <Link :href="route('admin.master-documents.edit', document.id)" class="px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition">
                                     Edit Document
                                 </Link>
                                 <Link :href="route('admin.master-documents.index')" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition">
@@ -45,20 +45,20 @@
                                 </div>
 
                                 <!-- International Standard -->
-                                <div v-if="document.international_standard" class="bg-blue-50 rounded-lg p-6 border border-blue-200">
-                                    <h3 class="text-lg font-semibold text-blue-900 mb-2 flex items-center">
+                                <div v-if="document.international_standard" class="bg-red-50 rounded-lg p-6 border border-red-200">
+                                    <h3 class="text-lg font-semibold text-red-900 mb-2 flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                         International Standard
                                     </h3>
-                                    <p class="text-blue-800 font-medium">{{ document.international_standard }}</p>
+                                    <p class="text-brand-red-600 font-medium">{{ document.international_standard }}</p>
                                 </div>
 
                                 <!-- Example URL -->
                                 <div v-if="document.example_url" class="bg-gray-50 rounded-lg p-6">
                                     <h3 class="text-lg font-semibold text-gray-800 mb-3">Reference Link</h3>
-                                    <a :href="document.example_url" target="_blank" class="text-indigo-600 hover:text-indigo-800 underline flex items-center">
+                                    <a :href="document.example_url" target="_blank" class="text-brand-red-600 hover:text-brand-red-600 underline flex items-center">
                                         {{ document.example_url }}
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -79,7 +79,7 @@
                                             class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
                                         >
                                             <div>
-                                                <Link :href="route('admin.document-assignments.show', assignment.country_id)" class="text-indigo-600 hover:text-indigo-800 font-medium">
+                                                <Link :href="route('admin.document-assignments.show', assignment.country_id)" class="text-brand-red-600 hover:text-brand-red-600 font-medium">
                                                     {{ assignment.country?.name }}
                                                 </Link>
                                                 <span class="ml-2 text-xs text-gray-500">
@@ -149,7 +149,7 @@
                                 <div v-if="document.typical_validity_days" class="bg-white rounded-lg border border-gray-200 p-6">
                                     <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Validity</h3>
                                     <div class="text-center">
-                                        <div class="text-3xl font-bold text-indigo-600">{{ document.typical_validity_days }}</div>
+                                        <div class="text-3xl font-bold text-brand-red-600">{{ document.typical_validity_days }}</div>
                                         <div class="text-sm text-gray-600 mt-1">days</div>
                                     </div>
                                 </div>

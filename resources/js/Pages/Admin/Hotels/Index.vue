@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
@@ -51,7 +51,7 @@ const toggleStatus = (id) => {
                             </div>
                             <Link
                                 :href="route('admin.hotels.create')"
-                                class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"
+                                class="bg-brand-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
                             >
                                 + Add Hotel
                             </Link>
@@ -60,9 +60,9 @@ const toggleStatus = (id) => {
 
                     <!-- Stats -->
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-6">
-                        <div class="bg-blue-50 p-4 rounded-lg">
-                            <div class="text-blue-600 text-sm font-medium">Total Hotels</div>
-                            <div class="text-2xl font-bold text-blue-900">{{ stats.total }}</div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <div class="text-brand-red-600 text-sm font-medium">Total Hotels</div>
+                            <div class="text-2xl font-bold text-red-900">{{ stats.total }}</div>
                         </div>
                         <div class="bg-green-50 p-4 rounded-lg">
                             <div class="text-green-600 text-sm font-medium">Active</div>
@@ -154,13 +154,13 @@ const toggleStatus = (id) => {
                                     <div class="flex gap-2">
                                         <Link
                                             :href="route('admin.hotels.rooms', hotel.id)"
-                                            class="text-blue-600 hover:text-blue-800 px-3 py-1 rounded border border-blue-600"
+                                            class="text-brand-red-600 hover:text-brand-red-600 px-3 py-1 rounded border border-brand-red-600"
                                         >
                                             Rooms
                                         </Link>
                                         <Link
                                             :href="route('admin.hotels.edit', hotel.id)"
-                                            class="text-indigo-600 hover:text-indigo-800 px-3 py-1 rounded border border-indigo-600"
+                                            class="text-brand-red-600 hover:text-brand-red-600 px-3 py-1 rounded border border-brand-red-600"
                                         >
                                             Edit
                                         </Link>
@@ -187,7 +187,7 @@ const toggleStatus = (id) => {
                                 v-for="(link, index) in hotels.links"
                                 :key="index"
                                 :href="link.url"
-                                :class="link.active ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
+                                :class="link.active ? 'bg-brand-red-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
                                 class="px-3 py-2 rounded border"
                                 v-html="link.label"
                             />

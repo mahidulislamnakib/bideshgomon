@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Edit Directory" />
 
@@ -38,7 +38,7 @@
                                     <select
                                         id="directory_category_id"
                                         v-model="form.directory_category_id"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         :class="{ 'border-red-500': form.errors.directory_category_id }"
                                         required
                                     >
@@ -57,7 +57,7 @@
                                     <select
                                         id="country_id"
                                         v-model="form.country_id"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         :class="{ 'border-red-500': form.errors.country_id }"
                                     >
                                         <option value="">Select Country</option>
@@ -79,7 +79,7 @@
                                         id="name"
                                         v-model="form.name"
                                         type="text"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         :class="{ 'border-red-500': form.errors.name }"
                                         required
                                     />
@@ -94,7 +94,7 @@
                                         id="name_bn"
                                         v-model="form.name_bn"
                                         type="text"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         :class="{ 'border-red-500': form.errors.name_bn }"
                                         placeholder="বাংলায় নাম"
                                         required
@@ -127,7 +127,7 @@
                                     id="description"
                                     v-model="form.description"
                                     rows="3"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.description }"
                                 ></textarea>
                                 <p v-if="form.errors.description" class="mt-1 text-sm text-red-600">{{ form.errors.description }}</p>
@@ -141,7 +141,7 @@
                                     id="description_bn"
                                     v-model="form.description_bn"
                                     rows="3"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.description_bn }"
                                     placeholder="বাংলায় বিবরণ"
                                 ></textarea>
@@ -164,7 +164,7 @@
                                         id="email"
                                         v-model="form.email"
                                         type="email"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         :class="{ 'border-red-500': form.errors.email }"
                                     />
                                     <p v-if="form.errors.email" class="mt-1 text-sm text-red-600">{{ form.errors.email }}</p>
@@ -178,7 +178,7 @@
                                         id="phone"
                                         v-model="form.phone"
                                         type="text"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         :class="{ 'border-red-500': form.errors.phone }"
                                     />
                                     <p v-if="form.errors.phone" class="mt-1 text-sm text-red-600">{{ form.errors.phone }}</p>
@@ -193,7 +193,7 @@
                                     id="website"
                                     v-model="form.website"
                                     type="url"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.website }"
                                     placeholder="https://"
                                 />
@@ -208,7 +208,7 @@
                                     id="address"
                                     v-model="form.address"
                                     rows="2"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.address }"
                                 ></textarea>
                                 <p v-if="form.errors.address" class="mt-1 text-sm text-red-600">{{ form.errors.address }}</p>
@@ -222,7 +222,7 @@
                                     id="address_bn"
                                     v-model="form.address_bn"
                                     rows="2"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.address_bn }"
                                     placeholder="বাংলায় ঠিকানা"
                                 ></textarea>
@@ -244,7 +244,7 @@
                                     id="latitude"
                                     v-model="form.latitude"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.latitude }"
                                     placeholder="23.8103"
                                 />
@@ -259,7 +259,7 @@
                                     id="longitude"
                                     v-model="form.longitude"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.longitude }"
                                     placeholder="90.4125"
                                 />
@@ -294,7 +294,7 @@
                                             <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
                                         <div class="flex text-sm text-gray-600">
-                                            <label for="logo" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none">
+                                            <label for="logo" class="relative cursor-pointer bg-white rounded-md font-medium text-brand-red-600 hover:text-brand-red-600 focus-within:outline-none">
                                                 <span>Upload logo</span>
                                                 <input
                                                     id="logo"
@@ -333,7 +333,7 @@
                                             <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
                                         <div class="flex text-sm text-gray-600">
-                                            <label for="image" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none">
+                                            <label for="image" class="relative cursor-pointer bg-white rounded-md font-medium text-brand-red-600 hover:text-brand-red-600 focus-within:outline-none">
                                                 <span>Upload image</span>
                                                 <input
                                                     id="image"
@@ -366,7 +366,7 @@
                                     id="meta_title"
                                     v-model="form.meta_title"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.meta_title }"
                                     maxlength="60"
                                 />
@@ -382,7 +382,7 @@
                                     id="meta_description"
                                     v-model="form.meta_description"
                                     rows="2"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.meta_description }"
                                     maxlength="160"
                                 ></textarea>
@@ -398,7 +398,7 @@
                                     id="meta_keywords"
                                     v-model="form.meta_keywords"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.meta_keywords }"
                                     placeholder="keyword1, keyword2, keyword3"
                                 />
@@ -417,7 +417,7 @@
                                 <input
                                     v-model="form.is_published"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 />
                                 <span class="ml-2 text-sm text-gray-700">Published (visible to public)</span>
                             </label>
@@ -426,7 +426,7 @@
                                 <input
                                     v-model="form.is_verified"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 />
                                 <span class="ml-2 text-sm text-gray-700">Verified</span>
                             </label>
@@ -435,7 +435,7 @@
                                 <input
                                     v-model="form.is_featured"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 />
                                 <span class="ml-2 text-sm text-gray-700">Featured</span>
                             </label>
@@ -446,7 +446,7 @@
                             <h4 class="text-sm font-medium text-gray-900 mb-3">Statistics</h4>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <div>
-                                    <div class="text-2xl font-bold text-blue-600">{{ directory.views_count || 0 }}</div>
+                                    <div class="text-2xl font-bold text-brand-red-600">{{ directory.views_count || 0 }}</div>
                                     <div class="text-xs text-gray-600">Views</div>
                                 </div>
                                 <div>
@@ -471,7 +471,7 @@
                         </Link>
                         <button
                             type="submit"
-                            class="px-4 py-2 bg-blue-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+                            class="px-4 py-2 bg-brand-red-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
                             :disabled="form.processing"
                         >
                             <span v-if="form.processing">Updating...</span>

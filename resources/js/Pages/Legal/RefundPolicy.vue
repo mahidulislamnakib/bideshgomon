@@ -40,7 +40,7 @@ const companyPhone = '+880 1712-345678'
           <!-- Overview -->
           <section>
             <h2 class="text-2xl font-semibold text-gray-900 mb-4 flex items-center">
-              <DocumentTextIcon class="h-6 w-6 mr-2 text-blue-600" />
+              <DocumentTextIcon class="h-6 w-6 mr-2 text-brand-red-600" />
               Overview
             </h2>
             <p class="text-gray-700 leading-relaxed">
@@ -172,13 +172,13 @@ const companyPhone = '+880 1712-345678'
           <!-- Refund Process -->
           <section>
             <h2 class="text-2xl font-semibold text-gray-900 mb-4 flex items-center">
-              <ClockIcon class="h-6 w-6 mr-2 text-blue-600" />
+              <ClockIcon class="h-6 w-6 mr-2 text-brand-red-600" />
               Refund Request Process
             </h2>
             <div class="bg-gray-50 rounded-lg p-6">
               <ol class="space-y-4">
                 <li class="flex items-start">
-                  <span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-semibold mr-4">1</span>
+                  <span class="flex-shrink-0 w-8 h-8 bg-brand-red-600 text-white rounded-full flex items-center justify-center font-semibold mr-4">1</span>
                   <div>
                     <p class="font-semibold text-gray-900">Submit Refund Request</p>
                     <p class="text-gray-600 text-sm mt-1">
@@ -187,7 +187,7 @@ const companyPhone = '+880 1712-345678'
                   </div>
                 </li>
                 <li class="flex items-start">
-                  <span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-semibold mr-4">2</span>
+                  <span class="flex-shrink-0 w-8 h-8 bg-brand-red-600 text-white rounded-full flex items-center justify-center font-semibold mr-4">2</span>
                   <div>
                     <p class="font-semibold text-gray-900">Review Period (3-5 Business Days)</p>
                     <p class="text-gray-600 text-sm mt-1">
@@ -196,7 +196,7 @@ const companyPhone = '+880 1712-345678'
                   </div>
                 </li>
                 <li class="flex items-start">
-                  <span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-semibold mr-4">3</span>
+                  <span class="flex-shrink-0 w-8 h-8 bg-brand-red-600 text-white rounded-full flex items-center justify-center font-semibold mr-4">3</span>
                   <div>
                     <p class="font-semibold text-gray-900">Decision Notification</p>
                     <p class="text-gray-600 text-sm mt-1">
@@ -205,7 +205,7 @@ const companyPhone = '+880 1712-345678'
                   </div>
                 </li>
                 <li class="flex items-start">
-                  <span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-semibold mr-4">4</span>
+                  <span class="flex-shrink-0 w-8 h-8 bg-brand-red-600 text-white rounded-full flex items-center justify-center font-semibold mr-4">4</span>
                   <div>
                     <p class="font-semibold text-gray-900">Refund Processing (7-14 Business Days)</p>
                     <p class="text-gray-600 text-sm mt-1">
@@ -220,7 +220,7 @@ const companyPhone = '+880 1712-345678'
           <!-- Payment Methods -->
           <section>
             <h2 class="text-2xl font-semibold text-gray-900 mb-4 flex items-center">
-              <CreditCardIcon class="h-6 w-6 mr-2 text-blue-600" />
+              <CreditCardIcon class="h-6 w-6 mr-2 text-brand-red-600" />
               Refund Methods & Timeline
             </h2>
             <div class="overflow-x-auto">
@@ -295,7 +295,7 @@ const companyPhone = '+880 1712-345678'
 
           <!-- Contact -->
           <section class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-8 text-center">
-            <EnvelopeIcon class="h-12 w-12 mx-auto text-blue-600 mb-4" />
+            <EnvelopeIcon class="h-12 w-12 mx-auto text-brand-red-600 mb-4" />
             <h2 class="text-2xl font-semibold text-gray-900 mb-4">Need Help with Refund?</h2>
             <p class="text-gray-700 mb-6">
               Our support team is here to assist you with any refund-related questions.
@@ -303,13 +303,13 @@ const companyPhone = '+880 1712-345678'
             <div class="flex flex-col sm:flex-row justify-center gap-4">
               <a 
                 :href="`mailto:${companyEmail}`" 
-                class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+                class="inline-flex items-center justify-center px-6 py-3 bg-brand-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
               >
                 Email Support
               </a>
               <a 
                 :href="`tel:${companyPhone}`" 
-                class="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition"
+                class="inline-flex items-center justify-center px-6 py-3 bg-white text-brand-red-600 font-semibold rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition"
               >
                 Call Us
               </a>
@@ -323,13 +323,13 @@ const companyPhone = '+880 1712-345678'
               Changes will be effective immediately upon posting. Last updated: December 1, 2025.
             </p>
             <div class="flex justify-center gap-6 mt-4">
-              <Link href="/legal/privacy-policy" class="text-sm text-blue-600 hover:underline">
+              <Link href="/legal/privacy-policy" class="text-sm text-brand-red-600 hover:underline">
                 Privacy Policy
               </Link>
-              <Link href="/legal/terms-of-service" class="text-sm text-blue-600 hover:underline">
+              <Link href="/legal/terms-of-service" class="text-sm text-brand-red-600 hover:underline">
                 Terms of Service
               </Link>
-              <Link href="/" class="text-sm text-blue-600 hover:underline">
+              <Link href="/" class="text-sm text-brand-red-600 hover:underline">
                 Back to Home
               </Link>
             </div>

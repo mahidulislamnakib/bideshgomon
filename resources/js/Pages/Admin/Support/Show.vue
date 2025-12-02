@@ -34,9 +34,9 @@
                                 <h1 class="text-2xl font-bold text-gray-900 mb-2">{{ ticket.subject }}</h1>
                                 <div class="flex items-center gap-4 text-sm text-gray-500">
                                     <span>From: <span class="font-medium text-gray-900">{{ ticket.user.name }}</span></span>
-                                    <span>•</span>
+                                    <span>�</span>
                                     <span>Created: {{ formatDateTime(ticket.created_at) }}</span>
-                                    <span v-if="ticket.assigned_to">•</span>
+                                    <span v-if="ticket.assigned_to">�</span>
                                     <span v-if="ticket.assigned_to">Assigned to: <span class="font-medium text-gray-900">{{ ticket.assigned_to.name }}</span></span>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                             <select
                                 v-model="assignForm.assigned_to"
                                 @change="assignTicket"
-                                class="rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-ocean-500 text-sm"
+                                class="rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600 text-sm"
                                 :disabled="assignForm.processing"
                             >
                                 <option value="">Assign to...</option>
@@ -61,7 +61,7 @@
                             <select
                                 v-model="priorityForm.priority"
                                 @change="updatePriority"
-                                class="rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-ocean-500 text-sm"
+                                class="rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600 text-sm"
                                 :disabled="priorityForm.processing"
                             >
                                 <option value="low">Low Priority</option>
@@ -74,7 +74,7 @@
                             <select
                                 v-model="statusForm.status"
                                 @change="updateStatus"
-                                class="rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-ocean-500 text-sm"
+                                class="rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600 text-sm"
                                 :disabled="statusForm.processing"
                             >
                                 <option value="open">Open</option>
@@ -89,7 +89,7 @@
                                 v-if="ticket.status !== 'closed'"
                                 @click="closeTicket"
                                 :disabled="closingTicket"
-                                class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ocean-500"
+                                class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600"
                             >
                                 Close Ticket
                             </button>
@@ -98,7 +98,7 @@
                                 v-if="ticket.status === 'closed'"
                                 @click="reopenTicket"
                                 :disabled="reopeningTicket"
-                                class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ocean-500"
+                                class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600"
                             >
                                 Reopen Ticket
                             </button>
@@ -149,7 +149,7 @@
                         <div class="flex items-start gap-4">
                             <div class="flex-shrink-0">
                                 <div 
-                                    :class="reply.is_staff_reply ? 'bg-ocean-600' : 'bg-gray-600'"
+                                    :class="reply.is_staff_reply ? 'bg-brand-red-600' : 'bg-gray-600'"
                                     class="w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold"
                                 >
                                     {{ reply.user.name.charAt(0).toUpperCase() }}
@@ -198,7 +198,7 @@
                                 <textarea
                                     v-model="replyForm.message"
                                     rows="4"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-ocean-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': replyForm.errors.message }"
                                     placeholder="Type your reply..."
                                     required
@@ -211,7 +211,7 @@
                                     <input
                                         v-model="replyForm.internal_note"
                                         type="checkbox"
-                                        class="rounded border-gray-300 text-ocean-600 shadow-sm focus:border-ocean-500 focus:ring-ocean-500"
+                                        class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600"
                                     />
                                     <span class="ml-2 text-sm text-gray-700">Internal Note (not visible to user)</span>
                                 </label>
@@ -232,7 +232,7 @@
                                 <button
                                     type="submit"
                                     :disabled="replyForm.processing"
-                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-ocean-600 hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ocean-500"
+                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600"
                                     :class="{ 'opacity-50 cursor-not-allowed': replyForm.processing }"
                                 >
                                     <span v-if="replyForm.processing">Sending...</span>
@@ -342,7 +342,7 @@ const submitReply = () => {
 const statusClass = (status) => {
     const classes = {
         open: 'bg-green-100 text-green-800',
-        in_progress: 'bg-blue-100 text-blue-800',
+        in_progress: 'bg-red-100 text-brand-red-600',
         awaiting_reply: 'bg-yellow-100 text-yellow-800',
         resolved: 'bg-purple-100 text-purple-800',
         closed: 'bg-gray-100 text-gray-800',
@@ -365,7 +365,7 @@ const priorityClass = (priority) => {
     const classes = {
         urgent: 'bg-red-100 text-red-800',
         high: 'bg-orange-100 text-orange-800',
-        normal: 'bg-blue-100 text-blue-800',
+        normal: 'bg-red-100 text-brand-red-600',
         low: 'bg-gray-100 text-gray-800',
     };
     return classes[priority] || 'bg-gray-100 text-gray-800';
@@ -383,12 +383,12 @@ const priorityLabel = (priority) => {
 
 const categoryLabel = (category) => {
     const labels = {
-        visa: '🛂 Visa & Immigration',
-        jobs: '💼 Jobs & Applications',
-        account: '👤 Account & Profile',
-        payment: '💳 Payment & Wallet',
-        services: '🎯 Services & Booking',
-        technical: '🔧 Technical Support',
+        visa: '?? Visa & Immigration',
+        jobs: '?? Jobs & Applications',
+        account: '?? Account & Profile',
+        payment: '?? Payment & Wallet',
+        services: '?? Services & Booking',
+        technical: '?? Technical Support',
     };
     return labels[category] || category;
 };

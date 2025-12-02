@@ -423,12 +423,12 @@ class User extends Authenticatable
      */
     public function calculateProfileCompletion(): int
     {
-        $completion = 0;
-        $totalSections = 13; // Updated from 12 to 13
+        $totalPoints = 0;
+        $maxPoints = 100;
 
-        // 1. Basic Information (10 points)
+        // 1. Basic Information (8 points)
         if ($this->name && $this->email) {
-            $completion += 10;
+            $totalPoints += 8;
         }
 
         // 2. Profile Details (10 points)
@@ -441,32 +441,32 @@ class User extends Authenticatable
                 $this->profile->present_address_line,
             ];
             $profileFilled = count(array_filter($profileFields, fn($v) => !empty($v)));
-            $completion += (int) (($profileFilled / 5) * 10);
+            $totalPoints += (int) (($profileFilled / 5) * 10);
         }
 
-        // 3. Education & Qualifications (10 points)
+        // 3. Education & Qualifications (8 points)
         if ($this->educations()->count() > 0) {
-            $completion += 10;
+            $totalPoints += 8;
         }
 
-        // 4. Work Experience (10 points)
+        // 4. Work Experience (8 points)
         if ($this->workExperiences()->count() > 0) {
-            $completion += 10;
+            $totalPoints += 8;
         }
 
-        // 5. Skills & Expertise (10 points)
+        // 5. Skills & Expertise (8 points)
         if ($this->skills()->count() > 0) {
-            $completion += 10;
+            $totalPoints += 8;
         }
 
-        // 6. Travel History (5 points)
+        // 6. Travel History (6 points)
         if ($this->travelHistory()->count() > 0) {
-            $completion += 5;
+            $totalPoints += 6;
         }
 
-        // 7. Family Information (5 points)
+        // 7. Family Information (6 points)
         if ($this->familyMembers()->count() > 0) {
-            $completion += 5;
+            $totalPoints += 6;
         }
 
         // 8. Financial Information (10 points)
@@ -477,30 +477,30 @@ class User extends Authenticatable
                 $this->profile->bank_balance_bdt,
             ];
             $financialFilled = count(array_filter($financialFields, fn($v) => !empty($v)));
-            $completion += (int) (($financialFilled / 3) * 10);
+            $totalPoints += (int) (($financialFilled / 3) * 10);
         }
 
-        // 9. Language Proficiency (10 points)
+        // 9. Language Proficiency (8 points)
         if ($this->languages()->count() > 0) {
-            $completion += 10;
+            $totalPoints += 8;
         }
 
-        // 10. Background & Security (5 points)
+        // 10. Background & Security (6 points)
         if ($this->securityInformation) {
-            $completion += 5;
+            $totalPoints += 6;
         }
 
-        // 11. Phone Numbers (5 points)
+        // 11. Phone Numbers (6 points)
         if ($this->phoneNumbers()->count() > 0) {
-            $completion += 5;
+            $totalPoints += 6;
         }
 
-        // 12. Passport Information (10 points)
-        if ($this->profile && $this->profile->passport_number) {
-            $completion += 10;
+        // 12. Passport Information (12 points)
+        if ($this->passports()->count() > 0) {
+            $totalPoints += 12;
         }
 
-        // 13. Social Media & Contact (5 points)
+        // 13. Social Media & Contact (4 points)
         if ($this->profile) {
             $socialFields = [
                 $this->profile->facebook_url,
@@ -511,11 +511,12 @@ class User extends Authenticatable
             ];
             $socialFilled = count(array_filter($socialFields, fn($v) => !empty($v)));
             if ($socialFilled > 0) {
-                $completion += 5;
+                $totalPoints += 4;
             }
         }
 
-        return min(100, $completion);
+        // Total: 8+10+8+8+8+6+6+10+8+6+6+12+4 = 100 points exactly
+        return min($maxPoints, $totalPoints);
     }
 
     /**
@@ -529,7 +530,7 @@ class User extends Authenticatable
                 'basic' => [
                     'name' => 'Basic Information',
                     'completed' => $this->name && $this->email,
-                    'weight' => 10,
+                    'weight' => 8,
                     'items' => [
                         'name' => !empty($this->name),
                         'email' => !empty($this->email),
@@ -551,31 +552,31 @@ class User extends Authenticatable
                 'education' => [
                     'name' => 'Education & Qualifications',
                     'completed' => $this->educations()->count() > 0,
-                    'weight' => 10,
+                    'weight' => 8,
                     'count' => $this->educations()->count(),
                 ],
                 'experience' => [
                     'name' => 'Work Experience',
                     'completed' => $this->workExperiences()->count() > 0,
-                    'weight' => 10,
+                    'weight' => 8,
                     'count' => $this->workExperiences()->count(),
                 ],
                 'skills' => [
                     'name' => 'Skills & Expertise',
                     'completed' => $this->skills()->count() > 0,
-                    'weight' => 10,
+                    'weight' => 8,
                     'count' => $this->skills()->count(),
                 ],
                 'travel' => [
                     'name' => 'Travel History',
                     'completed' => $this->travelHistory()->count() > 0,
-                    'weight' => 5,
+                    'weight' => 6,
                     'count' => $this->travelHistory()->count(),
                 ],
                 'family' => [
                     'name' => 'Family Information',
                     'completed' => $this->familyMembers()->count() > 0,
-                    'weight' => 5,
+                    'weight' => 6,
                     'count' => $this->familyMembers()->count(),
                 ],
                 'financial' => [
@@ -591,29 +592,43 @@ class User extends Authenticatable
                 'languages' => [
                     'name' => 'Language Proficiency',
                     'completed' => $this->languages()->count() > 0,
-                    'weight' => 10,
+                    'weight' => 8,
                     'count' => $this->languages()->count(),
                 ],
                 'security' => [
                     'name' => 'Background & Security',
                     'completed' => $this->securityInformation ? true : false,
-                    'weight' => 5,
+                    'weight' => 6,
                 ],
                 'passport' => [
                     'name' => 'Passport Information',
-                    'completed' => $this->profile && $this->profile->passport_number,
-                    'weight' => 10,
-                    'items' => [
-                        'passport_number' => !empty($this->profile?->passport_number),
-                        'issue_date' => !empty($this->profile?->passport_issue_date),
-                        'expiry_date' => !empty($this->profile?->passport_expiry_date),
-                    ]
+                    'completed' => $this->passports()->count() > 0,
+                    'weight' => 12,
+                    'count' => $this->passports()->count(),
                 ],
                 'phone' => [
                     'name' => 'Phone Numbers',
                     'completed' => $this->phoneNumbers()->count() > 0,
-                    'weight' => 5,
+                    'weight' => 6,
                     'count' => $this->phoneNumbers()->count(),
+                ],
+                'social' => [
+                    'name' => 'Social Media & Contact',
+                    'completed' => $this->profile && (
+                        $this->profile->facebook_url ||
+                        $this->profile->linkedin_url ||
+                        $this->profile->twitter_url ||
+                        $this->profile->instagram_url ||
+                        $this->profile->whatsapp_number
+                    ),
+                    'weight' => 4,
+                    'items' => [
+                        'facebook' => !empty($this->profile?->facebook_url),
+                        'linkedin' => !empty($this->profile?->linkedin_url),
+                        'twitter' => !empty($this->profile?->twitter_url),
+                        'instagram' => !empty($this->profile?->instagram_url),
+                        'whatsapp' => !empty($this->profile?->whatsapp_number),
+                    ]
                 ],
             ],
             'categories' => [

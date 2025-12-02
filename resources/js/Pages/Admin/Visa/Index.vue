@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
@@ -71,7 +71,7 @@ const formatDate = (date) => {
 };
 
 const statusColors = {
-    submitted: 'bg-blue-100 text-blue-800',
+    submitted: 'bg-red-100 text-brand-red-600',
     under_review: 'bg-yellow-100 text-yellow-800',
     documents_requested: 'bg-orange-100 text-orange-800',
     approved: 'bg-green-100 text-green-800',
@@ -117,9 +117,9 @@ const paymentColors = {
                         <p class="text-2xl font-bold text-gray-900">{{ stats.total }}</p>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm p-6">
-                        <ClockIcon class="h-8 w-8 text-blue-600 mb-2" />
+                        <ClockIcon class="h-8 w-8 text-brand-red-600 mb-2" />
                         <p class="text-sm text-gray-600">Pending</p>
-                        <p class="text-2xl font-bold text-blue-900">{{ stats.pending }}</p>
+                        <p class="text-2xl font-bold text-red-900">{{ stats.pending }}</p>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm p-6">
                         <DocumentTextIcon class="h-8 w-8 text-yellow-600 mb-2" />
@@ -154,7 +154,7 @@ const paymentColors = {
                                     v-model="search"
                                     type="text"
                                     placeholder="Reference, name, email, passport..."
-                                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                                     @keyup.enter="applyFilters"
                                 />
                             </div>
@@ -164,7 +164,7 @@ const paymentColors = {
                             <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
                             <select
                                 v-model="status"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                             >
                                 <option value="">All Statuses</option>
                                 <option value="submitted">Submitted</option>
@@ -180,7 +180,7 @@ const paymentColors = {
                             <label class="block text-sm font-medium text-gray-700 mb-2">Visa Type</label>
                             <select
                                 v-model="visaType"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                             >
                                 <option value="">All Types</option>
                                 <option value="tourist">Tourist</option>
@@ -198,7 +198,7 @@ const paymentColors = {
                                 v-model="destination"
                                 type="text"
                                 placeholder="Enter country"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                             />
                         </div>
 
@@ -206,7 +206,7 @@ const paymentColors = {
                             <label class="block text-sm font-medium text-gray-700 mb-2">Assigned To</label>
                             <select
                                 v-model="assignedTo"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                             >
                                 <option value="">All Staff</option>
                                 <option v-for="staff in staffMembers" :key="staff.id" :value="staff.id">
@@ -219,7 +219,7 @@ const paymentColors = {
                             <label class="block text-sm font-medium text-gray-700 mb-2">Payment Status</label>
                             <select
                                 v-model="paymentStatus"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                             >
                                 <option value="">All Payments</option>
                                 <option value="paid">Paid</option>
@@ -232,7 +232,7 @@ const paymentColors = {
                     <div class="flex gap-3">
                         <button
                             @click="applyFilters"
-                            class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold transition"
+                            class="px-6 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 font-semibold transition"
                         >
                             Apply Filters
                         </button>
@@ -308,7 +308,7 @@ const paymentColors = {
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a
                                             :href="route('admin.visa-applications.show', application.id)"
-                                            class="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-semibold text-sm"
+                                            class="inline-flex items-center gap-1 text-brand-red-600 hover:text-brand-red-600 font-semibold text-sm"
                                         >
                                             <EyeIcon class="h-4 w-4" />
                                             View
@@ -334,7 +334,7 @@ const paymentColors = {
                                     :class="[
                                         'px-4 py-2 text-sm font-medium rounded-lg border transition',
                                         link.active
-                                            ? 'bg-indigo-600 text-white border-indigo-600'
+                                            ? 'bg-brand-red-600 text-white border-brand-red-600'
                                             : link.url
                                             ? 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                                             : 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed'

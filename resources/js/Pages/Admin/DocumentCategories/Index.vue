@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { 
@@ -33,7 +33,7 @@ const deleteCategory = (id) => {
                     </div>
                     <Link
                         :href="route('admin.document-categories.create')"
-                        class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700"
+                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
                     >
                         <PlusIcon class="w-4 h-4 mr-2" />
                         Add Category
@@ -49,13 +49,13 @@ const deleteCategory = (id) => {
                     >
                         <div class="flex items-start justify-between mb-4">
                             <div class="flex items-center">
-                                <FolderIcon class="w-6 h-6 text-indigo-600 mr-3" />
+                                <FolderIcon class="w-6 h-6 text-brand-red-600 mr-3" />
                                 <h3 class="text-lg font-semibold text-gray-900">{{ category.name }}</h3>
                             </div>
                             <div class="flex space-x-2">
                                 <Link
                                     :href="route('admin.document-categories.edit', category.id)"
-                                    class="text-blue-600 hover:text-blue-900"
+                                    class="text-brand-red-600 hover:text-red-900"
                                     title="Edit"
                                 >
                                     <PencilIcon class="w-5 h-5" />

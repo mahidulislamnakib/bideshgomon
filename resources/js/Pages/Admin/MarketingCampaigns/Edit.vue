@@ -48,7 +48,7 @@ const submit = () => {
           <input
             v-model="form.name"
             type="text"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-600"
             placeholder="e.g., Summer 2024 Promotion"
             required
           />
@@ -69,8 +69,8 @@ const submit = () => {
               :class="[
                 'flex items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition',
                 form.type === type
-                  ? 'border-blue-600 bg-brand-red/10'
-                  : 'border-gray-300 hover:border-blue-600',
+                  ? 'border-brand-red-600 bg-brand-red/10'
+                  : 'border-gray-300 hover:border-brand-red-600',
               ]"
             >
               <input
@@ -81,7 +81,7 @@ const submit = () => {
               />
               <div class="text-center">
                 <div class="text-2xl mb-1">
-                  {{ type === 'email' ? '📧' : type === 'sms' ? '💬' : type === 'push' ? '🔔' : '📬' }}
+                  {{ type === 'email' ? '??' : type === 'sms' ? '??' : type === 'push' ? '??' : '??' }}
                 </div>
                 <div class="text-sm font-medium capitalize">{{ type }}</div>
               </div>
@@ -99,7 +99,7 @@ const submit = () => {
           </label>
           <select
             v-model="form.email_template_id"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-600"
             required
           >
             <option value="">
@@ -136,8 +136,8 @@ const submit = () => {
               :class="[
                 'flex flex-wrap items-start p-4 border-2 rounded-lg cursor-pointer transition',
                 form.audience_type === type
-                  ? 'border-blue-600 bg-brand-red/10'
-                  : 'border-gray-300 hover:border-blue-600',
+                  ? 'border-brand-red-600 bg-brand-red/10'
+                  : 'border-gray-300 hover:border-brand-red-600',
               ]"
             >
               <input
@@ -239,7 +239,7 @@ const submit = () => {
           <input
             v-model="form.scheduled_at"
             type="datetime-local"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-600"
           />
           <p class="text-xs text-gray-600 mt-1">
             Leave empty to save as draft. Set a future date to schedule.
@@ -255,7 +255,7 @@ const submit = () => {
             <input
               v-model="form.is_ab_test"
               type="checkbox"
-              class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-600"
+              class="w-4 h-4 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
             />
             <span class="ml-2 text-sm font-medium text-gray-700">Enable A/B Testing</span>
           </label>
@@ -308,7 +308,7 @@ const submit = () => {
           <button
             type="submit"
             :disabled="form.processing"
-            class="px-6 py-2 bg-blue-600 hover:bg-blue-700 transition-colors text-white rounded-lg hover:bg-brand-red-dark transition disabled:opacity-50"
+            class="px-6 py-2 bg-brand-red-600 hover:bg-red-700 transition-colors text-white rounded-lg hover:bg-brand-red-dark transition disabled:opacity-50"
           >
             {{ form.processing ? 'Updating...' : 'Update Campaign' }}
           </button>

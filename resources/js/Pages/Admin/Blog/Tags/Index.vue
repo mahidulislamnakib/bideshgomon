@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <Head title="Blog Tags" />
 
     <AdminLayout>
@@ -12,7 +12,7 @@
                     </div>
                     <button
                         @click="showCreateModal = true"
-                        class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700"
+                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
                     >
                         <PlusIcon class="h-5 w-5 mr-2" />
                         New Tag
@@ -29,14 +29,14 @@
                         >
                             <div class="flex items-center space-x-3 flex-1 min-w-0">
                                 <div class="flex-shrink-0">
-                                    <div class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center">
+                                    <div class="h-10 w-10 rounded-full bg-red-500 flex items-center justify-center">
                                         <TagIcon class="h-5 w-5 text-white" />
                                     </div>
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-semibold text-gray-900 truncate">{{ tag.name }}</p>
                                     <p class="text-xs text-gray-500 truncate">{{ tag.slug }}</p>
-                                    <p v-if="tag.posts_count !== undefined" class="text-xs text-blue-600 mt-1">
+                                    <p v-if="tag.posts_count !== undefined" class="text-xs text-brand-red-600 mt-1">
                                         {{ tag.posts_count }} {{ tag.posts_count === 1 ? 'post' : 'posts' }}
                                     </p>
                                 </div>
@@ -44,7 +44,7 @@
                             <div class="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button
                                     @click="editTag(tag)"
-                                    class="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-100 rounded-md transition-colors"
+                                    class="p-2 text-brand-red-600 hover:text-brand-red-600 hover:bg-red-100 rounded-md transition-colors"
                                     title="Edit"
                                 >
                                     <PencilIcon class="h-4 w-4" />
@@ -67,7 +67,7 @@
                         <div class="mt-6">
                             <button
                                 @click="showCreateModal = true"
-                                class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700"
+                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
                             >
                                 <PlusIcon class="h-5 w-5 mr-2" />
                                 Create Your First Tag
@@ -105,8 +105,8 @@
                                     <DialogPanel class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                                         <form @submit.prevent="submitForm">
                                             <div>
-                                                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 mx-auto">
-                                                    <TagIcon class="h-6 w-6 text-blue-600" />
+                                                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mx-auto">
+                                                    <TagIcon class="h-6 w-6 text-brand-red-600" />
                                                 </div>
                                                 <h3 class="text-lg font-medium leading-6 text-gray-900 text-center mt-3 mb-4">
                                                     {{ showEditModal ? 'Edit Tag' : 'Create New Tag' }}
@@ -122,7 +122,7 @@
                                                             v-model="form.name"
                                                             type="text"
                                                             placeholder="e.g., Technology, Travel, Lifestyle"
-                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                                             @input="generateSlug"
                                                             autofocus
                                                         />
@@ -142,7 +142,7 @@
                                                                 v-model="form.slug"
                                                                 type="text"
                                                                 placeholder="auto-generated"
-                                                                class="flex-1 block w-full rounded-none rounded-r-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                                                                class="flex-1 block w-full rounded-none rounded-r-md border-gray-300 focus:border-brand-red-600 focus:ring-brand-red-600"
                                                             />
                                                         </div>
                                                         <p class="mt-1 text-xs text-gray-500">
@@ -151,7 +151,7 @@
                                                         <p v-if="form.errors.slug" class="mt-1 text-sm text-red-600">{{ form.errors.slug }}</p>
                                                     </div>
 
-                                                    <div class="bg-blue-50 border border-blue-200 rounded-md p-3">
+                                                    <div class="bg-red-50 border border-red-200 rounded-md p-3">
                                                         <div class="flex">
                                                             <div class="flex-shrink-0">
                                                                 <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
@@ -172,7 +172,7 @@
                                                 <button
                                                     type="submit"
                                                     :disabled="form.processing"
-                                                    class="inline-flex w-full justify-center items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:col-start-2 disabled:opacity-50"
+                                                    class="inline-flex w-full justify-center items-center rounded-md bg-brand-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:col-start-2 disabled:opacity-50"
                                                 >
                                                     <CheckIcon v-if="!form.processing" class="h-5 w-5 mr-1" />
                                                     <svg v-else class="animate-spin h-5 w-5 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

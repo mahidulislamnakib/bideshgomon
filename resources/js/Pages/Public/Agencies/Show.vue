@@ -6,7 +6,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <!-- Breadcrumb -->
                 <div class="mb-6">
-                    <Link :href="route('agencies.index')" class="text-indigo-600 hover:text-indigo-900">
+                    <Link :href="route('agencies.index')" class="text-brand-red-600 hover:text-red-900">
                         ← Back to Agencies
                     </Link>
                 </div>
@@ -23,7 +23,7 @@
                                     class="h-24 w-24 object-cover rounded-lg"
                                 />
                                 <div v-else class="h-24 w-24 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                    <BuildingOfficeIcon class="h-12 w-12 text-indigo-600" />
+                                    <BuildingOfficeIcon class="h-12 w-12 text-brand-red-600" />
                                 </div>
                             </div>
                             <div>
@@ -141,7 +141,7 @@
                                             class="h-16 w-16 rounded-full object-cover"
                                         />
                                         <div v-else class="h-16 w-16 rounded-full bg-indigo-100 flex items-center justify-center">
-                                            <UserIcon class="h-8 w-8 text-indigo-600" />
+                                            <UserIcon class="h-8 w-8 text-brand-red-600" />
                                         </div>
                                     </div>
                                     <div>
@@ -190,7 +190,7 @@
                                             v-model="reviewForm.review"
                                             rows="4"
                                             placeholder="Share your experience with this agency..."
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                                         ></textarea>
                                         <p v-if="reviewForm.errors.review" class="mt-1 text-sm text-red-600">{{ reviewForm.errors.review }}</p>
                                     </div>
@@ -198,7 +198,7 @@
                                     <button
                                         type="submit"
                                         :disabled="reviewForm.processing"
-                                        class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-50"
+                                        class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50"
                                     >
                                         {{ reviewForm.processing ? 'Submitting...' : 'Submit Review' }}
                                     </button>
@@ -211,7 +211,7 @@
                                     <div class="flex items-start space-x-3">
                                         <div class="flex-shrink-0">
                                             <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
-                                                <span class="text-sm font-semibold text-indigo-600">
+                                                <span class="text-sm font-semibold text-brand-red-600">
                                                     {{ review.user?.name?.charAt(0) || 'U' }}
                                                 </span>
                                             </div>
@@ -250,17 +250,17 @@
                         <div class="bg-white rounded-lg shadow-sm p-6">
                             <h2 class="text-lg font-bold text-gray-900 mb-4">Contact Information</h2>
                             <div class="space-y-3">
-                                <a v-if="agency.email" :href="`mailto:${agency.email}`" class="flex items-center text-gray-700 hover:text-indigo-600">
+                                <a v-if="agency.email" :href="`mailto:${agency.email}`" class="flex items-center text-gray-700 hover:text-brand-red-600">
                                     <EnvelopeIcon class="h-5 w-5 mr-3 text-gray-400" />
                                     <span class="text-sm">{{ agency.email }}</span>
                                 </a>
 
-                                <a v-if="agency.phone" :href="`tel:${agency.phone}`" class="flex items-center text-gray-700 hover:text-indigo-600">
+                                <a v-if="agency.phone" :href="`tel:${agency.phone}`" class="flex items-center text-gray-700 hover:text-brand-red-600">
                                     <PhoneIcon class="h-5 w-5 mr-3 text-gray-400" />
                                     <span class="text-sm">{{ agency.phone }}</span>
                                 </a>
 
-                                <a v-if="agency.whatsapp" :href="`https://wa.me/${(agency.whatsapp || '').replace(/[^0-9]/g, '')}`" target="_blank" class="flex items-center text-gray-700 hover:text-indigo-600">
+                                <a v-if="agency.whatsapp" :href="`https://wa.me/${(agency.whatsapp || '').replace(/[^0-9]/g, '')}`" target="_blank" class="flex items-center text-gray-700 hover:text-brand-red-600">
                                     <ChatBubbleLeftIcon class="h-5 w-5 mr-3 text-gray-400" />
                                     <span class="text-sm">WhatsApp</span>
                                 </a>
@@ -270,7 +270,7 @@
                                     <span class="text-sm">{{ agency.address }}{{ agency.city ? `, ${agency.city}` : '' }}{{ agency.country ? `, ${agency.country}` : '' }}</span>
                                 </div>
 
-                                <a v-if="agency.website" :href="agency.website" target="_blank" class="flex items-center text-gray-700 hover:text-indigo-600">
+                                <a v-if="agency.website" :href="agency.website" target="_blank" class="flex items-center text-gray-700 hover:text-brand-red-600">
                                     <GlobeAltIcon class="h-5 w-5 mr-3 text-gray-400" />
                                     <span class="text-sm">Visit Website</span>
                                 </a>
@@ -309,7 +309,7 @@
                         <div v-if="agency.facebook_url || agency.linkedin_url || agency.twitter_url || agency.instagram_url" class="bg-white rounded-lg shadow-sm p-6">
                             <h2 class="text-lg font-bold text-gray-900 mb-4">Follow Us</h2>
                             <div class="flex space-x-4">
-                                <a v-if="agency.facebook_url" :href="agency.facebook_url" target="_blank" class="text-gray-400 hover:text-blue-600">
+                                <a v-if="agency.facebook_url" :href="agency.facebook_url" target="_blank" class="text-gray-400 hover:text-brand-red-600">
                                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                                 </a>
                                 <a v-if="agency.linkedin_url" :href="agency.linkedin_url" target="_blank" class="text-gray-400 hover:text-blue-700">
@@ -344,7 +344,7 @@
                                     class="h-12 w-12 object-cover rounded-lg"
                                 />
                                 <div v-else class="h-12 w-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                    <BuildingOfficeIcon class="h-6 w-6 text-indigo-600" />
+                                    <BuildingOfficeIcon class="h-6 w-6 text-brand-red-600" />
                                 </div>
                                 <div>
                                     <h3 class="font-semibold text-gray-900">{{ related.name }}</h3>

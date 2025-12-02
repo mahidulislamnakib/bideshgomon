@@ -23,7 +23,7 @@
                         >
                             <div class="flex items-start">
                                 <div class="flex-shrink-0">
-                                    <svg class="h-8 w-8" :class="selectedVisaType === type ? 'text-ocean-600' : 'text-indigo-600'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg class="h-8 w-8" :class="selectedVisaType === type ? 'text-brand-red-600' : 'text-brand-red-600'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
                                     </svg>
                                 </div>
@@ -42,12 +42,12 @@
                         <div>
                             <h2 class="text-2xl font-semibold text-gray-900">Popular Destinations</h2>
                             <p v-if="selectedVisaType" class="text-sm text-gray-600 mt-1">
-                                For <span class="font-semibold text-ocean-600">{{ visaTypes[selectedVisaType]?.name }}</span>
+                                For <span class="font-semibold text-brand-red-600">{{ visaTypes[selectedVisaType]?.name }}</span>
                             </p>
                         </div>
                         <Link
                             :href="route('visa.my-applications')"
-                            class="inline-flex items-center px-4 py-2 bg-ocean-600 text-white text-sm font-medium rounded-lg hover:bg-ocean-700"
+                            class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700"
                         >
                             My Applications
                         </Link>
@@ -76,7 +76,7 @@
                                 
                                 <div class="mb-4">
                                     <div class="text-sm text-gray-600 mb-1">Service Fee (from)</div>
-                                    <div class="text-2xl font-bold text-ocean-600">৳{{ country.service_fee.toLocaleString() }}</div>
+                                    <div class="text-2xl font-bold text-brand-red-600">৳{{ country.service_fee.toLocaleString() }}</div>
                                 </div>
 
                                 <div class="space-y-2">
@@ -88,7 +88,7 @@
                                     </button>
                                     <Link
                                         :href="route('visa.wizard', { country: country.name, type: selectedVisaType })"
-                                        class="block w-full text-center px-4 py-2 bg-ocean-600 text-white text-sm font-medium rounded-lg hover:bg-ocean-700 transition-colors"
+                                        class="block w-full text-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors"
                                     >
                                         Apply Now
                                     </Link>
@@ -183,7 +183,7 @@
                         <!-- Content -->
                         <div v-else-if="selectedRequirements" class="bg-white">
                             <!-- Header -->
-                            <div class="bg-ocean-600 px-6 py-4">
+                            <div class="bg-brand-red-600 px-6 py-4">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="text-xl font-semibold text-white" id="modal-title">
@@ -206,7 +206,7 @@
                                 <!-- Fees Section -->
                                 <div class="mb-8">
                                     <h4 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                                        <svg class="h-5 w-5 mr-2 text-ocean-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg class="h-5 w-5 mr-2 text-brand-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                                         </svg>
                                         Fees & Processing Time
@@ -222,7 +222,7 @@
                                         </div>
                                         <div class="bg-ocean-50 rounded-lg p-4">
                                             <div class="text-sm text-ocean-700 mb-1">Total Fee</div>
-                                            <div class="text-2xl font-bold text-ocean-600">৳{{ ((selectedRequirements.government_fee || 0) + (selectedRequirements.service_fee || 0)).toLocaleString() }}</div>
+                                            <div class="text-2xl font-bold text-brand-red-600">৳{{ ((selectedRequirements.government_fee || 0) + (selectedRequirements.service_fee || 0)).toLocaleString() }}</div>
                                         </div>
                                     </div>
                                     <div class="mt-4 grid grid-cols-3 gap-4">
@@ -247,7 +247,7 @@
                                 <!-- Required Documents -->
                                 <div v-if="selectedRequirements.required_documents?.length" class="mb-8">
                                     <h4 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                                        <svg class="h-5 w-5 mr-2 text-ocean-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg class="h-5 w-5 mr-2 text-brand-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                         </svg>
                                         Required Documents
@@ -265,7 +265,7 @@
                                 <!-- General Requirements -->
                                 <div v-if="selectedRequirements.general_requirements" class="mb-8">
                                     <h4 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                                        <svg class="h-5 w-5 mr-2 text-ocean-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg class="h-5 w-5 mr-2 text-brand-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                         </svg>
                                         General Requirements
@@ -276,7 +276,7 @@
                                 <!-- Financial Requirements -->
                                 <div v-if="selectedRequirements.min_bank_balance" class="mb-8">
                                     <h4 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                                        <svg class="h-5 w-5 mr-2 text-ocean-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg class="h-5 w-5 mr-2 text-brand-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                         Financial Requirements
@@ -298,7 +298,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                                     <div v-if="selectedRequirements.interview_required" class="bg-blue-50 border border-blue-200 rounded-lg p-4">
                                         <div class="flex items-start">
-                                            <svg class="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                            <svg class="h-5 w-5 text-brand-red-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
                                             </svg>
                                             <div>
@@ -367,7 +367,7 @@
                                     </button>
                                     <Link
                                         :href="route('visa.wizard', { country: selectedRequirements.country, type: selectedVisaType })"
-                                        class="px-6 py-2 bg-ocean-600 text-white text-sm font-medium rounded-lg hover:bg-ocean-700"
+                                        class="px-6 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700"
                                     >
                                         Apply Now
                                     </Link>

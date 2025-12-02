@@ -73,7 +73,7 @@ const maxUserValue = computed(() => {
 
 const statusColors = {
     pending: 'bg-yellow-100 text-yellow-800',
-    reviewed: 'bg-blue-100 text-blue-800',
+    reviewed: 'bg-red-100 text-brand-red-600',
     shortlisted: 'bg-green-100 text-green-800',
     rejected: 'bg-red-100 text-red-800',
     hired: 'bg-purple-100 text-purple-800',
@@ -90,7 +90,7 @@ const statusColors = {
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-rhythm-md">
                     <div>
                         <h1 class="font-display font-bold text-rhythm text-4xl sm:text-5xl">
-                            <span class="text-ocean-600">Analytics</span> & Reports
+                            <span class="text-brand-red-600">Analytics</span> & Reports
                         </h1>
                         <p class="text-ocean-200 mt-rhythm-sm text-lg">Comprehensive platform insights and metrics</p>
                     </div>
@@ -267,7 +267,7 @@ const statusColors = {
                         <h3 class="font-display font-bold text-xl text-gray-900">User Registrations (Last 30 Days)</h3>
                         <button
                             @click="exportReport('users')"
-                            class="text-ocean-600 hover:text-ocean-800 font-semibold text-sm flex items-center gap-rhythm-xs"
+                            class="text-brand-red-600 hover:text-ocean-800 font-semibold text-sm flex items-center gap-rhythm-xs"
                         >
                             <ArrowDownTrayIcon class="h-4 w-4" />
                             Export
@@ -286,7 +286,7 @@ const statusColors = {
                                         :style="{
                                             height: maxUserValue > 0 ? `${Math.max((data.count / maxUserValue) * 100, 8)}%` : '8%',
                                         }"
-                                        class="w-full bg-blue-600 hover:bg-blue-700 rounded-t transition-all relative shadow-sm cursor-pointer"
+                                        class="w-full bg-brand-red-600 hover:bg-red-700 rounded-t transition-all relative shadow-sm cursor-pointer"
                                     >
                                         <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 shadow-lg">
                                             {{ data.count }} users
@@ -321,7 +321,7 @@ const statusColors = {
                                     <span class="text-sm font-semibold text-gray-600">{{ index + 1 }}.</span>
                                     <span class="text-sm text-gray-900">{{ country.country }}</span>
                                 </div>
-                                <span class="text-sm font-bold text-ocean-600">{{ formatNumber(country.count) }}</span>
+                                <span class="text-sm font-bold text-brand-red-600">{{ formatNumber(country.count) }}</span>
                             </div>
                         </div>
                 </RhythmicCard>

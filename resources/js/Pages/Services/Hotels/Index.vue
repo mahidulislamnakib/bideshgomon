@@ -85,7 +85,7 @@ const formatPrice = (price) => {
                                     :alt="hotel.name"
                                     class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                                 />
-                                <div class="absolute top-3 right-3 bg-indigo-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                <div class="absolute top-3 right-3 bg-brand-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                                     ⭐ {{ hotel.star_rating }}-Star
                                 </div>
                             </div>
@@ -94,7 +94,7 @@ const formatPrice = (price) => {
                                 <p class="text-sm text-gray-600 mb-2">📍 {{ hotel.city }}, {{ hotel.country }}</p>
                                 <div class="flex items-center justify-between">
                                     <span class="text-sm text-gray-500">From</span>
-                                    <span class="text-xl font-bold text-indigo-600">{{ formatPrice(hotel.price_from) }}</span>
+                                    <span class="text-xl font-bold text-brand-red-600">{{ formatPrice(hotel.price_from) }}</span>
                                 </div>
                                 <p class="text-xs text-gray-500 mt-1">per night</p>
                             </div>
@@ -108,7 +108,7 @@ const formatPrice = (price) => {
                         <div class="bg-white rounded-lg shadow p-6 sticky top-6">
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="text-lg font-semibold text-gray-900">Filters</h3>
-                                <button @click="resetFilters" class="text-sm text-indigo-600 hover:text-indigo-800">
+                                <button @click="resetFilters" class="text-sm text-brand-red-600 hover:text-indigo-800">
                                     Reset
                                 </button>
                             </div>
@@ -161,14 +161,14 @@ const formatPrice = (price) => {
                                             v-model="search.amenities" 
                                             :value="amenity.value"
                                             type="checkbox" 
-                                            class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                            class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                         />
                                         <span class="ml-2 text-sm text-gray-700">{{ amenity.label }}</span>
                                     </label>
                                 </div>
                             </div>
 
-                            <button @click="applyFilters" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition">
+                            <button @click="applyFilters" class="w-full bg-brand-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition">
                                 Apply Filters
                             </button>
                         </div>
@@ -228,10 +228,10 @@ const formatPrice = (price) => {
                                     <div class="flex items-end justify-between">
                                         <div>
                                             <span class="text-sm text-gray-500">From</span>
-                                            <div class="text-2xl font-bold text-indigo-600">{{ formatPrice(hotel.price_from) }}</div>
+                                            <div class="text-2xl font-bold text-brand-red-600">{{ formatPrice(hotel.price_from) }}</div>
                                             <p class="text-xs text-gray-500">per night</p>
                                         </div>
-                                        <button class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
+                                        <button class="bg-brand-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
                                             View Details
                                         </button>
                                     </div>
@@ -249,7 +249,7 @@ const formatPrice = (price) => {
                                     :class="[
                                         'px-4 py-2 rounded-lg border transition',
                                         link.active 
-                                            ? 'bg-indigo-600 text-white border-indigo-600' 
+                                            ? 'bg-brand-red-600 text-white border-indigo-600' 
                                             : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50',
                                         !link.url && 'opacity-50 cursor-not-allowed'
                                     ]"
@@ -266,7 +266,7 @@ const formatPrice = (price) => {
                             </svg>
                             <h3 class="mt-4 text-lg font-semibold text-gray-900">No hotels found</h3>
                             <p class="mt-2 text-gray-600">Try adjusting your filters or search criteria</p>
-                            <button @click="resetFilters" class="mt-4 bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700">
+                            <button @click="resetFilters" class="mt-4 bg-brand-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700">
                                 Reset Filters
                             </button>
                         </div>

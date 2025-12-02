@@ -1,8 +1,8 @@
-<template>
+﻿<template>
     <AdminLayout title="Edit Partner">
         <div class="max-w-3xl mx-auto">
             <div class="mb-6">
-                <Link :href="route('admin.partners.index')" class="text-blue-600 hover:text-blue-800">
+                <Link :href="route('admin.partners.index')" class="text-brand-red-600 hover:text-brand-red-600">
                     ← Back to Partners
                 </Link>
             </div>
@@ -77,7 +77,7 @@
                             v-model="form.is_active" 
                             type="checkbox" 
                             id="is_active"
-                            class="form-checkbox h-4 w-4 text-blue-600"
+                            class="form-checkbox h-4 w-4 text-brand-red-600"
                         />
                         <label for="is_active" class="ml-2 block text-sm text-gray-700">Active</label>
                     </div>

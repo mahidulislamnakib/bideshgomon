@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <Head :title="`${visaRequirement.country} - ${visaRequirement.visa_type}`" />
 
     <AdminLayout>
@@ -28,7 +28,7 @@
                         <div class="flex space-x-3">
                             <Link 
                                 :href="route('admin.visa-requirements.edit', visaRequirement.id)"
-                                class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 transition"
                             >
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
@@ -56,7 +56,7 @@
                         <div v-if="visaRequirement.required_documents && visaRequirement.required_documents.length > 0" class="bg-white rounded-lg shadow p-6">
                             <div class="flex items-center justify-between mb-4">
                                 <h2 class="text-xl font-semibold text-gray-900">Basic Documents (Common for All)</h2>
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+                                <span class="px-3 py-1 bg-red-100 text-brand-red-600 text-sm font-medium rounded-full">
                                     {{ visaRequirement.required_documents.length }} documents
                                 </span>
                             </div>
@@ -86,7 +86,7 @@
                                 <div 
                                     v-for="(docs, profession) in visaRequirement.profession_specific_docs" 
                                     :key="profession"
-                                    class="p-4 border-2 border-indigo-100 rounded-lg bg-indigo-50/30"
+                                    class="p-4 border-2 border-indigo-100 rounded-lg bg-red-50/30"
                                 >
                                     <h3 class="font-semibold text-indigo-900 mb-3">{{ profession }}</h3>
                                     <ul class="space-y-2">
@@ -95,7 +95,7 @@
                                             :key="index"
                                             class="flex items-start"
                                         >
-                                            <svg class="w-5 h-5 text-indigo-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <svg class="w-5 h-5 text-brand-red-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                             </svg>
                                             <span class="text-gray-700">{{ doc }}</span>
@@ -157,7 +157,7 @@
                             <div class="space-y-3">
                                 <div class="flex justify-between py-2 border-b-2 border-indigo-200">
                                     <span class="text-gray-700 font-medium">Embassy Fee:</span>
-                                    <span class="font-bold text-indigo-600">৳{{ (visaRequirement.government_fee || 0).toLocaleString() }}</span>
+                                    <span class="font-bold text-brand-red-600">৳{{ (visaRequirement.government_fee || 0).toLocaleString() }}</span>
                                 </div>
                                 <div class="flex justify-between py-2 border-b border-gray-200">
                                     <span class="text-gray-600">Service Fee:</span>
@@ -167,7 +167,7 @@
                                     <span class="text-gray-600">Processing Fee:</span>
                                     <span class="font-semibold text-gray-900">৳{{ (visaRequirement.processing_fee_standard || 0).toLocaleString() }}</span>
                                 </div>
-                                <div class="flex justify-between py-3 bg-indigo-600 text-white px-3 rounded -mx-3">
+                                <div class="flex justify-between py-3 bg-brand-red-600 text-white px-3 rounded -mx-3">
                                     <span class="font-bold">Total Amount:</span>
                                     <span class="font-bold text-lg">
                                         ৳{{ ((visaRequirement.government_fee || 0) + (visaRequirement.service_fee || 0) + (visaRequirement.processing_fee_standard || 0)).toLocaleString() }}
@@ -238,7 +238,7 @@
                                 </button>
                                 <Link 
                                     :href="route('admin.visa-requirements.edit', visaRequirement.id)"
-                                    class="block w-full px-4 py-2 bg-indigo-600 text-white text-center rounded-md hover:bg-indigo-700 transition"
+                                    class="block w-full px-4 py-2 bg-brand-red-600 text-white text-center rounded-md hover:bg-red-700 transition"
                                 >
                                     Edit Requirement
                                 </Link>

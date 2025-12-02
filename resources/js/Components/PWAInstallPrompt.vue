@@ -58,7 +58,7 @@
             <button
               @click="install"
               :disabled="isInstalling"
-              class="flex-1 bg-blue-600 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors disabled:opacity-50 text-sm"
+              class="flex-1 bg-brand-red-600 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 transition-colors disabled:opacity-50 text-sm"
             >
               <span v-if="isInstalling">Installing...</span>
               <span v-else>Install App</span>
@@ -154,20 +154,3 @@ onUnmounted(() => {
   window.removeEventListener('pwa:hideInstall', handleHideInstall);
 });
 </script>
-
-<style scoped>
-.slide-up-enter-active,
-.slide-up-leave-active {
-  transition: all 0.3s ease;
-}
-
-.slide-up-enter-from {
-  transform: translateY(100%);
-  opacity: 0;
-}
-
-.slide-up-leave-to {
-  transform: translateY(100%);
-  opacity: 0;
-}
-</style>

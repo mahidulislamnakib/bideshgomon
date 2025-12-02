@@ -130,7 +130,7 @@ const expiringSoonCount = computed(() =>
                 >
                     <div class="text-2xl mb-1">{{ type.icon }}</div>
                     <div class="text-xs text-gray-600">{{ type.label }}</div>
-                    <div class="mt-1 text-2xl font-semibold text-indigo-600">
+                    <div class="mt-1 text-2xl font-semibold text-brand-red-600">
                         {{ type.count }}
                     </div>
                 </div>
@@ -181,7 +181,7 @@ const expiringSoonCount = computed(() =>
                             <select
                                 :id="`type-${index}`"
                                 v-model="cert.type"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                                 required
                             >
                                 <option v-for="type in certificationTypes" :key="type.value" :value="type.value">
@@ -250,7 +250,7 @@ const expiringSoonCount = computed(() =>
                                         :id="`never-${index}`"
                                         v-model="cert.never_expires"
                                         type="checkbox"
-                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                        class="h-4 w-4 rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                         @change="cert.never_expires ? cert.expiry_date = '' : null"
                                     />
                                     <span class="ml-2 text-sm text-gray-700">Never expires</span>
@@ -315,7 +315,7 @@ const expiringSoonCount = computed(() =>
             <!-- Information Notice -->
             <div class="rounded-lg border border-blue-200 bg-blue-50 p-4">
                 <div class="flex items-start">
-                    <svg class="h-5 w-5 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="h-5 w-5 text-brand-red-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div>

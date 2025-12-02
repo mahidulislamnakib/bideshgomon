@@ -94,7 +94,7 @@ const getPriorityColor = (priority) => {
                         <button
                             @click="refreshAssessment"
                             :disabled="refreshing"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
                         >
                             <ArrowPathIcon class="h-5 w-5" :class="{ 'animate-spin': refreshing }" />
                             {{ refreshing ? 'Refreshing...' : 'Refresh Assessment' }}
@@ -295,7 +295,7 @@ const getPriorityColor = (priority) => {
                                 <Link
                                     v-if="rec.route"
                                     :href="route(rec.route)"
-                                    class="inline-flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
+                                    class="inline-flex items-center gap-2 text-sm font-medium text-brand-red-600 hover:text-indigo-800 transition-colors"
                                 >
                                     Take Action →
                                 </Link>
@@ -342,7 +342,7 @@ const getPriorityColor = (priority) => {
                             >
                                 <div class="flex justify-between items-center mb-2">
                                     <h4 class="font-semibold text-gray-900">{{ visa.type }}</h4>
-                                    <span class="text-sm font-bold text-blue-600">{{ visa.suitability }}%</span>
+                                    <span class="text-sm font-bold text-brand-red-600">{{ visa.suitability }}%</span>
                                 </div>
                                 <p class="text-sm text-gray-700">{{ visa.reason }}</p>
                             </div>

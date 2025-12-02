@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <Head title="Visa Requirements Management" />
 
     <AdminLayout>
@@ -13,7 +13,7 @@
                         </div>
                         <Link 
                             :href="route('admin.visa-requirements.create')" 
-                            class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700 transition"
+                            class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-white hover:bg-red-700 transition"
                         >
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
@@ -27,8 +27,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
                     <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
-                                <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="flex-shrink-0 bg-red-100 rounded-md p-3">
+                                <svg class="h-6 w-6 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                 </svg>
                             </div>
@@ -55,8 +55,8 @@
 
                     <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-indigo-100 rounded-md p-3">
-                                <svg class="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="flex-shrink-0 bg-red-100 rounded-md p-3">
+                                <svg class="h-6 w-6 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                             </div>
@@ -104,7 +104,7 @@
                             <select 
                                 v-model="filterForm.country" 
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Countries</option>
                                 <option v-for="country in countries" :key="country.value" :value="country.value">
@@ -118,7 +118,7 @@
                             <select 
                                 v-model="filterForm.visa_type" 
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Types</option>
                                 <option v-for="type in visaTypes" :key="type.value" :value="type.value">
@@ -132,7 +132,7 @@
                             <select 
                                 v-model="filterForm.is_active" 
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Status</option>
                                 <option value="1">Active</option>
@@ -175,7 +175,7 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-brand-red-600">
                                         {{ requirement.visa_type }}
                                     </span>
                                 </td>
@@ -212,13 +212,13 @@
                                     <div class="flex justify-end space-x-2">
                                         <Link 
                                             :href="route('admin.visa-requirements.show', requirement.id)"
-                                            class="text-indigo-600 hover:text-indigo-900"
+                                            class="text-brand-red-600 hover:text-red-900"
                                         >
                                             View
                                         </Link>
                                         <Link 
                                             :href="route('admin.visa-requirements.edit', requirement.id)"
-                                            class="text-blue-600 hover:text-blue-900"
+                                            class="text-brand-red-600 hover:text-red-900"
                                         >
                                             Edit
                                         </Link>
@@ -251,7 +251,7 @@
                                     :class="[
                                         'px-3 py-1 rounded border',
                                         link.active 
-                                            ? 'bg-indigo-600 text-white border-indigo-600' 
+                                            ? 'bg-brand-red-600 text-white border-brand-red-600' 
                                             : link.url 
                                                 ? 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50' 
                                                 : 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed'

@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { 
@@ -90,7 +90,7 @@ const rejectReward = (rewardId) => {
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0 bg-blue-500 rounded-md p-3">
+                                <div class="flex-shrink-0 bg-red-500 rounded-md p-3">
                                     <ChartBarIcon class="h-6 w-6 text-white" />
                                 </div>
                                 <div class="ml-4">
@@ -160,7 +160,7 @@ const rejectReward = (rewardId) => {
                                         v-model="searchForm.search"
                                         type="text"
                                         placeholder="Search by user name or email..."
-                                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600"
                                     />
                                     <MagnifyingGlassIcon class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
                                 </div>
@@ -173,7 +173,7 @@ const rejectReward = (rewardId) => {
                                 <select
                                     id="status"
                                     v-model="searchForm.status"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600"
                                 >
                                     <option value="">All Statuses</option>
                                     <option value="pending">Pending</option>
@@ -186,7 +186,7 @@ const rejectReward = (rewardId) => {
                             <div class="flex space-x-2">
                                 <button
                                     type="submit"
-                                    class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600"
                                     :disabled="searchForm.processing"
                                 >
                                     Search
@@ -300,7 +300,7 @@ const rejectReward = (rewardId) => {
                                             v-if="link.url"
                                             :href="link.url"
                                             :class="{
-                                                'bg-indigo-600 text-white': link.active,
+                                                'bg-brand-red-600 text-white': link.active,
                                                 'bg-white text-gray-700 hover:bg-gray-50': !link.active
                                             }"
                                             class="px-3 py-2 border rounded-md text-sm"
@@ -309,7 +309,7 @@ const rejectReward = (rewardId) => {
                                         <span
                                             v-else
                                             :class="{
-                                                'bg-indigo-600 text-white': link.active,
+                                                'bg-brand-red-600 text-white': link.active,
                                                 'bg-white text-gray-700': !link.active
                                             }"
                                             class="px-3 py-2 border rounded-md text-sm opacity-50 cursor-not-allowed"

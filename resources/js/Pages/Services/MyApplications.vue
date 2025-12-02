@@ -151,7 +151,7 @@ const statusOptions = [
                 id="status-filter"
                 v-model="statusFilter"
                 @change="applyFilters"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-brand-red-600"
               >
                 <option v-for="option in statusOptions" :key="option.value" :value="option.value">
                   {{ option.label }}
@@ -171,7 +171,7 @@ const statusOptions = [
                   type="text"
                   placeholder="Search by application number or service name..."
                   @keyup.enter="applyFilters"
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-brand-red-600"
                 />
                 <button
                   type="button"
@@ -200,7 +200,7 @@ const statusOptions = [
                     <div>
                       <Link
                         :href="route('applications.show', application.id)"
-                        class="text-lg font-semibold text-gray-900 hover:text-primary-600"
+                        class="text-lg font-semibold text-gray-900 hover:text-brand-red-600"
                       >
                         {{ application.service.name }}
                       </Link>
@@ -314,7 +314,7 @@ const statusOptions = [
           <Link
             v-if="!statusFilter && !searchQuery"
             :href="route('services.index')"
-            class="mt-6 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700"
+            class="mt-6 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-brand-red-600 border border-transparent rounded-md hover:bg-red-700"
           >
             Browse Services
           </Link>

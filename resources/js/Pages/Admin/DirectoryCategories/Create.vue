@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Create Directory Category" />
 
@@ -34,7 +34,7 @@
                                 id="name"
                                 v-model="form.name"
                                 type="text"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 :class="{ 'border-red-500': form.errors.name }"
                                 placeholder="e.g., Embassy, Airline, Training Center"
                                 required
@@ -51,7 +51,7 @@
                                 id="name_bn"
                                 v-model="form.name_bn"
                                 type="text"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 :class="{ 'border-red-500': form.errors.name_bn }"
                                 placeholder="বাংলায় নাম লিখুন"
                                 required
@@ -68,7 +68,7 @@
                                 id="description"
                                 v-model="form.description"
                                 rows="3"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 :class="{ 'border-red-500': form.errors.description }"
                                 placeholder="Brief description of this category..."
                             ></textarea>
@@ -86,7 +86,7 @@
                                     id="icon"
                                     v-model="form.icon"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.icon }"
                                     placeholder="e.g., fas fa-building, fas fa-plane"
                                 />
@@ -118,7 +118,7 @@
                                     <input
                                         v-model="form.color"
                                         type="text"
-                                        class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         :class="{ 'border-red-500': form.errors.color }"
                                         placeholder="#3B82F6"
                                     />
@@ -132,7 +132,7 @@
                                         :key="color.value"
                                         @click.prevent="form.color = color.value"
                                         type="button"
-                                        class="w-8 h-8 rounded border-2 border-gray-300 hover:border-blue-500 transition-colors"
+                                        class="w-8 h-8 rounded border-2 border-gray-300 hover:border-brand-red-600 transition-colors"
                                         :style="{ backgroundColor: color.value }"
                                         :title="color.name"
                                     ></button>
@@ -150,7 +150,7 @@
                                 v-model.number="form.sort_order"
                                 type="number"
                                 min="0"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 :class="{ 'border-red-500': form.errors.sort_order }"
                             />
                             <p class="mt-1 text-xs text-gray-500">Lower numbers appear first</p>
@@ -163,7 +163,7 @@
                                 <input
                                     v-model="form.is_active"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 />
                                 <span class="ml-2 text-sm text-gray-700">Active (visible to users)</span>
                             </label>
@@ -180,7 +180,7 @@
                             </Link>
                             <button
                                 type="submit"
-                                class="px-4 py-2 bg-blue-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+                                class="px-4 py-2 bg-brand-red-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
                                 :disabled="form.processing"
                             >
                                 <span v-if="form.processing">Creating...</span>

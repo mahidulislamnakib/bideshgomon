@@ -31,13 +31,8 @@ const clearFilters = () => {
     applyFilters();
 };
 
-const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-};
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
+const { formatDate } = useBangladeshFormat();
 
 const formatTime = (time) => {
     if (!time) return '';
@@ -78,7 +73,7 @@ const getEventTypeLabel = (type) => {
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <!-- Header -->
-                <div class="bg-sky-500 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-8 text-white">
+                <div class="bg-brand-red-600 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-8 text-white">
                     <h1 class="text-4xl font-bold mb-2">Upcoming Events</h1>
                     <p class="text-blue-100">Join our seminars, workshops, and fairs to expand your opportunities.</p>
                 </div>
@@ -96,7 +91,7 @@ const getEventTypeLabel = (type) => {
                             <div v-if="event.image" class="h-48 bg-gray-200">
                                 <img :src="`/storage/${event.image}`" :alt="event.title" class="w-full h-full object-cover">
                             </div>
-                            <div v-else class="h-48 bg-sky-500 flex items-center justify-center">
+                            <div v-else class="h-48 bg-brand-red-600 flex items-center justify-center">
                                 <svg class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
@@ -151,7 +146,7 @@ const getEventTypeLabel = (type) => {
                                     v-model="searchQuery"
                                     type="text"
                                     placeholder="Search by title, description, or location..."
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
                                     @keyup.enter="applyFilters"
                                 />
                             </div>
@@ -161,7 +156,7 @@ const getEventTypeLabel = (type) => {
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Event Type</label>
                                 <select
                                     v-model="selectedType"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
                                     @change="applyFilters"
                                 >
                                     <option value="">All Types</option>
@@ -178,7 +173,7 @@ const getEventTypeLabel = (type) => {
                                 <label class="block text-sm font-medium text-gray-700 mb-2">When</label>
                                 <select
                                     v-model="selectedTime"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
                                     @change="applyFilters"
                                 >
                                     <option value="upcoming">Upcoming</option>
@@ -191,7 +186,7 @@ const getEventTypeLabel = (type) => {
                         <div class="flex gap-2 mt-4">
                             <button
                                 @click="applyFilters"
-                                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                                class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700"
                             >
                                 Search
                             </button>
@@ -221,7 +216,7 @@ const getEventTypeLabel = (type) => {
                             <p class="mt-4 text-gray-500">No events found matching your criteria.</p>
                             <button
                                 @click="clearFilters"
-                                class="mt-4 text-blue-600 hover:text-blue-700 font-medium"
+                                class="mt-4 text-brand-red-600 hover:text-blue-700 font-medium"
                             >
                                 Clear filters and show all events
                             </button>

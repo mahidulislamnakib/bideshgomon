@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <AdminLayout>
     <Head title="Smart Suggestions" />
 
@@ -22,7 +22,7 @@
                 </Link>
                 <Link
                   :href="route('admin.data.smart-suggestions.create')"
-                  class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700"
+                  class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
                 >
                   Add Suggestion
                 </Link>
@@ -35,11 +35,11 @@
                 v-model="searchTerm"
                 type="text"
                 placeholder="Search suggestions..."
-                class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
               />
               <select
                 v-model="statusFilter"
-                class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
               >
                 <option value="">All Status</option>
                 <option value="active">Active</option>
@@ -49,7 +49,7 @@
               </select>
               <select
                 v-model="categoryFilter"
-                class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
               >
                 <option value="">All Categories</option>
                 <option value="visa">🛂 Visa</option>
@@ -60,7 +60,7 @@
               </select>
               <select
                 v-model="priorityFilter"
-                class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
               >
                 <option value="">All Priorities</option>
                 <option value="urgent">🔴 Urgent</option>
@@ -131,7 +131,7 @@
                       <div class="flex items-center gap-2">
                         <div class="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                           <div
-                            class="bg-indigo-600 h-2 rounded-full"
+                            class="bg-brand-red-600 h-2 rounded-full"
                             :style="{ width: `${suggestion.relevance_score}%` }"
                           ></div>
                         </div>
@@ -172,7 +172,7 @@
                         </button>
                         <Link
                           :href="route('admin.data.smart-suggestions.edit', suggestion.id)"
-                          class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400"
+                          class="text-brand-red-600 hover:text-red-900 dark:text-red-400"
                         >
                           Edit
                         </Link>
@@ -203,7 +203,7 @@
                       :class="[
                         'px-3 py-1 rounded border text-sm',
                         link.active
-                          ? 'bg-indigo-600 text-white border-indigo-600'
+                          ? 'bg-brand-red-600 text-white border-brand-red-600'
                           : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
                       ]"
                       v-html="link.label"
@@ -213,7 +213,7 @@
                       :class="[
                         'px-3 py-1 rounded border text-sm opacity-50 cursor-not-allowed',
                         link.active
-                          ? 'bg-indigo-600 text-white border-indigo-600'
+                          ? 'bg-brand-red-600 text-white border-brand-red-600'
                           : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600'
                       ]"
                       v-html="link.label"
@@ -293,7 +293,7 @@ const getPriorityClass = (priority) => {
     urgent: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
     high: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
     medium: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-    low: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+    low: 'bg-red-100 text-brand-red-600 dark:bg-blue-900 dark:text-blue-200',
   }
   return classes[priority] || 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
 }
@@ -306,7 +306,7 @@ const getStatus = (suggestion) => {
 }
 
 const getStatusClass = (suggestion) => {
-  if (suggestion.is_completed) return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+  if (suggestion.is_completed) return 'bg-red-100 text-brand-red-600 dark:bg-blue-900 dark:text-blue-200'
   if (suggestion.is_dismissed) return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
   if (suggestion.expires_at && isExpired(suggestion.expires_at)) return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
   return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'

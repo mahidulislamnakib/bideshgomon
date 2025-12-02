@@ -187,7 +187,7 @@ const completedCount = computed(() =>
 
 const getColorClasses = (color, type = 'bg') => {
     const colors = {
-        blue: { bg: 'bg-blue-500', text: 'text-blue-600', border: 'border-blue-500', ring: 'ring-blue-500' },
+        blue: { bg: 'bg-brand-red-600', text: 'text-brand-red-600', border: 'border-blue-500', ring: 'ring-blue-500' },
         gray: { bg: 'bg-gray-500', text: 'text-gray-600', border: 'border-gray-500', ring: 'ring-gray-500' },
         red: { bg: 'bg-red-600', text: 'text-red-600', border: 'border-red-600', ring: 'ring-red-600' },
         green: { bg: 'bg-green-600', text: 'text-green-600', border: 'border-green-600', ring: 'ring-green-600' },
@@ -256,7 +256,7 @@ const getProgressColor = () => {
         <!-- Benefits Notice -->
         <div class="rounded-lg border border-blue-200 bg-blue-50 p-4">
             <div class="flex items-start">
-                <svg class="h-5 w-5 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="h-5 w-5 text-brand-red-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
@@ -294,7 +294,7 @@ const getProgressColor = () => {
                             />
                         </div>
                         <div class="flex-1">
-                            <h5 class="font-medium text-gray-900 group-hover:text-indigo-600 transition-colors">
+                            <h5 class="font-medium text-gray-900 group-hover:text-brand-red-600 transition-colors">
                                 {{ section.name }}
                             </h5>
                             <p class="mt-1 text-xs text-gray-500">
@@ -344,7 +344,7 @@ const getProgressColor = () => {
 
                 <!-- Hover Arrow -->
                 <div class="absolute bottom-4 right-4 opacity-0 transition-opacity group-hover:opacity-100">
-                    <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="h-5 w-5 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </div>

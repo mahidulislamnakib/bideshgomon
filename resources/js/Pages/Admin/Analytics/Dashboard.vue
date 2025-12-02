@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Analytics Dashboard" />
 
@@ -13,14 +13,14 @@
                 <!-- Quick Stats Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <!-- Total Users -->
-                    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
+                    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-brand-red-600">
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-600">Total Users</p>
                                 <p class="text-3xl font-bold text-gray-900 mt-2">{{ stats.totalUsers?.toLocaleString() || 0 }}</p>
                                 <p class="text-sm text-green-600 mt-2">+{{ stats.newUsersToday || 0 }} today</p>
                             </div>
-                            <div class="text-blue-500">
+                            <div class="text-brand-red-600">
                                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                 </svg>
@@ -50,7 +50,7 @@
                             <div>
                                 <p class="text-sm font-medium text-gray-600">Active Agencies</p>
                                 <p class="text-3xl font-bold text-gray-900 mt-2">{{ stats.activeAgencies || 0 }}</p>
-                                <p class="text-sm text-blue-600 mt-2">{{ stats.pendingVerification || 0 }} pending</p>
+                                <p class="text-sm text-brand-red-600 mt-2">{{ stats.pendingVerification || 0 }} pending</p>
                             </div>
                             <div class="text-purple-500">
                                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,8 +108,8 @@
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-3">
                                         <div class="flex-shrink-0">
-                                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                                                <span class="text-blue-600 font-semibold">{{ user.name?.charAt(0) || '?' }}</span>
+                                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                                                <span class="text-brand-red-600 font-semibold">{{ user.name?.charAt(0) || '?' }}</span>
                                             </div>
                                         </div>
                                         <div>
@@ -274,7 +274,7 @@ const getRoleBadgeClass = (role) => {
     const classes = {
         admin: 'bg-red-100 text-red-800',
         agency: 'bg-purple-100 text-purple-800',
-        consultant: 'bg-blue-100 text-blue-800',
+        consultant: 'bg-red-100 text-brand-red-600',
         user: 'bg-gray-100 text-gray-800',
     }
     return classes[roleSlug] || classes.user

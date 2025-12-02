@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
@@ -55,11 +55,11 @@ const togglePublished = (faqId) => {
 
 const getCategoryColor = (categoryName) => {
     const colors = [
-        'bg-blue-100 text-blue-700',
+        'bg-red-100 text-blue-700',
         'bg-purple-100 text-purple-700',
         'bg-green-100 text-green-700',
         'bg-orange-100 text-orange-700',
-        'bg-indigo-100 text-indigo-700',
+        'bg-red-100 text-indigo-700',
         'bg-pink-100 text-pink-700',
     ];
     const hash = categoryName?.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) || 0;
@@ -104,7 +104,7 @@ const getHelpfulPercentage = (faq) => {
                             </Link>
                             <Link
                                 :href="route('admin.faqs.create')"
-                                class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-all shadow-sm"
+                                class="inline-flex items-center px-6 py-3 bg-brand-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-all shadow-sm"
                             >
                                 <PlusIcon class="h-5 w-5 mr-2" />
                                 Create FAQ
@@ -128,12 +128,12 @@ const getHelpfulPercentage = (faq) => {
                                     @keyup.enter="performSearch"
                                     type="text"
                                     placeholder="Search FAQs by question or answer..."
-                                    class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                    class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
                                 />
                             </div>
                             <button
                                 @click="performSearch"
-                                class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+                                class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
                             >
                                 Search
                             </button>
@@ -153,7 +153,7 @@ const getHelpfulPercentage = (faq) => {
                                 <select
                                     v-model="category_id"
                                     @change="performSearch"
-                                    class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Categories</option>
                                     <option v-for="category in categories" :key="category.id" :value="category.id">
@@ -167,7 +167,7 @@ const getHelpfulPercentage = (faq) => {
                                 <select
                                     v-model="status"
                                     @change="performSearch"
-                                    class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Status</option>
                                     <option value="published">Published</option>
@@ -197,7 +197,7 @@ const getHelpfulPercentage = (faq) => {
                         <div class="mt-6">
                             <Link
                                 :href="route('admin.faqs.create')"
-                                class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700"
                             >
                                 <PlusIcon class="h-5 w-5 mr-2" />
                                 Create FAQ
@@ -279,7 +279,7 @@ const getHelpfulPercentage = (faq) => {
                                         <div class="flex items-center space-x-2">
                                             <Link
                                                 :href="route('admin.faqs.edit', faq.id)"
-                                                class="text-blue-600 hover:text-blue-900"
+                                                class="text-brand-red-600 hover:text-red-900"
                                                 title="Edit"
                                             >
                                                 <PencilIcon class="h-5 w-5" />
@@ -318,7 +318,7 @@ const getHelpfulPercentage = (faq) => {
                                     :key="link.label"
                                     :href="link.url"
                                     :class="{
-                                        'bg-indigo-600 text-white': link.active,
+                                        'bg-brand-red-600 text-white': link.active,
                                         'bg-white text-gray-700 hover:bg-gray-50': !link.active,
                                         'pointer-events-none opacity-50': !link.url
                                     }"

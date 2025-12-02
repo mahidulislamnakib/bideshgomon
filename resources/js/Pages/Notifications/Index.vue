@@ -25,7 +25,7 @@ function markAll() {
     <div class="max-w-5xl mx-auto py-8 px-4">
       <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-bold">Notifications</h1>
-        <button @click="markAll" :disabled="readAllForm.processing || unreadCount===0" class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded disabled:opacity-50">Mark All Read ({{ unreadCount }})</button>
+        <button @click="markAll" :disabled="readAllForm.processing || unreadCount===0" class="bg-brand-red-600 hover:bg-red-700 text-white text-sm px-4 py-2 rounded disabled:opacity-50">Mark All Read ({{ unreadCount }})</button>
       </div>
 
       <div v-if="notifications.data.length === 0" class="bg-white rounded shadow p-8 text-center">
@@ -52,7 +52,7 @@ function markAll() {
       <div class="mt-6 flex justify-between items-center" v-if="notifications.links.length > 3">
         <div class="text-sm text-gray-600">Showing {{ notifications.data.length }} of {{ notifications.total }}</div>
         <div class="flex gap-1">
-          <Link v-for="l in notifications.links" :key="l.url + l.label" :href="l.url" v-html="l.label" :class="['px-2 py-1 rounded text-xs', l.active ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700']" />
+          <Link v-for="l in notifications.links" :key="l.url + l.label" :href="l.url" v-html="l.label" :class="['px-2 py-1 rounded text-xs', l.active ? 'bg-brand-red-600 text-white' : 'bg-gray-100 text-gray-700']" />
         </div>
       </div>
     </div>

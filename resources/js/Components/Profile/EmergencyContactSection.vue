@@ -88,7 +88,7 @@ const submit = () => {
                     <select
                         id="emergency_contact_relationship"
                         v-model="form.emergency_contact_relationship"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                         required
                     >
                         <option value="">Select relationship</option>
@@ -143,7 +143,7 @@ const submit = () => {
                     id="emergency_contact_address"
                     v-model="form.emergency_contact_address"
                     rows="3"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                     placeholder="Complete address including city and postal code"
                 ></textarea>
                 <p v-if="form.errors.emergency_contact_address" class="mt-1 text-sm text-red-600">

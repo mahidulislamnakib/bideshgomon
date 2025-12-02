@@ -6,14 +6,8 @@ const props = defineProps({
     event: Object,
 });
 
-const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-};
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
+const { formatDate } = useBangladeshFormat();
 
 const formatTime = (time) => {
     if (!time) return '';
@@ -74,7 +68,7 @@ const getDaysUntilEvent = () => {
                 <div class="mb-6">
                     <Link
                         :href="route('events.index')"
-                        class="inline-flex items-center text-blue-600 hover:text-blue-700"
+                        class="inline-flex items-center text-brand-red-600 hover:text-blue-700"
                     >
                         <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -91,7 +85,7 @@ const getDaysUntilEvent = () => {
                             <div v-if="event.image" class="h-96 bg-gray-200">
                                 <img :src="`/storage/${event.image}`" :alt="event.title" class="w-full h-full object-cover">
                             </div>
-                            <div v-else class="h-96 bg-sky-500 flex items-center justify-center">
+                            <div v-else class="h-96 bg-brand-red-600 flex items-center justify-center">
                                 <svg class="w-24 h-24 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
@@ -132,7 +126,7 @@ const getDaysUntilEvent = () => {
                                 <div class="space-y-4">
                                     <!-- Date and Time -->
                                     <div class="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
-                                        <svg class="w-6 h-6 text-blue-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg class="w-6 h-6 text-brand-red-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
                                         <div>
@@ -172,7 +166,7 @@ const getDaysUntilEvent = () => {
 
                                     <!-- Max Participants -->
                                     <div v-if="event.max_participants" class="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
-                                        <svg class="w-6 h-6 text-blue-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg class="w-6 h-6 text-brand-red-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                         </svg>
                                         <div>
@@ -194,13 +188,13 @@ const getDaysUntilEvent = () => {
                                 
                                 <!-- Upcoming Event -->
                                 <div v-if="isUpcoming() && !hasRegistrationClosed()">
-                                    <div class="bg-sky-500 text-white p-4 rounded-lg mb-4 text-center">
+                                    <div class="bg-brand-red-600 text-white p-4 rounded-lg mb-4 text-center">
                                         <div class="text-3xl font-bold">{{ getDaysUntilEvent() }}</div>
                                         <div class="text-sm">{{ getDaysUntilEvent() === 1 ? 'Day' : 'Days' }} Until Event</div>
                                     </div>
                                     
                                     <button
-                                        class="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold transition-colors"
+                                        class="w-full px-4 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 font-semibold transition-colors"
                                     >
                                         Register for This Event
                                     </button>
@@ -247,7 +241,7 @@ const getDaysUntilEvent = () => {
                                     <a
                                         :href="event.meeting_link"
                                         target="_blank"
-                                        class="block text-blue-600 hover:text-blue-700 text-sm break-all underline"
+                                        class="block text-brand-red-600 hover:text-blue-700 text-sm break-all underline"
                                     >
                                         {{ event.meeting_link }}
                                     </a>
@@ -257,10 +251,10 @@ const getDaysUntilEvent = () => {
                                 <div class="mt-6 pt-4 border-t border-gray-200">
                                     <p class="text-sm font-medium text-gray-700 mb-2">Share this event:</p>
                                     <div class="flex gap-2">
-                                        <button class="flex-1 px-3 py-2 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 text-sm">
+                                        <button class="flex-1 px-3 py-2 bg-blue-50 text-brand-red-600 rounded hover:bg-blue-100 text-sm">
                                             Facebook
                                         </button>
-                                        <button class="flex-1 px-3 py-2 bg-cyan-50 text-cyan-600 rounded hover:bg-cyan-100 text-sm">
+                                        <button class="flex-1 px-3 py-2 bg-cyan-50 text-brand-red-600 rounded hover:bg-cyan-100 text-sm">
                                             Twitter
                                         </button>
                                         <button class="flex-1 px-3 py-2 bg-green-50 text-green-600 rounded hover:bg-green-100 text-sm">
@@ -280,7 +274,7 @@ const getDaysUntilEvent = () => {
                                 </p>
                                 <Link
                                     :href="route('support.create')"
-                                    class="inline-flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium"
+                                    class="inline-flex items-center text-brand-red-600 hover:text-blue-700 text-sm font-medium"
                                 >
                                     Contact Support
                                     <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

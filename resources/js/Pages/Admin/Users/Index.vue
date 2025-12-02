@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
@@ -181,8 +181,8 @@ const impersonateUser = (user) => {
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                <UsersIcon class="h-6 w-6 text-indigo-600" />
+                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                                <UsersIcon class="h-6 w-6 text-brand-red-600" />
                             </div>
                             <div>
                                 <h1 class="text-2xl font-bold text-gray-900">User Management</h1>
@@ -192,7 +192,7 @@ const impersonateUser = (user) => {
                         <div class="flex gap-3">
                             <Link
                                 :href="route('admin.users.create')"
-                                class="bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2.5 rounded-lg font-medium transition-colors flex items-center gap-2"
+                                class="bg-brand-red-600 text-white hover:bg-red-700 px-4 py-2.5 rounded-lg font-medium transition-colors flex items-center gap-2"
                             >
                                 <UserPlusIcon class="h-5 w-5" />
                                 Create User
@@ -216,7 +216,7 @@ const impersonateUser = (user) => {
                                 <p class="text-sm font-medium text-gray-600 mb-1">Total Users</p>
                                 <p class="text-2xl font-bold text-gray-900">{{ stats.total }}</p>
                             </div>
-                            <UsersIcon class="h-8 w-8 text-indigo-500" />
+                            <UsersIcon class="h-8 w-8 text-brand-red-600" />
                         </div>
                     </div>
 
@@ -264,9 +264,9 @@ const impersonateUser = (user) => {
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-600 mb-1">Admins</p>
-                                <p class="text-2xl font-bold text-indigo-600">{{ stats.admins }}</p>
+                                <p class="text-2xl font-bold text-brand-red-600">{{ stats.admins }}</p>
                             </div>
-                            <ShieldCheckIcon class="h-8 w-8 text-indigo-500" />
+                            <ShieldCheckIcon class="h-8 w-8 text-brand-red-600" />
                         </div>
                     </div>
                 </div>
@@ -282,7 +282,7 @@ const impersonateUser = (user) => {
                                     type="text"
                                     @keyup.enter="searchUsers"
                                     placeholder="Search by name, email, or phone..."
-                                    class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 />
                             </div>
                         </div>
@@ -302,7 +302,7 @@ const impersonateUser = (user) => {
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
                                 <select
                                     v-model="filters.role"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Roles</option>
                                     <option value="user">User</option>
@@ -314,7 +314,7 @@ const impersonateUser = (user) => {
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
                                 <select
                                     v-model="filters.status"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All Statuses</option>
                                     <option value="active">Active</option>
@@ -326,7 +326,7 @@ const impersonateUser = (user) => {
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Email Verification</label>
                                 <select
                                     v-model="filters.email_verified"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
                                 >
                                     <option value="">All</option>
                                     <option value="verified">Verified</option>
@@ -337,7 +337,7 @@ const impersonateUser = (user) => {
                             <div class="flex items-end gap-2">
                                 <button
                                     @click="applyFilters"
-                                    class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+                                    class="flex-1 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
                                 >
                                     Apply
                                 </button>
@@ -355,7 +355,7 @@ const impersonateUser = (user) => {
                 <!-- Bulk Actions -->
                 <div
                     v-if="selectedUsers.length > 0"
-                    class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 mb-6 flex items-center justify-between"
+                    class="bg-red-50 border border-indigo-200 rounded-lg p-4 mb-6 flex items-center justify-between"
                 >
                     <span class="text-indigo-900 font-medium">{{ selectedUsers.length }} user(s) selected</span>
                     <div class="flex gap-2">
@@ -387,7 +387,7 @@ const impersonateUser = (user) => {
                                             type="checkbox"
                                             :checked="selectedUsers.length === users.data.length && users.data.length > 0"
                                             @change="toggleSelectAll"
-                                            class="h-4 w-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
+                                            class="h-4 w-4 text-brand-red-600 rounded border-gray-300 focus:ring-brand-red-600"
                                         />
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -417,12 +417,12 @@ const impersonateUser = (user) => {
                                             type="checkbox"
                                             :checked="selectedUsers.includes(user.id)"
                                             @change="toggleSelect(user.id)"
-                                            class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                                            class="h-4 w-4 text-brand-red-600 rounded border-gray-300 focus:ring-brand-red-600"
                                         />
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center gap-3">
-                                            <div class="h-10 w-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-semibold">
+                                            <div class="h-10 w-10 rounded-full bg-brand-red-600 flex items-center justify-center text-white font-semibold">
                                                 {{ (user.name || '').charAt(0).toUpperCase() }}
                                             </div>
                                             <div>
@@ -441,7 +441,7 @@ const impersonateUser = (user) => {
                                         <span
                                             :class="[
                                                 'px-3 py-1 rounded-full text-xs font-semibold',
-                                                user.role?.slug === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800',
+                                                user.role?.slug === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-red-100 text-brand-red-600',
                                             ]"
                                         >
                                             {{ user.role?.name || 'N/A' }}
@@ -473,14 +473,14 @@ const impersonateUser = (user) => {
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <Link
                                             :href="route('admin.users.show', user.id)"
-                                            class="text-blue-600 hover:text-blue-900 inline-flex items-center gap-1"
+                                            class="text-brand-red-600 hover:text-red-900 inline-flex items-center gap-1"
                                         >
                                             <EyeIcon class="h-4 w-4" />
                                             View
                                         </Link>
                                         <Link
                                             :href="route('admin.users.edit', user.id)"
-                                            class="ml-3 text-indigo-600 hover:text-indigo-900 inline-flex items-center gap-1"
+                                            class="ml-3 text-brand-red-600 hover:text-red-900 inline-flex items-center gap-1"
                                         >
                                             <PencilIcon class="h-4 w-4" />
                                             Edit

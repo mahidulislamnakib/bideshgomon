@@ -48,7 +48,7 @@ const cancelBooking = () => {
         <div class="py-12">
             <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
                 <div class="mb-6">
-                    <Link :href="route('hotels.my-bookings')" class="text-indigo-600 hover:text-indigo-800">
+                    <Link :href="route('hotels.my-bookings')" class="text-brand-red-600 hover:text-indigo-800">
                         ← Back to My Bookings
                     </Link>
                 </div>
@@ -181,7 +181,7 @@ const cancelBooking = () => {
                                     </div>
                                     <div class="border-t pt-3 flex justify-between items-center">
                                         <span class="text-xl font-semibold text-gray-900">Total Amount</span>
-                                        <span class="text-2xl font-bold text-indigo-600">{{ formatPrice(booking.total_amount) }}</span>
+                                        <span class="text-2xl font-bold text-brand-red-600">{{ formatPrice(booking.total_amount) }}</span>
                                     </div>
                                 </div>
                                 <div class="mt-4 pt-4 border-t flex justify-between items-center">
@@ -259,7 +259,7 @@ const cancelBooking = () => {
                             </button>
                             <Link v-if="booking.status === 'confirmed' || booking.status === 'checked_in'" 
                                 :href="route('hotels.show', booking.hotel_id)"
-                                class="flex-1 bg-indigo-600 text-white py-3 px-6 rounded-lg hover:bg-indigo-700 transition text-center">
+                                class="flex-1 bg-brand-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition text-center">
                                 View Hotel
                             </Link>
                         </div>
@@ -277,7 +277,7 @@ const cancelBooking = () => {
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Reason for cancellation *</label>
                                 <textarea v-model="cancelForm.reason" rows="3" required
-                                    class="w-full border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                                    class="w-full border-gray-300 rounded-lg focus:ring-brand-red-600 focus:border-indigo-500"
                                     placeholder="Please provide a reason..."></textarea>
                                 <span v-if="cancelForm.errors.reason" class="text-sm text-red-600">{{ cancelForm.errors.reason }}</span>
                             </div>

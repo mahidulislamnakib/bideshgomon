@@ -42,7 +42,7 @@ class WalletTransaction extends Model
     /**
      * Get transaction_type attribute (for backward compatibility).
      */
-    public function getTransactionTypeAttribute(): string
+    public function getTransactionTypeAttribute(): ?string
     {
         return $this->type;
     }

@@ -110,7 +110,7 @@
                     <div class="bg-white rounded-lg shadow-lg p-6 sticky top-4">
                         <div class="text-center">
                             <!-- Price -->
-                            <div class="text-4xl font-bold text-sky-600 mb-2">
+                            <div class="text-4xl font-bold text-brand-red-600 mb-2">
                                 ৳{{ package.price.toLocaleString() }}
                             </div>
                             <div v-if="package.price_unit !== 'fixed'" class="text-gray-600 mb-4">
@@ -147,7 +147,7 @@
                             <!-- CTA Button -->
                             <button
                                 v-if="package.is_available"
-                                class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-colors duration-200"
+                                class="w-full bg-brand-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-colors duration-200"
                             >
                                 Book Now
                             </button>
@@ -158,7 +158,7 @@
                             <!-- Contact Link -->
                             <a
                                 href="#"
-                                class="block mt-4 text-sm text-sky-600 hover:text-sky-700 font-medium"
+                                class="block mt-4 text-sm text-brand-red-600 hover:text-sky-700 font-medium"
                             >
                                 Have questions? Contact us
                             </a>
@@ -173,7 +173,7 @@
                                 <span class="text-gray-600">Service:</span>
                                 <Link
                                     :href="route('services.show', package.service_module.slug)"
-                                    class="text-sky-600 hover:text-sky-700 font-medium"
+                                    class="text-brand-red-600 hover:text-sky-700 font-medium"
                                 >
                                     {{ package.service_module.name }}
                                 </Link>
@@ -212,7 +212,7 @@
                             <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ pkg.short_description }}</p>
                             
                             <div class="flex items-baseline justify-between mb-4">
-                                <div class="text-2xl font-bold text-sky-600">
+                                <div class="text-2xl font-bold text-brand-red-600">
                                     ৳{{ pkg.price.toLocaleString() }}
                                 </div>
                                 <div v-if="pkg.original_price" class="text-sm line-through text-gray-400">

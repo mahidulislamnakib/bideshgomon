@@ -1,6 +1,7 @@
-import '../css/app.css';
-import '../css/performance.css';
-import 'flag-icons/css/flag-icons.min.css';
+// import '../css/app.css';  // TEMPORARILY DISABLED - PostCSS/Sucrase parser error
+// import '../css/layout-fixes.css';  // Disabled - causing PostCSS errors
+// import '../css/performance.css';   // Disabled - causing PostCSS errors
+// import 'flag-icons/css/flag-icons.min.css'; // Disabled - causing PostCSS errors
 import './bootstrap';
 
 import { createInertiaApp } from '@inertiajs/vue3';
@@ -8,8 +9,8 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
-// Import PWA Manager
-import { pwa } from './pwa';
+// Import PWA Manager - PERMANENTLY DISABLED
+// import { pwa } from './pwa';
 
 
 // Import lazy load directives
@@ -38,8 +39,5 @@ createInertiaApp({
         
         return app.mount(el);
     },
-    progress: {
-        color: '#4F46E5',
-        showSpinner: true,
-    },
+    progress: false, // Disabled to prevent page jumping
 });

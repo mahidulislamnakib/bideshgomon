@@ -8,7 +8,7 @@
                 <div class="mb-8">
                     <div class="flex items-center gap-3 mb-2">
                         <div class="p-2 bg-teal-100 rounded-lg">
-                            <BellIcon class="w-8 h-8 text-teal-600" />
+                            <BellIcon class="w-8 h-8 text-brand-red-600" />
                         </div>
                         <div>
                             <h1 class="text-3xl font-bold text-gray-900">Notification Preferences</h1>
@@ -22,7 +22,7 @@
                     <div class="px-6 py-5 border-b-2 border-gray-200">
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-teal-100 rounded-lg">
-                                <ComputerDesktopIcon class="h-5 w-5 text-teal-600" />
+                                <ComputerDesktopIcon class="h-5 w-5 text-brand-red-600" />
                             </div>
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900">Communication Channels</h2>
@@ -46,8 +46,8 @@
                                             type="button"
                                             @click="togglePreference(index, 'email_enabled')"
                                             :class="[
-                                                pref.email_enabled ? 'bg-teal-600' : 'bg-gray-200',
-                                                'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2'
+                                                pref.email_enabled ? 'bg-brand-red-600' : 'bg-gray-200',
+                                                'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2'
                                             ]"
                                         >
                                             <span
@@ -67,8 +67,8 @@
                                             type="button"
                                             @click="togglePreference(index, 'in_app_enabled')"
                                             :class="[
-                                                pref.in_app_enabled ? 'bg-teal-600' : 'bg-gray-200',
-                                                'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2'
+                                                pref.in_app_enabled ? 'bg-brand-red-600' : 'bg-gray-200',
+                                                'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2'
                                             ]"
                                         >
                                             <span
@@ -113,7 +113,7 @@
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="inline-flex items-center gap-2 px-6 py-2.5 bg-teal-600 text-white rounded-lg font-medium hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="inline-flex items-center gap-2 px-6 py-2.5 bg-brand-red-600 text-white rounded-lg font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             <span v-if="form.processing">Saving...</span>
                             <span v-else>Save Preferences</span>
@@ -126,7 +126,7 @@
                     <div class="flex gap-4">
                         <div class="flex-shrink-0">
                             <div class="p-2 bg-teal-100 rounded-lg">
-                                <InformationCircleIcon class="h-5 w-5 text-teal-600" />
+                                <InformationCircleIcon class="h-5 w-5 text-brand-red-600" />
                             </div>
                         </div>
                         <div class="flex-1">

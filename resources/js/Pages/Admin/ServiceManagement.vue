@@ -25,7 +25,7 @@ const props = defineProps({
 });
 
 const formatCurrency = (amount) => {
-    return `৳${parseFloat(amount).toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    return `?${parseFloat(amount).toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 };
 
 const formatDate = (date) => {
@@ -35,7 +35,7 @@ const formatDate = (date) => {
 const getStatusColor = (status) => {
     const colors = {
         pending: 'bg-yellow-100 text-yellow-800',
-        shortlisted: 'bg-blue-100 text-blue-800',
+        shortlisted: 'bg-red-100 text-brand-red-600',
         approved: 'bg-green-100 text-green-800',
         confirmed: 'bg-green-100 text-green-800',
         rejected: 'bg-red-100 text-red-800',
@@ -76,7 +76,7 @@ const getRiskColor = (risk) => {
             <!-- New Services Grid -->
             <div>
                 <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                    <StarIcon class="h-6 w-6 text-indigo-600 mr-2" />
+                    <StarIcon class="h-6 w-6 text-brand-red-600 mr-2" />
                     New Platform Services
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -84,15 +84,15 @@ const getRiskColor = (risk) => {
                     <!-- Job Applications Card -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-lg transition-all">
                         <div class="flex items-center justify-between mb-4">
-                            <div class="p-3 bg-blue-100 rounded-lg">
-                                <BriefcaseIcon class="h-8 w-8 text-blue-600" />
+                            <div class="p-3 bg-red-100 rounded-lg">
+                                <BriefcaseIcon class="h-8 w-8 text-brand-red-600" />
                             </div>
                             <span class="text-xs font-semibold text-green-600 bg-green-50 px-3 py-1 rounded-full">
                                 +{{ jobApplicationStats.today }} today
                             </span>
                         </div>
                         <h3 class="text-lg font-bold text-gray-900 mb-2">Job Applications</h3>
-                        <p class="text-3xl font-extrabold text-blue-600 mb-4">{{ jobApplicationStats.total }}</p>
+                        <p class="text-3xl font-extrabold text-brand-red-600 mb-4">{{ jobApplicationStats.total }}</p>
                         
                         <div class="space-y-2 mb-4">
                             <div class="flex justify-between text-sm">
@@ -101,7 +101,7 @@ const getRiskColor = (risk) => {
                             </div>
                             <div class="flex justify-between text-sm">
                                 <span class="text-gray-600">Shortlisted</span>
-                                <span class="font-semibold text-blue-600">{{ jobApplicationStats.shortlisted }}</span>
+                                <span class="font-semibold text-brand-red-600">{{ jobApplicationStats.shortlisted }}</span>
                             </div>
                             <div class="flex justify-between text-sm">
                                 <span class="text-gray-600">Approved</span>
@@ -111,7 +111,7 @@ const getRiskColor = (risk) => {
                         
                         <Link
                             :href="route('admin.job-applications.index')"
-                            class="block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                            class="block w-full text-center bg-brand-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors font-medium"
                         >
                             Manage Applications
                         </Link>
@@ -179,7 +179,7 @@ const getRiskColor = (risk) => {
                             </div>
                             <div class="flex justify-between text-sm">
                                 <span class="text-gray-600">Avg Views/Profile</span>
-                                <span class="font-semibold text-blue-600">{{ publicProfileStats.average_views_per_profile }}</span>
+                                <span class="font-semibold text-brand-red-600">{{ publicProfileStats.average_views_per_profile }}</span>
                             </div>
                         </div>
                         
@@ -219,8 +219,8 @@ const getRiskColor = (risk) => {
                     <!-- CV Builder -->
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
                         <div class="flex items-center justify-between mb-3">
-                            <div class="p-2 bg-blue-100 rounded-lg">
-                                <DocumentTextIcon class="h-6 w-6 text-blue-600" />
+                            <div class="p-2 bg-red-100 rounded-lg">
+                                <DocumentTextIcon class="h-6 w-6 text-brand-red-600" />
                             </div>
                             <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded">
                                 +{{ cvStats.today }}
@@ -250,7 +250,7 @@ const getRiskColor = (risk) => {
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
                         <div class="flex items-center justify-between mb-3">
                             <div class="p-2 bg-sky-100 rounded-lg">
-                                <PaperAirplaneIcon class="h-6 w-6 text-sky-600" />
+                                <PaperAirplaneIcon class="h-6 w-6 text-brand-red-600" />
                             </div>
                             <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded">
                                 +{{ flightStats.today }}
@@ -304,14 +304,14 @@ const getRiskColor = (risk) => {
                 <!-- Recent Job Applications -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                     <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                        <BriefcaseIcon class="h-5 w-5 text-blue-600 mr-2" />
+                        <BriefcaseIcon class="h-5 w-5 text-brand-red-600 mr-2" />
                         Recent Job Applications
                     </h3>
                     <div class="space-y-3">
                         <div
                             v-for="application in recentJobApplications"
                             :key="application.id"
-                            class="border-l-4 border-blue-500 pl-3 py-2"
+                            class="border-l-4 border-brand-red-600 pl-3 py-2"
                         >
                             <p class="font-semibold text-gray-900 text-sm">{{ application.user.name }}</p>
                             <p class="text-xs text-gray-600">{{ application.job.title }}</p>
@@ -379,9 +379,9 @@ const getRiskColor = (risk) => {
                             <a
                                 :href="`/profile/${profile.slug}`"
                                 target="_blank"
-                                class="text-xs text-blue-600 hover:underline"
+                                class="text-xs text-brand-red-600 hover:underline"
                             >
-                                View Profile →
+                                View Profile ?
                             </a>
                         </div>
                         <div v-if="publicProfileStats.top_viewed_profiles.length === 0" class="text-center py-4 text-gray-500 text-sm">

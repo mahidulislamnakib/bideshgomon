@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, router, useForm, usePage } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
@@ -141,7 +141,7 @@ const formatCurrency = (amount) => {
 
 const statusColors = {
     pending: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-    reviewed: 'bg-blue-100 text-blue-800 border-blue-200',
+    reviewed: 'bg-red-100 text-brand-red-600 border-red-200',
     shortlisted: 'bg-green-100 text-green-800 border-green-200',
     rejected: 'bg-red-100 text-red-800 border-red-200',
     hired: 'bg-purple-100 text-purple-800 border-purple-200',
@@ -179,7 +179,7 @@ const tabs = [
                         <button
                             v-if="canImpersonate"
                             @click="impersonateUser"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition-colors"
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 font-medium transition-colors"
                             :title="`Debug: isAdmin=${isAdmin}, impersonating=${impersonating}, userRole=${user.role?.slug}`"
                         >
                             <UserIcon class="h-4 w-4" />
@@ -215,7 +215,7 @@ const tabs = [
                         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                             <!-- Avatar and Basic Info -->
                             <div class="flex items-center gap-4">
-                                <div class="h-20 w-20 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600 text-3xl font-bold">
+                                <div class="h-20 w-20 rounded-lg bg-red-100 flex items-center justify-center text-brand-red-600 text-3xl font-bold">
                                     {{ (user.name || '').charAt(0).toUpperCase() }}
                                 </div>
                                 <div>
@@ -228,7 +228,7 @@ const tabs = [
                                         <span
                                             :class="[
                                                 'px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5',
-                                                user.role?.slug === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-indigo-100 text-indigo-800',
+                                                user.role?.slug === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-red-100 text-brand-red-600',
                                             ]"
                                         >
                                             <ShieldCheckIcon class="h-4 w-4" />
@@ -312,7 +312,7 @@ const tabs = [
                                 :class="[
                                     'flex items-center gap-2 px-6 py-4 font-medium text-sm border-b-2 transition-colors',
                                     activeTab === tab.id
-                                        ? 'border-indigo-600 text-indigo-600'
+                                        ? 'border-brand-red-600 text-brand-red-600'
                                         : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300',
                                 ]"
                             >
@@ -410,10 +410,10 @@ const tabs = [
                         <div v-if="activeTab === 'applications'" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <h2 class="text-lg font-bold text-gray-900 mb-6 flex items-center justify-between">
                                 <span class="flex items-center gap-2">
-                                    <BriefcaseIcon class="h-6 w-6 text-indigo-600" />
+                                    <BriefcaseIcon class="h-6 w-6 text-brand-red-600" />
                                     Job Applications
                                 </span>
-                                <span class="text-sm font-medium px-3 py-1 bg-indigo-100 text-indigo-700 rounded-lg">
+                                <span class="text-sm font-medium px-3 py-1 bg-red-100 text-indigo-700 rounded-lg">
                                     {{ user.job_applications?.length || 0 }}
                                 </span>
                             </h2>
@@ -444,7 +444,7 @@ const tabs = [
                                         </div>
                                         <Link
                                             :href="route('admin.applications.show', application.id)"
-                                            class="px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium text-sm"
+                                            class="px-5 py-2.5 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium text-sm"
                                         >
                                             View Details
                                         </Link>
@@ -464,10 +464,10 @@ const tabs = [
                         <div v-if="activeTab === 'cvs'" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <h2 class="text-lg font-bold text-gray-900 mb-6 flex items-center justify-between">
                                 <span class="flex items-center gap-2">
-                                    <DocumentTextIcon class="h-6 w-6 text-indigo-600" />
+                                    <DocumentTextIcon class="h-6 w-6 text-brand-red-600" />
                                     CVs & Documents
                                 </span>
-                                <span class="text-sm font-medium px-3 py-1 bg-indigo-100 text-indigo-700 rounded-lg">
+                                <span class="text-sm font-medium px-3 py-1 bg-red-100 text-indigo-700 rounded-lg">
                                     {{ user.cvs?.length || 0 }}
                                 </span>
                             </h2>
@@ -478,8 +478,8 @@ const tabs = [
                                     class="flex items-center justify-between p-5 border border-gray-200 rounded-lg hover:border-indigo-300 hover:shadow-sm transition-all"
                                 >
                                     <div class="flex items-center gap-4">
-                                        <div class="p-3 bg-indigo-100 rounded-lg">
-                                            <DocumentTextIcon class="h-6 w-6 text-indigo-600" />
+                                        <div class="p-3 bg-red-100 rounded-lg">
+                                            <DocumentTextIcon class="h-6 w-6 text-brand-red-600" />
                                         </div>
                                         <div>
                                             <p class="font-bold text-gray-900">{{ cv.title || 'Untitled CV' }}</p>
@@ -508,7 +508,7 @@ const tabs = [
                         <!-- Activity Tab -->
                         <div v-if="activeTab === 'activity'" class="bg-white rounded-xl shadow-sm p-6">
                             <h2 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
-                                <ClockIcon class="h-6 w-6 text-blue-600" />
+                                <ClockIcon class="h-6 w-6 text-brand-red-600" />
                                 Activity Log
                             </h2>
                             <div class="space-y-4">
@@ -525,8 +525,8 @@ const tabs = [
                                 </div>
                                 <div v-if="user.email_verified_at" class="flex gap-4 p-4 bg-gray-50 rounded-lg">
                                     <div class="flex-shrink-0">
-                                        <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                            <CheckBadgeIcon class="h-5 w-5 text-indigo-600" />
+                                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                                            <CheckBadgeIcon class="h-5 w-5 text-brand-red-600" />
                                         </div>
                                     </div>
                                     <div class="flex-1">
@@ -536,8 +536,8 @@ const tabs = [
                                 </div>
                                 <div v-if="user.last_login_at" class="flex gap-4 p-4 bg-gray-50 rounded-lg">
                                     <div class="flex-shrink-0">
-                                        <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                            <ClockIcon class="h-5 w-5 text-indigo-600" />
+                                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                                            <ClockIcon class="h-5 w-5 text-brand-red-600" />
                                         </div>
                                     </div>
                                     <div class="flex-1">
@@ -554,11 +554,11 @@ const tabs = [
                         <!-- Wallet Information -->
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
                             <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                                <CreditCardIcon class="h-6 w-6 text-indigo-600" />
+                                <CreditCardIcon class="h-6 w-6 text-brand-red-600" />
                                 Wallet Balance
                             </h3>
                             <div class="space-y-4">
-                                <div class="p-4 bg-indigo-50 rounded-lg">
+                                <div class="p-4 bg-red-50 rounded-lg">
                                     <p class="text-sm font-medium text-indigo-700 mb-1">Main Balance</p>
                                     <p class="text-3xl font-bold text-indigo-900">{{ formatCurrency(user.wallet?.balance || 0) }}</p>
                                 </div>
@@ -574,13 +574,13 @@ const tabs = [
                         <!-- Role Management -->
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <h3 class="text-md font-bold text-gray-900 mb-4 flex items-center gap-2">
-                                <ShieldCheckIcon class="h-6 w-6 text-indigo-600" />
+                                <ShieldCheckIcon class="h-6 w-6 text-brand-red-600" />
                                 Role Management
                             </h3>
                             <div class="space-y-3">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Current Role</label>
-                                    <div class="p-3 bg-indigo-50 rounded-lg border border-indigo-200">
+                                    <div class="p-3 bg-red-50 rounded-lg border border-indigo-200">
                                         <p class="font-bold text-indigo-900">{{ user.role?.name || 'User' }}</p>
                                     </div>
                                 </div>
@@ -588,7 +588,7 @@ const tabs = [
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Change To</label>
                                     <select
                                         v-model="roleForm.role_id"
-                                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                                     >
                                         <option value="1">Admin</option>
                                         <option value="2">User</option>
@@ -599,7 +599,7 @@ const tabs = [
                                 <button
                                     @click="updateRole"
                                     :disabled="roleForm.processing || roleForm.role_id === user.role_id"
-                                    class="w-full px-4 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    class="w-full px-4 py-2.5 bg-brand-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     <span v-if="roleForm.processing">Updating...</span>
                                     <span v-else>Update Role</span>
@@ -662,13 +662,13 @@ const tabs = [
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <h3 class="text-md font-bold text-gray-900 mb-4">Quick Stats</h3>
                             <div class="space-y-4">
-                                <div class="flex justify-between items-center p-3 bg-indigo-50 rounded-lg">
+                                <div class="flex justify-between items-center p-3 bg-red-50 rounded-lg">
                                     <span class="text-sm text-gray-700 font-medium">Applications</span>
-                                    <span class="text-lg font-bold text-indigo-600">{{ user.job_applications?.length || 0 }}</span>
+                                    <span class="text-lg font-bold text-brand-red-600">{{ user.job_applications?.length || 0 }}</span>
                                 </div>
-                                <div class="flex justify-between items-center p-3 bg-indigo-50 rounded-lg">
+                                <div class="flex justify-between items-center p-3 bg-red-50 rounded-lg">
                                     <span class="text-sm text-gray-700 font-medium">CVs Created</span>
-                                    <span class="text-lg font-bold text-indigo-600">{{ user.cvs?.length || 0 }}</span>
+                                    <span class="text-lg font-bold text-brand-red-600">{{ user.cvs?.length || 0 }}</span>
                                 </div>
                                 <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
                                     <span class="text-sm text-gray-700 font-medium">Email Status</span>

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <div class="py-12">
             <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
@@ -32,7 +32,7 @@
                                         v-model="form.document_name"
                                         type="text"
                                         id="document_name"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                                         required
                                     />
                                     <p v-if="form.errors.document_name" class="mt-1 text-sm text-red-600">{{ form.errors.document_name }}</p>
@@ -46,7 +46,7 @@
                                     <select
                                         v-model="form.category_id"
                                         id="category_id"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                                         required
                                     >
                                         <option value="">Select Category</option>
@@ -66,7 +66,7 @@
                                         v-model="form.description"
                                         id="description"
                                         rows="3"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                                     ></textarea>
                                     <p v-if="form.errors.description" class="mt-1 text-sm text-red-600">{{ form.errors.description }}</p>
                                 </div>
@@ -81,7 +81,7 @@
                                         id="specifications"
                                         rows="5"
                                         placeholder="Enter detailed requirements, format, size, etc."
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                                     ></textarea>
                                     <p class="mt-1 text-xs text-gray-500">Detailed requirements for this document type</p>
                                     <p v-if="form.errors.specifications" class="mt-1 text-sm text-red-600">{{ form.errors.specifications }}</p>
@@ -97,7 +97,7 @@
                                         type="text"
                                         id="international_standard"
                                         placeholder="e.g., ICAO Doc 9303, ISO/IEC 7810, WHO IHR"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                                     />
                                     <p class="mt-1 text-xs text-gray-500">e.g., ICAO, ISO, WHO, UN</p>
                                     <p v-if="form.errors.international_standard" class="mt-1 text-sm text-red-600">{{ form.errors.international_standard }}</p>
@@ -110,7 +110,7 @@
                                             v-model="form.translation_required"
                                             type="checkbox"
                                             id="translation_required"
-                                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                            class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded"
                                         />
                                         <label for="translation_required" class="ml-2 block text-sm text-gray-700">
                                             Translation Required
@@ -122,7 +122,7 @@
                                             v-model="form.notarization_required"
                                             type="checkbox"
                                             id="notarization_required"
-                                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                            class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded"
                                         />
                                         <label for="notarization_required" class="ml-2 block text-sm text-gray-700">
                                             Notarization Required
@@ -140,7 +140,7 @@
                                         type="number"
                                         id="typical_validity_days"
                                         placeholder="e.g., 90, 180, 3650"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                                     />
                                     <p class="mt-1 text-xs text-gray-500">How long this document remains valid</p>
                                     <p v-if="form.errors.typical_validity_days" class="mt-1 text-sm text-red-600">{{ form.errors.typical_validity_days }}</p>
@@ -156,7 +156,7 @@
                                         type="url"
                                         id="example_url"
                                         placeholder="https://"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                                     />
                                     <p class="mt-1 text-xs text-gray-500">Link to sample document or official guidelines</p>
                                     <p v-if="form.errors.example_url" class="mt-1 text-sm text-red-600">{{ form.errors.example_url }}</p>
@@ -172,7 +172,7 @@
                                             v-model.number="form.sort_order"
                                             type="number"
                                             id="sort_order"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
                                         />
                                     </div>
 
@@ -181,7 +181,7 @@
                                             v-model="form.is_active"
                                             type="checkbox"
                                             id="is_active"
-                                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                            class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded"
                                         />
                                         <label for="is_active" class="ml-2 block text-sm text-gray-700">
                                             Active
@@ -206,7 +206,7 @@
                                     <button
                                         type="submit"
                                         :disabled="form.processing"
-                                        class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                        class="px-6 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         <span v-if="form.processing">Updating...</span>
                                         <span v-else>Update Document</span>

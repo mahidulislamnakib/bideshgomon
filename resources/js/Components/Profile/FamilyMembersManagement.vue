@@ -245,7 +245,7 @@ const handleFileChange = (event) => {
             </div>
             <button
                 @click="addFamilyMember"
-                class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150"
             >
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -317,7 +317,7 @@ const handleFileChange = (event) => {
                         <td class="px-6 py-4 text-right text-sm font-medium space-x-2">
                             <button
                                 @click="editFamilyMember(member)"
-                                class="text-indigo-600 hover:text-indigo-900"
+                                class="text-brand-red-600 hover:text-red-900"
                             >
                                 Edit
                             </button>
@@ -349,7 +349,7 @@ const handleFileChange = (event) => {
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Relationship *</label>
-                                <select v-model="form.relationship" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <select v-model="form.relationship" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600">
                                     <option value="">Select relationship</option>
                                     <option v-for="rel in relationshipOptions" :key="rel" :value="rel">
                                         {{ getRelationshipDisplay(rel) }}
@@ -360,24 +360,24 @@ const handleFileChange = (event) => {
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Full Name *</label>
-                                <input v-model="form.full_name" type="text" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                <input v-model="form.full_name" type="text" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                                 <p v-if="form.errors.full_name" class="mt-1 text-sm text-red-600">{{ form.errors.full_name }}</p>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Date of Birth *</label>
-                                <input v-model="form.date_of_birth" type="date" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                <input v-model="form.date_of_birth" type="date" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                                 <p v-if="form.errors.date_of_birth" class="mt-1 text-sm text-red-600">{{ form.errors.date_of_birth }}</p>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Place of Birth</label>
-                                <input v-model="form.place_of_birth" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                <input v-model="form.place_of_birth" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Gender *</label>
-                                <select v-model="form.gender" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <select v-model="form.gender" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600">
                                     <option value="">Select gender</option>
                                     <option v-for="gender in genderOptions" :key="gender" :value="gender">
                                         {{ ((gender || '').charAt(0).toUpperCase() || '') + (gender || '').slice(1) }}
@@ -388,7 +388,7 @@ const handleFileChange = (event) => {
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Nationality *</label>
-                                <input v-model="form.nationality" type="text" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                <input v-model="form.nationality" type="text" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                                 <p v-if="form.errors.nationality" class="mt-1 text-sm text-red-600">{{ form.errors.nationality }}</p>
                             </div>
                         </div>
@@ -400,12 +400,12 @@ const handleFileChange = (event) => {
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Current Country</label>
-                                <input v-model="form.current_country" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                <input v-model="form.current_country" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Current City</label>
-                                <input v-model="form.current_city" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                <input v-model="form.current_city" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                             </div>
                         </div>
                     </div>
@@ -416,22 +416,22 @@ const handleFileChange = (event) => {
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Occupation</label>
-                                <input v-model="form.occupation" type="text" :disabled="form.is_dependent" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100" />
+                                <input v-model="form.occupation" type="text" :disabled="form.is_dependent" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600 disabled:bg-gray-100" />
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Employer</label>
-                                <input v-model="form.employer" type="text" :disabled="form.is_dependent" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100" />
+                                <input v-model="form.employer" type="text" :disabled="form.is_dependent" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600 disabled:bg-gray-100" />
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Annual Income (৳)</label>
-                                <input v-model="form.annual_income_bdt" type="number" step="0.01" :disabled="form.is_dependent" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100" />
+                                <input v-model="form.annual_income_bdt" type="number" step="0.01" :disabled="form.is_dependent" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600 disabled:bg-gray-100" />
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Education Level</label>
-                                <select v-model="form.education_level" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <select v-model="form.education_level" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600">
                                     <option value="">Select education level</option>
                                     <option v-for="level in educationLevelOptions" :key="level" :value="level">
                                         {{ level.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()) }}
@@ -441,7 +441,7 @@ const handleFileChange = (event) => {
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Marital Status</label>
-                                <select v-model="form.marital_status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <select v-model="form.marital_status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600">
                                     <option value="">Select marital status</option>
                                     <option v-for="status in maritalStatusOptions" :key="status" :value="status">
                                         {{ ((status || '').charAt(0).toUpperCase() || '') + (status || '').slice(1) }}
@@ -456,28 +456,28 @@ const handleFileChange = (event) => {
                         <h4 class="text-md font-semibold text-gray-700 mb-4">Dependency & Travel Status</h4>
                         <div class="space-y-3">
                             <div class="flex items-center">
-                                <input v-model="form.is_dependent" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+                                <input v-model="form.is_dependent" type="checkbox" class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded" />
                                 <label class="ml-2 block text-sm text-gray-900">
                                     Is Dependent (financially dependent on you)
                                 </label>
                             </div>
 
                             <div class="flex items-center">
-                                <input v-model="form.lives_with_user" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+                                <input v-model="form.lives_with_user" type="checkbox" class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded" />
                                 <label class="ml-2 block text-sm text-gray-900">
                                     Lives with me
                                 </label>
                             </div>
 
                             <div class="flex items-center">
-                                <input v-model="form.will_accompany_travel" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+                                <input v-model="form.will_accompany_travel" type="checkbox" class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded" />
                                 <label class="ml-2 block text-sm text-gray-900">
                                     Will accompany me on travels
                                 </label>
                             </div>
 
                             <div class="flex items-center">
-                                <input v-model="form.emergency_contact" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+                                <input v-model="form.emergency_contact" type="checkbox" class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded" />
                                 <label class="ml-2 block text-sm text-gray-900">
                                     Emergency Contact
                                 </label>
@@ -491,12 +491,12 @@ const handleFileChange = (event) => {
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Passport Number</label>
-                                <input v-model="form.passport_number" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                <input v-model="form.passport_number" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Visa Status</label>
-                                <select v-model="form.visa_status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <select v-model="form.visa_status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600">
                                     <option value="">Select visa status</option>
                                     <option v-for="status in visaStatusOptions" :key="status" :value="status">
                                         {{ status.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()) }}
@@ -511,7 +511,7 @@ const handleFileChange = (event) => {
                         <h4 class="text-md font-semibold text-gray-700 mb-4">Deceased Information</h4>
                         <div class="space-y-3">
                             <div class="flex items-center">
-                                <input v-model="form.deceased" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+                                <input v-model="form.deceased" type="checkbox" class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded" />
                                 <label class="ml-2 block text-sm text-gray-900">
                                     Deceased
                                 </label>
@@ -519,7 +519,7 @@ const handleFileChange = (event) => {
 
                             <div v-if="form.deceased">
                                 <label class="block text-sm font-medium text-gray-700">Date of Death</label>
-                                <input v-model="form.deceased_date" type="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                <input v-model="form.deceased_date" type="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                             </div>
                         </div>
                     </div>
@@ -530,12 +530,12 @@ const handleFileChange = (event) => {
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Contact Phone</label>
-                                <input v-model="form.contact_phone" type="tel" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="+880 1XXX-XXXXXX" />
+                                <input v-model="form.contact_phone" type="tel" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" placeholder="+880 1XXX-XXXXXX" />
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Contact Email</label>
-                                <input v-model="form.contact_email" type="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                <input v-model="form.contact_email" type="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" />
                             </div>
                         </div>
                     </div>
@@ -554,7 +554,7 @@ const handleFileChange = (event) => {
                     <!-- Notes -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Notes</label>
-                        <textarea v-model="form.notes" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                        <textarea v-model="form.notes" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"></textarea>
                     </div>
 
                     <!-- Form Actions -->
@@ -562,14 +562,14 @@ const handleFileChange = (event) => {
                         <button
                             type="button"
                             @click="showModal = false"
-                            class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                            class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50"
                         >
                             {{ form.processing ? 'Saving...' : 'Save Family Member' }}
                         </button>

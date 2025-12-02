@@ -12,7 +12,7 @@
         <div class="bg-white rounded-lg border border-gray-200 p-6">
             <div class="flex items-center gap-3 mb-4">
                 <div class="p-2 bg-blue-100 rounded-lg">
-                    <GlobeAltIcon class="w-6 h-6 text-blue-600" />
+                    <GlobeAltIcon class="w-6 h-6 text-brand-red-600" />
                 </div>
                 <div>
                     <h4 class="font-semibold text-gray-900">Preferred Destinations</h4>
@@ -21,36 +21,72 @@
             </div>
             
             <div class="space-y-4">
-                <div class="flex flex-wrap gap-2">
-                    <button
-                        v-for="destination in popularDestinations"
-                        :key="destination"
-                        @click="toggleDestination(destination)"
-                        :class="[
-                            'px-4 py-2 rounded-full text-sm font-medium transition-all',
-                            form.preferred_destinations?.includes(destination)
-                                ? 'bg-blue-600 text-white shadow-md'
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        ]"
-                    >
-                        {{ destination }}
-                    </button>
+                <!-- Popular Countries (Quick Select) -->
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-2">Popular Destinations</label>
+                    <div class="flex flex-wrap gap-2">
+                        <button
+                            v-for="destination in popularDestinations"
+                            :key="destination"
+                            @click="toggleDestination(destination)"
+                            :class="[
+                                'px-4 py-2 rounded-full text-sm font-medium transition-all',
+                                form.preferred_destinations?.includes(destination)
+                                    ? 'bg-brand-red-600 text-white shadow-md'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            ]"
+                        >
+                            {{ destination }}
+                        </button>
+                    </div>
                 </div>
-                
-                <div class="flex gap-2">
-                    <input
-                        v-model="customDestination"
-                        @keyup.enter="addCustomDestination"
-                        type="text"
-                        placeholder="Add custom destination..."
-                        class="flex-1 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    />
-                    <button
-                        @click="addCustomDestination"
-                        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                    >
-                        Add
-                    </button>
+
+                <!-- All Countries (Searchable Dropdown) -->
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-2">All Countries</label>
+                    <div class="relative">
+                        <input
+                            v-model="countrySearch"
+                            @focus="showCountryDropdown = true"
+                            @blur="hideCountryDropdown"
+                            type="text"
+                            placeholder="Search and select countries..."
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                        />
+                        <div
+                            v-if="showCountryDropdown && filteredCountries.length > 0"
+                            class="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto"
+                        >
+                            <button
+                                v-for="country in filteredCountries"
+                                :key="country.name"
+                                @mousedown.prevent="toggleDestination(country.name)"
+                                :class="[
+                                    'w-full text-left px-4 py-2 hover:bg-gray-50 transition-colors flex items-center justify-between',
+                                    form.preferred_destinations?.includes(country.name) ? 'bg-blue-50' : ''
+                                ]"
+                            >
+                                <span class="text-sm">{{ country.name }}</span>
+                                <span v-if="form.preferred_destinations?.includes(country.name)" class="text-brand-red-600 text-xs">✓ Selected</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selected Destinations -->
+                <div v-if="form.preferred_destinations && form.preferred_destinations.length > 0">
+                    <label class="block text-xs font-medium text-gray-700 mb-2">Selected Destinations ({{ form.preferred_destinations.length }})</label>
+                    <div class="flex flex-wrap gap-2">
+                        <button
+                            v-for="destination in form.preferred_destinations"
+                            :key="destination"
+                            @click="toggleDestination(destination)"
+                            class="px-3 py-1 bg-brand-red-600 text-white text-sm rounded-full hover:bg-red-700 transition-all flex items-center gap-1"
+                        >
+                            {{ destination }}
+                            <span class="text-xs">×</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -169,7 +205,7 @@
         <div class="bg-white rounded-lg border border-gray-200 p-6">
             <div class="flex items-center gap-3 mb-4">
                 <div class="p-2 bg-indigo-100 rounded-lg">
-                    <GlobeAltIcon class="w-6 h-6 text-indigo-600" />
+                    <GlobeAltIcon class="w-6 h-6 text-brand-red-600" />
                 </div>
                 <div>
                     <h4 class="font-semibold text-gray-900">Regional Settings</h4>
@@ -184,7 +220,7 @@
                     </label>
                     <select
                         v-model="form.language"
-                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                     >
                         <option v-for="language in languages" :key="language.id" :value="language.id">
                             {{ language.name }}
@@ -198,7 +234,7 @@
                     </label>
                     <select
                         v-model="form.timezone"
-                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                     >
                         <option value="Asia/Dhaka">Asia/Dhaka (GMT+6)</option>
                         <option value="Asia/Dubai">Asia/Dubai (GMT+4)</option>
@@ -214,7 +250,7 @@
                     </label>
                     <select
                         v-model="form.currency"
-                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
                     >
                         <option v-for="currency in currencies" :key="currency.id" :value="currency.code">
                             {{ currency.symbol }} {{ currency.code }} - {{ currency.name }}
@@ -284,7 +320,7 @@
             <button
                 @click="savePreferences"
                 :disabled="form.processing"
-                class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
             >
                 <span v-if="!form.processing">Save Preferences</span>
                 <span v-else>Saving...</span>
@@ -330,6 +366,8 @@ const props = defineProps({
 });
 
 const customDestination = ref('');
+const countrySearch = ref('');
+const showCountryDropdown = ref(false);
 
 // Use countries from database
 const popularDestinations = computed(() => {
@@ -350,6 +388,30 @@ const popularDestinations = computed(() => {
         .map(c => c.name)
         .slice(0, 12);
 });
+
+// Filtered countries based on search
+const filteredCountries = computed(() => {
+    if (!props.countries || props.countries.length === 0) return [];
+    
+    const searchTerm = countrySearch.value.toLowerCase().trim();
+    
+    if (!searchTerm) {
+        // Show all countries when no search term
+        return props.countries;
+    }
+    
+    // Filter by name
+    return props.countries.filter(c => 
+        c.name.toLowerCase().includes(searchTerm)
+    );
+});
+
+// Hide dropdown with delay to allow click events
+const hideCountryDropdown = () => {
+    setTimeout(() => {
+        showCountryDropdown.value = false;
+    }, 200);
+};
 
 // Map Font Awesome icons to emojis
 const iconToEmoji = {
@@ -408,7 +470,7 @@ const notificationChannels = [
         icon: EnvelopeIcon,
         label: 'Email Notifications',
         description: 'Receive notifications via email',
-        color: 'text-blue-600'
+        color: 'text-brand-red-600'
     },
     {
         key: 'sms',
@@ -492,6 +554,8 @@ const toggleDestination = (destination) => {
     } else {
         form.preferred_destinations.push(destination);
     }
+    // Clear search after selection
+    countrySearch.value = '';
 };
 
 const addCustomDestination = () => {

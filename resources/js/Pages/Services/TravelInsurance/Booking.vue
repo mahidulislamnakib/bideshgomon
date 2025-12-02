@@ -412,7 +412,7 @@ const canProceedStep2 = computed(() => {
                     <!-- Payment Info -->
                     <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6">
                         <div class="flex items-start space-x-3">
-                            <CreditCardIcon class="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+                            <CreditCardIcon class="h-6 w-6 text-brand-red-600 flex-shrink-0 mt-1" />
                             <div>
                                 <h3 class="font-bold text-blue-900 mb-2">Payment via Wallet</h3>
                                 <p class="text-sm text-blue-800">

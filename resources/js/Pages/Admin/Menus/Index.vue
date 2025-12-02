@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -29,7 +29,7 @@ const clearCache = () => {
 
 const getLocationBadgeColor = (location) => {
     const colors = {
-        'header_main': 'bg-blue-100 text-blue-800',
+        'header_main': 'bg-red-100 text-brand-red-600',
         'footer_column_1': 'bg-green-100 text-green-800',
         'footer_column_2': 'bg-purple-100 text-purple-800',
         'footer_column_3': 'bg-pink-100 text-pink-800',
@@ -64,7 +64,7 @@ const getLocationBadgeColor = (location) => {
                             </button>
                             <Link
                                 :href="route('menus.create')"
-                                class="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
+                                class="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 transition-colors"
                             >
                                 <PlusIcon class="h-5 w-5 mr-2" />
                                 Add Menu Item
@@ -148,7 +148,7 @@ const getLocationBadgeColor = (location) => {
                                         <div class="flex items-center justify-end gap-2">
                                             <Link
                                                 :href="route('menus.edit', menu.id)"
-                                                class="text-indigo-600 hover:text-indigo-900"
+                                                class="text-brand-red-600 hover:text-red-900"
                                             >
                                                 <PencilIcon class="h-5 w-5" />
                                             </Link>
@@ -170,7 +170,7 @@ const getLocationBadgeColor = (location) => {
                                             <div class="mt-6">
                                                 <Link
                                                     :href="route('menus.create')"
-                                                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                                                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700"
                                                 >
                                                     <PlusIcon class="h-5 w-5 mr-2" />
                                                     Add Menu Item
@@ -222,7 +222,7 @@ const getLocationBadgeColor = (location) => {
                                             :href="link.url"
                                             :class="[
                                                 link.active
-                                                    ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
+                                                    ? 'z-10 bg-red-50 border-brand-red-600 text-brand-red-600'
                                                     : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
                                                 'relative inline-flex items-center px-4 py-2 border text-sm font-medium'
                                             ]"
@@ -236,13 +236,13 @@ const getLocationBadgeColor = (location) => {
                 </div>
 
                 <!-- Info Panel -->
-                <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div class="mt-6 bg-red-50 border border-red-200 rounded-lg p-4">
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <Bars3Icon class="h-5 w-5 text-blue-400" />
                         </div>
                         <div class="ml-3">
-                            <h3 class="text-sm font-medium text-blue-800">Menu Locations</h3>
+                            <h3 class="text-sm font-medium text-brand-red-600">Menu Locations</h3>
                             <div class="mt-2 text-sm text-blue-700">
                                 <ul class="list-disc list-inside space-y-1">
                                     <li><strong>Header Main:</strong> Primary navigation at top of website</li>

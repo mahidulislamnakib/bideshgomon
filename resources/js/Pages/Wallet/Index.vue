@@ -189,7 +189,7 @@ const submitWithdraw = () => {
                         </template>
                         <template #default>
                             <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">Transactions</p>
-                            <p class="text-lg sm:text-xl font-bold text-sky-600">{{ transactionCount || 0 }}</p>
+                            <p class="text-lg sm:text-xl font-bold text-brand-red-600">{{ transactionCount || 0 }}</p>
                         </template>
                     </RhythmicCard>
                 </div>
@@ -303,7 +303,7 @@ const submitWithdraw = () => {
                 <div class="p-rhythm-lg pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
                     <!-- Modal Header with gradient accent -->
                     <div class="flex items-center gap-3 mb-rhythm-lg">
-                        <div class="w-12 h-12 rounded-xl bg-ocean-500 flex items-center justify-center shadow-rhythmic-md">
+                        <div class="w-12 h-12 rounded-xl bg-brand-red-600 flex items-center justify-center shadow-rhythmic-md">
                             <PlusCircleIcon class="h-6 w-6 text-white" />
                         </div>
                         <div>
@@ -323,11 +323,11 @@ const submitWithdraw = () => {
                                 min="100"
                                 max="100000"
                                 placeholder="Enter amount (min ৳100)"
-                                class="w-full px-rhythm-md py-rhythm-md text-lg border-2 border-ocean-200 rounded-xl focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 transition-all bg-white"
+                                class="w-full px-rhythm-md py-rhythm-md text-lg border-2 border-ocean-200 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-ocean-500 transition-all bg-white"
                                 required
                             />
                             <p class="text-xs text-gray-500 mt-rhythm-xs flex items-center gap-1">
-                                <span class="inline-block w-1.5 h-1.5 rounded-full bg-ocean-500"></span>
+                                <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-red-600"></span>
                                 Minimum: ৳100 • Maximum: ৳100,000
                             </p>
                         </template>
@@ -336,7 +336,7 @@ const submitWithdraw = () => {
                     <!-- Payment Gateway Selector -->
                     <div v-if="addFundsForm.amount >= 100" class="animate-fadeIn">
                         <label class="block text-sm font-semibold text-gray-800 mb-rhythm-sm flex items-center gap-2">
-                            <span class="inline-block w-2 h-2 rounded-full bg-ocean-500"></span>
+                            <span class="inline-block w-2 h-2 rounded-full bg-brand-red-600"></span>
                             Select Payment Gateway
                         </label>
                         <PaymentGatewaySelector

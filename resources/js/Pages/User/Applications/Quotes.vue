@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
 import {
   CheckCircleIcon,
   XCircleIcon,
@@ -18,6 +19,8 @@ const props = defineProps({
   application: Object,
   quotes: Array,
 });
+
+const { formatDate } = useBangladeshFormat();
 
 const selectedQuote = ref(null);
 const showAcceptModal = ref(false);
@@ -112,7 +115,7 @@ const getAgencyRating = (agency) => {
               <div class="flex items-start justify-between mb-4">
                 <div class="flex items-center gap-3">
                   <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                    <BuildingOfficeIcon class="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                    <BuildingOfficeIcon class="h-6 w-6 text-brand-red-600 dark:text-blue-400" />
                   </div>
                   <div>
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white">
@@ -163,7 +166,7 @@ const getAgencyRating = (agency) => {
                   <ClockIcon class="h-4 w-4 text-gray-400" />
                   <span class="text-gray-600 dark:text-gray-400">Valid until:</span>
                   <span class="font-medium text-gray-900 dark:text-white">
-                    {{ new Date(quote.valid_until).toLocaleDateString() }}
+                    {{ formatDate(quote.valid_until) }}
                   </span>
                 </div>
                 <div class="flex items-center gap-2 text-sm">
@@ -190,7 +193,7 @@ const getAgencyRating = (agency) => {
                 <button
                   @click="selectQuote(quote); showAcceptModal = true"
                   :disabled="quote.status !== 'pending'"
-                  class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors"
+                  class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-brand-red-600 hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors"
                 >
                   <CheckCircleIcon class="h-5 w-5" />
                   Accept Quote
@@ -249,7 +252,7 @@ const getAgencyRating = (agency) => {
           <button
             @click="acceptQuote"
             :disabled="acceptingQuote"
-            class="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white py-2 rounded-lg font-medium transition-colors"
+            class="flex-1 bg-brand-red-600 hover:bg-red-700 disabled:bg-blue-400 text-white py-2 rounded-lg font-medium transition-colors"
           >
             {{ acceptingQuote ? 'Processing...' : 'Confirm' }}
           </button>

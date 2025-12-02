@@ -83,7 +83,7 @@ const shareViaEmail = () => {
                         
                         <div class="relative z-10">
                             <div class="flex items-center justify-center mb-4">
-                                <ShareIcon class="h-8 w-8 text-indigo-600 mr-3" />
+                                <ShareIcon class="h-8 w-8 text-brand-red-600 mr-3" />
                                 <h3 class="text-2xl font-bold text-gray-900">Your Referral Code</h3>
                             </div>
                             
@@ -109,7 +109,7 @@ const shareViaEmail = () => {
                                         />
                                         <button
                                             @click="copyToClipboard"
-                                            class="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white hover:bg-indigo-700 font-semibold transition-all duration-200"
+                                            class="flex items-center gap-2 px-6 py-3 bg-brand-red-600 text-white hover:bg-red-700 font-semibold transition-all duration-200"
                                         >
                                             <CheckCircleIcon v-if="copied" class="h-5 w-5 text-green-600" />
                                             <ClipboardDocumentIcon v-else class="h-5 w-5" />
@@ -136,7 +136,7 @@ const shareViaEmail = () => {
                                         <!-- Facebook -->
                                         <button
                                             @click="shareViaFacebook"
-                                            class="group flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                                            class="group flex items-center gap-2 px-6 py-3 bg-brand-red-600 hover:bg-red-700 text-white rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                                         >
                                             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -173,7 +173,7 @@ const shareViaEmail = () => {
                                     <p class="text-xs text-gray-500 mt-1">Friends you've invited</p>
                                 </div>
                                 <div class="p-4 bg-blue-100 rounded-xl">
-                                    <UserGroupIcon class="h-8 w-8 text-blue-600" />
+                                    <UserGroupIcon class="h-8 w-8 text-brand-red-600" />
                                 </div>
                             </div>
                         </template>

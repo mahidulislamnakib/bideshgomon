@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <Head title="Email Templates" />
   <AdminLayout>
     <div class="p-6">
@@ -14,7 +14,7 @@
             </svg>
             Bulk Upload
           </Link>
-          <Link :href="route('admin.data.email-templates.create')" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+          <Link :href="route('admin.data.email-templates.create')" class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
@@ -27,10 +27,10 @@
         <div class="p-4 border-b border-gray-200">
           <div class="flex flex-wrap gap-4">
             <div class="flex-1 min-w-[200px]">
-              <input v-model="filters.search" @input="debouncedSearch" type="text" placeholder="Search templates..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"/>
+              <input v-model="filters.search" @input="debouncedSearch" type="text" placeholder="Search templates..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600"/>
             </div>
             <div class="w-40">
-              <select v-model="filters.category" @change="applyFilters" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+              <select v-model="filters.category" @change="applyFilters" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600">
                 <option value="">All Categories</option>
                 <option value="general">General</option>
                 <option value="transactional">Transactional</option>
@@ -39,14 +39,14 @@
               </select>
             </div>
             <div class="w-32">
-              <select v-model="filters.is_active" @change="applyFilters" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+              <select v-model="filters.is_active" @change="applyFilters" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600">
                 <option value="">All Status</option>
                 <option value="1">Active</option>
                 <option value="0">Inactive</option>
               </select>
             </div>
             <div class="w-40">
-              <select v-model="filters.sort" @change="applyFilters" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+              <select v-model="filters.sort" @change="applyFilters" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600">
                 <option value="name">Name</option>
                 <option value="category">Category</option>
                 <option value="campaigns">Campaigns</option>
@@ -79,7 +79,7 @@
                 </td>
                 <td class="px-6 py-4">
                   <span class="inline-flex px-2 py-1 text-xs font-medium rounded-full" :class="{
-                    'bg-blue-100 text-blue-800': template.category === 'general',
+                    'bg-red-100 text-brand-red-600': template.category === 'general',
                     'bg-green-100 text-green-800': template.category === 'transactional',
                     'bg-purple-100 text-purple-800': template.category === 'marketing',
                     'bg-yellow-100 text-yellow-800': template.category === 'notification'
@@ -91,12 +91,12 @@
                   {{ template.campaigns_count || 0 }}
                 </td>
                 <td class="px-6 py-4">
-                  <button @click="toggleStatus(template)" class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" :class="template.is_active ? 'bg-blue-600' : 'bg-gray-200'">
+                  <button @click="toggleStatus(template)" class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2" :class="template.is_active ? 'bg-brand-red-600' : 'bg-gray-200'">
                     <span class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform" :class="template.is_active ? 'translate-x-6' : 'translate-x-1'"/>
                   </button>
                 </td>
                 <td class="px-6 py-4 text-right text-sm font-medium space-x-2">
-                  <Link :href="route('admin.data.email-templates.edit', template.id)" class="text-blue-600 hover:text-blue-900">Edit</Link>
+                  <Link :href="route('admin.data.email-templates.edit', template.id)" class="text-brand-red-600 hover:text-red-900">Edit</Link>
                   <button @click="confirmDelete(template)" class="text-red-600 hover:text-red-900" :disabled="template.campaigns_count > 0" :class="{'opacity-50 cursor-not-allowed': template.campaigns_count > 0}">Delete</button>
                 </td>
               </tr>

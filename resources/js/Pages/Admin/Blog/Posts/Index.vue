@@ -11,7 +11,7 @@
                 </div>
                 <Link
                     :href="route('admin.blog.posts.create')"
-                    class="inline-flex items-center px-4 py-2 bg-ocean-500 border border-transparent rounded-md font-semibold text-sm text-white hover:bg-ocean-600 transition-colors"
+                    class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-sm text-white hover:bg-red-700 transition-colors"
                 >
                     <PlusIcon class="h-5 w-5 mr-2" />
                     New Post
@@ -20,14 +20,16 @@
 
             <!-- Filters Card -->
             <BaseCard padding="lg">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <BaseInput
-                        v-model="searchQuery"
-                        type="text"
-                        placeholder="Search posts..."
-                        :icon="MagnifyingGlassIcon"
-                        @input="handleSearch"
-                    />
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="md:col-span-2">
+                        <BaseInput
+                            v-model="searchQuery"
+                            type="text"
+                            placeholder="Search posts..."
+                            :icon="MagnifyingGlassIcon"
+                            @input="handleSearch"
+                        />
+                    </div>
                     <BaseSelect
                         v-model="statusFilter"
                         :options="[
@@ -46,6 +48,10 @@
                         ]"
                         @change="applyFilters"
                     />
+                </div>
+                <div class="flex gap-2 mt-4">
+                    <button @click="applyFilters" class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 transition-colors">Search</button>
+                    <button @click="clearFilters" class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">Reset</button>
                 </div>
             </BaseCard>
 
@@ -75,7 +81,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody class="bg-white divide-y divide-gray-200" v-if="posts.data.length > 0">
                             <tr v-for="post in posts.data" :key="post.id" class="hover:bg-gray-50 transition-colors">
                                 <td class="px-6 py-4">
                                     <div class="flex items-start gap-3">
@@ -131,7 +137,7 @@
                                     <div class="flex items-center justify-end gap-2">
                                         <Link
                                             :href="route('admin.blog.posts.edit', post.id)"
-                                            class="text-ocean-600 hover:text-ocean-900"
+                                            class="text-brand-red-600 hover:text-red-900"
                                         >
                                             <PencilIcon class="h-5 w-5" />
                                         </Link>
@@ -144,10 +150,20 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr v-if="posts.data.length === 0">
+                        </tbody>
+                        <tbody v-else>
+                            <tr>
                                 <td colspan="6" class="px-6 py-12 text-center text-gray-500">
-                                    <div class="text-lg font-medium">No blog posts found</div>
-                                    <p class="mt-1">Create your first post to get started</p>
+                                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-.868 0-1.563.695-1.563 1.563 0 .868.695 1.563 1.563 1.563.868 0 1.563-.695 1.563-1.563C13.563 8.695 12.868 8 12 8zM6 20l1.5-4.5L3 12l4.5-1.5L9 6l1.5 4.5L15 12l-4.5 1.5L9 18l-3 2z" />
+                                    </svg>
+                                    <div class="mt-4 text-gray-500">No blog posts found</div>
+                                    <Link
+                                        :href="route('admin.blog.posts.create')"
+                                        class="mt-4 inline-block text-brand-red-600 hover:text-red-700"
+                                    >
+                                        Create your first post
+                                    </Link>
                                 </td>
                             </tr>
                         </tbody>
@@ -168,7 +184,7 @@
                                 :class="[
                                     'px-3 py-2 text-sm font-medium rounded-md transition-colors',
                                     link.active
-                                        ? 'bg-ocean-500 text-white'
+                                        ? 'bg-brand-red-600 text-white'
                                         : link.url
                                         ? 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
                                         : 'bg-gray-100 text-gray-400 cursor-not-allowed'
@@ -237,5 +253,12 @@ const formatNumber = (num) => {
         return (num / 1000).toFixed(1) + 'k';
     }
     return num;
+};
+
+const clearFilters = () => {
+    searchQuery.value = '';
+    statusFilter.value = '';
+    categoryFilter.value = '';
+    applyFilters();
 };
 </script>

@@ -5,6 +5,7 @@ import { UserIcon, EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon, GiftIcon
 import Header from '@/Components/Header.vue';
 import Footer from '@/Components/Footer.vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import InternationalPhoneInput from '@/Components/InternationalPhoneInput.vue';
 
 const props = defineProps({
     referralCode: String,
@@ -16,10 +17,33 @@ const form = useForm({
     last_name: '',
     email: '',
     phone: '',
+    country_code: '+880',
     password: '',
     password_confirmation: '',
     referral_code: props.referralCode || '',
 });
+
+// Countries for phone input
+const countries = [
+    { code: '+880', name: 'Bangladesh', flag: '🇧🇩' },
+    { code: '+1', name: 'United States', flag: '🇺🇸' },
+    { code: '+44', name: 'United Kingdom', flag: '🇬🇧' },
+    { code: '+91', name: 'India', flag: '🇮🇳' },
+    { code: '+86', name: 'China', flag: '🇨🇳' },
+    { code: '+81', name: 'Japan', flag: '🇯🇵' },
+    { code: '+49', name: 'Germany', flag: '🇩🇪' },
+    { code: '+33', name: 'France', flag: '🇫🇷' },
+    { code: '+971', name: 'UAE', flag: '🇦🇪' },
+    { code: '+966', name: 'Saudi Arabia', flag: '🇸🇦' },
+    { code: '+92', name: 'Pakistan', flag: '🇵🇰' },
+    { code: '+93', name: 'Afghanistan', flag: '🇦🇫' },
+    { code: '+61', name: 'Australia', flag: '🇦🇺' },
+    { code: '+64', name: 'New Zealand', flag: '🇳🇿' },
+    { code: '+27', name: 'South Africa', flag: '🇿🇦' },
+    { code: '+234', name: 'Nigeria', flag: '🇳🇬' },
+    { code: '+254', name: 'Kenya', flag: '🇰🇪' },
+    { code: '+995', name: 'Georgia', flag: '🇬🇪' },
+];
 
 const showPassword = ref(false);
 const showConfirmPassword = ref(false);
@@ -186,31 +210,17 @@ const submit = () => {
                         </div>
 
                         <!-- Phone Number Input -->
-                        <div>
-                            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
-                                Mobile Number *
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <PhoneIcon class="h-5 w-5 text-gray-400" />
-                                </div>
-                                <input
-                                    id="phone"
-                                    type="tel"
-                                    v-model="form.phone"
-                                    required
-                                    autocomplete="tel"
-                                    placeholder="+880 1712345678"
-                                    class="block w-full pl-11 pr-4 py-4 text-base border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
-                                    :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.phone }"
-                                />
-                            </div>
-                            <p class="mt-1 text-xs text-gray-500">Include country code (e.g., +880 for Bangladesh)</p>
-                            <p v-if="form.errors.phone" class="mt-2 text-sm text-red-600 flex items-center">
-                                <span class="inline-block w-1 h-1 bg-red-600 rounded-full mr-2"></span>
-                                {{ form.errors.phone }}
-                            </p>
-                        </div>
+                        <InternationalPhoneInput
+                            v-model="form.phone"
+                            v-model:country-code="form.country_code"
+                            :countries="countries"
+                            label="Mobile Number *"
+                            placeholder="1712345678"
+                            helper-text="Enter your phone number without country code"
+                            :error-message="form.errors.phone"
+                            :required="true"
+                            id="phone"
+                        />
 
                         <!-- Referral Code -->
                         <div>

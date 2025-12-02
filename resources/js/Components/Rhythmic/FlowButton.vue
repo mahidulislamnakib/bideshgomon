@@ -93,13 +93,13 @@ const roundedClass = computed(() => {
 
 const variantClass = computed(() => {
     const variants = {
-        ocean: 'bg-ocean-500 text-white hover:bg-ocean-600 focus:ring-ocean-300',
-        sky: 'bg-sky-500 text-white hover:bg-sky-600 focus:ring-sky-300',
+        ocean: 'bg-brand-red-600 text-white hover:bg-brand-red-600 focus:ring-ocean-300',
+        sky: 'bg-brand-red-600 text-white hover:bg-brand-red-600 focus:ring-sky-300',
         growth: 'bg-growth-500 text-white hover:bg-growth-600 focus:ring-growth-300',
         sunrise: 'bg-sunrise-500 text-white hover:bg-sunrise-600 focus:ring-sunrise-300',
         gold: 'bg-gold-500 text-white hover:bg-gold-600 focus:ring-gold-300',
-        outline: 'bg-white border-2 border-ocean-500 text-ocean-600 hover:bg-ocean-50 focus:ring-ocean-300',
-        ghost: 'bg-transparent text-ocean-600 hover:bg-ocean-50 focus:ring-ocean-300',
+        outline: 'bg-white border-2 border-ocean-500 text-brand-red-600 hover:bg-ocean-50 focus:ring-ocean-300',
+        ghost: 'bg-transparent text-brand-red-600 hover:bg-ocean-50 focus:ring-ocean-300',
         danger: 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-300',
     };
     return variants[props.variant] || variants.ocean;
@@ -134,8 +134,10 @@ const iconAfterClass = computed(() => {
 });
 </script>
 
+<!-- Temporarily disabled for Vite 5.4.11 CSS bug
 <style scoped>
 .group:hover .group-hover\:translate-x-1 {
     transform: translateX(0.25rem);
 }
 </style>
+-->

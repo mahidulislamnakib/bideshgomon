@@ -1,26 +1,26 @@
-<template>
+﻿<template>
     <Head title="Blog Categories" />
 
     <AdminLayout>
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <!-- Header -->
-                <div class="mb-6 flex items-center justify-between">
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-900">Blog Categories</h2>
-                        <p class="mt-1 text-sm text-gray-600">Organize your blog posts into categories</p>
-                    </div>
-                    <button
-                        @click="showCreateModal = true"
-                        class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700"
-                    >
-                        <PlusIcon class="h-5 w-5 mr-2" />
-                        New Category
-                    </button>
+        <div class="space-y-6">
+            <!-- Header -->
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-display-md font-bold text-gray-900">Blog Categories</h1>
+                    <p class="mt-1 text-gray-600">Organize your blog posts into categories</p>
                 </div>
+                <button
+                    @click="showCreateModal = true"
+                    class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-sm text-white hover:bg-red-700 transition-colors"
+                >
+                    <PlusIcon class="h-5 w-5 mr-2" />
+                    New Category
+                </button>
+            </div>
 
-                <!-- Categories Table -->
-                <div class="bg-white shadow-sm rounded-lg overflow-hidden">
+            <!-- Categories Table -->
+            <BaseCard padding="none">
+                <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
@@ -75,7 +75,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <button
                                         @click="editCategory(category)"
-                                        class="text-blue-600 hover:text-blue-900 mr-4"
+                                        class="text-brand-red-600 hover:text-red-900 mr-4"
                                     >
                                         Edit
                                     </button>
@@ -96,8 +96,9 @@
                         <p class="mt-1 text-sm text-gray-500">Get started by creating a new category.</p>
                     </div>
                 </div>
+            </BaseCard>
 
-                <!-- Create/Edit Modal -->
+            <!-- Create/Edit Modal -->
                 <TransitionRoot :show="showCreateModal || showEditModal" as="template">
                     <Dialog as="div" class="relative z-50" @close="closeModal">
                         <TransitionChild
@@ -139,7 +140,7 @@
                                                             id="name"
                                                             v-model="form.name"
                                                             type="text"
-                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                                             @input="generateSlug"
                                                         />
                                                         <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">{{ form.errors.name }}</p>
@@ -153,7 +154,7 @@
                                                             id="slug"
                                                             v-model="form.slug"
                                                             type="text"
-                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                                         />
                                                         <p v-if="form.errors.slug" class="mt-1 text-sm text-red-600">{{ form.errors.slug }}</p>
                                                     </div>
@@ -166,7 +167,7 @@
                                                             id="description"
                                                             v-model="form.description"
                                                             rows="3"
-                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                                         ></textarea>
                                                     </div>
 
@@ -181,7 +182,7 @@
                                                                 type="text"
                                                                 placeholder="📝"
                                                                 maxlength="2"
-                                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                                             />
                                                         </div>
 
@@ -193,7 +194,7 @@
                                                                 id="color"
                                                                 v-model="form.color"
                                                                 type="color"
-                                                                class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                                class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                                             />
                                                         </div>
                                                     </div>
@@ -207,7 +208,7 @@
                                                             v-model="form.order"
                                                             type="number"
                                                             min="0"
-                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                                         />
                                                     </div>
 
@@ -216,7 +217,7 @@
                                                             id="is_active"
                                                             v-model="form.is_active"
                                                             type="checkbox"
-                                                            class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                                            class="h-4 w-4 rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
                                                         />
                                                         <label for="is_active" class="ml-2 block text-sm text-gray-700">
                                                             Active
@@ -229,7 +230,7 @@
                                                 <button
                                                     type="submit"
                                                     :disabled="form.processing"
-                                                    class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:col-start-2 disabled:opacity-50"
+                                                    class="inline-flex w-full justify-center rounded-md bg-brand-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:col-start-2 disabled:opacity-50"
                                                 >
                                                     {{ form.processing ? 'Saving...' : 'Save' }}
                                                 </button>
@@ -248,7 +249,6 @@
                         </div>
                     </Dialog>
                 </TransitionRoot>
-            </div>
         </div>
     </AdminLayout>
 </template>
@@ -257,6 +257,7 @@
 import { ref } from 'vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import BaseCard from '@/Components/Base/BaseCard.vue';
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
 import { PlusIcon, FolderIcon } from '@heroicons/vue/24/outline';
 

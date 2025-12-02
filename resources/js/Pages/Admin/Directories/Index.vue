@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Directories" />
 
@@ -12,7 +12,7 @@
                     </div>
                     <Link
                         :href="route('admin.directories.create')"
-                        class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150"
                     >
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
@@ -32,7 +32,7 @@
                                 @input="debouncedSearch"
                                 type="text"
                                 placeholder="Search by name, email, phone..."
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             />
                         </div>
 
@@ -42,7 +42,7 @@
                             <select
                                 v-model="filters.category"
                                 @change="filterDirectories"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Categories</option>
                                 <option v-for="cat in categories" :key="cat.id" :value="cat.id">
@@ -57,7 +57,7 @@
                             <select
                                 v-model="filters.country"
                                 @change="filterDirectories"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Countries</option>
                                 <option v-for="country in countries" :key="country.id" :value="country.id">
@@ -72,7 +72,7 @@
                             <select
                                 v-model="filters.status"
                                 @change="filterDirectories"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Status</option>
                                 <option value="published">Published</option>
@@ -88,7 +88,7 @@
                                 v-model="filters.verified"
                                 @change="filterDirectories"
                                 type="checkbox"
-                                class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             />
                             <span class="ml-2 text-sm text-gray-700">Verified Only</span>
                         </label>
@@ -97,7 +97,7 @@
                                 v-model="filters.featured"
                                 @change="filterDirectories"
                                 type="checkbox"
-                                class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             />
                             <span class="ml-2 text-sm text-gray-700">Featured Only</span>
                         </label>
@@ -146,7 +146,7 @@
                                                 <div class="text-sm font-medium text-gray-900 flex items-center">
                                                     {{ directory.name }}
                                                     <span v-if="directory.is_verified" class="ml-2" title="Verified">
-                                                        <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                                        <svg class="w-4 h-4 text-brand-red-600" fill="currentColor" viewBox="0 0 20 20">
                                                             <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                                         </svg>
                                                     </span>
@@ -209,7 +209,7 @@
                                                 @click="toggleVerified(directory)"
                                                 :class="[
                                                     'p-1 rounded hover:bg-gray-100',
-                                                    directory.is_verified ? 'text-blue-600' : 'text-gray-400'
+                                                    directory.is_verified ? 'text-brand-red-600' : 'text-gray-400'
                                                 ]"
                                                 :title="directory.is_verified ? 'Verified' : 'Not Verified'"
                                             >
@@ -231,7 +231,7 @@
                                             </button>
                                             <Link
                                                 :href="route('admin.directories.edit', directory.id)"
-                                                class="text-blue-600 hover:text-blue-900 p-1"
+                                                class="text-brand-red-600 hover:text-red-900 p-1"
                                                 title="Edit"
                                             >
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -264,7 +264,7 @@
                         <div class="mt-6">
                             <Link
                                 :href="route('admin.directories.create')"
-                                class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700"
+                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
                             >
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>

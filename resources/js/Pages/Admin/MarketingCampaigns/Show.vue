@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { Link } from '@inertiajs/vue3'
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 
@@ -46,7 +46,7 @@ const getProgressPercentage = () => {
           <div>
             <Link
               :href="route('admin.marketing-campaigns.index')"
-              class="text-blue-600 hover:text-brand-red-dark text-sm mb-2 inline-block"
+              class="text-brand-red-600 hover:text-brand-red-dark text-sm mb-2 inline-block"
             >
               ← Back to Campaigns
             </Link>
@@ -66,7 +66,7 @@ const getProgressPercentage = () => {
             <Link
               v-if="['draft', 'scheduled', 'paused'].includes(campaign.status)"
               :href="route('admin.marketing-campaigns.edit', campaign.id)"
-              class="px-4 py-2 bg-blue-600 hover:bg-blue-700 transition-colors text-white rounded-lg hover:bg-brand-red-dark transition"
+              class="px-4 py-2 bg-brand-red-600 hover:bg-red-700 transition-colors text-white rounded-lg hover:bg-brand-red-dark transition"
             >
               Edit Campaign
             </Link>
@@ -88,7 +88,7 @@ const getProgressPercentage = () => {
           <div class="text-sm text-gray-600 mb-1">
             Sent
           </div>
-          <div class="text-3xl font-bold text-blue-600">
+          <div class="text-3xl font-bold text-brand-red-600">
             {{ campaign.sent_count.toLocaleString() }}
           </div>
           <div class="text-sm text-gray-500 mt-1">
@@ -152,7 +152,7 @@ const getProgressPercentage = () => {
               👆
             </div>
           </div>
-          <div class="text-3xl font-bold text-blue-600 mb-2">
+          <div class="text-3xl font-bold text-brand-red-600 mb-2">
             {{ campaign.clicked_count.toLocaleString() }}
           </div>
           <div class="text-sm text-gray-600">
@@ -160,7 +160,7 @@ const getProgressPercentage = () => {
           </div>
           <div class="mt-4 bg-gray-200 rounded-full h-2">
             <div
-              class="bg-blue-600 hover:bg-blue-700 transition-colors h-2 rounded-full"
+              class="bg-brand-red-600 hover:bg-red-700 transition-colors h-2 rounded-full"
               :style="{ width: campaign.click_rate + '%' }"
             ></div>
           </div>
@@ -259,7 +259,7 @@ const getProgressPercentage = () => {
         </div>
         <div class="bg-gray-200 rounded-full h-4">
           <div
-            class="bg-blue-600 hover:bg-blue-700 transition-colors h-4 rounded-full transition-all duration-500"
+            class="bg-brand-red-600 hover:bg-red-700 transition-colors h-4 rounded-full transition-all duration-500"
             :style="{ width: getProgressPercentage() + '%' }"
           ></div>
         </div>

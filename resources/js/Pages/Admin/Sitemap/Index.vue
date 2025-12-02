@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <AdminLayout>
         <Head title="Admin Sitemap" />
 
@@ -31,7 +31,7 @@
                             </button>
                             <button
                                 @click="expandAll"
-                                class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 transition"
                             >
                                 Expand All
                             </button>
@@ -43,14 +43,14 @@
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
                     <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
                         <div class="flex items-center">
-                            <div class="p-3 bg-indigo-100 rounded-full">
-                                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="p-3 bg-red-100 rounded-full">
+                                <svg class="w-6 h-6 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                 </svg>
                             </div>
                             <div class="ml-4">
                                 <div class="text-sm font-medium text-gray-500">Total Routes</div>
-                                <div class="mt-1 text-3xl font-bold text-indigo-600">{{ stats.total_routes }}</div>
+                                <div class="mt-1 text-3xl font-bold text-brand-red-600">{{ stats.total_routes }}</div>
                             </div>
                         </div>
                     </div>
@@ -69,14 +69,14 @@
                     </div>
                     <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
                         <div class="flex items-center">
-                            <div class="p-3 bg-blue-100 rounded-full">
-                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="p-3 bg-red-100 rounded-full">
+                                <svg class="w-6 h-6 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
                             </div>
                             <div class="ml-4">
                                 <div class="text-sm font-medium text-gray-500">Static Routes</div>
-                                <div class="mt-1 text-3xl font-bold text-blue-600">{{ stats.without_params }}</div>
+                                <div class="mt-1 text-3xl font-bold text-brand-red-600">{{ stats.without_params }}</div>
                             </div>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                                     v-model="searchQuery"
                                     type="text"
                                     placeholder="Search by URI, name, action, or category..."
-                                    class="w-full pl-10 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    class="w-full pl-10 rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                 />
                                 <svg class="absolute left-3 top-3 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -129,7 +129,7 @@
                             <label class="block text-sm font-medium text-gray-700 mb-2">HTTP Method</label>
                             <select
                                 v-model="methodFilter"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Methods</option>
                                 <option value="GET">GET</option>
@@ -142,7 +142,7 @@
                             <label class="block text-sm font-medium text-gray-700 mb-2">Route Type</label>
                             <select
                                 v-model="routeTypeFilter"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                             >
                                 <option value="">All Types</option>
                                 <option value="static">Static Only</option>
@@ -203,7 +203,7 @@
                         >
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center flex-1">
-                                    <span class="text-xl mr-3 text-indigo-600">
+                                    <span class="text-xl mr-3 text-brand-red-600">
                                         {{ expandedCategories.includes(category) ? '▼' : '▶' }}
                                     </span>
                                     <div class="flex-1">
@@ -238,7 +238,7 @@
                                 <button
                                     @click.stop="testCategoryLinks(categoryRoutes)"
                                     v-if="(categoryRoutes || []).filter(r => !r?.has_params && r.methods.includes('GET')).length > 0"
-                                    class="ml-4 px-3 py-1 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-700 transition"
+                                    class="ml-4 px-3 py-1 bg-brand-red-600 text-white text-sm rounded-md hover:bg-red-700 transition"
                                 >
                                     Test Category
                                 </button>
@@ -261,7 +261,7 @@
                                             <!-- HTTP Methods -->
                                             <span :class="[
                                                 'px-2 py-1 text-xs font-medium rounded',
-                                                route.methods.includes('GET') ? 'bg-blue-100 text-blue-800' :
+                                                route.methods.includes('GET') ? 'bg-red-100 text-brand-red-600' :
                                                 route.methods.includes('POST') ? 'bg-green-100 text-green-800' :
                                                 route.methods.includes('PUT') ? 'bg-yellow-100 text-yellow-800' :
                                                 'bg-red-100 text-red-800'
@@ -323,7 +323,7 @@
                                             :href="route.url"
                                             target="_blank"
                                             @click="markAsTested(route.uri)"
-                                            class="inline-flex items-center px-3 py-2 border border-indigo-300 shadow-sm text-sm leading-4 font-medium rounded-md text-indigo-700 bg-white hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition"
+                                            class="inline-flex items-center px-3 py-2 border border-indigo-300 shadow-sm text-sm leading-4 font-medium rounded-md text-indigo-700 bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 transition"
                                         >
                                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

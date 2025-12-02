@@ -42,7 +42,7 @@ if (! function_exists('format_bd_phone')) {
 
 if (! function_exists('format_bd_date')) {
     /**
-     * Format date in DD/MM/YYYY format (Bangladeshi standard).
+     * Format date in DD MM YYYY format (Bangladeshi standard with spaces).
      *
      * @param  string|DateTime  $date
      * @param  bool  $includeTime
@@ -55,7 +55,7 @@ if (! function_exists('format_bd_date')) {
         }
 
         $dateTime = $date instanceof DateTime ? $date : new DateTime($date);
-        $format = $includeTime ? 'd/m/Y h:i A' : 'd/m/Y';
+        $format = $includeTime ? 'd M Y h:i A' : 'd M Y';
 
         return $dateTime->format($format);
     }
@@ -63,9 +63,10 @@ if (! function_exists('format_bd_date')) {
 
 if (! function_exists('parse_bd_date')) {
     /**
-     * Parse DD/MM/YYYY format date to Y-m-d for database storage.
+     * Parse DD MM YYYY format date to Y-m-d for database storage.
+     * Accepts both space-separated (DD MM YYYY) and slash-separated (DD/MM/YYYY) formats.
      *
-     * @param  string  $date  Date in DD/MM/YYYY format
+     * @param  string  $date  Date in DD MM YYYY or DD/MM/YYYY format
      * @return string|null Date in Y-m-d format
      */
     function parse_bd_date($date)
@@ -79,7 +80,23 @@ if (! function_exists('parse_bd_date')) {
             return $date;
         }
 
-        // Parse DD/MM/YYYY format
+        // Parse DD MM YYYY format (with spaces)
+        if (preg_match('/^(\d{1,2})\s+(\w+|\d{1,2})\s+(\d{4})$/', $date, $matches)) {
+            $day = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
+            $monthStr = $matches[2];
+            $year = $matches[3];
+            
+            // Convert month name to number if necessary
+            if (!is_numeric($monthStr)) {
+                $monthNum = date('m', strtotime($monthStr));
+            } else {
+                $monthNum = str_pad($monthStr, 2, '0', STR_PAD_LEFT);
+            }
+
+            return "{$year}-{$monthNum}-{$day}";
+        }
+
+        // Parse DD/MM/YYYY format (with slashes) - backward compatibility
         if (preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/', $date, $matches)) {
             $day = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
             $month = str_pad($matches[2], 2, '0', STR_PAD_LEFT);
