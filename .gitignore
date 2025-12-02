@@ -1,0 +1,112 @@
+# Laravel
+/vendor
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+/auth.json
+Homestead.json
+Homestead.yaml
+
+# Environment Files
+.env
+.env.backup
+.env.production
+.env.local
+
+# Laravel Caches
+/bootstrap/cache/*.php
+/.phpunit.cache
+.phpunit.result.cache
+.phpactor.json
+
+# OS Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Log Files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database
+*.sqlite
+*.sqlite-journal
+database.sqlite
+
+# Temporary/Test Files (IMPORTANT: Keep repo clean)
+test-*.php
+check-*.php
+scan-*.php
+analyze-*.php
+verify-*.php
+debug-*.php
+fix-*.php
+deep-*.php
+count-*.php
+list-*.php
+*-test.php
+temp-*.php
+tmp-*.php
+
+# Temporary SQL/Shell Scripts
+fix-*.sql
+add-*.sql
+create-missing-*.sql
+seed-*.sql
+temp-*.sql
+fix-*.sh
+quick-*.sh
+temp-*.sh
+
+# Analysis & Debug Reports
+*-ANALYSIS.md
+*-ANALYSIS.txt
+*-REPORT.txt
+*-RESULTS.txt
+*-SCAN.md
+*-SCAN.txt
+*-FIXES.md
+*-ISSUES.md
+*-SUMMARY.md
+TESTING_SESSION_*.md
+DATABASE_VERIFICATION_*.txt
+PROFILE_DATA_*.txt
+deep-schema-*.txt
+
+# Backup & Archives
+*.backup
+*.bak
+*.old
+*.tar.gz
+*.zip
+*-backup.*
+composer.json.backup
+
+# Build & Deployment Artifacts
+bideshgomon-deploy.tar.gz
+*.deploy.tar.gz
+dist/
+build/
+
+# IDE & Editor
+.phpstorm.meta.php
+_ide_helper*.php
+.idea/
+.vscode/settings.json
+*.code-workspace
+
+# Orphaned Files
+id
+mahidulislamnakib@gmail.com,
