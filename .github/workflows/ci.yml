@@ -28,7 +28,7 @@ jobs:
     name: ${{ matrix.check.name }}
     
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       
       - name: Setup PHP
         if: contains(matrix.check.name, 'PHP')
@@ -73,7 +73,7 @@ jobs:
     name: Security Vulnerabilities
     
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
