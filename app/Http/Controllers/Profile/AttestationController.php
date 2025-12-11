@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\Models\Attestation;
 use App\Models\Country;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -25,18 +24,18 @@ class AttestationController extends Controller
             'Birth Certificate', 'Marriage Certificate', 'Divorce Certificate',
             'Police Clearance', 'Medical Certificate', 'Experience Certificate',
             'Employment Contract', 'Power of Attorney', 'Commercial Documents',
-            'Company Registration', 'Business License', 'Other'
+            'Company Registration', 'Business License', 'Other',
         ];
 
         $attestationTypes = [
             'MOFA Attestation', 'Embassy Attestation', 'HRD Attestation',
             'MEA Attestation', 'Chamber of Commerce', 'Notary Attestation',
-            'Home Department', 'SDM Attestation', 'Apostille'
+            'Home Department', 'SDM Attestation', 'Apostille',
         ];
 
         $purposes = [
             'Employment Visa', 'Student Visa', 'Business Visa', 'Family Visa',
-            'Work Permit', 'Higher Education', 'Immigration', 'Business Setup', 'Other'
+            'Work Permit', 'Higher Education', 'Immigration', 'Business Setup', 'Other',
         ];
 
         return Inertia::render('Profile/Attestation/Create', [
@@ -57,14 +56,14 @@ class AttestationController extends Controller
 
         $quotes = [];
         $serviceApplication = null;
-        
+
         if ($attestation->serviceApplication) {
             $serviceApplication = $attestation->serviceApplication;
             $quotes = $serviceApplication->quotes()
                 ->with(['agency'])
                 ->orderBy('quoted_amount', 'asc')
                 ->get()
-                ->map(function($quote) {
+                ->map(function ($quote) {
                     return [
                         'id' => $quote->id,
                         'agency_name' => $quote->agency->name ?? 'Unknown',

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TranslationRequest;
 use App\Models\ServiceApplication;
 use App\Models\ServiceModule;
+use App\Models\TranslationRequest;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -57,19 +57,19 @@ class TranslationRequestController extends Controller
         $validated['user_agent'] = $request->userAgent();
 
         // Calculate fees
-        $validated['certification_fee'] = match($validated['certification_type']) {
+        $validated['certification_fee'] = match ($validated['certification_type']) {
             'notarized' => 2000,
             'certified' => 1000,
             default => 0
         };
 
-        $validated['urgency_fee'] = match($validated['urgency']) {
+        $validated['urgency_fee'] = match ($validated['urgency']) {
             'urgent' => 1500,
             'express' => 800,
             default => 0
         };
 
-        $validated['delivery_days'] = match($validated['urgency']) {
+        $validated['delivery_days'] = match ($validated['urgency']) {
             'urgent' => 2,
             'express' => 3,
             default => 5

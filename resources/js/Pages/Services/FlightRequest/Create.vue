@@ -80,12 +80,12 @@
                         <div v-if="form.trip_type !== 'multi_city'" class="space-y-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">From</label>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">From</label>
                                     <input
                                         v-model="form.origin_airport_code"
                                         type="text"
                                         placeholder="e.g., DAC (Dhaka)"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                         required
                                     />
                                     <div v-if="form.errors.origin_airport_code" class="text-red-600 text-sm mt-1">
@@ -94,12 +94,12 @@
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">To</label>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">To</label>
                                     <input
                                         v-model="form.destination_airport_code"
                                         type="text"
                                         placeholder="e.g., DXB (Dubai)"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                         required
                                     />
                                     <div v-if="form.errors.destination_airport_code" class="text-red-600 text-sm mt-1">
@@ -110,12 +110,12 @@
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Departure Date</label>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Departure Date</label>
                                     <input
                                         v-model="form.travel_date"
                                         type="date"
                                         :min="getTodayDate()"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                         required
                                     />
                                     <div v-if="form.errors.travel_date" class="text-red-600 text-sm mt-1">
@@ -124,12 +124,12 @@
                                 </div>
 
                                 <div v-if="form.trip_type === 'round_trip'">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Return Date</label>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Return Date</label>
                                     <input
                                         v-model="form.return_date"
                                         type="date"
                                         :min="form.travel_date || getTodayDate()"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                         required
                                     />
                                     <div v-if="form.errors.return_date" class="text-red-600 text-sm mt-1">
@@ -160,34 +160,34 @@
 
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">From</label>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">From</label>
                                         <input
                                             v-model="segment.origin"
                                             type="text"
                                             placeholder="e.g., DAC"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                             required
                                         />
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">To</label>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">To</label>
                                         <input
                                             v-model="segment.destination"
                                             type="text"
                                             placeholder="e.g., DXB"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                             required
                                         />
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Date</label>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Date</label>
                                         <input
                                             v-model="segment.date"
                                             type="date"
                                             :min="getTodayDate()"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                             required
                                         />
                                     </div>
@@ -207,20 +207,20 @@
                         <!-- Passengers & Class -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Passengers</label>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Passengers</label>
                                 <select
                                     v-model.number="form.passengers_count"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
                                 >
                                     <option v-for="n in 9" :key="n" :value="n">{{ n }} {{ n === 1 ? 'Passenger' : 'Passengers' }}</option>
                                 </select>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Class</label>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Class</label>
                                 <select
                                     v-model="form.flight_class"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
                                 >
                                     <option value="economy">Economy</option>
                                     <option value="business">Business</option>
@@ -239,34 +239,34 @@
                                     class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-gray-200 rounded-lg"
                                 >
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
                                         <input
                                             v-model="passenger.name"
                                             type="text"
                                             placeholder="As per passport"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                             required
                                         />
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Age</label>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Age</label>
                                         <input
                                             v-model.number="passenger.age"
                                             type="number"
                                             min="0"
                                             max="120"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                             required
                                         />
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Passport Number (Optional)</label>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Passport Number (Optional)</label>
                                         <input
                                             v-model="passenger.passport_number"
                                             type="text"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                         />
                                     </div>
                                 </div>
@@ -278,31 +278,31 @@
                             <h3 class="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Contact Name</label>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Contact Name</label>
                                     <input
                                         v-model="form.contact_name"
                                         type="text"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                         required
                                     />
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
                                     <input
                                         v-model="form.contact_email"
                                         type="email"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                         required
                                     />
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Phone</label>
                                     <input
                                         v-model="form.contact_phone"
                                         type="tel"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                         required
                                     />
                                 </div>
@@ -314,26 +314,26 @@
                             <h3 class="text-lg font-semibold text-gray-900 mb-4">Budget Range (Optional)</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Budget (৳)</label>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Minimum Budget (৳)</label>
                                     <input
                                         v-model.number="form.budget_min"
                                         type="number"
                                         min="0"
                                         step="1000"
                                         placeholder="e.g., 50000"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                     />
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Maximum Budget (৳)</label>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Maximum Budget (৳)</label>
                                     <input
                                         v-model.number="form.budget_max"
                                         type="number"
                                         min="0"
                                         step="1000"
                                         placeholder="e.g., 100000"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                     />
                                 </div>
                             </div>

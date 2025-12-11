@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FlightBooking extends Model
 {
@@ -107,7 +107,7 @@ class FlightBooking extends Model
 
         static::creating(function ($booking) {
             if (empty($booking->booking_reference)) {
-                $booking->booking_reference = 'FB' . date('Ymd') . str_pad(
+                $booking->booking_reference = 'FB'.date('Ymd').str_pad(
                     static::whereDate('created_at', today())->count() + 1,
                     3,
                     '0',
@@ -171,13 +171,13 @@ class FlightBooking extends Model
     public function scopeUpcoming($query)
     {
         return $query->where('travel_date', '>=', today())
-                     ->whereIn('status', ['confirmed', 'pending']);
+            ->whereIn('status', ['confirmed', 'pending']);
     }
 
     public function scopePast($query)
     {
         return $query->where('travel_date', '<', today())
-                     ->where('status', 'completed');
+            ->where('status', 'completed');
     }
 
     /**
@@ -205,7 +205,7 @@ class FlightBooking extends Model
 
     public function canCancel(): bool
     {
-        return in_array($this->status, ['pending', 'confirmed']) 
+        return in_array($this->status, ['pending', 'confirmed'])
                && $this->travel_date > today();
     }
 
@@ -237,7 +237,7 @@ class FlightBooking extends Model
      */
     public function getFormattedTotalAttribute(): string
     {
-        return '৳ ' . number_format((float) $this->total_amount, 2);
+        return '৳ '.number_format((float) $this->total_amount, 2);
     }
 
     /**
@@ -245,7 +245,7 @@ class FlightBooking extends Model
      */
     public function getStatusColorAttribute(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             'pending' => 'yellow',
             'confirmed' => 'green',
             'cancelled' => 'red',
@@ -260,7 +260,7 @@ class FlightBooking extends Model
      */
     public function getPaymentStatusColorAttribute(): string
     {
-        return match($this->payment_status) {
+        return match ($this->payment_status) {
             'paid' => 'green',
             'pending' => 'yellow',
             'failed' => 'red',

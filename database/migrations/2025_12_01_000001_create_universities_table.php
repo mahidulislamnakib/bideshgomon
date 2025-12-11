@@ -36,7 +36,7 @@ return new class extends Migration
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             $table->index('country_id');
             $table->index('world_ranking');
             $table->index('is_featured');

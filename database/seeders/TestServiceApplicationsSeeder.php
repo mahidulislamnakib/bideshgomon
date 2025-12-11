@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Country;
 use App\Models\ServiceApplication;
 use App\Models\ServiceModule;
-use App\Models\Country;
 use App\Models\TouristVisa;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class TestServiceApplicationsSeeder extends Seeder
@@ -37,7 +37,7 @@ class TestServiceApplicationsSeeder extends Seeder
             ->where('name', 'like', '%Tourist%')
             ->first();
 
-        if (!$touristVisaModule) {
+        if (! $touristVisaModule) {
             $touristVisaModule = ServiceModule::first();
         }
 
@@ -46,8 +46,9 @@ class TestServiceApplicationsSeeder extends Seeder
         $canada = Country::where('name', 'Canada')->first();
         $uk = Country::where('name', 'United Kingdom')->first();
 
-        if (!$usa || !$canada || !$uk) {
+        if (! $usa || ! $canada || ! $uk) {
             $this->command->error('Countries not found. Please run CountrySeeder first.');
+
             return;
         }
 
@@ -81,14 +82,14 @@ class TestServiceApplicationsSeeder extends Seeder
                 'intended_travel_date' => $appData['departure_date'],
                 'duration_days' => 14,
                 'status' => 'pending',
-                'user_notes' => 'Test application for ' . $appData['travel_purpose'],
+                'user_notes' => 'Test application for '.$appData['travel_purpose'],
             ]);
 
             // Create service application
             $application = ServiceApplication::create([
                 'user_id' => $appData['user']->id,
                 'service_module_id' => $touristVisaModule->id,
-                'application_number' => 'APP-' . date('Y') . '-' . str_pad(ServiceApplication::count() + 1, 4, '0', STR_PAD_LEFT),
+                'application_number' => 'APP-'.date('Y').'-'.str_pad(ServiceApplication::count() + 1, 4, '0', STR_PAD_LEFT),
                 'status' => 'pending',
                 'application_data' => [
                     'destination_country' => $appData['country']->name,

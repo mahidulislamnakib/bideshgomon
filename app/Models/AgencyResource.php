@@ -77,7 +77,7 @@ class AgencyResource extends Model
      */
     public function isPending(): bool
     {
-        return $this->requires_admin_approval && !$this->is_approved;
+        return $this->requires_admin_approval && ! $this->is_approved;
     }
 
     /**
@@ -126,7 +126,7 @@ class AgencyResource extends Model
     public function scopePending($query)
     {
         return $query->where('requires_admin_approval', true)
-                    ->where('is_approved', false);
+            ->where('is_approved', false);
     }
 
     /**

@@ -2,18 +2,17 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\ServiceModule;
-use App\Models\ServiceFormField;
 use App\Models\ServiceCategory;
-use Illuminate\Support\Str;
+use App\Models\ServiceFormField;
+use App\Models\ServiceModule;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class PluginServiceArchitectureSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     * 
+     *
      * This seeder creates sample services with dynamic form fields
      * demonstrating the plugin architecture capabilities.
      */
@@ -78,7 +77,7 @@ class PluginServiceArchitectureSeeder extends Seeder
 
         } catch (\Exception $e) {
             DB::rollBack();
-            $this->command->error('❌ Error seeding plugin services: ' . $e->getMessage());
+            $this->command->error('❌ Error seeding plugin services: '.$e->getMessage());
             throw $e;
         }
     }
@@ -717,18 +716,18 @@ class PluginServiceArchitectureSeeder extends Seeder
     {
         foreach ($fields as $fieldData) {
             $fieldData['service_module_id'] = $service->id;
-            
+
             // Map 'label' to 'field_label' (correct column name)
             if (isset($fieldData['label'])) {
                 $fieldData['field_label'] = $fieldData['label'];
                 unset($fieldData['label']);
             }
-            
+
             // Convert options array to JSON if exists
             if (isset($fieldData['options']) && is_array($fieldData['options'])) {
                 $fieldData['options'] = json_encode($fieldData['options']);
             }
-            
+
             // Convert conditional_logic to conditional_rules
             if (isset($fieldData['conditional_logic'])) {
                 $fieldData['conditional_rules'] = $fieldData['conditional_logic'];

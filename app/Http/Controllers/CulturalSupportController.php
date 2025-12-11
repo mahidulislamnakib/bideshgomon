@@ -17,7 +17,7 @@ class CulturalSupportController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $support = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $support = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($support, 'cultural-support', $validated);
 
         return response()->json(['message' => 'Cultural integration support request created']);

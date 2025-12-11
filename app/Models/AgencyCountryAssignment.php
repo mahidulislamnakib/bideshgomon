@@ -138,6 +138,7 @@ class AgencyCountryAssignment extends Model
     public function calculateAgencyEarnings(float $totalFees): float
     {
         $commission = $this->calculatePlatformCommission($totalFees);
+
         return $totalFees - $commission;
     }
 

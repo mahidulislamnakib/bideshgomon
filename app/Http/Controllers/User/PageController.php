@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Page;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PageController extends Controller
@@ -23,4 +22,3 @@ class PageController extends Controller
         ]);
     }
 }
-

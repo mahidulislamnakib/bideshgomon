@@ -194,7 +194,7 @@ class VisaHistoryController extends Controller
         // Check if visa history is referenced in travel history
         if ($visaHistory->travelHistory()->exists()) {
             return redirect()->back()->withErrors([
-                'error' => 'Cannot delete visa history that has related travel history records.'
+                'error' => 'Cannot delete visa history that has related travel history records.',
             ]);
         }
 

@@ -5,9 +5,6 @@ namespace App\Services;
 use App\Models\PaymentTransaction;
 use App\Models\Wallet;
 use App\Models\WalletTransaction;
-use App\Services\SSLCommerzService;
-use App\Services\BKashService;
-use App\Services\NagadService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -15,7 +12,9 @@ use Illuminate\Support\Str;
 class PaymentGatewayService
 {
     protected SSLCommerzService $sslcommerz;
+
     protected BKashService $bkash;
+
     protected NagadService $nagad;
 
     public function __construct(
@@ -35,7 +34,7 @@ class PaymentGatewayService
     {
         try {
             // Validate gateway
-            if (!in_array($gateway, ['sslcommerz', 'bkash', 'nagad'])) {
+            if (! in_array($gateway, ['sslcommerz', 'bkash', 'nagad'])) {
                 return [
                     'success' => false,
                     'message' => 'Invalid payment gateway',
@@ -46,7 +45,7 @@ class PaymentGatewayService
             $transaction = PaymentTransaction::create([
                 'user_id' => $data['user_id'],
                 'wallet_id' => $data['wallet_id'] ?? null,
-                'transaction_id' => 'TXN-' . strtoupper(Str::random(16)),
+                'transaction_id' => 'TXN-'.strtoupper(Str::random(16)),
                 'gateway' => $gateway,
                 'amount' => $data['amount'],
                 'currency' => $data['currency'] ?? 'BDT',
@@ -62,20 +61,20 @@ class PaymentGatewayService
                 'metadata' => $data['metadata'] ?? [],
             ]);
 
-            Log::info("Payment initiated", [
+            Log::info('Payment initiated', [
                 'transaction_id' => $transaction->transaction_id,
                 'gateway' => $gateway,
                 'amount' => $data['amount'],
             ]);
 
             // Initiate payment with gateway
-            $result = match($gateway) {
+            $result = match ($gateway) {
                 'sslcommerz' => $this->initiateSSLCommerz($transaction, $data),
                 'bkash' => $this->initiateBKash($transaction, $data),
                 'nagad' => $this->initiateNagad($transaction, $data),
             };
 
-            if (!$result['success']) {
+            if (! $result['success']) {
                 $transaction->markAsFailed(
                     $result['error_code'] ?? 'INITIATION_FAILED',
                     $result['message'] ?? 'Failed to initiate payment'
@@ -87,14 +86,14 @@ class PaymentGatewayService
             ]);
 
         } catch (\Exception $e) {
-            Log::error("Payment initiation failed", [
+            Log::error('Payment initiation failed', [
                 'gateway' => $gateway,
                 'error' => $e->getMessage(),
             ]);
 
             return [
                 'success' => false,
-                'message' => 'Payment initiation failed: ' . $e->getMessage(),
+                'message' => 'Payment initiation failed: '.$e->getMessage(),
             ];
         }
     }
@@ -105,7 +104,7 @@ class PaymentGatewayService
     public function processCallback(string $gateway, array $data): array
     {
         try {
-            $result = match($gateway) {
+            $result = match ($gateway) {
                 'sslcommerz' => $this->processSSLCommerzCallback($data),
                 'bkash' => $this->processBKashCallback($data),
                 'nagad' => $this->processNagadCallback($data),
@@ -119,14 +118,14 @@ class PaymentGatewayService
             return $result;
 
         } catch (\Exception $e) {
-            Log::error("Callback processing failed", [
+            Log::error('Callback processing failed', [
                 'gateway' => $gateway,
                 'error' => $e->getMessage(),
             ]);
 
             return [
                 'success' => false,
-                'message' => 'Callback processing failed: ' . $e->getMessage(),
+                'message' => 'Callback processing failed: '.$e->getMessage(),
             ];
         }
     }
@@ -137,7 +136,7 @@ class PaymentGatewayService
     public function processWebhook(string $gateway, array $data): array
     {
         try {
-            $result = match($gateway) {
+            $result = match ($gateway) {
                 'sslcommerz' => $this->processSSLCommerzWebhook($data),
                 'bkash' => $this->processBKashWebhook($data),
                 'nagad' => $this->processNagadWebhook($data),
@@ -151,14 +150,14 @@ class PaymentGatewayService
             return $result;
 
         } catch (\Exception $e) {
-            Log::error("Webhook processing failed", [
+            Log::error('Webhook processing failed', [
                 'gateway' => $gateway,
                 'error' => $e->getMessage(),
             ]);
 
             return [
                 'success' => false,
-                'message' => 'Webhook processing failed: ' . $e->getMessage(),
+                'message' => 'Webhook processing failed: '.$e->getMessage(),
             ];
         }
     }
@@ -169,7 +168,7 @@ class PaymentGatewayService
     public function refund(PaymentTransaction $transaction, float $amount, string $reason = ''): array
     {
         try {
-            if (!$transaction->isSuccessful()) {
+            if (! $transaction->isSuccessful()) {
                 return [
                     'success' => false,
                     'message' => 'Can only refund successful transactions',
@@ -183,7 +182,7 @@ class PaymentGatewayService
                 ];
             }
 
-            $result = match($transaction->gateway) {
+            $result = match ($transaction->gateway) {
                 'sslcommerz' => $this->sslcommerz->refund(
                     $transaction->gateway_transaction_id,
                     $amount,
@@ -211,14 +210,14 @@ class PaymentGatewayService
             return $result;
 
         } catch (\Exception $e) {
-            Log::error("Refund processing failed", [
+            Log::error('Refund processing failed', [
                 'transaction_id' => $transaction->transaction_id,
                 'error' => $e->getMessage(),
             ]);
 
             return [
                 'success' => false,
-                'message' => 'Refund processing failed: ' . $e->getMessage(),
+                'message' => 'Refund processing failed: '.$e->getMessage(),
             ];
         }
     }
@@ -309,14 +308,14 @@ class PaymentGatewayService
     protected function processSSLCommerzCallback(array $data): array
     {
         $transactionId = $data['tran_id'] ?? null;
-        
-        if (!$transactionId) {
+
+        if (! $transactionId) {
             return ['success' => false, 'message' => 'Transaction ID not found'];
         }
 
         $transaction = PaymentTransaction::where('transaction_id', $transactionId)->first();
-        
-        if (!$transaction) {
+
+        if (! $transaction) {
             return ['success' => false, 'message' => 'Transaction not found'];
         }
 
@@ -355,14 +354,14 @@ class PaymentGatewayService
     protected function processBKashCallback(array $data): array
     {
         $paymentId = $data['paymentID'] ?? null;
-        
-        if (!$paymentId) {
+
+        if (! $paymentId) {
             return ['success' => false, 'message' => 'Payment ID not found'];
         }
 
         $transaction = PaymentTransaction::where('payment_reference_id', $paymentId)->first();
-        
-        if (!$transaction) {
+
+        if (! $transaction) {
             return ['success' => false, 'message' => 'Transaction not found'];
         }
 
@@ -397,14 +396,14 @@ class PaymentGatewayService
     protected function processNagadCallback(array $data): array
     {
         $paymentReferenceId = $data['payment_ref_id'] ?? null;
-        
-        if (!$paymentReferenceId) {
+
+        if (! $paymentReferenceId) {
             return ['success' => false, 'message' => 'Payment reference ID not found'];
         }
 
         $transaction = PaymentTransaction::where('payment_reference_id', $paymentReferenceId)->first();
-        
-        if (!$transaction) {
+
+        if (! $transaction) {
             return ['success' => false, 'message' => 'Transaction not found'];
         }
 
@@ -467,8 +466,8 @@ class PaymentGatewayService
     {
         DB::transaction(function () use ($transaction) {
             $wallet = Wallet::where('user_id', $transaction->user_id)->first();
-            
-            if (!$wallet) {
+
+            if (! $wallet) {
                 $wallet = Wallet::create([
                     'user_id' => $transaction->user_id,
                     'balance' => 0,
@@ -494,7 +493,7 @@ class PaymentGatewayService
             // Update payment transaction with wallet_id
             $transaction->update(['wallet_id' => $wallet->id]);
 
-            Log::info("Wallet credited", [
+            Log::info('Wallet credited', [
                 'transaction_id' => $transaction->transaction_id,
                 'amount' => $transaction->net_amount,
                 'wallet_balance' => $wallet->balance,
@@ -509,11 +508,12 @@ class PaymentGatewayService
     {
         DB::transaction(function () use ($transaction, $amount) {
             $wallet = $transaction->wallet;
-            
-            if (!$wallet) {
-                Log::error("Wallet not found for refund", [
+
+            if (! $wallet) {
+                Log::error('Wallet not found for refund', [
                     'transaction_id' => $transaction->transaction_id,
                 ]);
+
                 return;
             }
 
@@ -532,7 +532,7 @@ class PaymentGatewayService
                 'status' => 'completed',
             ]);
 
-            Log::info("Wallet debited for refund", [
+            Log::info('Wallet debited for refund', [
                 'transaction_id' => $transaction->transaction_id,
                 'amount' => $amount,
                 'wallet_balance' => $wallet->balance,

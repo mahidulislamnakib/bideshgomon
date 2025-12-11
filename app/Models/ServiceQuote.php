@@ -95,7 +95,7 @@ class ServiceQuote extends Model
     public function scopePending($query)
     {
         return $query->where('status', 'pending')
-                    ->where('valid_until', '>', now());
+            ->where('valid_until', '>', now());
     }
 
     public function scopeAccepted($query)

@@ -27,7 +27,7 @@ class FamilyMemberController extends Controller
 
         // Return Inertia page for direct navigation
         return Inertia::render('Profile/FamilyMembers', [
-            'familyMembers' => $familyMembers
+            'familyMembers' => $familyMembers,
         ]);
     }
 
@@ -61,22 +61,22 @@ class FamilyMemberController extends Controller
             'contact_email' => 'nullable|email|max:255',
             'emergency_contact' => 'boolean',
             'relationship_proof' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
-            'notes' => 'nullable|string|max:1000'
+            'notes' => 'nullable|string|max:1000',
         ]);
 
         // Validation: If dependent, should not have income
         if ($request->input('is_dependent') && $request->filled('annual_income_bdt') && $request->input('annual_income_bdt') > 0) {
             return response()->json([
                 'message' => 'A dependent cannot have an annual income.',
-                'errors' => ['annual_income_bdt' => ['Dependent members should not have income listed.']]
+                'errors' => ['annual_income_bdt' => ['Dependent members should not have income listed.']],
             ], 422);
         }
 
         // Validation: If deceased, require deceased date
-        if ($request->input('deceased') && !$request->filled('deceased_date')) {
+        if ($request->input('deceased') && ! $request->filled('deceased_date')) {
             return response()->json([
                 'message' => 'Deceased date is required when marking as deceased.',
-                'errors' => ['deceased_date' => ['Please provide the date of death.']]
+                'errors' => ['deceased_date' => ['Please provide the date of death.']],
             ], 422);
         }
 
@@ -96,19 +96,20 @@ class FamilyMemberController extends Controller
         // Create the family member
         try {
             $familyMember = FamilyMember::create($validated);
-            
+
             return response()->json([
                 'message' => 'Family member added successfully.',
-                'family_member' => $familyMember
+                'family_member' => $familyMember,
             ], 201);
         } catch (\Exception $e) {
             Log::error('Family member creation failed', [
                 'error' => $e->getMessage(),
-                'user_id' => auth()->id()
+                'user_id' => auth()->id(),
             ]);
+
             return response()->json([
                 'message' => 'Failed to add family member.',
-                'errors' => ['general' => [$e->getMessage()]]
+                'errors' => ['general' => [$e->getMessage()]],
             ], 500);
         }
     }
@@ -146,22 +147,22 @@ class FamilyMemberController extends Controller
             'contact_email' => 'nullable|email|max:255',
             'emergency_contact' => 'boolean',
             'relationship_proof' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
-            'notes' => 'nullable|string|max:1000'
+            'notes' => 'nullable|string|max:1000',
         ]);
 
         // Validation: If dependent, should not have income
         if ($request->input('is_dependent') && $request->filled('annual_income_bdt') && $request->input('annual_income_bdt') > 0) {
             return response()->json([
                 'message' => 'A dependent cannot have an annual income.',
-                'errors' => ['annual_income_bdt' => ['Dependent members should not have income listed.']]
+                'errors' => ['annual_income_bdt' => ['Dependent members should not have income listed.']],
             ], 422);
         }
 
         // Validation: If deceased, require deceased date
-        if ($request->input('deceased') && !$request->filled('deceased_date')) {
+        if ($request->input('deceased') && ! $request->filled('deceased_date')) {
             return response()->json([
                 'message' => 'Deceased date is required when marking as deceased.',
-                'errors' => ['deceased_date' => ['Please provide the date of death.']]
+                'errors' => ['deceased_date' => ['Please provide the date of death.']],
             ], 422);
         }
 
@@ -183,7 +184,7 @@ class FamilyMemberController extends Controller
 
         return response()->json([
             'message' => 'Family member updated successfully.',
-            'family_member' => $familyMember
+            'family_member' => $familyMember,
         ]);
     }
 
@@ -203,7 +204,7 @@ class FamilyMemberController extends Controller
         $familyMember->delete();
 
         return response()->json([
-            'message' => 'Family member deleted successfully.'
+            'message' => 'Family member deleted successfully.',
         ]);
     }
 }

@@ -1,15 +1,20 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\TouristVisaApplicationController;
-use App\Http\Controllers\Api\StudentVisaApplicationController;
-use App\Http\Controllers\Api\WorkVisaApplicationController;
-use App\Http\Controllers\Api\TranslationApplicationController;
+use App\Http\Controllers\Api\AdController;
 use App\Http\Controllers\Api\AttestationApplicationController;
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\Api\HajjUmrahApplicationController;
 use App\Http\Controllers\API\SearchController;
-use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\Api\StudentVisaApplicationController;
+use App\Http\Controllers\Api\TouristVisaApplicationController;
+use App\Http\Controllers\Api\TranslationApplicationController;
+use App\Http\Controllers\Api\WorkVisaApplicationController;
+use App\Http\Controllers\HealthCheckController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+// Health check endpoint (no auth required for monitoring)
+Route::get('/health', HealthCheckController::class)->name('api.health');
 
 // Public API routes
 Route::prefix('v1')->group(function () {
@@ -96,4 +101,11 @@ Route::middleware(['auth:web'])->prefix('hajj-umrah-applications')->name('api.ha
     Route::get('/{hajjUmrah}', [HajjUmrahApplicationController::class, 'show'])->name('show');
     Route::put('/{hajjUmrah}', [HajjUmrahApplicationController::class, 'update'])->name('update');
     Route::delete('/{hajjUmrah}', [HajjUmrahApplicationController::class, 'destroy'])->name('destroy');
+});
+
+// Ad System API routes
+Route::prefix('ads')->name('api.ads.')->group(function () {
+    Route::post('/fetch', [AdController::class, 'fetch'])->name('fetch');
+    Route::post('/impression', [AdController::class, 'impression'])->name('impression');
+    Route::post('/click', [AdController::class, 'click'])->name('click');
 });

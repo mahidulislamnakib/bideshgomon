@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\BlogPost;
 use App\Models\BlogCategory;
+use App\Models\BlogPost;
 use App\Models\BlogTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -79,7 +79,7 @@ class BlogPostController extends Controller
 
         $post = BlogPost::create($validated);
 
-        if (!empty($validated['tags'])) {
+        if (! empty($validated['tags'])) {
             $post->tags()->sync($validated['tags']);
         }
 
@@ -90,7 +90,7 @@ class BlogPostController extends Controller
     public function edit(BlogPost $post)
     {
         $post->load(['category', 'tags']);
-        
+
         $categories = BlogCategory::where('is_active', true)->orderBy('order')->get();
         $tags = BlogTag::orderBy('name')->get();
 
@@ -106,7 +106,7 @@ class BlogPostController extends Controller
         $validated = $request->validate([
             'category_id' => 'required|exists:blog_categories,id',
             'title' => 'required|string|max:255',
-            'slug' => 'nullable|string|unique:blog_posts,slug,' . $post->id,
+            'slug' => 'nullable|string|unique:blog_posts,slug,'.$post->id,
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
             'featured_image' => 'nullable|string',
@@ -148,6 +148,7 @@ class BlogPostController extends Controller
     private function calculateReadingTime(string $content): int
     {
         $wordCount = str_word_count(strip_tags($content));
+
         return max(1, ceil($wordCount / 200)); // 200 words per minute
     }
 }

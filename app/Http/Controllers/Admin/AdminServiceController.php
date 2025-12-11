@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ServiceModule;
 use App\Models\ServiceCategory;
+use App\Models\ServiceModule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -20,7 +20,7 @@ class AdminServiceController extends Controller
         $query = ServiceModule::with('category')
             ->when($request->search, function ($q, $search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%");
+                    ->orWhere('slug', 'like', "%{$search}%");
             })
             ->when($request->category, function ($q, $category) {
                 $q->where('service_category_id', $category);
@@ -102,7 +102,7 @@ class AdminServiceController extends Controller
         }
 
         // Set default sort_order if not provided
-        if (!isset($validated['sort_order'])) {
+        if (! isset($validated['sort_order'])) {
             $maxOrder = ServiceModule::max('sort_order') ?? 0;
             $validated['sort_order'] = $maxOrder + 1;
         }
@@ -121,8 +121,8 @@ class AdminServiceController extends Controller
     {
         $service->load([
             'category',
-            'formFields' => fn($q) => $q->ordered(),
-            'applications' => fn($q) => $q->latest()->limit(10),
+            'formFields' => fn ($q) => $q->ordered(),
+            'applications' => fn ($q) => $q->latest()->limit(10),
         ]);
 
         $stats = [
@@ -160,7 +160,7 @@ class AdminServiceController extends Controller
         $validated = $request->validate([
             'service_category_id' => 'required|exists:service_categories,id',
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|unique:service_modules,slug,' . $service->id,
+            'slug' => 'required|string|unique:service_modules,slug,'.$service->id,
             'short_description' => 'nullable|string',
             'full_description' => 'nullable|string',
             'description' => 'nullable|string',
@@ -253,7 +253,7 @@ class AdminServiceController extends Controller
 
         $field = $validated['field'];
         $service->update([
-            $field => !$service->$field,
+            $field => ! $service->$field,
         ]);
 
         return back()->with('success', 'Status updated successfully.');
@@ -265,8 +265,8 @@ class AdminServiceController extends Controller
     public function duplicate(ServiceModule $service)
     {
         $newService = $service->replicate();
-        $newService->name = $service->name . ' (Copy)';
-        $newService->slug = $service->slug . '-copy-' . time();
+        $newService->name = $service->name.' (Copy)';
+        $newService->slug = $service->slug.'-copy-'.time();
         $newService->is_active = false;
         $newService->applications_count = 0;
         $newService->views_count = 0;

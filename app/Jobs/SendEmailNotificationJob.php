@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Models\EmailLog;
-use App\Models\EmailTemplate;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -16,6 +15,7 @@ class SendEmailNotificationJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $tries = 3;
+
     public $timeout = 60;
 
     public function __construct(
@@ -26,7 +26,7 @@ class SendEmailNotificationJob implements ShouldQueue
     {
         $emailLog = EmailLog::find($this->emailLogId);
 
-        if (!$emailLog || $emailLog->status === 'sent') {
+        if (! $emailLog || $emailLog->status === 'sent') {
             return;
         }
 
@@ -40,10 +40,10 @@ class SendEmailNotificationJob implements ShouldQueue
             $emailLog->markAsSent();
         } catch (\Exception $e) {
             $emailLog->markAsFailed($e->getMessage());
-            
+
             if ($this->attempts() >= $this->tries) {
                 // Log final failure
-                \Log::error('Email sending failed after ' . $this->tries . ' attempts', [
+                \Log::error('Email sending failed after '.$this->tries.' attempts', [
                     'email_log_id' => $emailLog->id,
                     'error' => $e->getMessage(),
                 ]);

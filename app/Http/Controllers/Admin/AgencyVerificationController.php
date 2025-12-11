@@ -28,8 +28,8 @@ class AgencyVerificationController extends Controller
         // Search by agency name
         if ($request->has('search') && $request->search !== '') {
             $query->whereHas('agency', function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('company_name', 'like', '%' . $request->search . '%');
+                $q->where('name', 'like', '%'.$request->search.'%')
+                    ->orWhere('company_name', 'like', '%'.$request->search.'%');
             });
         }
 
@@ -126,7 +126,7 @@ class AgencyVerificationController extends Controller
                 'user_id' => $verificationRequest->agency->user_id,
                 'type' => 'verification_rejected',
                 'title' => 'Verification Rejected',
-                'body' => 'Your verification request has been rejected. ' . ($request->rejection_reason ? 'Reason: ' . $request->rejection_reason : 'Please review the admin notes.'),
+                'body' => 'Your verification request has been rejected. '.($request->rejection_reason ? 'Reason: '.$request->rejection_reason : 'Please review the admin notes.'),
                 'action_url' => route('agency.verification.index'),
                 'icon' => '❌',
                 'color' => 'red',

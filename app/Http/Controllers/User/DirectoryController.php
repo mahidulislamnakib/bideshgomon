@@ -50,7 +50,7 @@ class DirectoryController extends Controller
         // Sort
         $sortBy = $request->get('sort_by', 'name');
         $sortOrder = $request->get('sort_order', 'asc');
-        
+
         if ($sortBy === 'views') {
             $query->orderBy('view_count', $sortOrder);
         } else {

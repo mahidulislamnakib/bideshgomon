@@ -18,14 +18,14 @@ return new class extends Migration
             $table->decimal('default_delivery_charge', 10, 2)->default(0.00)->after('has_delivery_charges');
             $table->boolean('is_query_based')->default(true)->after('default_delivery_charge');
             $table->boolean('is_marketplace')->default(false)->after('is_query_based');
-            
+
             // University exclusivity support
             $table->boolean('supports_university_exclusivity')->default(false)->after('is_marketplace');
-            
+
             // Agency type restrictions
             $table->foreignId('restricted_to_agency_type_id')->nullable()->after('supports_university_exclusivity')
                 ->constrained('agency_types')->onDelete('set null');
-            
+
             // Add indexes for performance
             $table->index('is_marketplace');
             $table->index('restricted_to_agency_type_id');
@@ -41,7 +41,7 @@ return new class extends Migration
             $table->dropForeign(['restricted_to_agency_type_id']);
             $table->dropIndex(['is_marketplace']);
             $table->dropIndex(['restricted_to_agency_type_id']);
-            
+
             $table->dropColumn([
                 'requires_form_submission',
                 'has_delivery_charges',

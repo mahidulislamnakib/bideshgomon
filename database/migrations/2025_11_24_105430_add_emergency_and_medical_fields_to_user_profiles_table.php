@@ -13,21 +13,21 @@ return new class extends Migration
     {
         Schema::table('user_profiles', function (Blueprint $table) {
             // Add missing emergency contact fields
-            if (!Schema::hasColumn('user_profiles', 'emergency_contact_email')) {
+            if (! Schema::hasColumn('user_profiles', 'emergency_contact_email')) {
                 $table->string('emergency_contact_email')->nullable()->after('emergency_contact_relationship');
             }
-            if (!Schema::hasColumn('user_profiles', 'emergency_contact_address')) {
+            if (! Schema::hasColumn('user_profiles', 'emergency_contact_address')) {
                 $table->string('emergency_contact_address', 500)->nullable()->after('emergency_contact_email');
             }
-            
+
             // Add medical information fields
-            if (!Schema::hasColumn('user_profiles', 'allergies')) {
+            if (! Schema::hasColumn('user_profiles', 'allergies')) {
                 $table->text('allergies')->nullable()->after('blood_group');
             }
-            if (!Schema::hasColumn('user_profiles', 'medical_conditions')) {
+            if (! Schema::hasColumn('user_profiles', 'medical_conditions')) {
                 $table->text('medical_conditions')->nullable()->after('allergies');
             }
-            if (!Schema::hasColumn('user_profiles', 'vaccinations')) {
+            if (! Schema::hasColumn('user_profiles', 'vaccinations')) {
                 $table->json('vaccinations')->nullable()->after('medical_conditions');
             }
         });

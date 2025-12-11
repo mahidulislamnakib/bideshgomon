@@ -94,7 +94,7 @@ class AgencyVerificationDocument extends Model
      */
     public function getFileSizeFormatted(): string
     {
-        if (!$this->file_size) {
+        if (! $this->file_size) {
             return 'Unknown';
         }
 
@@ -107,6 +107,6 @@ class AgencyVerificationDocument extends Model
             $unitIndex++;
         }
 
-        return round($size, 2) . ' ' . $units[$unitIndex];
+        return round($size, 2).' '.$units[$unitIndex];
     }
 }

@@ -2,14 +2,14 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\User;
 use App\Models\Agency;
+use App\Models\AgencyCountryAssignment;
+use App\Models\Country;
 use App\Models\Role;
 use App\Models\ServiceModule;
-use App\Models\Country;
+use App\Models\User;
 use App\Models\VisaType;
-use App\Models\AgencyCountryAssignment;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class AgencyTestSeeder extends Seeder
@@ -20,9 +20,10 @@ class AgencyTestSeeder extends Seeder
     public function run(): void
     {
         $agencyRole = Role::where('slug', 'agency')->first();
-        
-        if (!$agencyRole) {
+
+        if (! $agencyRole) {
             $this->command->error('Agency role not found. Please run RoleSeeder first.');
+
             return;
         }
 

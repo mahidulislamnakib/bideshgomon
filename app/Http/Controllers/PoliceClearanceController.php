@@ -17,7 +17,7 @@ class PoliceClearanceController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $clearance = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $clearance = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($clearance, 'police-clearance', $validated);
 
         return response()->json(['message' => 'Police clearance request created']);

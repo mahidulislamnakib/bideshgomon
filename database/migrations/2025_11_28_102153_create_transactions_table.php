@@ -40,7 +40,7 @@ return new class extends Migration
             $table->timestamp('refunded_at')->nullable();
             $table->text('failure_reason')->nullable();
             $table->timestamps();
-            
+
             $table->index(['user_id', 'status']);
             $table->index(['gateway', 'status']);
             $table->index('created_at');

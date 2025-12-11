@@ -244,6 +244,6 @@ class TravelInsurancePackageSeeder extends Seeder
             echo "  ✓ {$package['name']} - ৳{$package['price_per_day']}/day\n";
         }
 
-        echo "\n✅ Created " . count($packages) . " travel insurance packages\n";
+        echo "\n✅ Created ".count($packages)." travel insurance packages\n";
     }
 }

@@ -34,7 +34,7 @@
                                 <div v-if="application.payment_status === 'pending'" class="text-right">
                                     <Link
                                         :href="route('visa.payment', application.id)"
-                                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700"
+                                        class="inline-flex items-center px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700"
                                     >
                                         Make Payment
                                     </Link>

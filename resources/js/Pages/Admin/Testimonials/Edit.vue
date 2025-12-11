@@ -17,14 +17,14 @@
                     <!-- Author Name -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Author Name (English) *
                             </label>
                             <input
                                 v-model="form.author_name"
                                 type="text"
                                 required
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
                                 :class="{ 'border-red-500': form.errors.author_name }"
                             />
                             <div v-if="form.errors.author_name" class="mt-1 text-sm text-red-600">
@@ -33,13 +33,13 @@
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Author Name (Bengali)
                             </label>
                             <input
                                 v-model="form.author_name_bn"
                                 type="text"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
                             />
                         </div>
                     </div>
@@ -47,24 +47,24 @@
                     <!-- Position -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Position (English)
                             </label>
                             <input
                                 v-model="form.position"
                                 type="text"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
                             />
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Position (Bengali)
                             </label>
                             <input
                                 v-model="form.position_bn"
                                 type="text"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
                             />
                         </div>
                     </div>
@@ -72,52 +72,52 @@
                     <!-- Company -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Company (English)
                             </label>
                             <input
                                 v-model="form.company"
                                 type="text"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
                             />
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Company (Bengali)
                             </label>
                             <input
                                 v-model="form.company_bn"
                                 type="text"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
                             />
                         </div>
                     </div>
 
                     <!-- Location -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
                             Location
                         </label>
                         <input
                             v-model="form.location"
                             type="text"
                             placeholder="e.g., Dhaka, Bangladesh"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
                         />
                     </div>
 
                     <!-- Content -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Testimonial Content (English) *
                             </label>
                             <textarea
                                 v-model="form.content"
                                 required
                                 rows="6"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
                                 :class="{ 'border-red-500': form.errors.content }"
                             />
                             <div v-if="form.errors.content" class="mt-1 text-sm text-red-600">
@@ -126,20 +126,20 @@
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Testimonial Content (Bengali)
                             </label>
                             <textarea
                                 v-model="form.content_bn"
                                 rows="6"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
                             />
                         </div>
                     </div>
 
                     <!-- Rating -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
                             Rating *
                         </label>
                         <div class="flex items-center gap-2">
@@ -168,7 +168,7 @@
 
                     <!-- Photo Upload -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
                             Author Photo
                         </label>
                         
@@ -181,7 +181,7 @@
                             @change="handleFileChange"
                             type="file"
                             accept="image/*"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
                         />
                         <p class="mt-1 text-sm text-gray-500">Maximum file size: 2MB. Leave empty to keep current photo.</p>
                         

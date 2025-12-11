@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserPhoneNumber;
 use App\Models\PhoneVerificationCode;
+use App\Models\UserPhoneNumber;
 use App\Services\SmsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +45,7 @@ class PhoneNumberController extends Controller
         // Map label to phone_type (convert label to lowercase for type)
         $phoneType = strtolower($validated['label']);
         // If label is custom, default to 'mobile'
-        if (!in_array($phoneType, ['mobile', 'home', 'work', 'whatsapp'])) {
+        if (! in_array($phoneType, ['mobile', 'home', 'work', 'whatsapp'])) {
             $phoneType = 'mobile';
         }
 
@@ -86,23 +86,23 @@ class PhoneNumberController extends Controller
 
         // Prepare update data
         $updateData = [];
-        
+
         if (isset($validated['phone_number'])) {
             $updateData['phone_number'] = $validated['phone_number'];
         }
-        
+
         if (isset($validated['country_code'])) {
             $updateData['country_code'] = $validated['country_code'];
         }
-        
+
         if (isset($validated['label'])) {
             $phoneType = strtolower($validated['label']);
-            if (!in_array($phoneType, ['mobile', 'home', 'work', 'whatsapp'])) {
+            if (! in_array($phoneType, ['mobile', 'home', 'work', 'whatsapp'])) {
                 $phoneType = 'mobile';
             }
             $updateData['phone_type'] = $phoneType;
         }
-        
+
         if (isset($validated['is_primary'])) {
             $updateData['is_primary'] = $validated['is_primary'];
         }
@@ -144,7 +144,7 @@ class PhoneNumberController extends Controller
             $newPrimary = Auth::user()->phoneNumbers()
                 ->where('id', '!=', $phoneNumber->id)
                 ->first();
-            
+
             if ($newPrimary) {
                 $newPrimary->update(['is_primary' => true]);
             }
@@ -191,7 +191,7 @@ class PhoneNumberController extends Controller
         // Send SMS
         $sent = $this->smsService->sendVerificationCode($phoneNumber, $verificationCode->code);
 
-        if (!$sent) {
+        if (! $sent) {
             return response()->json([
                 'message' => 'Failed to send verification code. Please try again.',
             ], 500);
@@ -219,11 +219,11 @@ class PhoneNumberController extends Controller
 
         // Try Twilio Verify API first if configured
         if ($this->smsService->twilioVerifyConfigured()) {
-            $fullNumber = '+' . preg_replace('/\D+/', '', $phoneNumber->country_code) 
-                        . preg_replace('/\D+/', '', $phoneNumber->phone_number);
-            
+            $fullNumber = '+'.preg_replace('/\D+/', '', $phoneNumber->country_code)
+                        .preg_replace('/\D+/', '', $phoneNumber->phone_number);
+
             $approved = $this->smsService->verifyTwilioCode($fullNumber, $validated['code']);
-            
+
             if ($approved) {
                 $phoneNumber->update([
                     'is_verified' => true,
@@ -247,7 +247,7 @@ class PhoneNumberController extends Controller
             ->where('is_used', false)
             ->first();
 
-        if (!$verificationCode) {
+        if (! $verificationCode) {
             return response()->json([
                 'message' => 'Invalid verification code',
             ], 422);

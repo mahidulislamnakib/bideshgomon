@@ -61,7 +61,7 @@ class WorkVisa extends Model
 
         static::creating(function ($workVisa) {
             if (empty($workVisa->application_reference)) {
-                $workVisa->application_reference = 'WV' . strtoupper(uniqid());
+                $workVisa->application_reference = 'WV'.strtoupper(uniqid());
             }
         });
     }
@@ -137,19 +137,19 @@ class WorkVisa extends Model
     public function getJobInfoAttribute(): string
     {
         $parts = [];
-        
+
         if ($this->job_title) {
             $parts[] = $this->job_title;
         }
-        
+
         if ($this->employer_name) {
-            $parts[] = 'at ' . $this->employer_name;
+            $parts[] = 'at '.$this->employer_name;
         }
-        
+
         if ($this->job_category) {
-            $parts[] = '(' . $this->job_category . ')';
+            $parts[] = '('.$this->job_category.')';
         }
-        
+
         return implode(' ', $parts) ?: 'Position details pending';
     }
 
@@ -158,14 +158,14 @@ class WorkVisa extends Model
      */
     public function getSalaryInfoAttribute(): string
     {
-        if (!$this->offered_salary) {
+        if (! $this->offered_salary) {
             return 'Salary not disclosed';
         }
-        
+
         $currency = $this->salary_currency ?? 'USD';
         $amount = number_format((float) $this->offered_salary, 2);
-        $period = $this->salary_period ? '/' . $this->salary_period : '';
-        
+        $period = $this->salary_period ? '/'.$this->salary_period : '';
+
         return "{$currency} {$amount}{$period}";
     }
 
@@ -175,15 +175,15 @@ class WorkVisa extends Model
     public function getExperienceInfoAttribute(): string
     {
         $parts = [];
-        
+
         if ($this->years_of_experience) {
-            $parts[] = $this->years_of_experience . ' years';
+            $parts[] = $this->years_of_experience.' years';
         }
-        
+
         if ($this->experience_level) {
-            $parts[] = '(' . $this->experience_level . ')';
+            $parts[] = '('.$this->experience_level.')';
         }
-        
+
         return implode(' ', $parts) ?: 'Experience not specified';
     }
 }

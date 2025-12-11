@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -27,10 +26,10 @@ class SocialAuthController extends Controller
     {
         try {
             $googleUser = Socialite::driver('google')->user();
-            
+
             // Check if user exists with this email
             $user = User::where('email', $googleUser->email)->first();
-            
+
             if ($user) {
                 // Update Google credentials if needed
                 $user->update([
@@ -41,10 +40,10 @@ class SocialAuthController extends Controller
             } else {
                 // Get default 'user' role
                 $userRole = \App\Models\Role::where('slug', 'user')->first();
-                if (!$userRole) {
+                if (! $userRole) {
                     return redirect()->route('login')->with('error', 'System configuration error. Please contact support.');
                 }
-                
+
                 // Create new user
                 $user = User::create([
                     'name' => $googleUser->name,
@@ -57,11 +56,11 @@ class SocialAuthController extends Controller
                     'role_id' => $userRole->id,
                 ]);
             }
-            
+
             Auth::login($user);
-            
+
             return redirect()->intended(route('dashboard'));
-            
+
         } catch (\Exception $e) {
             return redirect()->route('login')->with('error', 'Unable to login with Google. Please try again.');
         }

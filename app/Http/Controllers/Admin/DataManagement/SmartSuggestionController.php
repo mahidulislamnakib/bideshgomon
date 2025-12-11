@@ -20,11 +20,11 @@ class SmartSuggestionController extends Controller
         // Search
         if ($request->has('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('title', 'LIKE', "%{$search}%")
-                  ->orWhere('description', 'LIKE', "%{$search}%")
-                  ->orWhere('suggestion_type', 'LIKE', "%{$search}%")
-                  ->orWhere('category', 'LIKE', "%{$search}%");
+                    ->orWhere('description', 'LIKE', "%{$search}%")
+                    ->orWhere('suggestion_type', 'LIKE', "%{$search}%")
+                    ->orWhere('category', 'LIKE', "%{$search}%");
             });
         }
 
@@ -67,7 +67,7 @@ class SmartSuggestionController extends Controller
     public function create()
     {
         $users = User::select('id', 'name', 'email')->orderBy('name')->get();
-        
+
         return Inertia::render('Admin/DataManagement/SmartSuggestions/Create', [
             'users' => $users,
         ]);
@@ -105,7 +105,7 @@ class SmartSuggestionController extends Controller
     {
         $smartSuggestion->load('user:id,name,email');
         $users = User::select('id', 'name', 'email')->orderBy('name')->get();
-        
+
         return Inertia::render('Admin/DataManagement/SmartSuggestions/Edit', [
             'suggestion' => $smartSuggestion,
             'users' => $users,
@@ -136,16 +136,16 @@ class SmartSuggestionController extends Controller
         }
 
         // Handle completion timestamp
-        if ($validated['is_completed'] && !$smartSuggestion->is_completed) {
+        if ($validated['is_completed'] && ! $smartSuggestion->is_completed) {
             $validated['completed_at'] = now();
-        } elseif (!$validated['is_completed']) {
+        } elseif (! $validated['is_completed']) {
             $validated['completed_at'] = null;
         }
 
         // Handle dismissal timestamp
-        if ($validated['is_dismissed'] && !$smartSuggestion->is_dismissed) {
+        if ($validated['is_dismissed'] && ! $smartSuggestion->is_dismissed) {
             $validated['dismissed_at'] = now();
-        } elseif (!$validated['is_dismissed']) {
+        } elseif (! $validated['is_dismissed']) {
             $validated['dismissed_at'] = null;
         }
 
@@ -286,11 +286,11 @@ class SmartSuggestionController extends Controller
 
     protected function validateRow(array $row, int $rowNumber): ?string
     {
-        if (!User::where('id', $row['user_id'])->exists()) {
+        if (! User::where('id', $row['user_id'])->exists()) {
             return "Row {$rowNumber}: User with ID '{$row['user_id']}' does not exist";
         }
 
-        if (!in_array($row['priority'], ['urgent', 'high', 'medium', 'low'])) {
+        if (! in_array($row['priority'], ['urgent', 'high', 'medium', 'low'])) {
             return "Row {$rowNumber}: Priority must be one of: urgent, high, medium, low";
         }
 
@@ -304,17 +304,17 @@ class SmartSuggestionController extends Controller
     protected function transformRowData(array $row): array
     {
         $data = [
-            'user_id' => (int)$row['user_id'],
+            'user_id' => (int) $row['user_id'],
             'suggestion_type' => trim($row['suggestion_type']),
             'category' => trim($row['category']),
             'priority' => strtolower(trim($row['priority'])),
             'title' => trim($row['title']),
             'description' => trim($row['description']),
-            'data' => !empty($row['data']) ? json_decode($row['data'], true) : null,
-            'action_type' => !empty($row['action_type']) ? trim($row['action_type']) : null,
-            'action_url' => !empty($row['action_url']) ? trim($row['action_url']) : null,
-            'expires_at' => !empty($row['expires_at']) ? $row['expires_at'] : null,
-            'relevance_score' => isset($row['relevance_score']) ? (int)$row['relevance_score'] : 50,
+            'data' => ! empty($row['data']) ? json_decode($row['data'], true) : null,
+            'action_type' => ! empty($row['action_type']) ? trim($row['action_type']) : null,
+            'action_url' => ! empty($row['action_url']) ? trim($row['action_url']) : null,
+            'expires_at' => ! empty($row['expires_at']) ? $row['expires_at'] : null,
+            'relevance_score' => isset($row['relevance_score']) ? (int) $row['relevance_score'] : 50,
         ];
 
         return $data;
@@ -331,7 +331,7 @@ class SmartSuggestionController extends Controller
             'id', 'user_id', 'user_name', 'user_email', 'suggestion_type', 'category', 'priority',
             'title', 'description', 'data', 'action_type', 'action_url',
             'is_completed', 'completed_at', 'is_dismissed', 'dismissed_at',
-            'expires_at', 'relevance_score', 'created_at'
+            'expires_at', 'relevance_score', 'created_at',
         ];
     }
 
@@ -347,7 +347,7 @@ class SmartSuggestionController extends Controller
             'priority' => $model->priority,
             'title' => $model->title,
             'description' => $model->description,
-            'data' => !empty($model->data) ? json_encode($model->data) : '',
+            'data' => ! empty($model->data) ? json_encode($model->data) : '',
             'action_type' => $model->action_type ?? '',
             'action_url' => $model->action_url ?? '',
             'is_completed' => $model->is_completed ? '1' : '0',

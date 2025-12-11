@@ -317,7 +317,7 @@ const categoryList = computed(() => {
                   v-model="search"
                   type="text"
                   placeholder="Search by service name, description, or keywords..."
-                  class="w-full pl-12 pr-12 py-4 text-base border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-ocean-500 dark:bg-gray-700 dark:text-white transition-all"
+                  class="w-full pl-12 pr-12 py-4 text-base border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-ocean-500 dark:bg-gray-700 dark:text-white transition-all"
                 />
                 <button
                   v-if="search"
@@ -344,7 +344,7 @@ const categoryList = computed(() => {
                   :class="[
                     'inline-flex items-center gap-rhythm-xs px-rhythm-md py-rhythm-sm rounded-xl font-medium text-sm transition-all duration-300',
                     selectedCategory === 'all'
-                      ? 'bg-brand-red-600 text-white shadow-rhythmic-md shadow-ocean-500/30 scale-105'
+                      ? 'bg-emerald-600 text-white shadow-rhythmic-md shadow-ocean-500/30 scale-105'
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 hover:scale-105'
                   ]"
                 >
@@ -488,8 +488,8 @@ const categoryList = computed(() => {
                     'w-8 h-8',
                     service.coming_soon 
                       ? 'text-gray-400' 
-                      : getCategoryColor(service.category).includes('ocean') ? 'text-brand-red-600' :
-                        getCategoryColor(service.category).includes('sky') ? 'text-brand-red-600' :
+                      : getCategoryColor(service.category).includes('ocean') ? 'text-emerald-600' :
+                        getCategoryColor(service.category).includes('sky') ? 'text-emerald-600' :
                         getCategoryColor(service.category).includes('heritage') ? 'text-purple-600' :
                         getCategoryColor(service.category).includes('sunrise') ? 'text-orange-600' :
                         getCategoryColor(service.category).includes('growth') ? 'text-green-600' :

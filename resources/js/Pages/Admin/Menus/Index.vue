@@ -30,10 +30,15 @@ const clearCache = () => {
 const getLocationBadgeColor = (location) => {
     const colors = {
         'header_main': 'bg-red-100 text-brand-red-600',
+        'header_top': 'bg-blue-100 text-blue-800',
         'footer_column_1': 'bg-green-100 text-green-800',
         'footer_column_2': 'bg-purple-100 text-purple-800',
         'footer_column_3': 'bg-pink-100 text-pink-800',
+        'footer_bottom': 'bg-gray-100 text-gray-800',
         'mobile_menu': 'bg-orange-100 text-orange-800',
+        'user_dashboard': 'bg-indigo-100 text-indigo-800',
+        'admin_quick_actions': 'bg-yellow-100 text-yellow-800',
+        'services_menu': 'bg-teal-100 text-teal-800',
     };
     return colors[location] || 'bg-gray-100 text-gray-800';
 };
@@ -246,8 +251,13 @@ const getLocationBadgeColor = (location) => {
                             <div class="mt-2 text-sm text-blue-700">
                                 <ul class="list-disc list-inside space-y-1">
                                     <li><strong>Header Main:</strong> Primary navigation at top of website</li>
+                                    <li><strong>Header Top:</strong> Quick links bar above main header</li>
                                     <li><strong>Footer Columns:</strong> Three columns in footer section</li>
+                                    <li><strong>Footer Bottom:</strong> Legal links at bottom (Privacy, Terms, etc.)</li>
                                     <li><strong>Mobile Menu:</strong> Navigation for mobile devices</li>
+                                    <li><strong>User Dashboard:</strong> Sidebar menu for logged-in users</li>
+                                    <li><strong>Admin Quick Actions:</strong> Quick access menu for administrators</li>
+                                    <li><strong>Services Menu:</strong> Dropdown for services (Visa, Jobs, Travel)</li>
                                     <li><strong>Cache:</strong> Menus are cached for 1 hour. Click "Clear Cache" after changes.</li>
                                 </ul>
                             </div>

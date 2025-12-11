@@ -17,7 +17,7 @@ class SkillVerificationController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $verification = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $verification = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($verification, 'skill-verification', $validated);
 
         return response()->json(['message' => 'Skill verification request created']);

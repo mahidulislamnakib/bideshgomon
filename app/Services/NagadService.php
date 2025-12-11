@@ -9,10 +9,15 @@ use Illuminate\Support\Facades\Log;
 class NagadService
 {
     protected $merchantId;
+
     protected $merchantNumber;
+
     protected $publicKey;
+
     protected $privateKey;
+
     protected $baseUrl;
+
     protected $sandbox;
 
     public function __construct()
@@ -30,10 +35,10 @@ class NagadService
      */
     protected function generateSignature(string $data): string
     {
-        $private_key = "-----BEGIN RSA PRIVATE KEY-----\n" . $this->privateKey . "\n-----END RSA PRIVATE KEY-----";
-        
+        $private_key = "-----BEGIN RSA PRIVATE KEY-----\n".$this->privateKey."\n-----END RSA PRIVATE KEY-----";
+
         openssl_sign($data, $signature, $private_key, OPENSSL_ALGO_SHA256);
-        
+
         return base64_encode($signature);
     }
 
@@ -42,10 +47,10 @@ class NagadService
      */
     protected function encryptData(string $data): string
     {
-        $public_key = "-----BEGIN PUBLIC KEY-----\n" . $this->publicKey . "\n-----END PUBLIC KEY-----";
-        
+        $public_key = "-----BEGIN PUBLIC KEY-----\n".$this->publicKey."\n-----END PUBLIC KEY-----";
+
         openssl_public_encrypt($data, $encrypted, $public_key);
-        
+
         return base64_encode($encrypted);
     }
 
@@ -83,7 +88,7 @@ class NagadService
             }
 
             // Initialize payment
-            $initUrl = $this->baseUrl . '/api/dfs/check-out/initialize/' . $this->merchantId . '/' . $orderId;
+            $initUrl = $this->baseUrl.'/api/dfs/check-out/initialize/'.$this->merchantId.'/'.$orderId;
             $response = Http::withHeaders([
                 'X-KM-IP-V4' => request()->ip(),
                 'X-KM-Client-Type' => 'PC_WEB',
@@ -95,7 +100,7 @@ class NagadService
 
             $result = $response->json();
 
-            if (!isset($result['sensitiveData']) || !isset($result['signature'])) {
+            if (! isset($result['sensitiveData']) || ! isset($result['signature'])) {
                 throw new Exception('Invalid response from Nagad');
             }
 
@@ -115,7 +120,7 @@ class NagadService
                 'signature' => $this->generateSignature(json_encode($paymentData)),
             ];
 
-            $completeUrl = $this->baseUrl . '/api/dfs/check-out/complete/' . $result['paymentReferenceId'];
+            $completeUrl = $this->baseUrl.'/api/dfs/check-out/complete/'.$result['paymentReferenceId'];
             $completeResponse = Http::withHeaders([
                 'X-KM-IP-V4' => request()->ip(),
                 'X-KM-Client-Type' => 'PC_WEB',
@@ -127,7 +132,7 @@ class NagadService
 
             $completeResult = $completeResponse->json();
 
-            if (!isset($completeResult['callBackUrl'])) {
+            if (! isset($completeResult['callBackUrl'])) {
                 throw new Exception('Payment URL not received');
             }
 
@@ -164,8 +169,8 @@ class NagadService
                     ->info('Nagad: Verifying payment', ['payment_reference_id' => $paymentReferenceId]);
             }
 
-            $url = $this->baseUrl . '/api/dfs/verify/payment/' . $paymentReferenceId;
-            
+            $url = $this->baseUrl.'/api/dfs/verify/payment/'.$paymentReferenceId;
+
             $response = Http::withHeaders([
                 'X-KM-IP-V4' => request()->ip(),
                 'X-KM-Client-Type' => 'PC_WEB',
@@ -177,7 +182,7 @@ class NagadService
 
             $result = $response->json();
 
-            if (!isset($result['status'])) {
+            if (! isset($result['status'])) {
                 throw new Exception('Invalid verification response');
             }
 
@@ -210,11 +215,11 @@ class NagadService
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
-        
+
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
-        
+
         return $randomString;
     }
 }

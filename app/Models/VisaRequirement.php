@@ -265,7 +265,7 @@ class VisaRequirement extends Model
      */
     public function calculatePlatformCommission(): float
     {
-        if (!$this->managed_by_agency) {
+        if (! $this->managed_by_agency) {
             return 0;
         }
 
@@ -280,7 +280,7 @@ class VisaRequirement extends Model
      */
     public function calculateAgencyEarnings(): float
     {
-        if (!$this->managed_by_agency) {
+        if (! $this->managed_by_agency) {
             return 0;
         }
 
@@ -329,6 +329,6 @@ class VisaRequirement extends Model
      */
     public function isManagedByAgency(): bool
     {
-        return !is_null($this->managed_by_agency);
+        return ! is_null($this->managed_by_agency);
     }
 }

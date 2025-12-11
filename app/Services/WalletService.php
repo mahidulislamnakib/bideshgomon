@@ -34,12 +34,12 @@ class WalletService
         ?int $processedBy = null
     ): WalletTransaction {
         return DB::transaction(function () use ($wallet, $amount, $description, $referenceType, $referenceId, $metadata, $processedBy) {
-            if (!$wallet->isActive()) {
+            if (! $wallet->isActive()) {
                 throw new \Exception('Wallet is not active');
             }
 
             $transaction = $wallet->credit($amount, $description, $referenceType, $referenceId, $metadata);
-            
+
             if ($processedBy) {
                 $transaction->update(['processed_by' => $processedBy]);
             }
@@ -61,16 +61,16 @@ class WalletService
         ?int $processedBy = null
     ): WalletTransaction {
         return DB::transaction(function () use ($wallet, $amount, $description, $referenceType, $referenceId, $metadata, $processedBy) {
-            if (!$wallet->isActive()) {
+            if (! $wallet->isActive()) {
                 throw new \Exception('Wallet is not active');
             }
 
-            if (!$wallet->hasBalance($amount)) {
+            if (! $wallet->hasBalance($amount)) {
                 throw new \Exception('Insufficient balance');
             }
 
             $transaction = $wallet->debit($amount, $description, $referenceType, $referenceId, $metadata);
-            
+
             if ($processedBy) {
                 $transaction->update(['processed_by' => $processedBy]);
             }
@@ -85,8 +85,8 @@ class WalletService
     public function getBalance(User $user): float
     {
         $wallet = $user->wallet;
-        
-        if (!$wallet) {
+
+        if (! $wallet) {
             return 0.00;
         }
 
@@ -99,8 +99,8 @@ class WalletService
     public function getTransactionHistory(User $user, int $perPage = 15)
     {
         $wallet = $user->wallet;
-        
-        if (!$wallet) {
+
+        if (! $wallet) {
             return collect();
         }
 
@@ -113,8 +113,8 @@ class WalletService
     public function canDebit(User $user, float $amount): bool
     {
         $wallet = $user->wallet;
-        
-        if (!$wallet || !$wallet->isActive()) {
+
+        if (! $wallet || ! $wallet->isActive()) {
             return false;
         }
 

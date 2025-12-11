@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\DataManagement;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Traits\BulkUploadable;
+use App\Http\Controllers\Controller;
 use App\Models\JobCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,8 +15,11 @@ class JobCategoryController extends Controller
     use BulkUploadable;
 
     protected $entityName = 'Job Category';
+
     protected $entityNamePlural = 'Job Categories';
+
     protected $indexRoute = 'admin.data.job-categories.index';
+
     protected $bulkUploadView = 'Admin/DataManagement/JobCategories/BulkUpload';
 
     /**
@@ -29,10 +32,10 @@ class JobCategoryController extends Controller
         // Search
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%")
+                    ->orWhere('slug', 'like', "%{$search}%");
             });
         }
 
@@ -62,7 +65,7 @@ class JobCategoryController extends Controller
         $allCategories = JobCategory::with('parent')
             ->orderBy('order')
             ->get()
-            ->map(function($cat) {
+            ->map(function ($cat) {
                 return [
                     'id' => $cat->id,
                     'name' => $cat->full_path,
@@ -89,7 +92,7 @@ class JobCategoryController extends Controller
         $parentCategories = JobCategory::with('parent')
             ->orderBy('order')
             ->get()
-            ->map(function($cat) {
+            ->map(function ($cat) {
                 return [
                     'id' => $cat->id,
                     'name' => $cat->full_path,
@@ -118,7 +121,7 @@ class JobCategoryController extends Controller
         ]);
 
         // Prevent circular reference
-        if (!empty($validated['parent_id'])) {
+        if (! empty($validated['parent_id'])) {
             $parent = JobCategory::find($validated['parent_id']);
             // Check if trying to set self as parent (will fail on create, but good practice)
         }
@@ -134,7 +137,7 @@ class JobCategoryController extends Controller
                 'data' => $validated,
             ]);
 
-            return back()->withInput()->with('error', 'Failed to create job category: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to create job category: '.$e->getMessage());
         }
     }
 
@@ -147,11 +150,11 @@ class JobCategoryController extends Controller
             ->where('id', '!=', $jobCategory->id) // Exclude self
             ->orderBy('order')
             ->get()
-            ->filter(function($cat) use ($jobCategory) {
+            ->filter(function ($cat) use ($jobCategory) {
                 // Exclude descendants to prevent circular references
-                return !$cat->isDescendantOf($jobCategory) && $cat->id !== $jobCategory->id;
+                return ! $cat->isDescendantOf($jobCategory) && $cat->id !== $jobCategory->id;
             })
-            ->map(function($cat) {
+            ->map(function ($cat) {
                 return [
                     'id' => $cat->id,
                     'name' => $cat->full_path,
@@ -182,7 +185,7 @@ class JobCategoryController extends Controller
         ]);
 
         // Prevent circular reference
-        if (!empty($validated['parent_id'])) {
+        if (! empty($validated['parent_id'])) {
             if ($validated['parent_id'] == $jobCategory->id) {
                 return back()->withInput()->with('error', 'A category cannot be its own parent.');
             }
@@ -205,7 +208,7 @@ class JobCategoryController extends Controller
                 'data' => $validated,
             ]);
 
-            return back()->withInput()->with('error', 'Failed to update job category: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to update job category: '.$e->getMessage());
         }
     }
 
@@ -235,7 +238,7 @@ class JobCategoryController extends Controller
                 'id' => $jobCategory->id,
             ]);
 
-            return back()->with('error', 'Failed to delete job category: ' . $e->getMessage());
+            return back()->with('error', 'Failed to delete job category: '.$e->getMessage());
         }
     }
 
@@ -246,7 +249,7 @@ class JobCategoryController extends Controller
     {
         try {
             $jobCategory->update([
-                'is_active' => !$jobCategory->is_active
+                'is_active' => ! $jobCategory->is_active,
             ]);
 
             return back()->with('success', 'Status updated successfully.');
@@ -354,20 +357,20 @@ class JobCategoryController extends Controller
 
         // Required fields
         if (empty($row['name'])) {
-            $errors[] = "Name is required";
+            $errors[] = 'Name is required';
         }
 
         // Parent code validation (if provided)
-        if (!empty($row['parent_code'])) {
+        if (! empty($row['parent_code'])) {
             $parent = JobCategory::where('slug', $row['parent_code'])->first();
-            if (!$parent) {
+            if (! $parent) {
                 $errors[] = "Parent category with slug '{$row['parent_code']}' not found";
             }
         }
 
         // Numeric validations
-        if (!empty($row['order']) && !is_numeric($row['order'])) {
-            $errors[] = "Order must be a number";
+        if (! empty($row['order']) && ! is_numeric($row['order'])) {
+            $errors[] = 'Order must be a number';
         }
 
         return $errors;
@@ -381,15 +384,15 @@ class JobCategoryController extends Controller
         $data = [
             'name' => $row['name'],
             'name_bn' => $row['name_bn'] ?? null,
-            'slug' => !empty($row['slug']) ? $row['slug'] : null,
+            'slug' => ! empty($row['slug']) ? $row['slug'] : null,
             'description' => $row['description'] ?? null,
-            'order' => !empty($row['order']) ? (int)$row['order'] : 0,
-            'is_active' => isset($row['is_active']) ? 
+            'order' => ! empty($row['order']) ? (int) $row['order'] : 0,
+            'is_active' => isset($row['is_active']) ?
                 (strtolower($row['is_active']) === 'true' || $row['is_active'] === '1') : true,
         ];
 
         // Get parent_id from parent_code if provided
-        if (!empty($row['parent_code'])) {
+        if (! empty($row['parent_code'])) {
             $parent = JobCategory::where('slug', $row['parent_code'])->first();
             $data['parent_id'] = $parent ? $parent->id : null;
         } else {
@@ -420,9 +423,9 @@ class JobCategoryController extends Controller
         // Apply same filters as index
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%");
+                    ->orWhere('slug', 'like', "%{$search}%");
             });
         }
 

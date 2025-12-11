@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <AdminLayout>
         <Head title="Create Directory" />
 
@@ -32,7 +32,7 @@
                             <!-- Category & Country -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label for="directory_category_id" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="directory_category_id" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Category <span class="text-red-500">*</span>
                                     </label>
                                     <select
@@ -51,7 +51,7 @@
                                 </div>
 
                                 <div>
-                                    <label for="country_id" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="country_id" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Country
                                     </label>
                                     <select
@@ -72,7 +72,7 @@
                             <!-- Names -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Name (English) <span class="text-red-500">*</span>
                                     </label>
                                     <input
@@ -87,7 +87,7 @@
                                 </div>
 
                                 <div>
-                                    <label for="name_bn" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="name_bn" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Name (Bengali) <span class="text-red-500">*</span>
                                     </label>
                                     <input
@@ -96,7 +96,7 @@
                                         type="text"
                                         class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                         :class="{ 'border-red-500': form.errors.name_bn }"
-                                        placeholder="বাংলায় নাম"
+                                        placeholder="??????? ???"
                                         required
                                     />
                                     <p v-if="form.errors.name_bn" class="mt-1 text-sm text-red-600">{{ form.errors.name_bn }}</p>
@@ -105,7 +105,7 @@
 
                             <!-- Descriptions -->
                             <div>
-                                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Description (English)
                                 </label>
                                 <textarea
@@ -119,7 +119,7 @@
                             </div>
 
                             <div>
-                                <label for="description_bn" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="description_bn" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Description (Bengali)
                                 </label>
                                 <textarea
@@ -128,7 +128,7 @@
                                     rows="3"
                                     class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.description_bn }"
-                                    placeholder="বাংলায় বিবরণ"
+                                    placeholder="??????? ?????"
                                 ></textarea>
                                 <p v-if="form.errors.description_bn" class="mt-1 text-sm text-red-600">{{ form.errors.description_bn }}</p>
                             </div>
@@ -142,7 +142,7 @@
                         <div class="space-y-4">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Email
                                     </label>
                                     <input
@@ -156,7 +156,7 @@
                                 </div>
 
                                 <div>
-                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Phone
                                     </label>
                                     <input
@@ -171,7 +171,7 @@
                             </div>
 
                             <div>
-                                <label for="website" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="website" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Website URL
                                 </label>
                                 <input
@@ -186,7 +186,7 @@
                             </div>
 
                             <div>
-                                <label for="address" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="address" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Address (English)
                                 </label>
                                 <textarea
@@ -200,7 +200,7 @@
                             </div>
 
                             <div>
-                                <label for="address_bn" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="address_bn" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Address (Bengali)
                                 </label>
                                 <textarea
@@ -209,7 +209,7 @@
                                     rows="2"
                                     class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
                                     :class="{ 'border-red-500': form.errors.address_bn }"
-                                    placeholder="বাংলায় ঠিকানা"
+                                    placeholder="??????? ??????"
                                 ></textarea>
                                 <p v-if="form.errors.address_bn" class="mt-1 text-sm text-red-600">{{ form.errors.address_bn }}</p>
                             </div>
@@ -222,7 +222,7 @@
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label for="latitude" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="latitude" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Latitude
                                 </label>
                                 <input
@@ -237,7 +237,7 @@
                             </div>
 
                             <div>
-                                <label for="longitude" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="longitude" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Longitude
                                 </label>
                                 <input
@@ -344,7 +344,7 @@
                         
                         <div class="space-y-4">
                             <div>
-                                <label for="meta_title" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="meta_title" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Meta Title
                                 </label>
                                 <input
@@ -360,7 +360,7 @@
                             </div>
 
                             <div>
-                                <label for="meta_description" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="meta_description" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Meta Description
                                 </label>
                                 <textarea
@@ -376,7 +376,7 @@
                             </div>
 
                             <div>
-                                <label for="meta_keywords" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="meta_keywords" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Meta Keywords
                                 </label>
                                 <input

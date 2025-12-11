@@ -31,7 +31,7 @@ return new class extends Migration
             $table->timestamp('accepted_at')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
-            
+
             $table->index(['user_id', 'service_module_id']);
             $table->index(['agency_id', 'status']);
             $table->index('application_number');

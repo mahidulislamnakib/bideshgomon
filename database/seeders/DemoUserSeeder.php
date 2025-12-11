@@ -2,19 +2,18 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\User;
-use App\Models\UserProfile;
 use App\Models\FamilyMember;
-use App\Models\UserEducation;
-use App\Models\UserWorkExperience;
-use App\Models\UserLanguage;
-use App\Models\UserPhoneNumber;
-use App\Models\UserTravelHistory;
-use App\Models\UserSecurityInformation;
 use App\Models\Language;
 use App\Models\LanguageTest;
 use App\Models\Role;
+use App\Models\User;
+use App\Models\UserEducation;
+use App\Models\UserPhoneNumber;
+use App\Models\UserProfile;
+use App\Models\UserSecurityInformation;
+use App\Models\UserTravelHistory;
+use App\Models\UserWorkExperience;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class DemoUserSeeder extends Seeder
@@ -56,34 +55,34 @@ class DemoUserSeeder extends Seeder
             'gender' => 'male',
             'nationality' => 'Bangladeshi',
             'marital_status' => 'married',
-            
+
             // Present Address
             'present_address_line' => 'House 45, Road 12, Dhanmondi',
             'present_city' => 'Dhaka',
             'present_division' => 'Dhaka',
             'present_district' => 'Dhaka',
             'present_postal_code' => '1209',
-            
+
             // Permanent Address
             'permanent_address_line' => 'Village: Rampur, Post: Mirzapur',
             'permanent_city' => 'Tangail',
             'permanent_division' => 'Dhaka',
             'permanent_district' => 'Tangail',
             'permanent_postal_code' => '1900',
-            
+
             // Documents
             'nid' => '1234567890123',
             'passport_number' => 'BG1234567',
             'passport_issue_date' => '2020-01-15',
             'passport_expiry_date' => '2030-01-14',
-            
+
             // Employment & Financial Information
             'employer_name' => 'Tech Solutions Bangladesh Ltd',
             'employer_address' => 'Gulshan-2, Dhaka',
             'employment_start_date' => '2018-03-01',
             'monthly_income_bdt' => 85000,
             'annual_income_bdt' => 1020000,
-            
+
             // Bank Details
             'bank_name' => 'Dutch-Bangla Bank',
             'bank_branch' => 'Dhanmondi Branch',
@@ -91,35 +90,35 @@ class DemoUserSeeder extends Seeder
             'bank_account_type' => 'savings',
             'bank_balance_bdt' => 450000,
             'bank_statement_path' => 'documents/bank-statements/demo-statement.pdf',
-            
+
             // Property
             'owns_property' => true,
             'property_type' => 'Apartment',
             'property_address' => 'Dhanmondi, Dhaka',
             'property_value_bdt' => 8500000,
             'property_documents_path' => 'documents/property/deed.pdf',
-            
+
             // Vehicle
             'owns_vehicle' => true,
             'vehicle_type' => 'Car',
             'vehicle_make_model' => 'Toyota Corolla',
             'vehicle_year' => 2019,
             'vehicle_value_bdt' => 1800000,
-            
+
             // Investments
             'has_investments' => true,
             'investment_types' => 'Fixed Deposits, Mutual Funds, Stock Market',
             'investment_value_bdt' => 1200000,
-            
+
             // Liabilities
             'has_liabilities' => true,
             'liability_types' => 'Home Loan',
             'liabilities_amount_bdt' => 2500000,
-            
+
             // Net Worth
             'total_assets_bdt' => 11950000,
             'net_worth_bdt' => 9450000,
-            
+
             // Documents
             'tax_return_path' => 'documents/tax/tax-return-2024.pdf',
             'salary_certificate_path' => 'documents/employment/salary-certificate.pdf',
@@ -405,7 +404,7 @@ class DemoUserSeeder extends Seeder
         // Create Security Information
         UserSecurityInformation::create([
             'user_id' => $user->id,
-            
+
             // All clean records
             'has_criminal_record' => false,
             'has_been_deported' => false,
@@ -414,20 +413,20 @@ class DemoUserSeeder extends Seeder
             'has_violated_visa_conditions' => false,
             'has_immigration_ban' => false,
             'has_military_service' => false,
-            
+
             // Police Clearance
             'has_police_clearance' => true,
             'police_clearance_country' => 'BD',
             'police_clearance_issue_date' => '2024-09-01',
             'police_clearance_expiry_date' => '2025-09-01',
             'police_clearance_reference' => 'BPC2024-BD-123456',
-            
+
             // Background Check
             'background_check_completed' => true,
             'background_check_agency' => 'National Background Check Services',
             'background_check_date' => '2024-08-15',
             'background_check_result' => 'clear',
-            
+
             // Security - Clean
             'has_terrorist_affiliation' => false,
             'member_of_banned_organization' => false,
@@ -437,6 +436,6 @@ class DemoUserSeeder extends Seeder
         $this->command->info('📧 Email: demo@bideshgomon.com');
         $this->command->info('🔑 Password: password123');
         $this->command->info('');
-        $this->command->info('Profile completion: ' . $user->calculateProfileCompletion() . '%');
+        $this->command->info('Profile completion: '.$user->calculateProfileCompletion().'%');
     }
 }

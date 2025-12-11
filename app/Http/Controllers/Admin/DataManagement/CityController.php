@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\DataManagement;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Traits\BulkUploadable;
+use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Country;
 use Illuminate\Http\Request;
@@ -16,8 +16,11 @@ class CityController extends Controller
     use BulkUploadable;
 
     protected $entityName = 'City';
+
     protected $entityNamePlural = 'Cities';
+
     protected $indexRoute = 'admin.data.cities.index';
+
     protected $bulkUploadView = 'Admin/DataManagement/Cities/BulkUpload';
 
     /**
@@ -30,10 +33,10 @@ class CityController extends Controller
         // Search
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%")
-                  ->orWhere('state_province', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%")
+                    ->orWhere('state_province', 'like', "%{$search}%");
             });
         }
 
@@ -75,7 +78,7 @@ class CityController extends Controller
     public function create()
     {
         $countries = Country::where('is_active', true)->orderBy('name')->get();
-        
+
         return Inertia::render('Admin/DataManagement/Cities/Create', [
             'countries' => $countries,
         ]);
@@ -105,7 +108,8 @@ class CityController extends Controller
                 ->route('admin.data.cities.index')
                 ->with('success', 'City created successfully.');
         } catch (\Exception $e) {
-            Log::error('Error creating city: ' . $e->getMessage());
+            Log::error('Error creating city: '.$e->getMessage());
+
             return back()->withInput()->with('error', 'Failed to create city.');
         }
     }
@@ -116,7 +120,7 @@ class CityController extends Controller
     public function edit(City $city)
     {
         $countries = Country::where('is_active', true)->orderBy('name')->get();
-        
+
         return Inertia::render('Admin/DataManagement/Cities/Edit', [
             'city' => $city->load('country'),
             'countries' => $countries,
@@ -147,7 +151,8 @@ class CityController extends Controller
                 ->route('admin.data.cities.index')
                 ->with('success', 'City updated successfully.');
         } catch (\Exception $e) {
-            Log::error('Error updating city: ' . $e->getMessage());
+            Log::error('Error updating city: '.$e->getMessage());
+
             return back()->withInput()->with('error', 'Failed to update city.');
         }
     }
@@ -164,7 +169,8 @@ class CityController extends Controller
                 ->route('admin.data.cities.index')
                 ->with('success', 'City deleted successfully.');
         } catch (\Exception $e) {
-            Log::error('Error deleting city: ' . $e->getMessage());
+            Log::error('Error deleting city: '.$e->getMessage());
+
             return back()->with('error', 'Failed to delete city.');
         }
     }
@@ -176,12 +182,13 @@ class CityController extends Controller
     {
         try {
             $city->update([
-                'is_active' => !$city->is_active,
+                'is_active' => ! $city->is_active,
             ]);
 
             return back()->with('success', 'City status updated successfully.');
         } catch (\Exception $e) {
-            Log::error('Error toggling city status: ' . $e->getMessage());
+            Log::error('Error toggling city status: '.$e->getMessage());
+
             return back()->with('error', 'Failed to update city status.');
         }
     }
@@ -269,7 +276,7 @@ class CityController extends Controller
     {
         // Check if country exists
         $country = Country::where('iso_code_2', $row['country_code'])->first();
-        if (!$country) {
+        if (! $country) {
             return "Row {$rowNumber}: Country with code '{$row['country_code']}' not found";
         }
 
@@ -289,8 +296,8 @@ class CityController extends Controller
             'timezone' => $row['timezone'] ?? null,
             'latitude' => isset($row['latitude']) && $row['latitude'] !== '' ? $row['latitude'] : null,
             'longitude' => isset($row['longitude']) && $row['longitude'] !== '' ? $row['longitude'] : null,
-            'is_capital' => isset($row['is_capital']) ? (bool)$row['is_capital'] : false,
-            'is_active' => isset($row['is_active']) ? (bool)$row['is_active'] : true,
+            'is_capital' => isset($row['is_capital']) ? (bool) $row['is_capital'] : false,
+            'is_active' => isset($row['is_active']) ? (bool) $row['is_active'] : true,
         ];
     }
 
@@ -320,9 +327,9 @@ class CityController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%");
             });
         }
 

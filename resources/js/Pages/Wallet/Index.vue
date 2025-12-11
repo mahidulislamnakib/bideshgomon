@@ -207,7 +207,7 @@ const submitWithdraw = () => {
                             <span class="text-sm">History</span>
                         </Link>
                         <button 
-                            @click="window.location.reload()"
+                            @click="router.reload({ only: ['wallet', 'recentTransactions'] })"
                             class="flex-1 flex items-center justify-center gap-2 py-3 bg-gray-50 text-gray-700 rounded-xl font-medium hover:bg-gray-100 transition-colors"
                         >
                             <ArrowPathIcon class="h-5 w-5" />

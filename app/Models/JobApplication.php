@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 
 class JobApplication extends Model
 {
@@ -144,7 +144,7 @@ class JobApplication extends Model
 
     public function getStatusBadgeColor()
     {
-        return match($this->status) {
+        return match ($this->status) {
             'pending' => 'bg-yellow-100 text-yellow-800',
             'under_review' => 'bg-blue-100 text-blue-800',
             'shortlisted' => 'bg-indigo-100 text-indigo-800',
@@ -159,7 +159,7 @@ class JobApplication extends Model
 
     public function getStatusLabel()
     {
-        return match($this->status) {
+        return match ($this->status) {
             'pending' => 'Pending',
             'under_review' => 'Under Review',
             'shortlisted' => 'Shortlisted',

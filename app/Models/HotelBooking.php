@@ -143,7 +143,7 @@ class HotelBooking extends Model
     {
         return $query->where(function ($q) {
             $q->where('status', 'checked_out')
-              ->orWhere('check_out_date', '<', now());
+                ->orWhere('check_out_date', '<', now());
         });
     }
 
@@ -155,7 +155,7 @@ class HotelBooking extends Model
     // Accessors
     public function getStatusBadgeAttribute()
     {
-        return match($this->status) {
+        return match ($this->status) {
             'pending' => ['text' => 'Pending', 'class' => 'warning'],
             'confirmed' => ['text' => 'Confirmed', 'class' => 'success'],
             'checked_in' => ['text' => 'Checked In', 'class' => 'info'],
@@ -168,7 +168,7 @@ class HotelBooking extends Model
 
     public function getPaymentBadgeAttribute()
     {
-        return match($this->payment_status) {
+        return match ($this->payment_status) {
             'pending' => ['text' => 'Payment Pending', 'class' => 'warning'],
             'paid' => ['text' => 'Paid', 'class' => 'success'],
             'refunded' => ['text' => 'Refunded', 'class' => 'info'],
@@ -194,13 +194,13 @@ class HotelBooking extends Model
 
     public function getIsCancellableAttribute()
     {
-        return in_array($this->status, ['pending', 'confirmed']) && 
+        return in_array($this->status, ['pending', 'confirmed']) &&
                $this->check_in_date > now()->addDay(); // At least 1 day before check-in
     }
 
     public function getIsModifiableAttribute()
     {
-        return in_array($this->status, ['pending', 'confirmed']) && 
+        return in_array($this->status, ['pending', 'confirmed']) &&
                $this->check_in_date > now()->addDays(2); // At least 2 days before check-in
     }
 
@@ -211,12 +211,12 @@ class HotelBooking extends Model
 
     public function getStayDurationTextAttribute()
     {
-        return "{$this->nights} " . ($this->nights === 1 ? 'Night' : 'Nights');
+        return "{$this->nights} ".($this->nights === 1 ? 'Night' : 'Nights');
     }
 
     public function getFormattedTotalAttribute()
     {
-        return number_format($this->total_amount, 2) . ' ' . $this->currency;
+        return number_format($this->total_amount, 2).' '.$this->currency;
     }
 
     public function getDaysUntilCheckInAttribute()
@@ -298,7 +298,7 @@ class HotelBooking extends Model
         static::creating(function ($booking) {
             // Auto-generate booking reference
             if (empty($booking->booking_reference)) {
-                $booking->booking_reference = 'HB' . date('Ymd') . str_pad(
+                $booking->booking_reference = 'HB'.date('Ymd').str_pad(
                     static::whereDate('created_at', today())->count() + 1,
                     4,
                     '0',

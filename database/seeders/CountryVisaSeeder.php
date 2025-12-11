@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +16,7 @@ class CountryVisaSeeder extends Seeder
         DB::statement('PRAGMA foreign_keys = OFF');
         DB::table('visa_fees')->truncate();
         DB::table('visa_requirements')->whereNotNull('country_id')->delete();
-        
+
         // Insert or update countries
         $countries = [
             ['name' => 'United States', 'iso_code_2' => 'US', 'iso_code_3' => 'USA', 'flag_emoji' => '🇺🇸', 'phone_code' => '+1', 'currency_code' => 'USD', 'region' => 'Americas', 'is_active' => true],
@@ -51,7 +50,7 @@ class CountryVisaSeeder extends Seeder
                 ])
             );
         }
-        
+
         DB::statement('PRAGMA foreign_keys = ON');
 
         // Get country IDs

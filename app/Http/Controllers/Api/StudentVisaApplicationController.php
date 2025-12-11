@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\StudentVisa;
 use App\Models\ServiceApplication;
 use App\Models\ServiceModule;
+use App\Models\StudentVisa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class StudentVisaApplicationController extends Controller
 {
@@ -30,21 +30,21 @@ class StudentVisaApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(array (
-  'destination_country_id' => 'required|exists:countries,id',
-  'education_level' => 'required|string',
-  'study_field' => 'nullable|string',
-  'institution_name' => 'nullable|string|max:255',
-  'course_name' => 'nullable|string|max:255',
-  'intended_start_date' => 'nullable|date',
-  'course_duration_months' => 'nullable|integer|min:1',
-  'has_admission_letter' => 'boolean',
-  'has_ielts_toefl' => 'boolean',
-  'english_test_type' => 'nullable|string',
-  'english_test_score' => 'nullable|string',
-  'previous_education_gpa' => 'nullable|string',
-  'user_notes' => 'nullable|string|max:5000',
-));
+        $validated = $request->validate([
+            'destination_country_id' => 'required|exists:countries,id',
+            'education_level' => 'required|string',
+            'study_field' => 'nullable|string',
+            'institution_name' => 'nullable|string|max:255',
+            'course_name' => 'nullable|string|max:255',
+            'intended_start_date' => 'nullable|date',
+            'course_duration_months' => 'nullable|integer|min:1',
+            'has_admission_letter' => 'boolean',
+            'has_ielts_toefl' => 'boolean',
+            'english_test_type' => 'nullable|string',
+            'english_test_score' => 'nullable|string',
+            'previous_education_gpa' => 'nullable|string',
+            'user_notes' => 'nullable|string|max:5000',
+        ]);
 
         $validated['user_id'] = $request->user()->id;
         $validated['status'] = 'pending';
@@ -110,7 +110,7 @@ class StudentVisaApplicationController extends Controller
         // Ensure user can only view their own applications
         if ($application->user_id !== $request->user()->id) {
             return response()->json([
-                'message' => 'Unauthorized access to this application.'
+                'message' => 'Unauthorized access to this application.',
             ], 403);
         }
 
@@ -127,32 +127,32 @@ class StudentVisaApplicationController extends Controller
         // Ensure user can only update their own applications
         if ($application->user_id !== $request->user()->id) {
             return response()->json([
-                'message' => 'Unauthorized access to this application.'
+                'message' => 'Unauthorized access to this application.',
             ], 403);
         }
 
         // Only allow updates if status is 'pending'
         if ($application->status !== 'pending') {
             return response()->json([
-                'message' => 'Cannot update application after submission.'
+                'message' => 'Cannot update application after submission.',
             ], 422);
         }
 
-        $validated = $request->validate(array (
-  'destination_country_id' => 'required|exists:countries,id',
-  'education_level' => 'required|string',
-  'study_field' => 'nullable|string',
-  'institution_name' => 'nullable|string|max:255',
-  'course_name' => 'nullable|string|max:255',
-  'intended_start_date' => 'nullable|date',
-  'course_duration_months' => 'nullable|integer|min:1',
-  'has_admission_letter' => 'boolean',
-  'has_ielts_toefl' => 'boolean',
-  'english_test_type' => 'nullable|string',
-  'english_test_score' => 'nullable|string',
-  'previous_education_gpa' => 'nullable|string',
-  'user_notes' => 'nullable|string|max:5000',
-));
+        $validated = $request->validate([
+            'destination_country_id' => 'required|exists:countries,id',
+            'education_level' => 'required|string',
+            'study_field' => 'nullable|string',
+            'institution_name' => 'nullable|string|max:255',
+            'course_name' => 'nullable|string|max:255',
+            'intended_start_date' => 'nullable|date',
+            'course_duration_months' => 'nullable|integer|min:1',
+            'has_admission_letter' => 'boolean',
+            'has_ielts_toefl' => 'boolean',
+            'english_test_type' => 'nullable|string',
+            'english_test_score' => 'nullable|string',
+            'previous_education_gpa' => 'nullable|string',
+            'user_notes' => 'nullable|string|max:5000',
+        ]);
 
         $application->update($validated);
 
@@ -170,21 +170,21 @@ class StudentVisaApplicationController extends Controller
         // Ensure user can only delete their own applications
         if ($application->user_id !== $request->user()->id) {
             return response()->json([
-                'message' => 'Unauthorized access to this application.'
+                'message' => 'Unauthorized access to this application.',
             ], 403);
         }
 
         // Only allow deletion if status is 'pending'
         if ($application->status !== 'pending') {
             return response()->json([
-                'message' => 'Cannot delete application after submission.'
+                'message' => 'Cannot delete application after submission.',
             ], 422);
         }
 
         $application->delete();
 
         return response()->json([
-            'message' => 'Application deleted successfully'
+            'message' => 'Application deleted successfully',
         ]);
     }
 }

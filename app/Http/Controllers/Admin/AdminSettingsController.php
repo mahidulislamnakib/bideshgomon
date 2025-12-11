@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class AdminSettingsController extends Controller
@@ -30,16 +30,16 @@ class AdminSettingsController extends Controller
             'api' => 'API Keys',
             'advanced' => 'Advanced Settings',
         ];
-        
+
         // Merge with database groups
         $dbGroups = SiteSetting::distinct('group')
             ->pluck('group')
             ->filter() // Remove empty strings
-            ->mapWithKeys(function($group) {
+            ->mapWithKeys(function ($group) {
                 return [$group => ucfirst(str_replace('_', ' ', $group))];
             })
             ->toArray();
-        
+
         return array_merge($defaults, $dbGroups);
     }
 
@@ -58,15 +58,15 @@ class AdminSettingsController extends Controller
     {
         // Ensure settings exist before rendering
         $this->ensureDefaultSettings();
-        
+
         $currentGroup = $request->get('group', 'general');
-        
+
         // Force array conversion and ensure data is never null
         $settings = SiteSetting::orderBy('group')
             ->orderBy('sort_order')
             ->get()
             ->toArray();
-        
+
         $groups = $this->getSettingsGroups();
 
         Log::info('Admin settings loaded', [
@@ -91,13 +91,13 @@ class AdminSettingsController extends Controller
         ]);
 
         $updatedCount = 0;
-        
+
         foreach ($validated['settings'] as $settingData) {
             $setting = SiteSetting::where('key', $settingData['key'])->first();
-            
+
             if ($setting) {
                 $value = $settingData['value'];
-                
+
                 // Handle different types
                 if ($setting->type === 'boolean') {
                     $value = filter_var($value, FILTER_VALIDATE_BOOLEAN) ? '1' : '0';
@@ -110,8 +110,8 @@ class AdminSettingsController extends Controller
 
                 $setting->update(['value' => $value]);
                 $updatedCount++;
-                
-                Log::info("Updated setting: {$setting->key} = " . ($value ?? '(null)'));
+
+                Log::info("Updated setting: {$setting->key} = ".($value ?? '(null)'));
             }
         }
 
@@ -124,7 +124,7 @@ class AdminSettingsController extends Controller
     public function clearCache()
     {
         clear_settings_cache();
-        
+
         return back()->with('success', 'All settings caches cleared successfully!');
     }
 
@@ -145,7 +145,7 @@ class AdminSettingsController extends Controller
         ]);
 
         $value = $validated['value'] ?? '';
-        
+
         if ($validated['type'] === 'boolean') {
             $value = filter_var($value, FILTER_VALIDATE_BOOLEAN) ? '1' : '0';
         } elseif ($validated['type'] === 'json' && is_array($value)) {
@@ -182,28 +182,28 @@ class AdminSettingsController extends Controller
             ['key' => 'contact_email', 'value' => 'support@bideshgomon.com', 'group' => 'general', 'type' => 'email', 'description' => 'Contact email address', 'is_public' => true],
             ['key' => 'contact_phone', 'value' => '+880 1234567890', 'group' => 'general', 'type' => 'text', 'description' => 'Contact phone number', 'is_public' => true],
             ['key' => 'support_hours', 'value' => '9:00 AM - 6:00 PM (GMT+6)', 'group' => 'general', 'type' => 'text', 'description' => 'Support hours', 'is_public' => true],
-            
+
             // Email Settings
             ['key' => 'email_from_name', 'value' => 'Bidesh Gomon', 'group' => 'email', 'type' => 'text', 'description' => 'Email sender name', 'is_public' => false],
             ['key' => 'email_from_address', 'value' => 'noreply@bideshgomon.com', 'group' => 'email', 'type' => 'email', 'description' => 'Email sender address', 'is_public' => false],
             ['key' => 'email_footer', 'value' => 'Thank you for using Bidesh Gomon!', 'group' => 'email', 'type' => 'text', 'description' => 'Email footer text', 'is_public' => false],
-            
+
             // Job Settings
             ['key' => 'job_application_fee', 'value' => '500', 'group' => 'jobs', 'type' => 'number', 'description' => 'Default job application fee (BDT)', 'is_public' => true],
             ['key' => 'job_posting_duration', 'value' => '30', 'group' => 'jobs', 'type' => 'number', 'description' => 'Job posting duration in days', 'is_public' => false],
             ['key' => 'max_applications_per_user', 'value' => '10', 'group' => 'jobs', 'type' => 'number', 'description' => 'Maximum applications per user per day', 'is_public' => false],
-            
+
             // Wallet Settings
             ['key' => 'min_withdrawal_amount', 'value' => '1000', 'group' => 'wallet', 'type' => 'number', 'description' => 'Minimum withdrawal amount (BDT)', 'is_public' => true],
             ['key' => 'referral_bonus', 'value' => '100', 'group' => 'wallet', 'type' => 'number', 'description' => 'Referral bonus amount (BDT)', 'is_public' => true],
             ['key' => 'cashback_percentage', 'value' => '5', 'group' => 'wallet', 'type' => 'number', 'description' => 'Cashback percentage', 'is_public' => true],
-            
+
             // Feature Flags
             ['key' => 'enable_registrations', 'value' => '1', 'group' => 'features', 'type' => 'boolean', 'description' => 'Enable user registrations', 'is_public' => true],
             ['key' => 'enable_job_applications', 'value' => '1', 'group' => 'features', 'type' => 'boolean', 'description' => 'Enable job applications', 'is_public' => true],
             ['key' => 'enable_referrals', 'value' => '1', 'group' => 'features', 'type' => 'boolean', 'description' => 'Enable referral system', 'is_public' => true],
             ['key' => 'maintenance_mode', 'value' => '0', 'group' => 'features', 'type' => 'boolean', 'description' => 'Enable maintenance mode', 'is_public' => true],
-            
+
             // Social Media
             ['key' => 'facebook_url', 'value' => 'https://facebook.com/bideshgomon', 'group' => 'social', 'type' => 'url', 'description' => 'Facebook page URL', 'is_public' => true],
             ['key' => 'twitter_url', 'value' => 'https://twitter.com/bideshgomon', 'group' => 'social', 'type' => 'url', 'description' => 'Twitter profile URL', 'is_public' => true],

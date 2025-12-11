@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Traits\CreatesServiceApplications;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class AirportTransferController extends Controller
 {
@@ -26,7 +25,7 @@ class AirportTransferController extends Controller
         ]);
 
         // Create booking record (simplified for demo)
-        $booking = (object)[
+        $booking = (object) [
             'id' => uniqid(),
             'user_id' => $request->user()->id ?? 1,
             'pickup_location' => $validated['pickup_location'],

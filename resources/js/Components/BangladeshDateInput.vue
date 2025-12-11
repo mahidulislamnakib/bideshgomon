@@ -224,14 +224,3 @@ const helperText = computed(() => {
     </div>
 </template>
 
-<style scoped>
-/* Hide native date picker chevron/calendar icon */
-input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
-}
-
-input[type="date"]::-webkit-inner-spin-button,
-input[type="date"]::-webkit-outer-spin-button {
-    display: none;
-}
-</style>

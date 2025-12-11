@@ -2,12 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use App\Models\AdminImpersonationLog;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
 
 class AdminImpersonationLogsTest extends TestCase
 {
@@ -22,7 +20,7 @@ class AdminImpersonationLogsTest extends TestCase
 
     public function test_admin_can_view_impersonation_logs_index()
     {
-        $admin = User::whereHas('role', fn($q) => $q->where('slug','admin'))->first();
+        $admin = User::whereHas('role', fn ($q) => $q->where('slug', 'admin'))->first();
         $user = User::factory()->create();
         // Create sample log
         $log = AdminImpersonationLog::create([
@@ -40,7 +38,7 @@ class AdminImpersonationLogsTest extends TestCase
 
     public function test_duration_minutes_accessor_returns_expected_value()
     {
-        $admin = User::whereHas('role', fn($q) => $q->where('slug','admin'))->first();
+        $admin = User::whereHas('role', fn ($q) => $q->where('slug', 'admin'))->first();
         $user = User::factory()->create();
         $started = now()->subMinutes(30);
         $ended = now()->subMinutes(5);
@@ -58,7 +56,7 @@ class AdminImpersonationLogsTest extends TestCase
 
     public function test_csv_export_streams_expected_headers()
     {
-        $admin = User::whereHas('role', fn($q) => $q->where('slug','admin'))->first();
+        $admin = User::whereHas('role', fn ($q) => $q->where('slug', 'admin'))->first();
         $user = User::factory()->create();
         AdminImpersonationLog::create([
             'impersonator_id' => $admin->id,

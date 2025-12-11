@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Traits;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -37,87 +37,89 @@ trait BulkUploadable
             $file = $request->file('file');
             $path = $file->getRealPath();
             $csvData = array_map('str_getcsv', file($path));
-            
+
             // Get headers from first row
             $headers = array_shift($csvData);
             $headers = array_map('trim', $headers);
-            
+
             // Validate headers
             $requiredColumns = $this->getRequiredColumns();
             $missingColumns = array_diff($requiredColumns, $headers);
-            
-            if (!empty($missingColumns)) {
-                return back()->with('error', 'Missing required columns: ' . implode(', ', $missingColumns));
+
+            if (! empty($missingColumns)) {
+                return back()->with('error', 'Missing required columns: '.implode(', ', $missingColumns));
             }
 
             $successCount = 0;
             $errorCount = 0;
             $errors = [];
-            
+
             DB::beginTransaction();
-            
+
             try {
                 foreach ($csvData as $index => $row) {
                     // Skip empty rows
                     if (empty(array_filter($row))) {
                         continue;
                     }
-                    
+
                     // Combine headers with row data
                     $data = array_combine($headers, $row);
                     $lineNumber = $index + 2; // +2 because array starts at 0 and we removed header
-                    
+
                     // Validate row data
                     $validator = Validator::make($data, $this->getValidationRules());
-                    
+
                     if ($validator->fails()) {
                         $errorCount++;
-                        $errors[] = "Line {$lineNumber}: " . implode(', ', $validator->errors()->all());
-                        
+                        $errors[] = "Line {$lineNumber}: ".implode(', ', $validator->errors()->all());
+
                         // Stop if too many errors
                         if ($errorCount > 100) {
-                            $errors[] = "Too many errors. Upload stopped. Please fix the CSV and try again.";
+                            $errors[] = 'Too many errors. Upload stopped. Please fix the CSV and try again.';
                             break;
                         }
+
                         continue;
                     }
-                    
+
                     // Transform data if needed
                     $transformedData = $this->transformRowData($data);
-                    
+
                     // Save to database
                     try {
                         $this->saveRecord($transformedData);
                         $successCount++;
                     } catch (\Exception $e) {
                         $errorCount++;
-                        $errors[] = "Line {$lineNumber}: " . $e->getMessage();
+                        $errors[] = "Line {$lineNumber}: ".$e->getMessage();
                     }
                 }
-                
+
                 if ($errorCount > 0 && $successCount === 0) {
                     DB::rollBack();
-                    return back()->with('error', 'Upload failed. Errors: ' . implode("\n", array_slice($errors, 0, 10)));
+
+                    return back()->with('error', 'Upload failed. Errors: '.implode("\n", array_slice($errors, 0, 10)));
                 }
-                
+
                 DB::commit();
-                
+
                 $message = "Successfully imported {$successCount} records.";
                 if ($errorCount > 0) {
                     $message .= " {$errorCount} records failed.";
                 }
-                
+
                 return redirect()->route($this->indexRoute ?? 'admin.data.index')
                     ->with('success', $message)
                     ->with('uploadErrors', $errors);
-                    
+
             } catch (\Exception $e) {
                 DB::rollBack();
                 throw $e;
             }
-            
+
         } catch (\Exception $e) {
-            return back()->with('error', 'Upload failed: ' . $e->getMessage());
+            return back()->with('error', 'Upload failed: '.$e->getMessage());
         }
     }
 
@@ -128,28 +130,28 @@ trait BulkUploadable
     {
         $columns = $this->getTemplateColumns();
         $sampleData = $this->getSampleData();
-        
-        $filename = Str::slug($this->entityNamePlural ?? 'data') . '_template.csv';
-        
+
+        $filename = Str::slug($this->entityNamePlural ?? 'data').'_template.csv';
+
         $headers = [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => "attachment; filename=\"{$filename}\"",
         ];
-        
-        $callback = function() use ($columns, $sampleData) {
+
+        $callback = function () use ($columns, $sampleData) {
             $file = fopen('php://output', 'w');
-            
+
             // Write headers
             fputcsv($file, $columns);
-            
+
             // Write sample data
             foreach ($sampleData as $row) {
                 fputcsv($file, $row);
             }
-            
+
             fclose($file);
         };
-        
+
         return response()->stream($callback, 200, $headers);
     }
 
@@ -160,31 +162,31 @@ trait BulkUploadable
     {
         $query = $this->getExportQuery($request);
         $data = $query->get();
-        
-        $filename = Str::slug($this->entityNamePlural ?? 'data') . '_export_' . now()->format('Y-m-d_His') . '.csv';
-        
+
+        $filename = Str::slug($this->entityNamePlural ?? 'data').'_export_'.now()->format('Y-m-d_His').'.csv';
+
         $headers = [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => "attachment; filename=\"{$filename}\"",
         ];
-        
+
         $columns = $this->getExportColumns();
-        
-        $callback = function() use ($data, $columns) {
+
+        $callback = function () use ($data, $columns) {
             $file = fopen('php://output', 'w');
-            
+
             // Write headers
             fputcsv($file, $columns);
-            
+
             // Write data
             foreach ($data as $record) {
                 $row = $this->prepareExportRow($record);
                 fputcsv($file, $row);
             }
-            
+
             fclose($file);
         };
-        
+
         return response()->stream($callback, 200, $headers);
     }
 

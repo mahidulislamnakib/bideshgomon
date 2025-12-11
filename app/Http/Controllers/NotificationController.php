@@ -6,7 +6,6 @@ use App\Models\UserNotification;
 use App\Services\NotificationService;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
@@ -51,21 +50,28 @@ class NotificationController extends Controller
 
     public function markRead(UserNotification $notification)
     {
-        if ($notification->user_id !== Auth::id()) abort(403);
+        if ($notification->user_id !== Auth::id()) {
+            abort(403);
+        }
         $notification->markRead();
+
         return back()->with('success', 'Notification marked as read');
     }
 
     public function markAllRead(NotificationService $service)
     {
         $service->markAllRead(Auth::id());
+
         return back()->with('success', 'All notifications marked as read');
     }
 
     public function destroy(UserNotification $notification)
     {
-        if ($notification->user_id !== Auth::id()) abort(403);
+        if ($notification->user_id !== Auth::id()) {
+            abort(403);
+        }
         $notification->delete();
+
         return back()->with('success', 'Notification deleted');
     }
 

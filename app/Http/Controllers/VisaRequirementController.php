@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\VisaRequirement;
 use App\Models\VisaFee;
+use App\Models\VisaRequirement;
 use Illuminate\Http\Request;
 
 class VisaRequirementController extends Controller
@@ -23,10 +23,10 @@ class VisaRequirementController extends Controller
 
         // Get visa requirements for the country and profession
         $requirement = VisaRequirement::where('country_id', $countryId)
-            ->where(function($query) use ($profession) {
+            ->where(function ($query) use ($profession) {
                 $query->where('profession', $profession)
-                      ->orWhere('profession', 'all')
-                      ->orWhereNull('profession');
+                    ->orWhere('profession', 'all')
+                    ->orWhereNull('profession');
             })
             ->where('visa_type', 'tourist')
             ->where('is_active', true)
@@ -34,16 +34,16 @@ class VisaRequirementController extends Controller
 
         // Get visa fees
         $fees = VisaFee::where('country_id', $countryId)
-            ->where(function($query) use ($profession) {
+            ->where(function ($query) use ($profession) {
                 $query->where('profession', $profession)
-                      ->orWhere('profession', 'all')
-                      ->orWhereNull('profession');
+                    ->orWhere('profession', 'all')
+                    ->orWhereNull('profession');
             })
             ->where('visa_type', 'tourist')
             ->first();
 
         // If no specific requirement found, get default
-        if (!$requirement) {
+        if (! $requirement) {
             $requirement = VisaRequirement::where('country_id', $countryId)
                 ->where('is_template', true)
                 ->where('visa_type', 'tourist')
@@ -52,7 +52,7 @@ class VisaRequirementController extends Controller
         }
 
         // If no specific fees found, get default
-        if (!$fees) {
+        if (! $fees) {
             $fees = VisaFee::where('country_id', $countryId)
                 ->whereNull('agency_id')
                 ->where('visa_type', 'tourist')

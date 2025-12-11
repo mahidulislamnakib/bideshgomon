@@ -18,7 +18,7 @@ class TaxFilingController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $filing = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $filing = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($filing, 'tax-filing', $validated);
 
         return response()->json(['message' => 'Tax filing assistance request created']);

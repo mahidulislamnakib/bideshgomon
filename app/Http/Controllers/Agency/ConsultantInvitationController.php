@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
 use App\Models\AgencyTeamMember;
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -39,7 +39,7 @@ class ConsultantInvitationController extends Controller
 
         // Check if user already exists
         $existingUser = User::where('email', $validated['email'])->first();
-        
+
         if ($existingUser) {
             // Check if already a team member
             if ($agency->teamMembers()->where('user_id', $existingUser->id)->exists()) {
@@ -63,7 +63,7 @@ class ConsultantInvitationController extends Controller
             $existingUser->update(['agency_id' => $agency->id]);
 
             return redirect()->route('agency.team.index')
-                ->with('success', 'Existing user assigned as ' . $validated['role'] . ' successfully.');
+                ->with('success', 'Existing user assigned as '.$validated['role'].' successfully.');
         }
 
         // Create invitation token
@@ -84,12 +84,21 @@ class ConsultantInvitationController extends Controller
 
         // Send invitation email
         $invitationUrl = route('consultant.accept-invitation', $invitationToken);
-        
-        // TODO: Send actual email
+
+        // Create a notification for the invited consultant (they'll see it after registration)
+        // For now, log the invitation details
+        \Illuminate\Support\Facades\Log::info('Consultant invitation created', [
+            'email' => $validated['email'],
+            'token' => $invitationToken,
+            'url' => $invitationUrl,
+            'agency' => auth()->user()->agency->name ?? 'Unknown',
+        ]);
+
+        // TODO: Integrate with mail service once mail configuration is ready
         // Mail::to($validated['email'])->send(new ConsultantInvitation($teamMember, $invitationUrl));
 
         return redirect()->route('agency.team.index')
-            ->with('success', 'Invitation sent successfully to ' . $validated['email']);
+            ->with('success', 'Invitation sent successfully to '.$validated['email']);
     }
 
     /**
@@ -154,7 +163,7 @@ class ConsultantInvitationController extends Controller
      */
     private function getDefaultPermissions(string $role): array
     {
-        return match($role) {
+        return match ($role) {
             'manager' => [
                 'can_view_applications' => true,
                 'can_submit_quotes' => true,

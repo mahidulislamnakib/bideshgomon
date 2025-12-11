@@ -1,4 +1,4 @@
-ï»¿<script setup>
+<script setup>
 import { ref } from 'vue'
 import { Link, useForm } from '@inertiajs/vue3'
 import AdminLayout from '@/Layouts/AdminLayout.vue'
@@ -151,8 +151,8 @@ function isPdf(filename) {
                   <span :class="badgeClass(doc.status)" class="px-2 py-1 rounded-full text-xs font-semibold">{{ doc.status }}</span>
                   <div v-if="doc.rejection_reason" class="text-xs text-red-600 mt-1">{{ doc.rejection_reason }}</div>
                 </td>
-                <td class="px-3 py-2 text-sm">{{ doc.reviewer?.name || 'â€”' }}</td>
-                <td class="px-3 py-2 text-sm">{{ doc.reviewed_at ? formatDate(doc.reviewed_at) : 'â€”' }}</td>
+                <td class="px-3 py-2 text-sm">{{ doc.reviewer?.name || '—' }}</td>
+                <td class="px-3 py-2 text-sm">{{ doc.reviewed_at ? formatDate(doc.reviewed_at) : '—' }}</td>
               </tr>
             </tbody>
           </table>
@@ -247,5 +247,3 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>

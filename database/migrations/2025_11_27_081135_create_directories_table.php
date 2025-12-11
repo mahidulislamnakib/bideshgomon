@@ -43,7 +43,7 @@ return new class extends Migration
             $table->boolean('is_published')->default(true);
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->index('slug');
             $table->index(['directory_category_id', 'country_id']);
             $table->index('is_published');

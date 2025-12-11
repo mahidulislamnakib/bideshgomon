@@ -63,21 +63,21 @@ const submit = () => {
                                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Primary Guest Information</h3>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
                                             <input v-model="form.guest_name" type="text" required
-                                                class="w-full border-gray-300 rounded-lg focus:ring-brand-red-600 focus:border-indigo-500" />
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" />
                                             <span v-if="form.errors.guest_name" class="text-sm text-red-600">{{ form.errors.guest_name }}</span>
                                         </div>
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
                                             <input v-model="form.guest_email" type="email" required
-                                                class="w-full border-gray-300 rounded-lg focus:ring-brand-red-600 focus:border-indigo-500" />
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" />
                                             <span v-if="form.errors.guest_email" class="text-sm text-red-600">{{ form.errors.guest_email }}</span>
                                         </div>
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Phone *</label>
                                             <input v-model="form.guest_phone" type="tel" required
-                                                class="w-full border-gray-300 rounded-lg focus:ring-brand-red-600 focus:border-indigo-500" />
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" />
                                             <span v-if="form.errors.guest_phone" class="text-sm text-red-600">{{ form.errors.guest_phone }}</span>
                                         </div>
                                     </div>
@@ -90,14 +90,14 @@ const submit = () => {
                                         <h4 class="font-medium text-gray-700 mb-3">Guest {{ index + 1 }}</h4>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
                                                 <input v-model="guest.name" type="text" required
-                                                    class="w-full border-gray-300 rounded-lg focus:ring-brand-red-600 focus:border-indigo-500" />
+                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" />
                                             </div>
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-2">Age</label>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-2">Age</label>
                                                 <input v-model="guest.age" type="number" min="1" max="120"
-                                                    class="w-full border-gray-300 rounded-lg focus:ring-brand-red-600 focus:border-indigo-500" />
+                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" />
                                             </div>
                                         </div>
                                     </div>
@@ -105,10 +105,10 @@ const submit = () => {
 
                                 <!-- Special Requests -->
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Special Requests (Optional)</label>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Special Requests (Optional)</label>
                                     <textarea v-model="form.special_requests" rows="4"
                                         placeholder="Any special requirements or requests..."
-                                        class="w-full border-gray-300 rounded-lg focus:ring-brand-red-600 focus:border-indigo-500"></textarea>
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"></textarea>
                                 </div>
 
                                 <!-- Terms & Conditions -->

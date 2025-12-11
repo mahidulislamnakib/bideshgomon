@@ -118,7 +118,7 @@ class HotelRoom extends Model
 
     public function getFormattedPriceAttribute()
     {
-        return number_format($this->current_price, 2) . ' ' . $this->currency;
+        return number_format($this->current_price, 2).' '.$this->currency;
     }
 
     public function getMaxCapacityAttribute()
@@ -132,6 +132,7 @@ class HotelRoom extends Model
         if ($this->max_children > 0) {
             $text .= ", {$this->max_children} Children";
         }
+
         return $text;
     }
 
@@ -151,7 +152,7 @@ class HotelRoom extends Model
 
     public function getDiscountedPriceAttribute()
     {
-        if (!$this->hasActiveDiscount()) {
+        if (! $this->hasActiveDiscount()) {
             return null;
         }
 
@@ -160,7 +161,7 @@ class HotelRoom extends Model
 
     public function getSavingsAttribute()
     {
-        if (!$this->discounted_price) {
+        if (! $this->discounted_price) {
             return 0;
         }
 
@@ -175,17 +176,18 @@ class HotelRoom extends Model
 
     public function hasActiveDiscount()
     {
-        if (!$this->discount_percentage || !$this->discount_valid_from || !$this->discount_valid_until) {
+        if (! $this->discount_percentage || ! $this->discount_valid_from || ! $this->discount_valid_until) {
             return false;
         }
 
         $today = now()->startOfDay();
+
         return $today->between($this->discount_valid_from, $this->discount_valid_until);
     }
 
     public function isAvailableForDates($checkIn, $checkOut, $roomsNeeded = 1)
     {
-        if (!$this->is_available || $this->total_rooms === 0) {
+        if (! $this->is_available || $this->total_rooms === 0) {
             return false;
         }
 
@@ -197,7 +199,7 @@ class HotelRoom extends Model
                     ->orWhereBetween('check_out_date', [$checkIn, $checkOut])
                     ->orWhere(function ($q) use ($checkIn, $checkOut) {
                         $q->where('check_in_date', '<=', $checkIn)
-                          ->where('check_out_date', '>=', $checkOut);
+                            ->where('check_out_date', '>=', $checkOut);
                     });
             })
             ->sum('rooms_count');

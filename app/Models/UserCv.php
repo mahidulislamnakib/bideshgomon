@@ -89,15 +89,16 @@ class UserCv extends Model
     // Helpers
     public function getPublicUrlAttribute()
     {
-        if (!$this->is_public || !$this->public_token) {
+        if (! $this->is_public || ! $this->public_token) {
             return null;
         }
+
         return route('cv.public', $this->public_token);
     }
 
     public function hasGeneratedPdf()
     {
-        return !empty($this->pdf_path) && file_exists(storage_path('app/' . $this->pdf_path));
+        return ! empty($this->pdf_path) && file_exists(storage_path('app/'.$this->pdf_path));
     }
 
     public function incrementViewCount()
@@ -116,6 +117,7 @@ class UserCv extends Model
         $this->public_token = Str::random(32);
         $this->is_public = true;
         $this->save();
+
         return $this->public_token;
     }
 

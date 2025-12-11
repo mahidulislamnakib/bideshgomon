@@ -22,7 +22,7 @@ class BlogTagController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%");
+                    ->orWhere('slug', 'like', "%{$search}%");
             });
         }
 
@@ -79,7 +79,7 @@ class BlogTagController extends Controller
     public function edit(BlogTag $blogTag)
     {
         $blogTag->loadCount('posts');
-        
+
         return Inertia::render('Admin/DataManagement/BlogTags/Edit', [
             'blogTag' => $blogTag,
         ]);
@@ -88,8 +88,8 @@ class BlogTagController extends Controller
     public function update(Request $request, BlogTag $blogTag)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:blog_tags,name,' . $blogTag->id,
-            'slug' => 'nullable|string|max:255|unique:blog_tags,slug,' . $blogTag->id,
+            'name' => 'required|string|max:255|unique:blog_tags,name,'.$blogTag->id,
+            'slug' => 'nullable|string|max:255|unique:blog_tags,slug,'.$blogTag->id,
         ]);
 
         if (empty($validated['slug'])) {
@@ -183,7 +183,7 @@ class BlogTagController extends Controller
     {
         return [
             'name' => trim($row['name']),
-            'slug' => !empty($row['slug']) ? Str::slug(trim($row['slug'])) : Str::slug(trim($row['name'])),
+            'slug' => ! empty($row['slug']) ? Str::slug(trim($row['slug'])) : Str::slug(trim($row['name'])),
         ];
     }
 

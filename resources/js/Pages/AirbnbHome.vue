@@ -554,19 +554,5 @@ const vClickOutside = {
 }
 </script>
 
-<!-- Temporarily disabled for debugging
-<style scoped>
-.menu-item {
-    display: block;
-    padding: 0.625rem 1rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    color: rgb(55 65 81);
-    transition: background-color 200ms;
-}
-
-.menu-item:hover {
-    background-color: rgb(249 250 251);
-}
-</style>
+<!--
 -->

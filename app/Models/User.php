@@ -10,25 +10,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\UserPassport;
-use App\Models\UserEducation;
-use App\Models\UserWorkExperience;
-use App\Models\UserLanguage;
-use App\Models\UserVisaHistory;
-use App\Models\UserTravelHistory;
-use App\Models\UserFamilyMember;
-use App\Models\UserFinancialInformation;
-use App\Models\UserSecurityInformation;
-use App\Models\UserCv;
-use App\Models\JobApplication;
-use App\Models\Country;
-use Laravel\Scout\Searchable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, Searchable, HasApiTokens;
+    use HasApiTokens, HasFactory, Notifiable, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -440,7 +428,7 @@ class User extends Authenticatable
                 $this->profile->nid,
                 $this->profile->present_address_line,
             ];
-            $profileFilled = count(array_filter($profileFields, fn($v) => !empty($v)));
+            $profileFilled = count(array_filter($profileFields, fn ($v) => ! empty($v)));
             $totalPoints += (int) (($profileFilled / 5) * 10);
         }
 
@@ -476,7 +464,7 @@ class User extends Authenticatable
                 $this->profile->employer_name,
                 $this->profile->bank_balance_bdt,
             ];
-            $financialFilled = count(array_filter($financialFields, fn($v) => !empty($v)));
+            $financialFilled = count(array_filter($financialFields, fn ($v) => ! empty($v)));
             $totalPoints += (int) (($financialFilled / 3) * 10);
         }
 
@@ -509,7 +497,7 @@ class User extends Authenticatable
                 $this->profile->instagram_url,
                 $this->profile->whatsapp_number,
             ];
-            $socialFilled = count(array_filter($socialFields, fn($v) => !empty($v)));
+            $socialFilled = count(array_filter($socialFields, fn ($v) => ! empty($v)));
             if ($socialFilled > 0) {
                 $totalPoints += 4;
             }
@@ -532,10 +520,10 @@ class User extends Authenticatable
                     'completed' => $this->name && $this->email,
                     'weight' => 8,
                     'items' => [
-                        'name' => !empty($this->name),
-                        'email' => !empty($this->email),
+                        'name' => ! empty($this->name),
+                        'email' => ! empty($this->email),
                         'phone' => $this->phoneNumbers()->count() > 0,
-                    ]
+                    ],
                 ],
                 'profile' => [
                     'name' => 'Profile Details',
@@ -543,11 +531,11 @@ class User extends Authenticatable
                     'weight' => 10,
                     'items' => [
                         'dob' => $this->profile?->dob ? true : false,
-                        'gender' => !empty($this->profile?->gender),
-                        'nationality' => !empty($this->profile?->nationality),
-                        'nid' => !empty($this->profile?->nid),
-                        'address' => !empty($this->profile?->present_address_line),
-                    ]
+                        'gender' => ! empty($this->profile?->gender),
+                        'nationality' => ! empty($this->profile?->nationality),
+                        'nid' => ! empty($this->profile?->nid),
+                        'address' => ! empty($this->profile?->present_address_line),
+                    ],
                 ],
                 'education' => [
                     'name' => 'Education & Qualifications',
@@ -584,10 +572,10 @@ class User extends Authenticatable
                     'completed' => $this->profile && $this->profile->monthly_income_bdt,
                     'weight' => 10,
                     'items' => [
-                        'income' => !empty($this->profile?->monthly_income_bdt),
-                        'employer' => !empty($this->profile?->employer_name),
-                        'bank' => !empty($this->profile?->bank_balance_bdt),
-                    ]
+                        'income' => ! empty($this->profile?->monthly_income_bdt),
+                        'employer' => ! empty($this->profile?->employer_name),
+                        'bank' => ! empty($this->profile?->bank_balance_bdt),
+                    ],
                 ],
                 'languages' => [
                     'name' => 'Language Proficiency',
@@ -623,12 +611,12 @@ class User extends Authenticatable
                     ),
                     'weight' => 4,
                     'items' => [
-                        'facebook' => !empty($this->profile?->facebook_url),
-                        'linkedin' => !empty($this->profile?->linkedin_url),
-                        'twitter' => !empty($this->profile?->twitter_url),
-                        'instagram' => !empty($this->profile?->instagram_url),
-                        'whatsapp' => !empty($this->profile?->whatsapp_number),
-                    ]
+                        'facebook' => ! empty($this->profile?->facebook_url),
+                        'linkedin' => ! empty($this->profile?->linkedin_url),
+                        'twitter' => ! empty($this->profile?->twitter_url),
+                        'instagram' => ! empty($this->profile?->instagram_url),
+                        'whatsapp' => ! empty($this->profile?->whatsapp_number),
+                    ],
                 ],
             ],
             'categories' => [
@@ -648,7 +636,7 @@ class User extends Authenticatable
                     'financial' => $this->profile && $this->profile->monthly_income_bdt,
                     'security' => $this->securityInformation ? true : false,
                 ],
-            ]
+            ],
         ];
     }
 
@@ -665,7 +653,7 @@ class User extends Authenticatable
      */
     public function getPublicProfileUrlAttribute(): ?string
     {
-        if (!$this->public_profile_slug) {
+        if (! $this->public_profile_slug) {
             return null;
         }
 
@@ -677,14 +665,15 @@ class User extends Authenticatable
      */
     public function isSectionVisible(string $section): bool
     {
-        if (!$this->profile_is_public) {
+        if (! $this->profile_is_public) {
             return false;
         }
 
         $settings = $this->profile_visibility_settings ?? [];
-        
+
         return $settings[$section] ?? true; // Default to visible
     }
+
     /**
      * Smart suggestions generated for the user.
      */
@@ -726,7 +715,3 @@ class User extends Authenticatable
         ];
     }
 }
-
-
-
-

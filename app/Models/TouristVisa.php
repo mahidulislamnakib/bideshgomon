@@ -38,7 +38,7 @@ class TouristVisa extends Model
 
         static::creating(function ($touristVisa) {
             if (empty($touristVisa->application_reference)) {
-                $touristVisa->application_reference = 'TV' . strtoupper(uniqid());
+                $touristVisa->application_reference = 'TV'.strtoupper(uniqid());
             }
         });
     }

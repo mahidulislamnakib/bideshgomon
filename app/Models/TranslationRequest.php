@@ -40,7 +40,7 @@ class TranslationRequest extends Model
         parent::boot();
         static::creating(function ($model) {
             if (empty($model->request_reference)) {
-                $model->request_reference = 'TRANS-' . strtoupper(uniqid());
+                $model->request_reference = 'TRANS-'.strtoupper(uniqid());
             }
         });
     }

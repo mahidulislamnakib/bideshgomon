@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\User;
 use App\Models\UserFamilyMember;
 use App\Models\UserWorkExperience;
-use App\Models\UserProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,7 +17,7 @@ class ProfileSectionsTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->user = User::factory()->create();
         $this->user->profile()->create([]);
     }
@@ -52,7 +51,7 @@ class ProfileSectionsTest extends TestCase
             ]);
 
         $response->assertStatus(201);
-        
+
         $this->assertDatabaseHas('user_family_members', [
             'user_id' => $this->user->id,
             'full_name' => 'Jane Doe',
@@ -99,7 +98,7 @@ class ProfileSectionsTest extends TestCase
             ]);
 
         $response->assertStatus(200);
-        
+
         $familyMember->refresh();
         $this->assertEquals('secondary', $familyMember->education_level);
         $this->assertTrue($familyMember->is_dependent);
@@ -119,7 +118,7 @@ class ProfileSectionsTest extends TestCase
             ]);
 
         $response->assertStatus(201);
-        
+
         $this->assertDatabaseHas('user_work_experiences', [
             'user_id' => $this->user->id,
             'company_name' => 'Tech Company',
@@ -148,7 +147,7 @@ class ProfileSectionsTest extends TestCase
             ]);
 
         $response->assertStatus(200);
-        
+
         $experience->refresh();
         $this->assertTrue($experience->is_current_employment);
         $this->assertEquals('Senior Developer', $experience->position);
@@ -202,8 +201,8 @@ class ProfileSectionsTest extends TestCase
     public function profile_completion_calculates_correctly(): void
     {
         $completion = $this->user->calculateProfileCompletion();
-        
-    $this->assertIsInt($completion);
+
+        $this->assertIsInt($completion);
         $this->assertGreaterThanOrEqual(0, $completion);
         $this->assertLessThanOrEqual(100, $completion);
     }

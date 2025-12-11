@@ -48,6 +48,6 @@ class RelationshipTypeSeeder extends Seeder
             RelationshipType::create($type);
         }
 
-        $this->command->info('Relationship types seeded: ' . count($relationshipTypes) . ' entries');
+        $this->command->info('Relationship types seeded: '.count($relationshipTypes).' entries');
     }
 }

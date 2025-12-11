@@ -16,7 +16,7 @@ class SiteSettingController extends Controller
     public function index(Request $request)
     {
         $group = $request->get('group', 'general');
-        
+
         $settings = SiteSetting::where('group', $group)
             ->orderBy('sort_order', 'asc')
             ->get();
@@ -48,7 +48,7 @@ class SiteSettingController extends Controller
         foreach ($settings as $key => $value) {
             $setting = SiteSetting::where('key', $key)->first();
 
-            if (!$setting || !$setting->is_editable) {
+            if (! $setting || ! $setting->is_editable) {
                 continue;
             }
 
@@ -92,7 +92,7 @@ class SiteSettingController extends Controller
 
         $setting = SiteSetting::where('key', $request->key)->first();
 
-        if (!$setting || !$setting->is_editable) {
+        if (! $setting || ! $setting->is_editable) {
             return response()->json(['error' => 'Setting not found or not editable'], 404);
         }
 
@@ -139,7 +139,7 @@ class SiteSettingController extends Controller
 
         $setting = SiteSetting::where('key', $request->key)->first();
 
-        if (!$setting || $setting->type !== 'image' || !$setting->value) {
+        if (! $setting || $setting->type !== 'image' || ! $setting->value) {
             return response()->json(['error' => 'File not found'], 404);
         }
 
@@ -192,4 +192,3 @@ class SiteSettingController extends Controller
         return back()->with('success', 'Settings cache cleared successfully.');
     }
 }
-

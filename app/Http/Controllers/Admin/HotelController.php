@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hotel;
-use App\Models\HotelRoom;
 use App\Models\HotelBooking;
+use App\Models\HotelRoom;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Illuminate\Support\Str;
 
 class HotelController extends Controller
 {
@@ -21,10 +20,10 @@ class HotelController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('city', 'like', "%{$search}%")
-                  ->orWhere('address', 'like', "%{$search}%");
+                    ->orWhere('city', 'like', "%{$search}%")
+                    ->orWhere('address', 'like', "%{$search}%");
             });
         }
 
@@ -103,7 +102,7 @@ class HotelController extends Controller
      */
     public function show(Hotel $hotel)
     {
-        $hotel->load(['rooms', 'bookings' => function($q) {
+        $hotel->load(['rooms', 'bookings' => function ($q) {
             $q->latest()->limit(10);
         }]);
 
@@ -189,7 +188,7 @@ class HotelController extends Controller
      */
     public function toggleStatus(Hotel $hotel)
     {
-        $hotel->is_active = !$hotel->is_active;
+        $hotel->is_active = ! $hotel->is_active;
         $hotel->save();
 
         return back()->with('success', 'Hotel status updated successfully.');
@@ -204,10 +203,10 @@ class HotelController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('booking_reference', 'like', "%{$search}%")
-                  ->orWhere('guest_name', 'like', "%{$search}%")
-                  ->orWhere('guest_email', 'like', "%{$search}%");
+                    ->orWhere('guest_name', 'like', "%{$search}%")
+                    ->orWhere('guest_email', 'like', "%{$search}%");
             });
         }
 
@@ -277,14 +276,14 @@ class HotelController extends Controller
         ]);
 
         $booking->status = $validated['status'];
-        
-        if ($validated['status'] === 'confirmed' && !$booking->confirmed_at) {
+
+        if ($validated['status'] === 'confirmed' && ! $booking->confirmed_at) {
             $booking->confirmed_at = now();
-        } elseif ($validated['status'] === 'checked_in' && !$booking->checked_in_at) {
+        } elseif ($validated['status'] === 'checked_in' && ! $booking->checked_in_at) {
             $booking->checked_in_at = now();
-        } elseif ($validated['status'] === 'checked_out' && !$booking->checked_out_at) {
+        } elseif ($validated['status'] === 'checked_out' && ! $booking->checked_out_at) {
             $booking->checked_out_at = now();
-        } elseif ($validated['status'] === 'cancelled' && !$booking->cancelled_at) {
+        } elseif ($validated['status'] === 'cancelled' && ! $booking->cancelled_at) {
             $booking->cancelled_at = now();
         }
 
@@ -303,8 +302,8 @@ class HotelController extends Controller
     public function analytics(Request $request)
     {
         $period = $request->input('period', '30days');
-        
-        $startDate = match($period) {
+
+        $startDate = match ($period) {
             '7days' => now()->subDays(7),
             '30days' => now()->subDays(30),
             '90days' => now()->subDays(90),
@@ -323,13 +322,13 @@ class HotelController extends Controller
             ->where('created_at', '>=', $startDate)->count();
 
         // Top hotels
-        $topHotels = Hotel::withCount(['bookings' => function($q) use ($startDate) {
+        $topHotels = Hotel::withCount(['bookings' => function ($q) use ($startDate) {
             $q->where('created_at', '>=', $startDate)
-              ->whereIn('status', ['confirmed', 'checked_in', 'checked_out']);
+                ->whereIn('status', ['confirmed', 'checked_in', 'checked_out']);
         }])
-        ->orderBy('bookings_count', 'desc')
-        ->limit(10)
-        ->get();
+            ->orderBy('bookings_count', 'desc')
+            ->limit(10)
+            ->get();
 
         // Popular cities
         $popularCities = HotelBooking::where('created_at', '>=', $startDate)

@@ -77,8 +77,8 @@ class Page extends Model
     {
         return $query->where(function ($q) use ($search) {
             $q->where('title', 'like', "%{$search}%")
-              ->orWhere('content', 'like', "%{$search}%")
-              ->orWhere('slug', 'like', "%{$search}%");
+                ->orWhere('content', 'like', "%{$search}%")
+                ->orWhere('slug', 'like', "%{$search}%");
         });
     }
 
@@ -95,7 +95,7 @@ class Page extends Model
 
     public function getPageTypeLabel()
     {
-        return match($this->page_type) {
+        return match ($this->page_type) {
             'terms' => 'Terms of Service',
             'privacy' => 'Privacy Policy',
             'refund' => 'Refund Policy',
@@ -108,7 +108,7 @@ class Page extends Model
 
     public function getTemplateLabel()
     {
-        return match($this->template) {
+        return match ($this->template) {
             'default' => 'Default Template',
             'legal' => 'Legal Document',
             'informational' => 'Informational',

@@ -38,7 +38,7 @@ class VisaServiceSeeder extends Seeder
                 'applicant_email' => 'applicant@example.com',
                 'applicant_phone' => '+8801700000000',
                 'applicant_dob' => '1990-01-15',
-                'passport_number' => 'BD' . rand(1000000, 9999999),
+                'passport_number' => 'BD'.rand(1000000, 9999999),
                 'passport_issue_date' => '2020-01-01',
                 'passport_expiry_date' => '2030-01-01',
                 'passport_issuing_country' => 'Bangladesh',

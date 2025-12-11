@@ -106,7 +106,7 @@ class CourseController extends Controller
             ->where('id', '!=', $course->id)
             ->where(function ($query) use ($course) {
                 $query->where('university_id', $course->university_id)
-                      ->orWhere('subject', $course->subject);
+                    ->orWhere('subject', $course->subject);
             })
             ->limit(6)
             ->get();
@@ -117,4 +117,3 @@ class CourseController extends Controller
         ]);
     }
 }
-

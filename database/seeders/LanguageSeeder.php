@@ -19,7 +19,7 @@ class LanguageSeeder extends Seeder
             ['name' => 'Hindi', 'name_bn' => 'হিন্দি', 'code' => 'hi', 'native_name' => 'हिन्दी'],
             ['name' => 'Urdu', 'name_bn' => 'উর্দু', 'code' => 'ur', 'native_name' => 'اردو'],
             ['name' => 'Arabic', 'name_bn' => 'আরবি', 'code' => 'ar', 'native_name' => 'العربية'],
-            
+
             // Major Asian languages
             ['name' => 'Chinese', 'name_bn' => 'চীনা', 'code' => 'zh', 'native_name' => '中文'],
             ['name' => 'Japanese', 'name_bn' => 'জাপানি', 'code' => 'ja', 'native_name' => '日本語'],
@@ -31,7 +31,7 @@ class LanguageSeeder extends Seeder
             ['name' => 'Tagalog', 'name_bn' => 'তাগালগ', 'code' => 'tl', 'native_name' => 'Tagalog'],
             ['name' => 'Tamil', 'name_bn' => 'তামিল', 'code' => 'ta', 'native_name' => 'தமிழ்'],
             ['name' => 'Telugu', 'name_bn' => 'তেলুগু', 'code' => 'te', 'native_name' => 'తెలుగు'],
-            
+
             // European languages
             ['name' => 'Spanish', 'name_bn' => 'স্প্যানিশ', 'code' => 'es', 'native_name' => 'Español'],
             ['name' => 'French', 'name_bn' => 'ফরাসি', 'code' => 'fr', 'native_name' => 'Français'],

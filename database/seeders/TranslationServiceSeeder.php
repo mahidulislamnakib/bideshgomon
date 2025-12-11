@@ -18,7 +18,7 @@ class TranslationServiceSeeder extends Seeder
         ];
 
         foreach ($requests as $req) {
-            $certFee = match($req['cert']) {
+            $certFee = match ($req['cert']) {
                 'notarized' => 2000,
                 'certified' => 1000,
                 default => 0

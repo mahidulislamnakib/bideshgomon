@@ -16,7 +16,7 @@ class UserWorkExperienceController extends Controller
     public function index()
     {
         $experiences = Auth::user()->workExperiences()->orderBy('start_date', 'desc')->get();
-        
+
         return response()->json($experiences);
     }
 

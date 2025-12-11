@@ -69,6 +69,7 @@ class Notification extends Model
         }
 
         $this->read_at = now();
+
         return $this->save();
     }
 
@@ -77,11 +78,12 @@ class Notification extends Model
      */
     public function markAsUnread(): bool
     {
-        if (!$this->read_at) {
+        if (! $this->read_at) {
             return false;
         }
 
         $this->read_at = null;
+
         return $this->save();
     }
 
@@ -90,7 +92,7 @@ class Notification extends Model
      */
     public function isRead(): bool
     {
-        return !is_null($this->read_at);
+        return ! is_null($this->read_at);
     }
 
     /**

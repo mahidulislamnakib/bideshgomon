@@ -18,7 +18,7 @@ class BankAccountController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $account = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $account = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($account, 'bank-account', $validated);
 
         return response()->json(['message' => 'Bank account opening request created']);

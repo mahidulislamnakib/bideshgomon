@@ -6,8 +6,8 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\UserDocument;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class DocumentVerificationTest extends TestCase
@@ -56,7 +56,7 @@ class DocumentVerificationTest extends TestCase
         $this->assertDatabaseHas('user_notifications', [
             'user_id' => $user->id,
             'type' => 'document_approved',
-            'title' => 'Document Approved'
+            'title' => 'Document Approved',
         ]);
     }
 
@@ -68,7 +68,7 @@ class DocumentVerificationTest extends TestCase
 
         $this->actingAs($admin)
             ->post(route('admin.documents.reject', $doc->id), [
-                'reason' => 'Blurry image'
+                'reason' => 'Blurry image',
             ])
             ->assertRedirect();
 
@@ -78,7 +78,7 @@ class DocumentVerificationTest extends TestCase
         $this->assertDatabaseHas('user_notifications', [
             'user_id' => $user->id,
             'type' => 'document_rejected',
-            'title' => 'Document Rejected'
+            'title' => 'Document Rejected',
         ]);
     }
 

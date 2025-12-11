@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\UserDocument;
 use App\Models\User;
+use App\Models\UserDocument;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserDocumentFactory extends Factory
@@ -28,7 +28,7 @@ class UserDocumentFactory extends Factory
 
     public function approved(): static
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'status' => UserDocument::STATUS_APPROVED,
             'reviewed_by' => null,
             'reviewed_at' => now(),
@@ -37,7 +37,7 @@ class UserDocumentFactory extends Factory
 
     public function rejected(): static
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'status' => UserDocument::STATUS_REJECTED,
             'reviewed_by' => null,
             'reviewed_at' => now(),

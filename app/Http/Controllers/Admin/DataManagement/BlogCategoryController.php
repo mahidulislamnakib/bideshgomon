@@ -22,8 +22,8 @@ class BlogCategoryController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('slug', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
             });
         }
 
@@ -90,7 +90,7 @@ class BlogCategoryController extends Controller
     public function edit(BlogCategory $blogCategory)
     {
         $blogCategory->loadCount('posts');
-        
+
         return Inertia::render('Admin/DataManagement/BlogCategories/Edit', [
             'blogCategory' => $blogCategory,
         ]);
@@ -99,8 +99,8 @@ class BlogCategoryController extends Controller
     public function update(Request $request, BlogCategory $blogCategory)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:blog_categories,name,' . $blogCategory->id,
-            'slug' => 'nullable|string|max:255|unique:blog_categories,slug,' . $blogCategory->id,
+            'name' => 'required|string|max:255|unique:blog_categories,name,'.$blogCategory->id,
+            'slug' => 'nullable|string|max:255|unique:blog_categories,slug,'.$blogCategory->id,
             'icon' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'color' => 'nullable|string|max:20',
@@ -135,7 +135,7 @@ class BlogCategoryController extends Controller
     public function toggleStatus(BlogCategory $blogCategory)
     {
         $blogCategory->update([
-            'is_active' => !$blogCategory->is_active,
+            'is_active' => ! $blogCategory->is_active,
         ]);
 
         return back();
@@ -227,11 +227,11 @@ class BlogCategoryController extends Controller
             return "Row {$rowNumber}: Name is required";
         }
 
-        if (!empty($row['color']) && !preg_match('/^#[0-9A-F]{6}$/i', $row['color'])) {
+        if (! empty($row['color']) && ! preg_match('/^#[0-9A-F]{6}$/i', $row['color'])) {
             return "Row {$rowNumber}: Color must be a valid hex code (e.g., #3B82F6)";
         }
 
-        if (isset($row['order']) && (!is_numeric($row['order']) || $row['order'] < 0)) {
+        if (isset($row['order']) && (! is_numeric($row['order']) || $row['order'] < 0)) {
             return "Row {$rowNumber}: Order must be a positive number";
         }
 
@@ -242,12 +242,12 @@ class BlogCategoryController extends Controller
     {
         return [
             'name' => trim($row['name']),
-            'slug' => !empty($row['slug']) ? Str::slug(trim($row['slug'])) : Str::slug(trim($row['name'])),
+            'slug' => ! empty($row['slug']) ? Str::slug(trim($row['slug'])) : Str::slug(trim($row['name'])),
             'icon' => trim($row['icon'] ?? ''),
             'description' => trim($row['description'] ?? ''),
-            'color' => !empty($row['color']) ? strtoupper(trim($row['color'])) : '#3B82F6',
-            'order' => isset($row['order']) ? (int)$row['order'] : 0,
-            'is_active' => isset($row['is_active']) ? (bool)$row['is_active'] : true,
+            'color' => ! empty($row['color']) ? strtoupper(trim($row['color'])) : '#3B82F6',
+            'order' => isset($row['order']) ? (int) $row['order'] : 0,
+            'is_active' => isset($row['is_active']) ? (bool) $row['is_active'] : true,
         ];
     }
 

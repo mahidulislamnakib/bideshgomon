@@ -22,13 +22,13 @@ class Partner extends Model
         'sort_order',
         'is_featured',
         'is_active',
-        'updated_by'
+        'updated_by',
     ];
 
     protected $casts = [
         'is_featured' => 'boolean',
         'is_active' => 'boolean',
-        'sort_order' => 'integer'
+        'sort_order' => 'integer',
     ];
 
     // Relationships

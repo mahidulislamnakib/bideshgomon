@@ -22,8 +22,8 @@ class ServiceCategoryController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('slug', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
             });
         }
 
@@ -91,7 +91,7 @@ class ServiceCategoryController extends Controller
     public function edit(ServiceCategory $serviceCategory)
     {
         $serviceCategory->loadCount('modules');
-        
+
         return Inertia::render('Admin/DataManagement/ServiceCategories/Edit', [
             'serviceCategory' => $serviceCategory,
         ]);
@@ -100,8 +100,8 @@ class ServiceCategoryController extends Controller
     public function update(Request $request, ServiceCategory $serviceCategory)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:service_categories,name,' . $serviceCategory->id,
-            'slug' => 'nullable|string|max:255|unique:service_categories,slug,' . $serviceCategory->id,
+            'name' => 'required|string|max:255|unique:service_categories,name,'.$serviceCategory->id,
+            'slug' => 'nullable|string|max:255|unique:service_categories,slug,'.$serviceCategory->id,
             'icon' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'color' => 'nullable|string|max:20',
@@ -138,7 +138,7 @@ class ServiceCategoryController extends Controller
     public function toggleStatus(ServiceCategory $serviceCategory)
     {
         $serviceCategory->update([
-            'is_active' => !$serviceCategory->is_active,
+            'is_active' => ! $serviceCategory->is_active,
         ]);
 
         return back();
@@ -232,12 +232,12 @@ class ServiceCategoryController extends Controller
         }
 
         // Validate color format if provided
-        if (!empty($row['color']) && !preg_match('/^#[0-9A-F]{6}$/i', $row['color'])) {
+        if (! empty($row['color']) && ! preg_match('/^#[0-9A-F]{6}$/i', $row['color'])) {
             return "Row {$rowNumber}: Color must be a valid hex code (e.g., #3B82F6)";
         }
 
         // Validate sort_order
-        if (isset($row['sort_order']) && (!is_numeric($row['sort_order']) || $row['sort_order'] < 0)) {
+        if (isset($row['sort_order']) && (! is_numeric($row['sort_order']) || $row['sort_order'] < 0)) {
             return "Row {$rowNumber}: Sort order must be a positive number";
         }
 
@@ -248,12 +248,12 @@ class ServiceCategoryController extends Controller
     {
         $data = [
             'name' => trim($row['name']),
-            'slug' => !empty($row['slug']) ? Str::slug(trim($row['slug'])) : Str::slug(trim($row['name'])),
+            'slug' => ! empty($row['slug']) ? Str::slug(trim($row['slug'])) : Str::slug(trim($row['name'])),
             'icon' => trim($row['icon'] ?? ''),
             'description' => trim($row['description'] ?? ''),
-            'color' => !empty($row['color']) ? strtoupper(trim($row['color'])) : '#3B82F6',
-            'sort_order' => isset($row['sort_order']) ? (int)$row['sort_order'] : 0,
-            'is_active' => isset($row['is_active']) ? (bool)$row['is_active'] : true,
+            'color' => ! empty($row['color']) ? strtoupper(trim($row['color'])) : '#3B82F6',
+            'sort_order' => isset($row['sort_order']) ? (int) $row['sort_order'] : 0,
+            'is_active' => isset($row['is_active']) ? (bool) $row['is_active'] : true,
         ];
 
         return $data;

@@ -152,13 +152,13 @@ const iconBgClass = computed(() => {
         default: 'bg-gray-100 text-gray-700',
         light: 'bg-gray-100 text-gray-700',
         dark: 'bg-gray-800 text-gray-200',
-        gradient: 'bg-brand-red-600 text-white',
-        ocean: 'bg-brand-red-600 text-white',
-        sky: 'bg-brand-red-600 text-white',
+        gradient: 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white',
+        ocean: 'bg-ocean-500 text-white',
+        sky: 'bg-sky-500 text-white',
         growth: 'bg-growth-500 text-white',
-        sunrise: 'bg-sunrise-500 text-white',
+        sunrise: 'bg-orange-500 text-white',
         gold: 'bg-gold-500 text-white',
-        heritage: 'bg-heritage-500 text-white',
+        heritage: 'bg-purple-600 text-white',
     };
     return variants[props.variant] || variants.default;
 });

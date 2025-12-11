@@ -1,11 +1,10 @@
 <?php
 
+use App\Models\JobCategory;
+use App\Models\JobPosting;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
-use App\Models\JobPosting;
-use App\Models\JobCategory;
 
 return new class extends Migration
 {
@@ -45,7 +44,7 @@ return new class extends Migration
         foreach ($jobPostings as $job) {
             // Try to find matching category by slug or name (case-insensitive)
             $categorySlug = \Illuminate\Support\Str::slug($job->category);
-            
+
             $category = JobCategory::where('slug', $categorySlug)
                 ->orWhere('name', 'like', $job->category)
                 ->first();

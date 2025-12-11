@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\DataManagement;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Traits\BulkUploadable;
+use App\Http\Controllers\Controller;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,8 +15,11 @@ class CountryController extends Controller
     use BulkUploadable;
 
     protected $entityName = 'Country';
+
     protected $entityNamePlural = 'Countries';
+
     protected $indexRoute = 'admin.data.countries.index';
+
     protected $bulkUploadView = 'Admin/DataManagement/Countries/BulkUpload';
 
     /**
@@ -29,11 +32,11 @@ class CountryController extends Controller
         // Search
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%")
-                  ->orWhere('iso_code_2', 'like', "%{$search}%")
-                  ->orWhere('iso_code_3', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%")
+                    ->orWhere('iso_code_2', 'like', "%{$search}%")
+                    ->orWhere('iso_code_3', 'like', "%{$search}%");
             });
         }
 
@@ -111,7 +114,7 @@ class CountryController extends Controller
                 'data' => $validated,
             ]);
 
-            return back()->withInput()->with('error', 'Failed to create country: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to create country: '.$e->getMessage());
         }
     }
 
@@ -164,7 +167,7 @@ class CountryController extends Controller
                 'error' => $e->getMessage(),
             ]);
 
-            return back()->withInput()->with('error', 'Failed to update country: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to update country: '.$e->getMessage());
         }
     }
 
@@ -184,7 +187,7 @@ class CountryController extends Controller
                 'error' => $e->getMessage(),
             ]);
 
-            return back()->with('error', 'Failed to delete country: ' . $e->getMessage());
+            return back()->with('error', 'Failed to delete country: '.$e->getMessage());
         }
     }
 
@@ -194,7 +197,7 @@ class CountryController extends Controller
     public function toggleStatus(Country $country)
     {
         try {
-            $country->update(['is_active' => !$country->is_active]);
+            $country->update(['is_active' => ! $country->is_active]);
 
             return back()->with('success', 'Country status updated successfully.');
         } catch (\Exception $e) {
@@ -221,7 +224,7 @@ class CountryController extends Controller
             'currency_code',
             'flag_emoji',
             'region',
-            'is_active'
+            'is_active',
         ];
     }
 
@@ -232,7 +235,7 @@ class CountryController extends Controller
             'iso_code_2',
             'iso_code_3',
             'phone_code',
-            'currency_code'
+            'currency_code',
         ];
     }
 
@@ -296,10 +299,10 @@ class CountryController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%")
-                  ->orWhere('iso_code_2', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%")
+                    ->orWhere('iso_code_2', 'like', "%{$search}%");
             });
         }
 

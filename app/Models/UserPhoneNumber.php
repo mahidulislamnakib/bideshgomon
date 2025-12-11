@@ -41,7 +41,7 @@ class UserPhoneNumber extends Model
      */
     public function getFullPhoneNumberAttribute(): string
     {
-        return $this->country_code . ' ' . $this->phone_number;
+        return $this->country_code.' '.$this->phone_number;
     }
 
     /**

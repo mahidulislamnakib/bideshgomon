@@ -970,28 +970,3 @@ const getProficiencyLabel = (level) => {
         </div>
     </AuthenticatedLayout>
 </template>
-
-<style scoped>
-@keyframes slide-up {
-    from {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.animate-slide-up {
-    animation: slide-up 0.3s ease-out;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-.scroll-mt-20 {
-    scroll-margin-top: 5rem;
-}
-</style>

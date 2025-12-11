@@ -272,31 +272,4 @@ const closeModal = () => {
 </script>
 
 <!-- Temporarily disabled for debugging
-<style scoped>
-/* Custom Range Slider */
-.range-slider::-webkit-slider-thumb {
-    appearance: none;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #10b981;
-    cursor: pointer;
-    border: 4px solid white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.range-slider::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #10b981;
-    cursor: pointer;
-    border: 4px solid white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.range-slider::-webkit-slider-runnable-track {
-    background: linear-gradient(to right, #10b981 0%, #10b981 var(--value), #e5e7eb var(--value), #e5e7eb 100%);
-}
-</style>
 -->

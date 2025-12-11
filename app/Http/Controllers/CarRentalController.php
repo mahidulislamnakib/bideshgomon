@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Traits\CreatesServiceApplications;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class CarRentalController extends Controller
 {
@@ -26,7 +25,7 @@ class CarRentalController extends Controller
         ]);
 
         // Create rental record (simplified for demo)
-        $rental = (object)[
+        $rental = (object) [
             'id' => uniqid(),
             'user_id' => $request->user()->id ?? 1,
             'pickup_location' => $validated['pickup_location'],

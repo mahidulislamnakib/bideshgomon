@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Country;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -16,18 +15,19 @@ class CountrySeeder extends Seeder
     {
         // Disable foreign key checks for MySQL
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        
+
         // Clear existing countries
         DB::table('countries')->truncate();
-        
+
         // Re-enable foreign key checks
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         // Read CSV file
         $csvFile = database_path('seeders/csv/countries_complete.csv');
-        
-        if (!file_exists($csvFile)) {
+
+        if (! file_exists($csvFile)) {
             $this->command->error("CSV file not found: {$csvFile}");
+
             return;
         }
 
@@ -37,7 +37,9 @@ class CountrySeeder extends Seeder
         $insertedCount = 0;
 
         foreach ($rows as $row) {
-            if (count($row) < 10) continue; // Skip incomplete rows
+            if (count($row) < 10) {
+                continue;
+            } // Skip incomplete rows
 
             DB::table('countries')->insert([
                 'name' => $row[0],
@@ -49,7 +51,7 @@ class CountrySeeder extends Seeder
                 'flag_emoji' => $row[6],
                 'region' => $row[7],
                 'nationality' => $row[8],
-                'is_active' => (bool)$row[9],
+                'is_active' => (bool) $row[9],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

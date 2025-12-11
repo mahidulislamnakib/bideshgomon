@@ -61,14 +61,22 @@ class SeoSetting extends Model
     public function getRobotsMetaAttribute(): string
     {
         $parts = [];
-        if ($this->index) $parts[] = 'index';
-        else $parts[] = 'noindex';
-        
-        if ($this->follow) $parts[] = 'follow';
-        else $parts[] = 'nofollow';
-        
-        if ($this->robots) $parts[] = $this->robots;
-        
+        if ($this->index) {
+            $parts[] = 'index';
+        } else {
+            $parts[] = 'noindex';
+        }
+
+        if ($this->follow) {
+            $parts[] = 'follow';
+        } else {
+            $parts[] = 'nofollow';
+        }
+
+        if ($this->robots) {
+            $parts[] = $this->robots;
+        }
+
         return implode(', ', $parts);
     }
 

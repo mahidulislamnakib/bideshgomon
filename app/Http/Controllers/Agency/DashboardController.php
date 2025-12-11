@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
+use App\Models\AgencyCountryAssignment;
 use App\Models\ServiceApplication;
 use App\Models\ServiceQuote;
-use App\Models\AgencyCountryAssignment;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -14,15 +13,15 @@ class DashboardController extends Controller
     public function index()
     {
         $user = auth()->user();
-        
+
         // Get or create agency profile
         $agency = $user->agency;
-        
-        if (!$agency) {
+
+        if (! $agency) {
             // Auto-create agency profile for users with agency role
             $agency = \App\Models\Agency::create([
                 'user_id' => $user->id,
-                'name' => $user->name . "'s Agency",
+                'name' => $user->name."'s Agency",
                 'email' => $user->email,
                 'phone' => $user->phone ?? '',
                 'is_verified' => false,
@@ -46,15 +45,15 @@ class DashboardController extends Controller
             'my_completed' => ServiceApplication::where('agency_id', $agency->id)
                 ->where('status', 'completed')
                 ->count(),
-            
+
             // Unassigned applications from countries this agency serves
             'available_applications' => ServiceApplication::whereNull('agency_id')
                 ->where('status', 'pending')
-                ->whereHas('serviceModule', function($query) use ($assignedCountryIds) {
+                ->whereHas('serviceModule', function ($query) use ($assignedCountryIds) {
                     $query->whereJsonContains('application_data->destination_country_id', $assignedCountryIds);
                 })
                 ->count(),
-                
+
             'pending_quotes' => ServiceQuote::where('agency_id', $agency->id)
                 ->where('status', 'pending')
                 ->count(),
@@ -67,16 +66,17 @@ class DashboardController extends Controller
         $availableApplications = ServiceApplication::with(['user', 'serviceModule', 'touristVisa.destinationCountry'])
             ->whereNull('agency_id')
             ->where('status', 'pending')
-            ->whereHas('serviceModule', function($query) use ($assignedCountryIds) {
+            ->whereHas('serviceModule', function ($query) {
                 // For now, we'll filter by checking application_data JSON
                 // In future, we might add a direct country_id field
             })
             ->latest()
             ->take(10)
             ->get()
-            ->filter(function($app) use ($assignedCountryIds) {
+            ->filter(function ($app) use ($assignedCountryIds) {
                 // Filter by destination country in application_data
                 $countryId = $app->application_data['destination_country_id'] ?? null;
+
                 return $countryId && in_array($countryId, $assignedCountryIds);
             });
 

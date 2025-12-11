@@ -22,12 +22,12 @@ class ServiceQuoteController extends Controller
         }
 
         $quotes = $application->quotes()
-            ->with(['agency' => function($query) {
+            ->with(['agency' => function ($query) {
                 $query->select('id', 'name', 'email', 'phone', 'logo_path');
             }])
             ->orderBy('quoted_amount', 'asc') // Show cheapest first
             ->get()
-            ->map(function($quote) {
+            ->map(function ($quote) {
                 return [
                     'id' => $quote->id,
                     'agency_name' => $quote->agency->name ?? 'Unknown Agency',
@@ -71,7 +71,7 @@ class ServiceQuoteController extends Controller
         // Check if quote is already accepted or rejected
         if ($quote->status !== 'pending') {
             return response()->json([
-                'message' => 'This quote has already been ' . $quote->status,
+                'message' => 'This quote has already been '.$quote->status,
             ], 422);
         }
 
@@ -98,7 +98,7 @@ class ServiceQuoteController extends Controller
             if ($application->touristVisa) {
                 $application->touristVisa->update([
                     'status' => 'assigned',
-                    'admin_notes' => 'Quote accepted - Assigned to agency: ' . $quote->agency->name,
+                    'admin_notes' => 'Quote accepted - Assigned to agency: '.$quote->agency->name,
                 ]);
             }
 
@@ -152,7 +152,7 @@ class ServiceQuoteController extends Controller
         // Check if quote is already accepted or rejected
         if ($quote->status !== 'pending') {
             return response()->json([
-                'message' => 'This quote has already been ' . $quote->status,
+                'message' => 'This quote has already been '.$quote->status,
             ], 422);
         }
 
@@ -203,8 +203,8 @@ class ServiceQuoteController extends Controller
         // Calculate comparison metrics
         $cheapestQuote = $quotes->sortBy('quoted_amount')->first();
         $fastestQuote = $quotes->sortBy('processing_time_days')->first();
-        
-        $comparison = $quotes->map(function($quote) use ($cheapestQuote, $fastestQuote) {
+
+        $comparison = $quotes->map(function ($quote) use ($cheapestQuote, $fastestQuote) {
             return [
                 'id' => $quote->id,
                 'agency' => [

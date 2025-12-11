@@ -69,17 +69,18 @@ class TravelInsurancePackage extends Model
     public function calculatePrice(int $days, int $travelers = 1): float
     {
         $basePrice = $this->price_per_day * $days * $travelers;
+
         return max($basePrice, $this->min_price);
     }
 
     public function getFormattedPricePerDayAttribute(): string
     {
-        return '৳ ' . number_format($this->price_per_day, 2);
+        return '৳ '.number_format($this->price_per_day, 2);
     }
 
     public function getFormattedMaxCoverageAttribute(): string
     {
-        return '৳ ' . number_format($this->max_coverage, 0);
+        return '৳ '.number_format($this->max_coverage, 0);
     }
 
     protected static function boot()

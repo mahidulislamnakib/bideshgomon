@@ -160,7 +160,7 @@ class PageController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'title_bn' => 'nullable|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:pages,slug,' . $page->id,
+            'slug' => 'nullable|string|max:255|unique:pages,slug,'.$page->id,
             'content' => 'required|string',
             'content_bn' => 'nullable|string',
             'page_type' => 'required|string|in:terms,privacy,refund,about,help,contact,custom',
@@ -179,9 +179,9 @@ class PageController extends Controller
         }
 
         $validated['updated_by'] = auth()->id();
-        
+
         // Update published_at when publishing
-        if ($validated['is_published'] && !$page->is_published) {
+        if ($validated['is_published'] && ! $page->is_published) {
             $validated['published_at'] = now();
         }
 
@@ -208,8 +208,8 @@ class PageController extends Controller
     public function togglePublished(Page $page)
     {
         $page->update([
-            'is_published' => !$page->is_published,
-            'published_at' => !$page->is_published ? now() : $page->published_at,
+            'is_published' => ! $page->is_published,
+            'published_at' => ! $page->is_published ? now() : $page->published_at,
             'updated_by' => auth()->id(),
         ]);
 
@@ -222,8 +222,8 @@ class PageController extends Controller
     public function duplicate(Page $page)
     {
         $newPage = $page->replicate();
-        $newPage->title = $page->title . ' (Copy)';
-        $newPage->slug = Str::slug($newPage->title) . '-' . time();
+        $newPage->title = $page->title.' (Copy)';
+        $newPage->slug = Str::slug($newPage->title).'-'.time();
         $newPage->is_published = false;
         $newPage->published_at = null;
         $newPage->updated_by = auth()->id();

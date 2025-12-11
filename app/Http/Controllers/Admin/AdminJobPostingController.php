@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\JobPosting;
 use App\Models\Country;
+use App\Models\JobPosting;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\DB;
 
 class AdminJobPostingController extends Controller
 {
@@ -24,8 +23,8 @@ class AdminJobPostingController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('company_name', 'like', "%{$search}%")
-                  ->orWhere('category', 'like', "%{$search}%");
+                    ->orWhere('company_name', 'like', "%{$search}%")
+                    ->orWhere('category', 'like', "%{$search}%");
             });
         }
 
@@ -51,9 +50,9 @@ class AdminJobPostingController extends Controller
         if ($request->filled('status')) {
             if ($request->status === 'active') {
                 $query->where('is_active', true);
-            } else if ($request->status === 'inactive') {
+            } elseif ($request->status === 'inactive') {
                 $query->where('is_active', false);
-            } else if ($request->status === 'expired') {
+            } elseif ($request->status === 'expired') {
                 $query->where('application_deadline', '<', now());
             }
         }
@@ -174,17 +173,17 @@ class AdminJobPostingController extends Controller
             ->findOrFail($id);
 
         // Fix benefits and skills JSON decoding (same issue as JobController)
-        if (is_string($job->benefits) && !empty($job->benefits)) {
+        if (is_string($job->benefits) && ! empty($job->benefits)) {
             $decoded = json_decode($job->benefits, true);
             $job->benefits = is_array($decoded) ? $decoded : [];
-        } elseif (!is_array($job->benefits)) {
+        } elseif (! is_array($job->benefits)) {
             $job->benefits = [];
         }
-        
-        if (is_string($job->skills) && !empty($job->skills)) {
+
+        if (is_string($job->skills) && ! empty($job->skills)) {
             $decoded = json_decode($job->skills, true);
             $job->skills = is_array($decoded) ? $decoded : [];
-        } elseif (!is_array($job->skills)) {
+        } elseif (! is_array($job->skills)) {
             $job->skills = [];
         }
 
@@ -260,13 +259,13 @@ class AdminJobPostingController extends Controller
     public function destroy($id)
     {
         $job = JobPosting::findOrFail($id);
-        
+
         // Check if there are applications
         $applicationsCount = $job->applications()->count();
-        
+
         if ($applicationsCount > 0) {
             return back()->withErrors([
-                'error' => "Cannot delete job posting with {$applicationsCount} applications. Please archive it instead."
+                'error' => "Cannot delete job posting with {$applicationsCount} applications. Please archive it instead.",
             ]);
         }
 
@@ -282,7 +281,7 @@ class AdminJobPostingController extends Controller
     public function toggleFeatured($id)
     {
         $job = JobPosting::findOrFail($id);
-        $job->update(['is_featured' => !$job->is_featured]);
+        $job->update(['is_featured' => ! $job->is_featured]);
 
         return back()->with('success', 'Featured status updated!');
     }
@@ -293,7 +292,7 @@ class AdminJobPostingController extends Controller
     public function toggleActive($id)
     {
         $job = JobPosting::findOrFail($id);
-        $job->update(['is_active' => !$job->is_active]);
+        $job->update(['is_active' => ! $job->is_active]);
 
         return back()->with('success', 'Active status updated!');
     }
@@ -315,7 +314,7 @@ class AdminJobPostingController extends Controller
 
         if ($jobsWithApplications > 0) {
             return back()->withErrors([
-                'error' => "{$jobsWithApplications} job(s) have applications and cannot be deleted."
+                'error' => "{$jobsWithApplications} job(s) have applications and cannot be deleted.",
             ]);
         }
 
@@ -355,7 +354,7 @@ class AdminJobPostingController extends Controller
         ]);
 
         // Store original agency fee if not already set
-        if (!$job->agency_posted_fee) {
+        if (! $job->agency_posted_fee) {
             $job->agency_posted_fee = $job->application_fee;
         }
 
@@ -376,7 +375,7 @@ class AdminJobPostingController extends Controller
 
         $job->save();
 
-        return back()->with('success', 'Job posting approved successfully! Processing fee: ৳' . number_format((float)$job->processing_fee, 2));
+        return back()->with('success', 'Job posting approved successfully! Processing fee: ৳'.number_format((float) $job->processing_fee, 2));
     }
 
     /**
@@ -399,4 +398,3 @@ class AdminJobPostingController extends Controller
         return back()->with('success', 'Job posting rejected.');
     }
 }
-

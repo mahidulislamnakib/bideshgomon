@@ -454,8 +454,3 @@ const canProceedStep2 = computed(() => {
     </AuthenticatedLayout>
 </template>
 
-<style scoped>
-.touch-manipulation {
-    touch-action: manipulation;
-}
-</style>

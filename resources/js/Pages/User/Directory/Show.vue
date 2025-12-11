@@ -385,35 +385,3 @@ const openDirections = () => {
 };
 </script>
 
-<style scoped>
-/* Custom scrollbar for better UX */
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-/* Smooth scroll behavior */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Enhanced prose styles for description */
-.prose {
-    @apply text-gray-700 leading-relaxed;
-}
-.prose h1, .prose h2, .prose h3 {
-    @apply font-bold text-gray-900 mt-6 mb-4;
-}
-.prose p {
-    @apply mb-4;
-}
-.prose ul, .prose ol {
-    @apply ml-6 mb-4;
-}
-.prose li {
-    @apply mb-2;
-}
-</style>

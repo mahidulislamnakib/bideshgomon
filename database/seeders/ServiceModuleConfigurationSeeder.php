@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\ServiceModule;
 use App\Models\AgencyType;
+use App\Models\ServiceModule;
 use Illuminate\Database\Seeder;
 
 class ServiceModuleConfigurationSeeder extends Seeder
@@ -264,10 +264,10 @@ class ServiceModuleConfigurationSeeder extends Seeder
         $this->command->info("\n=== Service Module Configuration Complete ===");
         $this->command->info("Updated: {$updated} service modules");
         $this->command->info("\nKey Features Configured:");
-        $this->command->info("• Marketplace services: Tourist Visa, Work Visa, Student Visa, Tour Packages");
-        $this->command->info("• Delivery services: Attestation (৳200), Notary (৳150), Translation (৳100)");
-        $this->command->info("• University exclusivity: University Application");
-        $this->command->info("• Recruiting agency only: Job Posting");
-        $this->command->info("• Platform direct: CV Building");
+        $this->command->info('• Marketplace services: Tourist Visa, Work Visa, Student Visa, Tour Packages');
+        $this->command->info('• Delivery services: Attestation (৳200), Notary (৳150), Translation (৳100)');
+        $this->command->info('• University exclusivity: University Application');
+        $this->command->info('• Recruiting agency only: Job Posting');
+        $this->command->info('• Platform direct: CV Building');
     }
 }

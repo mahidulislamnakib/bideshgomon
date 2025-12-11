@@ -322,6 +322,6 @@ class DocumentTypeSeeder extends Seeder
             DocumentType::create($type);
         }
 
-        $this->command->info('Document types seeded successfully: ' . count($documentTypes) . ' entries');
+        $this->command->info('Document types seeded successfully: '.count($documentTypes).' entries');
     }
 }

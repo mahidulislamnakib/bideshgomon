@@ -527,11 +527,11 @@ onMounted(() => {
             </h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <InputLabel for="relationship" value="Relationship *" />
+                <InputLabel for="relationship" value="Relationship *" class="block text-sm font-semibold text-gray-700 mb-2" />
                 <select
                   id="relationship"
                   v-model="form.relationship"
-                  class="mt-1 block w-full text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-pink-500 focus:ring-pink-500 rounded-lg"
+                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl transition-all bg-white"
                   required
                 >
                   <option value="">Select relationship</option>
@@ -571,11 +571,11 @@ onMounted(() => {
               </div>
 
               <div>
-                <InputLabel for="gender" value="Gender *" />
+                <InputLabel for="gender" value="Gender *" class="block text-sm font-semibold text-gray-700 mb-2" />
                 <select
                   id="gender"
                   v-model="form.gender"
-                  class="mt-1 block w-full text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-pink-500 focus:ring-pink-500 rounded-lg"
+                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl transition-all bg-white"
                   required
                 >
                   <option value="">Select gender</option>
@@ -678,11 +678,11 @@ onMounted(() => {
               </div>
 
               <div>
-                <InputLabel for="education_level" value="Education Level" />
+                <InputLabel for="education_level" value="Education Level" class="block text-sm font-semibold text-gray-700 mb-2" />
                 <select
                   id="education_level"
                   v-model="form.education_level"
-                  class="mt-1 block w-full text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-pink-500 focus:ring-pink-500 rounded-lg"
+                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl transition-all bg-white"
                 >
                   <option value="">Select education level</option>
                   <option v-for="level in educationLevelOptions" :key="level" :value="level">
@@ -693,11 +693,11 @@ onMounted(() => {
               </div>
 
               <div>
-                <InputLabel for="marital_status" value="Marital Status" />
+                <InputLabel for="marital_status" value="Marital Status" class="block text-sm font-semibold text-gray-700 mb-2" />
                 <select
                   id="marital_status"
                   v-model="form.marital_status"
-                  class="mt-1 block w-full text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-pink-500 focus:ring-pink-500 rounded-lg"
+                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl transition-all bg-white"
                 >
                   <option value="">Select marital status</option>
                   <option v-for="status in maritalStatusOptions" :key="status" :value="status">
@@ -728,11 +728,11 @@ onMounted(() => {
               </div>
 
               <div>
-                <InputLabel for="immigration_status" value="Immigration Status" />
+                <InputLabel for="immigration_status" value="Immigration Status" class="block text-sm font-semibold text-gray-700 mb-2" />
                 <select
                   id="immigration_status"
                   v-model="form.immigration_status"
-                  class="mt-1 block w-full text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-pink-500 focus:ring-pink-500 rounded-lg"
+                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl transition-all bg-white"
                 >
                   <option value="">Select immigration status</option>
                   <option v-for="status in visaStatusOptions" :key="status" :value="status">

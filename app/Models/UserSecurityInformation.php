@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Carbon\Carbon;
 
 class UserSecurityInformation extends Model
 {
@@ -15,7 +14,7 @@ class UserSecurityInformation extends Model
 
     protected $fillable = [
         'user_id',
-        
+
         // Criminal Records
         'has_criminal_record',
         'criminal_record_details',
@@ -25,7 +24,7 @@ class UserSecurityInformation extends Model
         'sentence_duration',
         'sentence_served',
         'sentence_completion_date',
-        
+
         // Deportation History
         'has_been_deported',
         'deportation_country',
@@ -33,7 +32,7 @@ class UserSecurityInformation extends Model
         'deportation_reason',
         'deportation_ban_active',
         'deportation_ban_expiry',
-        
+
         // Visa Violations
         'has_overstayed_visa',
         'overstay_country',
@@ -45,14 +44,14 @@ class UserSecurityInformation extends Model
         'illegal_work_details',
         'has_violated_visa_conditions',
         'visa_violation_details',
-        
+
         // Immigration Bans
         'has_immigration_ban',
         'ban_country',
         'ban_start_date',
         'ban_end_date',
         'ban_reason',
-        
+
         // Military Service
         'has_military_service',
         'military_country',
@@ -62,27 +61,27 @@ class UserSecurityInformation extends Model
         'military_service_end_date',
         'discharge_type',
         'military_documents_path',
-        
+
         // Police Clearance
         'has_police_clearance',
         'police_clearance_country',
         'police_clearance_issue_date',
         'police_clearance_expiry_date',
         'police_clearance_document_path',
-        
+
         // Background Check
         'background_check_completed',
         'background_check_date',
         'background_check_agency',
         'background_check_document_path',
-        
+
         // Health & Medical
         'has_health_issues',
         'health_issues_details',
         'medical_exam_completed',
         'medical_exam_date',
         'medical_certificate_path',
-        
+
         // Terrorism & Security
         'has_terrorist_links',
         'terrorist_links_details',
@@ -90,7 +89,7 @@ class UserSecurityInformation extends Model
         'denied_entry_country',
         'denied_entry_date',
         'denied_entry_reason',
-        
+
         // Character References
         'character_reference_name_1',
         'character_reference_phone_1',
@@ -98,7 +97,7 @@ class UserSecurityInformation extends Model
         'character_reference_name_2',
         'character_reference_phone_2',
         'character_reference_email_2',
-        
+
         // Additional
         'additional_security_notes',
         'declaration_signed',
@@ -123,7 +122,7 @@ class UserSecurityInformation extends Model
         'has_terrorist_links' => 'boolean',
         'has_been_denied_entry' => 'boolean',
         'declaration_signed' => 'boolean',
-        
+
         // Dates
         'conviction_date' => 'date',
         'sentence_completion_date' => 'date',
@@ -140,7 +139,7 @@ class UserSecurityInformation extends Model
         'medical_exam_date' => 'date',
         'denied_entry_date' => 'date',
         'declaration_date' => 'date',
-        
+
         // Integers
         'overstay_duration_days' => 'integer',
     ];
@@ -166,10 +165,10 @@ class UserSecurityInformation extends Model
      */
     public function isPoliceCleared(): bool
     {
-        if (!$this->has_police_clearance || !$this->police_clearance_expiry_date) {
+        if (! $this->has_police_clearance || ! $this->police_clearance_expiry_date) {
             return false;
         }
-        
+
         return $this->police_clearance_expiry_date > now();
     }
 

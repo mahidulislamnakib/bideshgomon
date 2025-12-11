@@ -2,18 +2,16 @@
 
 namespace App\Services;
 
-use App\Models\User;
-use App\Models\ServiceModule;
-use App\Models\ServiceApplication;
 use App\Models\ApplicationDocument;
 use App\Models\ApplicationStatusHistory;
+use App\Models\ServiceApplication;
+use App\Models\ServiceModule;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 /**
  * ServiceApplicationService
- * 
+ *
  * Handles application submissions, validation, and lifecycle management
  */
 class ServiceApplicationService
@@ -27,13 +25,6 @@ class ServiceApplicationService
 
     /**
      * Create a new application (draft or submitted)
-     * 
-     * @param User $user
-     * @param ServiceModule $service
-     * @param array $formData
-     * @param array $files
-     * @param bool $isDraft
-     * @return ServiceApplication
      */
     public function createApplication(
         User $user,
@@ -43,9 +34,9 @@ class ServiceApplicationService
         bool $isDraft = false
     ): ServiceApplication {
         // Validate form data
-        if (!$isDraft) {
+        if (! $isDraft) {
             $validation = $this->dataMapper->validateFormData($service, $formData);
-            if (!$validation['valid']) {
+            if (! $validation['valid']) {
                 throw new \InvalidArgumentException(json_encode($validation['errors']));
             }
         }
@@ -71,16 +62,16 @@ class ServiceApplicationService
             ]);
 
             // Handle file uploads
-            if (!empty($files)) {
+            if (! empty($files)) {
                 $this->attachDocuments($application, $files);
             }
 
             // Record status history
-            $this->recordStatusChange($application, null, $application->status, 
+            $this->recordStatusChange($application, null, $application->status,
                 $isDraft ? 'Application saved as draft' : 'Application submitted');
 
             // Update service application count
-            if (!$isDraft) {
+            if (! $isDraft) {
                 $service->increment('applications_count');
             }
 
@@ -100,11 +91,6 @@ class ServiceApplicationService
 
     /**
      * Update existing application
-     * 
-     * @param ServiceApplication $application
-     * @param array $formData
-     * @param array $files
-     * @return ServiceApplication
      */
     public function updateApplication(
         ServiceApplication $application,
@@ -124,7 +110,7 @@ class ServiceApplicationService
             ]);
 
             // Handle new file uploads
-            if (!empty($files)) {
+            if (! empty($files)) {
                 $this->attachDocuments($application, $files);
             }
 
@@ -143,9 +129,6 @@ class ServiceApplicationService
 
     /**
      * Submit draft application
-     * 
-     * @param ServiceApplication $application
-     * @return ServiceApplication
      */
     public function submitDraftApplication(ServiceApplication $application): ServiceApplication
     {
@@ -156,8 +139,8 @@ class ServiceApplicationService
         // Validate before submission
         $service = $application->serviceModule;
         $validation = $this->dataMapper->validateFormData($service, $application->form_data ?? []);
-        
-        if (!$validation['valid']) {
+
+        if (! $validation['valid']) {
             throw new \InvalidArgumentException(json_encode($validation['errors']));
         }
 
@@ -184,12 +167,6 @@ class ServiceApplicationService
 
     /**
      * Change application status (Admin)
-     * 
-     * @param ServiceApplication $application
-     * @param string $newStatus
-     * @param string|null $notes
-     * @param User|null $changedBy
-     * @return ServiceApplication
      */
     public function changeStatus(
         ServiceApplication $application,
@@ -199,10 +176,10 @@ class ServiceApplicationService
     ): ServiceApplication {
         $validStatuses = [
             'draft', 'pending', 'under_review', 'additional_info',
-            'approved', 'rejected', 'cancelled', 'completed'
+            'approved', 'rejected', 'cancelled', 'completed',
         ];
 
-        if (!in_array($newStatus, $validStatuses)) {
+        if (! in_array($newStatus, $validStatuses)) {
             throw new \InvalidArgumentException("Invalid status: {$newStatus}");
         }
 
@@ -240,15 +217,13 @@ class ServiceApplicationService
 
     /**
      * Attach documents to application
-     * 
-     * @param ServiceApplication $application
-     * @param array $files Format: ['field_name' => UploadedFile]
-     * @return void
+     *
+     * @param  array  $files  Format: ['field_name' => UploadedFile]
      */
     protected function attachDocuments(ServiceApplication $application, array $files): void
     {
         foreach ($files as $fieldName => $file) {
-            if (!$file || !$file->isValid()) {
+            if (! $file || ! $file->isValid()) {
                 continue;
             }
 
@@ -268,13 +243,6 @@ class ServiceApplicationService
 
     /**
      * Record status change in history
-     * 
-     * @param ServiceApplication $application
-     * @param string|null $fromStatus
-     * @param string $toStatus
-     * @param string|null $notes
-     * @param User|null $changedBy
-     * @return void
      */
     protected function recordStatusChange(
         ServiceApplication $application,
@@ -294,7 +262,7 @@ class ServiceApplicationService
 
     /**
      * Generate unique application number
-     * 
+     *
      * @return string Format: APP-2025-001234
      */
     protected function generateApplicationNumber(): string
@@ -304,16 +272,13 @@ class ServiceApplicationService
             ->orderBy('id', 'desc')
             ->first();
 
-        $sequence = $lastApp ? (int)substr($lastApp->application_number, -6) + 1 : 1;
+        $sequence = $lastApp ? (int) substr($lastApp->application_number, -6) + 1 : 1;
 
         return sprintf('APP-%s-%06d', $year, $sequence);
     }
 
     /**
      * Capture user profile snapshot at time of application
-     * 
-     * @param User $user
-     * @return array
      */
     protected function captureProfileSnapshot(User $user): array
     {
@@ -332,9 +297,6 @@ class ServiceApplicationService
 
     /**
      * Get application with related data
-     * 
-     * @param int $applicationId
-     * @return ServiceApplication
      */
     public function getApplicationDetails(int $applicationId): ServiceApplication
     {
@@ -348,10 +310,6 @@ class ServiceApplicationService
 
     /**
      * Update user profile from application data (if user requested)
-     * 
-     * @param ServiceApplication $application
-     * @param array $fieldsToUpdate
-     * @return bool
      */
     public function syncProfileFromApplication(ServiceApplication $application, array $fieldsToUpdate = []): bool
     {

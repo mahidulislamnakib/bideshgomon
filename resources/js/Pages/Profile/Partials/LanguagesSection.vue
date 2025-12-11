@@ -411,11 +411,11 @@ const formatDate = dateString => {
         <!-- Basic Information -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <InputLabel for="language_id" value="Language *" />
+            <InputLabel for="language_id" value="Language *" class="block text-sm font-semibold text-gray-700 mb-2" />
             <select
               id="language_id"
               v-model="form.language_id"
-              class="mt-1 block w-full border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-brand-red-600 rounded-lg dark:bg-gray-700 dark:text-white"
+              class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl dark:bg-gray-700 dark:text-white transition-all bg-white"
               required
             >
               <option value="" disabled>Select a language</option>
@@ -430,11 +430,11 @@ const formatDate = dateString => {
           </div>
 
           <div>
-            <InputLabel for="proficiency_level" value="Proficiency Level *" />
+            <InputLabel for="proficiency_level" value="Proficiency Level *" class="block text-sm font-semibold text-gray-700 mb-2" />
             <select
               id="proficiency_level"
               v-model="form.proficiency_level"
-              class="mt-1 block w-full border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-brand-red-600 rounded-lg dark:bg-gray-700 dark:text-white"
+              class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl dark:bg-gray-700 dark:text-white transition-all bg-white"
               required
             >
               <option value="" disabled>Select proficiency</option>
@@ -471,11 +471,11 @@ const formatDate = dateString => {
           <div class="space-y-4">
             <!-- Test Type -->
             <div>
-              <InputLabel for="language_test_id" value="Test Type" />
+              <InputLabel for="language_test_id" value="Test Type" class="block text-sm font-semibold text-gray-700 mb-2" />
               <select
                 id="language_test_id"
                 v-model="form.language_test_id"
-                class="mt-1 block w-full border-gray-300 dark:border-gray-600 focus:border-cyan-500 focus:ring-brand-red-600 rounded-lg dark:bg-gray-700 dark:text-white"
+                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl dark:bg-gray-700 dark:text-white transition-all bg-white"
               >
                 <option :value="null">No test taken / Not applicable</option>
                 <optgroup v-if="languageTestsList && languageTestsList.length > 0" label="Available Tests">

@@ -102,7 +102,7 @@ class PackageController extends Controller
     public function compare(Request $request)
     {
         $slugs = $request->input('packages', []);
-        
+
         if (count($slugs) < 2) {
             return redirect()->route('packages.index')
                 ->with('error', 'Please select at least 2 packages to compare');

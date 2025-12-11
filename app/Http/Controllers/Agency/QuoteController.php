@@ -17,7 +17,7 @@ class QuoteController extends Controller
     {
         $agency = auth()->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             abort(403, 'Agency not found');
         }
 
@@ -50,7 +50,7 @@ class QuoteController extends Controller
     {
         $agency = auth()->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             abort(403, 'Agency not found');
         }
 
@@ -96,13 +96,13 @@ class QuoteController extends Controller
     {
         $agency = auth()->user()->agency;
 
-        if (!$agency || $quote->agency_id !== $agency->id) {
+        if (! $agency || $quote->agency_id !== $agency->id) {
             abort(403, 'Unauthorized');
         }
 
         if ($quote->status !== 'pending') {
             return redirect()->route('agency.applications.show', $quote->service_application_id)
-                ->with('error', 'Cannot edit a quote that has been ' . $quote->status);
+                ->with('error', 'Cannot edit a quote that has been '.$quote->status);
         }
 
         $quote->load(['serviceApplication.user', 'serviceApplication.serviceModule', 'serviceApplication.touristVisa.destinationCountry']);
@@ -119,12 +119,12 @@ class QuoteController extends Controller
     {
         $agency = auth()->user()->agency;
 
-        if (!$agency || $quote->agency_id !== $agency->id) {
+        if (! $agency || $quote->agency_id !== $agency->id) {
             abort(403, 'Unauthorized');
         }
 
         if ($quote->status !== 'pending') {
-            return redirect()->back()->with('error', 'Cannot edit a quote that has been ' . $quote->status);
+            return redirect()->back()->with('error', 'Cannot edit a quote that has been '.$quote->status);
         }
 
         $validated = $request->validate([

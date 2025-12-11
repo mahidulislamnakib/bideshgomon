@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Models\SystemEvent;
 use App\Models\User;
 use App\Models\UserDocument;
+use App\Services\DocumentVerificationService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Services\DocumentVerificationService;
-use App\Models\SystemEvent;
 
 class SystemEventAuditTest extends TestCase
 {
@@ -26,7 +26,7 @@ class SystemEventAuditTest extends TestCase
         $adminRole = \App\Models\Role::where('slug', 'admin')->first() ?? \App\Models\Role::factory()->create([
             'name' => 'Administrator',
             'slug' => 'admin',
-            'description' => 'Admin role'
+            'description' => 'Admin role',
         ]);
         $admin = User::factory()->create(['role_id' => $adminRole->id]);
         $service = app(DocumentVerificationService::class);
@@ -37,7 +37,7 @@ class SystemEventAuditTest extends TestCase
             // document_type already set by factory
         ]);
 
-    $service->approve($doc, $admin->id);
+        $service->approve($doc, $admin->id);
 
         $this->assertDatabaseHas('system_events', [
             'event_type' => 'document.approved',
@@ -55,7 +55,7 @@ class SystemEventAuditTest extends TestCase
         $adminRole = \App\Models\Role::where('slug', 'admin')->first() ?? \App\Models\Role::factory()->create([
             'name' => 'Administrator',
             'slug' => 'admin',
-            'description' => 'Admin role'
+            'description' => 'Admin role',
         ]);
         $admin = User::factory()->create(['role_id' => $adminRole->id]);
         $service = app(DocumentVerificationService::class);
@@ -65,7 +65,7 @@ class SystemEventAuditTest extends TestCase
             'status' => 'pending',
         ]);
 
-    $service->reject($doc, $admin->id, 'Blurry scan');
+        $service->reject($doc, $admin->id, 'Blurry scan');
 
         $this->assertDatabaseHas('system_events', [
             'event_type' => 'document.rejected',

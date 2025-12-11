@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Consultant;
 
 use App\Http\Controllers\Controller;
-use App\Models\ServiceApplication;
 use App\Models\AgencyTeamMember;
-use Illuminate\Http\Request;
+use App\Models\ServiceApplication;
 use Inertia\Inertia;
 
 class DashboardController extends Controller

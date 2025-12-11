@@ -38,6 +38,7 @@ class SiteSetting extends Model
     public static function get($key, $default = null)
     {
         $settings = self::getAllCached();
+
         return $settings[$key] ?? $default;
     }
 
@@ -87,6 +88,7 @@ class SiteSetting extends Model
         if ($this->type === 'json') {
             return json_decode($this->value, true);
         }
+
         return $this->value;
     }
 

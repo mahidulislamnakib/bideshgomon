@@ -415,6 +415,6 @@ class HotelSeeder extends Seeder
             }
         }
 
-        $this->command->info('✅ Created ' . Hotel::count() . ' hotels with ' . HotelRoom::count() . ' room types');
+        $this->command->info('✅ Created '.Hotel::count().' hotels with '.HotelRoom::count().' room types');
     }
 }

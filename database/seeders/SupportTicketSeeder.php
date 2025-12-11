@@ -18,8 +18,9 @@ class SupportTicketSeeder extends Seeder
             $query->where('name', 'user');
         })->first();
 
-        if (!$user) {
+        if (! $user) {
             $this->command->warn('⚠️ No regular user found. Please create a user first.');
+
             return;
         }
 
@@ -138,6 +139,6 @@ class SupportTicketSeeder extends Seeder
         }
 
         $this->command->info('✅ Support tickets seeded successfully!');
-        $this->command->info('📊 Created ' . count($tickets) . ' sample tickets across 6 categories');
+        $this->command->info('📊 Created '.count($tickets).' sample tickets across 6 categories');
     }
 }

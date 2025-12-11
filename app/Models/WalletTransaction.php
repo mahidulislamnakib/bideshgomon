@@ -103,14 +103,14 @@ class WalletTransaction extends Model
         }
 
         $wallet = $this->wallet;
-        
+
         // Reverse the transaction effect
         if ($this->type === 'credit') {
             $wallet->balance -= $this->amount;
         } else {
             $wallet->balance += $this->amount;
         }
-        
+
         $wallet->save();
 
         $this->update([

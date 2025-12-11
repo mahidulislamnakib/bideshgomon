@@ -13,25 +13,25 @@ class DocumentOCRService
     public function processDocument(string $imagePath, string $documentType): array
     {
         $startTime = microtime(true);
-        
+
         try {
             // Extract metadata for fraud detection
             $metadata = $this->extractMetadata($imagePath);
-            
+
             // Preprocess image for better OCR
             $processedPath = $this->preprocessImage($imagePath);
 
             // Try OCR methods in order of preference
             $result = $this->tryGoogleVisionOCR($processedPath, $documentType);
-            
-            if (!$result['success']) {
+
+            if (! $result['success']) {
                 $result = $this->tryTesseractOCR($processedPath, $documentType);
             }
 
-            if (!$result['success']) {
+            if (! $result['success']) {
                 $result = $this->tryBasicExtraction($processedPath, $documentType);
             }
-            
+
             // Add processing time and metadata to result
             $result['processing_time'] = round(microtime(true) - $startTime, 2);
             $result['metadata'] = $metadata;
@@ -64,7 +64,7 @@ class DocumentOCRService
             'file_modified' => date('Y-m-d H:i:s', filemtime($imagePath)),
             'fraud_indicators' => [],
         ];
-        
+
         try {
             // Get image dimensions using native PHP
             $imageInfo = getimagesize($imagePath);
@@ -73,7 +73,7 @@ class DocumentOCRService
                 $metadata['height'] = $imageInfo[1];
                 $metadata['aspect_ratio'] = round($imageInfo[0] / $imageInfo[1], 2);
             }
-            
+
             // Extract EXIF data if available
             $exifData = @exif_read_data($imagePath);
             if ($exifData) {
@@ -84,17 +84,17 @@ class DocumentOCRService
                     'software' => $exifData['Software'] ?? null,
                     'gps' => isset($exifData['GPSLatitude']) ? 'Available' : 'Not Available',
                 ];
-                
+
                 // Fraud detection indicators
                 if (isset($exifData['Software'])) {
                     $software = strtolower($exifData['Software']);
-                    if (strpos($software, 'photoshop') !== false || 
-                        strpos($software, 'gimp') !== false || 
+                    if (strpos($software, 'photoshop') !== false ||
+                        strpos($software, 'gimp') !== false ||
                         strpos($software, 'paint') !== false) {
-                        $metadata['fraud_indicators'][] = 'Image edited with: ' . $exifData['Software'];
+                        $metadata['fraud_indicators'][] = 'Image edited with: '.$exifData['Software'];
                     }
                 }
-                
+
                 // Check if datetime is too recent (just created)
                 if (isset($exifData['DateTime'])) {
                     $exifTime = strtotime($exifData['DateTime']);
@@ -105,7 +105,7 @@ class DocumentOCRService
             } else {
                 $metadata['fraud_indicators'][] = 'No EXIF data found (possible edited/screenshot)';
             }
-            
+
             // Check for suspiciously small/large file sizes
             if (isset($metadata['width'], $metadata['height'])) {
                 $expectedSize = ($metadata['width'] * $metadata['height']) / 10;
@@ -113,15 +113,15 @@ class DocumentOCRService
                     $metadata['fraud_indicators'][] = 'Unusually small file size for image dimensions';
                 }
             }
-            
+
         } catch (\Exception $e) {
             Log::warning('Metadata extraction failed', ['error' => $e->getMessage()]);
             $metadata['extraction_error'] = $e->getMessage();
         }
-        
+
         return $metadata;
     }
-    
+
     /**
      * Preprocess image for better OCR results.
      */
@@ -129,7 +129,7 @@ class DocumentOCRService
     {
         // Skip preprocessing if Intervention Image not available
         return $imagePath;
-        
+
         try {
             // $image = Image::make($imagePath);
 
@@ -157,6 +157,7 @@ class DocumentOCRService
             Log::warning('Image preprocessing failed, using original', [
                 'error' => $e->getMessage(),
             ]);
+
             return $imagePath;
         }
     }
@@ -168,7 +169,7 @@ class DocumentOCRService
     {
         $apiKey = config('services.google_vision.api_key');
 
-        if (!$apiKey) {
+        if (! $apiKey) {
             return ['success' => false, 'error' => 'Google Vision API key not configured'];
         }
 
@@ -210,6 +211,7 @@ class DocumentOCRService
             return ['success' => false, 'error' => 'Google Vision API request failed'];
         } catch (\Exception $e) {
             Log::error('Google Vision OCR failed', ['error' => $e->getMessage()]);
+
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
@@ -219,19 +221,19 @@ class DocumentOCRService
      */
     protected function tryTesseractOCR(string $imagePath, string $documentType): array
     {
-        if (!function_exists('exec') || !$this->isTesseractInstalled()) {
+        if (! function_exists('exec') || ! $this->isTesseractInstalled()) {
             return ['success' => false, 'error' => 'Tesseract not available'];
         }
 
         try {
-            $outputFile = sys_get_temp_dir() . '/' . uniqid('ocr_');
-            $command = "tesseract " . escapeshellarg($imagePath) . " " . escapeshellarg($outputFile) . " 2>&1";
-            
+            $outputFile = sys_get_temp_dir().'/'.uniqid('ocr_');
+            $command = 'tesseract '.escapeshellarg($imagePath).' '.escapeshellarg($outputFile).' 2>&1';
+
             exec($command, $output, $returnCode);
 
-            if ($returnCode === 0 && file_exists($outputFile . '.txt')) {
-                $text = file_get_contents($outputFile . '.txt');
-                @unlink($outputFile . '.txt');
+            if ($returnCode === 0 && file_exists($outputFile.'.txt')) {
+                $text = file_get_contents($outputFile.'.txt');
+                @unlink($outputFile.'.txt');
 
                 $extractedData = $this->parseDocumentData($text, $documentType);
 
@@ -248,6 +250,7 @@ class DocumentOCRService
             return ['success' => false, 'error' => 'Tesseract processing failed'];
         } catch (\Exception $e) {
             Log::error('Tesseract OCR failed', ['error' => $e->getMessage()]);
+
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
@@ -434,6 +437,7 @@ class DocumentOCRService
     protected function isTesseractInstalled(): bool
     {
         exec('tesseract --version 2>&1', $output, $returnCode);
+
         return $returnCode === 0;
     }
 }

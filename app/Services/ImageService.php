@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class ImageService
 {
@@ -13,15 +13,13 @@ class ImageService
 
     public function __construct()
     {
-        $this->manager = new ImageManager(new Driver());
+        $this->manager = new ImageManager(new Driver);
     }
 
     /**
      * Optimize and convert image to WebP format
      *
-     * @param UploadedFile $file
-     * @param string $directory
-     * @param array $sizes Thumbnail sizes to generate
+     * @param  array  $sizes  Thumbnail sizes to generate
      * @return array Paths to generated images
      */
     public function optimizeAndStore(UploadedFile $file, string $directory = 'images', array $sizes = []): array
@@ -44,7 +42,7 @@ class ImageService
             $height = $dimensions['height'] ?? null;
 
             $thumbnail = clone $image;
-            
+
             if ($width && $height) {
                 $thumbnail->cover($width, $height);
             } elseif ($width) {
@@ -72,14 +70,10 @@ class ImageService
 
     /**
      * Generate responsive srcset for an image
-     *
-     * @param string $imagePath
-     * @param array $widths
-     * @return array
      */
     public function generateResponsiveSizes(string $imagePath, array $widths = [320, 640, 768, 1024, 1280, 1920]): array
     {
-        if (!Storage::disk('public')->exists($imagePath)) {
+        if (! Storage::disk('public')->exists($imagePath)) {
             return [];
         }
 
@@ -92,10 +86,10 @@ class ImageService
         foreach ($widths as $width) {
             $resized = clone $image;
             $resized->scale(width: $width);
-            
+
             $resizedPath = "{$directory}/{$filename}_{$width}w.webp";
             $this->storeWebP($resized, $resizedPath, 85);
-            
+
             $results[] = [
                 'path' => $resizedPath,
                 'url' => Storage::disk('public')->url($resizedPath),
@@ -109,15 +103,11 @@ class ImageService
     /**
      * Create thumbnail with specific dimensions
      *
-     * @param string $imagePath
-     * @param int $width
-     * @param int $height
-     * @param string $fit Method: 'cover', 'contain', 'fill'
-     * @return string|null
+     * @param  string  $fit  Method: 'cover', 'contain', 'fill'
      */
     public function createThumbnail(string $imagePath, int $width, int $height, string $fit = 'cover'): ?string
     {
-        if (!Storage::disk('public')->exists($imagePath)) {
+        if (! Storage::disk('public')->exists($imagePath)) {
             return null;
         }
 
@@ -146,14 +136,10 @@ class ImageService
 
     /**
      * Optimize existing image without changing format
-     *
-     * @param string $imagePath
-     * @param int $quality
-     * @return bool
      */
     public function optimizeExisting(string $imagePath, int $quality = 85): bool
     {
-        if (!Storage::disk('public')->exists($imagePath)) {
+        if (! Storage::disk('public')->exists($imagePath)) {
             return false;
         }
 
@@ -165,13 +151,10 @@ class ImageService
 
     /**
      * Get image dimensions
-     *
-     * @param string $imagePath
-     * @return array|null
      */
     public function getImageDimensions(string $imagePath): ?array
     {
-        if (!Storage::disk('public')->exists($imagePath)) {
+        if (! Storage::disk('public')->exists($imagePath)) {
             return null;
         }
 
@@ -185,9 +168,6 @@ class ImageService
 
     /**
      * Delete image and all its variants
-     *
-     * @param string $imagePath
-     * @return bool
      */
     public function deleteWithVariants(string $imagePath): bool
     {
@@ -201,9 +181,9 @@ class ImageService
         // Delete all variants (thumbnails, responsive sizes)
         $pattern = "{$directory}/{$filename}_*";
         $variants = Storage::disk('public')->files($directory);
-        
+
         foreach ($variants as $variant) {
-            if (str_starts_with(basename($variant), $filename . '_')) {
+            if (str_starts_with(basename($variant), $filename.'_')) {
                 Storage::disk('public')->delete($variant);
             }
         }
@@ -214,8 +194,6 @@ class ImageService
     /**
      * Batch optimize images in a directory
      *
-     * @param string $directory
-     * @param int $quality
      * @return int Number of images optimized
      */
     public function batchOptimize(string $directory, int $quality = 85): int
@@ -225,7 +203,7 @@ class ImageService
 
         foreach ($files as $file) {
             $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-            
+
             if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
                 $this->optimizeExisting($file, $quality);
                 $count++;

@@ -11,7 +11,7 @@ return [
     'logout' => 'লগআউট',
     'login' => 'লগইন',
     'register' => 'নিবন্ধন',
-    
+
     // Actions
     'create' => 'তৈরি করুন',
     'edit' => 'সম্পাদনা',
@@ -31,7 +31,7 @@ return [
     'next' => 'পরবর্তী',
     'previous' => 'পূর্ববর্তী',
     'confirm' => 'নিশ্চিত করুন',
-    
+
     // Status
     'active' => 'সক্রিয়',
     'inactive' => 'নিষ্ক্রিয়',
@@ -40,7 +40,7 @@ return [
     'rejected' => 'প্রত্যাখ্যাত',
     'completed' => 'সম্পন্ন',
     'cancelled' => 'বাতিল',
-    
+
     // Messages
     'success' => 'সফল',
     'error' => 'ত্রুটি',
@@ -51,7 +51,7 @@ return [
     'are_you_sure' => 'আপনি কি নিশ্চিত?',
     'delete_confirmation' => 'আপনি কি এটি মুছে ফেলতে চান?',
     'unsaved_changes' => 'অসংরক্ষিত পরিবর্তন আছে',
-    
+
     // Admin Panel
     'admin_panel' => 'অ্যাডমিন প্যানেল',
     'user_management' => 'ব্যবহারকারী ব্যবস্থাপনা',
@@ -60,7 +60,7 @@ return [
     'reports' => 'রিপোর্ট',
     'analytics' => 'বিশ্লেষণ',
     'notifications' => 'বিজ্ঞপ্তি',
-    
+
     // Forms
     'name' => 'নাম',
     'email' => 'ইমেইল',
@@ -77,7 +77,7 @@ return [
     'male' => 'পুরুষ',
     'female' => 'মহিলা',
     'other' => 'অন্যান্য',
-    
+
     // Common
     'all' => 'সব',
     'show' => 'দেখান',

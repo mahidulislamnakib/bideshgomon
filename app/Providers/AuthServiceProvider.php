@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-use App\Models\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
             if ($target->role && strtolower($target->role->slug) === 'admin' && $target->id !== $admin->id) {
                 return false; // cannot impersonate other admins
             }
+
             return true;
         });
     }

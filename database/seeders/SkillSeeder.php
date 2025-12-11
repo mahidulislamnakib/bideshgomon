@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Skill;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
 class SkillSeeder extends Seeder
@@ -37,7 +37,7 @@ class SkillSeeder extends Seeder
             ['name' => 'HTML/CSS', 'category' => 'Technical', 'description' => 'Web markup and styling'],
             ['name' => 'TypeScript', 'category' => 'Technical', 'description' => 'Typed superset of JavaScript'],
             ['name' => 'Tailwind CSS', 'category' => 'Technical', 'description' => 'Utility-first CSS framework'],
-            
+
             // Design & Creative
             ['name' => 'Adobe Photoshop', 'category' => 'Design', 'description' => 'Image editing software'],
             ['name' => 'Adobe Illustrator', 'category' => 'Design', 'description' => 'Vector graphics editor'],
@@ -46,7 +46,7 @@ class SkillSeeder extends Seeder
             ['name' => 'UI/UX Design', 'category' => 'Design', 'description' => 'User interface and experience design'],
             ['name' => 'Graphic Design', 'category' => 'Design', 'description' => 'Visual communication design'],
             ['name' => 'Video Editing', 'category' => 'Design', 'description' => 'Post-production video work'],
-            
+
             // Business & Management
             ['name' => 'Project Management', 'category' => 'Business', 'description' => 'Planning and organizing projects'],
             ['name' => 'Business Analysis', 'category' => 'Business', 'description' => 'Analyzing business needs'],
@@ -57,7 +57,7 @@ class SkillSeeder extends Seeder
             ['name' => 'Business Customer Service', 'category' => 'Business', 'description' => 'Supporting business customers'],
             ['name' => 'Accounting', 'category' => 'Business', 'description' => 'Financial record keeping'],
             ['name' => 'HR Management', 'category' => 'Business', 'description' => 'Human resources management'],
-            
+
             // Soft Skills
             ['name' => 'Communication', 'category' => 'Soft Skills', 'description' => 'Effective information exchange'],
             ['name' => 'Leadership', 'category' => 'Soft Skills', 'description' => 'Guiding and motivating teams'],
@@ -68,7 +68,7 @@ class SkillSeeder extends Seeder
             ['name' => 'Adaptability', 'category' => 'Soft Skills', 'description' => 'Adjusting to changes'],
             ['name' => 'Creativity', 'category' => 'Soft Skills', 'description' => 'Innovative thinking'],
             ['name' => 'Attention to Detail', 'category' => 'Soft Skills', 'description' => 'Careful and thorough work'],
-            
+
             // Trade & Labor Skills
             ['name' => 'Electrical Work', 'category' => 'Trade', 'description' => 'Electrical installation and repair'],
             ['name' => 'Plumbing', 'category' => 'Trade', 'description' => 'Pipe installation and repair'],
@@ -79,20 +79,20 @@ class SkillSeeder extends Seeder
             ['name' => 'HVAC', 'category' => 'Trade', 'description' => 'Heating, ventilation, and air conditioning'],
             ['name' => 'Painting', 'category' => 'Trade', 'description' => 'Surface coating application'],
             ['name' => 'Machining', 'category' => 'Trade', 'description' => 'Operating machine tools'],
-            
+
             // Healthcare
             ['name' => 'Nursing', 'category' => 'Healthcare', 'description' => 'Patient care services'],
             ['name' => 'First Aid', 'category' => 'Healthcare', 'description' => 'Emergency medical assistance'],
             ['name' => 'Patient Care', 'category' => 'Healthcare', 'description' => 'Healthcare support'],
             ['name' => 'Medical Terminology', 'category' => 'Healthcare', 'description' => 'Healthcare language'],
-            
+
             // Hospitality & Service
             ['name' => 'Cooking', 'category' => 'Hospitality', 'description' => 'Food preparation'],
             ['name' => 'Bartending', 'category' => 'Hospitality', 'description' => 'Beverage preparation and service'],
             ['name' => 'Customer Service', 'category' => 'Hospitality', 'description' => 'Guest services'],
             ['name' => 'Hotel Management', 'category' => 'Hospitality', 'description' => 'Hospitality operations'],
             ['name' => 'Food Service', 'category' => 'Hospitality', 'description' => 'Restaurant service'],
-            
+
             // Other Professional Skills
             ['name' => 'Data Entry', 'category' => 'Administrative', 'description' => 'Computer data input'],
             ['name' => 'Microsoft Office', 'category' => 'Administrative', 'description' => 'Office productivity suite'],
@@ -101,7 +101,7 @@ class SkillSeeder extends Seeder
             ['name' => 'Report Writing', 'category' => 'Administrative', 'description' => 'Professional documentation'],
             ['name' => 'Presentation Skills', 'category' => 'Communication', 'description' => 'Public speaking'],
             ['name' => 'Teaching', 'category' => 'Education', 'description' => 'Instructional expertise'],
-            
+
             // MIDDLE EAST IMMIGRANT SKILLS (High Demand in Gulf Countries)
             // Construction & Building
             ['name' => 'Masonry', 'category' => 'Construction', 'description' => 'Bricklaying and stonework for building projects'],
@@ -110,7 +110,7 @@ class SkillSeeder extends Seeder
             ['name' => 'Tile & Marble Fitting', 'category' => 'Construction', 'description' => 'Floor and wall finishing work'],
             ['name' => 'Gypsum Work', 'category' => 'Construction', 'description' => 'False ceiling and partition installation'],
             ['name' => 'Building Maintenance', 'category' => 'Construction', 'description' => 'General building upkeep and repairs'],
-            
+
             // Mechanical & Technical
             ['name' => 'AC Technician', 'category' => 'Technical Trade', 'description' => 'Air conditioning installation and repair'],
             ['name' => 'Refrigeration', 'category' => 'Technical Trade', 'description' => 'Cooling system maintenance'],
@@ -119,7 +119,7 @@ class SkillSeeder extends Seeder
             ['name' => 'Forklift Operation', 'category' => 'Technical Trade', 'description' => 'Material handling equipment operation'],
             ['name' => 'Crane Operation', 'category' => 'Technical Trade', 'description' => 'Heavy lifting equipment operation'],
             ['name' => 'Excavator Operation', 'category' => 'Technical Trade', 'description' => 'Earth moving equipment operation'],
-            
+
             // Hospitality & Service (Gulf specific)
             ['name' => 'Hotel Housekeeping', 'category' => 'Hospitality', 'description' => 'Room cleaning and maintenance in hotels'],
             ['name' => 'Room Service', 'category' => 'Hospitality', 'description' => 'In-room food and beverage service'],
@@ -128,52 +128,52 @@ class SkillSeeder extends Seeder
             ['name' => 'Kitchen Helper', 'category' => 'Hospitality', 'description' => 'Food preparation assistance'],
             ['name' => 'Barista', 'category' => 'Hospitality', 'description' => 'Coffee preparation specialist'],
             ['name' => 'Laundry Worker', 'category' => 'Hospitality', 'description' => 'Commercial laundry operations'],
-            
+
             // Domestic Work (Very common for Gulf employment)
             ['name' => 'Domestic Helper', 'category' => 'Domestic Services', 'description' => 'Household cleaning and maintenance'],
             ['name' => 'Nanny/Childcare', 'category' => 'Domestic Services', 'description' => 'Professional childcare services'],
             ['name' => 'Elderly Care', 'category' => 'Domestic Services', 'description' => 'Senior citizen care and assistance'],
             ['name' => 'Cook (Home)', 'category' => 'Domestic Services', 'description' => 'Private household cooking'],
             ['name' => 'Driver (Personal)', 'category' => 'Domestic Services', 'description' => 'Private vehicle driving services'],
-            
+
             // Retail & Sales (Gulf Markets)
             ['name' => 'Retail Cashier', 'category' => 'Retail', 'description' => 'Point of sale operations'],
             ['name' => 'Storekeeper', 'category' => 'Retail', 'description' => 'Inventory management'],
             ['name' => 'Salesperson', 'category' => 'Retail', 'description' => 'Product sales and customer service'],
             ['name' => 'Merchandiser', 'category' => 'Retail', 'description' => 'Product display and arrangement'],
-            
+
             // Security & Safety
             ['name' => 'Security Guard', 'category' => 'Security', 'description' => 'Property and personnel protection'],
             ['name' => 'Safety Officer', 'category' => 'Security', 'description' => 'Workplace safety management'],
             ['name' => 'Fire Safety', 'category' => 'Security', 'description' => 'Fire prevention and response'],
-            
+
             // Oil & Gas (Gulf Specific)
             ['name' => 'Oil Rig Worker', 'category' => 'Oil & Gas', 'description' => 'Petroleum extraction operations'],
             ['name' => 'Pipeline Technician', 'category' => 'Oil & Gas', 'description' => 'Pipeline installation and maintenance'],
             ['name' => 'Petrochemical Operations', 'category' => 'Oil & Gas', 'description' => 'Chemical processing in oil industry'],
-            
+
             // Beauty & Wellness (Gulf Market)
             ['name' => 'Beautician', 'category' => 'Beauty & Wellness', 'description' => 'Beauty treatments and services'],
             ['name' => 'Hairdresser', 'category' => 'Beauty & Wellness', 'description' => 'Hair styling and cutting'],
             ['name' => 'Spa Therapist', 'category' => 'Beauty & Wellness', 'description' => 'Massage and spa treatments'],
             ['name' => 'Nail Technician', 'category' => 'Beauty & Wellness', 'description' => 'Manicure and pedicure services'],
-            
+
             // Tailoring & Garments
             ['name' => 'Tailor', 'category' => 'Garments', 'description' => 'Clothing alteration and creation'],
             ['name' => 'Garment Worker', 'category' => 'Garments', 'description' => 'Factory garment production'],
             ['name' => 'Embroidery', 'category' => 'Garments', 'description' => 'Decorative needlework'],
-            
+
             // Agriculture (Farm Work in Gulf)
             ['name' => 'Farm Worker', 'category' => 'Agriculture', 'description' => 'Agricultural labor and crop management'],
             ['name' => 'Gardening', 'category' => 'Agriculture', 'description' => 'Landscape maintenance and plant care'],
             ['name' => 'Livestock Handling', 'category' => 'Agriculture', 'description' => 'Animal husbandry and care'],
-            
+
             // Logistics & Warehouse
             ['name' => 'Warehouse Worker', 'category' => 'Logistics', 'description' => 'Storage and inventory management'],
             ['name' => 'Packing', 'category' => 'Logistics', 'description' => 'Product packaging and preparation'],
             ['name' => 'Loading/Unloading', 'category' => 'Logistics', 'description' => 'Cargo handling operations'],
             ['name' => 'Delivery Driver', 'category' => 'Logistics', 'description' => 'Goods transportation and delivery'],
-            
+
             // Cleaning & Sanitation
             ['name' => 'Cleaner', 'category' => 'Cleaning Services', 'description' => 'Commercial and residential cleaning'],
             ['name' => 'Janitorial Services', 'category' => 'Cleaning Services', 'description' => 'Building maintenance and cleaning'],

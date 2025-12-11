@@ -18,7 +18,7 @@ class RelocationServiceController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $relocation = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $relocation = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($relocation, 'relocation', $validated);
 
         return response()->json(['message' => 'Relocation service request created']);

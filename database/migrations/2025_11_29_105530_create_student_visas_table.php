@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('destination_country_id')->constrained('countries')->onDelete('cascade');
             $table->string('application_reference')->unique();
-            
+
             // Student-specific fields
             $table->string('education_level')->nullable(); // High School, Bachelor's, Master's, PhD
             $table->string('study_field')->nullable(); // Engineering, Computer Science, etc.
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('english_test_type')->nullable(); // IELTS, TOEFL, PTE
             $table->decimal('english_test_score', 4, 1)->nullable();
             $table->decimal('previous_education_gpa', 4, 2)->nullable();
-            
+
             // Common visa fields
             $table->enum('status', [
                 'pending',
@@ -37,7 +37,7 @@ return new class extends Migration
                 'processing',
                 'approved',
                 'rejected',
-                'cancelled'
+                'cancelled',
             ])->default('pending');
             $table->text('user_notes')->nullable();
             $table->text('admin_notes')->nullable();

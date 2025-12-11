@@ -20,11 +20,11 @@ class CvTemplateController extends Controller
         // Search
         if ($request->has('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'LIKE', "%{$search}%")
-                  ->orWhere('slug', 'LIKE', "%{$search}%")
-                  ->orWhere('description', 'LIKE', "%{$search}%")
-                  ->orWhere('category', 'LIKE', "%{$search}%");
+                    ->orWhere('slug', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%")
+                    ->orWhere('category', 'LIKE', "%{$search}%");
             });
         }
 
@@ -106,7 +106,7 @@ class CvTemplateController extends Controller
     public function edit(CvTemplate $cvTemplate)
     {
         $cvTemplate->load('userCvs:id,user_id');
-        
+
         return Inertia::render('Admin/DataManagement/CvTemplates/Edit', [
             'template' => $cvTemplate->append('user_cvs_count'),
         ]);
@@ -115,8 +115,8 @@ class CvTemplateController extends Controller
     public function update(Request $request, CvTemplate $cvTemplate)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:cv_templates,name,' . $cvTemplate->id,
-            'slug' => 'nullable|string|max:255|unique:cv_templates,slug,' . $cvTemplate->id,
+            'name' => 'required|string|max:255|unique:cv_templates,name,'.$cvTemplate->id,
+            'slug' => 'nullable|string|max:255|unique:cv_templates,slug,'.$cvTemplate->id,
             'description' => 'nullable|string',
             'thumbnail' => 'nullable|string|max:255',
             'category' => 'required|string|max:100',
@@ -163,7 +163,7 @@ class CvTemplateController extends Controller
 
     public function toggleStatus(CvTemplate $cvTemplate)
     {
-        $cvTemplate->is_active = !$cvTemplate->is_active;
+        $cvTemplate->is_active = ! $cvTemplate->is_active;
         $cvTemplate->save();
 
         return back();
@@ -280,12 +280,12 @@ class CvTemplateController extends Controller
             return "Row {$rowNumber}: Template with name '{$row['name']}' already exists";
         }
 
-        if (!empty($row['slug']) && CvTemplate::where('slug', $row['slug'])->exists()) {
+        if (! empty($row['slug']) && CvTemplate::where('slug', $row['slug'])->exists()) {
             return "Row {$rowNumber}: Template with slug '{$row['slug']}' already exists";
         }
 
         // Validate price
-        if (isset($row['price']) && (!is_numeric($row['price']) || $row['price'] < 0)) {
+        if (isset($row['price']) && (! is_numeric($row['price']) || $row['price'] < 0)) {
             return "Row {$rowNumber}: Price must be a non-negative number";
         }
 
@@ -296,16 +296,16 @@ class CvTemplateController extends Controller
     {
         $data = [
             'name' => trim($row['name']),
-            'slug' => !empty($row['slug']) ? Str::slug(trim($row['slug'])) : Str::slug(trim($row['name'])),
-            'description' => !empty($row['description']) ? trim($row['description']) : null,
-            'thumbnail' => !empty($row['thumbnail']) ? trim($row['thumbnail']) : null,
+            'slug' => ! empty($row['slug']) ? Str::slug(trim($row['slug'])) : Str::slug(trim($row['name'])),
+            'description' => ! empty($row['description']) ? trim($row['description']) : null,
+            'thumbnail' => ! empty($row['thumbnail']) ? trim($row['thumbnail']) : null,
             'category' => trim($row['category']),
-            'is_premium' => isset($row['is_premium']) ? (bool)$row['is_premium'] : false,
-            'price' => isset($row['price']) ? (float)$row['price'] : 0,
-            'color_scheme' => !empty($row['color_scheme']) ? json_decode($row['color_scheme'], true) : null,
-            'sections' => !empty($row['sections']) ? json_decode($row['sections'], true) : null,
-            'sort_order' => isset($row['sort_order']) ? (int)$row['sort_order'] : 0,
-            'is_active' => isset($row['is_active']) ? (bool)$row['is_active'] : true,
+            'is_premium' => isset($row['is_premium']) ? (bool) $row['is_premium'] : false,
+            'price' => isset($row['price']) ? (float) $row['price'] : 0,
+            'color_scheme' => ! empty($row['color_scheme']) ? json_decode($row['color_scheme'], true) : null,
+            'sections' => ! empty($row['sections']) ? json_decode($row['sections'], true) : null,
+            'sort_order' => isset($row['sort_order']) ? (int) $row['sort_order'] : 0,
+            'is_active' => isset($row['is_active']) ? (bool) $row['is_active'] : true,
         ];
 
         return $data;
@@ -331,8 +331,8 @@ class CvTemplateController extends Controller
             'category' => $model->category,
             'is_premium' => $model->is_premium ? '1' : '0',
             'price' => $model->price,
-            'color_scheme' => !empty($model->color_scheme) ? json_encode($model->color_scheme) : '',
-            'sections' => !empty($model->sections) ? json_encode($model->sections) : '',
+            'color_scheme' => ! empty($model->color_scheme) ? json_encode($model->color_scheme) : '',
+            'sections' => ! empty($model->sections) ? json_encode($model->sections) : '',
             'sort_order' => $model->sort_order,
             'is_active' => $model->is_active ? '1' : '0',
         ];

@@ -80,6 +80,7 @@ class UserTravelHistory extends Model
         if ($this->entry_date && $this->exit_date) {
             return $this->entry_date->diffInDays($this->exit_date);
         }
+
         return null;
     }
 
@@ -88,7 +89,7 @@ class UserTravelHistory extends Model
      */
     public function isOngoing(): bool
     {
-        return $this->entry_date && !$this->exit_date;
+        return $this->entry_date && ! $this->exit_date;
     }
 
     /**
@@ -97,6 +98,7 @@ class UserTravelHistory extends Model
     public function getCountryNameAttribute(): string
     {
         $countries = config('countries');
+
         return $countries[$this->country_visited] ?? $this->country_visited;
     }
 

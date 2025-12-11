@@ -85,9 +85,9 @@ if (! function_exists('parse_bd_date')) {
             $day = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
             $monthStr = $matches[2];
             $year = $matches[3];
-            
+
             // Convert month name to number if necessary
-            if (!is_numeric($monthStr)) {
+            if (! is_numeric($monthStr)) {
                 $monthNum = date('m', strtotime($monthStr));
             } else {
                 $monthNum = str_pad($monthStr, 2, '0', STR_PAD_LEFT);
@@ -330,7 +330,7 @@ if (! function_exists('is_bd_weekend')) {
      */
     function is_bd_weekend($date = null)
     {
-        $dateTime = $date ? ($date instanceof DateTime ? $date : new DateTime($date)) : new DateTime();
+        $dateTime = $date ? ($date instanceof DateTime ? $date : new DateTime($date)) : new DateTime;
         $dayOfWeek = $dateTime->format('N'); // 1 (Monday) to 7 (Sunday)
 
         // Friday = 5, Saturday = 6

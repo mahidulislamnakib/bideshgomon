@@ -82,12 +82,12 @@ class FlightQuote extends Model
 
     public function getFormattedPriceAttribute(): string
     {
-        return '৳ ' . number_format($this->quoted_price);
+        return '৳ '.number_format($this->quoted_price);
     }
 
     public function getStatusColorAttribute(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             'pending' => 'bg-yellow-100 text-yellow-800',
             'accepted' => 'bg-green-100 text-green-800',
             'rejected' => 'bg-red-100 text-red-800',

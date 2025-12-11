@@ -16,9 +16,22 @@ class HandleInertiaRequests extends Middleware
 
     /**
      * Determine the current asset version.
+     * Returns Vite build hash for cache busting.
      */
     public function version(Request $request): ?string
     {
+        // Use Vite manifest hash for proper asset versioning
+        // This ensures assets are re-fetched only when they actually change
+        $manifestPath = public_path('build/manifest.json');
+
+        if (file_exists($manifestPath)) {
+            $manifest = json_decode(file_get_contents($manifestPath), true);
+
+            // Return hash of manifest file for version detection
+            return md5(json_encode($manifest));
+        }
+
+        // Fallback to parent version in development
         return parent::version($request);
     }
 
@@ -30,7 +43,7 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $user = $request->user();
-        
+
         if ($user) {
             $user->loadMissing('role');
         }
@@ -41,7 +54,7 @@ class HandleInertiaRequests extends Middleware
         if ($originalId) {
             if ($user && $user->id !== $originalId) {
                 // Fetch minimal original admin data
-                $impersonatorModel = \App\Models\User::query()->with('role')->select(['id','name','email','role_id'])->find($originalId);
+                $impersonatorModel = \App\Models\User::query()->with('role')->select(['id', 'name', 'email', 'role_id'])->find($originalId);
                 if ($impersonatorModel) {
                     $impersonator = [
                         'id' => $impersonatorModel->id,
@@ -56,13 +69,14 @@ class HandleInertiaRequests extends Middleware
                 }
             }
         }
-        
+
         return [
             ...parent::share($request),
             'locale' => app()->getLocale(),
             'available_locales' => config('app.available_locales', ['en', 'bn']),
             'translations' => function () {
                 $locale = app()->getLocale();
+
                 return [
                     'ui' => \Illuminate\Support\Facades\Lang::get('ui', [], $locale),
                     'auth' => \Illuminate\Support\Facades\Lang::get('auth', [], $locale),

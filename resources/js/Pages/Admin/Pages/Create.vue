@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { ref } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -68,7 +68,7 @@ const submit = () => {
                         <div class="space-y-4">
                             <!-- Title -->
                             <div>
-                                <label for="title" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="title" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Page Title *
                                 </label>
                                 <input
@@ -84,7 +84,7 @@ const submit = () => {
 
                             <!-- Slug -->
                             <div>
-                                <label for="slug" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="slug" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Slug *
                                     <span class="text-gray-500 font-normal">(URL-friendly version)</span>
                                 </label>
@@ -104,7 +104,7 @@ const submit = () => {
                             <!-- Type and Template -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label for="type" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="type" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Page Type *
                                     </label>
                                     <select
@@ -120,7 +120,7 @@ const submit = () => {
                                 </div>
 
                                 <div>
-                                    <label for="template" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="template" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Template
                                     </label>
                                     <select
@@ -137,7 +137,7 @@ const submit = () => {
 
                             <!-- Content -->
                             <div>
-                                <label for="content" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="content" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Page Content *
                                 </label>
                                 <textarea
@@ -159,7 +159,7 @@ const submit = () => {
                         
                         <div class="space-y-4">
                             <div>
-                                <label for="meta_title" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="meta_title" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Meta Title
                                 </label>
                                 <input
@@ -172,7 +172,7 @@ const submit = () => {
                             </div>
 
                             <div>
-                                <label for="meta_description" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="meta_description" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Meta Description
                                 </label>
                                 <textarea
@@ -185,7 +185,7 @@ const submit = () => {
                             </div>
 
                             <div>
-                                <label for="meta_keywords" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="meta_keywords" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Meta Keywords
                                 </label>
                                 <input
@@ -229,7 +229,7 @@ const submit = () => {
                             </div>
 
                             <div v-if="form.show_in_menu">
-                                <label for="menu_order" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label for="menu_order" class="block text-sm font-semibold text-gray-700 mb-2">
                                     Menu Order
                                 </label>
                                 <input

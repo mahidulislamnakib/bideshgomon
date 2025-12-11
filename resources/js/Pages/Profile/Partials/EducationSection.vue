@@ -423,11 +423,11 @@ const formatDate = (dateString) => {
           <!-- Degree Level and Degree -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <InputLabel for="degree" value="Degree / Qualification *" />
+              <InputLabel for="degree" value="Degree / Qualification *" class="block text-sm font-semibold text-gray-700 mb-2" />
               <select 
                 id="degree" 
                 v-model="form.value.degree" 
-                class="mt-1 block w-full py-3 px-4 text-base rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-brand-red-600 dark:focus:ring-brand-red-600 shadow-sm touch-manipulation"
+                class="mt-1 block w-full px-4 py-3 text-base rounded-xl border-2 border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:focus:border-indigo-600 shadow-sm touch-manipulation transition-all bg-white"
                 required
               >
                 <option value="">Select Degree</option>
@@ -442,8 +442,8 @@ const formatDate = (dateString) => {
             </div>
 
             <div>
-              <InputLabel for="field_of_study" value="Field of Study" />
-                <select id="field_of_study" v-model="form.value.field_of_study" class="mt-1 block w-full py-3 px-4 text-base rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-brand-red-600 dark:focus:ring-brand-red-600 shadow-sm touch-manipulation">
+              <InputLabel for="field_of_study" value="Field of Study" class="block text-sm font-semibold text-gray-700 mb-2" />
+                <select id="field_of_study" v-model="form.value.field_of_study" class="mt-1 block w-full px-4 py-3 text-base rounded-xl border-2 border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:focus:border-indigo-600 shadow-sm touch-manipulation transition-all bg-white">
                   <option value="">
                     Select Field of Study
                   </option>

@@ -8,18 +8,20 @@ use Illuminate\Console\Command;
 class CreateAdminUser extends Command
 {
     protected $signature = 'admin:create';
+
     protected $description = 'Create admin user';
 
     public function handle()
     {
         $admin = User::where('email', 'admin@bideshgomon.com')->first();
-        
+
         if ($admin) {
             $this->info('Admin user already exists!');
             $this->info('');
             $this->info('📧 Email: admin@bideshgomon.com');
             $this->info('🔑 Password: admin123');
-            $this->info('💰 Wallet Balance: ৳' . number_format($admin->wallet?->balance ?? 0, 2));
+            $this->info('💰 Wallet Balance: ৳'.number_format($admin->wallet?->balance ?? 0, 2));
+
             return;
         }
 
@@ -30,7 +32,7 @@ class CreateAdminUser extends Command
             'email_verified_at' => now(),
         ]);
 
-        if (!$admin->wallet) {
+        if (! $admin->wallet) {
             $admin->wallet()->create([
                 'balance' => 50000.00,
                 'currency' => 'BDT',

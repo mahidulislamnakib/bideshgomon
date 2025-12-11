@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FlightRoute;
 use App\Models\FlightBooking;
-use App\Models\Country;
+use App\Models\FlightRoute;
 use App\Services\WalletService;
 use App\Traits\CreatesServiceApplications;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use Inertia\Inertia;
 
 class FlightBookingController extends Controller
 {
     use CreatesServiceApplications;
+
     protected WalletService $walletService;
 
     public function __construct(WalletService $walletService)
@@ -37,7 +36,7 @@ class FlightBookingController extends Controller
             ->select('origin_city', 'origin_airport_code')
             ->distinct()
             ->get()
-            ->map(fn($route) => [
+            ->map(fn ($route) => [
                 'code' => $route->origin_airport_code,
                 'city' => $route->origin_city,
             ]);
@@ -47,7 +46,7 @@ class FlightBookingController extends Controller
             ->distinct()
             ->with('destinationCountry:id,name')
             ->get()
-            ->map(fn($route) => [
+            ->map(fn ($route) => [
                 'code' => $route->destination_airport_code,
                 'city' => $route->destination_city,
                 'country' => $route->destinationCountry->name ?? '',
@@ -101,13 +100,13 @@ class FlightBookingController extends Controller
         $flightClass = $request->query('flight_class', 'economy');
 
         // Check if route is available on selected date
-        if (!$route->isAvailableOnDate($travelDate)) {
+        if (! $route->isAvailableOnDate($travelDate)) {
             return redirect()->route('flight-booking.index')
                 ->with('error', 'This flight is not available on the selected date.');
         }
 
         // Calculate pricing
-        $baseFare = match($flightClass) {
+        $baseFare = match ($flightClass) {
             'business' => $route->business_price,
             'first_class' => $route->first_class_price,
             default => $route->economy_price,
@@ -162,12 +161,12 @@ class FlightBookingController extends Controller
         $route = FlightRoute::findOrFail($validated['flight_route_id']);
 
         // Verify route availability
-        if (!$route->isAvailableOnDate($validated['travel_date'])) {
+        if (! $route->isAvailableOnDate($validated['travel_date'])) {
             return back()->with('error', 'This flight is not available on the selected date.');
         }
 
         // Calculate pricing
-        $baseFare = match($validated['flight_class']) {
+        $baseFare = match ($validated['flight_class']) {
             'business' => (float) $route->business_price,
             'first_class' => (float) $route->first_class_price,
             default => (float) $route->economy_price,
@@ -179,29 +178,29 @@ class FlightBookingController extends Controller
 
         // Calculate extras
         $seatSelectionFee = 0;
-        if (!empty($validated['selected_seats'])) {
+        if (! empty($validated['selected_seats'])) {
             $seatSelectionFee = count($validated['selected_seats']) * 500; // ৳500 per seat
         }
 
         $extraBaggageFee = 0;
-        if (!empty($validated['extra_baggage_count'])) {
+        if (! empty($validated['extra_baggage_count'])) {
             $extraBaggageFee = $validated['extra_baggage_count'] * 2000; // ৳2000 per bag
         }
 
         $mealFee = 0;
-        if (!empty($validated['meal_preferences'])) {
+        if (! empty($validated['meal_preferences'])) {
             $mealFee = count($validated['meal_preferences']) * 800; // ৳800 per meal
         }
 
         $insuranceFee = 0;
-        if (!empty($validated['add_insurance'])) {
+        if (! empty($validated['add_insurance'])) {
             $insuranceFee = $validated['passengers_count'] * 1500; // ৳1500 per passenger
         }
 
         $totalAmount = $subtotal + $taxesFees + $bookingFee + $seatSelectionFee + $extraBaggageFee + $mealFee + $insuranceFee;
 
         // Check wallet balance
-        if (!$user->wallet || $user->wallet->balance < $totalAmount) {
+        if (! $user->wallet || $user->wallet->balance < $totalAmount) {
             return back()->with('error', 'Insufficient wallet balance. Please add funds first.');
         }
 
@@ -255,7 +254,7 @@ class FlightBookingController extends Controller
                 'paid_at' => now(),
                 'status' => 'confirmed',
                 'confirmed_at' => now(),
-                'pnr_number' => 'PNR' . strtoupper(substr(md5($booking->id . time()), 0, 6)),
+                'pnr_number' => 'PNR'.strtoupper(substr(md5($booking->id.time()), 0, 6)),
             ]);
 
             // Increment route booking counter
@@ -274,7 +273,7 @@ class FlightBookingController extends Controller
                     'flight_class' => $validated['flight_class'],
                     'passengers_count' => $validated['passengers_count'],
                     'total_amount' => $totalAmount,
-                    'pnr_number' => 'PNR' . strtoupper(substr(md5($booking->id . time()), 0, 6)),
+                    'pnr_number' => 'PNR'.strtoupper(substr(md5($booking->id.time()), 0, 6)),
                 ]
             );
 
@@ -285,6 +284,7 @@ class FlightBookingController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
+
             return back()->with('error', 'Booking failed. Please try again.');
         }
     }
@@ -299,7 +299,7 @@ class FlightBookingController extends Controller
         $query = FlightBooking::forUser($request->user()->id)
             ->with(['flightRoute.originCountry', 'flightRoute.destinationCountry']);
 
-        $bookings = match($filter) {
+        $bookings = match ($filter) {
             'upcoming' => $query->upcoming()->latest()->paginate(10),
             'past' => $query->past()->latest()->paginate(10),
             'cancelled' => $query->cancelled()->latest()->paginate(10),
@@ -309,6 +309,7 @@ class FlightBookingController extends Controller
         // Add can_cancel flag to each booking
         $bookings->getCollection()->transform(function ($booking) {
             $booking->can_cancel = $booking->canCancel();
+
             return $booking;
         });
 
@@ -339,7 +340,7 @@ class FlightBookingController extends Controller
     {
         $booking = FlightBooking::where('user_id', $request->user()->id)->findOrFail($id);
 
-        if (!$booking->canCancel()) {
+        if (! $booking->canCancel()) {
             return back()->with('error', 'This booking cannot be cancelled.');
         }
 
@@ -374,10 +375,11 @@ class FlightBookingController extends Controller
             DB::commit();
 
             return redirect()->route('flight-booking.my-bookings')
-                ->with('success', "Booking cancelled. Refund of ৳" . number_format($refundAmount, 2) . " processed to your wallet.");
+                ->with('success', 'Booking cancelled. Refund of ৳'.number_format($refundAmount, 2).' processed to your wallet.');
 
         } catch (\Exception $e) {
             DB::rollBack();
+
             return back()->with('error', 'Cancellation failed. Please try again.');
         }
     }

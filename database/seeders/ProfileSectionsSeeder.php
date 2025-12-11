@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\FamilyMember;
+use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\UserSecurityInformation;
 use Illuminate\Database\Seeder;
@@ -13,8 +13,8 @@ class ProfileSectionsSeeder extends Seeder
     public function run(): void
     {
         $user = User::first();
-        
-        if (!$user) {
+
+        if (! $user) {
             $user = User::factory()->create([
                 'name' => 'Test User',
                 'email' => 'test@example.com',
@@ -68,4 +68,3 @@ class ProfileSectionsSeeder extends Seeder
         $this->command->info(' Seeded: 2 family members, 2 languages, 1 security record');
     }
 }
-

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('specific_instructions')->nullable();
             $table->integer('sort_order')->default(0);
             $table->timestamps();
-            
+
             // Indexes
             $table->index('visa_requirement_id');
             $table->index('document_type_id');

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\DataManagement;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Traits\BulkUploadable;
+use App\Http\Controllers\Controller;
 use App\Models\Language;
 use App\Models\LanguageTest;
 use Illuminate\Http\Request;
@@ -16,8 +16,11 @@ class LanguageTestController extends Controller
     use BulkUploadable;
 
     protected $entityName = 'Language Test';
+
     protected $entityNamePlural = 'Language Tests';
+
     protected $indexRoute = 'admin.data.language-tests.index';
+
     protected $bulkUploadView = 'Admin/DataManagement/LanguageTests/BulkUpload';
 
     /**
@@ -30,13 +33,13 @@ class LanguageTestController extends Controller
         // Search
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%")
-                  ->orWhere('code', 'like', "%{$search}%")
-                  ->orWhereHas('language', function($q) use ($search) {
-                      $q->where('name', 'like', "%{$search}%");
-                  });
+                    ->orWhere('name_bn', 'like', "%{$search}%")
+                    ->orWhere('code', 'like', "%{$search}%")
+                    ->orWhereHas('language', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    });
             });
         }
 
@@ -112,7 +115,7 @@ class LanguageTestController extends Controller
                 'data' => $validated,
             ]);
 
-            return back()->withInput()->with('error', 'Failed to create language test: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to create language test: '.$e->getMessage());
         }
     }
 
@@ -158,7 +161,7 @@ class LanguageTestController extends Controller
                 'data' => $validated,
             ]);
 
-            return back()->withInput()->with('error', 'Failed to update language test: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to update language test: '.$e->getMessage());
         }
     }
 
@@ -178,7 +181,7 @@ class LanguageTestController extends Controller
                 'id' => $languageTest->id,
             ]);
 
-            return back()->with('error', 'Failed to delete language test: ' . $e->getMessage());
+            return back()->with('error', 'Failed to delete language test: '.$e->getMessage());
         }
     }
 
@@ -189,7 +192,7 @@ class LanguageTestController extends Controller
     {
         try {
             $languageTest->update([
-                'is_active' => !$languageTest->is_active
+                'is_active' => ! $languageTest->is_active,
             ]);
 
             return back()->with('success', 'Status updated successfully.');
@@ -309,40 +312,40 @@ class LanguageTestController extends Controller
 
         // Required fields
         if (empty($row['name'])) {
-            $errors[] = "Name is required";
+            $errors[] = 'Name is required';
         }
         if (empty($row['code'])) {
-            $errors[] = "Code is required";
+            $errors[] = 'Code is required';
         }
         if (empty($row['score_type'])) {
-            $errors[] = "Score type is required";
-        } elseif (!in_array($row['score_type'], ['band', 'percentage', 'points', 'grade'])) {
-            $errors[] = "Score type must be one of: band, percentage, points, grade";
+            $errors[] = 'Score type is required';
+        } elseif (! in_array($row['score_type'], ['band', 'percentage', 'points', 'grade'])) {
+            $errors[] = 'Score type must be one of: band, percentage, points, grade';
         }
 
         // Language code validation (if provided)
-        if (!empty($row['language_code'])) {
+        if (! empty($row['language_code'])) {
             $language = Language::where('code', $row['language_code'])->first();
-            if (!$language) {
+            if (! $language) {
                 $errors[] = "Language with code '{$row['language_code']}' not found";
             }
         }
 
         // Numeric validations
-        if (!empty($row['min_score']) && !is_numeric($row['min_score'])) {
-            $errors[] = "Min score must be a number";
+        if (! empty($row['min_score']) && ! is_numeric($row['min_score'])) {
+            $errors[] = 'Min score must be a number';
         }
-        if (!empty($row['max_score']) && !is_numeric($row['max_score'])) {
-            $errors[] = "Max score must be a number";
+        if (! empty($row['max_score']) && ! is_numeric($row['max_score'])) {
+            $errors[] = 'Max score must be a number';
         }
-        if (!empty($row['min_score']) && !empty($row['max_score']) && 
+        if (! empty($row['min_score']) && ! empty($row['max_score']) &&
             is_numeric($row['min_score']) && is_numeric($row['max_score']) &&
-            (float)$row['max_score'] < (float)$row['min_score']) {
-            $errors[] = "Max score must be greater than or equal to min score";
+            (float) $row['max_score'] < (float) $row['min_score']) {
+            $errors[] = 'Max score must be greater than or equal to min score';
         }
 
         // Duplicate code check
-        if (!empty($row['code'])) {
+        if (! empty($row['code'])) {
             $exists = LanguageTest::where('code', $row['code'])->exists();
             if ($exists) {
                 $errors[] = "Language test with code '{$row['code']}' already exists";
@@ -361,16 +364,16 @@ class LanguageTestController extends Controller
             'name' => $row['name'],
             'name_bn' => $row['name_bn'] ?? null,
             'code' => strtolower(trim($row['code'])),
-            'min_score' => !empty($row['min_score']) ? (float)$row['min_score'] : null,
-            'max_score' => !empty($row['max_score']) ? (float)$row['max_score'] : null,
+            'min_score' => ! empty($row['min_score']) ? (float) $row['min_score'] : null,
+            'max_score' => ! empty($row['max_score']) ? (float) $row['max_score'] : null,
             'score_type' => $row['score_type'],
             'description' => $row['description'] ?? null,
-            'is_active' => isset($row['is_active']) ? 
+            'is_active' => isset($row['is_active']) ?
                 (strtolower($row['is_active']) === 'true' || $row['is_active'] === '1') : true,
         ];
 
         // Get language_id from language_code if provided
-        if (!empty($row['language_code'])) {
+        if (! empty($row['language_code'])) {
             $language = Language::where('code', $row['language_code'])->first();
             $data['language_id'] = $language ? $language->id : null;
         } else {
@@ -401,9 +404,9 @@ class LanguageTestController extends Controller
         // Apply same filters as index
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('code', 'like', "%{$search}%");
+                    ->orWhere('code', 'like', "%{$search}%");
             });
         }
 

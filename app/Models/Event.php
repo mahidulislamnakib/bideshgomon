@@ -83,10 +83,10 @@ class Event extends Model
 
     public function scopeSearch($query, $search)
     {
-        return $query->where(function($q) use ($search) {
+        return $query->where(function ($q) use ($search) {
             $q->where('title', 'like', "%{$search}%")
-              ->orWhere('description', 'like', "%{$search}%")
-              ->orWhere('location', 'like', "%{$search}%");
+                ->orWhere('description', 'like', "%{$search}%")
+                ->orWhere('location', 'like', "%{$search}%");
         });
     }
 
@@ -103,32 +103,34 @@ class Event extends Model
 
     public function hasRegistrationClosed(): bool
     {
-        if (!$this->registration_deadline) {
+        if (! $this->registration_deadline) {
             return false;
         }
+
         return $this->registration_deadline < now()->toDateString();
     }
 
     public function isFull(): bool
     {
-        if (!$this->max_participants) {
+        if (! $this->max_participants) {
             return false;
         }
+
         // This would check against actual registrations when that feature is added
         return false;
     }
 
     public function canRegister(): bool
     {
-        return $this->isUpcoming() 
-            && !$this->hasRegistrationClosed() 
-            && !$this->isFull()
+        return $this->isUpcoming()
+            && ! $this->hasRegistrationClosed()
+            && ! $this->isFull()
             && $this->is_published;
     }
 
     public function getEventTypeLabel(): string
     {
-        return match($this->event_type) {
+        return match ($this->event_type) {
             'seminar' => 'Seminar',
             'workshop' => 'Workshop',
             'fair' => 'Fair',

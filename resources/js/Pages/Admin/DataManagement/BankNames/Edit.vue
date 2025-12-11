@@ -11,10 +11,10 @@
         <form @submit.prevent="submit">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="md:col-span-2">
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
                 Bank Name <span class="text-red-500">*</span>
               </label>
-              <input v-model="form.name" type="text" required class="w-full px-3 py-2 border rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" :class="form.errors.name ? 'border-red-500' : 'border-gray-300'"/>
+              <input v-model="form.name" type="text" required class="w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" :class="form.errors.name ? 'border-red-500' : 'border-gray-200'"/>
               <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">{{ form.errors.name }}</p>
             </div>
 
@@ -37,10 +37,10 @@
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
                 Bank Type <span class="text-red-500">*</span>
               </label>
-              <select v-model="form.type" required class="w-full px-3 py-2 border rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" :class="form.errors.type ? 'border-red-500' : 'border-gray-300'">
+              <select v-model="form.type" required class="w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" :class="form.errors.type ? 'border-red-500' : 'border-gray-200'">
                 <option value="">Select Type</option>
                 <option value="commercial">Commercial Bank</option>
                 <option value="islamic">Islamic Bank</option>
@@ -52,8 +52,8 @@
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">SWIFT Code</label>
-              <input v-model="form.swift_code" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600"/>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">SWIFT Code</label>
+              <input v-model="form.swift_code" type="text" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"/>
               <p v-if="form.errors.swift_code" class="mt-1 text-sm text-red-600">{{ form.errors.swift_code }}</p>
             </div>
 
@@ -70,8 +70,8 @@
             </div>
 
             <div class="md:col-span-2">
-              <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-              <textarea v-model="form.description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600"></textarea>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+              <textarea v-model="form.description" rows="3" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"></textarea>
               <p v-if="form.errors.description" class="mt-1 text-sm text-red-600">{{ form.errors.description }}</p>
             </div>
 

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Carbon\Carbon;
 
 class AppointmentController extends Controller
 {
@@ -103,7 +103,7 @@ class AppointmentController extends Controller
             abort(403);
         }
 
-        if (!$appointment->canBeCancelled()) {
+        if (! $appointment->canBeCancelled()) {
             return back()->withErrors(['error' => 'This appointment cannot be cancelled.']);
         }
 
@@ -127,7 +127,7 @@ class AppointmentController extends Controller
             abort(403);
         }
 
-        if (!$appointment->canBeRescheduled()) {
+        if (! $appointment->canBeRescheduled()) {
             return back()->withErrors(['error' => 'This appointment cannot be rescheduled.']);
         }
 
@@ -168,7 +168,7 @@ class AppointmentController extends Controller
         // Business hours: 9 AM to 6 PM
         $businessHours = [
             '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
-            '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30'
+            '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30',
         ];
 
         // Get all booked appointments
@@ -176,7 +176,7 @@ class AppointmentController extends Controller
             ->whereIn('status', ['pending', 'confirmed'])
             ->get()
             ->mapWithKeys(function ($appointment) {
-                return [$appointment->appointment_date->format('Y-m-d') . '_' . $appointment->appointment_time => true];
+                return [$appointment->appointment_date->format('Y-m-d').'_'.$appointment->appointment_time => true];
             });
 
         $currentDate = $startDate->copy();
@@ -184,6 +184,7 @@ class AppointmentController extends Controller
             // Skip weekends
             if ($currentDate->isWeekend()) {
                 $currentDate->addDay();
+
                 continue;
             }
 
@@ -191,13 +192,13 @@ class AppointmentController extends Controller
             $availableTimes = [];
 
             foreach ($businessHours as $time) {
-                $key = $dateStr . '_' . $time;
-                if (!isset($bookedAppointments[$key])) {
+                $key = $dateStr.'_'.$time;
+                if (! isset($bookedAppointments[$key])) {
                     $availableTimes[] = $time;
                 }
             }
 
-            if (!empty($availableTimes)) {
+            if (! empty($availableTimes)) {
                 $slots[$dateStr] = $availableTimes;
             }
 

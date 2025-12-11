@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\DataManagement;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Traits\BulkUploadable;
+use App\Http\Controllers\Controller;
 use App\Models\InstitutionType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,8 +15,11 @@ class InstitutionTypeController extends Controller
     use BulkUploadable;
 
     protected $entityName = 'Institution Type';
+
     protected $entityNamePlural = 'Institution Types';
+
     protected $indexRoute = 'admin.data.institution-types.index';
+
     protected $bulkUploadView = 'Admin/DataManagement/InstitutionTypes/BulkUpload';
 
     public function index(Request $request)
@@ -25,11 +28,11 @@ class InstitutionTypeController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%")
+                    ->orWhere('slug', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
             });
         }
 
@@ -81,10 +84,12 @@ class InstitutionTypeController extends Controller
 
         try {
             InstitutionType::create($validated);
+
             return redirect()->route('admin.data.institution-types.index')
                 ->with('success', 'Institution type created successfully.');
         } catch (\Exception $e) {
             Log::error('Institution type creation failed', ['error' => $e->getMessage()]);
+
             return back()->withInput()->with('error', 'Failed to create institution type.');
         }
     }
@@ -111,10 +116,12 @@ class InstitutionTypeController extends Controller
 
         try {
             $institutionType->update($validated);
+
             return redirect()->route('admin.data.institution-types.index')
                 ->with('success', 'Institution type updated successfully.');
         } catch (\Exception $e) {
             Log::error('Institution type update failed', ['error' => $e->getMessage()]);
+
             return back()->withInput()->with('error', 'Failed to update institution type.');
         }
     }
@@ -123,10 +130,12 @@ class InstitutionTypeController extends Controller
     {
         try {
             $institutionType->delete();
+
             return redirect()->route('admin.data.institution-types.index')
                 ->with('success', 'Institution type deleted successfully.');
         } catch (\Exception $e) {
             Log::error('Institution type deletion failed', ['error' => $e->getMessage()]);
+
             return back()->with('error', 'Failed to delete institution type.');
         }
     }
@@ -134,10 +143,12 @@ class InstitutionTypeController extends Controller
     public function toggleStatus(InstitutionType $institutionType)
     {
         try {
-            $institutionType->update(['is_active' => !$institutionType->is_active]);
+            $institutionType->update(['is_active' => ! $institutionType->is_active]);
+
             return back()->with('success', 'Institution type status updated successfully.');
         } catch (\Exception $e) {
             Log::error('Institution type status toggle failed', ['error' => $e->getMessage()]);
+
             return back()->with('error', 'Failed to update status.');
         }
     }
@@ -179,6 +190,7 @@ class InstitutionTypeController extends Controller
         if (isset($data['is_active'])) {
             $data['is_active'] = in_array(strtolower($data['is_active']), ['true', '1', 'yes']);
         }
+
         return $data;
     }
 
@@ -193,9 +205,9 @@ class InstitutionTypeController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%");
             });
         }
 

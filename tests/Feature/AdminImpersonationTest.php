@@ -29,7 +29,7 @@ class AdminImpersonationTest extends TestCase
 
         $this->actingAs($admin)
             ->post(route('admin.users.impersonate', $target->id), [
-                'purpose' => 'Support: verify user dashboard layout'
+                'purpose' => 'Support: verify user dashboard layout',
             ])
             ->assertRedirect();
 
@@ -54,7 +54,7 @@ class AdminImpersonationTest extends TestCase
 
         $this->actingAs($adminA)
             ->post(route('admin.users.impersonate', $adminB->id), [
-                'purpose' => 'Attempt should fail'
+                'purpose' => 'Attempt should fail',
             ])
             ->assertStatus(403);
 
@@ -72,7 +72,7 @@ class AdminImpersonationTest extends TestCase
 
         $this->actingAs($admin)
             ->post(route('admin.users.impersonate', $target->id), [
-                'purpose' => 'Troubleshoot user issue'
+                'purpose' => 'Troubleshoot user issue',
             ])
             ->assertRedirect();
 

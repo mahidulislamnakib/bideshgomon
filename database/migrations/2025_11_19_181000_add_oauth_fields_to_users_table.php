@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            if (!Schema::hasColumn('users', 'google_id')) {
+            if (! Schema::hasColumn('users', 'google_id')) {
                 $table->string('google_id')->nullable()->after('email');
             }
-            if (!Schema::hasColumn('users', 'google_token')) {
+            if (! Schema::hasColumn('users', 'google_token')) {
                 $table->text('google_token')->nullable()->after('google_id');
             }
-            if (!Schema::hasColumn('users', 'google_refresh_token')) {
+            if (! Schema::hasColumn('users', 'google_refresh_token')) {
                 $table->text('google_refresh_token')->nullable()->after('google_token');
             }
         });

@@ -1,0 +1,361 @@
+name: CD - Deployment Pipeline
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # Build and push Docker image
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    
+    outputs:
+      image-tag: ${{ steps.meta.outputs.tags }}
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha,prefix={{branch}}-
+            type=ref,event=branch
+      
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            BUILD_DATE=${{ github.event.head_commit.timestamp }}
+            VCS_REF=${{ github.sha }}
+  
+  # Deploy to staging for integration tests
+  deploy-staging:
+    runs-on: ubuntu-latest
+    needs: build
+    environment: staging
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Configure kubectl
+        uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG_STAGING }}
+      
+      - name: Deploy to staging
+        run: |
+          # Update deployment with new image
+          kubectl set image deployment/bideshgomon-app \
+            app=${{ needs.build.outputs.image-tag }} \
+            -n staging
+          
+          # Wait for rollout
+          kubectl rollout status deployment/bideshgomon-app -n staging --timeout=5m
+      
+      - name: Get staging URL
+        id: staging-url
+        run: |
+          STAGING_URL=$(kubectl get service bideshgomon-app -n staging -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+          echo "url=http://${STAGING_URL}" >> $GITHUB_OUTPUT
+    
+    outputs:
+      staging-url: ${{ steps.staging-url.outputs.url }}
+  
+  # Run integration tests
+  integration-tests:
+    runs-on: ubuntu-latest
+    needs: deploy-staging
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, dom, fileinfo, pdo, pdo_mysql
+      
+      - name: Install Dependencies
+        run: composer install --prefer-dist --no-progress
+      
+      - name: Run Integration Tests
+        run: composer test:integration
+        env:
+          APP_URL: ${{ needs.deploy-staging.outputs.staging-url }}
+          DB_CONNECTION: mysql
+          DB_HOST: ${{ secrets.DB_HOST_STAGING }}
+          DB_DATABASE: ${{ secrets.DB_DATABASE_STAGING }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME_STAGING }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD_STAGING }}
+  
+  # E2E tests with Playwright
+  e2e-tests:
+    runs-on: ubuntu-latest
+    needs: deploy-staging
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      
+      - name: Run E2E tests
+        run: npm run test:e2e
+        env:
+          BASE_URL: ${{ needs.deploy-staging.outputs.staging-url }}
+      
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-results
+          path: playwright-report/
+          retention-days: 7
+  
+  # Canary deployment (5% traffic)
+  deploy-canary:
+    runs-on: ubuntu-latest
+    needs: [build, integration-tests, e2e-tests]
+    environment: production-canary
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Configure kubectl
+        uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG_PROD }}
+      
+      - name: Deploy canary
+        run: |
+          # Apply canary deployment (5% traffic)
+          kubectl apply -f k8s/canary-deployment.yml
+          
+          # Update canary with new image
+          kubectl set image deployment/bideshgomon-canary \
+            app=${{ needs.build.outputs.image-tag }} \
+            -n production
+          
+          # Wait for rollout
+          kubectl rollout status deployment/bideshgomon-canary -n production --timeout=5m
+      
+      - name: Get canary endpoint
+        id: canary
+        run: |
+          CANARY_IP=$(kubectl get service bideshgomon-canary -n production -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+          echo "url=http://${CANARY_IP}" >> $GITHUB_OUTPUT
+    
+    outputs:
+      canary-url: ${{ steps.canary.outputs.url }}
+  
+  # Smoke tests on canary
+  smoke-tests:
+    runs-on: ubuntu-latest
+    needs: deploy-canary
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Wait for health check
+        run: |
+          # Wait up to 2 minutes for health endpoint
+          for i in {1..24}; do
+            if curl -f -s "${{ needs.deploy-canary.outputs.canary-url }}/health" > /dev/null; then
+              echo "✅ Health check passed"
+              exit 0
+            fi
+            echo "Waiting for health check... ($i/24)"
+            sleep 5
+          done
+          echo "❌ Health check failed"
+          exit 1
+      
+      - name: Run smoke tests
+        run: |
+          # Critical path smoke tests
+          BASE_URL="${{ needs.deploy-canary.outputs.canary-url }}"
+          
+          # Test 1: Homepage loads
+          echo "Testing homepage..."
+          curl -f -s "${BASE_URL}/" > /dev/null || exit 1
+          
+          # Test 2: API health
+          echo "Testing API health..."
+          curl -f -s "${BASE_URL}/api/health" | jq -e '.status == "healthy"' || exit 1
+          
+          # Test 3: Database connectivity
+          echo "Testing database..."
+          curl -f -s "${BASE_URL}/health" | jq -e '.database.status == "ok"' || exit 1
+          
+          # Test 4: Cache connectivity
+          echo "Testing cache..."
+          curl -f -s "${BASE_URL}/health" | jq -e '.cache.status == "ok"' || exit 1
+          
+          echo "✅ All smoke tests passed"
+  
+  # Monitor canary metrics
+  monitor-canary:
+    runs-on: ubuntu-latest
+    needs: smoke-tests
+    
+    steps:
+      - name: Query Prometheus metrics
+        run: |
+          # Query error rate for last 5 minutes
+          ERROR_RATE=$(curl -s "${{ secrets.PROMETHEUS_URL }}/api/v1/query" \
+            --data-urlencode 'query=rate(http_requests_total{status=~"5..",deployment="canary"}[5m])' \
+            | jq -r '.data.result[0].value[1] // "0"')
+          
+          # Check if error rate is acceptable (< 1%)
+          if (( $(echo "$ERROR_RATE > 0.01" | bc -l) )); then
+            echo "❌ Error rate too high: $ERROR_RATE"
+            exit 1
+          fi
+          
+          echo "✅ Canary metrics healthy (error rate: $ERROR_RATE)"
+      
+      - name: Check latency
+        run: |
+          # Query p95 latency
+          LATENCY=$(curl -s "${{ secrets.PROMETHEUS_URL }}/api/v1/query" \
+            --data-urlencode 'query=histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{deployment="canary"}[5m]))' \
+            | jq -r '.data.result[0].value[1] // "0"')
+          
+          # Check if latency is acceptable (< 500ms)
+          if (( $(echo "$LATENCY > 0.5" | bc -l) )); then
+            echo "❌ Latency too high: ${LATENCY}s"
+            exit 1
+          fi
+          
+          echo "✅ Canary latency healthy (p95: ${LATENCY}s)"
+  
+  # Promote to full production
+  promote-production:
+    runs-on: ubuntu-latest
+    needs: [deploy-canary, monitor-canary]
+    environment: production
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Configure kubectl
+        uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG_PROD }}
+      
+      - name: Promote to production
+        run: |
+          # Update main production deployment
+          kubectl set image deployment/bideshgomon-app \
+            app=${{ needs.build.outputs.image-tag }} \
+            -n production
+          
+          # Rolling update with health checks
+          kubectl rollout status deployment/bideshgomon-app -n production --timeout=10m
+      
+      - name: Verify deployment
+        run: |
+          # Check deployment health
+          kubectl get deployment bideshgomon-app -n production -o json \
+            | jq -e '.status.conditions[] | select(.type=="Available" and .status=="True")'
+          
+          echo "✅ Production deployment successful"
+      
+      - name: Clean up canary
+        run: |
+          # Scale down canary after successful promotion
+          kubectl scale deployment/bideshgomon-canary --replicas=0 -n production
+  
+  # Rollback on failure
+  rollback:
+    runs-on: ubuntu-latest
+    needs: [deploy-canary, smoke-tests, monitor-canary]
+    if: failure()
+    environment: production
+    
+    steps:
+      - name: Configure kubectl
+        uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG_PROD }}
+      
+      - name: Rollback canary
+        run: |
+          echo "❌ Deployment failed, rolling back canary..."
+          
+          # Rollback canary deployment
+          kubectl rollout undo deployment/bideshgomon-canary -n production
+          
+          # Scale down canary
+          kubectl scale deployment/bideshgomon-canary --replicas=0 -n production
+      
+      - name: Notify team
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          text: |
+            🚨 Production deployment failed and was rolled back
+            Commit: ${{ github.sha }}
+            Author: ${{ github.actor }}
+            See: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+      
+      - name: Create incident
+        run: |
+          # Post to incident management (e.g., PagerDuty, Opsgenie)
+          curl -X POST "${{ secrets.INCIDENT_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "severity": "high",
+              "title": "Production deployment rollback",
+              "description": "Automated rollback due to failed health checks",
+              "source": "GitHub Actions",
+              "commit": "${{ github.sha }}"
+            }'

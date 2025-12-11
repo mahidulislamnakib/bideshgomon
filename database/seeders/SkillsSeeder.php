@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Skill;
 use App\Models\SkillCategory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class SkillsSeeder extends Seeder
 {
@@ -38,79 +39,79 @@ class SkillsSeeder extends Seeder
         $skills = [
             // Programming Languages
             'Programming Languages' => [
-                'PHP', 'JavaScript', 'Python', 'Java', 'C++', 'C#', 'Ruby', 'Go', 
-                'Swift', 'Kotlin', 'TypeScript', 'Rust', 'Scala', 'R', 'MATLAB'
+                'PHP', 'JavaScript', 'Python', 'Java', 'C++', 'C#', 'Ruby', 'Go',
+                'Swift', 'Kotlin', 'TypeScript', 'Rust', 'Scala', 'R', 'MATLAB',
             ],
-            
+
             // Web Development
             'Web Development' => [
-                'HTML', 'CSS', 'React', 'Vue.js', 'Angular', 'Node.js', 'Laravel', 
+                'HTML', 'CSS', 'React', 'Vue.js', 'Angular', 'Node.js', 'Laravel',
                 'Django', 'Flask', 'Express.js', 'Next.js', 'Nuxt.js', 'jQuery',
-                'Bootstrap', 'Tailwind CSS', 'WordPress', 'Shopify', 'REST API', 'GraphQL'
+                'Bootstrap', 'Tailwind CSS', 'WordPress', 'Shopify', 'REST API', 'GraphQL',
             ],
-            
+
             // Mobile Development
             'Mobile Development' => [
                 'Android Development', 'iOS Development', 'React Native', 'Flutter',
-                'Xamarin', 'Ionic', 'SwiftUI', 'Jetpack Compose'
+                'Xamarin', 'Ionic', 'SwiftUI', 'Jetpack Compose',
             ],
-            
+
             // Database Management
             'Database Management' => [
                 'MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Oracle', 'SQL Server',
-                'SQLite', 'Firebase', 'Elasticsearch', 'Cassandra', 'DynamoDB'
+                'SQLite', 'Firebase', 'Elasticsearch', 'Cassandra', 'DynamoDB',
             ],
-            
+
             // DevOps & Cloud
             'DevOps & Cloud' => [
                 'AWS', 'Azure', 'Google Cloud', 'Docker', 'Kubernetes', 'Jenkins',
-                'Git', 'GitHub', 'GitLab', 'CI/CD', 'Terraform', 'Ansible', 'Linux'
+                'Git', 'GitHub', 'GitLab', 'CI/CD', 'Terraform', 'Ansible', 'Linux',
             ],
-            
+
             // Design
             'Design' => [
                 'Adobe Photoshop', 'Adobe Illustrator', 'Figma', 'Sketch', 'Adobe XD',
                 'InDesign', 'UI/UX Design', 'Graphic Design', 'Web Design', '3D Modeling',
-                'After Effects', 'Premiere Pro', 'Blender'
+                'After Effects', 'Premiere Pro', 'Blender',
             ],
-            
+
             // Business
             'Business' => [
                 'Project Management', 'Business Analysis', 'Financial Analysis',
                 'Strategic Planning', 'Risk Management', 'Quality Assurance',
                 'Agile', 'Scrum', 'JIRA', 'Trello', 'Microsoft Office', 'Excel',
-                'Data Analysis', 'Power BI', 'Tableau'
+                'Data Analysis', 'Power BI', 'Tableau',
             ],
-            
+
             // Marketing
             'Marketing' => [
                 'Digital Marketing', 'SEO', 'SEM', 'Social Media Marketing',
                 'Content Marketing', 'Email Marketing', 'Google Analytics',
-                'Google Ads', 'Facebook Ads', 'Copywriting', 'Brand Management'
+                'Google Ads', 'Facebook Ads', 'Copywriting', 'Brand Management',
             ],
-            
+
             // Language Skills
             'Language Skills' => [
                 'English', 'Bengali', 'Hindi', 'Arabic', 'Spanish', 'French',
-                'German', 'Chinese', 'Japanese', 'Korean', 'Portuguese', 'Russian'
+                'German', 'Chinese', 'Japanese', 'Korean', 'Portuguese', 'Russian',
             ],
-            
+
             // Soft Skills
             'Soft Skills' => [
                 'Communication', 'Leadership', 'Teamwork', 'Problem Solving',
                 'Time Management', 'Critical Thinking', 'Adaptability', 'Creativity',
                 'Emotional Intelligence', 'Negotiation', 'Public Speaking',
-                'Customer Service', 'Conflict Resolution'
+                'Customer Service', 'Conflict Resolution',
             ],
         ];
 
         foreach ($skills as $categoryName => $skillsList) {
             $category = SkillCategory::where('name', $categoryName)->first();
-            
+
             if ($category) {
                 foreach ($skillsList as $skillName) {
                     Skill::firstOrCreate(
-                        ['slug' => \Str::slug($skillName)],
+                        ['slug' => Str::slug($skillName)],
                         [
                             'skill_category_id' => $category->id,
                             'name' => $skillName,

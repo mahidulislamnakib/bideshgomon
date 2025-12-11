@@ -8,8 +8,9 @@ import {
     ChartPieIcon, CogIcon, BuildingOffice2Icon, PaperAirplaneIcon,
     GlobeAltIcon, UserGroupIcon, RectangleStackIcon
 } from '@heroicons/vue/24/outline';
-import RhythmicCard from '@/Components/Rhythmic/RhythmicCard.vue';
-import AnimatedSection from '@/Components/Rhythmic/AnimatedSection.vue';
+import StatCard from '@/Components/Dashboard/StatCard.vue';
+import Card from '@/Components/Base/Card.vue';
+import Button from '@/Components/Base/Button.vue';
 
 const props = defineProps({
     stats: Object,
@@ -45,231 +46,164 @@ const formatDateTime = (date) => {
     <Head title="Admin Dashboard" />
 
     <AdminLayout>
-        <!-- Header with AnimatedSection -->
-        <AnimatedSection variant="ocean" :blobs="true" :animated="true">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-rhythm-xl">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h1 class="font-display font-bold text-rhythm text-4xl sm:text-5xl">
-                            <span class="text-brand-red-600">Admin</span> Dashboard
+                        <h1 class="text-3xl font-bold text-gray-900">
+                            Admin Dashboard
                         </h1>
-                        <p class="text-ocean-200 mt-rhythm-sm text-lg">Monitor and manage your platform</p>
+                        <p class="text-gray-600 mt-1 text-base">Monitor and manage your platform</p>
                     </div>
-                    <ChartBarIcon class="h-16 w-16 text-ocean-300 opacity-50" />
+                    <ChartBarIcon class="h-12 w-12 text-gray-400" />
                 </div>
             </div>
-        </AnimatedSection>
+        </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-rhythm-xl space-y-rhythm-xl">
             <!-- Stats Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-rhythm-lg">
                 <!-- Total Users -->
-                <RhythmicCard
-                    variant="ocean"
-                    size="md"
-                    title="Total Users"
+                <StatCard
+                    label="Total Users"
+                    :value="stats.users.total"
+                    :icon="UsersIcon"
+                    variant="blue"
+                    :trend="{ direction: 'up', value: `+${stats.users.today}`, label: 'today' }"
                     :description="`${stats.users.active} active this month`"
-                    :badge="`+${stats.users.today} today`"
-                >
-                    <template #icon>
-                        <UsersIcon class="h-8 w-8" />
-                    </template>
-                    <div class="text-display-md font-bold text-gray-900">
-                        {{ stats.users.total.toLocaleString() }}
-                    </div>
-                </RhythmicCard>
+                />
 
                 <!-- Total Revenue -->
-                <RhythmicCard
-                    variant="growth"
-                    size="md"
-                    title="Total Revenue"
+                <StatCard
+                    label="Total Revenue"
+                    :value="formatCurrency(stats.revenue.total)"
+                    :icon="CurrencyDollarIcon"
+                    variant="emerald"
+                    :trend="{ direction: 'up', value: formatCurrency(stats.revenue.today), label: 'today' }"
                     :description="`${formatCurrency(stats.revenue.this_month)} this month`"
-                    :badge="formatCurrency(stats.revenue.today)"
-                >
-                    <template #icon>
-                        <CurrencyDollarIcon class="h-8 w-8" />
-                    </template>
-                    <div class="text-display-md font-bold text-gray-900">
-                        {{ formatCurrency(stats.revenue.total) }}
-                    </div>
-                </RhythmicCard>
+                />
 
                 <!-- Insurance Bookings -->
-                <RhythmicCard
-                    variant="sunrise"
-                    size="md"
-                    title="Insurance Bookings"
+                <StatCard
+                    label="Insurance Bookings"
+                    :value="stats.services.insurance_bookings"
+                    :icon="ShieldCheckIcon"
+                    variant="cyan"
+                    :trend="{ direction: 'up', value: `+${stats.services.insurance_today}`, label: 'today' }"
                     description="Travel insurance policies"
-                    :badge="`+${stats.services.insurance_today} today`"
-                >
-                    <template #icon>
-                        <ShieldCheckIcon class="h-8 w-8" />
-                    </template>
-                    <div class="text-display-md font-bold text-gray-900">
-                        {{ stats.services.insurance_bookings }}
-                    </div>
-                </RhythmicCard>
+                />
 
                 <!-- CVs Created -->
-                <RhythmicCard
-                    variant="sky"
-                    size="md"
-                    title="CVs Created"
+                <StatCard
+                    label="CVs Created"
+                    :value="stats.services.cvs_created"
+                    :icon="DocumentTextIcon"
+                    variant="indigo"
+                    :trend="{ direction: 'up', value: `+${stats.services.cvs_today}`, label: 'today' }"
                     description="Professional CVs built"
-                    :badge="`+${stats.services.cvs_today} today`"
-                >
-                    <template #icon>
-                        <DocumentTextIcon class="h-8 w-8" />
-                    </template>
-                    <div class="text-display-md font-bold text-gray-900">
-                        {{ stats.services.cvs_created }}
-                    </div>
-                </RhythmicCard>
+                />
             </div>
 
             <!-- Hotel Bookings & Flight Requests Stats -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-rhythm-lg">
                 <!-- Hotel Bookings -->
-                <RhythmicCard
-                    variant="heritage"
-                    size="md"
-                    title="Hotel Bookings"
+                <StatCard
+                    label="Hotel Bookings"
+                    :value="stats.services.hotel_bookings"
+                    :icon="BuildingOffice2Icon"
+                    variant="emerald"
+                    :trend="{ direction: 'up', value: `+${stats.services.hotel_bookings_today}`, label: 'today' }"
                     :description="`${stats.services.confirmed_hotel_bookings} confirmed`"
-                    :badge="`+${stats.services.hotel_bookings_today} today`"
-                >
-                    <template #icon>
-                        <BuildingOffice2Icon class="h-8 w-8" />
-                    </template>
-                    <div class="text-display-md font-bold text-gray-900">
-                        {{ stats.services.hotel_bookings }}
-                    </div>
-                </RhythmicCard>
+                />
 
                 <!-- Hotel Revenue -->
-                <RhythmicCard
-                    variant="gold"
-                    size="md"
-                    title="Hotel Revenue"
-                    description="From confirmed bookings"
-                    badge="This month"
-                >
-                    <template #icon>
-                        <CurrencyDollarIcon class="h-8 w-8" />
-                    </template>
-                    <div class="text-display-md font-bold text-gray-900">
-                        {{ formatCurrency(stats.services.hotel_revenue_month) }}
-                    </div>
-                </RhythmicCard>
+                <StatCard
+                    label="Hotel Revenue"
+                    :value="formatCurrency(stats.services.hotel_revenue_month)"
+                    :icon="CurrencyDollarIcon"
+                    variant="amber"
+                    description="From confirmed bookings this month"
+                />
 
                 <!-- Flight Requests -->
-                <RhythmicCard
-                    variant="sky"
-                    size="md"
-                    title="Flight Requests"
+                <StatCard
+                    label="Flight Requests"
+                    :value="stats.services.flight_requests"
+                    :icon="PaperAirplaneIcon"
+                    variant="cyan"
+                    :trend="{ direction: 'up', value: `+${stats.services.flight_requests_today}`, label: 'today' }"
                     :description="`${stats.services.pending_flight_requests} pending`"
-                    :badge="`+${stats.services.flight_requests_today} today`"
-                >
-                    <template #icon>
-                        <PaperAirplaneIcon class="h-8 w-8" />
-                    </template>
-                    <div class="text-display-md font-bold text-gray-900">
-                        {{ stats.services.flight_requests }}
-                    </div>
-                </RhythmicCard>
+                />
 
                 <!-- Visa Applications -->
-                <RhythmicCard
-                    variant="ocean"
-                    size="md"
-                    title="Visa Applications"
+                <StatCard
+                    label="Visa Applications"
+                    :value="stats.services.visa_applications"
+                    :icon="DocumentTextIcon"
+                    variant="blue"
+                    :trend="{ direction: 'up', value: `+${stats.services.visa_applications_today}`, label: 'today' }"
                     :description="`${stats.services.approved_visa_applications} approved`"
-                    :badge="`+${stats.services.visa_applications_today} today`"
-                >
-                    <template #icon>
-                        <DocumentTextIcon class="h-8 w-8" />
-                    </template>
-                    <div class="text-display-md font-bold text-gray-900">
-                        {{ stats.services.visa_applications }}
-                    </div>
-                </RhythmicCard>
+                />
 
                 <!-- Support Tickets -->
-                <RhythmicCard
-                    variant="sunrise"
-                    size="md"
-                    title="Support Tickets"
-                    :description="`${stats.support.open_tickets} open · ${stats.support.urgent_tickets} urgent`"
-                    :badge="`+${stats.support.tickets_today} today`"
-                >
-                    <template #icon>
-                        <ClipboardDocumentListIcon class="h-8 w-8" />
-                    </template>
-                    <div class="text-display-md font-bold text-gray-900">
-                        {{ stats.support.total_tickets }}
-                    </div>
-                </RhythmicCard>
+                <StatCard
+                    label="Support Tickets"
+                    :value="stats.support.total_tickets"
+                    :icon="ClipboardDocumentListIcon"
+                    variant="amber"
+                    :trend="{ direction: 'up', value: `+${stats.support.tickets_today}`, label: 'today' }"
+                    :description="`${stats.support.open_tickets} open Â· ${stats.support.urgent_tickets} urgent`"
+                />
 
                 <!-- Appointments -->
-                <RhythmicCard
-                    variant="growth"
-                    size="md"
-                    title="Appointments"
-                    :description="`${stats.appointments.pending_appointments} pending · ${stats.appointments.confirmed_appointments} confirmed`"
-                    :badge="`+${stats.appointments.appointments_today} today`"
-                >
-                    <template #icon>
-                        <CogIcon class="h-8 w-8" />
-                    </template>
-                    <div class="text-display-md font-bold text-gray-900">
-                        {{ stats.appointments.total_appointments }}
-                    </div>
-                </RhythmicCard>
+                <StatCard
+                    label="Appointments"
+                    :value="stats.appointments.total_appointments"
+                    :icon="CogIcon"
+                    variant="emerald"
+                    :trend="{ direction: 'up', value: `+${stats.appointments.appointments_today}`, label: 'today' }"
+                    :description="`${stats.appointments.pending_appointments} pending Â· ${stats.appointments.confirmed_appointments} confirmed`"
+                />
 
                 <!-- Marketing Campaigns -->
-                <RhythmicCard
-                    variant="heritage"
-                    size="md"
-                    title="Marketing Campaigns"
-                    :description="`${formatCurrency(stats.campaigns.campaign_reach_month)} reach this month`"
-                    :badge="`${stats.campaigns.active_campaigns} active`"
-                >
-                    <template #icon>
-                        <ChartPieIcon class="h-8 w-8" />
-                    </template>
-                    <div class="text-display-md font-bold text-gray-900">
-                        {{ stats.campaigns.total_campaigns }}
-                    </div>
-                </RhythmicCard>
+                <StatCard
+                    label="Marketing Campaigns"
+                    :value="stats.campaigns.total_campaigns"
+                    :icon="ChartPieIcon"
+                    variant="purple"
+                    :description="`${formatCurrency(stats.campaigns.campaign_reach_month)} reach Â· ${stats.campaigns.active_campaigns} active`"
+                />
             </div>
 
             <!-- Visa Revenue Card -->
-            <RhythmicCard variant="ocean" size="lg">
-                <template #icon>
-                    <CurrencyDollarIcon class="h-8 w-8" />
-                </template>
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm text-gray-600 font-medium mb-2">Visa Service Revenue (This Month)</p>
-                        <p class="text-2xl font-bold text-gray-900">{{ formatCurrency(stats.services.visa_revenue_month) }}</p>
-                    </div>
-                    <Link
-                        :href="route('admin.visa-applications.index')"
-                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors"
+            <Card
+                title="Visa Service Revenue"
+                :icon="CurrencyDollarIcon"
+                icon-variant="blue"
+            >
+                <template #actions>
+                    <Button
+                        variant="primary"
+                        size="sm"
+                        @click="$inertia.visit(route('admin.visa-applications.index'))"
                     >
                         Manage Applications
-                    </Link>
+                    </Button>
+                </template>
+                <div class="text-3xl font-bold text-gray-900 dark:text-white">
+                    {{ formatCurrency(stats.services.visa_revenue_month) }}
                 </div>
-            </RhythmicCard>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">This month</p>
+            </Card>
 
             <!-- Quick Access Management -->
-            <RhythmicCard variant="light" size="lg">
+            <Card
+                title="Quick Access Management"
+                :icon="RectangleStackIcon"
+                icon-variant="blue"
+            >
                 <div class="space-y-6">
-                    <h2 class="font-bold text-2xl flex items-center text-gray-900">
-                        <RectangleStackIcon class="h-6 w-6 mr-2 text-gray-600" />
-                        Quick Access Management
-                    </h2>
-                
                 <!-- Document Hub System (Priority) -->
                 <div>
                     <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4 flex items-center">
@@ -281,7 +215,7 @@ const formatDateTime = (date) => {
                             :href="route('admin.master-documents.index')"
                             class="flex items-center p-4 bg-white rounded-lg hover:shadow-md transition-all group border border-gray-200"
                         >
-                            <div class="p-3 bg-brand-red-600 rounded-lg group-hover:bg-red-700 transition-colors">
+                            <div class="p-3 bg-blue-600 rounded-lg group-hover:bg-blue-700 transition-colors">
                                 <DocumentTextIcon class="h-6 w-6 text-white" />
                             </div>
                             <div class="ml-3">
@@ -294,7 +228,7 @@ const formatDateTime = (date) => {
                             :href="route('admin.document-categories.index')"
                             class="flex items-center p-4 bg-white rounded-lg hover:shadow-md transition-all group border border-gray-200"
                         >
-                            <div class="p-3 bg-brand-red-600 rounded-lg group-hover:bg-red-700 transition-colors">
+                            <div class="p-3 bg-indigo-600 rounded-lg group-hover:bg-indigo-700 transition-colors">
                                 <RectangleStackIcon class="h-6 w-6 text-white" />
                             </div>
                             <div class="ml-3">
@@ -307,7 +241,7 @@ const formatDateTime = (date) => {
                             :href="route('admin.document-assignments.index')"
                             class="flex items-center p-4 bg-white rounded-lg hover:shadow-md transition-all group border border-gray-200"
                         >
-                            <div class="p-3 bg-brand-red-600 rounded-lg group-hover:bg-red-700 transition-colors">
+                            <div class="p-3 bg-purple-600 rounded-lg group-hover:bg-purple-700 transition-colors">
                                 <GlobeAltIcon class="h-6 w-6 text-white" />
                             </div>
                             <div class="ml-3">
@@ -339,8 +273,8 @@ const formatDateTime = (date) => {
                             :href="route('admin.visa-applications.index')"
                             class="flex items-center p-4 bg-white rounded-lg hover:shadow-md transition-all group border border-gray-200"
                         >
-                            <div class="p-3 bg-red-100 rounded-lg group-hover:bg-indigo-200 transition-colors">
-                                <ClipboardDocumentListIcon class="h-6 w-6 text-brand-red-600" />
+                            <div class="p-3 bg-teal-100 rounded-lg group-hover:bg-teal-200 transition-colors">
+                                <ClipboardDocumentListIcon class="h-6 w-6 text-teal-600" />
                             </div>
                             <div class="ml-4">
                                 <p class="font-semibold text-gray-900">Visa Applications</p>
@@ -352,8 +286,8 @@ const formatDateTime = (date) => {
                             :href="route('admin.agency-assignments.index')"
                             class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all group"
                         >
-                            <div class="p-3 bg-red-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                                <UserGroupIcon class="h-6 w-6 text-brand-red-600" />
+                            <div class="p-3 bg-cyan-100 rounded-lg group-hover:bg-cyan-200 transition-colors">
+                                <UserGroupIcon class="h-6 w-6 text-cyan-600" />
                             </div>
                             <div class="ml-4">
                                 <p class="font-semibold text-gray-900">Agency Assignments</p>
@@ -371,8 +305,8 @@ const formatDateTime = (date) => {
                             :href="route('admin.service-modules.index')"
                             class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all group"
                         >
-                            <div class="p-3 bg-red-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                                <RectangleStackIcon class="h-6 w-6 text-brand-red-600" />
+                            <div class="p-3 bg-emerald-100 rounded-lg group-hover:bg-emerald-200 transition-colors">
+                                <RectangleStackIcon class="h-6 w-6 text-emerald-600" />
                             </div>
                             <div class="ml-4">
                                 <p class="font-semibold text-gray-900">Service Modules</p>
@@ -430,7 +364,7 @@ const formatDateTime = (date) => {
                             class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all group"
                         >
                             <div class="p-3 bg-sky-100 rounded-lg group-hover:bg-sky-200 transition-colors">
-                                <PaperAirplaneIcon class="h-6 w-6 text-brand-red-600" />
+                                <PaperAirplaneIcon class="h-6 w-6 text-sky-600" />
                             </div>
                             <div class="ml-4">
                                 <p class="font-semibold text-gray-900">Flight Requests</p>
@@ -461,8 +395,8 @@ const formatDateTime = (date) => {
                             :href="route('admin.jobs.index')"
                             class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all group"
                         >
-                            <div class="p-3 bg-red-100 rounded-lg group-hover:bg-indigo-200 transition-colors">
-                                <BriefcaseIcon class="h-6 w-6 text-brand-red-600" />
+                            <div class="p-3 bg-rose-100 rounded-lg group-hover:bg-rose-200 transition-colors">
+                                <BriefcaseIcon class="h-6 w-6 text-rose-600" />
                             </div>
                             <div class="ml-4">
                                 <p class="font-semibold text-gray-900">Job Postings</p>
@@ -474,8 +408,8 @@ const formatDateTime = (date) => {
                             :href="route('admin.applications.index')"
                             class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all group"
                         >
-                            <div class="p-3 bg-red-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                                <ClipboardDocumentListIcon class="h-6 w-6 text-brand-red-600" />
+                            <div class="p-3 bg-green-100 rounded-lg group-hover:bg-green-200 transition-colors">
+                                <ClipboardDocumentListIcon class="h-6 w-6 text-green-600" />
                             </div>
                             <div class="ml-4">
                                 <p class="font-semibold text-gray-900">Job Applications</p>
@@ -517,56 +451,46 @@ const formatDateTime = (date) => {
                     </div>
                 </div>
                 </div>
-            </RhythmicCard>
+            </Card>
 
             <!-- Wallet Stats -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-rhythm-lg">
-                <RhythmicCard variant="heritage" size="sm">
-                    <template #icon>
-                        <WalletIcon class="h-8 w-8" />
-                    </template>
-                    <div>
-                        <p class="text-sm text-gray-600 mb-rhythm-xs">Total Wallet Balance</p>
-                        <p class="text-display-sm font-bold text-gray-900">{{ formatCurrency(stats.wallet.total_balance) }}</p>
-                    </div>
-                </RhythmicCard>
+                <StatCard
+                    label="Total Wallet Balance"
+                    :value="formatCurrency(stats.wallet.total_balance)"
+                    :icon="WalletIcon"
+                    variant="blue"
+                />
 
-                <RhythmicCard variant="ocean" size="sm">
-                    <template #icon>
-                        <ArrowTrendingUpIcon class="h-8 w-8" />
-                    </template>
-                    <div>
-                        <p class="text-sm text-gray-600 mb-rhythm-xs">Total Transactions</p>
-                        <p class="text-display-sm font-bold text-gray-900">{{ stats.wallet.total_transactions.toLocaleString() }}</p>
-                    </div>
-                </RhythmicCard>
+                <StatCard
+                    label="Total Transactions"
+                    :value="stats.wallet.total_transactions"
+                    :icon="ArrowTrendingUpIcon"
+                    variant="blue"
+                />
 
-                <RhythmicCard variant="sunrise" size="sm">
-                    <template #icon>
-                        <BriefcaseIcon class="h-8 w-8" />
-                    </template>
-                    <div>
-                        <p class="text-sm text-gray-600 mb-rhythm-xs">Pending Withdrawals</p>
-                        <p class="text-display-sm font-bold text-gray-900">{{ stats.wallet.pending_withdrawals }}</p>
-                    </div>
-                </RhythmicCard>
+                <StatCard
+                    label="Pending Withdrawals"
+                    :value="stats.wallet.pending_withdrawals"
+                    :icon="BriefcaseIcon"
+                    variant="amber"
+                />
             </div>
 
             <!-- Charts Row -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-rhythm-lg">
                 <!-- User Registrations Chart -->
-                <RhythmicCard variant="light" size="lg">
-                    <h3 class="font-display font-bold text-xl text-gray-900 mb-rhythm-md">User Registrations (Last 7 Days)</h3>
+                <Card title="User Registrations (Last 7 Days)">
                     <div v-if="userChartData && userChartData.length > 0" class="space-y-rhythm-sm">
                         <div 
                             v-for="data in userChartData" 
                             :key="data.date"
                             class="flex items-center space-x-rhythm-sm"
                         >
-                            <div class="w-20 text-sm text-gray-600">{{ data.date }}</div>
-                            <div class="flex-1 bg-gray-100 rounded-full h-8 overflow-hidden">
+                            <div class="w-20 text-sm text-gray-600 dark:text-gray-400">{{ data.date }}</div>
+                            <div class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full h-8 overflow-hidden">
                                 <div 
-                                    class="bg-brand-red-600 h-full flex items-center justify-end pr-3 text-white text-sm font-medium transition-all duration-500"
+                                    class="bg-gradient-to-r from-blue-500 to-blue-600 h-full flex items-center justify-end pr-3 text-white text-sm font-medium transition-all duration-500"
                                     :style="{ width: `${Math.max((data.count / Math.max(...userChartData.map(d => d.count), 1)) * 100, 10)}%` }"
                                 >
                                     {{ data.count }}
@@ -574,24 +498,23 @@ const formatDateTime = (date) => {
                             </div>
                         </div>
                     </div>
-                    <div v-else class="text-center py-rhythm-lg text-gray-500">
+                    <div v-else class="text-center py-rhythm-lg text-gray-500 dark:text-gray-400">
                         No registration data available
                     </div>
-                </RhythmicCard>
+                </Card>
 
                 <!-- Revenue Chart -->
-                <RhythmicCard variant="light" size="lg">
-                    <h3 class="font-display font-bold text-xl text-gray-900 mb-rhythm-md">Revenue (Last 7 Days)</h3>
+                <Card title="Revenue (Last 7 Days)">
                     <div v-if="revenueChartData && revenueChartData.length > 0" class="space-y-rhythm-sm">
                         <div 
                             v-for="data in revenueChartData" 
                             :key="data.date"
                             class="flex items-center space-x-rhythm-sm"
                         >
-                            <div class="w-20 text-sm text-gray-600">{{ data.date }}</div>
-                            <div class="flex-1 bg-gray-100 rounded-full h-8 overflow-hidden">
+                            <div class="w-20 text-sm text-gray-600 dark:text-gray-400">{{ data.date }}</div>
+                            <div class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full h-8 overflow-hidden">
                                 <div 
-                                    class="bg-green-600 h-full flex items-center justify-end pr-3 text-white text-sm font-medium transition-all duration-500"
+                                    class="bg-emerald-600 h-full flex items-center justify-end pr-3 text-white text-sm font-medium transition-all duration-500"
                                     :style="{ width: `${Math.max((data.amount / Math.max(...revenueChartData.map(d => d.amount), 1)) * 100, 10)}%` }"
                                 >
                                     {{ formatCurrency(data.amount) }}
@@ -599,18 +522,17 @@ const formatDateTime = (date) => {
                             </div>
                         </div>
                     </div>
-                    <div v-else class="text-center py-rhythm-lg text-gray-500">
+                    <div v-else class="text-center py-rhythm-lg text-gray-500 dark:text-gray-400">
                         No revenue data available
                     </div>
-                </RhythmicCard>
+                </Card>
             </div>
 
             <!-- Security & Audit: Recent Impersonations -->
-            <RhythmicCard variant="light" size="lg">
-                <div class="flex items-center justify-between mb-rhythm-md">
-                    <h3 class="font-display font-bold text-xl text-gray-900">Recent Admin Impersonations</h3>
-                    <span class="text-xs text-gray-500">Last 10 sessions</span>
-                </div>
+            <Card title="Recent Admin Impersonations">
+                <template #actions>
+                    <span class="text-xs text-gray-500 dark:text-gray-400">Last 10 sessions</span>
+                </template>
                 <div v-if="recentImpersonations && recentImpersonations.length" class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200 text-sm">
                         <thead class="bg-gray-50">
@@ -635,16 +557,16 @@ const formatDateTime = (date) => {
                                     <span class="text-gray-400" v-else>Unknown</span>
                                 </td>
                                 <td class="px-3 py-2 text-gray-700">
-                                    <span class="line-clamp-2 max-w-xs block">{{ log.purpose || '—' }}</span>
+                                    <span class="line-clamp-2 max-w-xs block">{{ log.purpose || 'ï¿½' }}</span>
                                 </td>
                                 <td class="px-3 py-2 text-gray-600">{{ formatDateTime(log.started_at) }}</td>
                                 <td class="px-3 py-2 text-gray-600">
                                     <span v-if="log.ended_at">{{ formatDateTime(log.ended_at) }}</span>
-                                    <span v-else class="text-gray-400">—</span>
+                                    <span v-else class="text-gray-400">ï¿½</span>
                                 </td>
                                 <td class="px-3 py-2 text-gray-600">
                                     <span v-if="log.duration_minutes !== null">{{ log.duration_minutes }} min</span>
-                                    <span v-else class="text-gray-400">—</span>
+                                    <span v-else class="text-gray-400">ï¿½</span>
                                 </td>
                                 <td class="px-3 py-2">
                                     <span
@@ -661,10 +583,10 @@ const formatDateTime = (date) => {
                         </tbody>
                     </table>
                 </div>
-                <div v-else class="text-center py-rhythm-lg text-sm text-gray-500">
+                <div v-else class="text-center py-rhythm-lg text-sm text-gray-500 dark:text-gray-400">
                     No impersonation sessions recorded yet.
                 </div>
-            </RhythmicCard>
+            </Card>
 
             <!-- Recent Activities -->
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-rhythm-lg">
@@ -756,14 +678,14 @@ const formatDateTime = (date) => {
                         >
                             <p class="font-medium text-gray-900 text-sm">{{ booking.user?.name || 'Unknown' }}</p>
                             <p class="text-xs text-gray-600 mt-1">{{ booking.hotel?.name || 'Hotel' }}</p>
-                            <p class="text-xs text-gray-500 mt-1">{{ booking.room?.type || 'Room' }} • {{ booking.booking_reference }}</p>
+                            <p class="text-xs text-gray-500 mt-1">{{ booking.room?.type || 'Room' }} ï¿½ {{ booking.booking_reference }}</p>
                             <div class="flex items-center justify-between mt-2">
                                 <span 
                                     class="text-xs px-2 py-1 rounded-full"
                                     :class="{
                                         'bg-green-50 text-green-700': booking.status === 'confirmed',
                                         'bg-yellow-50 text-yellow-700': booking.status === 'pending',
-                                        'bg-red-50 text-blue-700': booking.status === 'checked_in',
+                                        'bg-blue-50 text-blue-700': booking.status === 'checked_in',
                                         'bg-gray-50 text-gray-700': booking.status === 'checked_out',
                                         'bg-red-50 text-red-700': booking.status === 'cancelled'
                                     }"
@@ -792,14 +714,14 @@ const formatDateTime = (date) => {
                             class="p-4 hover:bg-gray-50 transition-colors"
                         >
                             <p class="font-medium text-gray-900 text-sm">{{ application.user?.name || 'Unknown' }}</p>
-                            <p class="text-xs text-gray-600 mt-1">{{ application.destination_country }} • {{ application.visa_type }}</p>
+                            <p class="text-xs text-gray-600 mt-1">{{ application.destination_country }} ï¿½ {{ application.visa_type }}</p>
                             <p class="text-xs text-gray-500 mt-1">{{ application.application_reference }}</p>
                             <div class="flex items-center justify-between mt-2">
                                 <span 
                                     class="text-xs px-2 py-1 rounded-full"
                                     :class="{
                                         'bg-green-50 text-green-700': application.status === 'approved',
-                                        'bg-red-50 text-blue-700': application.status === 'submitted',
+                                        'bg-blue-50 text-blue-700': application.status === 'submitted',
                                         'bg-yellow-50 text-yellow-700': application.status === 'under_review',
                                         'bg-orange-50 text-orange-700': application.status === 'documents_requested',
                                         'bg-purple-50 text-purple-700': application.status === 'interview_scheduled',

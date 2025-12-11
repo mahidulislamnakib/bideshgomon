@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Models\Translation;
-use App\Models\Country;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,9 +17,9 @@ class TranslationController extends Controller
     public function create(): Response
     {
         $languages = [
-            'English', 'Arabic', 'Bengali', 'Hindi', 'Urdu', 'Chinese', 'French', 
-            'Spanish', 'German', 'Japanese', 'Korean', 'Russian', 'Italian', 
-            'Portuguese', 'Turkish', 'Persian', 'Malay', 'Indonesian', 'Thai', 'Other'
+            'English', 'Arabic', 'Bengali', 'Hindi', 'Urdu', 'Chinese', 'French',
+            'Spanish', 'German', 'Japanese', 'Korean', 'Russian', 'Italian',
+            'Portuguese', 'Turkish', 'Persian', 'Malay', 'Indonesian', 'Thai', 'Other',
         ];
 
         $documentTypes = [
@@ -29,14 +27,14 @@ class TranslationController extends Controller
             'Death Certificate', 'Academic Transcripts', 'Degree Certificate', 'Diploma',
             'Employment Contract', 'Experience Certificate', 'Police Clearance',
             'Medical Reports', 'Bank Statements', 'Property Documents', 'Legal Documents',
-            'Business Registration', 'Power of Attorney', 'Affidavit', 'Other'
+            'Business Registration', 'Power of Attorney', 'Affidavit', 'Other',
         ];
 
         $certificationTypes = [
-            'Standard Translation', 
-            'Certified Translation', 
+            'Standard Translation',
+            'Certified Translation',
             'Notarized Translation',
-            'Apostille Translation'
+            'Apostille Translation',
         ];
 
         return Inertia::render('Profile/Translation/Create', [
@@ -56,16 +54,16 @@ class TranslationController extends Controller
 
         $quotes = [];
         $serviceApplication = null;
-        
+
         if ($translation->serviceApplication) {
             $serviceApplication = $translation->serviceApplication;
             $quotes = $serviceApplication->quotes()
-                ->with(['agency' => function($query) {
+                ->with(['agency' => function ($query) {
                     $query->select('id', 'name', 'email', 'phone', 'logo_path');
                 }])
                 ->orderBy('quoted_amount', 'asc')
                 ->get()
-                ->map(function($quote) {
+                ->map(function ($quote) {
                     return [
                         'id' => $quote->id,
                         'agency_name' => $quote->agency->name ?? 'Unknown Agency',

@@ -33,12 +33,12 @@ class UserSeeder extends Seeder
                     'email_verified_at' => now(),
                 ]
             );
-            
+
             // Create profile and wallet if they don't exist
-            if (!$admin->profile) {
+            if (! $admin->profile) {
                 UserProfile::create(['user_id' => $admin->id]);
             }
-            if (!$admin->wallet) {
+            if (! $admin->wallet) {
                 Wallet::create([
                     'user_id' => $admin->id,
                     'balance' => 0,
@@ -58,11 +58,11 @@ class UserSeeder extends Seeder
                     'email_verified_at' => now(),
                 ]
             );
-            
-            if (!$agency->profile) {
+
+            if (! $agency->profile) {
                 UserProfile::create(['user_id' => $agency->id]);
             }
-            if (!$agency->wallet) {
+            if (! $agency->wallet) {
                 Wallet::create([
                     'user_id' => $agency->id,
                     'balance' => 0,
@@ -82,11 +82,11 @@ class UserSeeder extends Seeder
                     'email_verified_at' => now(),
                 ]
             );
-            
-            if (!$consultant->profile) {
+
+            if (! $consultant->profile) {
                 UserProfile::create(['user_id' => $consultant->id]);
             }
-            if (!$consultant->wallet) {
+            if (! $consultant->wallet) {
                 Wallet::create([
                     'user_id' => $consultant->id,
                     'balance' => 0,
@@ -106,11 +106,11 @@ class UserSeeder extends Seeder
                     'email_verified_at' => now(),
                 ]
             );
-            
-            if (!$testUser->profile) {
+
+            if (! $testUser->profile) {
                 UserProfile::create(['user_id' => $testUser->id]);
             }
-            if (!$testUser->wallet) {
+            if (! $testUser->wallet) {
                 Wallet::create([
                     'user_id' => $testUser->id,
                     'balance' => 5000.00,

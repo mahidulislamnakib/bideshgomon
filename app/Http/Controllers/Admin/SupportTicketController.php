@@ -7,7 +7,6 @@ use App\Models\SupportTicket;
 use App\Models\SupportTicketReply;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class SupportTicketController extends Controller
@@ -40,7 +39,7 @@ class SupportTicketController extends Controller
         if ($request->search) {
             $query->where(function ($q) use ($request) {
                 $q->where('ticket_number', 'like', "%{$request->search}%")
-                  ->orWhere('subject', 'like', "%{$request->search}%");
+                    ->orWhere('subject', 'like', "%{$request->search}%");
             });
         }
 

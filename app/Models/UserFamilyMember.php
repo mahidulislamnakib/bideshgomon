@@ -79,14 +79,14 @@ class UserFamilyMember extends Model
      */
     public function getAgeAttribute(): ?int
     {
-        if (!$this->date_of_birth) {
+        if (! $this->date_of_birth) {
             return null;
         }
-        
+
         if ($this->is_deceased && $this->deceased_date) {
             return $this->date_of_birth->diffInYears($this->deceased_date);
         }
-        
+
         return $this->date_of_birth->age;
     }
 
@@ -122,11 +122,11 @@ class UserFamilyMember extends Model
         if ($this->isSpouse()) {
             return true;
         }
-        
+
         if ($this->isChild() && $this->date_of_birth) {
             return $this->date_of_birth->age < 18;
         }
-        
+
         return false;
     }
 
@@ -135,10 +135,11 @@ class UserFamilyMember extends Model
      */
     public function getResidenceCountryNameAttribute(): string
     {
-        if (!$this->country_of_residence) {
+        if (! $this->country_of_residence) {
             return '';
         }
         $countries = config('countries');
+
         return $countries[$this->country_of_residence] ?? $this->country_of_residence;
     }
 

@@ -31,13 +31,13 @@ class SkillCategory extends Model
 
         // Auto-generate slug from name if not provided
         static::creating(function ($skillCategory) {
-            if (empty($skillCategory->slug) && !empty($skillCategory->name)) {
+            if (empty($skillCategory->slug) && ! empty($skillCategory->name)) {
                 $skillCategory->slug = Str::slug($skillCategory->name);
             }
         });
 
         static::updating(function ($skillCategory) {
-            if (empty($skillCategory->slug) && !empty($skillCategory->name)) {
+            if (empty($skillCategory->slug) && ! empty($skillCategory->name)) {
                 $skillCategory->slug = Str::slug($skillCategory->name);
             }
         });

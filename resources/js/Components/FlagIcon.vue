@@ -42,10 +42,3 @@ const sizeClass = computed(() => {
 });
 </script>
 
-<style scoped>
-.fi {
-    display: inline-block;
-    margin-right: 0.5rem;
-    border-radius: 2px;
-}
-</style>

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserNotification;
 use App\Models\User;
+use App\Models\UserNotification;
 use App\Services\NotificationService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;

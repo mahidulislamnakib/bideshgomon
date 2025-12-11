@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('proficiency_level', ['Beginner', 'Intermediate', 'Advanced', 'Expert'])->default('Intermediate');
             $table->integer('years_of_experience')->default(0);
             $table->timestamps();
-            
+
             $table->unique(['user_id', 'skill_id']);
         });
     }

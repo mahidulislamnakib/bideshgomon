@@ -2,10 +2,9 @@
 
 namespace App\Services;
 
-use App\Models\User;
-use App\Models\SmartSuggestion;
 use App\Models\ProfileAssessment;
-use Illuminate\Support\Facades\Log;
+use App\Models\SmartSuggestion;
+use App\Models\User;
 
 class SmartSuggestionsService
 {
@@ -102,7 +101,7 @@ class SmartSuggestionsService
 
         // Check financial information
         $financialInfo = $user->financialInformation;
-        if (!$financialInfo || !$financialInfo->monthly_income) {
+        if (! $financialInfo || ! $financialInfo->monthly_income) {
             $suggestions[] = [
                 'suggestion_type' => 'profile_improvement',
                 'category' => 'profile',
@@ -145,7 +144,7 @@ class SmartSuggestionsService
         $passports = $user->passports;
 
         foreach ($passports as $passport) {
-            if (!$passport->scan_front_upload) {
+            if (! $passport->scan_front_upload) {
                 $suggestions[] = [
                     'suggestion_type' => 'document_required',
                     'category' => 'document',
@@ -187,7 +186,7 @@ class SmartSuggestionsService
     {
         $suggestions = [];
 
-        if (!$assessment) {
+        if (! $assessment) {
             $suggestions[] = [
                 'suggestion_type' => 'next_step',
                 'category' => 'assessment',
@@ -200,6 +199,7 @@ class SmartSuggestionsService
                 'relevance_score' => 100,
                 'expires_at' => now()->addDays(7),
             ];
+
             return $suggestions;
         }
 
@@ -209,7 +209,7 @@ class SmartSuggestionsService
         foreach ($visaRecommendations as $visaRec) {
             if ($visaRec['eligibility'] >= 70) {
                 $priority = $visaRec['eligibility'] >= 85 ? 'high' : 'medium';
-                
+
                 $suggestions[] = [
                     'suggestion_type' => 'visa_recommendation',
                     'category' => 'visa',
@@ -240,7 +240,7 @@ class SmartSuggestionsService
     {
         $suggestions = [];
 
-        if (!$assessment) {
+        if (! $assessment) {
             return $suggestions;
         }
 
@@ -254,7 +254,7 @@ class SmartSuggestionsService
                     'category' => 'assessment',
                     'priority' => 'urgent',
                     'title' => "Improve {$this->getCategoryName($category)}",
-                    'description' => "Your {$this->getCategoryName($category)} score is {$score}/100. " . $this->getCategoryAdvice($category),
+                    'description' => "Your {$this->getCategoryName($category)} score is {$score}/100. ".$this->getCategoryAdvice($category),
                     'data' => [
                         'category' => $category,
                         'current_score' => $score,
@@ -302,7 +302,7 @@ class SmartSuggestionsService
         $hasJobApplications = $user->jobApplications()->count() > 0;
         $hasInsurance = $user->insuranceBookings()->count() > 0;
 
-        if (!$hasVisaApplications && $user->passports()->count() > 0) {
+        if (! $hasVisaApplications && $user->passports()->count() > 0) {
             $suggestions[] = [
                 'suggestion_type' => 'next_step',
                 'category' => 'application',
@@ -317,7 +317,7 @@ class SmartSuggestionsService
             ];
         }
 
-        if (!$hasJobApplications && $user->workExperiences()->count() > 0) {
+        if (! $hasJobApplications && $user->workExperiences()->count() > 0) {
             $suggestions[] = [
                 'suggestion_type' => 'next_step',
                 'category' => 'application',
@@ -332,7 +332,7 @@ class SmartSuggestionsService
             ];
         }
 
-        if (!$hasInsurance && $hasVisaApplications) {
+        if (! $hasInsurance && $hasVisaApplications) {
             $suggestions[] = [
                 'suggestion_type' => 'next_step',
                 'category' => 'application',
@@ -419,7 +419,7 @@ class SmartSuggestionsService
             'language_proficiency' => $assessment->language_proficiency_score,
         ];
 
-        return array_filter($categories, fn($score) => $score < 60);
+        return array_filter($categories, fn ($score) => $score < 60);
     }
 
     /**
@@ -427,7 +427,7 @@ class SmartSuggestionsService
      */
     private function getCategoryName(string $category): string
     {
-        return match($category) {
+        return match ($category) {
             'profile_completeness' => 'Profile Completeness',
             'document_completeness' => 'Document Completeness',
             'education' => 'Education',
@@ -444,7 +444,7 @@ class SmartSuggestionsService
      */
     private function getCategoryAdvice(string $category): string
     {
-        return match($category) {
+        return match ($category) {
             'profile_completeness' => 'Complete all sections of your profile including education, work experience, and personal details.',
             'document_completeness' => 'Upload all required documents including passport scans, certificates, and bank statements.',
             'education' => 'Add your educational qualifications, certificates, and transcripts.',
@@ -461,7 +461,7 @@ class SmartSuggestionsService
      */
     private function getCategoryActionUrl(string $category): string
     {
-        return match($category) {
+        return match ($category) {
             'profile_completeness' => route('profile.show'),
             'document_completeness' => route('profile.passports.index'),
             'education' => route('profile.education.index'),

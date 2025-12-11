@@ -3,17 +3,22 @@
 namespace App\Services;
 
 use Exception;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Cache;
 
 class BKashService
 {
     protected $appKey;
+
     protected $appSecret;
+
     protected $username;
+
     protected $password;
+
     protected $baseUrl;
+
     protected $sandbox;
 
     public function __construct()
@@ -42,7 +47,7 @@ class BKashService
             $response = Http::withHeaders([
                 'username' => $this->username,
                 'password' => $this->password,
-            ])->post($this->baseUrl . '/checkout/token/grant', [
+            ])->post($this->baseUrl.'/checkout/token/grant', [
                 'app_key' => $this->appKey,
                 'app_secret' => $this->appSecret,
             ]);
@@ -53,7 +58,7 @@ class BKashService
 
             $result = $response->json();
 
-            if (!isset($result['id_token'])) {
+            if (! isset($result['id_token'])) {
                 throw new Exception('Invalid token response from bKash');
             }
 
@@ -66,6 +71,7 @@ class BKashService
                 Log::channel(config('payment.logging.channel'))
                     ->error('bKash: Token generation failed', ['error' => $e->getMessage()]);
             }
+
             return null;
         }
     }
@@ -77,7 +83,7 @@ class BKashService
     {
         try {
             $token = $this->getToken();
-            if (!$token) {
+            if (! $token) {
                 throw new Exception('Failed to get authentication token');
             }
 
@@ -100,9 +106,9 @@ class BKashService
             }
 
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer '.$token,
                 'X-APP-Key' => $this->appKey,
-            ])->post($this->baseUrl . '/checkout/payment/create', $postData);
+            ])->post($this->baseUrl.'/checkout/payment/create', $postData);
 
             if ($response->failed()) {
                 throw new Exception('bKash API request failed');
@@ -110,7 +116,7 @@ class BKashService
 
             $result = $response->json();
 
-            if (!isset($result['paymentID'])) {
+            if (! isset($result['paymentID'])) {
                 throw new Exception($result['errorMessage'] ?? 'Payment creation failed');
             }
 
@@ -144,7 +150,7 @@ class BKashService
     {
         try {
             $token = $this->getToken();
-            if (!$token) {
+            if (! $token) {
                 throw new Exception('Failed to get authentication token');
             }
 
@@ -154,9 +160,9 @@ class BKashService
             }
 
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer '.$token,
                 'X-APP-Key' => $this->appKey,
-            ])->post($this->baseUrl . '/checkout/payment/execute', [
+            ])->post($this->baseUrl.'/checkout/payment/execute', [
                 'paymentID' => $paymentId,
             ]);
 
@@ -166,7 +172,7 @@ class BKashService
 
             $result = $response->json();
 
-            if (!isset($result['transactionStatus']) || $result['transactionStatus'] !== 'Completed') {
+            if (! isset($result['transactionStatus']) || $result['transactionStatus'] !== 'Completed') {
                 throw new Exception($result['errorMessage'] ?? 'Payment execution failed');
             }
 
@@ -198,14 +204,14 @@ class BKashService
     {
         try {
             $token = $this->getToken();
-            if (!$token) {
+            if (! $token) {
                 throw new Exception('Failed to get authentication token');
             }
 
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer '.$token,
                 'X-APP-Key' => $this->appKey,
-            ])->post($this->baseUrl . '/checkout/payment/query', [
+            ])->post($this->baseUrl.'/checkout/payment/query', [
                 'paymentID' => $paymentId,
             ]);
 
@@ -235,7 +241,7 @@ class BKashService
     {
         try {
             $token = $this->getToken();
-            if (!$token) {
+            if (! $token) {
                 throw new Exception('Failed to get authentication token');
             }
 
@@ -248,9 +254,9 @@ class BKashService
             }
 
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer '.$token,
                 'X-APP-Key' => $this->appKey,
-            ])->post($this->baseUrl . '/checkout/payment/refund', [
+            ])->post($this->baseUrl.'/checkout/payment/refund', [
                 'paymentID' => $transactionId,
                 'amount' => (string) $amount,
                 'trxID' => $transactionId,

@@ -110,7 +110,7 @@ class TravelInsuranceController extends Controller
         $totalAmount = $packagePrice + $taxAmount;
 
         // Check wallet balance
-        if (!$user->wallet || $user->wallet->balance < $totalAmount) {
+        if (! $user->wallet || $user->wallet->balance < $totalAmount) {
             return redirect()->back()->with('error', 'Insufficient wallet balance. Please add funds first.');
         }
 
@@ -149,7 +149,7 @@ class TravelInsuranceController extends Controller
                 'payment_reference' => $booking->booking_reference,
                 'paid_at' => now(),
                 'status' => 'confirmed',
-                'policy_number' => 'POL' . date('Ymd') . str_pad($booking->id, 6, '0', STR_PAD_LEFT),
+                'policy_number' => 'POL'.date('Ymd').str_pad($booking->id, 6, '0', STR_PAD_LEFT),
                 'policy_issued_at' => now(),
             ]);
 

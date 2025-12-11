@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use App\Models\Role;
-use App\Models\ProfileAssessment;
-use App\Models\UserProfile;
 use App\Models\Education;
-use App\Models\WorkExperience;
 use App\Models\Language;
+use App\Models\ProfileAssessment;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\UserProfile;
+use App\Models\WorkExperience;
 use App\Services\ProfileAssessmentService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -18,23 +18,24 @@ class ProfileAssessmentTest extends TestCase
     use RefreshDatabase;
 
     protected $user;
+
     protected $assessmentService;
 
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->assessmentService = app(ProfileAssessmentService::class);
-        
+
         // Create roles
         Role::create(['name' => 'admin', 'slug' => 'admin', 'description' => 'Administrator']);
         $userRole = Role::create(['name' => 'user', 'slug' => 'user', 'description' => 'User']);
         Role::create(['name' => 'agency', 'slug' => 'agency', 'description' => 'Agency']);
         Role::create(['name' => 'consultant', 'slug' => 'consultant', 'description' => 'Consultant']);
-        
+
         // Create a test user with basic profile
         $this->user = User::factory()->create([
-            'role_id' => $userRole->id
+            'role_id' => $userRole->id,
         ]);
     }
 
@@ -194,7 +195,7 @@ class ProfileAssessmentTest extends TestCase
         $assessment = $this->assessmentService->assessProfile($this->user);
 
         $this->assertContains($assessment->risk_level, ['low', 'medium', 'high']);
-        
+
         // Low overall score should result in higher risk
         if ($assessment->overall_score < 50) {
             $this->assertEquals('high', $assessment->risk_level);
@@ -213,7 +214,7 @@ class ProfileAssessmentTest extends TestCase
 
         $this->assertIsArray($assessment->recommendations);
         $this->assertNotEmpty($assessment->recommendations);
-        
+
         // Each recommendation should have required fields
         foreach ($assessment->recommendations as $rec) {
             $this->assertArrayHasKey('priority', $rec);
@@ -232,7 +233,7 @@ class ProfileAssessmentTest extends TestCase
 
         // First assessment
         $assessment1 = $this->assessmentService->assessProfile($this->user);
-        
+
         // Second call should return same assessment (not force refresh)
         $assessment2 = $this->assessmentService->assessProfile($this->user);
 
@@ -277,7 +278,7 @@ class ProfileAssessmentTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'sections' => [
-                '*' => ['name', 'score', 'icon']
+                '*' => ['name', 'score', 'icon'],
             ],
             'overall_score',
             'profile_completeness',
@@ -320,7 +321,7 @@ class ProfileAssessmentTest extends TestCase
 
         $this->assertIsArray($assessment->recommended_visa_types);
         $this->assertNotEmpty($assessment->recommended_visa_types);
-        
+
         // Check structure
         foreach ($assessment->recommended_visa_types as $visa) {
             $this->assertArrayHasKey('type', $visa);
@@ -354,4 +355,3 @@ class ProfileAssessmentTest extends TestCase
         $this->assertArrayHasKey('confidence_score', $assessment->ai_metadata);
     }
 }
-

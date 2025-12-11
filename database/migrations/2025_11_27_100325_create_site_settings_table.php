@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('is_editable')->default(true);
             $table->integer('sort_order')->default(0);
             $table->timestamps();
-            
+
             $table->index('key');
             $table->index('group');
         });

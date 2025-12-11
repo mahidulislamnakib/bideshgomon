@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 class MenuController extends Controller
 {
@@ -35,10 +35,15 @@ class MenuController extends Controller
     {
         $locations = [
             'header_main' => 'Header Main Menu',
+            'header_top' => 'Header Top Bar (Quick Links)',
             'footer_column_1' => 'Footer Column 1',
             'footer_column_2' => 'Footer Column 2',
             'footer_column_3' => 'Footer Column 3',
+            'footer_bottom' => 'Footer Bottom (Legal)',
             'mobile_menu' => 'Mobile Menu',
+            'user_dashboard' => 'User Dashboard Sidebar',
+            'admin_quick_actions' => 'Admin Quick Actions',
+            'services_menu' => 'Services Dropdown',
         ];
 
         $parentMenus = Menu::whereNull('parent_id')
@@ -47,8 +52,8 @@ class MenuController extends Controller
 
         // Get all named routes
         $routes = collect(Route::getRoutes())
-            ->filter(fn($route) => $route->getName())
-            ->map(fn($route) => $route->getName())
+            ->filter(fn ($route) => $route->getName())
+            ->map(fn ($route) => $route->getName())
             ->sort()
             ->values()
             ->toArray();
@@ -90,10 +95,15 @@ class MenuController extends Controller
     {
         $locations = [
             'header_main' => 'Header Main Menu',
+            'header_top' => 'Header Top Bar (Quick Links)',
             'footer_column_1' => 'Footer Column 1',
             'footer_column_2' => 'Footer Column 2',
             'footer_column_3' => 'Footer Column 3',
+            'footer_bottom' => 'Footer Bottom (Legal)',
             'mobile_menu' => 'Mobile Menu',
+            'user_dashboard' => 'User Dashboard Sidebar',
+            'admin_quick_actions' => 'Admin Quick Actions',
+            'services_menu' => 'Services Dropdown',
         ];
 
         $parentMenus = Menu::whereNull('parent_id')
@@ -102,8 +112,8 @@ class MenuController extends Controller
             ->get(['id', 'label', 'location']);
 
         $routes = collect(Route::getRoutes())
-            ->filter(fn($route) => $route->getName())
-            ->map(fn($route) => $route->getName())
+            ->filter(fn ($route) => $route->getName())
+            ->map(fn ($route) => $route->getName())
             ->sort()
             ->values()
             ->toArray();
@@ -172,7 +182,7 @@ class MenuController extends Controller
     public function clearCache()
     {
         Menu::clearMenuCache();
-        
+
         return back()->with('success', 'Menu cache cleared successfully.');
     }
 }

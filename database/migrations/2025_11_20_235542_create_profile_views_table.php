@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->timestamp('viewed_at');
             $table->timestamps();
-            
+
             $table->index(['user_id', 'viewed_at']);
             $table->index('ip_address');
         });

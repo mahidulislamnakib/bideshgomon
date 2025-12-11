@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -82,7 +82,7 @@ class EventController extends Controller
         ]);
 
         // Auto-generate slug if not provided
-        if (!isset($validated['slug'])) {
+        if (! isset($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['title']);
         }
 
@@ -123,7 +123,7 @@ class EventController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:events,slug,' . $event->id,
+            'slug' => 'nullable|string|max:255|unique:events,slug,'.$event->id,
             'description' => 'required|string',
             'event_type' => 'required|in:seminar,workshop,fair,consultation,webinar',
             'event_date' => 'required|date',
@@ -141,7 +141,7 @@ class EventController extends Controller
         ]);
 
         // Auto-generate slug if not provided
-        if (!isset($validated['slug'])) {
+        if (! isset($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['title']);
         }
 
@@ -179,7 +179,7 @@ class EventController extends Controller
      */
     public function toggleFeatured(Event $event)
     {
-        $event->update(['is_featured' => !$event->is_featured]);
+        $event->update(['is_featured' => ! $event->is_featured]);
 
         return back()->with('success', 'Event featured status updated.');
     }
@@ -189,7 +189,7 @@ class EventController extends Controller
      */
     public function togglePublished(Event $event)
     {
-        $event->update(['is_published' => !$event->is_published]);
+        $event->update(['is_published' => ! $event->is_published]);
 
         return back()->with('success', 'Event published status updated.');
     }

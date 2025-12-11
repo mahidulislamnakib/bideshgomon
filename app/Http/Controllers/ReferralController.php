@@ -22,9 +22,9 @@ class ReferralController extends Controller
     public function index(Request $request): Response
     {
         $user = $request->user();
-        
+
         // Generate referral code if doesn't exist
-        if (!$user->referral_code) {
+        if (! $user->referral_code) {
             $this->referralService->generateReferralCode($user);
             $user->refresh();
         }
@@ -33,7 +33,7 @@ class ReferralController extends Controller
         $referrals = $this->referralService->getUserReferrals($user, 10);
         $rewards = $this->referralService->getUserRewards($user, 5);
 
-        $referralLink = url('/register?ref=' . $user->referral_code);
+        $referralLink = url('/register?ref='.$user->referral_code);
 
         return Inertia::render('Referral/Index', [
             'referralCode' => $user->referral_code,

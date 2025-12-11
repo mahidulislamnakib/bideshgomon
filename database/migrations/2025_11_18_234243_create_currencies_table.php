@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('exchange_rate_to_bdt', 15, 6)->default(1); // Rate to BDT
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             // Indexes
             $table->index('code');
             $table->index('is_active');

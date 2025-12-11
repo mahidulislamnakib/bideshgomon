@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\FlightRequest;
+use App\Models\HotelBooking;
 use App\Models\JobApplication;
 use App\Models\ProfileAssessment;
-use App\Models\User;
 use App\Models\TravelInsuranceBooking;
+use App\Models\User;
 use App\Models\UserCv;
-use App\Models\HotelBooking;
-use App\Models\FlightRequest;
 use App\Models\VisaApplication;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class ServiceManagementController extends Controller
 {

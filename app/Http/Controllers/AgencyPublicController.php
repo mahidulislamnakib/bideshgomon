@@ -32,9 +32,9 @@ class AgencyPublicController extends Controller
 
         if ($request->search) {
             $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('description', 'like', '%' . $request->search . '%')
-                  ->orWhere('city', 'like', '%' . $request->search . '%');
+                $q->where('name', 'like', '%'.$request->search.'%')
+                    ->orWhere('description', 'like', '%'.$request->search.'%')
+                    ->orWhere('city', 'like', '%'.$request->search.'%');
             });
         }
 
@@ -77,7 +77,7 @@ class AgencyPublicController extends Controller
                 'reviews' => function ($query) {
                     $query->visible()->with('user')->latest();
                 },
-                'countryAssignments.country'
+                'countryAssignments.country',
             ])
             ->firstOrFail();
 
@@ -98,7 +98,7 @@ class AgencyPublicController extends Controller
 
     public function submitReview(Request $request, Agency $agency)
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return back()->with('error', 'Please login to submit a review.');
         }
 

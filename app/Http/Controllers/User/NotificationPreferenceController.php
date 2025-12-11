@@ -12,7 +12,7 @@ class NotificationPreferenceController extends Controller
     public function index()
     {
         $user = auth()->user();
-        
+
         $notificationTypes = [
             'verification_approved' => 'Verification Approved',
             'verification_rejected' => 'Verification Rejected',

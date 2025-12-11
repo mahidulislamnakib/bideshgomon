@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             LanguageSeeder::class,     // 27+ languages
             CitySeeder::class,         // 100+ cities
         ]);
-        
+
         // ============================================
         // PHASE 2: User Management
         // ============================================
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);  // Admin, Agency, Consultant users
         $this->call(ProfileManagementSeeder::class);
         $this->call(SimpleBangladeshiSeeder::class);
-        
+
         // ============================================
         // PHASE 3: Additional Features
         // ============================================

@@ -2,113 +2,164 @@
     <AdminLayout>
         <Head title="Flight Requests Management" />
 
-        <div class="py-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Header -->
-                <div class="mb-8">
-                    <h1 class="text-3xl font-bold text-gray-900">Flight Requests Management</h1>
-                    <p class="mt-2 text-gray-600">Manage and assign flight requests to agencies</p>
-                </div>
+        <div class="page-container">
+            <!-- Page Header -->
+            <PageHeader
+                title="Flight Requests"
+                description="Manage and assign flight requests to agencies"
+                icon="PaperAirplaneIcon"
+            />
 
-                <!-- Stats Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                        <div class="text-sm text-gray-500 mb-1">Total Requests</div>
-                        <div class="text-2xl font-bold text-gray-900">{{ stats.total }}</div>
+            <!-- Statistics Grid -->
+            <div class="grid-stats mb-8">
+                <div class="stat-card">
+                    <div class="stat-card-icon bg-blue-100">
+                        <ClipboardDocumentListIcon class="h-6 w-6 text-blue-600" />
                     </div>
-                    <div class="bg-yellow-50 rounded-lg shadow-sm border border-yellow-200 p-6">
-                        <div class="text-sm text-yellow-700 mb-1">Pending</div>
-                        <div class="text-2xl font-bold text-yellow-900">{{ stats.pending }}</div>
-                    </div>
-                    <div class="bg-red-50 rounded-lg shadow-sm border border-red-200 p-6">
-                        <div class="text-sm text-blue-700 mb-1">Assigned</div>
-                        <div class="text-2xl font-bold text-red-900">{{ stats.assigned }}</div>
-                    </div>
-                    <div class="bg-purple-50 rounded-lg shadow-sm border border-purple-200 p-6">
-                        <div class="text-sm text-purple-700 mb-1">Quoted</div>
-                        <div class="text-2xl font-bold text-purple-900">{{ stats.quoted }}</div>
-                    </div>
-                    <div class="bg-green-50 rounded-lg shadow-sm border border-green-200 p-6">
-                        <div class="text-sm text-green-700 mb-1">Completed</div>
-                        <div class="text-2xl font-bold text-green-900">{{ stats.completed }}</div>
+                    <div>
+                        <p class="stat-card-label">Total Requests</p>
+                        <p class="stat-card-value">{{ stats.total }}</p>
                     </div>
                 </div>
 
-                <!-- Filters and Search -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-                        <!-- Filter Tabs -->
-                        <div class="flex space-x-2">
-                            <Link
-                                :href="route('admin.flight-requests.index')"
-                                :class="[
-                                    'px-4 py-2 rounded-lg text-sm font-medium transition',
-                                    filter === 'all'
-                                        ? 'bg-brand-red-600 text-white'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                ]"
-                            >
-                                All
-                            </Link>
-                            <Link
-                                :href="route('admin.flight-requests.index', { filter: 'pending' })"
-                                :class="[
-                                    'px-4 py-2 rounded-lg text-sm font-medium transition',
-                                    filter === 'pending'
-                                        ? 'bg-brand-red-600 text-white'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                ]"
-                            >
-                                Pending
-                            </Link>
-                            <Link
-                                :href="route('admin.flight-requests.index', { filter: 'assigned' })"
-                                :class="[
-                                    'px-4 py-2 rounded-lg text-sm font-medium transition',
-                                    filter === 'assigned'
-                                        ? 'bg-brand-red-600 text-white'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                ]"
-                            >
-                                Assigned
-                            </Link>
-                            <Link
-                                :href="route('admin.flight-requests.index', { filter: 'quoted' })"
-                                :class="[
-                                    'px-4 py-2 rounded-lg text-sm font-medium transition',
-                                    filter === 'quoted'
-                                        ? 'bg-brand-red-600 text-white'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                ]"
-                            >
-                                Quoted
-                            </Link>
-                        </div>
-
-                        <!-- Search -->
-                        <div class="flex space-x-2">
-                            <input
-                                v-model="searchQuery"
-                                type="text"
-                                placeholder="Search by reference, route, user..."
-                                class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
-                            />
-                            <button
-                                @click="search"
-                                class="px-6 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition"
-                            >
-                                Search
-                            </button>
-                        </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon bg-yellow-100">
+                        <ClockIcon class="h-6 w-6 text-yellow-600" />
                     </div>
+                    <div>
+                        <p class="stat-card-label">Pending</p>
+                        <p class="stat-card-value">{{ stats.pending }}</p>
+                        <p class="stat-card-change text-yellow-600">Awaiting assignment</p>
+                    </div>
+                </div>
 
-                    <!-- Bulk Actions -->
-                    <div v-if="selectedRequests.length > 0" class="mt-4 flex items-center space-x-4">
-                        <span class="text-sm text-gray-600">{{ selectedRequests.length }} selected</span>
-                        <select
-                            v-model="bulkAssignAgency"
-                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                <div class="stat-card">
+                    <div class="stat-card-icon bg-blue-100">
+                        <UserGroupIcon class="h-6 w-6 text-blue-600" />
+                    </div>
+                    <div>
+                        <p class="stat-card-label">Assigned</p>
+                        <p class="stat-card-value">{{ stats.assigned }}</p>
+                        <p class="stat-card-change text-blue-600">To agencies</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-icon bg-purple-100">
+                        <DocumentTextIcon class="h-6 w-6 text-purple-600" />
+                    </div>
+                    <div>
+                        <p class="stat-card-label">Quoted</p>
+                        <p class="stat-card-value">{{ stats.quoted }}</p>
+                        <p class="stat-card-change text-purple-600">Offers received</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-icon bg-green-100">
+                        <CheckCircleIcon class="h-6 w-6 text-green-600" />
+                    </div>
+                    <div>
+                        <p class="stat-card-label">Completed</p>
+                        <p class="stat-card-value">{{ stats.completed }}</p>
+                        <p class="stat-card-change text-green-600">Successfully booked</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search & Filters -->
+            <div class="card-base mb-6">
+                <div class="flex flex-col gap-4">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <FormInput
+                            v-model="searchQuery"
+                            placeholder="Search by reference, airport codes, or user..."
+                            :icon="MagnifyingGlassIcon"
+                            class="flex-1"
+                            @input="handleSearch"
+                            @enter="applyFilters"
+                        />
+                        <button
+                            @click="showFilters = !showFilters"
+                            class="btn-secondary flex items-center justify-center gap-2"
                         >
+                            <FunnelIcon class="h-5 w-5" />
+                            Filters
+                            <span v-if="filter !== 'all'" class="ml-1 px-2 py-0.5 bg-red-100 text-red-600 text-xs rounded-full font-semibold">
+                                1
+                            </span>
+                        </button>
+                    </div>
+
+                    <!-- Filter Tabs -->
+                    <div v-if="showFilters" class="flex flex-wrap gap-2 pt-4 border-t border-gray-200">
+                        <Link
+                            :href="route('admin.flight-requests.index')"
+                            :class="[
+                                'px-4 py-2 rounded-lg text-sm font-medium transition',
+                                filter === 'all'
+                                    ? 'bg-red-600 text-white shadow-sm'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            ]"
+                        >
+                            All
+                        </Link>
+                        <Link
+                            :href="route('admin.flight-requests.index', { filter: 'pending' })"
+                            :class="[
+                                'px-4 py-2 rounded-lg text-sm font-medium transition',
+                                filter === 'pending'
+                                    ? 'bg-red-600 text-white shadow-sm'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            ]"
+                        >
+                            Pending
+                        </Link>
+                        <Link
+                            :href="route('admin.flight-requests.index', { filter: 'assigned' })"
+                            :class="[
+                                'px-4 py-2 rounded-lg text-sm font-medium transition',
+                                filter === 'assigned'
+                                    ? 'bg-red-600 text-white shadow-sm'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            ]"
+                        >
+                            Assigned
+                        </Link>
+                        <Link
+                            :href="route('admin.flight-requests.index', { filter: 'quoted' })"
+                            :class="[
+                                'px-4 py-2 rounded-lg text-sm font-medium transition',
+                                filter === 'quoted'
+                                    ? 'bg-red-600 text-white shadow-sm'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            ]"
+                        >
+                            Quoted
+                        </Link>
+                        <Link
+                            :href="route('admin.flight-requests.index', { filter: 'completed' })"
+                            :class="[
+                                'px-4 py-2 rounded-lg text-sm font-medium transition',
+                                filter === 'completed'
+                                    ? 'bg-red-600 text-white shadow-sm'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            ]"
+                        >
+                            Completed
+                        </Link>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bulk Actions -->
+            <div v-if="selectedRequests.length > 0" class="card-base mb-6 bg-blue-50 border-blue-200">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-medium text-gray-700">
+                        {{ selectedRequests.length }} request(s) selected
+                    </span>
+                    <div class="flex items-center gap-3">
+                        <select v-model="bulkAssignAgency" class="input-base text-sm">
                             <option value="">Select agency...</option>
                             <option v-for="agency in agencies" :key="agency.id" :value="agency.id">
                                 {{ agency.name }}
@@ -117,61 +168,41 @@
                         <button
                             @click="bulkAssign"
                             :disabled="!bulkAssignAgency"
-                            class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition disabled:opacity-50"
+                            class="btn-primary text-sm"
                         >
-                            Bulk Assign
+                            Assign Selected
                         </button>
-                        <button
-                            @click="clearSelection"
-                            class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition"
-                        >
+                        <button @click="clearSelection" class="btn-secondary text-sm">
                             Clear
                         </button>
                     </div>
                 </div>
+            </div>
 
-                <!-- Requests Table -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left">
-                                    <input
-                                        type="checkbox"
-                                        @change="toggleAll"
-                                        :checked="allSelected"
-                                        class="w-4 h-4 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
-                                    />
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Reference
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    User
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Route
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Date
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Budget
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Status
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Assigned To
-                                </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Quotes
-                                </th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Actions
-                                </th>
-                            </tr>
-                        </thead>
+            <!-- Requests Table -->
+            <div class="card-base overflow-hidden">
+                <table class="table-modern">
+                    <thead>
+                        <tr>
+                            <th class="w-12">
+                                <input
+                                    type="checkbox"
+                                    @change="toggleAll"
+                                    :checked="allSelected"
+                                    class="rounded text-red-600 focus:ring-red-500"
+                                />
+                            </th>
+                            <th>Reference</th>
+                            <th>User</th>
+                            <th>Route</th>
+                            <th>Travel Date</th>
+                            <th>Budget</th>
+                            <th>Status</th>
+                            <th>Assigned To</th>
+                            <th>Quotes</th>
+                            <th class="text-right">Actions</th>
+                        </tr>
+                    </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             <tr v-for="request in flightRequests.data" :key="request.id" class="hover:bg-gray-50">
                                 <td class="px-6 py-4">
@@ -235,11 +266,10 @@
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
-                </div>
+                </table>
 
                 <!-- Pagination -->
-                <div v-if="flightRequests.data.length > 0" class="mt-6">
+                <div v-if="flightRequests.data.length > 0" class="px-6 py-4 border-t border-gray-200">
                     <div class="flex justify-between items-center">
                         <div class="text-sm text-gray-600">
                             Showing {{ flightRequests.from }} to {{ flightRequests.to }} of {{ flightRequests.total }} requests
@@ -260,8 +290,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- End Requests Table Card -->
 
-                <!-- Assign Modal -->
+            <!-- Assign Modal -->
                 <div v-if="assignModal.show" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div class="bg-white rounded-lg p-6 max-w-md w-full">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4">Assign Request</h3>
@@ -296,7 +328,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            <!-- End Assign Modal -->
         </div>
     </AdminLayout>
 </template>
@@ -305,6 +337,22 @@
 import { ref, computed } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import PageHeader from '@/Components/Base/PageHeader.vue';
+import FormInput from '@/Components/Base/FormInput.vue';
+import StatusBadge from '@/Components/Base/StatusBadge.vue';
+import EmptyState from '@/Components/Base/EmptyState.vue';
+import {
+    MagnifyingGlassIcon,
+    FunnelIcon,
+    ClipboardDocumentListIcon,
+    ClockIcon,
+    UserGroupIcon,
+    DocumentTextIcon,
+    CheckCircleIcon,
+    EyeIcon,
+    PaperAirplaneIcon
+} from '@heroicons/vue/24/outline';
+import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
 
 const props = defineProps({
     flightRequests: {
@@ -329,9 +377,12 @@ const props = defineProps({
     }
 });
 
+const { formatDate } = useBangladeshFormat();
+
 const searchQuery = ref(props.search);
 const selectedRequests = ref([]);
 const bulkAssignAgency = ref('');
+const showFilters = ref(false);
 
 const assignModal = ref({
     show: false,
@@ -344,19 +395,20 @@ const allSelected = computed(() => {
            selectedRequests.value.length === props.flightRequests.data.length;
 });
 
-const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    });
-};
-
-const search = () => {
-    router.get(route('admin.flight-requests.index'), {
-        filter: props.filter,
-        search: searchQuery.value
-    });
+// Search with debounce
+let searchTimeout = null;
+const handleSearch = () => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+        router.get(route('admin.flight-requests.index'), {
+            filter: props.filter,
+            search: searchQuery.value
+        }, {
+            preserveState: true,
+            preserveScroll: true,
+            replace: true
+        });
+    }, 500);
 };
 
 const toggleAll = () => {

@@ -38,7 +38,7 @@ class PassportController extends Controller
                     'nullable',
                     'string',
                     'max:50',
-                    'unique:user_passports,passport_number,NULL,id,user_id,' . Auth::id()
+                    'unique:user_passports,passport_number,NULL,id,user_id,'.Auth::id(),
                 ],
                 'passport_type' => 'nullable|in:regular,diplomatic,official,service,emergency',
                 'issuing_country' => 'nullable|string|max:2',
@@ -81,8 +81,9 @@ class PassportController extends Controller
         } catch (\Exception $e) {
             Log::error('Passport creation failed', [
                 'error' => $e->getMessage(),
-                'user_id' => Auth::id()
+                'user_id' => Auth::id(),
             ]);
+
             return redirect()->back()->withErrors(['error' => 'Failed to add passport. Please check your input.'])->withInput();
         }
     }
@@ -99,7 +100,7 @@ class PassportController extends Controller
                 'nullable',
                 'string',
                 'max:50',
-                'unique:user_passports,passport_number,' . $id . ',id,user_id,' . Auth::id()
+                'unique:user_passports,passport_number,'.$id.',id,user_id,'.Auth::id(),
             ],
             'passport_type' => 'nullable|in:regular,diplomatic,official,service,emergency',
             'issuing_country' => 'nullable|string|max:2',
@@ -155,13 +156,13 @@ class PassportController extends Controller
         // Check if passport is referenced in visa history or travel history
         if ($passport->visaHistory()->exists()) {
             return redirect()->back()->withErrors([
-                'error' => 'Cannot delete passport that has visa history records.'
+                'error' => 'Cannot delete passport that has visa history records.',
             ]);
         }
 
         if ($passport->travelHistory()->exists()) {
             return redirect()->back()->withErrors([
-                'error' => 'Cannot delete passport that has travel history records.'
+                'error' => 'Cannot delete passport that has travel history records.',
             ]);
         }
 

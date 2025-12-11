@@ -19,7 +19,7 @@ class InterviewPrepController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $prep = (object)[
+        $prep = (object) [
             'id' => uniqid(),
             'user_id' => $request->user()->id ?? 1,
             'job_role' => $validated['job_role'],

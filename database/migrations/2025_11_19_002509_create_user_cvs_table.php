@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('cv_template_id')->constrained()->onDelete('restrict');
             $table->string('title'); // e.g., "Software Developer CV", "My Marketing CV"
-            
+
             // Personal Information (from user_profiles)
             $table->string('full_name');
             $table->string('email');
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('linkedin_url')->nullable();
             $table->string('website_url')->nullable();
             $table->text('professional_summary')->nullable();
-            
+
             // CV Data (JSON format for flexibility)
             $table->json('education')->nullable(); // Array of education entries
             $table->json('experience')->nullable(); // Array of work experience
@@ -36,11 +36,11 @@ return new class extends Migration
             $table->json('certifications')->nullable(); // Array of certifications
             $table->json('projects')->nullable(); // Array of projects
             $table->json('references')->nullable(); // Array of references
-            
+
             // Customization
             $table->json('custom_sections')->nullable(); // User-added sections
             $table->json('section_order')->nullable(); // Order of sections
-            
+
             // File & Status
             $table->string('pdf_path')->nullable(); // Generated PDF path
             $table->timestamp('last_generated_at')->nullable();
@@ -48,9 +48,9 @@ return new class extends Migration
             $table->string('public_token', 32)->nullable()->unique();
             $table->integer('view_count')->default(0);
             $table->integer('download_count')->default(0);
-            
+
             $table->timestamps();
-            
+
             // Indexes
             $table->index(['user_id', 'created_at']);
             $table->index('public_token');

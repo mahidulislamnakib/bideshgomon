@@ -67,12 +67,12 @@ class CvTemplate extends Model
     // Helpers
     public function isFree()
     {
-        return !$this->is_premium;
+        return ! $this->is_premium;
     }
 
     public function getFormattedPriceAttribute()
     {
-        return '৳' . number_format((float) $this->price, 0);
+        return '৳'.number_format((float) $this->price, 0);
     }
 
     // Auto-generate slug

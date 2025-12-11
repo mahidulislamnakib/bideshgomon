@@ -17,9 +17,10 @@ class WalletTransactionSeeder extends Seeder
     {
         // Get test user
         $user = User::where('email', 'john@test.com')->first();
-        
-        if (!$user) {
+
+        if (! $user) {
             echo "⚠️ Test user not found. Run ProfileManagementSeeder first.\n";
+
             return;
         }
 
@@ -46,7 +47,7 @@ class WalletTransactionSeeder extends Seeder
                 'status' => 'completed',
                 'description' => 'Initial wallet funding via bKash',
                 'reference_type' => 'payment',
-                'reference_id' => 'BKS' . rand(100000, 999999),
+                'reference_id' => 'BKS'.rand(100000, 999999),
                 'created_at' => now()->subDays(30),
             ],
             // Service payment
@@ -59,7 +60,7 @@ class WalletTransactionSeeder extends Seeder
                 'status' => 'completed',
                 'description' => 'Payment for Travel Insurance service',
                 'reference_type' => 'service_payment',
-                'reference_id' => 'SRV' . rand(100000, 999999),
+                'reference_id' => 'SRV'.rand(100000, 999999),
                 'created_at' => now()->subDays(28),
             ],
             // Referral bonus
@@ -72,7 +73,7 @@ class WalletTransactionSeeder extends Seeder
                 'status' => 'completed',
                 'description' => 'Referral bonus - Friend joined!',
                 'reference_type' => 'referral_bonus',
-                'reference_id' => 'REF' . rand(100000, 999999),
+                'reference_id' => 'REF'.rand(100000, 999999),
                 'created_at' => now()->subDays(25),
             ],
             // Another deposit
@@ -85,7 +86,7 @@ class WalletTransactionSeeder extends Seeder
                 'status' => 'completed',
                 'description' => 'Add funds via Nagad',
                 'reference_type' => 'payment',
-                'reference_id' => 'NGD' . rand(100000, 999999),
+                'reference_id' => 'NGD'.rand(100000, 999999),
                 'created_at' => now()->subDays(20),
             ],
             // Service payment
@@ -98,7 +99,7 @@ class WalletTransactionSeeder extends Seeder
                 'status' => 'completed',
                 'description' => 'CV Template purchase - Professional Design',
                 'reference_type' => 'service_payment',
-                'reference_id' => 'CV' . rand(100000, 999999),
+                'reference_id' => 'CV'.rand(100000, 999999),
                 'created_at' => now()->subDays(15),
             ],
             // Withdrawal
@@ -111,7 +112,7 @@ class WalletTransactionSeeder extends Seeder
                 'status' => 'completed',
                 'description' => 'Withdrawal to Bank Account',
                 'reference_type' => 'withdrawal',
-                'reference_id' => 'WTH' . rand(100000, 999999),
+                'reference_id' => 'WTH'.rand(100000, 999999),
                 'created_at' => now()->subDays(12),
             ],
             // Reward
@@ -124,7 +125,7 @@ class WalletTransactionSeeder extends Seeder
                 'status' => 'completed',
                 'description' => 'Reward for completing profile',
                 'reference_type' => 'reward',
-                'reference_id' => 'RWD' . rand(100000, 999999),
+                'reference_id' => 'RWD'.rand(100000, 999999),
                 'created_at' => now()->subDays(10),
             ],
             // Deposit
@@ -137,7 +138,7 @@ class WalletTransactionSeeder extends Seeder
                 'status' => 'completed',
                 'description' => 'Add funds via Rocket',
                 'reference_type' => 'payment',
-                'reference_id' => 'RKT' . rand(100000, 999999),
+                'reference_id' => 'RKT'.rand(100000, 999999),
                 'created_at' => now()->subDays(7),
             ],
             // Service payment
@@ -150,7 +151,7 @@ class WalletTransactionSeeder extends Seeder
                 'status' => 'completed',
                 'description' => 'Job Application service fee',
                 'reference_type' => 'service_payment',
-                'reference_id' => 'JOB' . rand(100000, 999999),
+                'reference_id' => 'JOB'.rand(100000, 999999),
                 'created_at' => now()->subDays(5),
             ],
             // Pending transaction
@@ -163,7 +164,7 @@ class WalletTransactionSeeder extends Seeder
                 'status' => 'pending',
                 'description' => 'Deposit via Bank Transfer (Processing)',
                 'reference_type' => 'payment',
-                'reference_id' => 'BNK' . rand(100000, 999999),
+                'reference_id' => 'BNK'.rand(100000, 999999),
                 'created_at' => now()->subDays(2),
             ],
             // Recent referral
@@ -176,7 +177,7 @@ class WalletTransactionSeeder extends Seeder
                 'status' => 'completed',
                 'description' => 'Referral bonus - 2nd level commission',
                 'reference_type' => 'referral_bonus',
-                'reference_id' => 'REF' . rand(100000, 999999),
+                'reference_id' => 'REF'.rand(100000, 999999),
                 'created_at' => now()->subDays(1),
             ],
             // Today's transaction
@@ -189,7 +190,7 @@ class WalletTransactionSeeder extends Seeder
                 'status' => 'completed',
                 'description' => 'Add funds via bKash',
                 'reference_type' => 'payment',
-                'reference_id' => 'BKS' . rand(100000, 999999),
+                'reference_id' => 'BKS'.rand(100000, 999999),
                 'created_at' => now()->subHours(3),
             ],
         ];
@@ -201,7 +202,7 @@ class WalletTransactionSeeder extends Seeder
         // Update wallet balance to match last transaction
         $wallet->update(['balance' => 19600.00]);
 
-        echo "✅ Created " . count($transactions) . " wallet transactions\n";
+        echo '✅ Created '.count($transactions)." wallet transactions\n";
         echo "💵 Final balance: ৳ 19,600.00\n";
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FlightRequest;
 use App\Models\FlightSearch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +15,7 @@ class FlightRequestController extends Controller
     public function create()
     {
         $popularRoutes = FlightSearch::getTrendingRoutes(6);
-        
+
         return Inertia::render('Services/FlightRequest/Create', [
             'popularRoutes' => $popularRoutes,
         ]);
@@ -126,7 +125,7 @@ class FlightRequestController extends Controller
     {
         $flightRequest = Auth::user()->flightRequests()->findOrFail($requestId);
 
-        if (!in_array($flightRequest->status, ['quoted', 'assigned'])) {
+        if (! in_array($flightRequest->status, ['quoted', 'assigned'])) {
             return back()->with('error', 'This request cannot accept quotes at this time.');
         }
 
@@ -144,7 +143,7 @@ class FlightRequestController extends Controller
         }
 
         // Deduct from wallet
-        $user->wallet->deduct($quote->quoted_price, 'Flight booking from quote #' . $quote->id);
+        $user->wallet->deduct($quote->quoted_price, 'Flight booking from quote #'.$quote->id);
 
         // Update quote status
         $quote->update(['status' => 'accepted']);
@@ -171,7 +170,7 @@ class FlightRequestController extends Controller
     {
         $flightRequest = Auth::user()->flightRequests()->findOrFail($id);
 
-        if (!in_array($flightRequest->status, ['pending', 'assigned', 'quoted'])) {
+        if (! in_array($flightRequest->status, ['pending', 'assigned', 'quoted'])) {
             return back()->with('error', 'This request cannot be cancelled.');
         }
 

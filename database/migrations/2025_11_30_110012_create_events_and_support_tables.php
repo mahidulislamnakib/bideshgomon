@@ -49,7 +49,7 @@ return new class extends Migration
             $table->string('status')->default('registered'); // registered, attended, cancelled
             $table->text('notes')->nullable();
             $table->timestamps();
-            
+
             $table->unique(['event_id', 'user_id']);
         });
 

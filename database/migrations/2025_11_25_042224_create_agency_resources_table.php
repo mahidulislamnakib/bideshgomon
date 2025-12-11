@@ -31,12 +31,12 @@ return new class extends Migration
             $table->json('metadata')->nullable()->comment('Additional resource data');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             // Indexes for performance
             $table->index(['agency_id', 'service_module_id']);
             $table->index(['resource_type', 'resource_name']);
             $table->index(['is_approved', 'is_active']);
-            
+
             // Unique constraint: One resource can only have one primary owner per service
             $table->unique(['service_module_id', 'resource_type', 'resource_name', 'is_primary_owner'], 'unique_primary_owner');
         });

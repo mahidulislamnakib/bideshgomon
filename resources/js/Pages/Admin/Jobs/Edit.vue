@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
@@ -359,7 +359,7 @@ const submit = () => {
                                         >
                                             {{ skill }}
                                             <button type="button" @click="removeSkill(index)" class="text-indigo-900 hover:text-red-600">
-                                                ×
+                                                �
                                             </button>
                                         </span>
                                     </div>
@@ -391,7 +391,7 @@ const submit = () => {
                                         >
                                             {{ benefit }}
                                             <button type="button" @click="removeBenefit(index)" class="text-green-900 hover:text-red-600">
-                                                ×
+                                                �
                                             </button>
                                         </span>
                                     </div>
@@ -415,7 +415,7 @@ const submit = () => {
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Application Fee (৳)</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Application Fee (?)</label>
                                     <input
                                         v-model.number="form.application_fee"
                                         type="number"

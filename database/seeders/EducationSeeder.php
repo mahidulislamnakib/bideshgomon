@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\UserEducation;
-use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class EducationSeeder extends Seeder
 {
@@ -97,29 +97,29 @@ class EducationSeeder extends Seeder
                     'field_of_study' => $fields[array_rand($fields)],
                     'start_date' => Carbon::create($startYear, rand(1, 12), 1),
                     'end_date' => $isCurrent ? null : Carbon::create($endYear, rand(1, 12), 1),
-                    'is_completed' => !$isCurrent,
+                    'is_completed' => ! $isCurrent,
                     'city' => $bangladeshCities[array_rand($bangladeshCities)],
                     'country' => 'BD',
                     'gpa_or_grade' => $isCurrent ? null : rand(300, 400) / 100,
-                    'degree_certificate_path' => rand(0, 1) ? 'education/certificates/sample_certificate_' . $user->id . '_' . $i . '.pdf' : null,
-                    'transcript_path' => rand(0, 1) ? 'education/transcripts/sample_transcript_' . $user->id . '_' . $i . '.pdf' : null,
+                    'degree_certificate_path' => rand(0, 1) ? 'education/certificates/sample_certificate_'.$user->id.'_'.$i.'.pdf' : null,
+                    'transcript_path' => rand(0, 1) ? 'education/transcripts/sample_transcript_'.$user->id.'_'.$i.'.pdf' : null,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
             }
         }
 
-        $this->command->info('✅ Education records created for ' . $users->count() . ' users');
+        $this->command->info('✅ Education records created for '.$users->count().' users');
     }
 
     private function generateDescription(string $field): string
     {
         $descriptions = [
-            'Completed comprehensive coursework in ' . $field . ' with focus on practical applications',
-            'Achieved excellence in ' . $field . ' through rigorous academic training',
-            'Specialized in ' . $field . ' with additional certifications',
-            'Gained in-depth knowledge of ' . $field . ' fundamentals and advanced concepts',
-            'Developed strong foundation in ' . $field . ' through project-based learning',
+            'Completed comprehensive coursework in '.$field.' with focus on practical applications',
+            'Achieved excellence in '.$field.' through rigorous academic training',
+            'Specialized in '.$field.' with additional certifications',
+            'Gained in-depth knowledge of '.$field.' fundamentals and advanced concepts',
+            'Developed strong foundation in '.$field.' through project-based learning',
         ];
 
         return $descriptions[array_rand($descriptions)];

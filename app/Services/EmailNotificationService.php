@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
+use App\Jobs\SendEmailNotificationJob;
 use App\Models\EmailLog;
 use App\Models\EmailTemplate;
 use App\Models\UserNotificationPreference;
-use App\Jobs\SendEmailNotificationJob;
 
 class EmailNotificationService
 {
@@ -20,14 +20,14 @@ class EmailNotificationService
             ->where('is_active', true)
             ->first();
 
-        if (!$template) {
+        if (! $template) {
             return null;
         }
 
         // Check user preferences
         if ($userId) {
             $notificationType = $this->getNotificationTypeFromTemplate($templateSlug);
-            if (!UserNotificationPreference::shouldSendEmail($userId, $notificationType)) {
+            if (! UserNotificationPreference::shouldSendEmail($userId, $notificationType)) {
                 return null;
             }
         }

@@ -28,7 +28,7 @@
                                 type="text" 
                                 required
                                 placeholder="Enter partner name"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                 :class="{ 'border-red-500': form.errors.name }"
                             />
                             <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">{{ form.errors.name }}</p>
@@ -43,7 +43,7 @@
                                 v-model="form.name_bn" 
                                 type="text" 
                                 placeholder="পার্টনার নাম"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                 :class="{ 'border-red-500': form.errors.name_bn }"
                             />
                             <p v-if="form.errors.name_bn" class="mt-1 text-sm text-red-600">{{ form.errors.name_bn }}</p>
@@ -106,7 +106,7 @@
                             <label class="block text-sm font-medium text-gray-700 mb-2">Partner Type</label>
                             <select 
                                 v-model="form.partner_type" 
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                 :class="{ 'border-red-500': form.errors.partner_type }"
                             >
                                 <option value="client">Client</option>
@@ -125,7 +125,7 @@
                                 type="number" 
                                 min="0"
                                 placeholder="0"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                 :class="{ 'border-red-500': form.errors.sort_order }"
                             />
                             <p class="mt-1 text-xs text-gray-500">Lower numbers appear first. Leave as 0 for default ordering.</p>

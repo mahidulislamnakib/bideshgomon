@@ -15,18 +15,18 @@ class ApiRateLimitMiddleware
     public function handle(Request $request, Closure $next, string $limit = 'default'): Response
     {
         $key = $this->resolveRequestSignature($request);
-        
+
         // Get rate limit based on user role or default
         $maxAttempts = $this->getMaxAttempts($request, $limit);
         $decayMinutes = 1;
 
         if (RateLimiter::tooManyAttempts($key, $maxAttempts)) {
             $retryAfter = RateLimiter::availableIn($key);
-            
+
             return response()->json([
                 'success' => false,
                 'message' => 'Too many requests. Please try again later.',
-                'retry_after' => $retryAfter
+                'retry_after' => $retryAfter,
             ], 429)->header('Retry-After', $retryAfter);
         }
 
@@ -46,10 +46,10 @@ class ApiRateLimitMiddleware
     protected function resolveRequestSignature(Request $request): string
     {
         if ($user = $request->user()) {
-            return 'api:' . $user->id;
+            return 'api:'.$user->id;
         }
 
-        return 'api:' . $request->ip();
+        return 'api:'.$request->ip();
     }
 
     /**
@@ -68,11 +68,11 @@ class ApiRateLimitMiddleware
 
         // Role-based limits
         $user = $request->user();
-        
+
         if ($user && $user->role) {
             $roleName = strtolower($user->role->name);
-            
-            return match($roleName) {
+
+            return match ($roleName) {
                 'admin', 'super_admin' => 1000,  // High limit for admins
                 'agent', 'service_provider' => 500,  // Medium for agents
                 default => 100  // Standard for users

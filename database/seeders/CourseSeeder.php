@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Course;
 use App\Models\University;
+use Illuminate\Database\Seeder;
 
 class CourseSeeder extends Seeder
 {
@@ -14,18 +14,19 @@ class CourseSeeder extends Seeder
 
         if ($universities->isEmpty()) {
             $this->command->warn('No universities found. Please run UniversitySeeder first.');
+
             return;
         }
 
         // Sample courses data - we'll create 50+ courses
         $coursesData = $this->getCoursesData();
-        
+
         $coursesCreated = 0;
 
         foreach ($coursesData as $uniName => $courses) {
             $university = $universities->where('name', $uniName)->first();
 
-            if (!$university) {
+            if (! $university) {
                 continue;
             }
 
@@ -66,4 +67,3 @@ class CourseSeeder extends Seeder
         ];
     }
 }
-

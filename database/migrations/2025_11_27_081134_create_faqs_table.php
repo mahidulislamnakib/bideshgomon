@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('helpful_count')->default(0);
             $table->json('tags')->nullable();
             $table->timestamps();
-            
+
             $table->index('faq_category_id');
             $table->index('is_published');
         });

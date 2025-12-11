@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * Master Seeder - Intelligent Re-seeding Strategy
- * 
+ *
  * This seeder handles both fresh seeding and re-seeding scenarios.
  * It safely clears existing data and rebuilds everything from scratch.
- * 
+ *
  * Usage:
  * - Fresh seed: php artisan db:seed --class=MasterSeeder
  * - After migration: php artisan migrate:fresh --seed --seeder=MasterSeeder
@@ -44,7 +44,7 @@ class MasterSeeder extends Seeder
         'service_requests',
         'bookings',
         'cv_downloads',
-        
+
         // Main tables
         'users',
         'job_postings',
@@ -54,7 +54,7 @@ class MasterSeeder extends Seeder
         'travel_insurance_packages',
         'flight_routes',
         'settings',
-        
+
         // Reference tables (can be truncated last)
         'cities',
         'languages',
@@ -96,7 +96,7 @@ class MasterSeeder extends Seeder
     private function clearExistingData(): void
     {
         $this->command->warn('🧹 Clearing existing data...');
-        
+
         // Disable foreign key checks temporarily
         Schema::disableForeignKeyConstraints();
 
@@ -209,17 +209,17 @@ class MasterSeeder extends Seeder
             ['table' => 'degrees', 'expected' => 29, 'label' => 'Degrees'],
             ['table' => 'languages', 'expected' => 28, 'label' => 'Languages'],
             ['table' => 'cities', 'expected' => 30, 'label' => 'Cities', 'min' => true],
-            
+
             // Users & Auth
             ['table' => 'users', 'expected' => 7, 'label' => 'Users', 'min' => true],
             ['table' => 'user_profiles', 'expected' => 7, 'label' => 'User Profiles', 'min' => true],
             ['table' => 'roles', 'expected' => 4, 'label' => 'Roles'],
-            
+
             // Services
             ['table' => 'service_categories', 'expected' => 6, 'label' => 'Service Categories'],
             ['table' => 'service_modules', 'expected' => 39, 'label' => 'Service Modules'],
             ['table' => 'job_postings', 'expected' => 10, 'label' => 'Job Postings'],
-            
+
             // Templates & Packages
             ['table' => 'cv_templates', 'expected' => 48, 'label' => 'CV Templates'],
             ['table' => 'travel_insurance_packages', 'expected' => 6, 'label' => 'Insurance Packages'],
@@ -231,10 +231,10 @@ class MasterSeeder extends Seeder
             $count = DB::table($check['table'])->count();
             $isMin = $check['min'] ?? false;
             $passed = $isMin ? ($count >= $check['expected']) : ($count === $check['expected']);
-            
+
             $symbol = $passed ? '✅' : '❌';
             $comparison = $isMin ? "≥ {$check['expected']}" : "= {$check['expected']}";
-            
+
             $this->command->line(sprintf(
                 '  %s %s: %d %s',
                 $symbol,
@@ -243,7 +243,7 @@ class MasterSeeder extends Seeder
                 $passed ? '' : "(expected {$comparison})"
             ));
 
-            if (!$passed) {
+            if (! $passed) {
                 $allPassed = false;
             }
         }
@@ -260,7 +260,7 @@ class MasterSeeder extends Seeder
         $activeServices = DB::table('service_modules')->where('is_active', true)->count();
         $this->command->info('');
         $this->command->info("📊 Active Services Available: {$activeServices}/39");
-        
+
         // Show test credentials
         $this->showTestCredentials();
     }
@@ -275,7 +275,7 @@ class MasterSeeder extends Seeder
         $this->command->info('           🔐 TEST CREDENTIALS (Password: password)');
         $this->command->info('════════════════════════════════════════════════════════════════');
         $this->command->info('');
-        
+
         $credentials = [
             ['email' => 'admin@bgplatform.com', 'role' => 'Admin', 'description' => 'Full system access'],
             ['email' => 'agency@bgplatform.com', 'role' => 'Agency', 'description' => 'Service provider'],

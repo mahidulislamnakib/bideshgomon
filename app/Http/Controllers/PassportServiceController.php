@@ -17,7 +17,7 @@ class PassportServiceController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $passport = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $passport = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($passport, 'passport-services', $validated);
 
         return response()->json(['message' => 'Passport service request created']);

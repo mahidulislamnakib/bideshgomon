@@ -285,13 +285,3 @@ const submit = () => {
         </form>
     </section>
 </template>
-
-<style scoped>
-.safe-area-bottom {
-    padding-bottom: max(1rem, env(safe-area-inset-bottom));
-}
-
-.active\:scale-98:active {
-    transform: scale(0.98);
-}
-</style>

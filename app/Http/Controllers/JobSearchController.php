@@ -19,7 +19,7 @@ class JobSearchController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $search = (object)[
+        $search = (object) [
             'id' => uniqid(),
             'user_id' => $request->user()->id ?? 1,
             'job_title' => $validated['job_title'],

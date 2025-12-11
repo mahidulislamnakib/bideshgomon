@@ -28,7 +28,7 @@ return new class extends Migration
             $table->timestamp('accepted_at')->nullable();
             $table->timestamp('rejected_at')->nullable();
             $table->timestamps();
-            
+
             $table->index(['service_application_id', 'agency_id']);
             $table->index(['agency_id', 'status']);
         });

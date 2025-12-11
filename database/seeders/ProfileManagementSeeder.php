@@ -3,15 +3,15 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\UserPassport;
-use App\Models\UserVisaHistory;
-use App\Models\UserTravelHistory;
-use App\Models\UserFamilyMember;
 use App\Models\UserEducation;
-use App\Models\UserWorkExperience;
-use App\Models\UserLanguage;
+use App\Models\UserFamilyMember;
 use App\Models\UserFinancialInformation;
+use App\Models\UserLanguage;
+use App\Models\UserPassport;
 use App\Models\UserSecurityInformation;
+use App\Models\UserTravelHistory;
+use App\Models\UserVisaHistory;
+use App\Models\UserWorkExperience;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,7 +19,7 @@ class ProfileManagementSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     * 
+     *
      * Creates comprehensive test data for ALL profile management components:
      * - Passports (with expired, expiring soon, valid)
      * - Visa History (approved, rejected, with overstays)
@@ -46,7 +46,7 @@ class ProfileManagementSeeder extends Seeder
         echo "✅ Test User: {$user->email}\n";
 
         // Assign user role if not already assigned
-        if (!$user->role_id) {
+        if (! $user->role_id) {
             $userRole = \App\Models\Role::where('name', 'user')->first();
             if ($userRole) {
                 $user->update(['role_id' => $userRole->id]);
@@ -62,7 +62,7 @@ class ProfileManagementSeeder extends Seeder
         $passport1 = UserPassport::updateOrCreate(
             [
                 'user_id' => $user->id,
-                'passport_number' => 'BD1234567'
+                'passport_number' => 'BD1234567',
             ],
             [
                 'passport_type' => 'regular',
@@ -88,7 +88,7 @@ class ProfileManagementSeeder extends Seeder
         $passport2 = UserPassport::updateOrCreate(
             [
                 'user_id' => $user->id,
-                'passport_number' => 'BD7654321'
+                'passport_number' => 'BD7654321',
             ],
             [
                 'passport_type' => 'regular',
@@ -114,7 +114,7 @@ class ProfileManagementSeeder extends Seeder
         $passport3 = UserPassport::updateOrCreate(
             [
                 'user_id' => $user->id,
-                'passport_number' => 'BD9876543'
+                'passport_number' => 'BD9876543',
             ],
             [
                 'passport_type' => 'regular',
@@ -786,9 +786,9 @@ class ProfileManagementSeeder extends Seeder
         echo "    - Thailand Overstay (2023)\n";
         echo "    - Medical History: Appendicitis\n";
 
-        echo "\n" . str_repeat('=', 60) . "\n";
+        echo "\n".str_repeat('=', 60)."\n";
         echo "✅ PROFILE MANAGEMENT SEEDING COMPLETE!\n";
-        echo str_repeat('=', 60) . "\n\n";
+        echo str_repeat('=', 60)."\n\n";
 
         echo "📊 Summary:\n";
         echo "  - User: {$user->email} (password: password)\n";

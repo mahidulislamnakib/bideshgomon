@@ -24,7 +24,7 @@ return new class extends Migration
                 'processing',
                 'approved',
                 'rejected',
-                'cancelled'
+                'cancelled',
             ])->default('pending');
             $table->text('user_notes')->nullable();
             $table->text('admin_notes')->nullable();

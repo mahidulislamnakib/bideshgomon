@@ -182,6 +182,15 @@ export default {
                 'safe-bottom': 'env(safe-area-inset-bottom)',
                 'safe-left': 'env(safe-area-inset-left)',
                 'safe-right': 'env(safe-area-inset-right)',
+                // Design System Rhythm (8px base)
+                'rhythm-xs': '4px',
+                'rhythm-sm': '8px',
+                'rhythm-md': '12px',
+                'rhythm-base': '16px',
+                'rhythm-lg': '24px',
+                'rhythm-xl': '32px',
+                'rhythm-2xl': '48px',
+                'rhythm-3xl': '64px',
             },
             fontSize: {
                 // Mobile-optimized typography

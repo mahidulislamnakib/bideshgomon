@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\MasterDocument;
 use App\Models\DocumentCategory;
+use App\Models\MasterDocument;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -19,7 +19,7 @@ class MasterDocumentController extends Controller
         }
 
         if ($request->has('search')) {
-            $query->where('document_name', 'like', '%' . $request->search . '%');
+            $query->where('document_name', 'like', '%'.$request->search.'%');
         }
 
         $documents = $query->orderBy('category_id')->orderBy('sort_order')->paginate(20);

@@ -33,7 +33,7 @@ class WalletController extends Controller
         if ($search) {
             $query->whereHas('user', function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('email', 'like', "%{$search}%");
+                    ->orWhere('email', 'like', "%{$search}%");
             });
         }
 
@@ -131,6 +131,7 @@ class WalletController extends Controller
     {
         try {
             $this->walletService->reverseTransaction($transaction);
+
             return redirect()->back()->with('success', 'Transaction reversed successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

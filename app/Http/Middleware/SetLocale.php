@@ -18,9 +18,9 @@ class SetLocale
     public function handle(Request $request, Closure $next): Response
     {
         $availableLocales = config('app.available_locales', ['en', 'bn']);
-        
+
         // Priority: URL parameter > Session > User preference > Browser > Default
-        $locale = $request->get('lang') 
+        $locale = $request->get('lang')
                   ?? Session::get('locale')
                   ?? $request->user()?->language
                   ?? $this->getPreferredLanguage($request, $availableLocales)
@@ -30,7 +30,7 @@ class SetLocale
         if (in_array($locale, $availableLocales)) {
             App::setLocale($locale);
             Session::put('locale', $locale);
-            
+
             // Update user preference if authenticated
             if ($request->user() && $request->user()->language !== $locale) {
                 $request->user()->update(['language' => $locale]);
@@ -46,8 +46,8 @@ class SetLocale
     protected function getPreferredLanguage(Request $request, array $availableLocales): ?string
     {
         $acceptLanguage = $request->header('Accept-Language');
-        
-        if (!$acceptLanguage) {
+
+        if (! $acceptLanguage) {
             return null;
         }
 
@@ -57,16 +57,16 @@ class SetLocale
             $parts = explode(';', $lang);
             $code = trim($parts[0]);
             $quality = 1.0;
-            
+
             if (isset($parts[1]) && str_starts_with($parts[1], 'q=')) {
                 $quality = (float) substr($parts[1], 2);
             }
-            
+
             $languages[$code] = $quality;
         }
-        
+
         arsort($languages);
-        
+
         // Match with available locales
         foreach ($languages as $lang => $quality) {
             $shortLang = substr($lang, 0, 2);
@@ -74,7 +74,7 @@ class SetLocale
                 return $shortLang;
             }
         }
-        
+
         return null;
     }
 }

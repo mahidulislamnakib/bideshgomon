@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\DataManagement;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Traits\BulkUploadable;
+use App\Http\Controllers\Controller;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,8 +15,11 @@ class LanguageController extends Controller
     use BulkUploadable;
 
     protected $entityName = 'Language';
+
     protected $entityNamePlural = 'Languages';
+
     protected $indexRoute = 'admin.data.languages.index';
+
     protected $bulkUploadView = 'Admin/DataManagement/Languages/BulkUpload';
 
     /**
@@ -29,11 +32,11 @@ class LanguageController extends Controller
         // Search
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%")
-                  ->orWhere('code', 'like', "%{$search}%")
-                  ->orWhere('native_name', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%")
+                    ->orWhere('code', 'like', "%{$search}%")
+                    ->orWhere('native_name', 'like', "%{$search}%");
             });
         }
 
@@ -95,7 +98,7 @@ class LanguageController extends Controller
                 'data' => $validated,
             ]);
 
-            return back()->withInput()->with('error', 'Failed to create language: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to create language: '.$e->getMessage());
         }
     }
 
@@ -143,7 +146,7 @@ class LanguageController extends Controller
                 'error' => $e->getMessage(),
             ]);
 
-            return back()->withInput()->with('error', 'Failed to update language: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to update language: '.$e->getMessage());
         }
     }
 
@@ -163,7 +166,7 @@ class LanguageController extends Controller
                 'error' => $e->getMessage(),
             ]);
 
-            return back()->with('error', 'Failed to delete language: ' . $e->getMessage());
+            return back()->with('error', 'Failed to delete language: '.$e->getMessage());
         }
     }
 
@@ -173,7 +176,7 @@ class LanguageController extends Controller
     public function toggleStatus(Language $language)
     {
         try {
-            $language->update(['is_active' => !$language->is_active]);
+            $language->update(['is_active' => ! $language->is_active]);
 
             return back()->with('success', 'Language status updated successfully.');
         } catch (\Exception $e) {
@@ -195,7 +198,7 @@ class LanguageController extends Controller
             'name_bn',
             'code',
             'native_name',
-            'is_active'
+            'is_active',
         ];
     }
 
@@ -203,7 +206,7 @@ class LanguageController extends Controller
     {
         return [
             'name',
-            'code'
+            'code',
         ];
     }
 
@@ -261,10 +264,10 @@ class LanguageController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%")
-                  ->orWhere('code', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%")
+                    ->orWhere('code', 'like', "%{$search}%");
             });
         }
 

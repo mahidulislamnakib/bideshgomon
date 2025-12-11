@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::table('user_profiles', function (Blueprint $table) {
             // Passport-standard name fields
-            if (!Schema::hasColumn('user_profiles', 'first_name')) {
+            if (! Schema::hasColumn('user_profiles', 'first_name')) {
                 $table->string('first_name', 100)->nullable()->after('bio');
             }
-            if (!Schema::hasColumn('user_profiles', 'middle_name')) {
+            if (! Schema::hasColumn('user_profiles', 'middle_name')) {
                 $table->string('middle_name', 100)->nullable()->after('first_name');
             }
-            if (!Schema::hasColumn('user_profiles', 'last_name')) {
+            if (! Schema::hasColumn('user_profiles', 'last_name')) {
                 $table->string('last_name', 100)->nullable()->after('middle_name');
             }
-            if (!Schema::hasColumn('user_profiles', 'name_as_per_passport')) {
+            if (! Schema::hasColumn('user_profiles', 'name_as_per_passport')) {
                 $table->string('name_as_per_passport')->nullable()->after('last_name');
             }
         });

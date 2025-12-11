@@ -45,7 +45,7 @@ class JobCategory extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::saving(function ($category) {
             if (empty($category->slug)) {
                 $category->slug = Str::slug($category->name);

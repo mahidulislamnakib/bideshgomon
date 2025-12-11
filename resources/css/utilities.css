@@ -1,0 +1,304 @@
+/* Global CSS Utilities for BideshGomon Admin Panel */
+
+/* ============================================
+   MODERN DESIGN SYSTEM UTILITIES
+   ============================================ */
+
+/* Input Base Styles */
+.input-base {
+  @apply w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm;
+  @apply focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent;
+  @apply transition-colors duration-200 bg-white;
+}
+
+.input-base:disabled {
+  @apply bg-gray-50 cursor-not-allowed;
+}
+
+.input-base.error {
+  @apply border-red-300 text-red-900 placeholder-red-300;
+  @apply focus:border-red-500 focus:ring-red-500;
+}
+
+/* Select Base Styles */
+.select-base {
+  @apply w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm;
+  @apply focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent;
+  @apply transition-colors duration-200 bg-white;
+  @apply appearance-none bg-no-repeat;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Textarea Base Styles */
+.textarea-base {
+  @apply w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm;
+  @apply focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent;
+  @apply transition-colors duration-200 bg-white resize-none;
+}
+
+/* Button Variants */
+.btn-primary {
+  @apply inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium;
+  @apply text-white bg-red-600 rounded-lg shadow-sm;
+  @apply hover:bg-red-700 active:bg-red-800;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500;
+  @apply transition-all duration-200;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium;
+  @apply text-gray-700 bg-gray-100 rounded-lg;
+  @apply hover:bg-gray-200 active:bg-gray-300;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400;
+  @apply transition-all duration-200;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium;
+  @apply text-gray-700 bg-white border border-gray-300 rounded-lg;
+  @apply hover:bg-gray-50 active:bg-gray-100;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400;
+  @apply transition-all duration-200;
+}
+
+.btn-danger {
+  @apply inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium;
+  @apply text-red-700 bg-red-50 border border-red-200 rounded-lg;
+  @apply hover:bg-red-100 active:bg-red-200;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500;
+  @apply transition-all duration-200;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium;
+  @apply text-gray-700 bg-transparent rounded-lg;
+  @apply hover:bg-gray-100 active:bg-gray-200;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400;
+  @apply transition-all duration-200;
+}
+
+/* Card Styles */
+.card-base {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200;
+}
+
+.card-hover {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200;
+  @apply hover:shadow-md transition-shadow duration-200;
+}
+
+/* Table Styles */
+.table-modern {
+  @apply min-w-full divide-y divide-gray-200;
+}
+
+.table-modern thead {
+  @apply bg-gray-50;
+}
+
+.table-modern thead th {
+  @apply px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider;
+}
+
+.table-modern tbody {
+  @apply bg-white divide-y divide-gray-100;
+}
+
+.table-modern tbody tr {
+  @apply hover:bg-gray-50 transition-colors duration-150;
+}
+
+.table-modern tbody td {
+  @apply px-6 py-4 text-sm text-gray-900 whitespace-nowrap;
+}
+
+/* Stat Card Styles */
+.stat-card {
+  @apply bg-white rounded-lg border border-gray-200 p-6;
+  @apply flex items-start gap-4;
+  @apply hover:shadow-md transition-shadow duration-200;
+}
+
+.stat-card-icon {
+  @apply p-3 rounded-lg shrink-0;
+}
+
+.stat-card-label {
+  @apply text-sm font-medium text-gray-600;
+}
+
+.stat-card-value {
+  @apply text-2xl font-bold text-gray-900 mt-1;
+}
+
+.stat-card-change {
+  @apply text-xs font-medium mt-1;
+}
+
+/* Page Layout */
+.page-container {
+  @apply max-w-screen-2xl mx-auto px-6 py-8;
+}
+
+.page-header {
+  @apply bg-white border-b border-gray-200;
+}
+
+.page-title {
+  @apply text-3xl font-bold text-gray-900 tracking-tight;
+}
+
+.page-description {
+  @apply text-gray-600 mt-2 text-sm;
+}
+
+/* Form Groups */
+.form-group {
+  @apply space-y-1.5;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-gray-700;
+}
+
+.form-help {
+  @apply text-xs text-gray-500;
+}
+
+.form-error {
+  @apply text-xs text-red-600;
+}
+
+/* Loading States */
+.loading-spinner {
+  @apply animate-spin h-5 w-5 text-red-600;
+}
+
+.loading-overlay {
+  @apply fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50;
+}
+
+/* Badges */
+.badge-base {
+  @apply inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full;
+}
+
+/* Dividers */
+.divider-horizontal {
+  @apply border-t border-gray-200 my-6;
+}
+
+.divider-vertical {
+  @apply border-l border-gray-200 mx-6;
+}
+
+/* Focus Visible (Accessibility) */
+.focus-visible-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500;
+}
+
+/* Scrollbar Styling (Webkit browsers) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-gray-100 rounded;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Responsive Grid Utilities */
+.grid-responsive {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+}
+
+.grid-stats {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6;
+}
+
+/* Animation Utilities */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .page-container {
+    @apply px-0;
+  }
+  
+  .card-base {
+    @apply shadow-none border-0;
+  }
+}
+
+/* Dark Mode Support (Future) */
+@media (prefers-color-scheme: dark) {
+  /* Placeholder for dark mode styles if needed */
+  /* .dark-mode-element { ... } */
+}
+
+/* Reduced Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

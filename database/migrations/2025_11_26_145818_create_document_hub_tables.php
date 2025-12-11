@@ -49,7 +49,7 @@ return new class extends Migration
             $table->text('specific_notes')->nullable(); // Country-specific variations
             $table->integer('sort_order')->default(0);
             $table->timestamps();
-            
+
             // Unique constraint to prevent duplicates
             $table->unique(['country_id', 'visa_type', 'profession_category', 'document_id'], 'unique_country_doc_req');
         });

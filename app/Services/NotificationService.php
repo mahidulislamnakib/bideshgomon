@@ -37,6 +37,7 @@ class NotificationService
                 $count++;
             }
         });
+
         return $count;
     }
 

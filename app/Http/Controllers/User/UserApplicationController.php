@@ -63,10 +63,10 @@ class UserApplicationController extends Controller
         // Handle document uploads with types
         if ($request->hasFile('documents')) {
             $documentTypes = $request->input('document_types', []);
-            
+
             foreach ($request->file('documents') as $key => $file) {
-                $fileName = time() . '_' . $key . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('applications/' . $application->id, $fileName, 'public');
+                $fileName = time().'_'.$key.'_'.$file->getClientOriginalName();
+                $filePath = $file->storeAs('applications/'.$application->id, $fileName, 'public');
 
                 $application->documents()->create([
                     'document_type' => $documentTypes[$key] ?? 'Other',
@@ -98,6 +98,7 @@ class UserApplicationController extends Controller
         // Add quotes count to each application
         $applications->getCollection()->transform(function ($application) {
             $application->quotes_count = $application->quotes()->count();
+
             return $application;
         });
 

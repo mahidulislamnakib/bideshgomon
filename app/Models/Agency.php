@@ -166,7 +166,7 @@ class Agency extends Model
         return $query->where('is_featured', true)
             ->where(function ($q) {
                 $q->whereNull('featured_until')
-                  ->orWhere('featured_until', '>', now());
+                    ->orWhere('featured_until', '>', now());
             });
     }
 
@@ -175,7 +175,7 @@ class Agency extends Model
         return $query->where('is_premium', true)
             ->where(function ($q) {
                 $q->whereNull('premium_until')
-                  ->orWhere('premium_until', '>', now());
+                    ->orWhere('premium_until', '>', now());
             });
     }
 
@@ -192,14 +192,14 @@ class Agency extends Model
 
     public function isFeaturedActive()
     {
-        return $this->is_featured && 
-               (!$this->featured_until || $this->featured_until->isFuture());
+        return $this->is_featured &&
+               (! $this->featured_until || $this->featured_until->isFuture());
     }
 
     public function isPremiumActive()
     {
-        return $this->is_premium && 
-               (!$this->premium_until || $this->premium_until->isFuture());
+        return $this->is_premium &&
+               (! $this->premium_until || $this->premium_until->isFuture());
     }
 
     public function calculateSuccessRate()
@@ -207,6 +207,7 @@ class Agency extends Model
         if ($this->total_clients == 0) {
             return 0;
         }
+
         return round(($this->successful_applications / $this->total_clients) * 100, 2);
     }
 
@@ -220,12 +221,12 @@ class Agency extends Model
 
     public function isProfileComplete()
     {
-        return !empty($this->name) &&
-               !empty($this->email) &&
-               !empty($this->phone) &&
-               !empty($this->address) &&
-               !empty($this->description) &&
-               !empty($this->business_type) &&
-               !empty($this->services_offered);
+        return ! empty($this->name) &&
+               ! empty($this->email) &&
+               ! empty($this->phone) &&
+               ! empty($this->address) &&
+               ! empty($this->description) &&
+               ! empty($this->business_type) &&
+               ! empty($this->services_offered);
     }
 }

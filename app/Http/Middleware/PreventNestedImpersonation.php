@@ -13,6 +13,7 @@ class PreventNestedImpersonation
         if (session()->has('impersonator_id')) {
             return redirect()->back()->with('error', 'Already in impersonation mode. Exit before starting a new one.');
         }
+
         return $next($request);
     }
 }

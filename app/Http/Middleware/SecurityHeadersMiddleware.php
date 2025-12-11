@@ -21,28 +21,28 @@ class SecurityHeadersMiddleware
         // In development, use a very permissive CSP
         if ($isDevelopment) {
             // Permissive CSP for development (Vite hot reload, etc.)
-            $response->headers->set('Content-Security-Policy', 
-                "default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; " .
-                "script-src * 'unsafe-inline' 'unsafe-eval'; " .
-                "style-src * 'unsafe-inline'; " .
-                "img-src * data: blob: 'unsafe-inline'; " .
-                "font-src * data:; " .
-                "connect-src * ws: wss:; " .
+            $response->headers->set('Content-Security-Policy',
+                "default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; ".
+                "script-src * 'unsafe-inline' 'unsafe-eval'; ".
+                "style-src * 'unsafe-inline'; ".
+                "img-src * data: blob: 'unsafe-inline'; ".
+                'font-src * data:; '.
+                'connect-src * ws: wss:; '.
                 "frame-ancestors 'none';"
             );
         } else {
             // Strict CSP for production
-            $response->headers->set('Content-Security-Policy', 
-                "default-src 'self'; " .
-                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; " .
-                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.bunny.net; " .
-                "img-src 'self' data: https: blob:; " .
-                "font-src 'self' data: https://fonts.gstatic.com https://fonts.bunny.net; " .
-                "connect-src 'self'; " .
-                "frame-ancestors 'none'; " .
+            $response->headers->set('Content-Security-Policy',
+                "default-src 'self'; ".
+                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; ".
+                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.bunny.net; ".
+                "img-src 'self' data: https: blob:; ".
+                "font-src 'self' data: https://fonts.gstatic.com https://fonts.bunny.net; ".
+                "connect-src 'self'; ".
+                "frame-ancestors 'none'; ".
                 "base-uri 'self';"
             );
-            
+
             // Strict Transport Security (HSTS)
             $response->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
         }
@@ -60,9 +60,9 @@ class SecurityHeadersMiddleware
         $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
 
         // Permissions Policy
-        $response->headers->set('Permissions-Policy', 
-            'geolocation=(), ' .
-            'microphone=(), ' .
+        $response->headers->set('Permissions-Policy',
+            'geolocation=(), '.
+            'microphone=(), '.
             'camera=()'
         );
 

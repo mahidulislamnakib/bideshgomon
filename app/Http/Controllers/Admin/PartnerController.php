@@ -17,7 +17,7 @@ class PartnerController extends Controller
             ->orderBy('created_at', 'desc');
 
         if ($request->search) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         }
 
         if ($request->has('status') && $request->status !== 'all') {
@@ -28,7 +28,7 @@ class PartnerController extends Controller
 
         return Inertia::render('Admin/Partners/Index', [
             'partners' => $partners,
-            'filters' => $request->only(['search', 'status'])
+            'filters' => $request->only(['search', 'status']),
         ]);
     }
 
@@ -44,7 +44,7 @@ class PartnerController extends Controller
             'logo' => 'required|image|mimes:jpeg,jpg,png,webp,svg|max:2048',
             'website_url' => 'nullable|url|max:255',
             'sort_order' => 'nullable|integer|min:0',
-            'is_active' => 'boolean'
+            'is_active' => 'boolean',
         ]);
 
         if ($request->hasFile('logo')) {
@@ -62,7 +62,7 @@ class PartnerController extends Controller
     public function edit(Partner $partner)
     {
         return Inertia::render('Admin/Partners/Edit', [
-            'partner' => $partner
+            'partner' => $partner,
         ]);
     }
 
@@ -73,7 +73,7 @@ class PartnerController extends Controller
             'logo' => 'nullable|image|mimes:jpeg,jpg,png,webp,svg|max:2048',
             'website_url' => 'nullable|url|max:255',
             'sort_order' => 'nullable|integer|min:0',
-            'is_active' => 'boolean'
+            'is_active' => 'boolean',
         ]);
 
         if ($request->hasFile('logo')) {
@@ -102,8 +102,8 @@ class PartnerController extends Controller
     public function toggleActive(Partner $partner)
     {
         $partner->update([
-            'is_active' => !$partner->is_active,
-            'updated_by' => auth()->id()
+            'is_active' => ! $partner->is_active,
+            'updated_by' => auth()->id(),
         ]);
 
         return back()->with('success', 'Partner status updated');
@@ -114,12 +114,12 @@ class PartnerController extends Controller
         $validated = $request->validate([
             'partners' => 'required|array',
             'partners.*.id' => 'required|exists:partners,id',
-            'partners.*.sort_order' => 'required|integer|min:0'
+            'partners.*.sort_order' => 'required|integer|min:0',
         ]);
 
         foreach ($validated['partners'] as $item) {
             Partner::where('id', $item['id'])->update([
-                'sort_order' => $item['sort_order']
+                'sort_order' => $item['sort_order'],
             ]);
         }
 

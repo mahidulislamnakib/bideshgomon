@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
 use App\Models\AgencyCountryAssignment;
+use App\Models\ProfessionVisaRequirement;
 use App\Models\VisaRequirement;
 use App\Models\VisaRequirementDocument;
-use App\Models\ProfessionVisaRequirement;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -91,7 +91,7 @@ class VisaManagementController extends Controller
             ->where('is_active', true)
             ->first();
 
-        if (!$assignment || !$assignment->canSetFees()) {
+        if (! $assignment || ! $assignment->canSetFees()) {
             abort(403, 'You do not have permission to set fees for this country.');
         }
 
@@ -119,7 +119,7 @@ class VisaManagementController extends Controller
             abort(403, 'You are not assigned to this visa requirement.');
         }
 
-        if (!$visaRequirement->canBeEditedByAgency($agencyId)) {
+        if (! $visaRequirement->canBeEditedByAgency($agencyId)) {
             abort(403, 'You do not have permission to edit this requirement.');
         }
 
@@ -149,7 +149,7 @@ class VisaManagementController extends Controller
             abort(403, 'You are not assigned to this visa requirement.');
         }
 
-        if (!$visaRequirement->canBeEditedByAgency($agencyId)) {
+        if (! $visaRequirement->canBeEditedByAgency($agencyId)) {
             abort(403, 'You do not have permission to edit this requirement.');
         }
 
@@ -182,7 +182,7 @@ class VisaManagementController extends Controller
             abort(403, 'You are not assigned to this visa requirement.');
         }
 
-        if (!$visaRequirement->canBeEditedByAgency($agencyId)) {
+        if (! $visaRequirement->canBeEditedByAgency($agencyId)) {
             abort(403, 'You do not have permission to edit this requirement.');
         }
 
@@ -213,7 +213,7 @@ class VisaManagementController extends Controller
             abort(403, 'You are not assigned to this visa requirement.');
         }
 
-        if (!$visaRequirement->canBeEditedByAgency($agencyId)) {
+        if (! $visaRequirement->canBeEditedByAgency($agencyId)) {
             abort(403, 'You do not have permission to edit this requirement.');
         }
 
@@ -234,7 +234,7 @@ class VisaManagementController extends Controller
             abort(403, 'You are not assigned to this visa requirement.');
         }
 
-        if (!$visaRequirement->canBeEditedByAgency($agencyId)) {
+        if (! $visaRequirement->canBeEditedByAgency($agencyId)) {
             abort(403, 'You do not have permission to edit this requirement.');
         }
 
@@ -267,7 +267,7 @@ class VisaManagementController extends Controller
             abort(403, 'You are not assigned to this visa requirement.');
         }
 
-        if (!$visaRequirement->canBeEditedByAgency($agencyId)) {
+        if (! $visaRequirement->canBeEditedByAgency($agencyId)) {
             abort(403, 'You do not have permission to edit this requirement.');
         }
 
@@ -298,7 +298,7 @@ class VisaManagementController extends Controller
             abort(403, 'You are not assigned to this visa requirement.');
         }
 
-        if (!$visaRequirement->canBeEditedByAgency($agencyId)) {
+        if (! $visaRequirement->canBeEditedByAgency($agencyId)) {
             abort(403, 'You do not have permission to edit this requirement.');
         }
 

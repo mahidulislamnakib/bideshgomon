@@ -20,13 +20,13 @@ class AdminSitemapController extends Controller
                 $uri = $route->uri();
                 $name = $route->getName();
                 $action = $route->getActionName();
-                
+
                 // Extract controller and method
                 $controllerAction = last(explode('\\', $action));
-                
+
                 // Categorize routes
                 $category = $this->categorizeRoute($uri);
-                
+
                 return [
                     'methods' => $methods,
                     'uri' => $uri,
@@ -60,7 +60,7 @@ class AdminSitemapController extends Controller
     {
         // Extract main category from URI
         $parts = explode('/', $uri);
-        
+
         if (count($parts) < 2) {
             return 'General';
         }

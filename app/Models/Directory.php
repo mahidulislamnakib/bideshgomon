@@ -123,7 +123,7 @@ class Directory extends Model
         });
 
         static::updating(function ($directory) {
-            if ($directory->isDirty('name') && !$directory->isDirty('slug')) {
+            if ($directory->isDirty('name') && ! $directory->isDirty('slug')) {
                 $directory->slug = Str::slug($directory->name);
             }
         });
@@ -163,6 +163,7 @@ class Directory extends Model
         if ($this->latitude && $this->longitude) {
             return "https://www.google.com/maps?q={$this->latitude},{$this->longitude}";
         }
+
         return null;
     }
 }

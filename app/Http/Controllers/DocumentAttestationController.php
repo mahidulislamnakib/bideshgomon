@@ -17,7 +17,7 @@ class DocumentAttestationController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $attestation = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $attestation = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($attestation, 'attestation', $validated);
 
         return response()->json(['message' => 'Document attestation request created']);

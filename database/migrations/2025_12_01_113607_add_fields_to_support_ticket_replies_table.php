@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('support_ticket_replies', function (Blueprint $table) {
             // Rename is_admin_reply to is_staff_reply for consistency
             $table->renameColumn('is_admin_reply', 'is_staff_reply');
-            
+
             // Add new fields
             $table->boolean('is_internal_note')->default(false)->after('is_admin_reply');
             $table->json('attachments')->nullable()->after('message');

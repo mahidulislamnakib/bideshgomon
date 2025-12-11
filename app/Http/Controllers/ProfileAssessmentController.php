@@ -22,7 +22,7 @@ class ProfileAssessmentController extends Controller
     public function show()
     {
         $user = auth()->user();
-        
+
         // Try to get cached assessment or generate new one
         $assessment = Cache::remember(
             "profile_assessment_{$user->id}",
@@ -71,7 +71,7 @@ class ProfileAssessmentController extends Controller
     public function generate(Request $request)
     {
         $user = auth()->user();
-        
+
         $assessment = $this->assessmentService->assessProfile($user, forceRefresh: true);
 
         return redirect()->route('profile.assessment.show')
@@ -84,7 +84,7 @@ class ProfileAssessmentController extends Controller
     public function recommendations()
     {
         $user = auth()->user();
-        
+
         $assessment = Cache::remember(
             "profile_assessment_{$user->id}",
             now()->addHours(1),
@@ -108,7 +108,7 @@ class ProfileAssessmentController extends Controller
     public function scoreBreakdown()
     {
         $user = auth()->user();
-        
+
         $assessment = Cache::remember(
             "profile_assessment_{$user->id}",
             now()->addHours(1),
@@ -174,7 +174,7 @@ class ProfileAssessmentController extends Controller
         ]);
 
         $user = auth()->user();
-        
+
         $assessment = Cache::remember(
             "profile_assessment_{$user->id}",
             now()->addHours(1),
@@ -186,7 +186,7 @@ class ProfileAssessmentController extends Controller
         $country = $request->input('country');
         $breakdown = $assessment->visa_eligibility_breakdown[$country] ?? null;
 
-        if (!$breakdown) {
+        if (! $breakdown) {
             return response()->json([
                 'message' => 'Eligibility data not available for this country',
             ], 404);

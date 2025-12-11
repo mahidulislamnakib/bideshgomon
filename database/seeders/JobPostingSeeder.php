@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\JobPosting;
 use App\Models\Country;
+use App\Models\JobPosting;
 use Illuminate\Database\Seeder;
 
 class JobPostingSeeder extends Seeder
@@ -48,7 +48,7 @@ class JobPostingSeeder extends Seeder
                 'application_deadline' => now()->addDays(28),
                 'published_at' => now()->subDays(2),
             ],
-            
+
             [
                 'title' => 'Housekeeping Staff - 5 Star Hotel',
                 'slug' => 'housekeeping-staff-marriott-dubai',
@@ -77,7 +77,7 @@ class JobPostingSeeder extends Seeder
                 'application_deadline' => now()->addDays(25),
                 'published_at' => now()->subDays(5),
             ],
-            
+
             [
                 'title' => 'Electrician - Commercial Projects',
                 'slug' => 'electrician-alfuttaim-abu-dhabi',
@@ -106,7 +106,7 @@ class JobPostingSeeder extends Seeder
                 'application_deadline' => now()->addDays(30),
                 'published_at' => now()->subDays(1),
             ],
-            
+
             // Saudi Arabia Jobs
             [
                 'title' => 'Construction Worker - Building Projects',
@@ -136,7 +136,7 @@ class JobPostingSeeder extends Seeder
                 'application_deadline' => now()->addDays(20),
                 'published_at' => now()->subDays(3),
             ],
-            
+
             [
                 'title' => 'Heavy Vehicle Driver - Trucks',
                 'slug' => 'truck-driver-jeddah',
@@ -165,7 +165,7 @@ class JobPostingSeeder extends Seeder
                 'application_deadline' => now()->addDays(26),
                 'published_at' => now()->subDays(4),
             ],
-            
+
             // Qatar Jobs
             [
                 'title' => 'Sales Associate - Luxury Retail',
@@ -195,7 +195,7 @@ class JobPostingSeeder extends Seeder
                 'application_deadline' => now()->addDays(27),
                 'published_at' => now()->subDays(3),
             ],
-            
+
             // Kuwait Jobs
             [
                 'title' => 'Registered Nurse - General Ward',
@@ -225,7 +225,7 @@ class JobPostingSeeder extends Seeder
                 'application_deadline' => now()->addDays(15),
                 'published_at' => now()->subDays(4),
             ],
-            
+
             [
                 'title' => 'English Teacher - International School',
                 'slug' => 'english-teacher-kuwait',
@@ -254,7 +254,7 @@ class JobPostingSeeder extends Seeder
                 'application_deadline' => now()->addDays(20),
                 'published_at' => now()->subDays(6),
             ],
-            
+
             // Malaysia Jobs
             [
                 'title' => 'Factory Worker - Electronics Assembly',
@@ -284,7 +284,7 @@ class JobPostingSeeder extends Seeder
                 'application_deadline' => now()->addDays(23),
                 'published_at' => now()->subDays(7),
             ],
-            
+
             // Singapore Jobs
             [
                 'title' => 'Software Developer - Full Stack',
@@ -320,6 +320,6 @@ class JobPostingSeeder extends Seeder
             JobPosting::create($job);
         }
 
-        $this->command->info('✅ Created ' . count($jobs) . ' job postings successfully!');
+        $this->command->info('✅ Created '.count($jobs).' job postings successfully!');
     }
 }

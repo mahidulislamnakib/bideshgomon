@@ -28,39 +28,39 @@ class FamilyMemberController extends Controller
                 'place_of_birth' => 'nullable|string|max:255',
                 'gender' => 'nullable|string|in:male,female,other',
                 'nationality' => 'nullable|string|max:100',
-            'country_of_residence' => 'nullable|string|max:100',
-            'city' => 'nullable|string|max:100',
-            'occupation' => 'nullable|string|max:255',
-            'employer_name' => 'nullable|string|max:255',
-            'annual_income' => 'nullable|numeric|min:0',
-            'income_currency' => 'nullable|string|max:3',
-            'education_level' => 'nullable|string|in:none,primary,secondary,higher_secondary,bachelors,masters,doctorate',
-            'marital_status' => 'nullable|string|in:single,married,divorced,widowed,separated',
-            'is_dependent' => 'boolean',
-            'lives_with_user' => 'boolean',
-            'will_accompany' => 'boolean',
-            'will_accompany_travel' => 'boolean',
-            'passport_number' => 'nullable|string|max:50',
-            'immigration_status' => 'nullable|string|in:citizen,permanent_resident,temporary_resident,student,refugee,other,not_applicable',
-            'is_deceased' => 'boolean',
-            'deceased_date' => 'nullable|date|before_or_equal:today',
-            'phone_number' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-            'emergency_contact' => 'boolean',
-            'relationship_proof' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
-            'address' => 'nullable|string|max:500',
-            'notes' => 'nullable|string|max:1000',
-        ]);
+                'country_of_residence' => 'nullable|string|max:100',
+                'city' => 'nullable|string|max:100',
+                'occupation' => 'nullable|string|max:255',
+                'employer_name' => 'nullable|string|max:255',
+                'annual_income' => 'nullable|numeric|min:0',
+                'income_currency' => 'nullable|string|max:3',
+                'education_level' => 'nullable|string|in:none,primary,secondary,higher_secondary,bachelors,masters,doctorate',
+                'marital_status' => 'nullable|string|in:single,married,divorced,widowed,separated',
+                'is_dependent' => 'boolean',
+                'lives_with_user' => 'boolean',
+                'will_accompany' => 'boolean',
+                'will_accompany_travel' => 'boolean',
+                'passport_number' => 'nullable|string|max:50',
+                'immigration_status' => 'nullable|string|in:citizen,permanent_resident,temporary_resident,student,refugee,other,not_applicable',
+                'is_deceased' => 'boolean',
+                'deceased_date' => 'nullable|date|before_or_equal:today',
+                'phone_number' => 'nullable|string|max:20',
+                'email' => 'nullable|email|max:255',
+                'emergency_contact' => 'boolean',
+                'relationship_proof' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
+                'address' => 'nullable|string|max:500',
+                'notes' => 'nullable|string|max:1000',
+            ]);
 
-        // Handle file upload
-        if ($request->hasFile('relationship_proof')) {
-            $file = $request->file('relationship_proof');
-            $path = $file->store('family-members/proofs', 'public');
-            $validated['relationship_proof_path'] = $path;
-            $validated['relationship_proof_uploaded'] = true;
-        } else {
-            $validated['relationship_proof_uploaded'] = false;
-        }
+            // Handle file upload
+            if ($request->hasFile('relationship_proof')) {
+                $file = $request->file('relationship_proof');
+                $path = $file->store('family-members/proofs', 'public');
+                $validated['relationship_proof_path'] = $path;
+                $validated['relationship_proof_uploaded'] = true;
+            } else {
+                $validated['relationship_proof_uploaded'] = false;
+            }
 
             $familyMember = Auth::user()->familyMembers()->create($validated);
 
@@ -68,8 +68,9 @@ class FamilyMemberController extends Controller
         } catch (\Exception $e) {
             Log::error('Family member creation failed', [
                 'error' => $e->getMessage(),
-                'user_id' => Auth::id()
+                'user_id' => Auth::id(),
             ]);
+
             return response()->json(['message' => 'Failed to add family member. Please check your input.', 'error' => $e->getMessage()], 422);
         }
     }
@@ -88,51 +89,52 @@ class FamilyMemberController extends Controller
                 'place_of_birth' => 'nullable|string|max:255',
                 'gender' => 'nullable|string|in:male,female,other',
                 'nationality' => 'nullable|string|max:100',
-            'country_of_residence' => 'nullable|string|max:100',
-            'city' => 'nullable|string|max:100',
-            'occupation' => 'nullable|string|max:255',
-            'employer_name' => 'nullable|string|max:255',
-            'annual_income' => 'nullable|numeric|min:0',
-            'income_currency' => 'nullable|string|max:3',
-            'education_level' => 'nullable|string|in:none,primary,secondary,higher_secondary,bachelors,masters,doctorate',
-            'marital_status' => 'nullable|string|in:single,married,divorced,widowed,separated',
-            'is_dependent' => 'boolean',
-            'lives_with_user' => 'boolean',
-            'will_accompany' => 'boolean',
-            'will_accompany_travel' => 'boolean',
-            'passport_number' => 'nullable|string|max:50',
-            'immigration_status' => 'nullable|string|in:citizen,permanent_resident,temporary_resident,student,refugee,other,not_applicable',
-            'is_deceased' => 'boolean',
-            'deceased_date' => 'nullable|date|before_or_equal:today',
-            'phone_number' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-            'emergency_contact' => 'boolean',
-            'relationship_proof' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
-            'address' => 'nullable|string|max:500',
-            'notes' => 'nullable|string|max:1000',
-        ]);
+                'country_of_residence' => 'nullable|string|max:100',
+                'city' => 'nullable|string|max:100',
+                'occupation' => 'nullable|string|max:255',
+                'employer_name' => 'nullable|string|max:255',
+                'annual_income' => 'nullable|numeric|min:0',
+                'income_currency' => 'nullable|string|max:3',
+                'education_level' => 'nullable|string|in:none,primary,secondary,higher_secondary,bachelors,masters,doctorate',
+                'marital_status' => 'nullable|string|in:single,married,divorced,widowed,separated',
+                'is_dependent' => 'boolean',
+                'lives_with_user' => 'boolean',
+                'will_accompany' => 'boolean',
+                'will_accompany_travel' => 'boolean',
+                'passport_number' => 'nullable|string|max:50',
+                'immigration_status' => 'nullable|string|in:citizen,permanent_resident,temporary_resident,student,refugee,other,not_applicable',
+                'is_deceased' => 'boolean',
+                'deceased_date' => 'nullable|date|before_or_equal:today',
+                'phone_number' => 'nullable|string|max:20',
+                'email' => 'nullable|email|max:255',
+                'emergency_contact' => 'boolean',
+                'relationship_proof' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
+                'address' => 'nullable|string|max:500',
+                'notes' => 'nullable|string|max:1000',
+            ]);
 
-        // Handle file upload
-        if ($request->hasFile('relationship_proof')) {
-            // Delete old file if exists
-            if ($familyMember->relationship_proof_path) {
-                Storage::disk('public')->delete($familyMember->relationship_proof_path);
+            // Handle file upload
+            if ($request->hasFile('relationship_proof')) {
+                // Delete old file if exists
+                if ($familyMember->relationship_proof_path) {
+                    Storage::disk('public')->delete($familyMember->relationship_proof_path);
+                }
+
+                $file = $request->file('relationship_proof');
+                $path = $file->store('family-members/proofs', 'public');
+                $validated['relationship_proof_path'] = $path;
+                $validated['relationship_proof_uploaded'] = true;
             }
 
-            $file = $request->file('relationship_proof');
-            $path = $file->store('family-members/proofs', 'public');
-            $validated['relationship_proof_path'] = $path;
-            $validated['relationship_proof_uploaded'] = true;
-        }
+            $familyMember->update($validated);
 
-        $familyMember->update($validated);
-
-        return response()->json($familyMember);
+            return response()->json($familyMember);
         } catch (\Exception $e) {
             Log::error('Family member update failed', [
                 'error' => $e->getMessage(),
-                'user_id' => Auth::id()
+                'user_id' => Auth::id(),
             ]);
+
             return response()->json(['message' => 'Failed to update family member. Please check your input.', 'error' => $e->getMessage()], 422);
         }
     }

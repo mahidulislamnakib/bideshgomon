@@ -11,7 +11,7 @@ return [
     'logout' => 'Logout',
     'login' => 'Login',
     'register' => 'Register',
-    
+
     // Actions
     'create' => 'Create',
     'edit' => 'Edit',
@@ -31,7 +31,7 @@ return [
     'next' => 'Next',
     'previous' => 'Previous',
     'confirm' => 'Confirm',
-    
+
     // Status
     'active' => 'Active',
     'inactive' => 'Inactive',
@@ -40,7 +40,7 @@ return [
     'rejected' => 'Rejected',
     'completed' => 'Completed',
     'cancelled' => 'Cancelled',
-    
+
     // Messages
     'success' => 'Success',
     'error' => 'Error',
@@ -51,7 +51,7 @@ return [
     'are_you_sure' => 'Are you sure?',
     'delete_confirmation' => 'Do you want to delete this?',
     'unsaved_changes' => 'You have unsaved changes',
-    
+
     // Admin Panel
     'admin_panel' => 'Admin Panel',
     'user_management' => 'User Management',
@@ -60,7 +60,7 @@ return [
     'reports' => 'Reports',
     'analytics' => 'Analytics',
     'notifications' => 'Notifications',
-    
+
     // Forms
     'name' => 'Name',
     'email' => 'Email',
@@ -77,7 +77,7 @@ return [
     'male' => 'Male',
     'female' => 'Female',
     'other' => 'Other',
-    
+
     // Common
     'all' => 'All',
     'show' => 'Show',

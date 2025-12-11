@@ -30,7 +30,7 @@ class PerformanceReport extends Command
     {
         $hours = $this->option('hours');
         $limit = $this->option('limit');
-        
+
         $this->info("Performance Report - Last {$hours} hours");
         $this->newLine();
 
@@ -53,7 +53,7 @@ class PerformanceReport extends Command
                 $this->line("  {$duration}ms - {$sql}...");
             }
         }
-        
+
         $this->newLine();
 
         // Slow Requests
@@ -100,7 +100,7 @@ class PerformanceReport extends Command
         }
 
         $this->newLine();
-        $this->info("✅ Report complete! Visit /telescope for detailed analysis.");
+        $this->info('✅ Report complete! Visit /telescope for detailed analysis.');
 
         return Command::SUCCESS;
     }

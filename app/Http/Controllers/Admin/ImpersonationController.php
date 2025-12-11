@@ -24,12 +24,12 @@ class ImpersonationController extends Controller
 
         // Validate purpose/reason
         $validated = $request->validate([
-            'purpose' => 'required|string|min:10|max:500'
+            'purpose' => 'required|string|min:10|max:500',
         ]);
 
         // Store original user ID
         Session::put('impersonate_original_user', auth()->id());
-        
+
         // Log impersonation with purpose
         activity()
             ->causedBy(auth()->user())
@@ -37,7 +37,7 @@ class ImpersonationController extends Controller
             ->withProperties([
                 'user_name' => $user->name,
                 'user_email' => $user->email,
-                'purpose' => $validated['purpose']
+                'purpose' => $validated['purpose'],
             ])
             ->log('Admin started impersonating user');
 
@@ -52,7 +52,7 @@ class ImpersonationController extends Controller
         // Get original user ID
         $originalUserId = Session::get('impersonate_original_user');
 
-        if (!$originalUserId) {
+        if (! $originalUserId) {
             return redirect()->route('dashboard')->with('error', 'You are not impersonating anyone.');
         }
 
@@ -65,7 +65,7 @@ class ImpersonationController extends Controller
             ->performedOn($impersonatedUser)
             ->withProperties([
                 'user_name' => $impersonatedUser->name,
-                'user_email' => $impersonatedUser->email
+                'user_email' => $impersonatedUser->email,
             ])
             ->log('Admin stopped impersonating user');
 
@@ -82,7 +82,7 @@ class ImpersonationController extends Controller
     {
         return response()->json([
             'impersonating' => Session::has('impersonate_original_user'),
-            'original_user_id' => Session::get('impersonate_original_user')
+            'original_user_id' => Session::get('impersonate_original_user'),
         ]);
     }
 }

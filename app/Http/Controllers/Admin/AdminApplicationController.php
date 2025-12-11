@@ -27,10 +27,10 @@ class AdminApplicationController extends Controller
         $query = ServiceApplication::with(['user', 'serviceModule'])
             ->when($request->search, function ($q, $search) {
                 $q->where('application_number', 'like', "%{$search}%")
-                  ->orWhereHas('user', function ($userQuery) use ($search) {
-                      $userQuery->where('name', 'like', "%{$search}%")
-                                ->orWhere('email', 'like', "%{$search}%");
-                  });
+                    ->orWhereHas('user', function ($userQuery) use ($search) {
+                        $userQuery->where('name', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%");
+                    });
             })
             ->when($request->service, function ($q, $service) {
                 $q->where('service_module_id', $service);
@@ -183,7 +183,21 @@ class AdminApplicationController extends Controller
                 auth()->user()
             );
 
-            // TODO: Send notification to user
+            // Send notification to user
+            app(\App\Services\NotificationService::class)->send(
+                $application->user_id,
+                'Additional Information Required',
+                'Your application requires additional documents: '.$validated['requested_documents'],
+                [
+                    'type' => 'additional_info_required',
+                    'priority' => 'high',
+                    'data' => [
+                        'application_id' => $application->id,
+                        'reference' => $application->reference_number,
+                        'requested_documents' => $validated['requested_documents'],
+                    ],
+                ]
+            );
 
             return back()->with('success', 'Additional information requested.');
         } catch (\Exception $e) {
@@ -301,7 +315,7 @@ class AdminApplicationController extends Controller
                 ->selectRaw('service_module_id, COUNT(*) as count')
                 ->groupBy('service_module_id')
                 ->get()
-                ->mapWithKeys(fn($item) => [$item->serviceModule->name => $item->count]),
+                ->mapWithKeys(fn ($item) => [$item->serviceModule->name => $item->count]),
             'avg_processing_days' => ServiceApplication::whereNotNull('approved_at')
                 ->whereNotNull('submitted_at')
                 ->whereBetween('submitted_at', [$dateFrom, $dateTo])
@@ -317,11 +331,47 @@ class AdminApplicationController extends Controller
      */
     protected function exportApplications($applications)
     {
-        // TODO: Implement CSV/Excel export
-        return response()->json([
-            'message' => 'Export functionality coming soon',
-            'count' => $applications->count(),
-        ]);
+        // Load relationships for export
+        $applications->load(['user', 'serviceModule', 'country']);
+
+        $filename = 'applications_'.date('Y-m-d_His').'.csv';
+
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'"',
+        ];
+
+        $callback = function () use ($applications) {
+            $file = fopen('php://output', 'w');
+
+            // CSV Headers
+            fputcsv($file, [
+                'Application Number',
+                'User Name',
+                'Service',
+                'Country',
+                'Status',
+                'Created Date',
+                'Updated Date',
+            ]);
+
+            // CSV Data
+            foreach ($applications as $app) {
+                fputcsv($file, [
+                    $app->application_number,
+                    $app->user->name ?? 'N/A',
+                    $app->serviceModule->name ?? 'N/A',
+                    $app->country->name ?? 'N/A',
+                    $app->status,
+                    $app->created_at->format('Y-m-d H:i'),
+                    $app->updated_at->format('Y-m-d H:i'),
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 
     /**
@@ -335,9 +385,13 @@ class AdminApplicationController extends Controller
             'documents',
         ]);
 
-        // TODO: Implement PDF generation
-        return response()->json([
-            'message' => 'PDF generation coming soon',
+        // Generate PDF using DomPDF
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.application', [
+            'application' => $application,
         ]);
+
+        $filename = 'application_'.$application->application_number.'.pdf';
+
+        return $pdf->download($filename);
     }
 }

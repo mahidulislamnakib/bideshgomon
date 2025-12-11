@@ -115,8 +115,8 @@ class ServiceFormField extends Model
      */
     public function hasProfileMapping(): bool
     {
-        return !empty($this->profile_map_key) || 
-               (!empty($this->profile_map_table) && !empty($this->profile_map_column));
+        return ! empty($this->profile_map_key) ||
+               (! empty($this->profile_map_table) && ! empty($this->profile_map_column));
     }
 
     /**
@@ -127,11 +127,11 @@ class ServiceFormField extends Model
         if ($this->profile_map_key) {
             return $this->profile_map_key;
         }
-        
+
         if ($this->profile_map_table && $this->profile_map_column) {
             return "{$this->profile_map_table}.{$this->profile_map_column}";
         }
-        
+
         return null;
     }
 
@@ -141,19 +141,19 @@ class ServiceFormField extends Model
     public function getValidationRulesArray(): array
     {
         $rules = [];
-        
+
         if ($this->is_required) {
             $rules[] = 'required';
         } else {
             $rules[] = 'nullable';
         }
-        
+
         // Add custom validation rules
         if ($this->validation_rules) {
             $customRules = explode('|', $this->validation_rules);
             $rules = array_merge($rules, $customRules);
         }
-        
+
         // Add length constraints
         if ($this->min_length && $this->max_length) {
             $rules[] = "between:{$this->min_length},{$this->max_length}";
@@ -162,7 +162,7 @@ class ServiceFormField extends Model
         } elseif ($this->max_length) {
             $rules[] = "max:{$this->max_length}";
         }
-        
+
         // Field type specific rules
         switch ($this->field_type) {
             case 'email':
@@ -190,50 +190,49 @@ class ServiceFormField extends Model
                 }
                 break;
         }
-        
+
         return $rules;
     }
 
     /**
      * Check if field should be shown based on conditional rules
-     * 
-     * @param array $formData Current form data
-     * @return bool
+     *
+     * @param  array  $formData  Current form data
      */
     public function shouldShow(array $formData): bool
     {
-        if (!$this->conditional_rules) {
+        if (! $this->conditional_rules) {
             return true;
         }
-        
+
         $rules = $this->conditional_rules;
-        
+
         // Simple show_if rule
         if (isset($rules['show_if'])) {
             $condition = $rules['show_if'];
             $fieldName = $condition['field'] ?? null;
             $expectedValue = $condition['value'] ?? null;
-            
+
             if ($fieldName && isset($formData[$fieldName])) {
                 return $formData[$fieldName] == $expectedValue;
             }
-            
+
             return false;
         }
-        
+
         // Hide_if rule
         if (isset($rules['hide_if'])) {
             $condition = $rules['hide_if'];
             $fieldName = $condition['field'] ?? null;
             $expectedValue = $condition['value'] ?? null;
-            
+
             if ($fieldName && isset($formData[$fieldName])) {
                 return $formData[$fieldName] != $expectedValue;
             }
-            
+
             return true;
         }
-        
+
         return true;
     }
 
@@ -242,15 +241,15 @@ class ServiceFormField extends Model
      */
     public function getOptionsArray(): array
     {
-        if (!$this->options) {
+        if (! $this->options) {
             return [];
         }
-        
+
         // If options are already in format [{"value": "m", "label": "Male"}]
         if (is_array($this->options) && isset($this->options[0]) && is_array($this->options[0])) {
             return $this->options;
         }
-        
+
         // Convert simple array ["Male", "Female"] to [{"value": "male", "label": "Male"}]
         return collect($this->options)->map(function ($label) {
             return [

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Models\Directory;
 use App\Models\DirectoryCategory;
-use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -109,7 +109,7 @@ class DirectoryController extends Controller
     public function show(Directory $directory)
     {
         $directory->load(['category', 'country']);
-        
+
         return Inertia::render('Admin/Directories/Show', [
             'directory' => $directory,
         ]);
@@ -130,7 +130,7 @@ class DirectoryController extends Controller
             'directory_category_id' => 'required|exists:directory_categories,id',
             'name' => 'required|string|max:255',
             'name_bn' => 'nullable|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:directories,slug,' . $directory->id,
+            'slug' => 'nullable|string|max:255|unique:directories,slug,'.$directory->id,
             'description' => 'required|string',
             'description_bn' => 'nullable|string',
             'country_id' => 'nullable|exists:countries,id',
@@ -184,21 +184,21 @@ class DirectoryController extends Controller
 
     public function toggleVerified(Directory $directory)
     {
-        $directory->update(['is_verified' => !$directory->is_verified]);
+        $directory->update(['is_verified' => ! $directory->is_verified]);
 
         return back()->with('success', 'Directory verification status updated successfully');
     }
 
     public function toggleFeatured(Directory $directory)
     {
-        $directory->update(['is_featured' => !$directory->is_featured]);
+        $directory->update(['is_featured' => ! $directory->is_featured]);
 
         return back()->with('success', 'Directory featured status updated successfully');
     }
 
     public function togglePublished(Directory $directory)
     {
-        $directory->update(['is_published' => !$directory->is_published]);
+        $directory->update(['is_published' => ! $directory->is_published]);
 
         return back()->with('success', 'Directory published status updated successfully');
     }

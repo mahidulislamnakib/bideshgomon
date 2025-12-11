@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('category')->nullable(); // e.g., 'Technical', 'Language', 'Soft Skills'
             $table->text('description')->nullable();
             $table->timestamps();
-            
+
             $table->index('category');
         });
     }

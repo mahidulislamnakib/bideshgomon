@@ -1,0 +1,119 @@
+groups:
+  - name: bideshgomon_alerts
+    interval: 30s
+    rules:
+      # High error rate alert
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.01
+        for: 2m
+        labels:
+          severity: critical
+          team: platform
+        annotations:
+          summary: "High 5xx error rate detected"
+          description: "Error rate is {{ $value | humanizePercentage }} (threshold: 1%)"
+          runbook_url: "https://docs.bideshgomon.com/runbooks/high-error-rate"
+
+      # High latency alert
+      - alert: HighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 1
+        for: 3m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "High response time detected"
+          description: "P95 latency is {{ $value }}s (threshold: 1s)"
+          runbook_url: "https://docs.bideshgomon.com/runbooks/high-latency"
+
+      # Database connection issues
+      - alert: DatabaseConnectionHigh
+        expr: db_connections_active > 80
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "High database connection usage"
+          description: "Active connections: {{ $value }} (threshold: 80)"
+
+      # Queue backup
+      - alert: QueueBacklog
+        expr: queue_jobs_pending > 1000
+        for: 10m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "Queue backlog detected"
+          description: "Pending jobs: {{ $value }} (threshold: 1000)"
+
+      # Failed jobs accumulating
+      - alert: HighFailedJobs
+        expr: rate(queue_jobs_failed[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+          team: platform
+        annotations:
+          summary: "High rate of failed queue jobs"
+          description: "Failed job rate: {{ $value }}/s"
+
+      # Application down
+      - alert: ApplicationDown
+        expr: up{job="bideshgomon"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: platform
+          page: true
+        annotations:
+          summary: "Application instance is down"
+          description: "{{ $labels.instance }} has been down for more than 1 minute"
+          runbook_url: "https://docs.bideshgomon.com/runbooks/app-down"
+
+      # Memory usage high
+      - alert: HighMemoryUsage
+        expr: (php_memory_usage_bytes / php_memory_peak_bytes) > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage: {{ $value | humanizePercentage }}"
+
+      # Disk space low
+      - alert: LowDiskSpace
+        expr: (storage_free_space_gb / storage_total_space_gb) < 0.1
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "Low disk space"
+          description: "Free space: {{ $value | humanizePercentage }}"
+
+      # Cache miss rate high
+      - alert: HighCacheMissRate
+        expr: rate(cache_misses_total[5m]) / (rate(cache_hits_total[5m]) + rate(cache_misses_total[5m])) > 0.5
+        for: 10m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "High cache miss rate"
+          description: "Cache miss rate: {{ $value | humanizePercentage }}"
+
+      # Deployment canary issues
+      - alert: CanaryDeploymentFailing
+        expr: rate(http_requests_total{deployment="canary",status=~"5.."}[5m]) > 0.02
+        for: 1m
+        labels:
+          severity: critical
+          team: platform
+          deployment: canary
+        annotations:
+          summary: "Canary deployment has high error rate"
+          description: "Canary error rate: {{ $value | humanizePercentage }} - consider rollback"
+          runbook_url: "https://docs.bideshgomon.com/runbooks/canary-rollback"

@@ -60,7 +60,7 @@ const getStatusText = (status) => {
         </h2>
         <Link
           href="/services"
-          class="inline-flex items-center px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors"
+          class="inline-flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-lg transition-colors"
         >
           Browse Services
         </Link>
@@ -190,7 +190,7 @@ const getStatusText = (status) => {
               </p>
               <Link
                 href="/services"
-                class="inline-flex items-center px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors"
+                class="inline-flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-lg transition-colors"
               >
                 Browse Services
               </Link>

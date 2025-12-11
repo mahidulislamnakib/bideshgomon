@@ -3,10 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use App\Models\UserEducation;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Carbon\Carbon;
 
 class UserEducationTest extends TestCase
 {

@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import AdDisplay from '@/Components/AdDisplay.vue';
 import { 
     SparklesIcon, 
     CurrencyDollarIcon, 
@@ -66,10 +67,10 @@ const profileShortcuts = [
         icon: 'user', 
         route: 'profile.edit', 
         description: 'Update your basic information',
-        color: 'blue',
-        bgColor: 'bg-blue-100',
-        textColor: 'text-brand-red-600',
-        hoverColor: 'group-hover:text-brand-red-600'
+        color: 'emerald',
+        bgColor: 'bg-emerald-100',
+        textColor: 'text-emerald-600',
+        hoverColor: 'group-hover:text-emerald-700'
     },
     { 
         name: 'Education', 
@@ -78,10 +79,10 @@ const profileShortcuts = [
         params: { section: 'education' }, 
         badge: props.stats?.education_count, 
         description: 'Manage academic records',
-        color: 'green',
-        bgColor: 'bg-emerald-100',
-        textColor: 'text-emerald-600',
-        hoverColor: 'group-hover:text-emerald-600'
+        color: 'blue',
+        bgColor: 'bg-blue-100',
+        textColor: 'text-blue-600',
+        hoverColor: 'group-hover:text-blue-700'
     },
     { 
         name: 'Work Experience', 
@@ -93,7 +94,7 @@ const profileShortcuts = [
         color: 'purple',
         bgColor: 'bg-purple-100',
         textColor: 'text-purple-600',
-        hoverColor: 'group-hover:text-purple-600'
+        hoverColor: 'group-hover:text-purple-700'
     }
 ];
 
@@ -107,13 +108,13 @@ const platformServices = computed(() => {
         'wallet': { bg: 'bg-green-100', text: 'text-green-600' },
         'referrals': { bg: 'bg-pink-100', text: 'text-pink-600' },
         'ai-profile-assessment': { bg: 'bg-purple-100', text: 'text-purple-600' },
-        'cv-builder': { bg: 'bg-indigo-100', text: 'text-brand-red-600' },
-        'document-scanner': { bg: 'bg-cyan-100', text: 'text-brand-red-600' },
-        'public-profile': { bg: 'bg-teal-100', text: 'text-brand-red-600' },
+        'cv-builder': { bg: 'bg-indigo-100', text: 'text-indigo-600' },
+        'document-scanner': { bg: 'bg-cyan-100', text: 'text-cyan-600' },
+        'public-profile': { bg: 'bg-teal-100', text: 'text-teal-600' },
         'payments': { bg: 'bg-amber-100', text: 'text-amber-600' },
         'support': { bg: 'bg-rose-100', text: 'text-rose-600' },
         'appointments': { bg: 'bg-violet-100', text: 'text-violet-600' },
-        'faqs': { bg: 'bg-sky-100', text: 'text-brand-red-600' },
+        'faqs': { bg: 'bg-sky-100', text: 'text-sky-600' },
         'events': { bg: 'bg-orange-100', text: 'text-orange-600' }
     };
     
@@ -137,13 +138,14 @@ const platformServices = computed(() => {
 // Get color classes for buttons
 const getColorClasses = (color) => {
     const colors = {
-        blue: 'bg-brand-red-600 hover:bg-red-700 focus:ring-brand-red-600',
+        emerald: 'bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-500',
+        blue: 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500',
         orange: 'bg-orange-600 hover:bg-orange-700 focus:ring-orange-500',
         green: 'bg-green-600 hover:bg-green-700 focus:ring-green-500',
         purple: 'bg-purple-600 hover:bg-purple-700 focus:ring-purple-500',
         gray: 'bg-gray-600 hover:bg-gray-700 focus:ring-gray-500'
     };
-    return colors[color] || colors.gray;
+    return colors[color] || colors.emerald;
 };
 </script>
 
@@ -176,6 +178,12 @@ const getColorClasses = (color) => {
                     </div>
                 </div>
 
+                <!-- Banner Ad -->
+                <AdDisplay 
+                    placement="banner" 
+                    page="dashboard"
+                />
+
                 <!-- Profile Management -->
                 <section class="mb-8 sm:mb-12">
                     <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 px-1">Profile Management</h2>
@@ -206,7 +214,7 @@ const getColorClasses = (color) => {
                                     {{ service.name }}
                                 </h3>
                                 <p class="text-sm text-gray-600 mb-4">{{ service.description }}</p>
-                                <div class="flex items-center text-sm font-medium text-brand-red-600 group-hover:text-blue-700">
+                                <div class="flex items-center text-sm font-medium text-emerald-600 group-hover:text-emerald-700">
                                     <span>Manage</span>
                                     <ChevronRightIcon class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                                 </div>
@@ -250,41 +258,56 @@ const getColorClasses = (color) => {
                 <!-- Platform Services -->
                 <section v-if="platformServices.length > 0" class="mb-8 sm:mb-12">
                     <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 px-1">Your Services & Tools</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-                        <Link 
-                            v-for="service in platformServices" 
-                            :key="service.name"
-                            :href="route(service.route, service.params || {})"
-                            class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group"
-                            :class="service.is_featured ? 'border-2 border-orange-200' : ''"
-                        >
-                            <div class="p-6">
-                                <div class="p-3 rounded-lg inline-block mb-4" :class="service.bgColor">
-                                    <component 
-                                        :is="getIcon(service.icon)" 
-                                        class="h-6 w-6"
-                                        :class="service.textColor"
-                                    />
-                                </div>
-                                <h3 class="text-base font-semibold text-gray-900 mb-2 group-hover:text-brand-red-600 transition-colors">
-                                    {{ service.name }}
-                                </h3>
-                                <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ service.description }}</p>
-                                <div class="flex items-center text-sm font-medium" 
-                                    :class="service.is_featured ? 'text-orange-600 group-hover:text-orange-700' : 'text-brand-red-600 group-hover:text-blue-700'">
-                                    <span>{{ service.is_featured ? 'Explore' : 'Open' }}</span>
-                                    <ChevronRightIcon class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                                </div>
+                    
+                    <!-- Grid with Sidebar -->
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        <!-- Main Content - Services Grid -->
+                        <div class="lg:col-span-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+                                <Link 
+                                    v-for="service in platformServices" 
+                                    :key="service.name"
+                                    :href="route(service.route, service.params || {})"
+                                    class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group"
+                                    :class="service.is_featured ? 'border-2 border-orange-200' : ''"
+                                >
+                                    <div class="p-6">
+                                        <div class="p-3 rounded-lg inline-block mb-4" :class="service.bgColor">
+                                            <component 
+                                                :is="getIcon(service.icon)" 
+                                                class="h-6 w-6"
+                                                :class="service.textColor"
+                                            />
+                                        </div>
+                                        <h3 class="text-base font-semibold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                                            {{ service.name }}
+                                        </h3>
+                                        <p class="text-sm text-gray-600 mb-4">{{ service.description }}</p>
+                                        <div class="flex items-center text-sm font-medium"
+                                            :class="service.is_featured ? 'text-orange-600 group-hover:text-orange-700' : 'text-emerald-600 group-hover:text-emerald-700'">
+                                            <span>{{ service.is_featured ? 'Explore' : 'Open' }}</span>
+                                            <ChevronRightIcon class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                                        </div>
+                                    </div>
+                                </Link>
                             </div>
-                        </Link>
+                        </div>
+
+                        <!-- Sidebar Ad -->
+                        <div class="lg:col-span-1">
+                            <AdDisplay 
+                                placement="sidebar" 
+                                page="dashboard"
+                            />
+                        </div>
                     </div>
                 </section>
 
                 <!-- Browse Revenue Services -->
                 <section class="mb-8 sm:mb-12">
-                    <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-8 text-center">
-                        <div class="inline-flex items-center justify-center p-4 bg-blue-100 rounded-full mb-4">
-                            <GlobeAltIcon class="h-10 w-10 text-brand-red-600" />
+                    <div class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-8 text-center">
+                        <div class="inline-flex items-center justify-center p-4 bg-emerald-100 rounded-full mb-4">
+                            <GlobeAltIcon class="h-10 w-10 text-emerald-600" />
                         </div>
                         <h2 class="text-2xl font-bold text-gray-900 mb-3">Looking for Visa Services?</h2>
                         <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
@@ -292,7 +315,7 @@ const getColorClasses = (color) => {
                         </p>
                         <Link 
                             :href="route('services.index')"
-                            class="inline-flex items-center px-6 py-3 rounded-xl text-base font-semibold text-white bg-brand-red-600 hover:bg-red-700 transition-all shadow-lg hover:shadow-xl"
+                            class="inline-flex items-center px-6 py-3 rounded-xl text-base font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-all shadow-lg hover:shadow-xl"
                         >
                             Browse All Services
                             <ChevronRightIcon class="h-5 w-5 ml-2" />

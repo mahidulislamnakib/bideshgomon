@@ -12,7 +12,7 @@ class HajjUmrah extends Model
         'user_id', 'application_reference', 'package_type', 'number_of_travelers',
         'preferred_travel_date', 'duration', 'accommodation_type', 'meal_plan',
         'transport_type', 'requires_visa_assistance', 'requires_training',
-        'status', 'special_requirements'
+        'status', 'special_requirements',
     ];
 
     protected $casts = [
@@ -26,12 +26,23 @@ class HajjUmrah extends Model
         parent::boot();
         static::creating(function ($hajj) {
             if (empty($hajj->application_reference)) {
-                $hajj->application_reference = 'HJ' . strtoupper(uniqid());
+                $hajj->application_reference = 'HJ'.strtoupper(uniqid());
             }
         });
     }
 
-    public function user(): BelongsTo { return $this->belongsTo(User::class); }
-    public function serviceApplication(): HasOne { return $this->hasOne(ServiceApplication::class, 'hajj_umrah_id'); }
-    public function canBeEditedByUser(): bool { return in_array($this->status, ['pending', 'submitted']); }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function serviceApplication(): HasOne
+    {
+        return $this->hasOne(ServiceApplication::class, 'hajj_umrah_id');
+    }
+
+    public function canBeEditedByUser(): bool
+    {
+        return in_array($this->status, ['pending', 'submitted']);
+    }
 }

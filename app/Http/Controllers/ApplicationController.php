@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ServiceModule;
 use App\Models\ServiceApplication;
-use App\Services\ServiceApplicationService;
+use App\Models\ServiceModule;
 use App\Services\DataMapperService;
+use App\Services\ServiceApplicationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -14,6 +14,7 @@ use Inertia\Response;
 class ApplicationController extends Controller
 {
     protected $applicationService;
+
     protected $dataMapper;
 
     public function __construct(
@@ -32,9 +33,9 @@ class ApplicationController extends Controller
         $service = ServiceModule::with(['formFields' => function ($query) {
             $query->active()->ordered();
         }])
-        ->where('slug', $serviceSlug)
-        ->active()
-        ->firstOrFail();
+            ->where('slug', $serviceSlug)
+            ->active()
+            ->firstOrFail();
 
         // Check if user already has a pending application
         $existingApplication = auth()->user()
@@ -105,12 +106,12 @@ class ApplicationController extends Controller
 
             DB::commit();
 
-            $message = $isDraft 
+            $message = $isDraft
                 ? 'Application saved as draft. You can complete it later.'
                 : 'Application submitted successfully! You will receive updates via email.';
 
             // Redirect to success page for submitted applications
-            if (!$isDraft) {
+            if (! $isDraft) {
                 return Inertia::render('Success/ApplicationSuccess', [
                     'application' => [
                         'id' => $application->id,
@@ -123,7 +124,7 @@ class ApplicationController extends Controller
                         'id' => $service->id,
                         'name' => $service->name,
                         'slug' => $service->slug,
-                    ]
+                    ],
                 ]);
             }
 
@@ -132,6 +133,7 @@ class ApplicationController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
+
             return back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }
@@ -152,9 +154,9 @@ class ApplicationController extends Controller
             ->when($request->search, function ($q, $search) {
                 $q->where(function ($query) use ($search) {
                     $query->where('application_number', 'like', "%{$search}%")
-                          ->orWhereHas('serviceModule', function ($serviceQuery) use ($search) {
-                              $serviceQuery->where('name', 'like', "%{$search}%");
-                          });
+                        ->orWhereHas('serviceModule', function ($serviceQuery) use ($search) {
+                            $serviceQuery->where('name', 'like', "%{$search}%");
+                        });
                 });
             })
             ->latest();
@@ -209,10 +211,10 @@ class ApplicationController extends Controller
         if ($application->form_data && $application->serviceModule->formFields) {
             foreach ($application->serviceModule->formFields as $field) {
                 $groupName = $field->group_name ?: 'General Information';
-                if (!isset($groupedFormData[$groupName])) {
+                if (! isset($groupedFormData[$groupName])) {
                     $groupedFormData[$groupName] = [];
                 }
-                
+
                 $groupedFormData[$groupName][] = [
                     'name' => $field->field_name,
                     'label' => $field->field_label,
@@ -306,6 +308,7 @@ class ApplicationController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
+
             return back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }
@@ -347,7 +350,7 @@ class ApplicationController extends Controller
         }
 
         // Can only cancel certain statuses
-        if (!in_array($application->status, ['draft', 'pending', 'under_review'])) {
+        if (! in_array($application->status, ['draft', 'pending', 'under_review'])) {
             return back()->with('error', 'This application cannot be cancelled.');
         }
 
@@ -401,6 +404,7 @@ class ApplicationController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
+
             return back()->with('error', $e->getMessage());
         }
     }
@@ -420,10 +424,13 @@ class ApplicationController extends Controller
             'documents',
         ]);
 
-        // TODO: Implement PDF generation using DomPDF or similar
-        return response()->json([
-            'message' => 'PDF generation coming soon',
+        // Generate PDF using DomPDF
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.application', [
             'application' => $application,
         ]);
+
+        $filename = 'application_'.$application->application_number.'.pdf';
+
+        return $pdf->download($filename);
     }
 }

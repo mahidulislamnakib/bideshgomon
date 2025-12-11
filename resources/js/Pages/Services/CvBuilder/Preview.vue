@@ -194,12 +194,3 @@ const secondaryColor = props.cv.cv_template.color_scheme.secondary;
         </div>
     </AuthenticatedLayout>
 </template>
-
-<style scoped>
-/* A4 Paper proportions */
-@media print {
-    .bg-gray-100 {
-        background: white;
-    }
-}
-</style>

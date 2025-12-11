@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('is_verified')->default(false);
             $table->boolean('is_visible')->default(true);
             $table->timestamps();
-            
+
             $table->unique(['agency_id', 'user_id', 'service_application_id']);
         });
     }

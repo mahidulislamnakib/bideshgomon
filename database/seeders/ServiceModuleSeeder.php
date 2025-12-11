@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\ServiceModule;
 use App\Models\ServiceCategory;
+use App\Models\ServiceModule;
+use Illuminate\Database\Seeder;
 
 class ServiceModuleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     * 
+     *
      * The "Plugin System" - Each service is a cartridge that can be plugged into agencies
      */
     public function run(): void

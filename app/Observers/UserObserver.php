@@ -9,6 +9,7 @@ use App\Services\WalletService;
 class UserObserver
 {
     protected WalletService $walletService;
+
     protected ReferralService $referralService;
 
     public function __construct(WalletService $walletService, ReferralService $referralService)
@@ -24,7 +25,7 @@ class UserObserver
     {
         // Auto-create wallet for new users
         $this->walletService->createWallet($user);
-        
+
         // Generate referral code
         $this->referralService->generateReferralCode($user);
     }

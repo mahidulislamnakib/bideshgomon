@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\SmartSuggestion;
 use App\Services\SmartSuggestionsService;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class SmartSuggestionsController extends Controller

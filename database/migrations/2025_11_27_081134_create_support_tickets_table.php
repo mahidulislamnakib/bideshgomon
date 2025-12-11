@@ -30,13 +30,13 @@ return new class extends Migration
             $table->text('satisfaction_feedback')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->index('ticket_number');
             $table->index(['user_id', 'status']);
             $table->index('category');
             $table->index('priority');
         });
-        
+
         // Support ticket replies table
         Schema::create('support_ticket_replies', function (Blueprint $table) {
             $table->id();
@@ -46,7 +46,7 @@ return new class extends Migration
             $table->json('attachments')->nullable();
             $table->boolean('is_staff_reply')->default(false);
             $table->timestamps();
-            
+
             $table->index('support_ticket_id');
         });
     }

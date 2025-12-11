@@ -18,7 +18,7 @@ class CurrencyExchangeController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $exchange = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $exchange = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($exchange, 'currency-exchange', $validated);
 
         return response()->json(['message' => 'Currency exchange request created']);

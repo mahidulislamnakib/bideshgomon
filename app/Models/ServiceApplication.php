@@ -69,7 +69,7 @@ class ServiceApplication extends Model
     protected static function generateApplicationNumber(): string
     {
         do {
-            $number = 'APP-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));
+            $number = 'APP-'.date('Ymd').'-'.strtoupper(substr(uniqid(), -6));
         } while (static::where('application_number', $number)->exists());
 
         return $number;
@@ -158,15 +158,15 @@ class ServiceApplication extends Model
         $this->timeline = $timeline;
 
         // Update special timestamps
-        if ($newStatus === 'submitted' && !$this->submitted_at) {
+        if ($newStatus === 'submitted' && ! $this->submitted_at) {
             $this->submitted_at = now();
         }
 
-        if (in_array($newStatus, ['under_review', 'processing']) && !$this->reviewed_at) {
+        if (in_array($newStatus, ['under_review', 'processing']) && ! $this->reviewed_at) {
             $this->reviewed_at = now();
         }
 
-        if (in_array($newStatus, ['completed', 'approved']) && !$this->completed_at) {
+        if (in_array($newStatus, ['completed', 'approved']) && ! $this->completed_at) {
             $this->completed_at = now();
             $this->serviceModule->incrementCompletions();
         }
@@ -219,7 +219,7 @@ class ServiceApplication extends Model
      */
     public function isCancellable(): bool
     {
-        return !in_array($this->status, ['completed', 'cancelled', 'rejected']);
+        return ! in_array($this->status, ['completed', 'cancelled', 'rejected']);
     }
 
     /**
@@ -227,7 +227,7 @@ class ServiceApplication extends Model
      */
     public function getStatusColorAttribute(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             'draft' => 'gray',
             'submitted' => 'blue',
             'under_review' => 'yellow',

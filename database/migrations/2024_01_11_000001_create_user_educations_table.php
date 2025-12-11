@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('user_educations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            
+
             // Basic Education Information
             $table->string('institution_name');
             $table->string('degree'); // Bachelor's, Master's, PhD, etc.
             $table->string('field_of_study')->nullable(); // Computer Science, Engineering, etc.
             $table->date('start_date');
             $table->date('end_date')->nullable();
-            
+
             // Enhanced for Visa Applications
             $table->string('country', 2)->nullable(); // Where studied
             $table->string('city')->nullable();
@@ -32,9 +32,9 @@ return new class extends Migration
             $table->string('language_of_instruction', 50)->nullable(); // English, Bengali, etc.
             $table->text('courses_completed')->nullable(); // List of major courses
             $table->text('honors_awards')->nullable(); // Academic achievements
-            
+
             $table->timestamps();
-            
+
             // Indexes
             $table->index('user_id');
             $table->index('start_date');

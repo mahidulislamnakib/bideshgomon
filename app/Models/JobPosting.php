@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 
 class JobPosting extends Model
 {
@@ -108,9 +108,9 @@ class JobPosting extends Model
     public function scopeActive(Builder $query)
     {
         return $query->where('is_active', true)
-            ->where(function($q) {
+            ->where(function ($q) {
                 $q->whereNull('application_deadline')
-                  ->orWhere('application_deadline', '>=', now());
+                    ->orWhere('application_deadline', '>=', now());
             });
     }
 
@@ -141,10 +141,10 @@ class JobPosting extends Model
 
     public function scopeSearch(Builder $query, $search)
     {
-        return $query->where(function($q) use ($search) {
+        return $query->where(function ($q) use ($search) {
             $q->where('title', 'like', "%{$search}%")
-              ->orWhere('company_name', 'like', "%{$search}%")
-              ->orWhere('description', 'like', "%{$search}%");
+                ->orWhere('company_name', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
         });
     }
 
@@ -189,6 +189,7 @@ class JobPosting extends Model
         if ($this->admin_approved_fee && $this->agency_posted_fee) {
             return $this->admin_approved_fee - $this->agency_posted_fee;
         }
+
         return 0;
     }
 
@@ -201,11 +202,11 @@ class JobPosting extends Model
     public function getSalaryRangeAttribute()
     {
         $symbol = $this->salary_currency === 'BDT' ? '৳' : $this->salary_currency;
-        
+
         if ($this->salary_max && $this->salary_max > $this->salary_min) {
-            return "{$symbol}" . number_format($this->salary_min) . " - {$symbol}" . number_format($this->salary_max);
+            return "{$symbol}".number_format($this->salary_min)." - {$symbol}".number_format($this->salary_max);
         }
-        
-        return "{$symbol}" . number_format($this->salary_min);
+
+        return "{$symbol}".number_format($this->salary_min);
     }
 }

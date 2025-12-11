@@ -1,9 +1,9 @@
-﻿<template>
+<template>
     <AdminLayout title="Edit Partner">
         <div class="max-w-3xl mx-auto">
             <div class="mb-6">
                 <Link :href="route('admin.partners.index')" class="text-brand-red-600 hover:text-brand-red-600">
-                    ← Back to Partners
+                    ? Back to Partners
                 </Link>
             </div>
 

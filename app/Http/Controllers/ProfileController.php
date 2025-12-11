@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\UserProfile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -39,11 +38,11 @@ class ProfileController extends Controller
             },
             'phoneNumbers' => function ($query) {
                 $query->orderBy('is_primary', 'desc');
-            }
+            },
         ]);
 
         // Create profile if doesn't exist
-        if (!$user->profile) {
+        if (! $user->profile) {
             $user->profile()->create([]);
         }
 
@@ -60,7 +59,9 @@ class ProfileController extends Controller
             'phoneNumbers' => $user->phoneNumbers,
             'profileCompletion' => $user->calculateProfileCompletion(),
         ]);
-    }    /**
+    }
+
+    /**
      * Ensure relationship returns array, never null or collection object
      */
     private function ensureArray($relationship)
@@ -68,15 +69,15 @@ class ProfileController extends Controller
         if (is_null($relationship)) {
             return [];
         }
-        
+
         if ($relationship instanceof \Illuminate\Database\Eloquent\Collection) {
             return $relationship->values()->all();
         }
-        
+
         if (is_array($relationship)) {
             return $relationship;
         }
-        
+
         return [];
     }
 
@@ -107,22 +108,22 @@ class ProfileController extends Controller
             },
             'passports' => function ($query) {
                 $query->orderBy('is_current_passport', 'desc')
-                     ->orderBy('expiry_date', 'desc');
+                    ->orderBy('expiry_date', 'desc');
             },
             'visaHistory' => function ($query) {
                 $query->orderBy('application_date', 'desc');
             },
             'userDocuments' => function ($query) {
                 $query->orderBy('created_at', 'desc');
-            }
+            },
         ]);
 
         // Create profile if doesn't exist
-        if (!$user->profile) {
+        if (! $user->profile) {
             $user->profile()->create([]);
             $user->load('profile'); // Reload the profile relationship
         }
-        
+
         // Ensure we have fresh profile data
         if ($user->profile) {
             $user->profile->refresh();
@@ -136,10 +137,10 @@ class ProfileController extends Controller
         $languageTests = \App\Models\LanguageTest::where('is_active', true)->orderBy('name')->get(['id', 'name', 'language_id'])->toArray();
         $serviceCategories = \App\Models\ServiceCategory::where('is_active', true)->orderBy('name')->get(['id', 'name', 'icon'])->toArray();
         $currencies = \App\Models\Currency::where('is_active', true)->orderBy('code')->get(['id', 'code', 'name', 'symbol'])->toArray();
-        
+
         Log::info('Profile edit data check', [
             'user_id' => $user->id,
-            'has_profile' => !is_null($user->profile),
+            'has_profile' => ! is_null($user->profile),
             'divisions_count' => count($divisions),
             'countries_count' => count($countries),
             'family_members_count' => count($this->ensureArray($user->familyMembers)),
@@ -173,14 +174,16 @@ class ProfileController extends Controller
             'profileCompletion' => $user->getProfileCompletionDetails(),
             'section' => $request->query('section'), // Pass section from query parameter
         ]);
-    }    /**
+    }
+
+    /**
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         Log::info('Profile update started', [
             'user_id' => $request->user()->id,
-            'input' => $request->all()
+            'input' => $request->all(),
         ]);
 
         // Update user email if changed
@@ -194,15 +197,15 @@ class ProfileController extends Controller
 
         // Update user profile with passport-standard name fields
         // Ensure profile exists
-        if (!$request->user()->profile) {
+        if (! $request->user()->profile) {
             $request->user()->profile()->create([]);
             $request->user()->load('profile');
         }
-        
+
         $profile = $request->user()->profile;
-        
+
         Log::info('Profile before update', ['profile' => $profile->toArray()]);
-        
+
         $profile->update([
             'first_name' => $request->input('first_name'),
             'middle_name' => $request->input('middle_name'),
@@ -218,7 +221,7 @@ class ProfileController extends Controller
             $request->input('middle_name'),
             $request->input('last_name'),
         ])));
-        
+
         if ($fullName) {
             $request->user()->update(['name' => $fullName]);
         }
@@ -272,7 +275,7 @@ class ProfileController extends Controller
             'owns_vehicle' => ['nullable', 'boolean'],
             'vehicle_type' => ['nullable', 'string', 'max:100'],
             'vehicle_make_model' => ['nullable', 'string', 'max:255'],
-            'vehicle_year' => ['nullable', 'integer', 'min:1900', 'max:' . (date('Y') + 1)],
+            'vehicle_year' => ['nullable', 'integer', 'min:1900', 'max:'.(date('Y') + 1)],
             'vehicle_value_bdt' => ['nullable', 'numeric', 'min:0'],
             'has_investments' => ['nullable', 'boolean'],
             'investment_types' => ['nullable', 'string', 'max:500'],
@@ -289,21 +292,21 @@ class ProfileController extends Controller
 
         // Split validated data into profile fields and financial fields
         $financialFields = [
-            'employment_start_date', 'employer_address', 'bank_branch', 
-            'bank_account_type', 'bank_statement_path', 'owns_property', 
-            'property_type', 'property_address', 'property_value_bdt', 
-            'property_documents_path', 'owns_vehicle', 'vehicle_type', 
-            'vehicle_make_model', 'vehicle_year', 'vehicle_value_bdt', 
-            'has_investments', 'investment_types', 'investment_value_bdt', 
-            'has_liabilities', 'liability_types', 'liabilities_amount_bdt', 
-            'total_assets_bdt', 'net_worth_bdt', 'tax_return_path', 
-            'salary_certificate_path', 'financial_sponsor_info'
+            'employment_start_date', 'employer_address', 'bank_branch',
+            'bank_account_type', 'bank_statement_path', 'owns_property',
+            'property_type', 'property_address', 'property_value_bdt',
+            'property_documents_path', 'owns_vehicle', 'vehicle_type',
+            'vehicle_make_model', 'vehicle_year', 'vehicle_value_bdt',
+            'has_investments', 'investment_types', 'investment_value_bdt',
+            'has_liabilities', 'liability_types', 'liabilities_amount_bdt',
+            'total_assets_bdt', 'net_worth_bdt', 'tax_return_path',
+            'salary_certificate_path', 'financial_sponsor_info',
         ];
 
         // Fields that exist in both tables (update in both places)
         $sharedFields = [
             'employer_name', 'monthly_income_bdt', 'annual_income_bdt',
-            'bank_name', 'bank_account_number', 'bank_balance_bdt'
+            'bank_name', 'bank_account_number', 'bank_balance_bdt',
         ];
 
         // Separate profile data and financial data
@@ -324,12 +327,12 @@ class ProfileController extends Controller
 
         // Update user profile
         $profile = $request->user()->profile()->firstOrCreate([]);
-        if (!empty($profileData)) {
+        if (! empty($profileData)) {
             $profile->update($profileData);
         }
 
         // Update financial information if any financial data exists
-        if (!empty($financialData)) {
+        if (! empty($financialData)) {
             $request->user()->financialInformation()->updateOrCreate(
                 ['user_id' => $request->user()->id],
                 $financialData
@@ -365,12 +368,12 @@ class ProfileController extends Controller
         ]);
 
         $profile = $request->user()->profile()->firstOrCreate([]);
-        
+
         // Filter out empty values
-        $socialLinks = array_filter($validated['social_links'] ?? [], function($value) {
-            return !empty(trim($value));
+        $socialLinks = array_filter($validated['social_links'] ?? [], function ($value) {
+            return ! empty(trim($value));
         });
-        
+
         // Update both JSON field and individual columns for backward compatibility
         $profile->update([
             'social_links' => $socialLinks,
@@ -428,6 +431,7 @@ class ProfileController extends Controller
             return Redirect::back()->with('success', 'Medical information updated successfully!');
         } catch (\Exception $e) {
             Log::error('Medical info update failed', ['error' => $e->getMessage(), 'user_id' => $request->user()->id]);
+
             return Redirect::back()->withErrors(['error' => 'Failed to update medical information. Please check your input.']);
         }
     }
@@ -459,6 +463,7 @@ class ProfileController extends Controller
             return Redirect::back()->with('success', 'References updated successfully!');
         } catch (\Exception $e) {
             Log::error('References update failed', ['error' => $e->getMessage(), 'user_id' => $request->user()->id]);
+
             return Redirect::back()->withErrors(['error' => 'Failed to update references. Please check your input.']);
         }
     }
@@ -488,6 +493,7 @@ class ProfileController extends Controller
             return Redirect::back()->with('success', 'Certifications updated successfully!');
         } catch (\Exception $e) {
             Log::error('Certifications update failed', ['error' => $e->getMessage(), 'user_id' => $request->user()->id]);
+
             return Redirect::back()->withErrors(['error' => 'Failed to update certifications. Please check your input.']);
         }
     }
@@ -541,11 +547,11 @@ class ProfileController extends Controller
             $profile->update(['data_downloaded_at' => now()]);
         }
 
-        $filename = 'user-data-' . $user->id . '-' . now()->format('Y-m-d') . '.json';
+        $filename = 'user-data-'.$user->id.'-'.now()->format('Y-m-d').'.json';
 
         return response()->json($data)
             ->header('Content-Type', 'application/json')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"');
     }
 
     /**
@@ -570,7 +576,7 @@ class ProfileController extends Controller
         ]);
 
         $request->user()->profile->update([
-            'preferences' => $validated['preferences'] ?? []
+            'preferences' => $validated['preferences'] ?? [],
         ]);
 
         return back()->with('success', 'Preferences updated successfully!');

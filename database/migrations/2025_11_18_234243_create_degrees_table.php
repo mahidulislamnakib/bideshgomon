@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('typical_duration_years')->default(4); // Typical years to complete
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             // Indexes
             $table->index('level');
             $table->index('is_active');

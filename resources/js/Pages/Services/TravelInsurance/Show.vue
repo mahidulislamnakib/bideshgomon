@@ -213,12 +213,3 @@ const getBadgeClass = (color) => {
     </AuthenticatedLayout>
 </template>
 
-<style scoped>
-.safe-area-inset-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-}
-
-.touch-manipulation {
-    touch-action: manipulation;
-}
-</style>

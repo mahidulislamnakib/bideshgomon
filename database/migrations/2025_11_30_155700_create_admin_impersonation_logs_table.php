@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('ended_at')->nullable();
             $table->string('purpose')->nullable();
             $table->timestamps();
-            
+
             // Indexes
             $table->index('impersonator_id');
             $table->index('target_user_id');

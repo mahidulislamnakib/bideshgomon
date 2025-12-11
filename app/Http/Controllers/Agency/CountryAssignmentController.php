@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
 use App\Models\AgencyCountryAssignment;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CountryAssignmentController extends Controller
@@ -16,7 +15,7 @@ class CountryAssignmentController extends Controller
     {
         $agency = auth()->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             abort(403, 'Agency profile not found');
         }
 

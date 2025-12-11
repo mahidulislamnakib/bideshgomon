@@ -101,7 +101,7 @@ class VisaRequirementDocument extends Model
     public function getRequirementSummaryAttribute(): string
     {
         $summary = $this->document_name;
-        
+
         if ($this->quantity > 1) {
             $summary .= " ({$this->quantity} copies)";
         }

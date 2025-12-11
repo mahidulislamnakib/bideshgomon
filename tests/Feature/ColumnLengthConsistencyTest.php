@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ColumnLengthConsistencyTest extends TestCase
 {
@@ -43,7 +43,7 @@ class ColumnLengthConsistencyTest extends TestCase
         $this->actingAs($user);
 
         $payload = [
-            'passport_number' => 'P' . rand(100000,999999),
+            'passport_number' => 'P'.rand(100000, 999999),
             'full_name_on_passport' => 'TEST USER',
             'issuing_country' => 'Bangladesh',
             'nationality' => 'Bangladeshi',

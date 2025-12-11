@@ -67,7 +67,7 @@
                                                 :placeholder="field.placeholder"
                                                 :min="field.min"
                                                 :max="field.max"
-                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-ocean-500"
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                             />
                                             <p v-if="errors[field.name]" class="mt-1 text-sm text-red-600">{{ errors[field.name] }}</p>
                                         </div>
@@ -84,7 +84,7 @@
                                                 :required="field.required"
                                                 :placeholder="field.placeholder"
                                                 :rows="field.rows || 4"
-                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-ocean-500"
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                             ></textarea>
                                             <p v-if="errors[field.name]" class="mt-1 text-sm text-red-600">{{ errors[field.name] }}</p>
                                         </div>
@@ -99,7 +99,7 @@
                                                 :id="field.name"
                                                 v-model="form[field.name]"
                                                 :required="field.required"
-                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-ocean-500"
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                             >
                                                 <option value="">Select {{ field.label }}</option>
                                                 <option v-for="option in field.options" :key="option.value" :value="option.value">
@@ -124,12 +124,12 @@
                                                         :value="option.value"
                                                         v-model="form[field.name]"
                                                         :required="field.required"
-                                                        class="mt-1 text-brand-red-600 focus:ring-brand-red-600"
+                                                        class="mt-1 text-emerald-600 focus:ring-emerald-500"
                                                     />
                                                     <div class="ml-3 flex-1">
                                                         <div class="font-semibold text-gray-900">{{ option.label }}</div>
                                                         <div class="text-sm text-gray-600">{{ option.description }}</div>
-                                                        <div v-if="option.price" class="text-sm font-medium text-brand-red-600 mt-1">
+                                                        <div v-if="option.price" class="text-sm font-medium text-emerald-600 mt-1">
                                                             {{ formatCurrency(option.price) }}
                                                         </div>
                                                     </div>
@@ -145,7 +145,7 @@
                                                     type="checkbox"
                                                     v-model="form[field.name]"
                                                     :required="field.required"
-                                                    class="mt-1 text-brand-red-600 focus:ring-brand-red-600 rounded"
+                                                    class="mt-1 text-emerald-600 focus:ring-emerald-500 rounded"
                                                 />
                                                 <span class="ml-3 text-sm text-gray-700">
                                                     {{ field.label }}
@@ -237,7 +237,7 @@
                                 <button
                                     v-if="currentStep < 5"
                                     type="submit"
-                                    class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 font-medium"
+                                    class="px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium"
                                 >
                                     Next Step
                                 </button>

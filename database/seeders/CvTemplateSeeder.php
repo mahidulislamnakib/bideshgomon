@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\CvTemplate;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class CvTemplateSeeder extends Seeder
 {
@@ -15,7 +14,7 @@ class CvTemplateSeeder extends Seeder
     {
         // Clear existing templates safely (database agnostic)
         CvTemplate::query()->delete();
-        
+
         $templates = [
             // FREE FOR ALL - No requirements
             [
@@ -35,7 +34,7 @@ class CvTemplateSeeder extends Seeder
                 'is_active' => true,
                 'sort_order' => 0,
             ],
-            
+
             // FREE with Points - Entry Level (100 points, 80% completion)
             [
                 'name' => 'Simple Professional',
@@ -279,7 +278,7 @@ class CvTemplateSeeder extends Seeder
                 'is_active' => true,
                 'sort_order' => 15,
             ],
-            
+
             // Additional Specialized Templates (16-30)
             [
                 'name' => 'Tech Specialist',
@@ -849,12 +848,12 @@ class CvTemplateSeeder extends Seeder
             CvTemplate::create($template);
         }
 
-        $freeTemplates = count(array_filter($templates, fn($t) => $t['can_purchase_with_points'] ?? false));
+        $freeTemplates = count(array_filter($templates, fn ($t) => $t['can_purchase_with_points'] ?? false));
         $paidTemplates = count($templates) - $freeTemplates;
 
-        $this->command->info('✅ Created ' . count($templates) . ' CV templates');
-        $this->command->info('🎁 Free with points: ' . $freeTemplates . ' templates');
-        $this->command->info('💰 Paid templates: ' . $paidTemplates . ' templates');
+        $this->command->info('✅ Created '.count($templates).' CV templates');
+        $this->command->info('🎁 Free with points: '.$freeTemplates.' templates');
+        $this->command->info('💰 Paid templates: '.$paidTemplates.' templates');
         $this->command->info('📊 Price range: ৳200 - ৳500');
     }
 }

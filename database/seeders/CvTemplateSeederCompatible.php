@@ -14,7 +14,7 @@ class CvTemplateSeederCompatible extends Seeder
     {
         // Clear existing templates
         CvTemplate::query()->delete();
-        
+
         // Map from bgproject templates to bideshgomon-api schema
         $templates = [
             // FREE
@@ -108,7 +108,7 @@ class CvTemplateSeederCompatible extends Seeder
             CvTemplate::create($template);
         }
 
-        $this->command->info('✅ Created ' . count($templates) . ' CV templates successfully!');
+        $this->command->info('✅ Created '.count($templates).' CV templates successfully!');
     }
 
     private function getAdditionalTemplates(): array

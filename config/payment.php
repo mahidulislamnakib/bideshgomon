@@ -37,16 +37,16 @@ return [
     'sslcommerz' => [
         'store_id' => env('SSLCOMMERZ_STORE_ID'),
         'store_password' => env('SSLCOMMERZ_STORE_PASSWORD'),
-        'api_url' => env('SSLCOMMERZ_SANDBOX', true) 
-            ? 'https://sandbox.sslcommerz.com' 
+        'api_url' => env('SSLCOMMERZ_SANDBOX', true)
+            ? 'https://sandbox.sslcommerz.com'
             : 'https://securepay.sslcommerz.com',
         'validation_url' => env('SSLCOMMERZ_SANDBOX', true)
             ? 'https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php'
             : 'https://securepay.sslcommerz.com/validator/api/validationserverAPI.php',
-        'success_url' => env('APP_URL') . '/payment/success',
-        'fail_url' => env('APP_URL') . '/payment/fail',
-        'cancel_url' => env('APP_URL') . '/payment/cancel',
-        'ipn_url' => env('APP_URL') . '/payment/ipn',
+        'success_url' => env('APP_URL').'/payment/success',
+        'fail_url' => env('APP_URL').'/payment/fail',
+        'cancel_url' => env('APP_URL').'/payment/cancel',
+        'ipn_url' => env('APP_URL').'/payment/ipn',
         'sandbox' => env('SSLCOMMERZ_SANDBOX', true),
     ],
 
@@ -68,8 +68,8 @@ return [
             ? 'https://tokenized.sandbox.bka.sh/v1.2.0-beta'
             : 'https://tokenized.pay.bka.sh/v1.2.0-beta',
         'sandbox' => env('BKASH_SANDBOX', true),
-        'callback_url' => env('APP_URL') . '/payment/bkash/callback',
-        'webhook_url' => env('APP_URL') . '/payment/bkash/webhook',
+        'callback_url' => env('APP_URL').'/payment/bkash/callback',
+        'webhook_url' => env('APP_URL').'/payment/bkash/webhook',
     ],
 
     /*
@@ -90,8 +90,8 @@ return [
             ? 'http://sandbox.mynagad.com:10080/remote-payment-gateway-1.0'
             : 'https://api.mynagad.com/api/dfs',
         'sandbox' => env('NAGAD_SANDBOX', true),
-        'callback_url' => env('APP_URL') . '/payment/nagad/callback',
-        'webhook_url' => env('APP_URL') . '/payment/nagad/webhook',
+        'callback_url' => env('APP_URL').'/payment/nagad/callback',
+        'webhook_url' => env('APP_URL').'/payment/nagad/webhook',
     ],
 
     /*

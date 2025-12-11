@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
@@ -361,7 +361,7 @@ const submit = () => {
                                         >
                                             {{ skill }}
                                             <button type="button" @click="removeSkill(index)" class="text-indigo-900 hover:text-red-600">
-                                                ×
+                                                �
                                             </button>
                                         </span>
                                     </div>
@@ -393,7 +393,7 @@ const submit = () => {
                                         >
                                             {{ benefit }}
                                             <button type="button" @click="removeBenefit(index)" class="text-green-900 hover:text-red-600">
-                                                ×
+                                                �
                                             </button>
                                         </span>
                                     </div>
@@ -460,7 +460,7 @@ const submit = () => {
                             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">
-                                        Application Fee (৳)
+                                        Application Fee (?)
                                         <span class="text-xs text-gray-500 block mt-1">Small processing charge</span>
                                     </label>
                                     <input
@@ -475,7 +475,7 @@ const submit = () => {
 
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">
-                                        Agency Posted Fee (৳) *
+                                        Agency Posted Fee (?) *
                                         <span class="text-xs text-brand-red-600 block mt-1 font-medium">Main fee amount</span>
                                     </label>
                                     <input
@@ -490,7 +490,7 @@ const submit = () => {
 
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">
-                                        Admin Approved Fee (৳) *
+                                        Admin Approved Fee (?) *
                                         <span class="text-xs text-gray-500 block mt-1">Final amount (shown to public)</span>
                                     </label>
                                     <input
@@ -505,11 +505,11 @@ const submit = () => {
 
                                 <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
                                     <label class="block text-sm font-medium text-gray-700 mb-2">
-                                        Processing Fee (৳)
+                                        Processing Fee (?)
                                         <span class="text-xs text-gray-500 block mt-1">Auto-calculated markup</span>
                                     </label>
                                     <div class="text-2xl font-bold text-brand-red-600">
-                                        +৳{{ Number(Math.max(0, (form.admin_approved_fee || 0) - (form.agency_posted_fee || 0))).toLocaleString() }}
+                                        +?{{ Number(Math.max(0, (form.admin_approved_fee || 0) - (form.agency_posted_fee || 0))).toLocaleString() }}
                                     </div>
                                     <div v-if="form.agency_posted_fee > 0 && form.admin_approved_fee > form.agency_posted_fee" class="text-xs text-gray-600 mt-1">
                                         {{ (((form.admin_approved_fee - form.agency_posted_fee) / form.agency_posted_fee) * 100).toFixed(1) }}% markup

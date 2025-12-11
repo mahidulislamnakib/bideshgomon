@@ -74,7 +74,7 @@ class LanguageTestSeeder extends Seeder
                 'description' => 'Cambridge English Qualifications',
                 'is_active' => true,
             ],
-            
+
             // Japanese proficiency tests
             [
                 'language_id' => null, // Will be set if Japanese language exists
@@ -131,7 +131,7 @@ class LanguageTestSeeder extends Seeder
                 'description' => 'Japanese Language Proficiency Test - Level N5 (Beginner)',
                 'is_active' => true,
             ],
-            
+
             // German proficiency tests
             [
                 'language_id' => null,
@@ -155,7 +155,7 @@ class LanguageTestSeeder extends Seeder
                 'description' => 'Goethe-Institut German Language Certificate',
                 'is_active' => true,
             ],
-            
+
             // French proficiency tests
             [
                 'language_id' => null,
@@ -190,7 +190,7 @@ class LanguageTestSeeder extends Seeder
                 'description' => 'Test d\'Évaluation de Français',
                 'is_active' => true,
             ],
-            
+
             // Spanish proficiency tests
             [
                 'language_id' => null,
@@ -203,7 +203,7 @@ class LanguageTestSeeder extends Seeder
                 'description' => 'Diplomas de Español como Lengua Extranjera',
                 'is_active' => true,
             ],
-            
+
             // Chinese proficiency tests
             [
                 'language_id' => null,
@@ -216,7 +216,7 @@ class LanguageTestSeeder extends Seeder
                 'description' => 'Hanyu Shuiping Kaoshi (Chinese Proficiency Test)',
                 'is_active' => true,
             ],
-            
+
             // Korean proficiency tests
             [
                 'language_id' => null,
@@ -229,7 +229,7 @@ class LanguageTestSeeder extends Seeder
                 'description' => 'Test of Proficiency in Korean',
                 'is_active' => true,
             ],
-            
+
             // Other/General
             [
                 'language_id' => null,

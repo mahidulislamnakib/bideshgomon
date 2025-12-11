@@ -122,7 +122,7 @@ class PaymentTransaction extends Model
     /**
      * Mark transaction as paid.
      */
-    public function markAsPaid(string $gatewayTransactionId = null, array $gatewayResponse = []): void
+    public function markAsPaid(?string $gatewayTransactionId = null, array $gatewayResponse = []): void
     {
         $this->update([
             'status' => 'completed',
@@ -135,7 +135,7 @@ class PaymentTransaction extends Model
     /**
      * Mark transaction as failed.
      */
-    public function markAsFailed(string $errorCode = null, string $errorMessage = null, array $gatewayResponse = []): void
+    public function markAsFailed(?string $errorCode = null, ?string $errorMessage = null, array $gatewayResponse = []): void
     {
         $this->update([
             'status' => 'failed',
@@ -149,7 +149,7 @@ class PaymentTransaction extends Model
     /**
      * Mark transaction as cancelled.
      */
-    public function markAsCancelled(string $reason = null): void
+    public function markAsCancelled(?string $reason = null): void
     {
         $this->update([
             'status' => 'cancelled',
@@ -171,7 +171,7 @@ class PaymentTransaction extends Model
     /**
      * Mark transaction as refunded.
      */
-    public function markAsRefunded(float $refundAmount, string $refundReference = null, array $gatewayResponse = []): void
+    public function markAsRefunded(float $refundAmount, ?string $refundReference = null, array $gatewayResponse = []): void
     {
         $this->update([
             'status' => 'refunded',

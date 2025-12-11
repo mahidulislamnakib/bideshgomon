@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class AdminUserManagementTest extends TestCase
 {
@@ -17,7 +17,7 @@ class AdminUserManagementTest extends TestCase
         $adminRole = Role::create([
             'name' => 'Admin',
             'slug' => 'admin',
-            'description' => 'Administrator'
+            'description' => 'Administrator',
         ]);
         $user = User::factory()->create(['role_id' => $adminRole->id]);
         $this->actingAs($user);
@@ -31,14 +31,14 @@ class AdminUserManagementTest extends TestCase
         $adminRole = Role::create([
             'name' => 'Admin',
             'slug' => 'admin',
-            'description' => 'Administrator'
+            'description' => 'Administrator',
         ]);
         $admin = User::factory()->create(['role_id' => $adminRole->id]);
         $this->actingAs($admin);
 
         // Attempt suspend
         $suspend = $this->post(route('admin.users.suspend', $admin->id), [
-            'reason' => 'Testing'
+            'reason' => 'Testing',
         ]);
         $suspend->assertSessionHas('error');
 

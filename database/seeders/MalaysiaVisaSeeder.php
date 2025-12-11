@@ -15,8 +15,9 @@ class MalaysiaVisaSeeder extends Seeder
         // Get Malaysia country ID
         $malaysiaId = DB::table('countries')->where('iso_code_2', 'MY')->value('id');
 
-        if (!$malaysiaId) {
+        if (! $malaysiaId) {
             $this->command->error('Malaysia not found in countries table. Please run CountryVisaSeeder first.');
+
             return;
         }
 
@@ -121,7 +122,7 @@ class MalaysiaVisaSeeder extends Seeder
                 [
                     'country_id' => $malaysiaId,
                     'profession' => $profession,
-                    'visa_type' => 'tourist'
+                    'visa_type' => 'tourist',
                 ],
                 [
                     'country' => 'Malaysia',
@@ -147,7 +148,7 @@ class MalaysiaVisaSeeder extends Seeder
                 [
                     'country_id' => $malaysiaId,
                     'profession' => $profession,
-                    'visa_type' => 'tourist'
+                    'visa_type' => 'tourist',
                 ],
                 [
                     'agency_id' => null,

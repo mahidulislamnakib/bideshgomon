@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('user_work_experiences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            
+
             // Basic Work Information
             $table->string('company_name');
             $table->string('position');
             $table->date('start_date');
             $table->date('end_date')->nullable();
-            
+
             // Enhanced for Visa Applications
             $table->string('country', 2)->nullable(); // Where worked
             $table->string('city')->nullable();
@@ -37,9 +37,9 @@ return new class extends Migration
             $table->text('reason_for_leaving')->nullable();
             $table->boolean('is_current_employment')->default(false);
             $table->enum('employment_type', ['full_time', 'part_time', 'contract', 'freelance', 'internship'])->nullable();
-            
+
             $table->timestamps();
-            
+
             // Indexes
             $table->index('user_id');
             $table->index('start_date');

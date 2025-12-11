@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\DataManagement;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Traits\BulkUploadable;
+use App\Http\Controllers\Controller;
 use App\Models\DocumentType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,8 +15,11 @@ class DocumentTypeController extends Controller
     use BulkUploadable;
 
     protected $entityName = 'Document Type';
+
     protected $entityNamePlural = 'Document Types';
+
     protected $indexRoute = 'admin.data.document-types.index';
+
     protected $bulkUploadView = 'Admin/DataManagement/DocumentTypes/BulkUpload';
 
     public function index(Request $request)
@@ -25,11 +28,11 @@ class DocumentTypeController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%")
+                    ->orWhere('slug', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
             });
         }
 
@@ -81,10 +84,12 @@ class DocumentTypeController extends Controller
 
         try {
             DocumentType::create($validated);
+
             return redirect()->route('admin.data.document-types.index')
                 ->with('success', 'Document type created successfully.');
         } catch (\Exception $e) {
             Log::error('Document type creation failed', ['error' => $e->getMessage()]);
+
             return back()->withInput()->with('error', 'Failed to create document type.');
         }
     }
@@ -111,10 +116,12 @@ class DocumentTypeController extends Controller
 
         try {
             $documentType->update($validated);
+
             return redirect()->route('admin.data.document-types.index')
                 ->with('success', 'Document type updated successfully.');
         } catch (\Exception $e) {
             Log::error('Document type update failed', ['error' => $e->getMessage()]);
+
             return back()->withInput()->with('error', 'Failed to update document type.');
         }
     }
@@ -123,10 +130,12 @@ class DocumentTypeController extends Controller
     {
         try {
             $documentType->delete();
+
             return redirect()->route('admin.data.document-types.index')
                 ->with('success', 'Document type deleted successfully.');
         } catch (\Exception $e) {
             Log::error('Document type deletion failed', ['error' => $e->getMessage()]);
+
             return back()->with('error', 'Failed to delete document type.');
         }
     }
@@ -134,10 +143,12 @@ class DocumentTypeController extends Controller
     public function toggleStatus(DocumentType $documentType)
     {
         try {
-            $documentType->update(['is_active' => !$documentType->is_active]);
+            $documentType->update(['is_active' => ! $documentType->is_active]);
+
             return back()->with('success', 'Document type status updated successfully.');
         } catch (\Exception $e) {
             Log::error('Document type status toggle failed', ['error' => $e->getMessage()]);
+
             return back()->with('error', 'Failed to update status.');
         }
     }
@@ -182,6 +193,7 @@ class DocumentTypeController extends Controller
         if (isset($data['is_active'])) {
             $data['is_active'] = in_array(strtolower($data['is_active']), ['true', '1', 'yes']);
         }
+
         return $data;
     }
 
@@ -196,9 +208,9 @@ class DocumentTypeController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%");
             });
         }
 

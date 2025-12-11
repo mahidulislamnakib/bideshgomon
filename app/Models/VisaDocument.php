@@ -17,7 +17,7 @@ class VisaDocument extends Model
         'original_filename', 'file_path', 'file_extension', 'file_size', 'mime_type',
         'status', 'verification_notes', 'verified_by', 'verified_at',
         'is_required', 'is_translated', 'is_notarized', 'document_expiry_date',
-        'description', 'version', 'metadata'
+        'description', 'version', 'metadata',
     ];
 
     protected $casts = [
@@ -86,7 +86,7 @@ class VisaDocument extends Model
     public function scopeExpiringSoon($query, $days = 30)
     {
         return $query->where('document_expiry_date', '<=', now()->addDays($days))
-                    ->where('document_expiry_date', '>', now());
+            ->where('document_expiry_date', '>', now());
     }
 
     // Accessors
@@ -106,13 +106,14 @@ class VisaDocument extends Model
     {
         $bytes = $this->file_size;
         if ($bytes >= 1073741824) {
-            return number_format($bytes / 1073741824, 2) . ' GB';
+            return number_format($bytes / 1073741824, 2).' GB';
         } elseif ($bytes >= 1048576) {
-            return number_format($bytes / 1048576, 2) . ' MB';
+            return number_format($bytes / 1048576, 2).' MB';
         } elseif ($bytes >= 1024) {
-            return number_format($bytes / 1024, 2) . ' KB';
+            return number_format($bytes / 1024, 2).' KB';
         }
-        return $bytes . ' bytes';
+
+        return $bytes.' bytes';
     }
 
     public function getFileUrlAttribute()

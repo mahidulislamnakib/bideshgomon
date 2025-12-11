@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\ProfileView;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -19,15 +19,15 @@ class PublicProfileController extends Controller
             ->where('profile_is_public', true)
             ->with([
                 'userProfile',
-                'educations' => function($q) {
+                'educations' => function ($q) {
                     $q->orderBy('start_date', 'desc');
                 },
-                'workExperiences' => function($q) {
+                'workExperiences' => function ($q) {
                     $q->orderBy('start_date', 'desc');
                 },
                 'languages',
                 'userPassports',
-                'travelHistory' => function($q) {
+                'travelHistory' => function ($q) {
                     $q->orderBy('entry_date', 'desc')->limit(10);
                 },
             ])
@@ -66,7 +66,7 @@ class PublicProfileController extends Controller
                 ->orderBy('viewed_at', 'desc')
                 ->limit(10)
                 ->get()
-                ->map(fn($view) => [
+                ->map(fn ($view) => [
                     'ip_address' => $this->maskIp($view->ip_address),
                     'country' => $view->country,
                     'city' => $view->city,
@@ -88,7 +88,7 @@ class PublicProfileController extends Controller
                 'string',
                 'max:255',
                 'regex:/^[a-z0-9\-]+$/',
-                'unique:users,public_profile_slug,' . $user->id,
+                'unique:users,public_profile_slug,'.$user->id,
             ],
             'profile_is_public' => 'required|boolean',
             'profile_visibility_settings' => 'nullable|array',
@@ -114,7 +114,7 @@ class PublicProfileController extends Controller
     {
         $user = auth()->user();
 
-        if (!$user->public_profile_slug || !$user->profile_is_public) {
+        if (! $user->public_profile_slug || ! $user->profile_is_public) {
             return response()->json([
                 'error' => 'Public profile not enabled',
             ], 400);
@@ -176,7 +176,7 @@ class PublicProfileController extends Controller
 
         // Education
         if ($user->isSectionVisible('education')) {
-            $data['education'] = $user->educations->map(fn($edu) => [
+            $data['education'] = $user->educations->map(fn ($edu) => [
                 'degree_level' => $edu->degree_level,
                 'institution_name' => $edu->institution_name,
                 'field_of_study' => $edu->field_of_study,
@@ -189,7 +189,7 @@ class PublicProfileController extends Controller
 
         // Work Experience
         if ($user->isSectionVisible('work_experience')) {
-            $data['work_experience'] = $user->workExperiences->map(fn($work) => [
+            $data['work_experience'] = $user->workExperiences->map(fn ($work) => [
                 'job_title' => $work->job_title,
                 'company_name' => $work->company_name,
                 'start_date' => $work->start_date?->format('M Y'),
@@ -202,7 +202,7 @@ class PublicProfileController extends Controller
 
         // Languages
         if ($user->isSectionVisible('languages')) {
-            $data['languages'] = $user->languages->map(fn($lang) => [
+            $data['languages'] = $user->languages->map(fn ($lang) => [
                 'language_name' => $lang->language_name,
                 'proficiency_level' => $lang->proficiency_level,
                 'ielts_score' => $lang->ielts_score,
@@ -212,7 +212,7 @@ class PublicProfileController extends Controller
 
         // Travel History (limited)
         if ($user->isSectionVisible('travel_history')) {
-            $data['travel_history'] = $user->travelHistory->map(fn($travel) => [
+            $data['travel_history'] = $user->travelHistory->map(fn ($travel) => [
                 'country' => $travel->country,
                 'purpose' => $travel->purpose,
                 'entry_date' => $travel->entry_date?->format('Y'),
@@ -228,7 +228,7 @@ class PublicProfileController extends Controller
         if ($user->isSectionVisible('social_links') && $user->userProfile && $user->userProfile->social_links) {
             // Filter out empty values
             $socialLinks = array_filter($user->userProfile->social_links);
-            if (!empty($socialLinks)) {
+            if (! empty($socialLinks)) {
                 $data['social_links'] = $socialLinks;
             }
         }
@@ -246,7 +246,7 @@ class PublicProfileController extends Controller
         $counter = 1;
 
         while (User::where('public_profile_slug', $slug)->exists()) {
-            $slug = $baseSlug . '-' . $counter;
+            $slug = $baseSlug.'-'.$counter;
             $counter++;
         }
 
@@ -276,13 +276,13 @@ class PublicProfileController extends Controller
      */
     protected function maskIp(?string $ip): ?string
     {
-        if (!$ip) {
+        if (! $ip) {
             return null;
         }
 
         $parts = explode('.', $ip);
         if (count($parts) === 4) {
-            return $parts[0] . '.' . $parts[1] . '.xxx.xxx';
+            return $parts[0].'.'.$parts[1].'.xxx.xxx';
         }
 
         return 'xxx.xxx.xxx.xxx';

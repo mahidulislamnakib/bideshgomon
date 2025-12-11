@@ -19,7 +19,7 @@ class AdminJobApplicationController extends Controller
         $query = JobApplication::with([
             'user.userProfile',
             'jobPosting.country',
-            'userCv'
+            'userCv',
         ]);
 
         // Filter by status
@@ -37,7 +37,7 @@ class AdminJobApplicationController extends Controller
             $search = $request->search;
             $query->whereHas('user', function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('email', 'like', "%{$search}%");
+                    ->orWhere('email', 'like', "%{$search}%");
             });
         }
 
@@ -82,7 +82,7 @@ class AdminJobApplicationController extends Controller
             'user.languages',
             'jobPosting.country',
             'userCv',
-            'walletTransaction'
+            'walletTransaction',
         ])->findOrFail($id);
 
         return Inertia::render('Admin/JobApplications/Show', [
@@ -104,7 +104,7 @@ class AdminJobApplicationController extends Controller
 
         $validated['reviewed_at'] = now();
         $validated['reviewed_by'] = Auth::id();
-        
+
         $application->update($validated);
 
         return back()->with('success', 'Application status updated successfully!');
@@ -127,7 +127,7 @@ class AdminJobApplicationController extends Controller
             'reviewed_at' => now(),
         ];
 
-        if (!empty($validated['admin_notes'])) {
+        if (! empty($validated['admin_notes'])) {
             $data['admin_notes'] = $validated['admin_notes'];
         }
 
@@ -154,16 +154,16 @@ class AdminJobApplicationController extends Controller
 
         $applications = $query->get();
 
-        $filename = 'job-applications-' . now()->format('Y-m-d-His') . '.csv';
-        
+        $filename = 'job-applications-'.now()->format('Y-m-d-His').'.csv';
+
         $headers = [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => "attachment; filename=\"{$filename}\"",
         ];
 
-        $callback = function() use ($applications) {
+        $callback = function () use ($applications) {
             $file = fopen('php://output', 'w');
-            
+
             // Header row
             fputcsv($file, [
                 'Application ID',

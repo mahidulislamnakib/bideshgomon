@@ -17,7 +17,7 @@ class LegalConsultationController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $consultation = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $consultation = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($consultation, 'legal-consultation', $validated);
 
         return response()->json(['message' => 'Legal consultation request created']);

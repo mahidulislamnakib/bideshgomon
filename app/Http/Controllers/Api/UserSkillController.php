@@ -76,7 +76,7 @@ class UserSkillController extends Controller
             ->where('user_id', Auth::id())
             ->first();
 
-        if (!$userSkill) {
+        if (! $userSkill) {
             return response()->json(['message' => 'Skill not found'], 404);
         }
 
@@ -101,7 +101,7 @@ class UserSkillController extends Controller
             ->where('user_id', Auth::id())
             ->first();
 
-        if (!$userSkill) {
+        if (! $userSkill) {
             return response()->json(['message' => 'Skill not found'], 404);
         }
 

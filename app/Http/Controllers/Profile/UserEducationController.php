@@ -16,7 +16,7 @@ class UserEducationController extends Controller
     public function index()
     {
         $educations = Auth::user()->educations()->orderBy('start_date', 'desc')->get();
-        
+
         return response()->json($educations);
     }
 

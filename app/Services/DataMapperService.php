@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
-use App\Models\User;
-use App\Models\ServiceModule;
 use App\Models\ServiceFormField;
-use Illuminate\Support\Facades\DB;
+use App\Models\ServiceModule;
+use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 /**
  * DataMapperService - The "Smart Bridge"
- * 
+ *
  * This service auto-fills application forms with user profile data.
  * It's the core of the "Single Source of Truth" architecture.
  */
@@ -18,10 +18,6 @@ class DataMapperService
 {
     /**
      * Get form structure with pre-filled data from user profile
-     * 
-     * @param ServiceModule $service
-     * @param User $user
-     * @return array
      */
     public function getFormWithData(ServiceModule $service, User $user): array
     {
@@ -31,7 +27,7 @@ class DataMapperService
             ->get();
 
         $userData = $this->getUserProfileData($user);
-        
+
         $formStructure = [
             'service' => [
                 'id' => $service->id,
@@ -44,13 +40,13 @@ class DataMapperService
 
         foreach ($fields as $field) {
             $fieldData = $this->mapFieldData($field, $userData);
-            
+
             // Add to fields array
             $formStructure['fields'][] = $fieldData;
-            
+
             // Group fields by group_name
             if ($field->group_name) {
-                if (!isset($formStructure['groups'][$field->group_name])) {
+                if (! isset($formStructure['groups'][$field->group_name])) {
                     $formStructure['groups'][$field->group_name] = [];
                 }
                 $formStructure['groups'][$field->group_name][] = $fieldData;
@@ -62,15 +58,11 @@ class DataMapperService
 
     /**
      * Map field data with user profile value
-     * 
-     * @param ServiceFormField $field
-     * @param array $userData
-     * @return array
      */
     private function mapFieldData(ServiceFormField $field, array $userData): array
     {
         $value = $this->getProfileValue($field, $userData);
-        
+
         return [
             'id' => $field->id,
             'name' => $field->field_name,
@@ -95,37 +87,32 @@ class DataMapperService
             'css_class' => $field->css_class,
             'has_profile_mapping' => $field->hasProfileMapping(),
             'profile_map_key' => $field->getProfileMapPath(),
-            'is_prefilled' => !empty($value),
+            'is_prefilled' => ! empty($value),
         ];
     }
 
     /**
      * Get value from user profile using field mapping
-     * 
-     * @param ServiceFormField $field
-     * @param array $userData
+     *
      * @return mixed
      */
     private function getProfileValue(ServiceFormField $field, array $userData)
     {
-        if (!$field->hasProfileMapping()) {
+        if (! $field->hasProfileMapping()) {
             return $field->default_value;
         }
 
         $mapPath = $field->getProfileMapPath();
-        
+
         // Use dot notation to access nested data
         $value = Arr::get($userData, $mapPath);
-        
+
         // Fallback to default value if profile value is empty
         return $value ?? $field->default_value;
     }
 
     /**
      * Get comprehensive user profile data
-     * 
-     * @param User $user
-     * @return array
      */
     private function getUserProfileData(User $user): array
     {
@@ -179,9 +166,7 @@ class DataMapperService
 
     /**
      * Validate form data against field rules
-     * 
-     * @param ServiceModule $service
-     * @param array $formData
+     *
      * @return array [bool $isValid, array $errors]
      */
     public function validateFormData(ServiceModule $service, array $formData): array
@@ -192,18 +177,18 @@ class DataMapperService
 
         foreach ($fields as $field) {
             // Skip fields that shouldn't be shown based on conditional rules
-            if (!$field->shouldShow($formData)) {
+            if (! $field->shouldShow($formData)) {
                 continue;
             }
 
             $rules[$field->field_name] = $field->getValidationRulesArray();
-            
+
             // Custom error messages
             $messages["{$field->field_name}.required"] = "{$field->field_label} is required.";
             $messages["{$field->field_name}.email"] = "{$field->field_label} must be a valid email address.";
             $messages["{$field->field_name}.numeric"] = "{$field->field_label} must be a number.";
             $messages["{$field->field_name}.date"] = "{$field->field_label} must be a valid date.";
-            
+
             if ($field->min_length) {
                 $messages["{$field->field_name}.min"] = "{$field->field_label} must be at least {$field->min_length} characters.";
             }
@@ -229,12 +214,8 @@ class DataMapperService
 
     /**
      * Update user profile with form data (when user checks "Save to profile")
-     * 
-     * @param User $user
-     * @param ServiceModule $service
-     * @param array $formData
-     * @param array $fieldsToUpdate Array of field names user wants to update in profile
-     * @return bool
+     *
+     * @param  array  $fieldsToUpdate  Array of field names user wants to update in profile
      */
     public function updateProfileFromFormData(User $user, ServiceModule $service, array $formData, array $fieldsToUpdate = []): bool
     {
@@ -248,7 +229,7 @@ class DataMapperService
         try {
             foreach ($fields as $field) {
                 $value = $formData[$field->field_name] ?? null;
-                
+
                 if ($value === null) {
                     continue;
                 }
@@ -257,6 +238,7 @@ class DataMapperService
             }
 
             DB::commit();
+
             return true;
         } catch (\Exception $e) {
             DB::rollBack();
@@ -265,17 +247,15 @@ class DataMapperService
                 'service_id' => $service->id,
                 'error' => $e->getMessage(),
             ]);
+
             return false;
         }
     }
 
     /**
      * Update specific profile field
-     * 
-     * @param User $user
-     * @param ServiceFormField $field
-     * @param mixed $value
-     * @return void
+     *
+     * @param  mixed  $value
      */
     private function updateProfileField(User $user, ServiceFormField $field, $value): void
     {
@@ -283,7 +263,7 @@ class DataMapperService
 
         switch ($table) {
             case 'user_profiles':
-                if (!$user->profile) {
+                if (! $user->profile) {
                     $user->profile()->create([$column => $value]);
                 } else {
                     $user->profile->update([$column => $value]);
@@ -305,21 +285,19 @@ class DataMapperService
                 break;
 
             case 'user_financial_information':
-                if (!$user->financialInformation) {
+                if (! $user->financialInformation) {
                     $user->financialInformation()->create([$column => $value]);
                 } else {
                     $user->financialInformation->update([$column => $value]);
                 }
                 break;
 
-            // Add more cases as needed
+                // Add more cases as needed
         }
     }
 
     /**
      * Get available profile fields for mapping (Admin tool)
-     * 
-     * @return array
      */
     public function getAvailableProfileFields(): array
     {

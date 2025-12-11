@@ -111,10 +111,8 @@ class UserFinancialInformation extends Model
 
     /**
      * Check if user has sufficient funds for a specific country.
-     * 
-     * @param string $countryCode ISO 3166-1 alpha-2
-     * @param float $requiredAmount
-     * @return bool
+     *
+     * @param  string  $countryCode  ISO 3166-1 alpha-2
      */
     public function hasSufficientFunds(string $countryCode, float $requiredAmount): bool
     {
@@ -138,11 +136,11 @@ class UserFinancialInformation extends Model
      */
     public function getFormattedAnnualIncomeAttribute(): string
     {
-        if (!$this->annual_income) {
+        if (! $this->annual_income) {
             return 'Not specified';
         }
-        
-        return format_bd_currency($this->annual_income) . ' ' . $this->currency;
+
+        return format_bd_currency($this->annual_income).' '.$this->currency;
     }
 
     /**
@@ -158,6 +156,6 @@ class UserFinancialInformation extends Model
      */
     public function hasActiveSponsor(): bool
     {
-        return $this->has_sponsor && !empty($this->sponsor_name);
+        return $this->has_sponsor && ! empty($this->sponsor_name);
     }
 }

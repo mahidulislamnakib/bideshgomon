@@ -98,12 +98,12 @@ class TravelInsuranceBooking extends Model
 
     public function getFormattedTotalAttribute(): string
     {
-        return '৳ ' . number_format($this->total_amount, 2);
+        return '৳ '.number_format($this->total_amount, 2);
     }
 
     public function getStatusBadgeColorAttribute(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             'pending' => 'yellow',
             'confirmed' => 'blue',
             'active' => 'green',
@@ -119,7 +119,7 @@ class TravelInsuranceBooking extends Model
 
         static::creating(function ($booking) {
             if (empty($booking->booking_reference)) {
-                $booking->booking_reference = 'TI' . date('Ymd') . str_pad($booking->id ?? rand(1, 9999), 4, '0', STR_PAD_LEFT);
+                $booking->booking_reference = 'TI'.date('Ymd').str_pad($booking->id ?? rand(1, 9999), 4, '0', STR_PAD_LEFT);
             }
         });
     }

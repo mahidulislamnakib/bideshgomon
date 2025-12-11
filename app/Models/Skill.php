@@ -32,13 +32,13 @@ class Skill extends Model
 
         // Auto-generate slug from name if not provided
         static::creating(function ($skill) {
-            if (empty($skill->slug) && !empty($skill->name)) {
+            if (empty($skill->slug) && ! empty($skill->name)) {
                 $skill->slug = Str::slug($skill->name);
             }
         });
 
         static::updating(function ($skill) {
-            if (empty($skill->slug) && !empty($skill->name)) {
+            if (empty($skill->slug) && ! empty($skill->name)) {
                 $skill->slug = Str::slug($skill->name);
             }
         });

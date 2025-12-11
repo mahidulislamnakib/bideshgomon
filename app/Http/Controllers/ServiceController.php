@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ServiceModule;
 use App\Models\ServiceCategory;
+use App\Models\ServiceModule;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class ServiceController extends Controller
@@ -19,11 +18,11 @@ class ServiceController extends Controller
     {
         $query = ServiceModule::with('category')
             ->select([
-                'id', 
-                'service_category_id', 
-                'name', 
-                'slug', 
-                'short_description', 
+                'id',
+                'service_category_id',
+                'name',
+                'slug',
+                'short_description',
                 'full_description as description',
                 'service_type',
                 'is_active',
@@ -31,7 +30,7 @@ class ServiceController extends Controller
                 'is_featured',
                 'sort_order',
                 'base_price',
-                'icon'
+                'icon',
             ])
             // Only show revenue-generating services
             ->where('service_type', 'revenue_service')
@@ -39,8 +38,8 @@ class ServiceController extends Controller
             ->when($request->search, function ($q, $search) {
                 $q->where(function ($query) use ($search) {
                     $query->where('name', 'like', "%{$search}%")
-                          ->orWhere('short_description', 'like', "%{$search}%")
-                          ->orWhere('full_description', 'like', "%{$search}%");
+                        ->orWhere('short_description', 'like', "%{$search}%")
+                        ->orWhere('full_description', 'like', "%{$search}%");
                 });
             })
             ->when($request->category, function ($q, $category) {
@@ -53,30 +52,30 @@ class ServiceController extends Controller
             ->orderBy('name');
 
         $services = $query->get()->map(function ($service) {
-                return [
-                    'id' => $service->id,
-                    'name' => $service->name,
-                    'slug' => $service->slug,
-                    'short_description' => $service->short_description,
-                    'description' => $service->description,
-                    'service_type' => $service->service_type,
-                    'is_active' => $service->is_active,
-                    'coming_soon' => $service->coming_soon,
-                    'is_featured' => $service->is_featured,
-                    'base_price' => $service->base_price,
-                    'icon' => $service->icon,
-                    'category' => [
-                        'id' => $service->category->id ?? null,
-                        'name' => $service->category->name ?? 'Other',
-                        'slug' => $service->category->slug ?? 'other',
-                    ],
-                ];
-            });
+            return [
+                'id' => $service->id,
+                'name' => $service->name,
+                'slug' => $service->slug,
+                'short_description' => $service->short_description,
+                'description' => $service->description,
+                'service_type' => $service->service_type,
+                'is_active' => $service->is_active,
+                'coming_soon' => $service->coming_soon,
+                'is_featured' => $service->is_featured,
+                'base_price' => $service->base_price,
+                'icon' => $service->icon,
+                'category' => [
+                    'id' => $service->category->id ?? null,
+                    'name' => $service->category->name ?? 'Other',
+                    'slug' => $service->category->slug ?? 'other',
+                ],
+            ];
+        });
 
         // Get categories for filter
         $categories = ServiceCategory::whereHas('serviceModules', function ($q) {
             $q->where('service_type', 'revenue_service')
-              ->where('is_active', true);
+                ->where('is_active', true);
         })->orderBy('name')->get();
 
         $featured = ServiceModule::with('category')
@@ -105,7 +104,7 @@ class ServiceController extends Controller
             'category',
             'formFields' => function ($query) {
                 $query->active()->ordered();
-            }
+            },
         ])
             ->where('slug', $slug)
             ->where('is_active', true)
@@ -164,7 +163,7 @@ class ServiceController extends Controller
             'IT Professional', 'Accountant', 'Manager', 'Consultant', 'Lawyer',
             'Architect', 'Designer', 'Nurse', 'Chef', 'Artist', 'Writer',
             'Freelancer', 'Government Employee', 'Private Employee', 'Retired',
-            'Self Employed', 'Other'
+            'Self Employed', 'Other',
         ];
 
         return Inertia::render('Services/Show', [
@@ -174,7 +173,7 @@ class ServiceController extends Controller
             'relatedServices' => $relatedServices,
             'existingApplication' => $existingApplication,
             'stats' => $stats,
-            'canApply' => auth()->check() && !$existingApplication,
+            'canApply' => auth()->check() && ! $existingApplication,
         ]);
     }
 
@@ -192,8 +191,8 @@ class ServiceController extends Controller
             ->where('service_type', 'revenue_service')
             ->where(function ($query) use ($validated) {
                 $query->where('name', 'like', "%{$validated['q']}%")
-                      ->orWhere('short_description', 'like', "%{$validated['q']}%")
-                      ->orWhere('full_description', 'like', "%{$validated['q']}%");
+                    ->orWhere('short_description', 'like', "%{$validated['q']}%")
+                    ->orWhere('full_description', 'like', "%{$validated['q']}%");
             })
             ->orderBy('sort_order')
             ->limit($validated['limit'] ?? 10)

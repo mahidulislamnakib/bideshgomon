@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ServiceModule extends Model
 {
-
     protected $fillable = [
         'service_category_id',
         'name',
@@ -215,12 +214,12 @@ class ServiceModule extends Model
     public function canBeAccessedBy(User $user): bool
     {
         // Check if service is active
-        if (!$this->is_active || $this->coming_soon) {
+        if (! $this->is_active || $this->coming_soon) {
             return false;
         }
 
         // Check if user's role is allowed
-        if (!empty($this->allowed_roles) && !in_array($user->role->name, $this->allowed_roles)) {
+        if (! empty($this->allowed_roles) && ! in_array($user->role->name, $this->allowed_roles)) {
             return false;
         }
 
@@ -251,12 +250,13 @@ class ServiceModule extends Model
         }
 
         $symbol = $this->currency === 'BDT' ? '৳' : '$';
-        
+        $price = (float) $this->base_price; // Cast to float to prevent type errors
+
         if ($this->price_type === 'variable') {
-            return $symbol . number_format($this->base_price, 0) . '+';
+            return $symbol.number_format($price, 0).'+';
         }
 
-        return $symbol . number_format($this->base_price, 0);
+        return $symbol.number_format($price, 0);
     }
 
     /**
@@ -304,7 +304,7 @@ class ServiceModule extends Model
      */
     public function isRestrictedToAgencyType(): bool
     {
-        return !is_null($this->restricted_to_agency_type_id);
+        return ! is_null($this->restricted_to_agency_type_id);
     }
 
     /**
@@ -319,6 +319,7 @@ class ServiceModule extends Model
 
         // Check if service is in agency's allowed service modules
         $allowedModules = $agency->agencyType->allowed_service_modules ?? [];
+
         return in_array($this->id, $allowedModules);
     }
 

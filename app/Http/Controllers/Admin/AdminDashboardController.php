@@ -3,26 +3,34 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\WalletTransaction;
-use App\Models\TravelInsuranceBooking;
-use App\Models\UserCv;
-use App\Models\HotelBooking;
-use App\Models\FlightRequest;
-use App\Models\VisaApplication;
 use App\Models\AdminImpersonationLog;
+use App\Models\Appointment;
+use App\Models\FlightRequest;
+use App\Models\HotelBooking;
 use App\Models\JobApplication;
+use App\Models\MarketingCampaign;
 use App\Models\ProfileAssessment;
 use App\Models\ProfileView;
 use App\Models\SupportTicket;
-use App\Models\Appointment;
-use App\Models\MarketingCampaign;
+use App\Models\TravelInsuranceBooking;
+use App\Models\User;
+use App\Models\UserCv;
+use App\Models\VisaApplication;
+use App\Models\WalletTransaction;
+use App\Services\AnalyticsService;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class AdminDashboardController extends Controller
 {
+    protected AnalyticsService $analytics;
+
+    public function __construct(AnalyticsService $analytics)
+    {
+        $this->analytics = $analytics;
+    }
+
     public function index()
     {
         // User Statistics
@@ -49,7 +57,7 @@ class AdminDashboardController extends Controller
         $insuranceBookingsToday = TravelInsuranceBooking::whereDate('created_at', today())->count();
         $totalCvsCreated = UserCv::count();
         $cvsCreatedToday = UserCv::whereDate('created_at', today())->count();
-        
+
         // Hotel Booking Statistics
         $totalHotelBookings = HotelBooking::count();
         $hotelBookingsToday = HotelBooking::whereDate('created_at', today())->count();
@@ -57,7 +65,7 @@ class AdminDashboardController extends Controller
         $hotelRevenueThisMonth = HotelBooking::where('payment_status', 'paid')
             ->whereMonth('created_at', now()->month)
             ->sum('total_amount');
-        
+
         // Flight Request Statistics
         $totalFlightRequests = FlightRequest::count();
         $flightRequestsToday = FlightRequest::whereDate('created_at', today())->count();
@@ -116,9 +124,9 @@ class AdminDashboardController extends Controller
 
         // Recent Activities
         $recentUsers = User::with('role')->latest()->take(10)->get(['id', 'name', 'email', 'created_at', 'role_id']);
-        $recentTransactions = WalletTransaction::with(['wallet' => function($query) {
-                $query->select('id', 'user_id', 'balance');
-            }])
+        $recentTransactions = WalletTransaction::with(['wallet' => function ($query) {
+            $query->select('id', 'user_id', 'balance');
+        }])
             ->latest()
             ->take(10)
             ->get();
@@ -126,11 +134,11 @@ class AdminDashboardController extends Controller
             ->latest()
             ->take(10)
             ->get();
-        $recentHotelBookings = HotelBooking::with(['hotel' => function($query) {
-                $query->select('id', 'name');
-            }, 'room' => function($query) {
-                $query->select('id', 'room_type');
-            }])
+        $recentHotelBookings = HotelBooking::with(['hotel' => function ($query) {
+            $query->select('id', 'name');
+        }, 'room' => function ($query) {
+            $query->select('id', 'room_type');
+        }])
             ->latest()
             ->take(5)
             ->get();
@@ -138,34 +146,25 @@ class AdminDashboardController extends Controller
             ->take(5)
             ->get();
 
-        // Chart Data - Last 7 days user registrations
-        $userChartData = [];
-        for ($i = 6; $i >= 0; $i--) {
-            $date = now()->subDays($i);
-            $userChartData[] = [
-                'date' => $date->format('M d'),
-                'count' => User::whereDate('created_at', $date)->count()
-            ];
-        }
+        // Optimized: Chart Data - 1 query instead of 7 queries
+        $userChartData = $this->analytics->cached(
+            'user_growth_7',
+            fn () => $this->analytics->getUserGrowthChart(7),
+            15 // Cache for 15 minutes
+        );
 
-        // Revenue Chart - Last 7 days
-        $revenueChartData = [];
-        for ($i = 6; $i >= 0; $i--) {
-            $date = now()->subDays($i);
-            $revenueChartData[] = [
-                'date' => $date->format('M d'),
-                'amount' => WalletTransaction::where('type', 'credit')
-                    ->where('description', 'like', '%payment%')
-                    ->whereDate('created_at', $date)
-                    ->sum('amount')
-            ];
-        }
+        // Optimized: Revenue Chart - 1 query instead of 7 queries
+        $revenueChartData = $this->analytics->cached(
+            'revenue_chart_7',
+            fn () => $this->analytics->getRevenueChart(7),
+            15 // Cache for 15 minutes
+        );
 
         // Recent Admin Impersonations (Security / Audit Widget)
         $recentImpersonations = AdminImpersonationLog::with([
-                'impersonator:id,name',
-                'target:id,name'
-            ])
+            'impersonator:id,name',
+            'target:id,name',
+        ])
             ->latest('started_at')
             ->limit(10)
             ->get()

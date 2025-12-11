@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\DataManagement;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Traits\BulkUploadable;
+use App\Http\Controllers\Controller;
 use App\Models\BankName;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,8 +15,11 @@ class BankNameController extends Controller
     use BulkUploadable;
 
     protected $entityName = 'Bank Name';
+
     protected $entityNamePlural = 'Bank Names';
+
     protected $indexRoute = 'admin.data.bank-names.index';
+
     protected $bulkUploadView = 'Admin/DataManagement/BankNames/BulkUpload';
 
     public function index(Request $request)
@@ -25,11 +28,11 @@ class BankNameController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%")
-                  ->orWhere('short_name', 'like', "%{$search}%")
-                  ->orWhere('swift_code', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%")
+                    ->orWhere('short_name', 'like', "%{$search}%")
+                    ->orWhere('swift_code', 'like', "%{$search}%");
             });
         }
 
@@ -83,10 +86,12 @@ class BankNameController extends Controller
 
         try {
             BankName::create($validated);
+
             return redirect()->route('admin.data.bank-names.index')
                 ->with('success', 'Bank name created successfully.');
         } catch (\Exception $e) {
             Log::error('Bank name creation failed', ['error' => $e->getMessage()]);
+
             return back()->withInput()->with('error', 'Failed to create bank name.');
         }
     }
@@ -115,10 +120,12 @@ class BankNameController extends Controller
 
         try {
             $bankName->update($validated);
+
             return redirect()->route('admin.data.bank-names.index')
                 ->with('success', 'Bank name updated successfully.');
         } catch (\Exception $e) {
             Log::error('Bank name update failed', ['error' => $e->getMessage()]);
+
             return back()->withInput()->with('error', 'Failed to update bank name.');
         }
     }
@@ -127,10 +134,12 @@ class BankNameController extends Controller
     {
         try {
             $bankName->delete();
+
             return redirect()->route('admin.data.bank-names.index')
                 ->with('success', 'Bank name deleted successfully.');
         } catch (\Exception $e) {
             Log::error('Bank name deletion failed', ['error' => $e->getMessage()]);
+
             return back()->with('error', 'Failed to delete bank name.');
         }
     }
@@ -138,10 +147,12 @@ class BankNameController extends Controller
     public function toggleStatus(BankName $bankName)
     {
         try {
-            $bankName->update(['is_active' => !$bankName->is_active]);
+            $bankName->update(['is_active' => ! $bankName->is_active]);
+
             return back()->with('success', 'Bank name status updated successfully.');
         } catch (\Exception $e) {
             Log::error('Bank name status toggle failed', ['error' => $e->getMessage()]);
+
             return back()->with('error', 'Failed to update status.');
         }
     }
@@ -185,6 +196,7 @@ class BankNameController extends Controller
         if (isset($data['is_active'])) {
             $data['is_active'] = in_array(strtolower($data['is_active']), ['true', '1', 'yes']);
         }
+
         return $data;
     }
 
@@ -199,9 +211,9 @@ class BankNameController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%");
             });
         }
 

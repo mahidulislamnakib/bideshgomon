@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasColumn('user_passports', 'is_primary')) {
+        if (! Schema::hasColumn('user_passports', 'is_primary')) {
             Schema::table('user_passports', function (Blueprint $table) {
                 $table->boolean('is_primary')->default(false)->after('notes');
             });

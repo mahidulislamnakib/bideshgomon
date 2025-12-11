@@ -15,7 +15,7 @@ class AdminImpersonationLogController extends Controller
     {
         $query = AdminImpersonationLog::with([
             'impersonator:id,name',
-            'target:id,name'
+            'target:id,name',
         ])->latest('started_at');
 
         // Filters
@@ -41,8 +41,8 @@ class AdminImpersonationLogController extends Controller
 
         $logs = $query->paginate(20)->withQueryString();
 
-        $admins = User::whereHas('role', fn($r) => $r->where('slug', 'admin'))
-            ->select('id','name')
+        $admins = User::whereHas('role', fn ($r) => $r->where('slug', 'admin'))
+            ->select('id', 'name')
             ->orderBy('name')
             ->get();
 
@@ -78,14 +78,14 @@ class AdminImpersonationLogController extends Controller
 
     public function export(Request $request): StreamedResponse
     {
-        $fileName = 'impersonation_logs_' . now()->format('Ymd_His') . '.csv';
+        $fileName = 'impersonation_logs_'.now()->format('Ymd_His').'.csv';
 
         $response = new StreamedResponse(function () use ($request) {
             $handle = fopen('php://output', 'w');
             // Header row
-            fputcsv($handle, ['ID','Admin','Target User','Purpose','Started At','Ended At','Duration Minutes','Status']);
+            fputcsv($handle, ['ID', 'Admin', 'Target User', 'Purpose', 'Started At', 'Ended At', 'Duration Minutes', 'Status']);
 
-            $query = AdminImpersonationLog::with(['impersonator:id,name','target:id,name'])->latest('started_at');
+            $query = AdminImpersonationLog::with(['impersonator:id,name', 'target:id,name'])->latest('started_at');
             if ($request->filled('status')) {
                 if ($request->status === 'active') {
                     $query->whereNull('ended_at');

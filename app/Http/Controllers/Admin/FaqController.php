@@ -72,7 +72,7 @@ class FaqController extends Controller
         ]);
 
         // Set default order if not provided
-        if (!isset($validated['order'])) {
+        if (! isset($validated['order'])) {
             $validated['order'] = Faq::where('faq_category_id', $validated['faq_category_id'])->max('order') + 1;
         }
 

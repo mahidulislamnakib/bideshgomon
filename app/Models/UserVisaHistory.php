@@ -100,6 +100,7 @@ class UserVisaHistory extends Model
     public function getCountryNameAttribute(): string
     {
         $countries = config('countries');
+
         return $countries[$this->country] ?? $this->country;
     }
 

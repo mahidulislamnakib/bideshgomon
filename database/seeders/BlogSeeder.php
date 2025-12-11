@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\BlogCategory;
-use App\Models\BlogTag;
 use App\Models\BlogPost;
+use App\Models\BlogTag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -66,7 +66,7 @@ class BlogSeeder extends Seeder
             'Bangladesh', 'Tourist Visa', 'Student Visa', 'Work Permit',
             'Schengen', 'USA', 'Canada', 'UK', 'Australia', 'Dubai',
             'Malaysia', 'Singapore', 'Thailand', 'Europe', 'Asia',
-            'Scholarship', 'IELTS', 'Job Search', 'Resume Tips', 'Interview'
+            'Scholarship', 'IELTS', 'Job Search', 'Resume Tips', 'Interview',
         ];
 
         foreach ($tagNames as $tagName) {
@@ -78,7 +78,7 @@ class BlogSeeder extends Seeder
 
         // Get admin user as author
         $author = User::where('email', 'admin@bgplatform.com')->first();
-        if (!$author) {
+        if (! $author) {
             $author = User::first();
         }
 

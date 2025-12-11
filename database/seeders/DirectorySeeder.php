@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Country;
 use App\Models\Directory;
 use App\Models\DirectoryCategory;
-use App\Models\Country;
 use Illuminate\Database\Seeder;
 
 class DirectorySeeder extends Seeder
@@ -15,10 +15,10 @@ class DirectorySeeder extends Seeder
         $airlineCategory = DirectoryCategory::where('slug', 'airline')->first();
         $trainingCategory = DirectoryCategory::where('slug', 'training-center')->first();
         $medicalCategory = DirectoryCategory::where('slug', 'medical-center')->first();
-        
+
         $bangladesh = Country::where('iso_code_2', 'BD')->first();
         $bangladeshId = $bangladesh ? $bangladesh->id : null;
-        
+
         // Embassies
         $embassies = [
             [

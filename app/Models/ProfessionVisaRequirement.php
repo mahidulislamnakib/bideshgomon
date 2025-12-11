@@ -81,7 +81,7 @@ class ProfessionVisaRequirement extends Model
      */
     public function getEffectiveMinBankBalance(): ?float
     {
-        return $this->min_bank_balance_override 
+        return $this->min_bank_balance_override
             ?? $this->visaRequirement->min_bank_balance;
     }
 
@@ -90,7 +90,7 @@ class ProfessionVisaRequirement extends Model
      */
     public function calculateFeeWithAdjustment(float $baseFee): float
     {
-        if (!$this->fee_adjustment) {
+        if (! $this->fee_adjustment) {
             return $baseFee;
         }
 
@@ -133,7 +133,7 @@ class ProfessionVisaRequirement extends Model
     public function getProfessionDisplayAttribute(): string
     {
         $display = ucwords(str_replace('_', ' ', $this->profession_category));
-        
+
         if ($this->profession_title) {
             $display .= " - {$this->profession_title}";
         }
@@ -146,6 +146,6 @@ class ProfessionVisaRequirement extends Model
      */
     public function hasAdditionalDocuments(): bool
     {
-        return !empty($this->required_documents) || !empty($this->additional_documents);
+        return ! empty($this->required_documents) || ! empty($this->additional_documents);
     }
 }

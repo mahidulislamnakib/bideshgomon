@@ -20,11 +20,11 @@ class EmailTemplateController extends Controller
         // Search
         if ($request->has('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'LIKE', "%{$search}%")
-                  ->orWhere('slug', 'LIKE', "%{$search}%")
-                  ->orWhere('subject', 'LIKE', "%{$search}%")
-                  ->orWhere('category', 'LIKE', "%{$search}%");
+                    ->orWhere('slug', 'LIKE', "%{$search}%")
+                    ->orWhere('subject', 'LIKE', "%{$search}%")
+                    ->orWhere('category', 'LIKE', "%{$search}%");
             });
         }
 
@@ -92,7 +92,7 @@ class EmailTemplateController extends Controller
     public function edit(EmailTemplate $emailTemplate)
     {
         $emailTemplate->load('campaigns:id,name');
-        
+
         return Inertia::render('Admin/DataManagement/EmailTemplates/Edit', [
             'template' => $emailTemplate->append('campaigns_count'),
         ]);
@@ -101,8 +101,8 @@ class EmailTemplateController extends Controller
     public function update(Request $request, EmailTemplate $emailTemplate)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:email_templates,name,' . $emailTemplate->id,
-            'slug' => 'nullable|string|max:255|unique:email_templates,slug,' . $emailTemplate->id,
+            'name' => 'required|string|max:255|unique:email_templates,name,'.$emailTemplate->id,
+            'slug' => 'nullable|string|max:255|unique:email_templates,slug,'.$emailTemplate->id,
             'subject' => 'required|string|max:255',
             'body' => 'required|string',
             'html_body' => 'nullable|string',
@@ -142,7 +142,7 @@ class EmailTemplateController extends Controller
 
     public function toggleStatus(EmailTemplate $emailTemplate)
     {
-        $emailTemplate->is_active = !$emailTemplate->is_active;
+        $emailTemplate->is_active = ! $emailTemplate->is_active;
         $emailTemplate->save();
 
         return back();
@@ -244,7 +244,7 @@ class EmailTemplateController extends Controller
             return "Row {$rowNumber}: Template with name '{$row['name']}' already exists";
         }
 
-        if (!empty($row['slug']) && EmailTemplate::where('slug', $row['slug'])->exists()) {
+        if (! empty($row['slug']) && EmailTemplate::where('slug', $row['slug'])->exists()) {
             return "Row {$rowNumber}: Template with slug '{$row['slug']}' already exists";
         }
 
@@ -255,13 +255,13 @@ class EmailTemplateController extends Controller
     {
         $data = [
             'name' => trim($row['name']),
-            'slug' => !empty($row['slug']) ? Str::slug(trim($row['slug'])) : Str::slug(trim($row['name'])),
+            'slug' => ! empty($row['slug']) ? Str::slug(trim($row['slug'])) : Str::slug(trim($row['name'])),
             'subject' => trim($row['subject']),
             'body' => trim($row['body']),
-            'html_body' => !empty($row['html_body']) ? trim($row['html_body']) : null,
+            'html_body' => ! empty($row['html_body']) ? trim($row['html_body']) : null,
             'category' => trim($row['category']),
-            'variables' => !empty($row['variables']) ? json_decode($row['variables'], true) : null,
-            'is_active' => isset($row['is_active']) ? (bool)$row['is_active'] : true,
+            'variables' => ! empty($row['variables']) ? json_decode($row['variables'], true) : null,
+            'is_active' => isset($row['is_active']) ? (bool) $row['is_active'] : true,
         ];
 
         return $data;
@@ -286,7 +286,7 @@ class EmailTemplateController extends Controller
             'body' => $model->body,
             'html_body' => $model->html_body ?? '',
             'category' => $model->category,
-            'variables' => !empty($model->variables) ? json_encode($model->variables) : '',
+            'variables' => ! empty($model->variables) ? json_encode($model->variables) : '',
             'is_active' => $model->is_active ? '1' : '0',
         ];
     }

@@ -15,7 +15,7 @@ class CurrencySeeder extends Seeder
         $currencies = [
             // BDT as base currency (rate = 1)
             ['code' => 'BDT', 'name' => 'Bangladeshi Taka', 'symbol' => '৳', 'exchange_rate_to_bdt' => 1.00],
-            
+
             // Major world currencies (example rates - should be updated regularly)
             ['code' => 'USD', 'name' => 'US Dollar', 'symbol' => '$', 'exchange_rate_to_bdt' => 110.50],
             ['code' => 'EUR', 'name' => 'Euro', 'symbol' => '€', 'exchange_rate_to_bdt' => 120.25],
@@ -23,7 +23,7 @@ class CurrencySeeder extends Seeder
             ['code' => 'CAD', 'name' => 'Canadian Dollar', 'symbol' => 'C$', 'exchange_rate_to_bdt' => 82.30],
             ['code' => 'AUD', 'name' => 'Australian Dollar', 'symbol' => 'A$', 'exchange_rate_to_bdt' => 72.15],
             ['code' => 'NZD', 'name' => 'New Zealand Dollar', 'symbol' => 'NZ$', 'exchange_rate_to_bdt' => 67.80],
-            
+
             // Middle East currencies
             ['code' => 'SAR', 'name' => 'Saudi Riyal', 'symbol' => 'ر.س', 'exchange_rate_to_bdt' => 29.45],
             ['code' => 'AED', 'name' => 'UAE Dirham', 'symbol' => 'د.إ', 'exchange_rate_to_bdt' => 30.08],
@@ -32,7 +32,7 @@ class CurrencySeeder extends Seeder
             ['code' => 'BHD', 'name' => 'Bahraini Dinar', 'symbol' => 'د.ب', 'exchange_rate_to_bdt' => 293.15],
             ['code' => 'OMR', 'name' => 'Omani Rial', 'symbol' => 'ر.ع', 'exchange_rate_to_bdt' => 287.40],
             ['code' => 'JOD', 'name' => 'Jordanian Dinar', 'symbol' => 'د.ا', 'exchange_rate_to_bdt' => 155.88],
-            
+
             // Asian currencies
             ['code' => 'INR', 'name' => 'Indian Rupee', 'symbol' => '₹', 'exchange_rate_to_bdt' => 1.32],
             ['code' => 'PKR', 'name' => 'Pakistani Rupee', 'symbol' => '₨', 'exchange_rate_to_bdt' => 0.40],
@@ -45,7 +45,7 @@ class CurrencySeeder extends Seeder
             ['code' => 'IDR', 'name' => 'Indonesian Rupiah', 'symbol' => 'Rp', 'exchange_rate_to_bdt' => 0.0070],
             ['code' => 'PHP', 'name' => 'Philippine Peso', 'symbol' => '₱', 'exchange_rate_to_bdt' => 1.97],
             ['code' => 'VND', 'name' => 'Vietnamese Dong', 'symbol' => '₫', 'exchange_rate_to_bdt' => 0.0045],
-            
+
             // European currencies
             ['code' => 'CHF', 'name' => 'Swiss Franc', 'symbol' => 'Fr', 'exchange_rate_to_bdt' => 125.60],
             ['code' => 'SEK', 'name' => 'Swedish Krona', 'symbol' => 'kr', 'exchange_rate_to_bdt' => 10.55],
@@ -56,12 +56,12 @@ class CurrencySeeder extends Seeder
             ['code' => 'HUF', 'name' => 'Hungarian Forint', 'symbol' => 'Ft', 'exchange_rate_to_bdt' => 0.31],
             ['code' => 'RUB', 'name' => 'Russian Ruble', 'symbol' => '₽', 'exchange_rate_to_bdt' => 1.20],
             ['code' => 'TRY', 'name' => 'Turkish Lira', 'symbol' => '₺', 'exchange_rate_to_bdt' => 3.30],
-            
+
             // Americas
             ['code' => 'BRL', 'name' => 'Brazilian Real', 'symbol' => 'R$', 'exchange_rate_to_bdt' => 22.15],
             ['code' => 'MXN', 'name' => 'Mexican Peso', 'symbol' => '$', 'exchange_rate_to_bdt' => 6.45],
             ['code' => 'ARS', 'name' => 'Argentine Peso', 'symbol' => '$', 'exchange_rate_to_bdt' => 0.11],
-            
+
             // Africa
             ['code' => 'ZAR', 'name' => 'South African Rand', 'symbol' => 'R', 'exchange_rate_to_bdt' => 6.05],
             ['code' => 'EGP', 'name' => 'Egyptian Pound', 'symbol' => 'ج.م', 'exchange_rate_to_bdt' => 2.25],

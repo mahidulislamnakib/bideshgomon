@@ -73,6 +73,7 @@ class University extends Model
         if ($max) {
             $query->where('world_ranking', '<=', $max);
         }
+
         return $query;
     }
 
@@ -84,6 +85,7 @@ class University extends Model
         if ($max) {
             $query->where('tuition_max', '<=', $max);
         }
+
         return $query;
     }
 
@@ -94,9 +96,9 @@ class University extends Model
     {
         return $query->where(function ($q) use ($search) {
             $q->where('name', 'like', "%{$search}%")
-              ->orWhere('city', 'like', "%{$search}%")
-              ->orWhere('state', 'like', "%{$search}%")
-              ->orWhere('description', 'like', "%{$search}%");
+                ->orWhere('city', 'like', "%{$search}%")
+                ->orWhere('state', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
         });
     }
 
@@ -121,14 +123,14 @@ class University extends Model
      */
     public function getFormattedTuitionAttribute()
     {
-        if (!$this->tuition_min && !$this->tuition_max) {
+        if (! $this->tuition_min && ! $this->tuition_max) {
             return 'N/A';
         }
-        
+
         if ($this->tuition_min && $this->tuition_max) {
-            return '$' . number_format((float)$this->tuition_min, 0) . ' - $' . number_format((float)$this->tuition_max, 0);
+            return '$'.number_format((float) $this->tuition_min, 0).' - $'.number_format((float) $this->tuition_max, 0);
         }
-        
-        return '$' . number_format((float)($this->tuition_max ?? $this->tuition_min), 0);
+
+        return '$'.number_format((float) ($this->tuition_max ?? $this->tuition_min), 0);
     }
 }

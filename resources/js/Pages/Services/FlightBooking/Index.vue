@@ -430,8 +430,3 @@ const getTomorrowDate = () => {
     </AuthenticatedLayout>
 </template>
 
-<style scoped>
-.active\:scale-98:active {
-    transform: scale(0.98);
-}
-</style>

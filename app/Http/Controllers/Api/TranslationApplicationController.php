@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Translation;
 use App\Models\ServiceApplication;
 use App\Models\ServiceModule;
+use App\Models\Translation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TranslationApplicationController extends Controller
 {
@@ -30,16 +30,16 @@ class TranslationApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(array (
-  'document_type' => 'required|string',
-  'source_language' => 'required|string',
-  'target_language' => 'required|string',
-  'page_count' => 'nullable|integer|min:1',
-  'certification_type' => 'nullable|string',
-  'is_urgent' => 'boolean',
-  'required_by_date' => 'nullable|date',
-  'user_notes' => 'nullable|string|max:5000',
-));
+        $validated = $request->validate([
+            'document_type' => 'required|string',
+            'source_language' => 'required|string',
+            'target_language' => 'required|string',
+            'page_count' => 'nullable|integer|min:1',
+            'certification_type' => 'nullable|string',
+            'is_urgent' => 'boolean',
+            'required_by_date' => 'nullable|date',
+            'user_notes' => 'nullable|string|max:5000',
+        ]);
 
         $validated['user_id'] = $request->user()->id;
         $validated['status'] = 'pending';
@@ -105,7 +105,7 @@ class TranslationApplicationController extends Controller
         // Ensure user can only view their own applications
         if ($application->user_id !== $request->user()->id) {
             return response()->json([
-                'message' => 'Unauthorized access to this application.'
+                'message' => 'Unauthorized access to this application.',
             ], 403);
         }
 
@@ -122,27 +122,27 @@ class TranslationApplicationController extends Controller
         // Ensure user can only update their own applications
         if ($application->user_id !== $request->user()->id) {
             return response()->json([
-                'message' => 'Unauthorized access to this application.'
+                'message' => 'Unauthorized access to this application.',
             ], 403);
         }
 
         // Only allow updates if status is 'pending'
         if ($application->status !== 'pending') {
             return response()->json([
-                'message' => 'Cannot update application after submission.'
+                'message' => 'Cannot update application after submission.',
             ], 422);
         }
 
-        $validated = $request->validate(array (
-  'document_type' => 'required|string',
-  'source_language' => 'required|string',
-  'target_language' => 'required|string',
-  'page_count' => 'nullable|integer|min:1',
-  'certification_type' => 'nullable|string',
-  'is_urgent' => 'boolean',
-  'required_by_date' => 'nullable|date',
-  'user_notes' => 'nullable|string|max:5000',
-));
+        $validated = $request->validate([
+            'document_type' => 'required|string',
+            'source_language' => 'required|string',
+            'target_language' => 'required|string',
+            'page_count' => 'nullable|integer|min:1',
+            'certification_type' => 'nullable|string',
+            'is_urgent' => 'boolean',
+            'required_by_date' => 'nullable|date',
+            'user_notes' => 'nullable|string|max:5000',
+        ]);
 
         $application->update($validated);
 
@@ -160,21 +160,21 @@ class TranslationApplicationController extends Controller
         // Ensure user can only delete their own applications
         if ($application->user_id !== $request->user()->id) {
             return response()->json([
-                'message' => 'Unauthorized access to this application.'
+                'message' => 'Unauthorized access to this application.',
             ], 403);
         }
 
         // Only allow deletion if status is 'pending'
         if ($application->status !== 'pending') {
             return response()->json([
-                'message' => 'Cannot delete application after submission.'
+                'message' => 'Cannot delete application after submission.',
             ], 422);
         }
 
         $application->delete();
 
         return response()->json([
-            'message' => 'Application deleted successfully'
+            'message' => 'Application deleted successfully',
         ]);
     }
 }

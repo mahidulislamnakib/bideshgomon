@@ -7,8 +7,8 @@ use App\Models\HajjUmrah;
 use App\Models\ServiceApplication;
 use App\Models\ServiceModule;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class HajjUmrahApplicationController extends Controller
 {
@@ -30,18 +30,18 @@ class HajjUmrahApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(array (
-  'package_type' => 'required|string',
-  'number_of_travelers' => 'required|integer|min:1',
-  'preferred_travel_date' => 'nullable|date',
-  'duration' => 'nullable|string',
-  'accommodation_type' => 'nullable|string',
-  'meal_plan' => 'nullable|string',
-  'transport_type' => 'nullable|string',
-  'requires_visa_assistance' => 'boolean',
-  'requires_training' => 'boolean',
-  'special_requirements' => 'nullable|string|max:5000',
-));
+        $validated = $request->validate([
+            'package_type' => 'required|string',
+            'number_of_travelers' => 'required|integer|min:1',
+            'preferred_travel_date' => 'nullable|date',
+            'duration' => 'nullable|string',
+            'accommodation_type' => 'nullable|string',
+            'meal_plan' => 'nullable|string',
+            'transport_type' => 'nullable|string',
+            'requires_visa_assistance' => 'boolean',
+            'requires_training' => 'boolean',
+            'special_requirements' => 'nullable|string|max:5000',
+        ]);
 
         $validated['user_id'] = $request->user()->id;
         $validated['status'] = 'pending';
@@ -107,7 +107,7 @@ class HajjUmrahApplicationController extends Controller
         // Ensure user can only view their own applications
         if ($application->user_id !== $request->user()->id) {
             return response()->json([
-                'message' => 'Unauthorized access to this application.'
+                'message' => 'Unauthorized access to this application.',
             ], 403);
         }
 
@@ -124,29 +124,29 @@ class HajjUmrahApplicationController extends Controller
         // Ensure user can only update their own applications
         if ($application->user_id !== $request->user()->id) {
             return response()->json([
-                'message' => 'Unauthorized access to this application.'
+                'message' => 'Unauthorized access to this application.',
             ], 403);
         }
 
         // Only allow updates if status is 'pending'
         if ($application->status !== 'pending') {
             return response()->json([
-                'message' => 'Cannot update application after submission.'
+                'message' => 'Cannot update application after submission.',
             ], 422);
         }
 
-        $validated = $request->validate(array (
-  'package_type' => 'required|string',
-  'number_of_travelers' => 'required|integer|min:1',
-  'preferred_travel_date' => 'nullable|date',
-  'duration' => 'nullable|string',
-  'accommodation_type' => 'nullable|string',
-  'meal_plan' => 'nullable|string',
-  'transport_type' => 'nullable|string',
-  'requires_visa_assistance' => 'boolean',
-  'requires_training' => 'boolean',
-  'special_requirements' => 'nullable|string|max:5000',
-));
+        $validated = $request->validate([
+            'package_type' => 'required|string',
+            'number_of_travelers' => 'required|integer|min:1',
+            'preferred_travel_date' => 'nullable|date',
+            'duration' => 'nullable|string',
+            'accommodation_type' => 'nullable|string',
+            'meal_plan' => 'nullable|string',
+            'transport_type' => 'nullable|string',
+            'requires_visa_assistance' => 'boolean',
+            'requires_training' => 'boolean',
+            'special_requirements' => 'nullable|string|max:5000',
+        ]);
 
         $application->update($validated);
 
@@ -164,21 +164,21 @@ class HajjUmrahApplicationController extends Controller
         // Ensure user can only delete their own applications
         if ($application->user_id !== $request->user()->id) {
             return response()->json([
-                'message' => 'Unauthorized access to this application.'
+                'message' => 'Unauthorized access to this application.',
             ], 403);
         }
 
         // Only allow deletion if status is 'pending'
         if ($application->status !== 'pending') {
             return response()->json([
-                'message' => 'Cannot delete application after submission.'
+                'message' => 'Cannot delete application after submission.',
             ], 422);
         }
 
         $application->delete();
 
         return response()->json([
-            'message' => 'Application deleted successfully'
+            'message' => 'Application deleted successfully',
         ]);
     }
 }

@@ -57,7 +57,9 @@ class UserDocument extends Model
 
     // Status constants
     public const STATUS_PENDING = 'pending';
+
     public const STATUS_APPROVED = 'approved';
+
     public const STATUS_REJECTED = 'rejected';
 
     // Document type suggestions (not enforced here; controllers/services validate)

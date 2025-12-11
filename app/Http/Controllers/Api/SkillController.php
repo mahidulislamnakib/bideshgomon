@@ -22,7 +22,7 @@ class SkillController extends Controller
 
         // Search by name if provided
         if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         }
 
         $skills = $query->orderBy('category')->orderBy('name')->get();

@@ -13,6 +13,7 @@ use Inertia\Response;
 class WalletController extends Controller
 {
     protected WalletService $walletService;
+
     protected EmailNotificationService $emailService;
 
     public function __construct(WalletService $walletService, EmailNotificationService $emailService)
@@ -27,27 +28,27 @@ class WalletController extends Controller
     public function index(Request $request): Response
     {
         $user = $request->user();
-        
+
         // Create wallet if doesn't exist
-        if (!$user->wallet) {
+        if (! $user->wallet) {
             $this->walletService->createWallet($user);
             $user->load('wallet');
         }
 
         $wallet = $user->wallet;
         $recentTransactions = $wallet->transactions()->latest()->take(10)->get();
-        
+
         // Calculate statistics
         $totalIn = $wallet->transactions()
             ->where('type', 'credit')
             ->where('status', 'completed')
             ->sum('amount');
-            
+
         $totalOut = $wallet->transactions()
             ->where('type', 'debit')
             ->where('status', 'completed')
             ->sum('amount');
-            
+
         $transactionCount = $wallet->transactions()->count();
 
         return Inertia::render('Wallet/Index', [
@@ -67,8 +68,8 @@ class WalletController extends Controller
     public function transactions(Request $request): Response|RedirectResponse
     {
         $user = $request->user();
-        
-        if (!$user->wallet) {
+
+        if (! $user->wallet) {
             return redirect()->route('wallet.index');
         }
 
@@ -107,9 +108,9 @@ class WalletController extends Controller
         ]);
 
         $user = $request->user();
-        
+
         // Create wallet if doesn't exist
-        if (!$user->wallet) {
+        if (! $user->wallet) {
             $this->walletService->createWallet($user);
             $user->load('wallet');
         }
@@ -118,7 +119,7 @@ class WalletController extends Controller
             // Redirect to payment gateway initiation
             $gateway = $validated['gateway'];
             $route = "payment.{$gateway}.initiate";
-            
+
             return redirect()->route($route, [
                 'amount' => $validated['amount'],
                 'customer_name' => $user->name,
@@ -143,8 +144,8 @@ class WalletController extends Controller
         ]);
 
         $user = $request->user();
-        
-        if (!$user->wallet) {
+
+        if (! $user->wallet) {
             return redirect()->back()->with('error', 'Wallet not found.');
         }
 
@@ -154,7 +155,7 @@ class WalletController extends Controller
         }
 
         try {
-            $referenceId = 'WTH' . rand(100000, 999999);
+            $referenceId = 'WTH'.rand(100000, 999999);
 
             // Withdraw from wallet
             $this->walletService->debitWallet(

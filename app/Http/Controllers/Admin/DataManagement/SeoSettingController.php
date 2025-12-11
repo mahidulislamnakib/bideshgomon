@@ -19,11 +19,11 @@ class SeoSettingController extends Controller
         // Search
         if ($request->has('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('page_type', 'LIKE', "%{$search}%")
-                  ->orWhere('title', 'LIKE', "%{$search}%")
-                  ->orWhere('description', 'LIKE', "%{$search}%")
-                  ->orWhere('keywords', 'LIKE', "%{$search}%");
+                    ->orWhere('title', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%")
+                    ->orWhere('keywords', 'LIKE', "%{$search}%");
             });
         }
 
@@ -100,7 +100,7 @@ class SeoSettingController extends Controller
     public function update(Request $request, SeoSetting $seoSetting)
     {
         $validated = $request->validate([
-            'page_type' => 'required|string|max:255|unique:seo_settings,page_type,' . $seoSetting->id,
+            'page_type' => 'required|string|max:255|unique:seo_settings,page_type,'.$seoSetting->id,
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'keywords' => 'nullable|string',
@@ -158,7 +158,7 @@ class SeoSettingController extends Controller
             'title', 'description', 'keywords', 'canonical_url',
             'og_title', 'og_description', 'og_image', 'og_type',
             'twitter_card', 'twitter_title', 'twitter_description', 'twitter_image', 'twitter_site',
-            'schema_markup', 'index', 'follow', 'robots'
+            'schema_markup', 'index', 'follow', 'robots',
         ];
     }
 
@@ -299,23 +299,23 @@ class SeoSettingController extends Controller
     {
         $data = [
             'page_type' => trim($row['page_type']),
-            'title' => !empty($row['title']) ? trim($row['title']) : null,
-            'description' => !empty($row['description']) ? trim($row['description']) : null,
-            'keywords' => !empty($row['keywords']) ? trim($row['keywords']) : null,
-            'canonical_url' => !empty($row['canonical_url']) ? trim($row['canonical_url']) : null,
-            'og_title' => !empty($row['og_title']) ? trim($row['og_title']) : null,
-            'og_description' => !empty($row['og_description']) ? trim($row['og_description']) : null,
-            'og_image' => !empty($row['og_image']) ? trim($row['og_image']) : null,
-            'og_type' => !empty($row['og_type']) ? trim($row['og_type']) : 'website',
-            'twitter_card' => !empty($row['twitter_card']) ? trim($row['twitter_card']) : 'summary_large_image',
-            'twitter_title' => !empty($row['twitter_title']) ? trim($row['twitter_title']) : null,
-            'twitter_description' => !empty($row['twitter_description']) ? trim($row['twitter_description']) : null,
-            'twitter_image' => !empty($row['twitter_image']) ? trim($row['twitter_image']) : null,
-            'twitter_site' => !empty($row['twitter_site']) ? trim($row['twitter_site']) : null,
-            'schema_markup' => !empty($row['schema_markup']) ? json_decode($row['schema_markup'], true) : null,
-            'index' => isset($row['index']) ? (bool)$row['index'] : true,
-            'follow' => isset($row['follow']) ? (bool)$row['follow'] : true,
-            'robots' => !empty($row['robots']) ? trim($row['robots']) : null,
+            'title' => ! empty($row['title']) ? trim($row['title']) : null,
+            'description' => ! empty($row['description']) ? trim($row['description']) : null,
+            'keywords' => ! empty($row['keywords']) ? trim($row['keywords']) : null,
+            'canonical_url' => ! empty($row['canonical_url']) ? trim($row['canonical_url']) : null,
+            'og_title' => ! empty($row['og_title']) ? trim($row['og_title']) : null,
+            'og_description' => ! empty($row['og_description']) ? trim($row['og_description']) : null,
+            'og_image' => ! empty($row['og_image']) ? trim($row['og_image']) : null,
+            'og_type' => ! empty($row['og_type']) ? trim($row['og_type']) : 'website',
+            'twitter_card' => ! empty($row['twitter_card']) ? trim($row['twitter_card']) : 'summary_large_image',
+            'twitter_title' => ! empty($row['twitter_title']) ? trim($row['twitter_title']) : null,
+            'twitter_description' => ! empty($row['twitter_description']) ? trim($row['twitter_description']) : null,
+            'twitter_image' => ! empty($row['twitter_image']) ? trim($row['twitter_image']) : null,
+            'twitter_site' => ! empty($row['twitter_site']) ? trim($row['twitter_site']) : null,
+            'schema_markup' => ! empty($row['schema_markup']) ? json_decode($row['schema_markup'], true) : null,
+            'index' => isset($row['index']) ? (bool) $row['index'] : true,
+            'follow' => isset($row['follow']) ? (bool) $row['follow'] : true,
+            'robots' => ! empty($row['robots']) ? trim($row['robots']) : null,
         ];
 
         return $data;
@@ -332,7 +332,7 @@ class SeoSettingController extends Controller
             'page_type', 'title', 'description', 'keywords', 'canonical_url',
             'og_title', 'og_description', 'og_image', 'og_type',
             'twitter_card', 'twitter_title', 'twitter_description', 'twitter_image', 'twitter_site',
-            'schema_markup', 'index', 'follow', 'robots'
+            'schema_markup', 'index', 'follow', 'robots',
         ];
     }
 
@@ -353,7 +353,7 @@ class SeoSettingController extends Controller
             'twitter_description' => $model->twitter_description ?? '',
             'twitter_image' => $model->twitter_image ?? '',
             'twitter_site' => $model->twitter_site ?? '',
-            'schema_markup' => !empty($model->schema_markup) ? json_encode($model->schema_markup) : '',
+            'schema_markup' => ! empty($model->schema_markup) ? json_encode($model->schema_markup) : '',
             'index' => $model->index ? '1' : '0',
             'follow' => $model->follow ? '1' : '0',
             'robots' => $model->robots ?? '',

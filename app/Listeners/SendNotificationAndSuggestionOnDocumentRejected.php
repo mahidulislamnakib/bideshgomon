@@ -3,9 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\DocumentRejected;
-use App\Services\NotificationService;
-use App\Services\SmartSuggestionsService;
 use App\Models\SmartSuggestion;
+use App\Services\NotificationService;
 
 class SendNotificationAndSuggestionOnDocumentRejected
 {
@@ -26,7 +25,7 @@ class SendNotificationAndSuggestionOnDocumentRejected
                     'document_id' => $doc->id,
                     'document_type' => $doc->document_type,
                     'rejection_reason' => $reason,
-                ]
+                ],
             ]
         );
 

@@ -45,7 +45,7 @@ return new class extends Migration
             $table->integer('search_count')->default(1);
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->index(['user_id', 'status']);
             $table->index('travel_date');
             $table->index('created_at');

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('region', 50)->nullable(); // Asia, Europe, Americas
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             // Indexes for fast lookup
             $table->index('iso_code_2');
             $table->index('is_active');

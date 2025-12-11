@@ -23,6 +23,6 @@ class SystemEvent extends Model
 
     public function scopeTypePrefix($query, string $prefix)
     {
-        return $query->where('event_type', 'like', $prefix . '%');
+        return $query->where('event_type', 'like', $prefix.'%');
     }
 }

@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\UserWorkExperience;
-use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class WorkExperienceSeeder extends Seeder
 {
@@ -97,16 +97,16 @@ class WorkExperienceSeeder extends Seeder
                     'currency' => 'BDT',
                     'salary_period' => 'monthly',
                     'supervisor_name' => $this->generateBangladeshiName(),
-                    'supervisor_phone' => '+880171' . rand(1000000, 9999999),
-                    'supervisor_email' => 'supervisor' . rand(1000, 9999) . '@company.com',
-                    'employment_letter_path' => rand(0, 1) ? 'work-experience/letters/sample_letter_' . $user->id . '_' . $i . '.pdf' : null,
+                    'supervisor_phone' => '+880171'.rand(1000000, 9999999),
+                    'supervisor_email' => 'supervisor'.rand(1000, 9999).'@company.com',
+                    'employment_letter_path' => rand(0, 1) ? 'work-experience/letters/sample_letter_'.$user->id.'_'.$i.'.pdf' : null,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
             }
         }
 
-        $this->command->info('✅ Work experience records created for ' . $users->count() . ' users');
+        $this->command->info('✅ Work experience records created for '.$users->count().' users');
     }
 
     private function generateResponsibilities(string $position): array
@@ -154,6 +154,7 @@ class WorkExperienceSeeder extends Seeder
     private function getRandomBDCity(): string
     {
         $cities = ['Dhaka', 'Chittagong', 'Sylhet', 'Rajshahi', 'Khulna', 'Barisal', 'Rangpur', 'Mymensingh'];
+
         return $cities[array_rand($cities)];
     }
 
@@ -165,6 +166,7 @@ class WorkExperienceSeeder extends Seeder
         if (str_contains($position, 'Lead') || str_contains($position, 'Principal')) {
             return 'Lead';
         }
+
         return 'Mid-Level';
     }
 
@@ -172,7 +174,7 @@ class WorkExperienceSeeder extends Seeder
     {
         $firstNames = ['Mohammed', 'Abdul', 'Md.', 'Fatema', 'Ayesha', 'Shahana', 'Tanvir', 'Rahim', 'Karim', 'Nasrin'];
         $lastNames = ['Rahman', 'Hossain', 'Ahmed', 'Ali', 'Khan', 'Chowdhury', 'Islam', 'Begum', 'Akter', 'Sultana'];
-        
-        return $firstNames[array_rand($firstNames)] . ' ' . $lastNames[array_rand($lastNames)];
+
+        return $firstNames[array_rand($firstNames)].' '.$lastNames[array_rand($lastNames)];
     }
 }

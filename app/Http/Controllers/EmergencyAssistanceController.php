@@ -18,7 +18,7 @@ class EmergencyAssistanceController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $emergency = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $emergency = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($emergency, 'emergency-assistance', $validated);
 
         return response()->json(['message' => 'Emergency assistance request created']);

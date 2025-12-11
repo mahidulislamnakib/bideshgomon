@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Admin;
 
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Role;
 use App\Models\SeoSetting;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class SeoSettingsTest extends TestCase
 {
@@ -15,7 +15,7 @@ class SeoSettingsTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Seed roles
         $this->artisan('db:seed', ['--class' => 'RolesSeeder']);
     }
@@ -69,11 +69,11 @@ class SeoSettingsTest extends TestCase
             'schema_markup' => [
                 '@context' => 'https://schema.org',
                 '@type' => 'Organization',
-                'name' => 'BideshGomon'
+                'name' => 'BideshGomon',
             ],
             'index' => true,
             'follow' => true,
-            'robots' => 'max-snippet:-1'
+            'robots' => 'max-snippet:-1',
         ];
 
         $response = $this->actingAs($admin)->put(route('seo-settings.update', 'home'), $data);
@@ -83,7 +83,7 @@ class SeoSettingsTest extends TestCase
             'page_type' => 'home',
             'title' => 'BideshGomon - Test Page',
             'keywords' => 'test, seo, bangladesh',
-            'twitter_site' => '@BideshGomon'
+            'twitter_site' => '@BideshGomon',
         ]);
     }
 
@@ -97,7 +97,7 @@ class SeoSettingsTest extends TestCase
             'title' => 'Cached Title',
             'description' => 'Cached Description',
             'index' => true,
-            'follow' => true
+            'follow' => true,
         ];
 
         // Create setting
@@ -105,7 +105,7 @@ class SeoSettingsTest extends TestCase
 
         // First call - should cache
         $setting1 = SeoSetting::getForPage('home');
-        
+
         // Second call - should retrieve from cache
         $setting2 = SeoSetting::getForPage('home');
 
@@ -125,14 +125,14 @@ class SeoSettingsTest extends TestCase
             'title' => 'Test Title',
             'description' => 'Test Description',
             'index' => true,
-            'follow' => true
+            'follow' => true,
         ]);
 
         $response = $this->actingAs($admin)->delete(route('seo-settings.destroy', 'home'));
 
         $response->assertRedirect();
         $this->assertDatabaseMissing('seo_settings', [
-            'page_type' => 'home'
+            'page_type' => 'home',
         ]);
     }
 
@@ -148,7 +148,7 @@ class SeoSettingsTest extends TestCase
             'title' => 'Home',
             'description' => 'Home page',
             'index' => true,
-            'follow' => true
+            'follow' => true,
         ]);
 
         SeoSetting::create([
@@ -156,7 +156,7 @@ class SeoSettingsTest extends TestCase
             'title' => 'Services',
             'description' => 'Services page',
             'index' => true,
-            'follow' => true
+            'follow' => true,
         ]);
 
         SeoSetting::create([
@@ -164,7 +164,7 @@ class SeoSettingsTest extends TestCase
             'title' => 'About',
             'description' => 'About page',
             'index' => false, // This should not be in sitemap
-            'follow' => true
+            'follow' => true,
         ]);
 
         $response = $this->actingAs($admin)->post(route('seo-settings.generate-sitemap'));
@@ -191,7 +191,7 @@ class SeoSettingsTest extends TestCase
             'canonical_url' => 'not-a-valid-url',
             'og_image' => 'also-not-a-url',
             'index' => true,
-            'follow' => true
+            'follow' => true,
         ];
 
         $response = $this->actingAs($admin)->put(route('seo-settings.update', 'home'), $data);
@@ -205,7 +205,7 @@ class SeoSettingsTest extends TestCase
         $setting = new SeoSetting([
             'index' => true,
             'follow' => false,
-            'robots' => 'max-snippet:-1'
+            'robots' => 'max-snippet:-1',
         ]);
 
         $robotsMeta = $setting->robots_meta;

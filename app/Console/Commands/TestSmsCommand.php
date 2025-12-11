@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\UserPhoneNumber;
 use App\Services\SmsService;
+use Illuminate\Console\Command;
 
 class TestSmsCommand extends Command
 {
@@ -21,8 +21,9 @@ class TestSmsCommand extends Command
             ? UserPhoneNumber::find($id)
             : UserPhoneNumber::first();
 
-        if (!$phone) {
+        if (! $phone) {
             $this->error('No phone number found. Add one via profile first.');
+
             return self::FAILURE;
         }
 
@@ -31,13 +32,15 @@ class TestSmsCommand extends Command
 
         if ($sent) {
             $this->info('Test SMS dispatched to: '.$phone->country_code.$phone->phone_number);
-            if (!$smsService->twilioConfigured()) {
+            if (! $smsService->twilioConfigured()) {
                 $this->warn('Twilio not fully configured; message logged only.');
             }
+
             return self::SUCCESS;
         }
 
         $this->error('Failed to send test SMS. Check logs.');
+
         return self::FAILURE;
     }
 }

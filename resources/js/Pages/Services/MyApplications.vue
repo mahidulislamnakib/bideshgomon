@@ -144,14 +144,14 @@ const statusOptions = [
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <!-- Status Filter -->
             <div>
-              <label for="status-filter" class="block text-sm font-medium text-gray-700 mb-1">
+              <label for="status-filter" class="block text-sm font-semibold text-gray-700 mb-2">
                 Status
               </label>
               <select
                 id="status-filter"
                 v-model="statusFilter"
                 @change="applyFilters"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-brand-red-600"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
               >
                 <option v-for="option in statusOptions" :key="option.value" :value="option.value">
                   {{ option.label }}
@@ -161,7 +161,7 @@ const statusOptions = [
 
             <!-- Search -->
             <div class="md:col-span-2">
-              <label for="search" class="block text-sm font-medium text-gray-700 mb-1">
+              <label for="search" class="block text-sm font-semibold text-gray-700 mb-2">
                 Search
               </label>
               <div class="flex gap-2">
@@ -171,7 +171,7 @@ const statusOptions = [
                   type="text"
                   placeholder="Search by application number or service name..."
                   @keyup.enter="applyFilters"
-                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-brand-red-600"
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
                 />
                 <button
                   type="button"

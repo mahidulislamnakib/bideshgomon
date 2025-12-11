@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FlightRequest extends Model
 {
@@ -67,7 +67,7 @@ class FlightRequest extends Model
 
         static::creating(function ($request) {
             if (empty($request->request_reference)) {
-                $request->request_reference = 'FR' . date('Ymd') . str_pad(
+                $request->request_reference = 'FR'.date('Ymd').str_pad(
                     static::whereDate('created_at', today())->count() + 1,
                     3,
                     '0',
@@ -157,10 +157,11 @@ class FlightRequest extends Model
     public function getFormattedBudgetAttribute(): string
     {
         if ($this->budget_min && $this->budget_max) {
-            return '৳ ' . number_format((float)$this->budget_min) . ' - ৳ ' . number_format((float)$this->budget_max);
+            return '৳ '.number_format((float) $this->budget_min).' - ৳ '.number_format((float) $this->budget_max);
         } elseif ($this->budget_max) {
-            return 'Up to ৳ ' . number_format((float)$this->budget_max);
+            return 'Up to ৳ '.number_format((float) $this->budget_max);
         }
+
         return 'Flexible';
     }
 
@@ -169,12 +170,13 @@ class FlightRequest extends Model
         if ($this->trip_type === 'multi_city') {
             return 'Multi-City Trip';
         }
-        return $this->origin_airport_code . ' → ' . $this->destination_airport_code;
+
+        return $this->origin_airport_code.' → '.$this->destination_airport_code;
     }
 
     public function getStatusColorAttribute(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             'pending' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
             'assigned' => 'bg-blue-100 text-blue-800 border-blue-200',
             'quoted' => 'bg-purple-100 text-purple-800 border-purple-200',

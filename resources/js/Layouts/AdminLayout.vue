@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3'
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import Dropdown from '@/Components/Dropdown.vue'
@@ -43,6 +43,7 @@ import {
   EnvelopeIcon,
   ClipboardDocumentIcon,
   MagnifyingGlassCircleIcon,
+  MagnifyingGlassIcon,
   ClockIcon,
   ChevronDownIcon,
   ChevronRightIcon,
@@ -57,16 +58,23 @@ import {
   CommandLineIcon,
   ArrowRightOnRectangleIcon,
   BookOpenIcon,
+  BuildingOffice2Icon,
+  LightBulbIcon,
+  EllipsisHorizontalIcon,
+  PlusCircleIcon,
+  CubeIcon,
 } from '@heroicons/vue/24/outline'
 
 const showingNavigationDropdown = ref(false)
 const showMobileSearch = ref(false)
-const collapsedSections = ref({})
+const expandedGroups = ref({})
 const sidebarCollapsed = ref(false)
 const darkMode = ref(false)
 const showCommandPalette = ref(false)
+const menuSearch = ref('')
 const page = usePage()
 const user = computed(() => page.props.auth.user)
+
 
 // Toggle dark mode
 const toggleDarkMode = () => {
@@ -77,6 +85,12 @@ const toggleDarkMode = () => {
   } else {
     document.documentElement.classList.remove('dark')
   }
+}
+
+// Toggle menu group
+const toggleGroup = (groupKey) => {
+  expandedGroups.value[groupKey] = !expandedGroups.value[groupKey]
+  localStorage.setItem('expandedGroups', JSON.stringify(expandedGroups.value))
 }
 
 // Load preferences and setup event listeners
@@ -98,6 +112,20 @@ onMounted(() => {
     sidebarCollapsed.value = savedSidebarState === 'true'
   }
 
+  // Load expanded groups
+  const savedGroups = localStorage.getItem('expandedGroups')
+  if (savedGroups) {
+    try {
+      expandedGroups.value = JSON.parse(savedGroups)
+    } catch (e) {
+      // Default: expand primary groups
+      expandedGroups.value = { services: true, jobs: true, travel: true }
+    }
+  } else {
+    // Default: expand primary groups
+    expandedGroups.value = { services: true, jobs: true, travel: true }
+  }
+
   // Command Palette keyboard shortcut (Cmd+K / Ctrl+K)
   const handleKeyPress = (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -117,6 +145,15 @@ onMounted(() => {
   }
 })
 
+// Auto-collapse other groups when one is expanded (accordion behavior)
+watch(expandedGroups, (newVal) => {
+  const expandedCount = Object.values(newVal).filter(Boolean).length
+  // Keep only services, jobs, travel expanded by default, collapse others on mobile
+  if (window.innerWidth < 768 && expandedCount > 2) {
+    // Auto-collapse behavior on mobile
+  }
+}, { deep: true })
+
 // Dynamic profile route based on user role
 const profileRoute = computed(() => {
   const roleSlug = user.value?.role?.slug
@@ -129,573 +166,324 @@ const profileRoute = computed(() => {
   return 'profile.edit'
 })
 
-const toggleSection = sectionName => {
-  collapsedSections.value[sectionName] = !collapsedSections.value[sectionName]
-}
-
 const toggleSidebar = () => {
   sidebarCollapsed.value = !sidebarCollapsed.value
   localStorage.setItem('sidebarCollapsed', sidebarCollapsed.value.toString())
 }
 
 // ========================================
-// ADMIN NAVIGATION - Reorganized Professional Structure
-// Grouped by functional areas for better UX
+// 3-LAYER ADMIN NAVIGATION STRUCTURE
+// Layer 1: Primary Actions (Top)
+// Layer 2: Collapsible Module Groups (Middle)
+// Layer 3: More Section (Bottom)
 // ========================================
-const navigation = [
-  // ========== DASHBOARD & OVERVIEW ==========
+
+// Layer 1: Primary Actions - Always visible
+const primaryActions = [
   {
     name: 'Dashboard',
     href: route('admin.dashboard'),
     icon: HomeIcon,
     current: route().current('admin.dashboard'),
-    section: 'dashboard',
     badge: null,
-    description: 'Main admin overview',
   },
   {
     name: 'Analytics',
     href: route('admin.analytics.index'),
     icon: ChartBarIcon,
     current: route().current('admin.analytics.*'),
-    section: 'dashboard',
-    description: 'Platform insights & reports',
   },
-
-  // ========== USER & PEOPLE MANAGEMENT ==========
   {
-    name: 'Users',
+    name: 'Users & Roles',
     href: route('admin.users.index'),
     icon: UsersIcon,
     current: route().current('admin.users.*'),
-    section: 'users',
-    description: 'Manage platform users',
   },
   {
-    name: 'Impersonation Logs',
-    href: route('admin.impersonations.index'),
-    icon: ClockIcon,
-    current: route().current('admin.impersonations.*'),
-    section: 'users',
-    description: 'Track admin impersonations',
+    name: 'Settings',
+    href: route('admin.settings.index'),
+    icon: Cog6ToothIcon,
+    current: route().current('admin.settings.*') || route().current('menus.*') || route().current('seo-settings.*'),
   },
+]
 
-  // ========== PLUGIN SYSTEM (PRIORITY) ==========
+// Layer 2: Collapsible Module Groups
+const moduleGroups = [
   {
-    name: 'Service Applications',
-    href: route('service-applications.index'),
-    icon: ClipboardDocumentListIcon,
-    current: route().current('service-applications.*'),
-    section: 'plugin-system',
-    badge: '38',
-    description: 'Universal Plugin System - All Services',
-  },
-  {
-    name: 'Service Quotes',
-    href: route('admin.service-quotes.index'),
-    icon: CurrencyDollarIcon,
-    current: route().current('admin.service-quotes.*'),
-    section: 'plugin-system',
-    description: 'Agency Quotes & Pricing',
-  },
-  {
-    name: 'Service Modules',
-    href: route('admin.service-modules.index'),
+    key: 'services',
+    name: 'Services',
     icon: RectangleStackIcon,
-    current: route().current('admin.service-modules.*'),
-    section: 'plugin-system',
     badge: '38',
-    description: 'Configure 38 Active Services',
+    items: [
+      {
+        name: 'Applications',
+        href: route('service-applications.index'),
+        icon: ClipboardDocumentListIcon,
+        current: route().current('service-applications.*'),
+        badge: '38',
+      },
+      {
+        name: 'Quotes',
+        href: route('admin.service-quotes.index'),
+        icon: CurrencyDollarIcon,
+        current: route().current('admin.service-quotes.*'),
+      },
+      {
+        name: 'Modules',
+        href: route('admin.service-modules.index'),
+        icon: CubeIcon,
+        current: route().current('admin.service-modules.*'),
+      },
+    ],
   },
-
-  // ========== JOBS & EMPLOYMENT ==========
   {
-    name: 'Job Postings',
-    href: route('admin.jobs.index'),
+    key: 'jobs',
+    name: 'Jobs',
     icon: BriefcaseIcon,
-    current: route().current('admin.jobs.*'),
-    section: 'jobs',
-    description: 'Manage job listings',
+    items: [
+      {
+        name: 'Postings',
+        href: route('admin.jobs.index'),
+        icon: BriefcaseIcon,
+        current: route().current('admin.jobs.*'),
+      },
+      {
+        name: 'Applications',
+        href: route('admin.job-applications.index'),
+        icon: ClipboardDocumentListIcon,
+        current: route().current('admin.job-applications.*') || route().current('admin.applications.*'),
+      },
+    ],
   },
   {
-    name: 'Job Applications',
-    href: route('admin.job-applications.index'),
-    icon: ClipboardDocumentListIcon,
-    current: route().current('admin.job-applications.*') || route().current('admin.applications.*'),
-    section: 'jobs',
-    description: 'Review applications',
-  },
-
-  // ========== VISA & TRAVEL SERVICES ==========
-  {
-    name: 'Visa Applications',
-    href: route('admin.visa-applications.index'),
-    icon: DocumentTextIcon,
-    current: route().current('admin.visa-applications.*'),
-    section: 'travel',
-    description: 'Process visa requests',
-  },
-  {
-    name: 'Visa Requirements',
-    href: route('admin.visa-requirements.index'),
-    icon: ClipboardDocumentListIcon,
-    current: route().current('admin.visa-requirements.*'),
-    section: 'travel',
-    description: 'Country visa rules',
-  },
-  {
-    name: 'Hotels',
-    href: route('admin.hotels.index'),
-    icon: BuildingLibraryIcon,
-    current: route().current('admin.hotels.*'),
-    section: 'travel',
-    description: 'Manage hotel inventory',
-  },
-  {
-    name: 'Hotel Bookings',
-    href: route('admin.hotel-bookings.index'),
-    icon: ClockIcon,
-    current: route().current('admin.hotel-bookings.*'),
-    section: 'travel',
-    description: 'Track reservations',
+    key: 'travel',
+    name: 'Travel',
+    icon: GlobeAltIcon,
+    items: [
+      {
+        name: 'Visa Apps',
+        href: route('admin.visa-applications.index'),
+        icon: DocumentTextIcon,
+        current: route().current('admin.visa-applications.*'),
+      },
+      {
+        name: 'Requirements',
+        href: route('admin.visa-requirements.index'),
+        icon: ClipboardDocumentListIcon,
+        current: route().current('admin.visa-requirements.*'),
+      },
+      {
+        name: 'Hotels',
+        href: route('admin.hotels.index'),
+        icon: BuildingLibraryIcon,
+        current: route().current('admin.hotels.*'),
+      },
+      {
+        name: 'Bookings',
+        href: route('admin.hotel-bookings.index'),
+        icon: ClockIcon,
+        current: route().current('admin.hotel-bookings.*'),
+      },
+      {
+        name: 'Flights',
+        href: route('admin.flight-requests.index'),
+        icon: TruckIcon,
+        current: route().current('admin.flight-requests.*'),
+      },
+    ],
   },
   {
-    name: 'Flight Requests',
-    href: route('admin.flight-requests.index'),
-    icon: TruckIcon,
-    current: route().current('admin.flight-requests.*'),
-    section: 'travel',
-    description: 'Flight inquiries',
-  },
-
-  // ========== AGENCY MANAGEMENT ==========
-  {
-    name: 'Agency Assignments',
-    href: route('admin.agency-assignments.index'),
+    key: 'agencies',
+    name: 'Agencies',
     icon: UserGroupIcon,
-    current: route().current('admin.agency-assignments.*'),
-    section: 'agencies',
-    description: 'Agency service allocations',
+    items: [
+      {
+        name: 'Assignments',
+        href: route('admin.agency-assignments.index'),
+        icon: UserGroupIcon,
+        current: route().current('admin.agency-assignments.*'),
+      },
+      {
+        name: 'Resources',
+        href: route('admin.agency-resources.index'),
+        icon: FolderIcon,
+        current: route().current('admin.agency-resources.*'),
+      },
+    ],
   },
   {
-    name: 'Agency Resources',
-    href: route('admin.agency-resources.index'),
-    icon: FolderIcon,
-    current: route().current('admin.agency-resources.*'),
-    section: 'agencies',
-    description: 'Agency materials & docs',
-  },
-
-  // ========== FINANCIAL & PAYMENTS ==========
-  {
-    name: 'Wallets',
-    href: route('admin.wallets.index'),
+    key: 'financial',
+    name: 'Financial',
     icon: BanknotesIcon,
-    current: route().current('admin.wallets.*'),
-    section: 'financial',
-    description: 'User wallet management',
+    items: [
+      {
+        name: 'Wallets',
+        href: route('admin.wallets.index'),
+        icon: BanknotesIcon,
+        current: route().current('admin.wallets.*'),
+      },
+      {
+        name: 'Rewards',
+        href: route('admin.rewards.index'),
+        icon: GiftIcon,
+        current: route().current('admin.rewards.*'),
+      },
+    ],
   },
   {
-    name: 'Rewards',
-    href: route('admin.rewards.index'),
-    icon: GiftIcon,
-    current: route().current('admin.rewards.*'),
-    section: 'financial',
-    description: 'Loyalty & rewards program',
-  },
-
-  // ========== CONTENT MANAGEMENT & CMS ==========
-  {
-    name: 'CMS Pages',
-    href: route('admin.pages.index'),
-    icon: DocumentTextIcon,
-    current: route().current('admin.pages.*'),
-    section: 'cms',
-    description: 'Terms, Privacy, About pages',
-  },
-  {
-    name: 'Blog Posts',
-    href: route('admin.blog.posts.index'),
+    key: 'content',
+    name: 'Content',
     icon: NewspaperIcon,
-    current: route().current('admin.blog.posts.*'),
-    section: 'cms',
-    description: 'Create articles & news',
+    items: [
+      {
+        name: 'Blog',
+        href: route('admin.blog.posts.index'),
+        icon: NewspaperIcon,
+        current: route().current('admin.blog.posts.*'),
+      },
+      {
+        name: 'Pages',
+        href: route('admin.pages.index'),
+        icon: DocumentTextIcon,
+        current: route().current('admin.pages.*'),
+      },
+      {
+        name: 'Events',
+        href: route('admin.events.index'),
+        icon: ClockIcon,
+        current: route().current('admin.events.*'),
+      },
+      {
+        name: 'FAQs',
+        href: route('admin.faqs.index'),
+        icon: QuestionMarkCircleIcon,
+        current: route().current('admin.faqs.*'),
+      },
+      {
+        name: 'Testimonials',
+        href: route('admin.testimonials.index'),
+        icon: ChatBubbleBottomCenterTextIcon,
+        current: route().current('admin.testimonials.*'),
+      },
+    ],
   },
   {
-    name: 'Events',
-    href: route('admin.events.index'),
-    icon: ClockIcon,
-    current: route().current('admin.events.*'),
-    section: 'cms',
-    description: 'Manage platform events',
+    key: 'support',
+    name: 'Support',
+    icon: ChatBubbleLeftRightIcon,
+    items: [
+      {
+        name: 'Tickets',
+        href: route('admin.support-tickets.index'),
+        icon: ChatBubbleLeftRightIcon,
+        current: route().current('admin.support-tickets.*'),
+      },
+      {
+        name: 'Appointments',
+        href: route('admin.appointments.index'),
+        icon: ClockIcon,
+        current: route().current('admin.appointments.*'),
+      },
+    ],
   },
-  {
-    name: 'FAQs',
-    href: route('admin.faqs.index'),
-    icon: QuestionMarkCircleIcon,
-    current: route().current('admin.faqs.*'),
-    section: 'cms',
-    description: 'Help center content',
-  },
-  {
-    name: 'Testimonials',
-    href: route('admin.testimonials.index'),
-    icon: ChatBubbleBottomCenterTextIcon,
-    current: route().current('admin.testimonials.*'),
-    section: 'cms',
-    description: 'Customer reviews',
-  },
+]
+
+// Layer 3: More Section - Rarely used pages
+const moreItems = [
   {
     name: 'Partners',
     href: route('admin.partners.index'),
     icon: UserGroupIcon,
     current: route().current('admin.partners.*'),
-    section: 'cms',
-    description: 'Partnership logos',
   },
   {
     name: 'Directories',
     href: route('admin.directories.index'),
     icon: BookOpenIcon,
     current: route().current('admin.directories.*'),
-    section: 'cms',
-    description: 'Embassies, Airlines, Training',
   },
   {
-    name: 'Marketing Campaigns',
+    name: 'Marketing',
     href: route('admin.marketing-campaigns.index'),
     icon: MegaphoneIcon,
     current: route().current('admin.marketing-campaigns.*'),
-    section: 'cms',
-    description: 'Promotional campaigns',
-  },
-
-  // ========== SUPPORT & COMMUNICATION ==========
-  {
-    name: 'Support Tickets',
-    href: route('admin.support-tickets.index'),
-    icon: ChatBubbleLeftRightIcon,
-    current: route().current('admin.support-tickets.*'),
-    section: 'support',
-    description: 'Customer support',
   },
   {
-    name: 'Appointments',
-    href: route('admin.appointments.index'),
-    icon: ClockIcon,
-    current: route().current('admin.appointments.*'),
-    section: 'support',
-    description: 'Booking management',
+    name: 'Ads',
+    href: route('admin.ads.index'),
+    icon: RectangleStackIcon,
+    current: route().current('admin.ads.*'),
+  },
+  {
+    name: 'Documents',
+    href: route('admin.documents.verify.index'),
+    icon: ShieldCheckIcon,
+    current: route().current('admin.documents.verify.*'),
+  },
+  {
+    name: 'Data Hub',
+    href: route('admin.data.index'),
+    icon: CircleStackIcon,
+    current: route().current('admin.data.*'),
   },
   {
     name: 'Notifications',
     href: route('admin.notifications.index'),
     icon: BellIcon,
     current: route().current('admin.notifications.*'),
-    section: 'support',
-    description: 'Push & email alerts',
-  },
-
-  // ========== DOCUMENT MANAGEMENT ==========
-  {
-    name: 'Document Verification',
-    href: route('admin.documents.verify.index'),
-    icon: ShieldCheckIcon,
-    current: route().current('admin.documents.verify.*'),
-    section: 'documents',
-    description: 'OCR & fraud detection',
   },
   {
-    name: 'Master Documents',
-    href: route('admin.master-documents.index'),
-    icon: DocumentTextIcon,
-    current: route().current('admin.master-documents.*'),
-    section: 'documents',
-    description: 'Document templates',
-  },
-  {
-    name: 'Document Categories',
-    href: route('admin.document-categories.index'),
-    icon: FolderIcon,
-    current: route().current('admin.document-categories.*'),
-    section: 'documents',
-    description: 'Organize documents',
-  },
-  {
-    name: 'Document Assignments',
-    href: route('admin.document-assignments.index'),
-    icon: ClipboardDocumentListIcon,
-    current: route().current('admin.document-assignments.*'),
-    section: 'documents',
-    description: 'Service requirements',
-  },
-
-  // ========== DATA MANAGEMENT ==========
-  {
-    name: 'Data Management',
-    href: route('admin.data.index'),
-    icon: CircleStackIcon,
-    current: route().current('admin.data.index'),
-    section: 'data',
-    description: 'Central dashboard',
-  },
-  {
-    name: 'Countries',
-    href: route('admin.data.countries.index'),
-    icon: GlobeAltIcon,
-    current: route().current('admin.data.countries.*'),
-    section: 'data',
-    description: 'Country database',
-  },
-  {
-    name: 'Cities',
-    href: route('admin.data.cities.index'),
-    icon: MapPinIcon,
-    current: route().current('admin.data.cities.*'),
-    section: 'data',
-    description: 'City locations',
-  },
-  {
-    name: 'Airports',
-    href: route('admin.data.airports.index'),
-    icon: PaperAirplaneIcon,
-    current: route().current('admin.data.airports.*'),
-    section: 'data',
-    description: 'Airport codes',
-  },
-  {
-    name: 'Currencies',
-    href: route('admin.data.currencies.index'),
-    icon: BanknotesIcon,
-    current: route().current('admin.data.currencies.*'),
-    section: 'data',
-    description: 'Currency rates',
-  },
-  {
-    name: 'Languages',
-    href: route('admin.data.languages.index'),
-    icon: LanguageIcon,
-    current: route().current('admin.data.languages.*'),
-    section: 'data',
-    description: 'Language database',
-  },
-  {
-    name: 'Language Tests',
-    href: route('admin.data.language-tests.index'),
-    icon: AcademicCapIcon,
-    current: route().current('admin.data.language-tests.*'),
-    section: 'data',
-    description: 'IELTS, TOEFL, etc.',
-  },
-  {
-    name: 'Degrees',
-    href: route('admin.data.degrees.index'),
-    icon: AcademicCapIcon,
-    current: route().current('admin.data.degrees.*'),
-    section: 'data',
-    description: 'Education levels',
-  },
-  {
-    name: 'Skills',
-    href: route('admin.data.skills.index'),
-    icon: AcademicCapIcon,
-    current: route().current('admin.data.skills.*'),
-    section: 'data',
-    description: 'Skill database',
-  },
-  {
-    name: 'Skill Categories',
-    href: route('admin.data.skill-categories.index'),
-    icon: FolderIcon,
-    current: route().current('admin.data.skill-categories.*'),
-    section: 'data',
-    description: 'Skill grouping',
-  },
-  {
-    name: 'Job Categories',
-    href: route('admin.data.job-categories.index'),
-    icon: BriefcaseIcon,
-    current: route().current('admin.data.job-categories.*'),
-    section: 'data',
-    description: 'Job classification',
-  },
-  {
-    name: 'Service Categories',
-    href: route('admin.data.service-categories.index'),
-    icon: RectangleStackIcon,
-    current: route().current('admin.data.service-categories.*'),
-    section: 'data',
-    description: 'Service grouping',
-  },
-  {
-    name: 'Blog Categories',
-    href: route('admin.data.blog-categories.index'),
-    icon: FolderIcon,
-    current: route().current('admin.data.blog-categories.*'),
-    section: 'data',
-    description: 'Blog organization',
-  },
-  {
-    name: 'Blog Tags',
-    href: route('admin.data.blog-tags.index'),
-    icon: TagIcon,
-    current: route().current('admin.data.blog-tags.*'),
-    section: 'data',
-    description: 'Blog keywords',
-  },
-  {
-    name: 'Bank Names',
-    href: route('admin.data.bank-names.index'),
-    icon: BuildingLibraryIcon,
-    current: route().current('admin.data.bank-names.*'),
-    section: 'data',
-    description: 'Bangladeshi banks',
-  },
-  {
-    name: 'Document Types',
-    href: route('admin.data.document-types.index'),
-    icon: DocumentTextIcon,
-    current: route().current('admin.data.document-types.*'),
-    section: 'data',
-    description: 'Required documents',
-  },
-  {
-    name: 'Institution Types',
-    href: route('admin.data.institution-types.index'),
-    icon: BuildingLibraryIcon,
-    current: route().current('admin.data.institution-types.*'),
-    section: 'data',
-    description: 'Educational institutions',
-  },
-  {
-    name: 'Relationship Types',
-    href: route('admin.data.relationship-types.index'),
-    icon: UserGroupIcon,
-    current: route().current('admin.data.relationship-types.*'),
-    section: 'data',
-    description: 'Family relationships',
-  },
-  {
-    name: 'Visa Types',
-    href: route('admin.data.visa-types.index'),
-    icon: DocumentTextIcon,
-    current: route().current('admin.data.visa-types.*'),
-    section: 'data',
-    description: 'Visa categories',
-  },
-  {
-    name: 'FAQ Categories',
-    href: route('admin.faq-categories.index'),
-    icon: FolderIcon,
-    current: route().current('admin.faq-categories.*'),
-    section: 'data',
-    description: 'Help center structure',
-  },
-  {
-    name: 'Directory Categories',
-    href: route('admin.directory-categories.index'),
-    icon: FolderIcon,
-    current: route().current('admin.directory-categories.*'),
-    section: 'data',
-    description: 'Directory organization',
-  },
-
-  // ========== TEMPLATES & EMAIL ==========
-  {
-    name: 'Email Templates',
-    href: route('admin.data.email-templates.index'),
-    icon: EnvelopeIcon,
-    current: route().current('admin.data.email-templates.*'),
-    section: 'templates',
-    description: 'Email automation',
-  },
-  {
-    name: 'CV Templates',
-    href: route('admin.data.cv-templates.index'),
-    icon: ClipboardDocumentIcon,
-    current: route().current('admin.data.cv-templates.*'),
-    section: 'templates',
-    description: 'Resume layouts',
-  },
-
-  // ========== SYSTEM & TOOLS ==========
-  {
-    name: 'Smart Suggestions',
-    href: route('admin.data.smart-suggestions.index'),
-    icon: SparklesIcon,
-    current: route().current('admin.data.smart-suggestions.*'),
-    section: 'system',
-    description: 'AI recommendations',
-  },
-  {
-    name: 'System Events',
-    href: route('admin.data.system-events.index'),
+    name: 'Impersonations',
+    href: route('admin.impersonations.index'),
     icon: ClockIcon,
-    current: route().current('admin.data.system-events.*'),
-    section: 'system',
-    description: 'Activity logs',
+    current: route().current('admin.impersonations.*'),
   },
   {
     name: 'Sitemap',
     href: route('admin.sitemap'),
     icon: MapIcon,
     current: route().current('admin.sitemap'),
-    section: 'system',
-    description: 'Test all admin routes',
-  },
-
-  // ========== SETTINGS & CONFIGURATION ==========
-  {
-    name: 'General Settings',
-    href: route('admin.settings.index'),
-    icon: Cog6ToothIcon,
-    current: route().current('admin.settings.index'),
-    section: 'settings',
-    description: 'Platform configuration',
-  },
-  {
-    name: 'Menus',
-    href: route('menus.index'),
-    icon: Bars3Icon,
-    current: route().current('menus.*'),
-    section: 'settings',
-    description: 'Navigation menu management',
-  },
-  {
-    name: 'SEO Settings',
-    href: route('seo-settings.index'),
-    icon: ChartBarIcon,
-    current: route().current('seo-settings.*'),
-    section: 'settings',
-    description: 'Search optimization',
-  },
-  {
-    name: 'API Keys',
-    href: route('admin.settings.index') + '?tab=api',
-    icon: CommandLineIcon,
-    current: false,
-    section: 'settings',
-    description: 'Third-party integrations',
   },
 ]
 
-// Navigation Sections Grouping - Reorganized for Better UX
-const navigationSections = {
-  // Dashboard is rendered standalone at top, so only show Analytics here
-  'Analytics & Insights': navigation.filter(item => item.section === 'dashboard' && item.name !== 'Dashboard'),
-  'Users & Access': navigation.filter(item => item.section === 'users'),
-  '🚀 Plugin System': navigation.filter(item => item.section === 'plugin-system'),
-  'Jobs & Employment': navigation.filter(item => item.section === 'jobs'),
-  'Visa & Travel': navigation.filter(item => item.section === 'travel'),
-  'Agencies': navigation.filter(item => item.section === 'agencies'),
-  'Financial': navigation.filter(item => item.section === 'financial'),
-  'CMS & Content': navigation.filter(item => item.section === 'cms'),
-  'Support': navigation.filter(item => item.section === 'support'),
-  'Documents': navigation.filter(item => item.section === 'documents'),
-  'Data Management': navigation.filter(item => item.section === 'data'),
-  'Templates': navigation.filter(item => item.section === 'templates'),
-  'System Tools': navigation.filter(item => item.section === 'system'),
-  'Settings': navigation.filter(item => item.section === 'settings'),
+// Smart search filter
+const filteredNavigation = computed(() => {
+  if (!menuSearch.value) return null
+  
+  const searchTerm = menuSearch.value.toLowerCase()
+  const results = []
+  
+  // Search primary actions
+  primaryActions.forEach(item => {
+    if (item.name.toLowerCase().includes(searchTerm)) {
+      results.push({ ...item, section: 'Primary' })
+    }
+  })
+  
+  // Search module groups
+  moduleGroups.forEach(group => {
+    group.items.forEach(item => {
+      if (item.name.toLowerCase().includes(searchTerm) || group.name.toLowerCase().includes(searchTerm)) {
+        results.push({ ...item, section: group.name })
+      }
+    })
+  })
+  
+  // Search more items
+  moreItems.forEach(item => {
+    if (item.name.toLowerCase().includes(searchTerm)) {
+      results.push({ ...item, section: 'More' })
+    }
+  })
+  
+  return results
+})
+
+// Check if user has permission (role-based visibility)
+const hasPermission = (item) => {
+  // Add role-based logic here
+  // For now, all items are visible to admin
+  return true
 }
 </script>
 
@@ -748,7 +536,7 @@ const navigationSections = {
               </h4>
               <div class="grid grid-cols-2 gap-2">
                 <Link
-                  v-for="item in navigation.slice(0, 6)"
+                  v-for="item in primaryActions"
                   :key="item.name"
                   :href="item.href"
                   class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group"
@@ -756,7 +544,7 @@ const navigationSections = {
                 >
                   <component
                     :is="item.icon"
-                    class="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-brand-red-600 dark:group-hover:text-indigo-400"
+                    class="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-400"
                   />
                   <span class="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">
                     {{ item.name }}
@@ -819,30 +607,83 @@ const navigationSections = {
         </div>
 
         <!-- Navigation Sections - Scrollable Area -->
-        <div
-          class="flex-1 overflow-y-auto px-3 py-4"
-        >
-          <ul role="list" class="space-y-1">
-            <!-- Dashboard - Standalone at Top -->
-            <li>
+        <div class="flex-1 overflow-y-auto px-3 py-4">
+          <!-- Smart Search (when expanded) -->
+          <div v-if="!sidebarCollapsed" class="mb-4">
+            <div class="relative">
+              <MagnifyingGlassIcon class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input
+                v-model="menuSearch"
+                type="text"
+                placeholder="Search menu..."
+                class="w-full pl-9 pr-3 py-2 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+              />
+            </div>
+          </div>
+
+          <!-- Search Results (when searching) -->
+          <ul v-if="filteredNavigation && filteredNavigation.length > 0" role="list" class="space-y-1">
+            <li v-for="item in filteredNavigation" :key="item.name">
               <Link
-                :href="route('admin.dashboard')"
+                :href="item.href"
                 :class="[
-                  route().current('admin.dashboard')
-                    ? 'bg-brand-red-600 text-white'
+                  item.current
+                    ? 'bg-indigo-600 text-white shadow-sm'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
                   sidebarCollapsed ? 'justify-center px-2' : 'px-3',
-                  'group flex items-center gap-x-3 rounded-lg py-2.5 text-sm font-semibold transition-colors',
+                  'group flex items-center gap-x-3 rounded-xl py-2.5 text-sm font-medium transition-all',
                 ]"
-                :title="sidebarCollapsed ? 'Dashboard' : ''"
+                @click="menuSearch = ''"
               >
-                <HomeIcon
+                <component
+                  :is="item.icon"
                   :class="[
                     'h-5 w-5 shrink-0',
-                    route().current('admin.dashboard') ? 'text-white' : 'text-gray-500',
+                    item.current ? 'text-white' : 'text-gray-500 group-hover:text-gray-700',
                   ]"
                 />
-                <span v-if="!sidebarCollapsed">Dashboard</span>
+                <div v-if="!sidebarCollapsed" class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between">
+                    <span class="truncate">{{ item.name }}</span>
+                    <span v-if="item.badge" class="px-2 py-0.5 text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400 rounded-full ml-2">
+                      {{ item.badge }}
+                    </span>
+                  </div>
+                  <p class="text-xs text-gray-400 truncate">{{ item.section }}</p>
+                </div>
+              </Link>
+            </li>
+          </ul>
+
+          <!-- No Results -->
+          <div v-else-if="filteredNavigation && filteredNavigation.length === 0" class="text-center py-8">
+            <MagnifyingGlassIcon class="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-2" />
+            <p class="text-sm text-gray-500 dark:text-gray-400">No menu items found</p>
+          </div>
+
+          <!-- Normal Navigation (when not searching) -->
+          <ul v-else role="list" class="space-y-1">
+            <!-- ===== LAYER 1: PRIMARY ACTIONS ===== -->
+            <li v-for="item in primaryActions" :key="item.name">
+              <Link
+                :href="item.href"
+                :class="[
+                  item.current
+                    ? 'bg-indigo-600 text-white shadow-sm'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
+                  sidebarCollapsed ? 'justify-center px-2' : 'px-3',
+                  'group flex items-center gap-x-3 rounded-xl py-2.5 text-sm font-semibold transition-all',
+                ]"
+                :title="sidebarCollapsed ? item.name : ''"
+              >
+                <component
+                  :is="item.icon"
+                  :class="[
+                    'h-5 w-5 shrink-0',
+                    item.current ? 'text-white' : 'text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-400',
+                  ]"
+                />
+                <span v-if="!sidebarCollapsed">{{ item.name }}</span>
               </Link>
             </li>
 
@@ -851,64 +692,115 @@ const navigationSections = {
               <div class="h-px bg-gray-200 dark:bg-gray-700"></div>
             </li>
 
-            <!-- Other Sections -->
-            <li v-for="(items, sectionName) in navigationSections" :key="sectionName" class="mb-4">
-              <div v-if="items.length > 0">
-                <!-- Collapsible Section Header -->
-                <button
-                  v-if="!sidebarCollapsed"
-                  class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors rounded-md hover:bg-gray-50 dark:hover:bg-gray-700/50"
-                  @click="toggleSection(sectionName)"
-                >
-                  <span class="uppercase tracking-wider">{{ sectionName }}</span>
-                  <ChevronDownIcon
+            <!-- ===== LAYER 2: MODULE GROUPS ===== -->
+            <li v-for="group in moduleGroups" :key="group.key" class="mb-2">
+              <!-- Group Header -->
+              <button
+                v-if="!sidebarCollapsed"
+                @click="toggleGroup(group.key)"
+                class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-lg transition-all"
+              >
+                <div class="flex items-center gap-2">
+                  <component :is="group.icon" class="w-4 h-4" />
+                  <span class="uppercase tracking-wider">{{ group.name }}</span>
+                  <span v-if="group.badge" class="px-1.5 py-0.5 text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400 rounded-full">
+                    {{ group.badge }}
+                  </span>
+                </div>
+                <ChevronDownIcon
+                  :class="[
+                    'w-4 h-4 transition-transform duration-200',
+                    expandedGroups[group.key] ? 'rotate-0' : '-rotate-90',
+                  ]"
+                />
+              </button>
+
+              <!-- Divider for Collapsed Sidebar -->
+              <div v-if="sidebarCollapsed" class="h-px bg-gray-200 dark:bg-gray-700 my-2"></div>
+
+              <!-- Group Items -->
+              <ul v-show="expandedGroups[group.key] || sidebarCollapsed" role="list" class="space-y-1 mt-1">
+                <li v-for="item in group.items" :key="item.name">
+                  <Link
+                    :href="item.href"
                     :class="[
-                      'w-4 h-4 transition-transform duration-200',
-                      collapsedSections[sectionName] ? '-rotate-90' : 'rotate-0',
+                      item.current
+                        ? 'bg-indigo-600 text-white shadow-sm'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
+                      sidebarCollapsed ? 'justify-center px-2' : 'px-3 ml-4',
+                      'group flex items-center gap-x-3 rounded-xl py-2.5 text-sm font-medium transition-all',
                     ]"
-                  />
-                </button>
-
-                <!-- Divider for Collapsed View -->
-                <div v-if="sidebarCollapsed" class="h-px bg-gray-200 dark:bg-gray-700 my-2"></div>
-
-                <!-- Section Items -->
-                <ul v-show="!collapsedSections[sectionName]" role="list" class="space-y-1 mt-2">
-                  <li v-for="item in items" :key="item.name">
-                    <Link
-                      :href="item.disabled ? '#' : item.href"
+                    :title="sidebarCollapsed ? item.name : ''"
+                  >
+                    <component
+                      :is="item.icon"
                       :class="[
-                        item.current
-                          ? 'bg-brand-red-600 text-white'
-                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
-                        sidebarCollapsed ? 'justify-center px-2' : 'px-3',
-                        'group flex items-center gap-x-3 rounded-lg py-2.5 text-sm font-medium transition-colors',
-                        item.disabled ? 'opacity-50 cursor-not-allowed' : '',
+                        'h-5 w-5 shrink-0',
+                        item.current ? 'text-white' : 'text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-400',
                       ]"
-                      :aria-disabled="item.disabled"
-                      :tabindex="item.disabled ? -1 : undefined"
-                      :title="sidebarCollapsed ? item.name : ''"
+                    />
+                    <span v-if="!sidebarCollapsed" class="flex-1 truncate">{{ item.name }}</span>
+                    <span
+                      v-if="item.badge && !sidebarCollapsed"
+                      class="px-2 py-0.5 text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400 rounded-full"
                     >
-                      <component
-                        :is="item.icon"
-                        :class="[
-                          'h-5 w-5 shrink-0',
-                          item.current ? 'text-white' : 'text-gray-500',
-                        ]"
-                        aria-hidden="true"
-                      />
-                      <span v-if="!sidebarCollapsed" class="flex-1 truncate">{{ item.name }}</span>
-                      <!-- Badge Count (if any) -->
-                      <span
-                        v-if="item.badge && !sidebarCollapsed"
-                        class="px-2 py-0.5 text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-brand-red-600/20 dark:text-indigo-400 rounded-full"
-                      >
-                        {{ item.badge }}
-                      </span>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+                      {{ item.badge }}
+                    </span>
+                  </Link>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Divider -->
+            <li class="my-3">
+              <div class="h-px bg-gray-200 dark:bg-gray-700"></div>
+            </li>
+
+            <!-- ===== LAYER 3: MORE SECTION ===== -->
+            <li>
+              <!-- More Header -->
+              <button
+                v-if="!sidebarCollapsed"
+                @click="toggleGroup('more')"
+                class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-lg transition-all"
+              >
+                <div class="flex items-center gap-2">
+                  <EllipsisHorizontalIcon class="w-4 h-4" />
+                  <span class="uppercase tracking-wider">More</span>
+                </div>
+                <ChevronDownIcon
+                  :class="[
+                    'w-4 h-4 transition-transform duration-200',
+                    expandedGroups.more ? 'rotate-0' : '-rotate-90',
+                  ]"
+                />
+              </button>
+
+              <!-- More Items -->
+              <ul v-show="expandedGroups.more || sidebarCollapsed" role="list" class="space-y-1 mt-1">
+                <li v-for="item in moreItems" :key="item.name">
+                  <Link
+                    :href="item.href"
+                    :class="[
+                      item.current
+                        ? 'bg-indigo-600 text-white shadow-sm'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
+                      sidebarCollapsed ? 'justify-center px-2' : 'px-3 ml-4',
+                      'group flex items-center gap-x-3 rounded-xl py-2.5 text-sm font-medium transition-all',
+                    ]"
+                    :title="sidebarCollapsed ? item.name : ''"
+                  >
+                    <component
+                      :is="item.icon"
+                      :class="[
+                        'h-5 w-5 shrink-0',
+                        item.current ? 'text-white' : 'text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-400',
+                      ]"
+                    />
+                    <span v-if="!sidebarCollapsed" class="flex-1 truncate">{{ item.name }}</span>
+                  </Link>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>

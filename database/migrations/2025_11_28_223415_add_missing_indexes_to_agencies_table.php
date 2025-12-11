@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('agencies', function (Blueprint $table) {
             // Add index for user_id foreign key (improves query performance)
             $table->index('user_id');
-            
+
             // Add indexes for common query patterns
             $table->index('verification_status');
             $table->index(['is_active', 'verification_status']);

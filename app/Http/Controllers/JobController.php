@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JobPosting;
+use App\Models\Country;
 use App\Models\JobApplication;
 use App\Models\JobCategory;
-use App\Models\Country;
+use App\Models\JobPosting;
 use App\Services\WalletService;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Inertia\Inertia;
 
 class JobController extends Controller
 {
@@ -28,7 +28,7 @@ class JobController extends Controller
     public function index(Request $request)
     {
         // Check if job_postings table exists
-        if (!Schema::hasTable('job_postings')) {
+        if (! Schema::hasTable('job_postings')) {
             return Inertia::render('Jobs/Index', [
                 'jobs' => ['data' => [], 'links' => []],
                 'countries' => [],
@@ -128,24 +128,24 @@ class JobController extends Controller
         $job->incrementViews();
 
         // Ensure benefits and skills are properly decoded as arrays
-        if (is_string($job->benefits) && !empty($job->benefits)) {
+        if (is_string($job->benefits) && ! empty($job->benefits)) {
             $decoded = json_decode($job->benefits, true);
             $job->benefits = is_array($decoded) ? $decoded : [];
-        } elseif (!is_array($job->benefits)) {
+        } elseif (! is_array($job->benefits)) {
             $job->benefits = [];
         }
-        
-        if (is_string($job->skills) && !empty($job->skills)) {
+
+        if (is_string($job->skills) && ! empty($job->skills)) {
             $decoded = json_decode($job->skills, true);
             $job->skills = is_array($decoded) ? $decoded : [];
-        } elseif (!is_array($job->skills)) {
+        } elseif (! is_array($job->skills)) {
             $job->skills = [];
         }
 
         // Check if user has applied
         $hasApplied = false;
         $application = null;
-        
+
         if (Auth::check()) {
             $application = JobApplication::where('job_posting_id', $job->id)
                 ->where('user_id', Auth::id())
@@ -203,9 +203,9 @@ class JobController extends Controller
             // Process application fee if required
             if ($job->application_fee > 0) {
                 $user = Auth::user();
-                
+
                 // Check wallet balance
-                if (!$user->wallet || $user->wallet->balance < $job->application_fee) {
+                if (! $user->wallet || $user->wallet->balance < $job->application_fee) {
                     return back()->with('error', 'Insufficient wallet balance. Please add funds to your wallet.');
                 }
 
@@ -249,6 +249,7 @@ class JobController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
+
             return back()->with('error', 'Failed to submit application. Please try again.');
         }
     }

@@ -12,10 +12,10 @@ class LanguageTestsSeeder extends Seeder
         $csvFile = database_path('seeders/csv/language_tests.csv');
         $rows = array_map('str_getcsv', file($csvFile));
         $header = array_shift($rows);
-        
+
         foreach ($rows as $row) {
             DB::table('language_tests')->insert([
-                'language_id' => (int)$row[0],
+                'language_id' => (int) $row[0],
                 'name' => $row[1],
                 'name_bn' => $row[2],
                 'code' => $row[3],
@@ -23,12 +23,12 @@ class LanguageTestsSeeder extends Seeder
                 'max_score' => $row[5],
                 'score_type' => $row[6],
                 'description' => $row[7],
-                'is_active' => (int)$row[8],
+                'is_active' => (int) $row[8],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
-        
-        echo "Seeded " . count($rows) . " language tests\n";
+
+        echo 'Seeded '.count($rows)." language tests\n";
     }
 }

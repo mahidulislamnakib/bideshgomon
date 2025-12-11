@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\AgencyType;
-use Illuminate\Support\Str;
+use Illuminate\Database\Seeder;
 
 class AgencyTypeSeeder extends Seeder
 {
@@ -252,11 +251,11 @@ class AgencyTypeSeeder extends Seeder
         $this->command->info('✅ Created 5 agency types successfully!');
         $this->command->table(
             ['Name', 'Slug', 'Commission Rate', 'Services'],
-            collect($agencyTypes)->map(fn($t) => [
+            collect($agencyTypes)->map(fn ($t) => [
                 $t['name'],
                 $t['slug'],
                 $t['default_commission_rate'].'%',
-                count($t['allowed_service_modules']).' services'
+                count($t['allowed_service_modules']).' services',
             ])
         );
     }

@@ -24,9 +24,9 @@ class CitySeeder extends Seeder
         $uae = Country::where('iso_code_2', 'AE')->first();
         $malaysia = Country::where('iso_code_2', 'MY')->first();
         $singapore = Country::where('iso_code_2', 'SG')->first();
-        
+
         $cities = [];
-        
+
         // Bangladesh cities (all 8 divisions)
         if ($bangladesh) {
             $cities = array_merge($cities, [
@@ -42,7 +42,7 @@ class CitySeeder extends Seeder
                 ['country_id' => $bangladesh->id, 'name' => 'Gazipur', 'name_bn' => 'গাজীপুর', 'state_province' => 'Dhaka', 'timezone' => 'Asia/Dhaka', 'latitude' => 23.9999, 'longitude' => 90.4203, 'is_capital' => false],
             ]);
         }
-        
+
         // Major Indian cities
         if ($india) {
             $cities = array_merge($cities, [
@@ -54,7 +54,7 @@ class CitySeeder extends Seeder
                 ['country_id' => $india->id, 'name' => 'Hyderabad', 'name_bn' => 'হায়দরাবাদ', 'state_province' => 'Telangana', 'timezone' => 'Asia/Kolkata', 'latitude' => 17.3850, 'longitude' => 78.4867, 'is_capital' => false],
             ]);
         }
-        
+
         // USA cities
         if ($usa) {
             $cities = array_merge($cities, [
@@ -65,7 +65,7 @@ class CitySeeder extends Seeder
                 ['country_id' => $usa->id, 'name' => 'Houston', 'name_bn' => 'হিউস্টন', 'state_province' => 'Texas', 'timezone' => 'America/Chicago', 'latitude' => 29.7604, 'longitude' => -95.3698, 'is_capital' => false],
             ]);
         }
-        
+
         // UK cities
         if ($uk) {
             $cities = array_merge($cities, [
@@ -74,7 +74,7 @@ class CitySeeder extends Seeder
                 ['country_id' => $uk->id, 'name' => 'Birmingham', 'name_bn' => 'বার্মিংহাম', 'state_province' => 'England', 'timezone' => 'Europe/London', 'latitude' => 52.4862, 'longitude' => -1.8904, 'is_capital' => false],
             ]);
         }
-        
+
         // Canada cities
         if ($canada) {
             $cities = array_merge($cities, [
@@ -83,7 +83,7 @@ class CitySeeder extends Seeder
                 ['country_id' => $canada->id, 'name' => 'Vancouver', 'name_bn' => 'ভ্যাঙ্কুভার', 'state_province' => 'British Columbia', 'timezone' => 'America/Vancouver', 'latitude' => 49.2827, 'longitude' => -123.1207, 'is_capital' => false],
             ]);
         }
-        
+
         // Australia cities
         if ($australia) {
             $cities = array_merge($cities, [
@@ -92,7 +92,7 @@ class CitySeeder extends Seeder
                 ['country_id' => $australia->id, 'name' => 'Melbourne', 'name_bn' => 'মেলবোর্ন', 'state_province' => 'Victoria', 'timezone' => 'Australia/Melbourne', 'latitude' => -37.8136, 'longitude' => 144.9631, 'is_capital' => false],
             ]);
         }
-        
+
         // Saudi Arabia cities
         if ($saudi) {
             $cities = array_merge($cities, [
@@ -101,7 +101,7 @@ class CitySeeder extends Seeder
                 ['country_id' => $saudi->id, 'name' => 'Dammam', 'name_bn' => 'দাম্মাম', 'state_province' => 'Eastern Province', 'timezone' => 'Asia/Riyadh', 'latitude' => 26.4207, 'longitude' => 50.0888, 'is_capital' => false],
             ]);
         }
-        
+
         // UAE cities
         if ($uae) {
             $cities = array_merge($cities, [
@@ -110,21 +110,21 @@ class CitySeeder extends Seeder
                 ['country_id' => $uae->id, 'name' => 'Sharjah', 'name_bn' => 'শারজাহ', 'state_province' => 'Sharjah', 'timezone' => 'Asia/Dubai', 'latitude' => 25.3463, 'longitude' => 55.4209, 'is_capital' => false],
             ]);
         }
-        
+
         // Malaysia cities
         if ($malaysia) {
             $cities = array_merge($cities, [
                 ['country_id' => $malaysia->id, 'name' => 'Kuala Lumpur', 'name_bn' => 'কুয়ালালামপুর', 'state_province' => 'Federal Territory', 'timezone' => 'Asia/Kuala_Lumpur', 'latitude' => 3.1390, 'longitude' => 101.6869, 'is_capital' => true],
             ]);
         }
-        
+
         // Singapore
         if ($singapore) {
             $cities = array_merge($cities, [
                 ['country_id' => $singapore->id, 'name' => 'Singapore', 'name_bn' => 'সিঙ্গাপুর', 'state_province' => null, 'timezone' => 'Asia/Singapore', 'latitude' => 1.3521, 'longitude' => 103.8198, 'is_capital' => true],
             ]);
         }
-        
+
         foreach ($cities as $city) {
             City::create($city);
         }

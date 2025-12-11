@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Package extends Model
 {
@@ -89,6 +89,7 @@ class Package extends Model
     public function scopeAvailable($query)
     {
         $now = now();
+
         return $query->where(function ($q) use ($now) {
             $q->where(function ($subQ) use ($now) {
                 $subQ->whereNull('available_from')
@@ -106,47 +107,48 @@ class Package extends Model
         if ($this->original_price && $this->original_price > $this->price) {
             return round((($this->original_price - $this->price) / $this->original_price) * 100);
         }
+
         return null;
     }
 
     public function getFormattedPriceAttribute(): string
     {
-        $formatted = '৳' . number_format($this->price, 0);
-        
+        $formatted = '৳'.number_format($this->price, 0);
+
         if ($this->price_unit !== 'fixed') {
-            $formatted .= ' / ' . str_replace('_', ' ', $this->price_unit);
+            $formatted .= ' / '.str_replace('_', ' ', $this->price_unit);
         }
-        
+
         return $formatted;
     }
 
     public function getIsAvailableAttribute(): bool
     {
         $now = now();
-        
+
         // Check date availability
         if ($this->available_from && $now->lt($this->available_from)) {
             return false;
         }
-        
+
         if ($this->available_until && $now->gt($this->available_until)) {
             return false;
         }
-        
+
         // Check booking limits
         if ($this->max_bookings && $this->current_bookings >= $this->max_bookings) {
             return false;
         }
-        
+
         return $this->is_active;
     }
 
     public function getSpotsLeftAttribute(): ?int
     {
-        if (!$this->max_bookings) {
+        if (! $this->max_bookings) {
             return null; // Unlimited
         }
-        
+
         return max(0, $this->max_bookings - $this->current_bookings);
     }
 }

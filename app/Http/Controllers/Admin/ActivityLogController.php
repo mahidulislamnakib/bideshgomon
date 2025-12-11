@@ -32,8 +32,8 @@ class ActivityLogController extends Controller
         // Filter by description
         if ($request->search) {
             $query->where(function ($q) use ($request) {
-                $q->where('description', 'like', '%' . $request->search . '%')
-                  ->orWhere('properties', 'like', '%' . $request->search . '%');
+                $q->where('description', 'like', '%'.$request->search.'%')
+                    ->orWhere('properties', 'like', '%'.$request->search.'%');
             });
         }
 
@@ -56,7 +56,7 @@ class ActivityLogController extends Controller
             ->map(function ($type) {
                 return [
                     'value' => $type,
-                    'label' => class_basename($type)
+                    'label' => class_basename($type),
                 ];
             });
 
@@ -68,7 +68,7 @@ class ActivityLogController extends Controller
             ->map(function ($event) {
                 return [
                     'value' => $event,
-                    'label' => ucfirst($event)
+                    'label' => ucfirst($event),
                 ];
             });
 
@@ -76,7 +76,7 @@ class ActivityLogController extends Controller
             'activities' => $activities,
             'filters' => $request->only(['user_id', 'subject_type', 'event', 'search', 'from_date', 'to_date']),
             'subjectTypes' => $subjectTypes,
-            'events' => $events
+            'events' => $events,
         ]);
     }
 
@@ -95,13 +95,13 @@ class ActivityLogController extends Controller
                 'causer' => $activity->causer ? [
                     'id' => $activity->causer->id,
                     'name' => $activity->causer->name,
-                    'email' => $activity->causer->email
+                    'email' => $activity->causer->email,
                 ] : null,
                 'properties' => $activity->properties,
                 'batch_uuid' => $activity->batch_uuid,
                 'created_at' => $activity->created_at,
-                'updated_at' => $activity->updated_at
-            ]
+                'updated_at' => $activity->updated_at,
+            ],
         ]);
     }
 }

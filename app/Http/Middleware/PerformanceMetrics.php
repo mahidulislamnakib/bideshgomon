@@ -32,15 +32,15 @@ class PerformanceMetrics
             Log::warning('Slow request detected', [
                 'url' => $request->fullUrl(),
                 'method' => $request->method(),
-                'execution_time' => $executionTime . 'ms',
-                'memory_usage' => $memoryUsage . 'MB',
+                'execution_time' => $executionTime.'ms',
+                'memory_usage' => $memoryUsage.'MB',
                 'user_id' => $request->user()?->id,
             ]);
         }
 
         // Add performance headers
-        $response->headers->set('X-Execution-Time', $executionTime . 'ms');
-        $response->headers->set('X-Memory-Usage', $memoryUsage . 'MB');
+        $response->headers->set('X-Execution-Time', $executionTime.'ms');
+        $response->headers->set('X-Memory-Usage', $memoryUsage.'MB');
 
         return $response;
     }

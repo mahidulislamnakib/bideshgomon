@@ -28,7 +28,7 @@ class DocumentType extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($model) {
             if (empty($model->slug)) {
                 $model->slug = Str::slug($model->name);

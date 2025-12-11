@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('native_name', 100)->nullable(); // English, বাংলা, हिन्दी
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             // Indexes
             $table->index('code');
             $table->index('is_active');

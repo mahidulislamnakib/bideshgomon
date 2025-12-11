@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
 use App\Models\Faq;
 use App\Models\FaqCategory;
 use App\Models\SupportTicket;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class HelpController extends Controller
 {
@@ -30,8 +30,8 @@ class HelpController extends Controller
         $dbCategories = FaqCategory::with(['activeFaqs' => function ($query) {
             $query->select('id', 'faq_category_id');
         }])
-        ->get()
-        ->keyBy('slug');
+            ->get()
+            ->keyBy('slug');
 
         // Build categories array with counts
         $categories = [];
@@ -58,15 +58,15 @@ class HelpController extends Controller
     public function category(Request $request, string $categorySlug)
     {
         $validCategories = ['visa', 'jobs', 'account', 'payment', 'services', 'technical'];
-        
-        if (!in_array($categorySlug, $validCategories)) {
+
+        if (! in_array($categorySlug, $validCategories)) {
             abort(404);
         }
 
         // Find the category by slug
         $category = FaqCategory::where('slug', $categorySlug)->first();
 
-        if (!$category) {
+        if (! $category) {
             // Return empty results if category doesn't exist yet
             $faqs = collect([]);
         } else {
@@ -98,7 +98,7 @@ class HelpController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('q', '');
-        
+
         if (empty($query)) {
             return redirect()->route('help.index');
         }
@@ -106,16 +106,16 @@ class HelpController extends Controller
         $faqs = Faq::published()
             ->where(function ($q) use ($query) {
                 $q->where('question', 'like', "%{$query}%")
-                  ->orWhere('answer', 'like', "%{$query}%");
+                    ->orWhere('answer', 'like', "%{$query}%");
             })
             ->with('category')
-            ->orderByRaw("
+            ->orderByRaw('
                 CASE 
                     WHEN question LIKE ? THEN 1
                     WHEN question LIKE ? THEN 2
                     ELSE 3
                 END
-            ", ["{$query}%", "%{$query}%"])
+            ', ["{$query}%", "%{$query}%"])
             ->paginate(20)
             ->appends(['q' => $query]);
 

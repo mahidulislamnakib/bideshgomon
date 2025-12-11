@@ -108,6 +108,7 @@ class Language extends Model
         if ($this->relationLoaded('userLanguages') && $this->userLanguages->first()) {
             return $this->userLanguages->first()->proficiency_level ?? $this->userLanguages->first()->proficiency;
         }
+
         return null;
     }
 
@@ -119,6 +120,7 @@ class Language extends Model
                 return (float) $entry->test_score;
             }
         }
+
         return null;
     }
 
@@ -130,6 +132,7 @@ class Language extends Model
                 return (float) $entry->test_score;
             }
         }
+
         return null;
     }
 }

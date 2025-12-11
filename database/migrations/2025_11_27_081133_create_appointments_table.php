@@ -31,7 +31,7 @@ return new class extends Migration
             $table->json('reminder_sent')->nullable(); // track email/SMS reminders
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->index(['user_id', 'appointment_date']);
             $table->index('status');
             $table->index('appointment_type');

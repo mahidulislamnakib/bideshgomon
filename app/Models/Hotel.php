@@ -133,10 +133,19 @@ class Hotel extends Model
 
     public function getRatingTextAttribute()
     {
-        if ($this->rating >= 4.5) return 'Excellent';
-        if ($this->rating >= 4.0) return 'Very Good';
-        if ($this->rating >= 3.5) return 'Good';
-        if ($this->rating >= 3.0) return 'Average';
+        if ($this->rating >= 4.5) {
+            return 'Excellent';
+        }
+        if ($this->rating >= 4.0) {
+            return 'Very Good';
+        }
+        if ($this->rating >= 3.5) {
+            return 'Good';
+        }
+        if ($this->rating >= 3.0) {
+            return 'Average';
+        }
+
         return 'Below Average';
     }
 
@@ -154,7 +163,7 @@ class Hotel extends Model
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;
-        $this->attributes['slug'] = Str::slug($value) . '-' . Str::random(6);
+        $this->attributes['slug'] = Str::slug($value).'-'.Str::random(6);
     }
 
     // Helper Methods
@@ -206,7 +215,7 @@ class Hotel extends Model
 
         static::creating(function ($hotel) {
             if (empty($hotel->slug)) {
-                $hotel->slug = Str::slug($hotel->name) . '-' . Str::random(6);
+                $hotel->slug = Str::slug($hotel->name).'-'.Str::random(6);
             }
         });
     }

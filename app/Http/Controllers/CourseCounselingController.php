@@ -19,7 +19,7 @@ class CourseCounselingController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $counseling = (object)[
+        $counseling = (object) [
             'id' => uniqid(),
             'user_id' => $request->user()->id ?? 1,
             'field_of_interest' => $validated['field_of_interest'],

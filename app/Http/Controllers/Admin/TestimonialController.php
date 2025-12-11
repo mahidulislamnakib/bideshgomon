@@ -17,11 +17,11 @@ class TestimonialController extends Controller
             ->orderBy('created_at', 'desc');
 
         if ($request->search) {
-            $query->where(function($q) use ($request) {
-                $q->where('author_name', 'like', '%' . $request->search . '%')
-                  ->orWhere('author_name_bn', 'like', '%' . $request->search . '%')
-                  ->orWhere('company', 'like', '%' . $request->search . '%')
-                  ->orWhere('content', 'like', '%' . $request->search . '%');
+            $query->where(function ($q) use ($request) {
+                $q->where('author_name', 'like', '%'.$request->search.'%')
+                    ->orWhere('author_name_bn', 'like', '%'.$request->search.'%')
+                    ->orWhere('company', 'like', '%'.$request->search.'%')
+                    ->orWhere('content', 'like', '%'.$request->search.'%');
             });
         }
 
@@ -43,7 +43,7 @@ class TestimonialController extends Controller
 
         return Inertia::render('Admin/Testimonials/Index', [
             'testimonials' => $testimonials,
-            'filters' => $request->only(['search', 'status', 'rating'])
+            'filters' => $request->only(['search', 'status', 'rating']),
         ]);
     }
 
@@ -68,7 +68,7 @@ class TestimonialController extends Controller
             'location' => 'nullable|string|max:255',
             'is_featured' => 'boolean',
             'is_approved' => 'boolean',
-            'sort_order' => 'nullable|integer|min:0'
+            'sort_order' => 'nullable|integer|min:0',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -86,7 +86,7 @@ class TestimonialController extends Controller
     public function edit(Testimonial $testimonial)
     {
         return Inertia::render('Admin/Testimonials/Edit', [
-            'testimonial' => $testimonial
+            'testimonial' => $testimonial,
         ]);
     }
 
@@ -106,7 +106,7 @@ class TestimonialController extends Controller
             'location' => 'nullable|string|max:255',
             'is_featured' => 'boolean',
             'is_approved' => 'boolean',
-            'sort_order' => 'nullable|integer|min:0'
+            'sort_order' => 'nullable|integer|min:0',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -135,8 +135,8 @@ class TestimonialController extends Controller
     public function toggleApproved(Testimonial $testimonial)
     {
         $testimonial->update([
-            'is_approved' => !$testimonial->is_approved,
-            'updated_by' => auth()->id()
+            'is_approved' => ! $testimonial->is_approved,
+            'updated_by' => auth()->id(),
         ]);
 
         return back()->with('success', 'Testimonial approval status updated');
@@ -145,8 +145,8 @@ class TestimonialController extends Controller
     public function toggleFeatured(Testimonial $testimonial)
     {
         $testimonial->update([
-            'is_featured' => !$testimonial->is_featured,
-            'updated_by' => auth()->id()
+            'is_featured' => ! $testimonial->is_featured,
+            'updated_by' => auth()->id(),
         ]);
 
         return back()->with('success', 'Testimonial featured status updated');
@@ -155,8 +155,8 @@ class TestimonialController extends Controller
     public function toggleActive(Testimonial $testimonial)
     {
         $testimonial->update([
-            'is_approved' => !$testimonial->is_approved,
-            'updated_by' => auth()->id()
+            'is_approved' => ! $testimonial->is_approved,
+            'updated_by' => auth()->id(),
         ]);
 
         return back()->with('success', 'Testimonial approval status updated');
@@ -167,12 +167,12 @@ class TestimonialController extends Controller
         $validated = $request->validate([
             'testimonials' => 'required|array',
             'testimonials.*.id' => 'required|exists:testimonials,id',
-            'testimonials.*.sort_order' => 'required|integer|min:0'
+            'testimonials.*.sort_order' => 'required|integer|min:0',
         ]);
 
         foreach ($validated['testimonials'] as $item) {
             Testimonial::where('id', $item['id'])->update([
-                'sort_order' => $item['sort_order']
+                'sort_order' => $item['sort_order'],
             ]);
         }
 

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FlightRoute extends Model
 {
@@ -144,8 +144,8 @@ class FlightRoute extends Model
     public function scopeSearchRoute($query, $origin, $destination, $date = null)
     {
         $query->where('origin_airport_code', $origin)
-              ->where('destination_airport_code', $destination)
-              ->where('is_active', true);
+            ->where('destination_airport_code', $destination)
+            ->where('is_active', true);
 
         if ($date) {
             $dayOfWeek = strtolower(date('l', strtotime($date)));
@@ -160,32 +160,32 @@ class FlightRoute extends Model
      */
     public function calculateTotalPrice(string $flightClass, int $passengers, array $extras = []): float
     {
-        $baseFare = match($flightClass) {
+        $baseFare = match ($flightClass) {
             'business' => (float) $this->business_price,
             'first_class' => (float) $this->first_class_price,
             default => (float) $this->economy_price,
         };
 
         $subtotal = $baseFare * $passengers;
-        
+
         // Add booking fee
         $subtotal += (float) $this->booking_fee;
 
         // Add taxes (approximately 15%)
         $taxes = $subtotal * 0.15;
-        
+
         // Add extras
         $extrasTotal = 0;
-        if (!empty($extras['extra_baggage'])) {
+        if (! empty($extras['extra_baggage'])) {
             $extrasTotal += $extras['extra_baggage'];
         }
-        if (!empty($extras['seat_selection'])) {
+        if (! empty($extras['seat_selection'])) {
             $extrasTotal += $extras['seat_selection'];
         }
-        if (!empty($extras['meals'])) {
+        if (! empty($extras['meals'])) {
             $extrasTotal += $extras['meals'];
         }
-        if (!empty($extras['insurance'])) {
+        if (! empty($extras['insurance'])) {
             $extrasTotal += $extras['insurance'];
         }
 
@@ -197,12 +197,12 @@ class FlightRoute extends Model
      */
     public function getFormattedEconomyPriceAttribute(): string
     {
-        return '৳ ' . number_format((float) $this->economy_price, 0);
+        return '৳ '.number_format((float) $this->economy_price, 0);
     }
 
     public function getFormattedBusinessPriceAttribute(): string
     {
-        return $this->business_price ? '৳ ' . number_format((float) $this->business_price, 0) : null;
+        return $this->business_price ? '৳ '.number_format((float) $this->business_price, 0) : null;
     }
 
     /**
@@ -218,11 +218,12 @@ class FlightRoute extends Model
      */
     public function isAvailableOnDate($date): bool
     {
-        if (!$this->is_active) {
+        if (! $this->is_active) {
             return false;
         }
 
         $dayOfWeek = strtolower(date('l', strtotime($date)));
+
         return in_array($dayOfWeek, $this->available_days ?? []);
     }
 

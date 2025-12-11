@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\FaqCategory;
 use App\Models\Faq;
+use App\Models\FaqCategory;
+use Illuminate\Database\Seeder;
 
 class FaqSeeder extends Seeder
 {
@@ -379,6 +379,6 @@ class FaqSeeder extends Seeder
         }
 
         $this->command->info('✅ FAQ categories and FAQs seeded successfully!');
-        $this->command->info('📊 Created 6 categories and ' . Faq::count() . ' FAQs');
+        $this->command->info('📊 Created 6 categories and '.Faq::count().' FAQs');
     }
 }

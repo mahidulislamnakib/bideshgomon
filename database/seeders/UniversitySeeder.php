@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\University;
 use App\Models\Country;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\University;
 use Illuminate\Database\Seeder;
 
 class UniversitySeeder extends Seeder
@@ -21,8 +20,9 @@ class UniversitySeeder extends Seeder
         $australia = Country::where('name', 'Australia')->first();
         $germany = Country::where('name', 'Germany')->first();
 
-        if (!$usa || !$uk || !$canada || !$australia || !$germany) {
+        if (! $usa || ! $uk || ! $canada || ! $australia || ! $germany) {
             $this->command->error('Required countries not found. Please seed countries first.');
+
             return;
         }
 
@@ -939,6 +939,6 @@ class UniversitySeeder extends Seeder
             University::create($university);
         }
 
-        $this->command->info('Successfully seeded ' . count($universities) . ' universities!');
+        $this->command->info('Successfully seeded '.count($universities).' universities!');
     }
 }

@@ -21,7 +21,7 @@ class ProfileUpdateRequest extends FormRequest
             'middle_name' => ['nullable', 'string', 'max:100'],
             'last_name' => ['required', 'string', 'max:100'],
             'name_as_per_passport' => ['nullable', 'string', 'max:255'],
-            
+
             // Email
             'email' => [
                 'required',

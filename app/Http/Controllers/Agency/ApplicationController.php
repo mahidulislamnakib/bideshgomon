@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
-use App\Models\ServiceApplication;
-use App\Models\AgencyCountryAssignment;
 use App\Models\Agency;
+use App\Models\AgencyCountryAssignment;
+use App\Models\ServiceApplication;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -18,7 +18,7 @@ class ApplicationController extends Controller
     {
         $agency = auth()->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             abort(403, 'Agency not found');
         }
 
@@ -45,11 +45,11 @@ class ApplicationController extends Controller
         // Search by application number or user name
         if ($request->has('search') && $request->search) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('application_number', 'like', "%{$search}%")
-                  ->orWhereHas('user', function($q) use ($search) {
-                      $q->where('name', 'like', "%{$search}%");
-                  });
+                    ->orWhereHas('user', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    });
             });
         }
 
@@ -57,11 +57,12 @@ class ApplicationController extends Controller
 
         // Filter available applications by country
         if ($request->filter === 'available') {
-            $applications->getCollection()->transform(function($app) use ($assignedCountryIds) {
+            $applications->getCollection()->transform(function ($app) use ($assignedCountryIds) {
                 $countryId = $app->application_data['destination_country_id'] ?? null;
                 if ($countryId && in_array($countryId, $assignedCountryIds)) {
                     return $app;
                 }
+
                 return null;
             })->filter();
         }
@@ -74,9 +75,9 @@ class ApplicationController extends Controller
             'my_applications' => ServiceApplication::where('agency_id', $agency->id)
                 ->count(),
             'quoted' => ServiceApplication::where('agency_id', $agency->id)
-                ->whereHas('quotes', function($q) use ($agency) {
+                ->whereHas('quotes', function ($q) use ($agency) {
                     $q->where('agency_id', $agency->id)
-                      ->where('status', 'pending');
+                        ->where('status', 'pending');
                 })
                 ->count(),
             'accepted' => ServiceApplication::where('agency_id', $agency->id)
@@ -98,11 +99,11 @@ class ApplicationController extends Controller
     {
         $agency = auth()->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             // Auto-create agency profile if not exists
             $agency = Agency::create([
                 'user_id' => auth()->id(),
-                'name' => auth()->user()->name . "'s Agency",
+                'name' => auth()->user()->name."'s Agency",
                 'email' => auth()->user()->email,
                 'is_active' => true,
                 'is_verified' => false,
@@ -119,9 +120,9 @@ class ApplicationController extends Controller
             'serviceModule',
             'touristVisa.destinationCountry',
             'touristVisa.documents',
-            'quotes' => function($query) use ($agency) {
+            'quotes' => function ($query) use ($agency) {
                 $query->where('agency_id', $agency->id);
-            }
+            },
         ]);
 
         return Inertia::render('Agency/Applications/Show', [
@@ -136,7 +137,7 @@ class ApplicationController extends Controller
     {
         $agency = auth()->user()->agency;
 
-        if (!$agency || $application->agency_id !== $agency->id) {
+        if (! $agency || $application->agency_id !== $agency->id) {
             abort(403, 'Unauthorized');
         }
 
@@ -152,13 +153,13 @@ class ApplicationController extends Controller
 
         // Update the linked TouristVisa status if exists
         if ($application->touristVisa) {
-            $touristVisaStatus = match($validated['status']) {
+            $touristVisaStatus = match ($validated['status']) {
                 'in_progress' => 'processing',
                 'completed' => 'approved',
                 'cancelled' => 'cancelled',
                 default => $application->touristVisa->status,
             };
-            
+
             $application->touristVisa->update(['status' => $touristVisaStatus]);
         }
 

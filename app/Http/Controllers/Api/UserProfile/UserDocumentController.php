@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\UserDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class UserDocumentController extends Controller
 {
@@ -29,10 +29,10 @@ class UserDocumentController extends Controller
 
         try {
             $file = $request->file('file');
-            
+
             // Store file
-            $path = $file->store('documents/' . Auth::id(), 'public');
-            
+            $path = $file->store('documents/'.Auth::id(), 'public');
+
             // Create document record
             $document = UserDocument::create([
                 'user_id' => Auth::id(),
@@ -82,8 +82,8 @@ class UserDocumentController extends Controller
             ->firstOrFail();
 
         $filePath = $document->file_path;
-        
-        if (!Storage::disk('public')->exists($filePath)) {
+
+        if (! Storage::disk('public')->exists($filePath)) {
             abort(404, 'File not found');
         }
 

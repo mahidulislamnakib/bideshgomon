@@ -3,24 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hotel;
-use App\Models\HotelRoom;
 use App\Models\HotelBooking;
+use App\Models\HotelRoom;
 use App\Traits\CreatesServiceApplications;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Inertia\Inertia;
 
 class HotelBookingController extends Controller
 {
     use CreatesServiceApplications;
+
     /**
      * Display hotel search page with filters
      */
     public function index(Request $request)
     {
-        $query = Hotel::with(['rooms' => function($q) {
+        $query = Hotel::with(['rooms' => function ($q) {
             $q->where('is_available', true)->orderBy('price_per_night', 'asc');
         }])->active();
 
@@ -85,7 +86,7 @@ class HotelBookingController extends Controller
      */
     public function show(Request $request, Hotel $hotel)
     {
-        $hotel->load(['rooms' => function($q) {
+        $hotel->load(['rooms' => function ($q) {
             $q->where('is_available', true)->orderBy('price_per_night', 'asc');
         }]);
 
@@ -137,7 +138,7 @@ class HotelBookingController extends Controller
         $roomsCount = $validated['rooms'];
 
         // Check availability
-        if (!$room->isAvailableForDates($checkIn, $checkOut, $roomsCount)) {
+        if (! $room->isAvailableForDates($checkIn, $checkOut, $roomsCount)) {
             return back()->with('error', 'Selected room is not available for these dates.');
         }
 
@@ -190,12 +191,12 @@ class HotelBookingController extends Controller
         ]);
 
         $room = HotelRoom::findOrFail($validated['hotel_room_id']);
-        
+
         // Verify availability
         $checkIn = \Carbon\Carbon::parse($validated['check_in_date']);
         $checkOut = \Carbon\Carbon::parse($validated['check_out_date']);
-        
-        if (!$room->isAvailableForDates($checkIn, $checkOut, $validated['rooms_count'])) {
+
+        if (! $room->isAvailableForDates($checkIn, $checkOut, $validated['rooms_count'])) {
             return back()->with('error', 'Room is no longer available for these dates.');
         }
 
@@ -209,7 +210,7 @@ class HotelBookingController extends Controller
 
         // Create booking within transaction
         DB::beginTransaction();
-        
+
         try {
             $booking = HotelBooking::create([
                 'user_id' => Auth::id(),
@@ -261,10 +262,11 @@ class HotelBookingController extends Controller
 
             return redirect()->route('hotel-bookings.payment', $booking)
                 ->with('success', 'Booking created successfully. Please complete payment.');
-                
+
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Hotel booking failed', ['error' => $e->getMessage()]);
+
             return back()->with('error', 'Booking failed. Please try again.');
         }
     }
@@ -308,10 +310,52 @@ class HotelBookingController extends Controller
             'payment_method' => 'required|in:wallet,card,cash',
         ]);
 
-        // TODO: Integrate with wallet system
-        // For now, mark as paid directly
-        
-        $booking->markAsPaid('TXN' . time() . rand(1000, 9999));
+        // Wallet payment integration
+        if ($validated['payment_method'] === 'wallet') {
+            $wallet = Auth::user()->wallet;
+
+            if (! $wallet || ! $wallet->isActive()) {
+                return back()->with('error', 'Your wallet is not available. Please choose another payment method.');
+            }
+
+            // Check sufficient balance
+            $bookingAmount = (float) $booking->total_amount;
+
+            if (! $wallet->hasBalance($bookingAmount)) {
+                return back()->with('error', sprintf(
+                    'Insufficient wallet balance. Required: %s, Available: %s',
+                    format_bd_currency($bookingAmount),
+                    format_bd_currency($wallet->balance)
+                ));
+            }
+
+            // Debit wallet
+            try {
+                $walletService = app(\App\Services\WalletService::class);
+                $transaction = $walletService->debitWallet(
+                    $wallet,
+                    $bookingAmount,
+                    "Hotel booking payment - {$booking->booking_reference}",
+                    'hotel_booking',
+                    $booking->id,
+                    [
+                        'hotel_id' => $booking->hotel_id,
+                        'check_in' => $booking->check_in_date,
+                        'check_out' => $booking->check_out_date,
+                    ]
+                );
+
+                $booking->payment_method = 'wallet';
+                $booking->markAsPaid($transaction->id);
+            } catch (\Exception $e) {
+                return back()->with('error', 'Payment failed: '.$e->getMessage());
+            }
+        } else {
+            // Other payment methods (card, cash)
+            $booking->payment_method = $validated['payment_method'];
+            $booking->markAsPaid('TXN'.time().rand(1000, 9999));
+        }
+
         $booking->confirm();
 
         return redirect()->route('hotel-bookings.confirmation', $booking)
@@ -395,7 +439,7 @@ class HotelBookingController extends Controller
             abort(403);
         }
 
-        if (!$booking->is_cancellable) {
+        if (! $booking->is_cancellable) {
             return back()->with('error', 'This booking cannot be cancelled.');
         }
 
@@ -405,7 +449,42 @@ class HotelBookingController extends Controller
 
         $booking->cancel($validated['reason']);
 
-        // TODO: Process refund through wallet system
+        // Process refund through wallet system
+        if ($booking->payment_method === 'wallet' && $booking->payment_status === 'paid') {
+            try {
+                $wallet = Auth::user()->wallet;
+
+                if ($wallet && $wallet->isActive()) {
+                    $walletService = app(\App\Services\WalletService::class);
+                    $refundAmount = (float) $booking->total_amount; // Full refund for cancelled bookings
+
+                    $walletService->creditWallet(
+                        $wallet,
+                        $refundAmount,
+                        "Refund for cancelled booking - {$booking->booking_reference}",
+                        'hotel_booking_refund',
+                        $booking->id,
+                        [
+                            'original_transaction_id' => $booking->transaction_id,
+                            'cancellation_reason' => $validated['reason'],
+                        ]
+                    );
+
+                    $booking->refund($refundAmount);
+
+                    return back()->with('success', sprintf(
+                        'Booking cancelled successfully. %s has been refunded to your wallet.',
+                        format_bd_currency($refundAmount)
+                    ));
+                }
+            } catch (\Exception $e) {
+                // Log error but don't block cancellation
+                Log::error('Hotel booking refund failed', [
+                    'booking_id' => $booking->id,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
 
         return back()->with('success', 'Booking cancelled successfully. Refund will be processed within 3-5 business days.');
     }

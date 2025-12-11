@@ -4,6 +4,27 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 
 export default defineConfig({
+    server: {
+        host: '0.0.0.0',
+        port: 5173,
+        strictPort: true,
+        hmr: {
+            protocol: 'ws',
+            host: 'localhost',
+            port: 5173,
+            clientPort: 5173,
+            overlay: true,
+        },
+        watch: {
+            usePolling: true,  // Better file watching on Windows
+            interval: 100,
+        },
+        headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+        },
+    },
     plugins: [
         laravel({
             input: 'resources/js/app.js',
@@ -16,6 +37,10 @@ export default defineConfig({
                     includeAbsolute: false,
                 },
             },
+            // Fix: Prevent Sucrase from processing scoped styles
+            script: {
+                babelParserPlugins: ['jsx']
+            }
         }),
     ],
     resolve: {
@@ -27,6 +52,7 @@ export default defineConfig({
         // Code splitting for better performance
         rollupOptions: {
             output: {
+                // Manual chunks for better caching
                 manualChunks: {
                     'vendor': [
                         'vue',
@@ -34,6 +60,10 @@ export default defineConfig({
                     ],
                     'heroicons': ['@heroicons/vue/24/outline', '@heroicons/vue/24/solid'],
                 },
+                // Cache busting with content hashes
+                entryFileNames: `assets/[name].[hash].js`,
+                chunkFileNames: `assets/[name].[hash].js`,
+                assetFileNames: `assets/[name].[hash].[ext]`,
             },
         },
         // Optimize chunk size

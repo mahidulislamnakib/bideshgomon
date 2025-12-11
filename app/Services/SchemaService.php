@@ -15,7 +15,7 @@ class SchemaService
             'name' => 'BideshGomon',
             'alternateName' => 'বিদেশ গমন',
             'url' => config('app.url'),
-            'logo' => config('app.url') . '/images/logo.png',
+            'logo' => config('app.url').'/images/logo.png',
             'description' => 'Professional visa application and immigration services for Bangladeshi citizens.',
             'email' => 'info@bideshgomon.com',
             'telephone' => '+880-1234-567890',
@@ -25,20 +25,20 @@ class SchemaService
                 'addressLocality' => 'Dhaka',
                 'addressRegion' => 'Dhaka Division',
                 'postalCode' => '1000',
-                'addressCountry' => 'BD'
+                'addressCountry' => 'BD',
             ],
             'contactPoint' => [
                 '@type' => 'ContactPoint',
                 'telephone' => '+880-1234-567890',
                 'contactType' => 'Customer Service',
                 'areaServed' => 'BD',
-                'availableLanguage' => ['Bengali', 'English']
+                'availableLanguage' => ['Bengali', 'English'],
             ],
             'sameAs' => [
                 'https://facebook.com/bideshgomon',
                 'https://twitter.com/bideshgomon',
-                'https://linkedin.com/company/bideshgomon'
-            ]
+                'https://linkedin.com/company/bideshgomon',
+            ],
         ];
     }
 
@@ -55,20 +55,20 @@ class SchemaService
             'provider' => [
                 '@type' => 'Organization',
                 'name' => 'BideshGomon',
-                'url' => config('app.url')
+                'url' => config('app.url'),
             ],
             'serviceType' => $service->service_type ?? 'Visa Application Service',
             'areaServed' => [
                 '@type' => 'Country',
-                'name' => 'Bangladesh'
+                'name' => 'Bangladesh',
             ],
             'offers' => [
                 '@type' => 'Offer',
                 'price' => $service->base_price ?? '0',
                 'priceCurrency' => 'BDT',
                 'availability' => 'https://schema.org/InStock',
-                'url' => route('services.show', $service->slug)
-            ]
+                'url' => route('services.show', $service->slug),
+            ],
         ];
     }
 
@@ -78,22 +78,22 @@ class SchemaService
     public function faqPage(array $faqs): array
     {
         $questions = [];
-        
+
         foreach ($faqs as $faq) {
             $questions[] = [
                 '@type' => 'Question',
                 'name' => $faq['question'],
                 'acceptedAnswer' => [
                     '@type' => 'Answer',
-                    'text' => $faq['answer']
-                ]
+                    'text' => $faq['answer'],
+                ],
             ];
         }
 
         return [
             '@context' => 'https://schema.org',
             '@type' => 'FAQPage',
-            'mainEntity' => $questions
+            'mainEntity' => $questions,
         ];
     }
 
@@ -113,15 +113,15 @@ class SchemaService
             'hiringOrganization' => [
                 '@type' => 'Organization',
                 'name' => 'BideshGomon',
-                'sameAs' => config('app.url')
+                'sameAs' => config('app.url'),
             ],
             'jobLocation' => [
                 '@type' => 'Place',
                 'address' => [
                     '@type' => 'PostalAddress',
                     'addressLocality' => $job->location ?? 'Dhaka',
-                    'addressCountry' => 'BD'
-                ]
+                    'addressCountry' => 'BD',
+                ],
             ],
             'baseSalary' => [
                 '@type' => 'MonetaryAmount',
@@ -130,9 +130,9 @@ class SchemaService
                     '@type' => 'QuantitativeValue',
                     'minValue' => $job->min_salary ?? 0,
                     'maxValue' => $job->max_salary ?? 0,
-                    'unitText' => 'MONTH'
-                ]
-            ]
+                    'unitText' => 'MONTH',
+                ],
+            ],
         ];
     }
 
@@ -146,25 +146,25 @@ class SchemaService
             '@type' => 'Article',
             'headline' => $post->title,
             'description' => $post->excerpt ?? substr(strip_tags($post->content), 0, 160),
-            'image' => $post->featured_image ?? config('app.url') . '/images/default-article.jpg',
+            'image' => $post->featured_image ?? config('app.url').'/images/default-article.jpg',
             'datePublished' => $post->published_at?->toIso8601String() ?? $post->created_at->toIso8601String(),
             'dateModified' => $post->updated_at->toIso8601String(),
             'author' => [
                 '@type' => 'Person',
-                'name' => $post->author->name ?? 'BideshGomon Team'
+                'name' => $post->author->name ?? 'BideshGomon Team',
             ],
             'publisher' => [
                 '@type' => 'Organization',
                 'name' => 'BideshGomon',
                 'logo' => [
                     '@type' => 'ImageObject',
-                    'url' => config('app.url') . '/images/logo.png'
-                ]
+                    'url' => config('app.url').'/images/logo.png',
+                ],
             ],
             'mainEntityOfPage' => [
                 '@type' => 'WebPage',
-                '@id' => route('blog.show', $post->slug)
-            ]
+                '@id' => route('blog.show', $post->slug),
+            ],
         ];
     }
 
@@ -174,20 +174,20 @@ class SchemaService
     public function breadcrumbList(array $breadcrumbs): array
     {
         $items = [];
-        
+
         foreach ($breadcrumbs as $index => $breadcrumb) {
             $items[] = [
                 '@type' => 'ListItem',
                 'position' => $index + 1,
                 'name' => $breadcrumb['title'],
-                'item' => $breadcrumb['url']
+                'item' => $breadcrumb['url'],
             ];
         }
 
         return [
             '@context' => 'https://schema.org',
             '@type' => 'BreadcrumbList',
-            'itemListElement' => $items
+            'itemListElement' => $items,
         ];
     }
 
@@ -205,8 +205,8 @@ class SchemaService
                 'ratingValue' => $ratingValue,
                 'reviewCount' => $reviewCount,
                 'bestRating' => $bestRating,
-                'worstRating' => 1
-            ]
+                'worstRating' => 1,
+            ],
         ];
     }
 
@@ -219,7 +219,7 @@ class SchemaService
             '@context' => 'https://schema.org',
             '@type' => 'LocalBusiness',
             'name' => 'BideshGomon',
-            'image' => config('app.url') . '/images/office.jpg',
+            'image' => config('app.url').'/images/office.jpg',
             '@id' => config('app.url'),
             'url' => config('app.url'),
             'telephone' => '+880-1234-567890',
@@ -230,21 +230,21 @@ class SchemaService
                 'addressLocality' => 'Dhaka',
                 'addressRegion' => 'Dhaka Division',
                 'postalCode' => '1000',
-                'addressCountry' => 'BD'
+                'addressCountry' => 'BD',
             ],
             'geo' => [
                 '@type' => 'GeoCoordinates',
                 'latitude' => 23.8103,
-                'longitude' => 90.4125
+                'longitude' => 90.4125,
             ],
             'openingHoursSpecification' => [
                 [
                     '@type' => 'OpeningHoursSpecification',
                     'dayOfWeek' => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
                     'opens' => '09:00',
-                    'closes' => '18:00'
-                ]
-            ]
+                    'closes' => '18:00',
+                ],
+            ],
         ];
     }
 }

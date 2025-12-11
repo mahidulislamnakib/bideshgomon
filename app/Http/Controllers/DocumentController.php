@@ -32,13 +32,13 @@ class DocumentController extends Controller
             'is_primary' => 'nullable|boolean',
         ]);
 
-        if (!in_array($request->document_type, UserDocument::supportedTypes())) {
+        if (! in_array($request->document_type, UserDocument::supportedTypes())) {
             return back()->withErrors(['document_type' => 'Unsupported document type']);
         }
 
         $service->upload(Auth::id(), $request->file('file'), $request->document_type, [
             'expires_at' => $request->expires_at,
-            'is_primary' => (bool)$request->is_primary,
+            'is_primary' => (bool) $request->is_primary,
             'meta' => [],
         ]);
 
@@ -51,6 +51,7 @@ class DocumentController extends Controller
             abort(403);
         }
         app(DocumentVerificationService::class)->delete($document);
+
         return redirect()->route('documents.index')->with('success', 'Document deleted');
     }
 
@@ -62,13 +63,13 @@ class DocumentController extends Controller
 
         // Try both storage_path (old) and file_path (new) fields
         $filePath = $document->file_path ?? $document->storage_path;
-        
-        if (!$filePath || !Storage::disk('private')->exists($filePath)) {
+
+        if (! $filePath || ! Storage::disk('private')->exists($filePath)) {
             abort(404, 'File not found');
         }
 
-        $fileName = $document->file_name ?? $document->original_filename ?? 'document.' . $document->file_type;
-        
+        $fileName = $document->file_name ?? $document->original_filename ?? 'document.'.$document->file_type;
+
         return response()->download(Storage::disk('private')->path($filePath), $fileName);
     }
 }

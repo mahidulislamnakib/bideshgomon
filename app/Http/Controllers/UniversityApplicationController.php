@@ -20,7 +20,7 @@ class UniversityApplicationController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $application = (object)[
+        $application = (object) [
             'id' => uniqid(),
             'user_id' => $request->user()->id ?? 1,
             'university_name' => $validated['university_name'],

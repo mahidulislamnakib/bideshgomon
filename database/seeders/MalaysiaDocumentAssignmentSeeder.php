@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Country;
-use App\Models\MasterDocument;
 use App\Models\CountryDocumentRequirement;
+use App\Models\MasterDocument;
+use Illuminate\Database\Seeder;
 
 class MalaysiaDocumentAssignmentSeeder extends Seeder
 {
@@ -15,9 +15,10 @@ class MalaysiaDocumentAssignmentSeeder extends Seeder
     public function run(): void
     {
         $malaysia = Country::where('name', 'Malaysia')->first();
-        
-        if (!$malaysia) {
+
+        if (! $malaysia) {
             $this->command->error('Malaysia not found in countries table');
+
             return;
         }
 
@@ -29,19 +30,19 @@ class MalaysiaDocumentAssignmentSeeder extends Seeder
             'Cover Letter' => ['all', null, 'Explaining purpose of visit', 4],
             'Flight Itinerary' => ['all', null, 'Confirmed round-trip booking', 5],
             'Hotel Reservations' => ['all', null, 'Confirmed booking for entire stay', 6],
-            
+
             // Job Holder specific
             'Employment Letter / NOC' => ['tourist', 'Job Holder', 'Must include leave approval and return guarantee', 7],
             'Pay Slips' => ['tourist', 'Job Holder', 'Last 3 months salary slips', 8],
             'Employee ID Card' => ['tourist', 'Job Holder', 'Copy of both sides', 9],
             'TIN Certificate' => ['tourist', 'Job Holder', 'Tax identification certificate', 10],
-            
+
             // Business Person specific
             'Trade License' => ['tourist', 'Business Person', 'Valid business license', 11],
             'Company Registration Certificate' => ['tourist', 'Business Person', 'Certificate of incorporation', 12],
             'Business Bank Statements' => ['tourist', 'Business Person', 'Last 6 months company bank statements', 13],
             'Tax Returns (ITR)' => ['tourist', 'Business Person', 'Last 2 years income tax returns', 14],
-            
+
             // Student specific
             'Student ID Card' => ['tourist', 'Student', 'Valid student identification', 15],
             'School/University NOC' => ['tourist', 'Student', 'Approval for travel during vacation', 16],
@@ -52,7 +53,7 @@ class MalaysiaDocumentAssignmentSeeder extends Seeder
 
         foreach ($documents as $docName => [$visaType, $profession, $notes, $order]) {
             $document = MasterDocument::where('document_name', $docName)->first();
-            
+
             if ($document) {
                 CountryDocumentRequirement::create([
                     'country_id' => $malaysia->id,

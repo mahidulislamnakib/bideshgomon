@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\DataManagement;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Traits\BulkUploadable;
+use App\Http\Controllers\Controller;
 use App\Models\SkillCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,8 +15,11 @@ class SkillCategoryController extends Controller
     use BulkUploadable;
 
     protected $entityName = 'Skill Category';
+
     protected $entityNamePlural = 'Skill Categories';
+
     protected $indexRoute = 'admin.data.skill-categories.index';
+
     protected $bulkUploadView = 'Admin/DataManagement/SkillCategories/BulkUpload';
 
     /**
@@ -29,10 +32,10 @@ class SkillCategoryController extends Controller
         // Search
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%")
+                    ->orWhere('slug', 'like', "%{$search}%");
             });
         }
 
@@ -88,7 +91,8 @@ class SkillCategoryController extends Controller
                 ->route('admin.data.skill-categories.index')
                 ->with('success', 'Skill category created successfully.');
         } catch (\Exception $e) {
-            Log::error('Error creating skill category: ' . $e->getMessage());
+            Log::error('Error creating skill category: '.$e->getMessage());
+
             return back()->withInput()->with('error', 'Failed to create skill category.');
         }
     }
@@ -134,7 +138,8 @@ class SkillCategoryController extends Controller
                 ->route('admin.data.skill-categories.index')
                 ->with('success', 'Skill category updated successfully.');
         } catch (\Exception $e) {
-            Log::error('Error updating skill category: ' . $e->getMessage());
+            Log::error('Error updating skill category: '.$e->getMessage());
+
             return back()->withInput()->with('error', 'Failed to update skill category.');
         }
     }
@@ -156,7 +161,8 @@ class SkillCategoryController extends Controller
                 ->route('admin.data.skill-categories.index')
                 ->with('success', 'Skill category deleted successfully.');
         } catch (\Exception $e) {
-            Log::error('Error deleting skill category: ' . $e->getMessage());
+            Log::error('Error deleting skill category: '.$e->getMessage());
+
             return back()->with('error', 'Failed to delete skill category.');
         }
     }
@@ -168,12 +174,13 @@ class SkillCategoryController extends Controller
     {
         try {
             $skillCategory->update([
-                'is_active' => !$skillCategory->is_active
+                'is_active' => ! $skillCategory->is_active,
             ]);
 
             return back()->with('success', 'Skill category status updated successfully.');
         } catch (\Exception $e) {
-            Log::error('Error toggling skill category status: ' . $e->getMessage());
+            Log::error('Error toggling skill category status: '.$e->getMessage());
+
             return back()->with('error', 'Failed to update status.');
         }
     }
@@ -252,12 +259,12 @@ class SkillCategoryController extends Controller
         }
 
         // Validate order if provided
-        if (isset($row['order']) && !is_numeric($row['order'])) {
+        if (isset($row['order']) && ! is_numeric($row['order'])) {
             return "Row {$rowNumber}: Order must be a number";
         }
 
         // Validate is_active if provided
-        if (isset($row['is_active']) && !in_array($row['is_active'], ['0', '1', 0, 1, true, false, 'true', 'false'])) {
+        if (isset($row['is_active']) && ! in_array($row['is_active'], ['0', '1', 0, 1, true, false, 'true', 'false'])) {
             return "Row {$rowNumber}: is_active must be 1 or 0";
         }
 
@@ -271,7 +278,7 @@ class SkillCategoryController extends Controller
             'name_bn' => $row['name_bn'] ?? null,
             'slug' => $row['slug'] ?? null,
             'description' => $row['description'] ?? null,
-            'order' => isset($row['order']) ? (int)$row['order'] : 0,
+            'order' => isset($row['order']) ? (int) $row['order'] : 0,
             'is_active' => isset($row['is_active']) ? in_array($row['is_active'], [1, '1', true, 'true']) : true,
         ];
 
@@ -309,10 +316,10 @@ class SkillCategoryController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('name_bn', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%");
+                    ->orWhere('name_bn', 'like', "%{$search}%")
+                    ->orWhere('slug', 'like', "%{$search}%");
             });
         }
 

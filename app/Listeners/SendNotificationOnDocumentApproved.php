@@ -20,7 +20,7 @@ class SendNotificationOnDocumentApproved
                 'data' => [
                     'document_id' => $doc->id,
                     'document_type' => $doc->document_type,
-                ]
+                ],
             ]
         );
     }

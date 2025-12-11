@@ -23,17 +23,17 @@ return new class extends Migration
             $table->boolean('is_featured')->default(false);
             $table->integer('views_count')->default(0);
             $table->integer('reading_time')->nullable(); // in minutes
-            
+
             // SEO fields
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();
-            
+
             // AI generation tracking
             $table->boolean('is_ai_generated')->default(false);
             $table->string('ai_model')->nullable();
             $table->json('ai_metadata')->nullable();
-            
+
             $table->timestamps();
             $table->softDeletes();
         });

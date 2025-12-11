@@ -43,22 +43,26 @@ const features = [
     {
         icon: GlobeAltIcon,
         title: 'Visa Applications',
-        description: 'Apply for visas to 50+ countries with smart form auto-fill',
+        description: 'Apply for visas to 50+ countries with smart form auto-fill and document management',
+        badge: 'Most Popular',
     },
     {
         icon: BriefcaseIcon,
         title: 'Job Opportunities',
-        description: 'Find and apply for jobs abroad with one-click applications',
+        description: 'Find and apply for jobs abroad with one-click applications and profile matching',
+        badge: 'High Demand',
     },
     {
         icon: PaperAirplaneIcon,
         title: 'Travel Services',
-        description: 'Book flights, hotels, and travel insurance seamlessly',
+        description: 'Book flights, hotels, and travel insurance seamlessly in one platform',
+        badge: 'Best Rates',
     },
     {
         icon: DocumentTextIcon,
         title: 'Document Services',
-        description: 'Generate CVs, translate documents, and manage applications',
+        description: 'Generate CVs, translate documents, and manage all your applications efficiently',
+        badge: 'Professional',
     },
 ];
 
@@ -117,7 +121,7 @@ const testimonials = [
                     Go Abroad with Confidence
                 </h1>
                 <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                    All-in-one platform for visa applications, job search, and travel booking
+                    All-in-one platform for visa applications, job search, travel booking, and document services. Simplify your journey abroad with intelligent automation and expert guidance.
                 </p>
                 <div v-if="homepageWidgets.showHeroSearch" class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <Link v-if="canRegister" :href="route('register')" class="w-full sm:w-auto px-8 py-3 bg-emerald-600 text-white text-center rounded-lg hover:bg-emerald-700 font-medium transition-colors">
@@ -142,17 +146,31 @@ const testimonials = [
         <div id="features" class="bg-white py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Everything You Need</h2>
-                    <p class="text-base md:text-lg text-gray-600">From visa applications to job searches, we've got you covered</p>
+                    <p class="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-2">Core Services</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Everything You Need in One Place</h2>
+                    <p class="text-base md:text-lg text-gray-600">From visa applications to job searches, we've got all your international needs covered</p>
                 </div>
                 
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div v-for="feature in features" :key="feature.title" class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow cursor-pointer">
+                    <div v-for="feature in features" :key="feature.title" class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow cursor-pointer relative">
+                        <div v-if="feature.badge" class="absolute top-4 right-4">
+                            <span class="px-2 py-1 text-xs font-semibold bg-emerald-100 text-emerald-700 rounded-full">
+                                {{ feature.badge }}
+                            </span>
+                        </div>
                         <div class="flex-shrink-0 mb-4 w-8 h-8">
                             <component :is="feature.icon" class="w-full h-full text-emerald-600" />
                         </div>
                         <h3 class="font-semibold text-lg text-gray-900 mb-2">{{ feature.title }}</h3>
                         <p class="text-sm text-gray-600 leading-relaxed">{{ feature.description }}</p>
+                        <div class="mt-4">
+                            <a href="#" class="text-emerald-600 hover:text-emerald-700 text-sm font-medium inline-flex items-center">
+                                Learn more
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -162,27 +180,28 @@ const testimonials = [
         <div class="bg-gray-50 py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
+                    <p class="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-2">Simple Process</p>
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
-                    <p class="text-base md:text-lg text-gray-600">Get started in 3 simple steps</p>
+                    <p class="text-base md:text-lg text-gray-600">Get started in 3 simple steps and take control of your international journey</p>
                 </div>
                 
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="bg-white rounded-xl p-8 text-center shadow-sm">
                         <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">1</div>
-                        <h3 class="font-semibold text-xl text-gray-900 mb-3">Create Profile</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">Fill your profile once with details, education, and documents</p>
+                        <h3 class="font-semibold text-xl text-gray-900 mb-3">Create Your Profile</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">Fill out your profile once with your personal details, education, work experience, and travel documents. Takes only 5 minutes!</p>
                     </div>
                     
                     <div class="bg-white rounded-xl p-8 text-center shadow-sm">
                         <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">2</div>
-                        <h3 class="font-semibold text-xl text-gray-900 mb-3">Choose Service</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">Browse visas, jobs, or travel. Auto-fill all forms</p>
+                        <h3 class="font-semibold text-xl text-gray-900 mb-3">Choose Your Service</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">Browse visas, jobs, or travel services. Your profile data automatically fills all forms - no repetitive data entry!</p>
                     </div>
                     
                     <div class="bg-white rounded-xl p-8 text-center shadow-sm">
                         <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">3</div>
                         <h3 class="font-semibold text-xl text-gray-900 mb-3">Track & Success</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">Track applications and get real-time updates</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Track all your applications in one dashboard. Get real-time updates and expert support throughout your journey</p>
                     </div>
                 </div>
             </div>
@@ -192,8 +211,9 @@ const testimonials = [
         <div class="bg-white py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
+                    <p class="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-2">Why Choose Us</p>
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Bidesh Gomon?</h2>
-                    <p class="text-base md:text-lg text-gray-600">We make your international journey seamless</p>
+                    <p class="text-base md:text-lg text-gray-600">We combine cutting-edge technology with personalized service to make your international journey seamless and stress-free</p>
                 </div>
                 
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -247,8 +267,9 @@ const testimonials = [
         <div v-if="homepageWidgets.showTestimonials" class="bg-gray-50 py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
+                    <p class="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-2">Customer Reviews</p>
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Loved by Thousands</h2>
-                    <p class="text-base md:text-lg text-gray-600">See what our users say</p>
+                    <p class="text-base md:text-lg text-gray-600">See what our users have to say about their experience with Bidesh Gomon</p>
                 </div>
                 
                 <div class="grid md:grid-cols-3 gap-8">
@@ -275,7 +296,7 @@ const testimonials = [
         <div class="bg-emerald-600 py-16">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Start Your Journey?</h2>
-                <p class="text-emerald-100 mb-8 text-base md:text-lg">Join thousands who trusted us</p>
+                <p class="text-emerald-100 mb-8 text-base md:text-lg">Join thousands of successful applicants who trusted Bidesh Gomon with their international dreams</p>
                 <Link v-if="canRegister" :href="route('register')" class="inline-block px-8 py-3 bg-white text-emerald-600 rounded-lg hover:bg-gray-50 font-semibold transition-colors">
                     Create Free Account
                 </Link>

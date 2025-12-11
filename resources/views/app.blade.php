@@ -11,19 +11,13 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- PWA Meta Tags -->
-        <link rel="manifest" href="/manifest.json">
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/icon-192x192.png">
-        <meta name="msapplication-TileColor" content="#4F46E5">
-        <meta name="msapplication-TileImage" content="/images/icons/icon-144x144.png">
-
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=proxima-nova:400,500,600,700&display=swap" rel="stylesheet" />
         
-        <!-- Tailwind CSS CDN (temporary workaround for PostCSS error) -->
+        <!-- Tailwind CSS CDN -->
+        <!-- NOTE: CSS imports disabled in app.js due to Sucrase parser bug -->
+        <!-- This CDN provides base Tailwind functionality until parser issue resolved -->
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
             tailwind.config = {
@@ -49,16 +43,8 @@
         @endif
         @inertiaHead
         
-        <!-- Disable Service Worker Permanently -->
-        <script>
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                    for(let registration of registrations) {
-                        registration.unregister();
-                    }
-                });
-            }
-        </script>
+        <!-- Unregister any previously registered service workers -->
+        <script src="/unregister-sw.js"></script>
         
         <!-- Cache Buster -->
         <meta name="asset-version" content="{{ config('app.asset_version', time()) }}">

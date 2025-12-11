@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\TouristVisa;
 use App\Models\ServiceApplication;
 use App\Models\ServiceModule;
+use App\Models\TouristVisa;
 use App\Traits\CreatesServiceApplications;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TouristVisaApplicationController extends Controller
 {
     use CreatesServiceApplications;
+
     /**
      * Display a listing of the resource for the authenticated user.
      */
@@ -83,7 +84,7 @@ class TouristVisaApplicationController extends Controller
             return redirect()
                 ->route('profile.tourist-visa.show', $application)
                 ->with('success', 'Tourist visa application created successfully.');
-                
+
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Failed to create tourist visa application', [
@@ -130,7 +131,7 @@ class TouristVisaApplicationController extends Controller
 
         if (in_array($touristVisaApplication->status, ['approved', 'rejected'])) {
             return response()->json([
-                'message' => 'Cannot update an application that has been ' . $touristVisaApplication->status,
+                'message' => 'Cannot update an application that has been '.$touristVisaApplication->status,
             ], 422);
         }
 

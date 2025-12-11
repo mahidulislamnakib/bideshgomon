@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\VisaApplication;
-use App\Models\VisaDocument;
-use App\Models\VisaAppointment;
 use App\Models\User;
+use App\Models\VisaApplication;
+use App\Models\VisaAppointment;
+use App\Models\VisaDocument;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -51,11 +51,11 @@ class VisaController extends Controller
         // Search
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('application_reference', 'like', "%{$search}%")
-                  ->orWhere('applicant_name', 'like', "%{$search}%")
-                  ->orWhere('applicant_email', 'like', "%{$search}%")
-                  ->orWhere('passport_number', 'like', "%{$search}%");
+                    ->orWhere('applicant_name', 'like', "%{$search}%")
+                    ->orWhere('applicant_email', 'like', "%{$search}%")
+                    ->orWhere('passport_number', 'like', "%{$search}%");
             });
         }
 
@@ -70,7 +70,7 @@ class VisaController extends Controller
             'revenue' => VisaApplication::paid()->sum('total_amount'),
         ];
 
-        $staffMembers = User::whereHas('role', function($q) {
+        $staffMembers = User::whereHas('role', function ($q) {
             $q->whereIn('slug', ['admin', 'consultant', 'agency']);
         })->get(['id', 'name', 'email']);
 
@@ -90,8 +90,8 @@ class VisaController extends Controller
         $application->load([
             'user',
             'assignedTo',
-            'documents' => fn($q) => $q->latest(),
-            'appointments' => fn($q) => $q->latest(),
+            'documents' => fn ($q) => $q->latest(),
+            'appointments' => fn ($q) => $q->latest(),
         ]);
 
         return Inertia::render('Admin/Visa/Show', [
@@ -238,7 +238,7 @@ class VisaController extends Controller
 
         $application->requestDocuments();
         $application->update([
-            'status_notes' => $validated['request_notes'] ?? 'Additional documents requested: ' . implode(', ', $validated['required_documents']),
+            'status_notes' => $validated['request_notes'] ?? 'Additional documents requested: '.implode(', ', $validated['required_documents']),
         ]);
 
         return back()->with('success', 'Document request sent to applicant.');
@@ -268,10 +268,10 @@ class VisaController extends Controller
         ]);
 
         $currentNotes = $application->internal_notes ?? '';
-        $newNote = "[" . now()->format('Y-m-d H:i') . " - " . auth()->user()->name . "]\n" . $validated['note'];
-        
+        $newNote = '['.now()->format('Y-m-d H:i').' - '.auth()->user()->name."]\n".$validated['note'];
+
         $application->update([
-            'internal_notes' => $currentNotes . "\n\n" . $newNote,
+            'internal_notes' => $currentNotes."\n\n".$newNote,
         ]);
 
         return back()->with('success', 'Note added successfully.');

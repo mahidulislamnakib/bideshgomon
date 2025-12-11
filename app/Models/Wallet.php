@@ -67,7 +67,7 @@ class Wallet extends Model
      */
     public function debit(float $amount, string $description, ?string $referenceType = null, ?string $referenceId = null, ?array $metadata = null): WalletTransaction
     {
-        if (!$this->hasBalance($amount)) {
+        if (! $this->hasBalance($amount)) {
             throw new \Exception('Insufficient balance');
         }
 

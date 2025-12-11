@@ -11,37 +11,37 @@
         <form @submit.prevent="submit">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="md:col-span-2">
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
                 Bank Name <span class="text-red-500">*</span>
               </label>
-              <input v-model="form.name" type="text" required class="w-full px-3 py-2 border rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" :class="form.errors.name ? 'border-red-500' : 'border-gray-300'" placeholder="e.g., Sonali Bank Limited"/>
+              <input v-model="form.name" type="text" required class="w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" :class="form.errors.name ? 'border-red-500' : 'border-gray-200'" placeholder="e.g., Sonali Bank Limited"/>
               <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">{{ form.errors.name }}</p>
             </div>
 
             <div class="md:col-span-2">
-              <label class="block text-sm font-medium text-gray-700 mb-1">Bank Name (Bengali)</label>
-              <input v-model="form.name_bn" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" placeholder="e.g., সোনালী ব্যাংক লিমিটেড"/>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Bank Name (Bengali)</label>
+              <input v-model="form.name_bn" type="text" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="e.g., সোনালী ব্যাংক লিমিটেড"/>
               <p v-if="form.errors.name_bn" class="mt-1 text-sm text-red-600">{{ form.errors.name_bn }}</p>
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Short Name</label>
-              <input v-model="form.short_name" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" placeholder="e.g., Sonali Bank"/>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Short Name</label>
+              <input v-model="form.short_name" type="text" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="e.g., Sonali Bank"/>
               <p v-if="form.errors.short_name" class="mt-1 text-sm text-red-600">{{ form.errors.short_name }}</p>
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Slug</label>
-              <input v-model="form.slug" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" placeholder="Auto-generated if empty"/>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Slug</label>
+              <input v-model="form.slug" type="text" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="Auto-generated if empty"/>
               <p class="mt-1 text-xs text-gray-500">Leave empty to auto-generate</p>
               <p v-if="form.errors.slug" class="mt-1 text-sm text-red-600">{{ form.errors.slug }}</p>
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
                 Bank Type <span class="text-red-500">*</span>
               </label>
-              <select v-model="form.type" required class="w-full px-3 py-2 border rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" :class="form.errors.type ? 'border-red-500' : 'border-gray-300'">
+              <select v-model="form.type" required class="w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" :class="form.errors.type ? 'border-red-500' : 'border-gray-200'">
                 <option value="">Select Type</option>
                 <option value="commercial">Commercial Bank</option>
                 <option value="islamic">Islamic Bank</option>
@@ -53,32 +53,32 @@
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">SWIFT Code</label>
-              <input v-model="form.swift_code" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" placeholder="e.g., SONIBBDH"/>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">SWIFT Code</label>
+              <input v-model="form.swift_code" type="text" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="e.g., SONIBBDH"/>
               <p v-if="form.errors.swift_code" class="mt-1 text-sm text-red-600">{{ form.errors.swift_code }}</p>
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Routing Number</label>
-              <input v-model="form.routing_number" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" placeholder="e.g., 010"/>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Routing Number</label>
+              <input v-model="form.routing_number" type="text" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="e.g., 010"/>
               <p v-if="form.errors.routing_number" class="mt-1 text-sm text-red-600">{{ form.errors.routing_number }}</p>
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Website</label>
-              <input v-model="form.website" type="url" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" placeholder="https://example.com"/>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Website</label>
+              <input v-model="form.website" type="url" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="https://example.com"/>
               <p v-if="form.errors.website" class="mt-1 text-sm text-red-600">{{ form.errors.website }}</p>
             </div>
 
             <div class="md:col-span-2">
-              <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-              <textarea v-model="form.description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" placeholder="Brief description about the bank"></textarea>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+              <textarea v-model="form.description" rows="3" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none" placeholder="Brief description about the bank"></textarea>
               <p v-if="form.errors.description" class="mt-1 text-sm text-red-600">{{ form.errors.description }}</p>
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Display Order</label>
-              <input v-model.number="form.sort_order" type="number" min="0" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" placeholder="0"/>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Display Order</label>
+              <input v-model.number="form.sort_order" type="number" min="0" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="0"/>
               <p v-if="form.errors.sort_order" class="mt-1 text-sm text-red-600">{{ form.errors.sort_order }}</p>
             </div>
 

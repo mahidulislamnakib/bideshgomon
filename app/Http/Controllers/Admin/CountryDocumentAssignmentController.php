@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CountryDocumentRequirement;
 use App\Models\Country;
-use App\Models\MasterDocument;
+use App\Models\CountryDocumentRequirement;
 use App\Models\DocumentCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,7 +16,7 @@ class CountryDocumentAssignmentController extends Controller
         $query = Country::with(['documentRequirements.document.category']);
 
         if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         }
 
         $countries = $query->orderBy('name')->paginate(20);
@@ -32,7 +31,7 @@ class CountryDocumentAssignmentController extends Controller
     {
         $countries = Country::orderBy('name')->get();
         $categories = DocumentCategory::with('documents')->orderBy('sort_order')->get();
-        
+
         $visaTypes = ['tourist', 'business', 'student', 'work', 'medical', 'transit', 'family'];
         $professions = ['Job Holder', 'Business Person', 'Student'];
 
@@ -70,7 +69,7 @@ class CountryDocumentAssignmentController extends Controller
                     ->orderBy('profession_category')
                     ->orderBy('sort_order');
             },
-            'documentRequirements.document.category'
+            'documentRequirements.document.category',
         ])->findOrFail($countryId);
 
         $categories = DocumentCategory::with('documents')->orderBy('sort_order')->get();
@@ -79,7 +78,7 @@ class CountryDocumentAssignmentController extends Controller
 
         // Group requirements by visa type and profession
         $groupedRequirements = $country->documentRequirements->groupBy(function ($req) {
-            return $req->visa_type . '|' . ($req->profession_category ?? 'all');
+            return $req->visa_type.'|'.($req->profession_category ?? 'all');
         });
 
         return Inertia::render('Admin/DocumentAssignments/Show', [
@@ -124,6 +123,6 @@ class CountryDocumentAssignmentController extends Controller
         }
 
         return redirect()->route('admin.document-assignments.show', $validated['country_id'])
-            ->with('success', count($validated['document_ids']) . ' documents assigned successfully.');
+            ->with('success', count($validated['document_ids']).' documents assigned successfully.');
     }
 }

@@ -14,9 +14,9 @@ class DirectoryCategoryController extends Controller
         $query = DirectoryCategory::withCount('directories');
 
         if ($request->search) {
-            $query->where(function($q) use ($request) {
+            $query->where(function ($q) use ($request) {
                 $q->where('name', 'like', "%{$request->search}%")
-                  ->orWhere('name_bn', 'like', "%{$request->search}%");
+                    ->orWhere('name_bn', 'like', "%{$request->search}%");
             });
         }
 
@@ -70,7 +70,7 @@ class DirectoryCategoryController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'name_bn' => 'nullable|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:directory_categories,slug,' . $directoryCategory->id,
+            'slug' => 'nullable|string|max:255|unique:directory_categories,slug,'.$directoryCategory->id,
             'description' => 'nullable|string',
             'icon' => 'nullable|string|max:100',
             'color' => 'required|string|in:blue,green,red,yellow,purple,pink,indigo,gray',
@@ -98,7 +98,7 @@ class DirectoryCategoryController extends Controller
 
     public function toggleActive(DirectoryCategory $directoryCategory)
     {
-        $directoryCategory->update(['is_active' => !$directoryCategory->is_active]);
+        $directoryCategory->update(['is_active' => ! $directoryCategory->is_active]);
 
         return back()->with('success', 'Category status updated successfully');
     }
@@ -107,7 +107,7 @@ class DirectoryCategoryController extends Controller
     {
         $validated = $request->validate([
             'ids' => 'required|array',
-            'ids.*' => 'exists:directory_categories,id'
+            'ids.*' => 'exists:directory_categories,id',
         ]);
 
         DirectoryCategory::updateOrder($validated['ids']);

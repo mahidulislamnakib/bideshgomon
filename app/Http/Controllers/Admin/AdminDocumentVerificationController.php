@@ -18,7 +18,7 @@ class AdminDocumentVerificationController extends Controller
             ->latest()
             ->paginate(20);
 
-        $recent = UserDocument::with(['user','reviewer'])
+        $recent = UserDocument::with(['user', 'reviewer'])
             ->whereIn('status', [UserDocument::STATUS_APPROVED, UserDocument::STATUS_REJECTED])
             ->latest('reviewed_at')
             ->limit(20)
@@ -38,6 +38,7 @@ class AdminDocumentVerificationController extends Controller
     public function approve(UserDocument $document, DocumentVerificationService $service)
     {
         $service->approve($document, Auth::id());
+
         return back()->with('success', 'Document approved');
     }
 
@@ -47,6 +48,7 @@ class AdminDocumentVerificationController extends Controller
             'reason' => 'required|string|max:1000',
         ]);
         $service->reject($document, Auth::id(), $request->reason);
+
         return back()->with('success', 'Document rejected');
     }
 }

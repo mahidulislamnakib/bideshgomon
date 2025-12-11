@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\FlightRoute;
 use App\Models\Country;
 use App\Models\Currency;
+use App\Models\FlightRoute;
 use Illuminate\Database\Seeder;
 
 class FlightRouteSeeder extends Seeder
@@ -430,6 +430,6 @@ class FlightRouteSeeder extends Seeder
             FlightRoute::create($routeData);
         }
 
-        $this->command->info('✅ Created ' . count($routes) . ' flight routes successfully!');
+        $this->command->info('✅ Created '.count($routes).' flight routes successfully!');
     }
 }

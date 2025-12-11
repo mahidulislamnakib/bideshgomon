@@ -19,7 +19,7 @@ class LanguageTestPrepController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $prep = (object)[
+        $prep = (object) [
             'id' => uniqid(),
             'user_id' => $request->user()->id ?? 1,
             'test_type' => $validated['test_type'],

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('sms')->default(false);
             $table->boolean('push')->default(true);
             $table->timestamps();
-            
+
             $table->unique(['user_id', 'notification_type']);
         });
     }

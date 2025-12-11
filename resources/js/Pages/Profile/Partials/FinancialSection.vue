@@ -517,12 +517,12 @@ const submitForm = () => {
             </div>
 
             <div class="sm:col-span-2">
-              <InputLabel for="property_type" value="Property Type" />
+              <InputLabel for="property_type" value="Property Type" class="block text-sm font-semibold text-gray-700 mb-2" />
               <textarea
                 id="property_type"
                 v-model="form.property_type"
                 rows="2"
-                class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm"
+                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm transition-all resize-none"
                 style="font-size: 16px"
                 placeholder="Describe your properties..."
               ></textarea>
@@ -530,12 +530,12 @@ const submitForm = () => {
             </div>
 
             <div class="sm:col-span-2">
-              <InputLabel for="vehicle_type" value="Vehicle Type" />
+              <InputLabel for="vehicle_type" value="Vehicle Type" class="block text-sm font-semibold text-gray-700 mb-2" />
               <textarea
                 id="vehicle_type"
                 v-model="form.vehicle_type"
                 rows="2"
-                class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm"
+                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm transition-all resize-none"
                 style="font-size: 16px"
                 placeholder="Make, model, year..."
               ></textarea>
@@ -543,12 +543,12 @@ const submitForm = () => {
             </div>
 
             <div class="sm:col-span-2">
-              <InputLabel for="investment_types" value="Investment Types" />
+              <InputLabel for="investment_types" value="Investment Types" class="block text-sm font-semibold text-gray-700 mb-2" />
               <textarea
                 id="investment_types"
                 v-model="form.investment_types"
                 rows="2"
-                class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm"
+                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm transition-all resize-none"
                 style="font-size: 16px"
                 placeholder="Describe your investments..."
               ></textarea>
@@ -580,12 +580,12 @@ const submitForm = () => {
               </div>
 
               <div class="sm:col-span-2">
-                <InputLabel for="liability_types" value="Liability Types" />
+                <InputLabel for="liability_types" value="Liability Types" class="block text-sm font-semibold text-gray-700 mb-2" />
                 <textarea
                   id="liability_types"
                   v-model="form.liability_types"
                   rows="2"
-                  class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-red-500 focus:ring-red-500 rounded-lg shadow-sm"
+                  class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm transition-all resize-none"
                   style="font-size: 16px"
                   placeholder="List all liabilities: type, amount, repayment terms..."
                 ></textarea>

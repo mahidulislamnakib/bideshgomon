@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Carbon\Carbon;
 
 class TravelBookingController extends Controller
 {
@@ -33,7 +33,7 @@ class TravelBookingController extends Controller
 
         return Inertia::render('Services/Travel/Book', [
             'consultants' => $consultants,
-            'availableSlots' => $availableSlots
+            'availableSlots' => $availableSlots,
         ]);
     }
 
@@ -82,7 +82,38 @@ class TravelBookingController extends Controller
             'duration' => '60', // 1 hour consultation
         ]);
 
-        // TODO: Send email notification to user and consultant
+        // Send notification to user
+        app(\App\Services\NotificationService::class)->send(
+            $appointment->user_id,
+            'Consultation Booked',
+            'Your travel consultation has been scheduled for '.$appointment->appointment_date->format('d/m/Y').' at '.$appointment->appointment_time.'.',
+            [
+                'type' => 'appointment_confirmed',
+                'priority' => 'high',
+                'data' => [
+                    'appointment_id' => $appointment->id,
+                    'appointment_type' => $appointment->appointment_type,
+                    'appointment_date' => $appointment->appointment_date->toDateString(),
+                ],
+            ]
+        );
+
+        // Send notification to consultant if assigned
+        if ($appointment->consultant_id) {
+            app(\App\Services\NotificationService::class)->send(
+                $appointment->consultant_id,
+                'New Consultation Booking',
+                'You have a new '.$appointment->appointment_type.' consultation scheduled for '.$appointment->appointment_date->format('d/m/Y').'.',
+                [
+                    'type' => 'new_appointment',
+                    'priority' => 'high',
+                    'data' => [
+                        'appointment_id' => $appointment->id,
+                        'user_name' => $appointment->user->name,
+                    ],
+                ]
+            );
+        }
 
         return redirect()->route('travel.bookings.confirmation', $appointment->id)
             ->with('success', 'Your travel consultation has been booked successfully!');
@@ -99,7 +130,7 @@ class TravelBookingController extends Controller
             ->firstOrFail();
 
         return Inertia::render('Services/Travel/Confirmation', [
-            'appointment' => $appointment
+            'appointment' => $appointment,
         ]);
     }
 
@@ -114,8 +145,8 @@ class TravelBookingController extends Controller
 
         // Business hours: 9 AM - 6 PM
         $businessHours = [
-            '09:00', '10:00', '11:00', '12:00', 
-            '13:00', '14:00', '15:00', '16:00', '17:00'
+            '09:00', '10:00', '11:00', '12:00',
+            '13:00', '14:00', '15:00', '16:00', '17:00',
         ];
 
         for ($date = $now->copy(); $date->lte($endDate); $date->addDay()) {
@@ -130,7 +161,7 @@ class TravelBookingController extends Controller
             foreach ($businessHours as $time) {
                 // Skip past time slots for today
                 if ($date->isToday()) {
-                    $slotTime = Carbon::createFromFormat('Y-m-d H:i', $dateStr . ' ' . $time);
+                    $slotTime = Carbon::createFromFormat('Y-m-d H:i', $dateStr.' '.$time);
                     if ($slotTime->isPast()) {
                         continue;
                     }
@@ -147,7 +178,7 @@ class TravelBookingController extends Controller
 
                 $isBooked = $query->exists();
 
-                if (!$isBooked) {
+                if (! $isBooked) {
                     $slots[$dateStr][] = $time;
                 }
             }
@@ -188,7 +219,7 @@ class TravelBookingController extends Controller
             ->firstOrFail();
 
         return Inertia::render('Services/Travel/ShowBooking', [
-            'booking' => $booking
+            'booking' => $booking,
         ]);
     }
 
@@ -205,7 +236,7 @@ class TravelBookingController extends Controller
         $appointment->update([
             'status' => 'cancelled',
             'cancelled_at' => now(),
-            'cancellation_reason' => $request->reason ?? 'User requested cancellation'
+            'cancellation_reason' => $request->reason ?? 'User requested cancellation',
         ]);
 
         return redirect()->route('travel.bookings.index')

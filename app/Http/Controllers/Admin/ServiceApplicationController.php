@@ -49,6 +49,7 @@ class ServiceApplicationController extends Controller
         // Add quotes count
         $applications->getCollection()->transform(function ($application) {
             $application->quotes_count = $application->quotes()->count();
+
             return $application;
         });
 
@@ -79,7 +80,7 @@ class ServiceApplicationController extends Controller
         $serviceApplication->load([
             'user',
             'serviceModule',
-            'assignedAgency'
+            'assignedAgency',
         ]);
 
         $quotes = $serviceApplication->quotes()
@@ -150,7 +151,7 @@ class ServiceApplicationController extends Controller
         $applications = $query->get();
 
         // Generate CSV
-        $filename = 'service-applications-' . date('Y-m-d-His') . '.csv';
+        $filename = 'service-applications-'.date('Y-m-d-His').'.csv';
         $headers = [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => "attachment; filename=\"{$filename}\"",
@@ -158,7 +159,7 @@ class ServiceApplicationController extends Controller
 
         $callback = function () use ($applications) {
             $file = fopen('php://output', 'w');
-            
+
             // CSV headers
             fputcsv($file, [
                 'Application Number',
@@ -191,4 +192,3 @@ class ServiceApplicationController extends Controller
         return response()->stream($callback, 200, $headers);
     }
 }
-

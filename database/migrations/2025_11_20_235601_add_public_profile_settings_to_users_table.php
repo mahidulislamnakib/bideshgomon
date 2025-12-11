@@ -31,7 +31,7 @@ return new class extends Migration
                 'profile_is_public',
                 'profile_visibility_settings',
                 'profile_bio',
-                'profile_headline'
+                'profile_headline',
             ]);
         });
     }

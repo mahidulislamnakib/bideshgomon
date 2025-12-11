@@ -58,7 +58,7 @@
             <button
               @click="install"
               :disabled="isInstalling"
-              class="flex-1 bg-brand-red-600 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 transition-colors disabled:opacity-50 text-sm"
+              class="flex-1 bg-emerald-600 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors disabled:opacity-50 text-sm"
             >
               <span v-if="isInstalling">Installing...</span>
               <span v-else>Install App</span>

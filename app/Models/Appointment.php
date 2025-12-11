@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Appointment extends Model
 {
@@ -42,7 +42,7 @@ class Appointment extends Model
 
         static::creating(function ($appointment) {
             if (empty($appointment->appointment_number)) {
-                $appointment->appointment_number = 'APT-' . strtoupper(uniqid());
+                $appointment->appointment_number = 'APT-'.strtoupper(uniqid());
             }
         });
     }
@@ -92,13 +92,13 @@ class Appointment extends Model
     // Helpers
     public function isUpcoming(): bool
     {
-        return in_array($this->status, ['pending', 'confirmed']) 
+        return in_array($this->status, ['pending', 'confirmed'])
             && $this->appointment_date >= now()->toDateString();
     }
 
     public function canBeCancelled(): bool
     {
-        return in_array($this->status, ['pending', 'confirmed']) 
+        return in_array($this->status, ['pending', 'confirmed'])
             && $this->appointment_date >= now()->toDateString();
     }
 

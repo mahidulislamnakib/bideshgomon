@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { Link } from '@inertiajs/vue3'
 
 const props = defineProps({
     items: {
@@ -63,11 +64,3 @@ const breadcrumbSchema = computed(() => {
         <script type="application/ld+json" v-html="JSON.stringify(breadcrumbSchema)"></script>
     </nav>
 </template>
-
-<script>
-import { Link } from '@inertiajs/vue3'
-
-export default {
-    components: { Link }
-}
-</script>

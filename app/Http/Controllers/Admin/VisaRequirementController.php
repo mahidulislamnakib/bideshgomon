@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\VisaRequirement;
-use App\Models\VisaRequirementDocument;
 use App\Models\ProfessionVisaRequirement;
 use App\Models\ServiceModule;
+use App\Models\VisaRequirement;
+use App\Models\VisaRequirementDocument;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -21,7 +21,7 @@ class VisaRequirementController extends Controller
 
         // Filters
         if ($request->filled('country')) {
-            $query->where('country', 'like', '%' . $request->country . '%');
+            $query->where('country', 'like', '%'.$request->country.'%');
         }
 
         if ($request->filled('visa_type')) {
@@ -51,7 +51,7 @@ class VisaRequirementController extends Controller
             ->distinct()
             ->orderBy('country')
             ->get()
-            ->map(fn($item) => [
+            ->map(fn ($item) => [
                 'value' => $item->country,
                 'label' => "{$item->country} ({$item->country_code})",
             ]);
@@ -83,8 +83,8 @@ class VisaRequirementController extends Controller
     {
         $visaRequirement->load([
             'serviceModule',
-            'documents' => fn($q) => $q->orderBy('sort_order'),
-            'professionRequirements' => fn($q) => $q->orderBy('sort_order'),
+            'documents' => fn ($q) => $q->orderBy('sort_order'),
+            'professionRequirements' => fn ($q) => $q->orderBy('sort_order'),
         ]);
 
         return Inertia::render('Admin/VisaRequirements/Show', [
@@ -109,7 +109,7 @@ class VisaRequirementController extends Controller
             ->where('is_active', true)
             ->orderBy('name')
             ->get()
-            ->map(fn($country) => [
+            ->map(fn ($country) => [
                 'id' => $country->id,
                 'name' => $country->name,
                 'code' => $country->code,
@@ -221,7 +221,7 @@ class VisaRequirementController extends Controller
             ->where('is_active', true)
             ->orderBy('name')
             ->get()
-            ->map(fn($country) => [
+            ->map(fn ($country) => [
                 'id' => $country->id,
                 'name' => $country->name,
                 'code' => $country->code,
@@ -380,7 +380,7 @@ class VisaRequirementController extends Controller
     public function toggleActive(VisaRequirement $visaRequirement)
     {
         $visaRequirement->update([
-            'is_active' => !$visaRequirement->is_active,
+            'is_active' => ! $visaRequirement->is_active,
         ]);
 
         return back()->with('success', 'Status updated successfully!');

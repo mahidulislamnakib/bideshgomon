@@ -20,11 +20,11 @@ class DegreeController extends Controller
         // Search
         if ($request->has('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'LIKE', "%{$search}%")
-                  ->orWhere('name_bn', 'LIKE', "%{$search}%")
-                  ->orWhere('short_name', 'LIKE', "%{$search}%")
-                  ->orWhere('level', 'LIKE', "%{$search}%");
+                    ->orWhere('name_bn', 'LIKE', "%{$search}%")
+                    ->orWhere('short_name', 'LIKE', "%{$search}%")
+                    ->orWhere('level', 'LIKE', "%{$search}%");
             });
         }
 
@@ -41,7 +41,7 @@ class DegreeController extends Controller
         // Sort
         $sortField = $request->get('sort_field', 'level');
         $sortDirection = $request->get('sort_direction', 'asc');
-        
+
         if ($sortField === 'level') {
             $query->orderBy('level', $sortDirection)->orderBy('name');
         } else {
@@ -106,7 +106,7 @@ class DegreeController extends Controller
         $degree = Degree::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255|unique:degrees,name,' . $id,
+            'name' => 'required|string|max:255|unique:degrees,name,'.$id,
             'name_bn' => 'nullable|string|max:255',
             'short_name' => 'required|string|max:50',
             'level' => 'required|string|max:50',
@@ -136,7 +136,7 @@ class DegreeController extends Controller
     public function toggleStatus($id)
     {
         $degree = Degree::findOrFail($id);
-        $degree->is_active = !$degree->is_active;
+        $degree->is_active = ! $degree->is_active;
         $degree->save();
 
         return back()->with('success', 'Degree status updated successfully');
@@ -230,8 +230,8 @@ class DegreeController extends Controller
         }
 
         // Validate typical_duration_years if provided
-        if (isset($row['typical_duration_years']) && !empty($row['typical_duration_years'])) {
-            if (!is_numeric($row['typical_duration_years']) || $row['typical_duration_years'] < 1 || $row['typical_duration_years'] > 10) {
+        if (isset($row['typical_duration_years']) && ! empty($row['typical_duration_years'])) {
+            if (! is_numeric($row['typical_duration_years']) || $row['typical_duration_years'] < 1 || $row['typical_duration_years'] > 10) {
                 return "Row {$rowNumber}: typical_duration_years must be a number between 1 and 10";
             }
         }
@@ -246,8 +246,8 @@ class DegreeController extends Controller
             'name_bn' => $row['name_bn'] ?? null,
             'short_name' => $row['short_name'],
             'level' => $row['level'],
-            'typical_duration_years' => isset($row['typical_duration_years']) && $row['typical_duration_years'] !== '' ? (int)$row['typical_duration_years'] : null,
-            'is_active' => isset($row['is_active']) ? (bool)$row['is_active'] : true,
+            'typical_duration_years' => isset($row['typical_duration_years']) && $row['typical_duration_years'] !== '' ? (int) $row['typical_duration_years'] : null,
+            'is_active' => isset($row['is_active']) ? (bool) $row['is_active'] : true,
         ];
     }
 

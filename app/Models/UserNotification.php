@@ -11,7 +11,7 @@ class UserNotification extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'type', 'title', 'body', 'priority', 'data', 'read_at', 'action_url', 'icon', 'color'
+        'user_id', 'type', 'title', 'body', 'priority', 'data', 'read_at', 'action_url', 'icon', 'color',
     ];
 
     protected $casts = [
@@ -20,7 +20,9 @@ class UserNotification extends Model
     ];
 
     public const PRIORITY_NORMAL = 'normal';
+
     public const PRIORITY_HIGH = 'high';
+
     public const PRIORITY_CRITICAL = 'critical';
 
     public function user(): BelongsTo
@@ -35,7 +37,7 @@ class UserNotification extends Model
 
     public function markRead(): void
     {
-        if (!$this->read_at) {
+        if (! $this->read_at) {
             $this->read_at = now();
             $this->save();
         }
@@ -43,7 +45,7 @@ class UserNotification extends Model
 
     public function isRead(): bool
     {
-        return !is_null($this->read_at);
+        return ! is_null($this->read_at);
     }
 
     public function priorityColor(): string

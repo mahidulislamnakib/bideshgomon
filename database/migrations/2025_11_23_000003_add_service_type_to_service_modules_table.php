@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('service_modules', function (Blueprint $table) {
-            $table->string('service_type')->default('query_based')->after('slug'); 
+            $table->string('service_type')->default('query_based')->after('slug');
             // Service types:
             // 'query_based' - User submits request, gets quotes from agencies (default for most services)
             // 'api_based' - Real-time data from external APIs (travel insurance, flight search)

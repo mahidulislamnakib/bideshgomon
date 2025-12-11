@@ -30,10 +30,12 @@ class TestResendEmail extends Command
             });
         } catch (\Throwable $e) {
             $this->error('Failed sending test email: '.$e->getMessage());
+
             return self::FAILURE;
         }
 
         $this->info('Dispatched test email to '.$to.' via mailer: '.config('mail.default'));
+
         return self::SUCCESS;
     }
 }

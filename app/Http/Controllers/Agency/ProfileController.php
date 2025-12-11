@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
-use App\Models\Agency;
-use App\Models\AgencyTeamMember;
 use App\Models\AgencyType;
 use App\Models\Country;
 use App\Models\Language;
@@ -19,7 +17,7 @@ class ProfileController extends Controller
     {
         $agency = auth()->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             return redirect()->route('agency.dashboard')->with('error', 'Agency profile not found.');
         }
 
@@ -39,7 +37,7 @@ class ProfileController extends Controller
     {
         $agency = auth()->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             return redirect()->route('agency.dashboard')->with('error', 'Agency profile not found.');
         }
 
@@ -52,13 +50,23 @@ class ProfileController extends Controller
             ->groupBy(function ($service) {
                 // Categorize services based on name patterns
                 $name = strtolower($service->name);
-                
-                if (str_contains($name, 'visa')) return 'Visa Services';
-                if (in_array($service->id, [8, 9, 10, 11, 12, 13, 28])) return 'Travel & Booking';
-                if (in_array($service->id, [14, 15, 16, 17])) return 'Education Services';
-                if (in_array($service->id, [18, 19, 20, 21, 22])) return 'Employment Services';
-                if (in_array($service->id, [23, 24, 25, 26, 27])) return 'Document Services';
-                
+
+                if (str_contains($name, 'visa')) {
+                    return 'Visa Services';
+                }
+                if (in_array($service->id, [8, 9, 10, 11, 12, 13, 28])) {
+                    return 'Travel & Booking';
+                }
+                if (in_array($service->id, [14, 15, 16, 17])) {
+                    return 'Education Services';
+                }
+                if (in_array($service->id, [18, 19, 20, 21, 22])) {
+                    return 'Employment Services';
+                }
+                if (in_array($service->id, [23, 24, 25, 26, 27])) {
+                    return 'Document Services';
+                }
+
                 return 'Support Services';
             });
 
@@ -77,7 +85,7 @@ class ProfileController extends Controller
     {
         $agency = auth()->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             return back()->with('error', 'Agency profile not found.');
         }
 
@@ -101,7 +109,7 @@ class ProfileController extends Controller
             'instagram_url' => 'nullable|url|max:255',
             'agency_type_id' => 'required|exists:agency_types,id',
             'business_type' => 'nullable|string', // Keep for backward compatibility
-            'established_year' => 'nullable|integer|min:1900|max:' . date('Y'),
+            'established_year' => 'nullable|integer|min:1900|max:'.date('Y'),
             'license_number' => 'nullable|string|max:100',
             'license_expiry' => 'nullable|date|after:today',
             'services_offered' => 'nullable|array',
@@ -116,7 +124,7 @@ class ProfileController extends Controller
         $agency->update($validated);
 
         // Check if profile is complete
-        if ($agency->isProfileComplete() && !$agency->profile_completed_at) {
+        if ($agency->isProfileComplete() && ! $agency->profile_completed_at) {
             $agency->update(['profile_completed_at' => now()]);
         }
 
@@ -131,7 +139,7 @@ class ProfileController extends Controller
 
         $agency = auth()->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             return back()->with('error', 'Agency profile not found.');
         }
 
@@ -156,7 +164,7 @@ class ProfileController extends Controller
 
         $agency = auth()->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             return back()->with('error', 'Agency profile not found.');
         }
 
@@ -169,7 +177,7 @@ class ProfileController extends Controller
         }
 
         $agency->update([
-            'office_images' => array_merge($existingImages, $newImages)
+            'office_images' => array_merge($existingImages, $newImages),
         ]);
 
         return back()->with('success', 'Office images uploaded successfully.');
@@ -183,7 +191,7 @@ class ProfileController extends Controller
 
         $agency = auth()->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             return back()->with('error', 'Agency profile not found.');
         }
 
@@ -204,12 +212,12 @@ class ProfileController extends Controller
         $fields = [
             'name', 'company_name', 'phone', 'email', 'address', 'city', 'country',
             'description', 'business_type', 'established_year', 'website',
-            'services_offered', 'logo_path', 'team_size'
+            'services_offered', 'logo_path', 'team_size',
         ];
 
         $completed = 0;
         foreach ($fields as $field) {
-            if (!empty($agency->$field)) {
+            if (! empty($agency->$field)) {
                 $completed++;
             }
         }

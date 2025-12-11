@@ -38,7 +38,7 @@ class ReferralService
     {
         $referrer = User::where('referral_code', $referralCode)->first();
 
-        if (!$referrer || $referrer->id === $newUser->id) {
+        if (! $referrer || $referrer->id === $newUser->id) {
             return null;
         }
 

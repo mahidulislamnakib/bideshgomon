@@ -20,11 +20,11 @@ class AirportController extends Controller
         // Search
         if ($request->has('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'LIKE', "%{$search}%")
-                  ->orWhere('name_bn', 'LIKE', "%{$search}%")
-                  ->orWhere('iata_code', 'LIKE', "%{$search}%")
-                  ->orWhere('icao_code', 'LIKE', "%{$search}%");
+                    ->orWhere('name_bn', 'LIKE', "%{$search}%")
+                    ->orWhere('iata_code', 'LIKE', "%{$search}%")
+                    ->orWhere('icao_code', 'LIKE', "%{$search}%");
             });
         }
 
@@ -72,7 +72,7 @@ class AirportController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -81,13 +81,14 @@ class AirportController extends Controller
 
         return response()->json([
             'message' => 'Airport created successfully',
-            'data' => $airport
+            'data' => $airport,
         ], 201);
     }
 
     public function show($id)
     {
         $airport = Airport::with('city.country')->findOrFail($id);
+
         return response()->json($airport);
     }
 
@@ -99,8 +100,8 @@ class AirportController extends Controller
             'city_id' => 'sometimes|required|exists:cities,id',
             'name' => 'sometimes|required|string|max:255',
             'name_bn' => 'nullable|string|max:255',
-            'iata_code' => 'sometimes|required|string|size:3|unique:airports,iata_code,' . $id,
-            'icao_code' => 'nullable|string|size:4|unique:airports,icao_code,' . $id,
+            'iata_code' => 'sometimes|required|string|size:3|unique:airports,iata_code,'.$id,
+            'icao_code' => 'nullable|string|size:4|unique:airports,icao_code,'.$id,
             'latitude' => 'nullable|numeric|between:-90,90',
             'longitude' => 'nullable|numeric|between:-180,180',
             'is_international' => 'boolean',
@@ -110,7 +111,7 @@ class AirportController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -119,7 +120,7 @@ class AirportController extends Controller
 
         return response()->json([
             'message' => 'Airport updated successfully',
-            'data' => $airport
+            'data' => $airport,
         ]);
     }
 
@@ -129,19 +130,19 @@ class AirportController extends Controller
         $airport->delete();
 
         return response()->json([
-            'message' => 'Airport deleted successfully'
+            'message' => 'Airport deleted successfully',
         ]);
     }
 
     public function toggleStatus($id)
     {
         $airport = Airport::findOrFail($id);
-        $airport->is_active = !$airport->is_active;
+        $airport->is_active = ! $airport->is_active;
         $airport->save();
 
         return response()->json([
             'message' => 'Airport status updated successfully',
-            'data' => $airport
+            'data' => $airport,
         ]);
     }
 
@@ -244,7 +245,7 @@ class AirportController extends Controller
     {
         // Check if city exists
         $city = City::where('name', $row['city_name'])->first();
-        if (!$city) {
+        if (! $city) {
             return "Row {$rowNumber}: City '{$row['city_name']}' not found";
         }
 
@@ -259,11 +260,11 @@ class AirportController extends Controller
         }
 
         // Validate ICAO code if provided
-        if (isset($row['icao_code']) && !empty($row['icao_code'])) {
+        if (isset($row['icao_code']) && ! empty($row['icao_code'])) {
             if (strlen($row['icao_code']) !== 4) {
                 return "Row {$rowNumber}: ICAO code must be exactly 4 characters";
             }
-            
+
             // Check ICAO uniqueness
             if (Airport::where('icao_code', strtoupper($row['icao_code']))->exists()) {
                 return "Row {$rowNumber}: ICAO code '{$row['icao_code']}' already exists";
@@ -271,15 +272,15 @@ class AirportController extends Controller
         }
 
         // Validate latitude
-        if (isset($row['latitude']) && !empty($row['latitude'])) {
-            if (!is_numeric($row['latitude']) || $row['latitude'] < -90 || $row['latitude'] > 90) {
+        if (isset($row['latitude']) && ! empty($row['latitude'])) {
+            if (! is_numeric($row['latitude']) || $row['latitude'] < -90 || $row['latitude'] > 90) {
                 return "Row {$rowNumber}: Invalid latitude value";
             }
         }
 
         // Validate longitude
-        if (isset($row['longitude']) && !empty($row['longitude'])) {
-            if (!is_numeric($row['longitude']) || $row['longitude'] < -180 || $row['longitude'] > 180) {
+        if (isset($row['longitude']) && ! empty($row['longitude'])) {
+            if (! is_numeric($row['longitude']) || $row['longitude'] < -180 || $row['longitude'] > 180) {
                 return "Row {$rowNumber}: Invalid longitude value";
             }
         }
@@ -300,8 +301,8 @@ class AirportController extends Controller
             'icao_code' => isset($row['icao_code']) && $row['icao_code'] !== '' ? strtoupper($row['icao_code']) : null,
             'latitude' => isset($row['latitude']) && $row['latitude'] !== '' ? $row['latitude'] : null,
             'longitude' => isset($row['longitude']) && $row['longitude'] !== '' ? $row['longitude'] : null,
-            'is_international' => isset($row['is_international']) ? (bool)$row['is_international'] : false,
-            'is_active' => isset($row['is_active']) ? (bool)$row['is_active'] : true,
+            'is_international' => isset($row['is_international']) ? (bool) $row['is_international'] : false,
+            'is_active' => isset($row['is_active']) ? (bool) $row['is_active'] : true,
         ];
 
         return $data;

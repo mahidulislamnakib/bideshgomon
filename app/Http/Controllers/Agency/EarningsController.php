@@ -7,7 +7,6 @@ use App\Models\Agency;
 use App\Models\ServiceApplication;
 use App\Models\ServiceQuote;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class EarningsController extends Controller
@@ -16,11 +15,11 @@ class EarningsController extends Controller
     {
         $agency = auth()->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             // Auto-create agency profile if not exists
             $agency = Agency::create([
                 'user_id' => auth()->id(),
-                'name' => auth()->user()->name . "'s Agency",
+                'name' => auth()->user()->name."'s Agency",
                 'email' => auth()->user()->email,
                 'is_active' => true,
                 'is_verified' => false,
@@ -29,36 +28,36 @@ class EarningsController extends Controller
 
         // Date filter (default: last 30 days)
         $period = $request->get('period', '30');
-        $startDate = now()->subDays((int)$period);
+        $startDate = now()->subDays((int) $period);
 
         // Financial Overview
         $financials = [
             'total_earnings' => ServiceApplication::where('agency_id', $agency->id)
                 ->where('status', 'completed')
                 ->sum('agency_earnings'),
-            
+
             'pending_earnings' => ServiceApplication::where('agency_id', $agency->id)
                 ->whereIn('status', ['accepted', 'in_progress'])
                 ->sum('agency_earnings'),
-            
+
             'total_quotes' => ServiceQuote::where('agency_id', $agency->id)
                 ->count(),
-            
+
             'accepted_quotes' => ServiceQuote::where('agency_id', $agency->id)
                 ->where('status', 'accepted')
                 ->count(),
-            
+
             'pending_quotes' => ServiceQuote::where('agency_id', $agency->id)
                 ->where('status', 'pending')
                 ->count(),
-            
+
             'rejected_quotes' => ServiceQuote::where('agency_id', $agency->id)
                 ->where('status', 'rejected')
                 ->count(),
         ];
 
         // Win Rate
-        $financials['win_rate'] = $financials['total_quotes'] > 0 
+        $financials['win_rate'] = $financials['total_quotes'] > 0
             ? round(($financials['accepted_quotes'] / $financials['total_quotes']) * 100, 1)
             : 0;
 

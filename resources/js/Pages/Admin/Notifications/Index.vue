@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 import { useForm } from '@inertiajs/vue3'
 import { useBangladeshFormat } from '@/Composables/useBangladeshFormat'
@@ -93,7 +93,7 @@ function submit() {
               </div>
               <p class="text-xs text-gray-600">To: {{ n.user?.name || 'User #'+n.user_id }}</p>
               <p class="text-sm text-gray-700 mt-1">{{ n.body }}</p>
-              <div class="text-xs text-gray-500 mt-1">{{ formatDate(n.created_at) }} • {{ formatTime(n.created_at) }}</div>
+              <div class="text-xs text-gray-500 mt-1">{{ formatDate(n.created_at) }} � {{ formatTime(n.created_at) }}</div>
             </div>
             <div class="text-xs text-gray-500">{{ n.read_at ? 'Read' : 'Unread' }}</div>
           </li>
@@ -117,4 +117,3 @@ export default {
 }
 </script>
 
-<style scoped></style>

@@ -13,7 +13,7 @@ use Inertia\Inertia;
 class DocumentScanController extends Controller
 {
     use AuthorizesRequests;
-    
+
     protected $ocrService;
 
     public function __construct(DocumentOCRService $ocrService)
@@ -65,7 +65,7 @@ class DocumentScanController extends Controller
 
             return back()->with('success', 'Document uploaded successfully. Processing...');
         } catch (\Exception $e) {
-            return back()->with('error', 'Failed to upload document: ' . $e->getMessage());
+            return back()->with('error', 'Failed to upload document: '.$e->getMessage());
         }
     }
 
@@ -136,7 +136,7 @@ class DocumentScanController extends Controller
             $user = auth()->user();
             $profile = $user->userProfile;
 
-            if (!$profile) {
+            if (! $profile) {
                 $profile = $user->userProfile()->create([]);
             }
 
@@ -161,7 +161,7 @@ class DocumentScanController extends Controller
                     case 'nationality':
                         if (isset($extractedData['nationality'])) {
                             // Try to find country by name
-                            $country = \App\Models\Country::where('name', 'like', '%' . $extractedData['nationality'] . '%')->first();
+                            $country = \App\Models\Country::where('name', 'like', '%'.$extractedData['nationality'].'%')->first();
                             if ($country) {
                                 $updates['nationality_country_id'] = $country->id;
                             }
@@ -175,7 +175,7 @@ class DocumentScanController extends Controller
                 }
             }
 
-            if (!empty($updates)) {
+            if (! empty($updates)) {
                 $profile->update($updates);
 
                 return back()->with('success', 'Profile updated successfully with extracted data.');
@@ -183,7 +183,7 @@ class DocumentScanController extends Controller
 
             return back()->with('info', 'No data to apply.');
         } catch (\Exception $e) {
-            return back()->with('error', 'Failed to apply data: ' . $e->getMessage());
+            return back()->with('error', 'Failed to apply data: '.$e->getMessage());
         }
     }
 
@@ -207,7 +207,7 @@ class DocumentScanController extends Controller
 
             return back()->with('success', 'Document scan deleted successfully.');
         } catch (\Exception $e) {
-            return back()->with('error', 'Failed to delete scan: ' . $e->getMessage());
+            return back()->with('error', 'Failed to delete scan: '.$e->getMessage());
         }
     }
 
@@ -236,7 +236,7 @@ class DocumentScanController extends Controller
 
             return back()->with('success', 'Reprocessing document...');
         } catch (\Exception $e) {
-            return back()->with('error', 'Failed to reprocess: ' . $e->getMessage());
+            return back()->with('error', 'Failed to reprocess: '.$e->getMessage());
         }
     }
 
@@ -248,7 +248,7 @@ class DocumentScanController extends Controller
         try {
             // Try multiple date formats
             $formats = ['d/m/Y', 'd-m-Y', 'm/d/Y', 'm-d-Y', 'Y-m-d'];
-            
+
             foreach ($formats as $format) {
                 $date = \DateTime::createFromFormat($format, $dateStr);
                 if ($date) {

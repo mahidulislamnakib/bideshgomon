@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { ref, computed } from 'vue';
 import { Head, useForm, Link } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -392,7 +392,7 @@ const getConfiguredCount = (groupKey) => {
                                                         :type="setting.type === 'password' && !visiblePasswords[setting.key] ? 'password' : 'text'"
                                                         :value="form.settings.find(s => s.key === setting.key)?.value"
                                                         @input="updateSetting(setting.key, $event.target.value)"
-                                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
+                                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                                         :placeholder="setting.description || ''"
                                                     />
                                                     <button
@@ -431,7 +431,7 @@ const getConfiguredCount = (groupKey) => {
                                                 type="checkbox"
                                                 :checked="form.settings.find(s => s.key === setting.key)?.value"
                                                 @change="updateSetting(setting.key, $event.target.checked)"
-                                                class="h-5 w-5 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
+                                                class="h-5 w-5 text-indigo-600 border-2 border-gray-200 rounded focus:ring-2 focus:ring-indigo-500 transition-all"
                                             />
                                         </div>
                                         <div v-else>
@@ -446,7 +446,7 @@ const getConfiguredCount = (groupKey) => {
                                                 :type="getInputType(setting.type)"
                                                 :value="form.settings.find(s => s.key === setting.key)?.value"
                                                 @input="updateSetting(setting.key, $event.target.value)"
-                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-brand-red-600"
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                             />
                                         </div>
                                     </div>

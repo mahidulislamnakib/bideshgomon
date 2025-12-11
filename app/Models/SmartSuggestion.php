@@ -51,7 +51,7 @@ class SmartSuggestion extends Model
             ->where('is_dismissed', false)
             ->where(function ($q) {
                 $q->whereNull('expires_at')
-                  ->orWhere('expires_at', '>', now());
+                    ->orWhere('expires_at', '>', now());
             });
     }
 
@@ -98,8 +98,8 @@ class SmartSuggestion extends Model
      */
     public function isActive()
     {
-        return !$this->is_completed 
-            && !$this->is_dismissed 
+        return ! $this->is_completed
+            && ! $this->is_dismissed
             && (is_null($this->expires_at) || $this->expires_at->isFuture());
     }
 
@@ -108,7 +108,7 @@ class SmartSuggestion extends Model
      */
     public function getPriorityColorAttribute()
     {
-        return match($this->priority) {
+        return match ($this->priority) {
             'urgent' => 'red',
             'high' => 'orange',
             'medium' => 'yellow',
@@ -122,7 +122,7 @@ class SmartSuggestion extends Model
      */
     public function getCategoryIconAttribute()
     {
-        return match($this->category) {
+        return match ($this->category) {
             'visa' => '🛂',
             'profile' => '👤',
             'document' => '📄',

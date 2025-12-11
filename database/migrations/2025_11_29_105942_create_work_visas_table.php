@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('destination_country_id')->constrained('countries')->onDelete('cascade');
             $table->string('application_reference')->unique();
-            
+
             // Employment-specific fields
             $table->string('job_title')->nullable();
             $table->string('job_category')->nullable(); // Skilled Worker, Professional, etc.
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->boolean('has_job_offer')->default(false);
             $table->date('intended_start_date')->nullable();
             $table->integer('contract_duration_months')->nullable();
-            
+
             // Experience & Skills
             $table->string('experience_level')->nullable(); // Entry, Mid, Senior, Expert
             $table->integer('years_of_experience')->nullable();
@@ -38,12 +38,12 @@ return new class extends Migration
             $table->string('highest_qualification')->nullable();
             $table->boolean('has_language_certificate')->default(false);
             $table->string('language_certificate_type')->nullable(); // IELTS, TOEFL, etc.
-            
+
             // Visa & Permit Details
             $table->string('work_permit_type')->nullable(); // H-1B, TSS, Iqama, etc.
             $table->boolean('requires_sponsorship')->default(true);
             $table->boolean('has_lmia_approval')->default(false); // Canada LMIA
-            
+
             // Common visa fields
             $table->enum('status', [
                 'pending',
@@ -51,7 +51,7 @@ return new class extends Migration
                 'processing',
                 'approved',
                 'rejected',
-                'cancelled'
+                'cancelled',
             ])->default('pending');
             $table->text('user_notes')->nullable();
             $table->text('admin_notes')->nullable();

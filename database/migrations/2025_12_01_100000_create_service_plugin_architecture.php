@@ -8,7 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * 
+     *
      * This migration creates the plugin-based service architecture:
      * - service_categories: Group services (Immigration, Jobs, Travel, etc.)
      * - services: Each service as a plugin (Tourist Visa, Work Permit, etc.)
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->json('config')->nullable(); // Category-level settings
             $table->timestamps();
-            
+
             $table->index('slug');
             $table->index('is_active');
             $table->index('sort_order');
@@ -51,22 +51,22 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
             $table->boolean('requires_approval')->default(true); // Some services auto-approve
-            
+
             // JSON configuration for flexibility
             $table->json('config')->nullable(); // Can store: requirements, documents_needed, pricing_tiers, etc.
-            
+
             // SEO
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();
-            
+
             // Tracking
             $table->unsignedInteger('views_count')->default(0);
             $table->unsignedInteger('applications_count')->default(0);
-            
+
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->index('slug');
             $table->index('category_id');
             $table->index('is_active');
@@ -78,7 +78,7 @@ return new class extends Migration
         Schema::create('service_fields', function (Blueprint $table) {
             $table->id();
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
-            
+
             // Field Definition
             $table->string('field_name'); // "passport_number", "travel_date"
             $table->string('field_label'); // "Passport Number", "Date of Travel"
@@ -86,28 +86,28 @@ return new class extends Migration
             $table->text('placeholder')->nullable();
             $table->text('help_text')->nullable(); // Shown below input
             $table->string('default_value')->nullable();
-            
+
             // Validation Rules
             $table->boolean('is_required')->default(false);
             $table->string('validation_rules')->nullable(); // Laravel validation: 'required|max:255|regex:/^[A-Z0-9]+$/'
-            
+
             // **CRITICAL: Profile Mapping** (The "Smart Bridge")
             $table->string('profile_map_key')->nullable(); // Maps to user profile: 'user_profiles.passport_number'
-            
+
             // For Select/Radio/Checkbox types
             $table->json('options')->nullable(); // ["Male", "Female", "Other"]
-            
+
             // Conditional Logic (Advanced)
             $table->json('conditional_rules')->nullable(); // Show field only if another field has specific value
-            
+
             // Layout & Order
             $table->unsignedInteger('sort_order')->default(0);
             $table->string('group_name')->nullable(); // Group fields: "Personal Info", "Travel Details"
             $table->unsignedInteger('column_width')->default(12); // Bootstrap cols: 6 = half width, 12 = full
-            
+
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             $table->index('service_id');
             $table->index('sort_order');
             $table->index('profile_map_key');
@@ -118,7 +118,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
-            
+
             // Application Status
             $table->enum('status', [
                 'draft',           // User started but didn't submit
@@ -128,32 +128,32 @@ return new class extends Migration
                 'approved',        // Application approved
                 'rejected',        // Application rejected
                 'cancelled',       // User cancelled
-                'completed'        // Service delivered
+                'completed',        // Service delivered
             ])->default('draft');
-            
+
             // The actual form data (JSON)
             $table->json('form_data')->nullable(); // All user inputs stored here
-            
+
             // Metadata
             $table->string('application_number')->unique(); // AUTO-GENERATED: "APP-2025-001234"
             $table->decimal('amount_paid', 10, 2)->default(0.00);
             $table->string('payment_status')->default('unpaid'); // unpaid, paid, refunded
             $table->string('payment_reference')->nullable(); // Transaction ID
-            
+
             // Admin Notes
             $table->text('admin_notes')->nullable();
             $table->text('rejection_reason')->nullable();
             $table->json('requested_documents')->nullable(); // List of additional docs needed
-            
+
             // Timeline
             $table->timestamp('submitted_at')->nullable();
             $table->timestamp('reviewed_at')->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->timestamp('completed_at')->nullable();
-            
+
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->index('user_id');
             $table->index('service_id');
             $table->index('status');
@@ -170,7 +170,7 @@ return new class extends Migration
             $table->string('to_status');
             $table->text('notes')->nullable();
             $table->timestamps();
-            
+
             $table->index('application_id');
         });
 
@@ -188,7 +188,7 @@ return new class extends Migration
             $table->foreignId('verified_by')->nullable()->constrained('users');
             $table->timestamp('verified_at')->nullable();
             $table->timestamps();
-            
+
             $table->index('application_id');
         });
     }

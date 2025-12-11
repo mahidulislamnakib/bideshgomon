@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\AgencyResource;
 use App\Models\Agency;
-use App\Models\ServiceModule;
+use App\Models\AgencyResource;
 use App\Models\Country;
+use App\Models\ServiceModule;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class AgencyResourceController extends Controller
 {
@@ -45,11 +44,11 @@ class AgencyResourceController extends Controller
         if ($request->has('search') && $request->search) {
             $searchTerm = $request->search;
             $query->where(function ($q) use ($searchTerm) {
-                $q->where('resource_name', 'like', '%' . $searchTerm . '%')
-                  ->orWhere('resource_code', 'like', '%' . $searchTerm . '%')
-                  ->orWhereHas('agency', function ($aq) use ($searchTerm) {
-                      $aq->where('name', 'like', '%' . $searchTerm . '%');
-                  });
+                $q->where('resource_name', 'like', '%'.$searchTerm.'%')
+                    ->orWhere('resource_code', 'like', '%'.$searchTerm.'%')
+                    ->orWhereHas('agency', function ($aq) use ($searchTerm) {
+                        $aq->where('name', 'like', '%'.$searchTerm.'%');
+                    });
             });
         }
 
@@ -124,7 +123,7 @@ class AgencyResourceController extends Controller
 
         if ($existingOwner) {
             return back()->withErrors([
-                'resource_name' => "This resource is already owned by {$existingOwner->agency->name}. Only one agency can be the primary owner."
+                'resource_name' => "This resource is already owned by {$existingOwner->agency->name}. Only one agency can be the primary owner.",
             ]);
         }
 
@@ -295,7 +294,7 @@ class AgencyResourceController extends Controller
             ->exists();
 
         return response()->json([
-            'available' => !$exists,
+            'available' => ! $exists,
             'message' => $exists ? 'This resource is already owned by another agency.' : 'This resource is available.',
         ]);
     }

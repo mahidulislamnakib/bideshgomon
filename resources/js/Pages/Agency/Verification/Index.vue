@@ -95,12 +95,12 @@
                 <h2 class="text-xl font-semibold text-gray-900 mb-4">Upload Document</h2>
                 <form @submit.prevent="uploadDocument" class="space-y-4">
                     <div>
-                        <label for="document_type" class="block text-sm font-medium text-gray-700">Document Type</label>
+                        <label for="document_type" class="block text-sm font-semibold text-gray-700 mb-2">Document Type</label>
                         <select
                             id="document_type"
                             v-model="uploadForm.document_type"
                             required
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
                         >
                             <option value="">Select document type</option>
                             <option v-for="(label, type) in requiredDocumentTypes" :key="type" :value="type">
@@ -110,12 +110,12 @@
                     </div>
 
                     <div>
-                        <label for="document_name" class="block text-sm font-medium text-gray-700">Document Name (Optional)</label>
+                        <label for="document_name" class="block text-sm font-semibold text-gray-700 mb-2">Document Name (Optional)</label>
                         <input
                             type="text"
                             id="document_name"
                             v-model="uploadForm.document_name"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                             placeholder="e.g., Trade License 2024"
                         />
                     </div>

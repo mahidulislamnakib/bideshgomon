@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Services\ImageService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 
 class OptimizeImages extends Command
 {

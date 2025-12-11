@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Log;
 class SSLCommerzService
 {
     protected $storeId;
+
     protected $storePassword;
+
     protected $apiUrl;
+
     protected $validationUrl;
+
     protected $sandbox;
 
     public function __construct()
@@ -39,7 +43,7 @@ class SSLCommerzService
                 'fail_url' => config('payment.sslcommerz.fail_url'),
                 'cancel_url' => config('payment.sslcommerz.cancel_url'),
                 'ipn_url' => config('payment.sslcommerz.ipn_url'),
-                
+
                 // Customer Information
                 'cus_name' => $data['customer_name'],
                 'cus_email' => $data['customer_email'],
@@ -48,16 +52,16 @@ class SSLCommerzService
                 'cus_city' => $data['customer_city'] ?? 'Dhaka',
                 'cus_country' => $data['customer_country'] ?? 'Bangladesh',
                 'cus_postcode' => $data['customer_postcode'] ?? '1000',
-                
+
                 // Product Information
                 'product_name' => $data['product_name'] ?? 'Wallet Recharge',
                 'product_category' => $data['product_category'] ?? 'Service',
                 'product_profile' => $data['product_profile'] ?? 'general',
-                
+
                 // Shipment Information (Required)
                 'shipping_method' => 'NO',
                 'num_of_item' => 1,
-                
+
                 // Additional Information
                 'value_a' => $data['metadata']['user_id'] ?? null,
                 'value_b' => $data['metadata']['wallet_id'] ?? null,
@@ -73,7 +77,7 @@ class SSLCommerzService
                     ]);
             }
 
-            $response = Http::asForm()->post($this->apiUrl . '/gwprocess/v4/api.php', $postData);
+            $response = Http::asForm()->post($this->apiUrl.'/gwprocess/v4/api.php', $postData);
 
             if ($response->failed()) {
                 throw new Exception('SSLCommerz API request failed');
@@ -81,7 +85,7 @@ class SSLCommerzService
 
             $result = $response->json();
 
-            if (!isset($result['status']) || $result['status'] !== 'SUCCESS') {
+            if (! isset($result['status']) || $result['status'] !== 'SUCCESS') {
                 throw new Exception($result['failedreason'] ?? 'Payment initiation failed');
             }
 
@@ -135,7 +139,7 @@ class SSLCommerzService
 
             $result = $response->json();
 
-            if (!isset($result['status']) || $result['status'] !== 'VALID') {
+            if (! isset($result['status']) || $result['status'] !== 'VALID') {
                 throw new Exception('Transaction validation failed');
             }
 
@@ -191,7 +195,7 @@ class SSLCommerzService
                     ]);
             }
 
-            $response = Http::asForm()->post($this->apiUrl . '/validator/api/merchantTransIDvalidationAPI.php', $postData);
+            $response = Http::asForm()->post($this->apiUrl.'/validator/api/merchantTransIDvalidationAPI.php', $postData);
 
             if ($response->failed()) {
                 throw new Exception('Refund API request failed');
@@ -232,7 +236,7 @@ class SSLCommerzService
                 'store_passwd' => $this->storePassword,
             ];
 
-            $response = Http::get($this->apiUrl . '/validator/api/merchantTransIDvalidationAPI.php', $queryData);
+            $response = Http::get($this->apiUrl.'/validator/api/merchantTransIDvalidationAPI.php', $queryData);
 
             if ($response->failed()) {
                 throw new Exception('Status check API request failed');

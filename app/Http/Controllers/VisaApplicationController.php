@@ -118,10 +118,10 @@ class VisaApplicationController extends Controller
             ->where('is_active', true)
             ->first();
 
-        if (!$requirement) {
+        if (! $requirement) {
             return response()->json([
                 'error' => 'No visa requirements found for this country and visa type.',
-                'config' => null
+                'config' => null,
             ], 404);
         }
 
@@ -131,11 +131,11 @@ class VisaApplicationController extends Controller
             'country_code' => $requirement->country_code,
             'visa_type' => $requirement->visa_type,
             'visa_category' => $requirement->visa_category,
-            
+
             // Wizard metadata
             'estimated_time' => $this->getEstimatedTime($requirement->visa_type),
             'total_steps' => 5,
-            
+
             // Steps configuration
             'steps' => [
                 [
@@ -149,7 +149,7 @@ class VisaApplicationController extends Controller
                         ['name' => 'applicant_dob', 'label' => 'Date of Birth', 'type' => 'date', 'required' => true],
                         ['name' => 'nationality', 'label' => 'Nationality', 'type' => 'text', 'required' => true, 'placeholder' => 'Bangladeshi'],
                         ['name' => 'occupation', 'label' => 'Occupation', 'type' => 'text', 'required' => false, 'placeholder' => 'Software Engineer'],
-                    ]
+                    ],
                 ],
                 [
                     'id' => 2,
@@ -160,7 +160,7 @@ class VisaApplicationController extends Controller
                         ['name' => 'passport_issue_date', 'label' => 'Issue Date', 'type' => 'date', 'required' => true],
                         ['name' => 'passport_expiry_date', 'label' => 'Expiry Date', 'type' => 'date', 'required' => true],
                         ['name' => 'passport_issuing_country', 'label' => 'Issuing Country', 'type' => 'text', 'required' => true, 'placeholder' => 'Bangladesh'],
-                    ]
+                    ],
                 ],
                 [
                     'id' => 3,
@@ -174,9 +174,9 @@ class VisaApplicationController extends Controller
                         ['name' => 'visa_category', 'label' => 'Visa Category', 'type' => 'select', 'required' => true, 'options' => [
                             ['value' => 'single_entry', 'label' => 'Single Entry'],
                             ['value' => 'multiple_entry', 'label' => 'Multiple Entry'],
-                            ['value' => 'transit', 'label' => 'Transit']
+                            ['value' => 'transit', 'label' => 'Transit'],
                         ]],
-                    ]
+                    ],
                 ],
                 [
                     'id' => 4,
@@ -184,20 +184,20 @@ class VisaApplicationController extends Controller
                     'description' => 'Select processing type',
                     'fields' => [
                         ['name' => 'processing_type', 'label' => 'Processing Speed', 'type' => 'radio', 'required' => true, 'options' => [
-                            ['value' => 'standard', 'label' => 'Standard', 'description' => ($requirement->processing_days_standard ?? 15) . ' days', 'price' => $requirement->processing_fee_standard ?? 0],
-                            ['value' => 'express', 'label' => 'Express', 'description' => ($requirement->processing_days_express ?? 7) . ' days', 'price' => $requirement->processing_fee_express ?? 0],
-                            ['value' => 'urgent', 'label' => 'Urgent', 'description' => ($requirement->processing_days_urgent ?? 3) . ' days', 'price' => $requirement->processing_fee_urgent ?? 0],
+                            ['value' => 'standard', 'label' => 'Standard', 'description' => ($requirement->processing_days_standard ?? 15).' days', 'price' => $requirement->processing_fee_standard ?? 0],
+                            ['value' => 'express', 'label' => 'Express', 'description' => ($requirement->processing_days_express ?? 7).' days', 'price' => $requirement->processing_fee_express ?? 0],
+                            ['value' => 'urgent', 'label' => 'Urgent', 'description' => ($requirement->processing_days_urgent ?? 3).' days', 'price' => $requirement->processing_fee_urgent ?? 0],
                         ]],
-                    ]
+                    ],
                 ],
                 [
                     'id' => 5,
                     'title' => 'Review & Submit',
                     'description' => 'Confirm details before submission',
                     'is_review' => true,
-                ]
+                ],
             ],
-            
+
             // Requirements & info
             'requirements' => [
                 'documents' => $requirement->required_documents ?? [],
@@ -208,21 +208,21 @@ class VisaApplicationController extends Controller
                 'interview_required' => $requirement->interview_required,
                 'biometrics_required' => $requirement->biometrics_required,
             ],
-            
+
             // Fees
             'fees' => [
-                'government_fee' => (float)$requirement->government_fee,
-                'service_fee' => (float)$requirement->service_fee,
+                'government_fee' => (float) $requirement->government_fee,
+                'service_fee' => (float) $requirement->service_fee,
                 'currency' => $requirement->currency ?? 'BDT',
             ],
-            
+
             // Processing information
             'processing' => [
                 'standard_days' => $requirement->processing_days_standard ?? 15,
                 'express_days' => $requirement->processing_days_express ?? 7,
                 'urgent_days' => $requirement->processing_days_urgent ?? 3,
             ],
-            
+
             // Help text
             'help_text' => $requirement->general_requirements,
             'important_notes' => $requirement->important_notes,
@@ -281,7 +281,7 @@ class VisaApplicationController extends Controller
      */
     private function getEstimatedTime(string $visaType): string
     {
-        return match($visaType) {
+        return match ($visaType) {
             'tourist' => '20-30 minutes',
             'business' => '25-35 minutes',
             'student' => '40-50 minutes',
@@ -333,7 +333,7 @@ class VisaApplicationController extends Controller
         $validated['user_agent'] = $request->userAgent();
 
         // Set processing days based on type
-        $validated['processing_days'] = match($validated['processing_type']) {
+        $validated['processing_days'] = match ($validated['processing_type']) {
             'standard' => 15,
             'express' => 7,
             'urgent' => 3,
@@ -343,7 +343,7 @@ class VisaApplicationController extends Controller
 
         // 🔥 PLUGIN SYSTEM: Create ServiceApplication for agency assignment
         // Route different visa types to their respective services
-        $serviceSlug = match($validated['visa_type']) {
+        $serviceSlug = match ($validated['visa_type']) {
             'work' => 'work-visa',
             'student' => 'student-visa',
             'business' => 'business-visa',
@@ -351,7 +351,7 @@ class VisaApplicationController extends Controller
             'transit' => 'transit-visa',
             default => null, // Tourist and other types handled separately
         };
-        
+
         // Special handling for family visa type (if it exists as a field)
         if (isset($validated['family_visa']) && $validated['family_visa']) {
             $serviceSlug = 'family-visa';
@@ -424,8 +424,8 @@ class VisaApplicationController extends Controller
 
         // Upload file
         $file = $request->file('file');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $path = $file->storeAs('visa-documents/' . $application->id, $filename, 'public');
+        $filename = time().'_'.$file->getClientOriginalName();
+        $path = $file->storeAs('visa-documents/'.$application->id, $filename, 'public');
 
         $validated['visa_application_id'] = $application->id;
         $validated['file_path'] = $path;
@@ -505,7 +505,7 @@ class VisaApplicationController extends Controller
     {
         $common = ['passport', 'photo', 'bank_statement', 'travel_itinerary', 'accommodation_proof'];
 
-        $specific = match($visaType) {
+        $specific = match ($visaType) {
             'business' => ['invitation_letter', 'employment_letter'],
             'student' => ['education_certificate', 'admission_letter'],
             'work' => ['employment_letter', 'work_permit'],

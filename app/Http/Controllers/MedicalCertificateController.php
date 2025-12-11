@@ -17,7 +17,7 @@ class MedicalCertificateController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $certificate = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $certificate = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($certificate, 'medical-certificate', $validated);
 
         return response()->json(['message' => 'Medical certificate request created']);

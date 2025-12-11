@@ -118,7 +118,7 @@ const leaveImpersonation = () => {
                                             <button
                                                 type="button"
                                                 class="inline-flex items-center rounded-md px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-                                                :class="{ 'border-b-2 border-indigo-400 text-gray-900': route().current('services.*') || route().current('user.applications.*') }"
+                                                :class="{ 'border-b-2 border-emerald-400 text-gray-900': route().current('services.*') || route().current('user.applications.*') }"
                                             >
                                                 <Cog6ToothIcon class="w-5 h-5 mr-1.5" />
                                                 Services
@@ -134,7 +134,7 @@ const leaveImpersonation = () => {
                                                 </template>
                                                 Browse Services
                                             </DropdownLink>
-                                            <DropdownLink :href="route('user.applications.index')" icon-class="text-brand-red-600">
+                                            <DropdownLink :href="route('user.applications.index')" icon-class="text-emerald-600">
                                                 <template #icon>
                                                     <ClipboardDocumentCheckIcon class="w-5 h-5" />
                                                 </template>
@@ -186,13 +186,13 @@ const leaveImpersonation = () => {
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink :href="route('profile.edit')" icon-class="text-brand-red-600">
+                                        <DropdownLink :href="route('profile.edit')" icon-class="text-emerald-600">
                                             <template #icon>
                                                 <UserIcon class="w-5 h-5" />
                                             </template>
                                             Profile
                                         </DropdownLink>
-                                        <DropdownLink :href="route('profile.assessment.show')" icon-class="text-heritage-600">
+                                        <DropdownLink :href="route('profile.assessment.show')" icon-class="text-purple-600">
                                             <template #icon>
                                                 <SparklesIcon class="w-5 h-5" />
                                             </template>

@@ -50,7 +50,7 @@ class StudentVisa extends Model
 
         static::creating(function ($studentVisa) {
             if (empty($studentVisa->application_reference)) {
-                $studentVisa->application_reference = 'SV' . strtoupper(uniqid());
+                $studentVisa->application_reference = 'SV'.strtoupper(uniqid());
             }
         });
     }
@@ -127,15 +127,15 @@ class StudentVisa extends Model
     public function getEducationInfoAttribute(): string
     {
         $parts = [];
-        
+
         if ($this->education_level) {
             $parts[] = $this->education_level;
         }
-        
+
         if ($this->study_field) {
-            $parts[] = 'in ' . $this->study_field;
+            $parts[] = 'in '.$this->study_field;
         }
-        
+
         return implode(' ', $parts) ?: 'Not specified';
     }
 
@@ -145,15 +145,15 @@ class StudentVisa extends Model
     public function getInstitutionInfoAttribute(): string
     {
         $parts = [];
-        
+
         if ($this->course_name) {
             $parts[] = $this->course_name;
         }
-        
+
         if ($this->institution_name) {
-            $parts[] = 'at ' . $this->institution_name;
+            $parts[] = 'at '.$this->institution_name;
         }
-        
+
         return implode(' ', $parts) ?: 'Institution pending';
     }
 }

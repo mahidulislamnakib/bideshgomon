@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ServiceModule;
 use App\Models\ServiceFormField;
+use App\Models\ServiceModule;
 use App\Services\DataMapperService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -61,7 +61,7 @@ class AdminServiceFieldController extends Controller
         $validated = $request->validate([
             'field_name' => 'required|string|max:255',
             'field_label' => 'required|string|max:255',
-            'field_type' => 'required|string|in:' . implode(',', array_keys(ServiceFormField::FIELD_TYPES)),
+            'field_type' => 'required|string|in:'.implode(',', array_keys(ServiceFormField::FIELD_TYPES)),
             'placeholder' => 'nullable|string',
             'help_text' => 'nullable|string',
             'default_value' => 'nullable|string',
@@ -91,7 +91,7 @@ class AdminServiceFieldController extends Controller
         }
 
         // Set default sort_order if not provided
-        if (!isset($validated['sort_order'])) {
+        if (! isset($validated['sort_order'])) {
             $maxOrder = $service->formFields()->max('sort_order') ?? 0;
             $validated['sort_order'] = $maxOrder + 1;
         }
@@ -129,7 +129,7 @@ class AdminServiceFieldController extends Controller
         $validated = $request->validate([
             'field_name' => 'required|string|max:255',
             'field_label' => 'required|string|max:255',
-            'field_type' => 'required|string|in:' . implode(',', array_keys(ServiceFormField::FIELD_TYPES)),
+            'field_type' => 'required|string|in:'.implode(',', array_keys(ServiceFormField::FIELD_TYPES)),
             'placeholder' => 'nullable|string',
             'help_text' => 'nullable|string',
             'default_value' => 'nullable|string',
@@ -202,8 +202,8 @@ class AdminServiceFieldController extends Controller
     public function duplicate(ServiceModule $service, ServiceFormField $field)
     {
         $newField = $field->replicate();
-        $newField->field_name = $field->field_name . '_copy';
-        $newField->field_label = $field->field_label . ' (Copy)';
+        $newField->field_name = $field->field_name.'_copy';
+        $newField->field_label = $field->field_label.' (Copy)';
         $newField->sort_order = $service->formFields()->max('sort_order') + 1;
         $newField->save();
 
@@ -216,7 +216,7 @@ class AdminServiceFieldController extends Controller
     public function toggleStatus(ServiceModule $service, ServiceFormField $field)
     {
         $field->update([
-            'is_active' => !$field->is_active,
+            'is_active' => ! $field->is_active,
         ]);
 
         return back()->with('success', 'Field status updated successfully.');
@@ -265,12 +265,12 @@ class AdminServiceFieldController extends Controller
         $errors = [];
 
         // Check if field_name is valid PHP variable name
-        if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $validated['field_name'])) {
+        if (! preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $validated['field_name'])) {
             $errors['field_name'] = 'Field name must be a valid variable name (letters, numbers, underscores only)';
         }
 
         // Validate Laravel validation rules
-        if (!empty($validated['validation_rules'])) {
+        if (! empty($validated['validation_rules'])) {
             try {
                 validator(['test' => 'value'], ['test' => $validated['validation_rules']]);
             } catch (\Exception $e) {
@@ -279,13 +279,13 @@ class AdminServiceFieldController extends Controller
         }
 
         // Check if profile map key exists (basic check)
-        if (!empty($validated['profile_map_key'])) {
+        if (! empty($validated['profile_map_key'])) {
             $availableKeys = collect($this->dataMapper->getAvailableProfileFields())
                 ->flatten(1)
                 ->pluck('key')
                 ->toArray();
-            
-            if (!in_array($validated['profile_map_key'], $availableKeys)) {
+
+            if (! in_array($validated['profile_map_key'], $availableKeys)) {
                 $errors['profile_map_key'] = 'Profile field mapping not found in available fields';
             }
         }

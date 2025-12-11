@@ -20,7 +20,7 @@ class VisaAppointment extends Model
         'cancelled_at', 'cancellation_reason', 'rescheduled_from',
         'original_datetime', 'reschedule_reason', 'reminder_sent',
         'reminder_sent_at', 'sms_reminder', 'email_reminder', 'notes',
-        'outcome', 'metadata'
+        'outcome', 'metadata',
     ];
 
     protected $casts = [
@@ -42,10 +42,10 @@ class VisaAppointment extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($appointment) {
             if (empty($appointment->appointment_reference)) {
-                $appointment->appointment_reference = 'APT-' . strtoupper(uniqid());
+                $appointment->appointment_reference = 'APT-'.strtoupper(uniqid());
             }
         });
     }
@@ -95,7 +95,7 @@ class VisaAppointment extends Model
     public function scopeUpcoming($query)
     {
         return $query->whereIn('status', ['scheduled', 'confirmed'])
-                    ->where('appointment_datetime', '>', now());
+            ->where('appointment_datetime', '>', now());
     }
 
     public function scopePast($query)
@@ -112,16 +112,16 @@ class VisaAppointment extends Model
     {
         return $query->whereBetween('appointment_datetime', [
             now()->startOfWeek(),
-            now()->endOfWeek()
+            now()->endOfWeek(),
         ]);
     }
 
     public function scopeNeedingReminder($query)
     {
         return $query->whereIn('status', ['scheduled', 'confirmed'])
-                    ->where('reminder_sent', false)
-                    ->where('appointment_datetime', '<=', now()->addDay())
-                    ->where('appointment_datetime', '>', now());
+            ->where('reminder_sent', false)
+            ->where('appointment_datetime', '<=', now()->addDay())
+            ->where('appointment_datetime', '>', now());
     }
 
     // Accessors
@@ -154,7 +154,7 @@ class VisaAppointment extends Model
 
     public function getIsUpcomingAttribute()
     {
-        return in_array($this->status, ['scheduled', 'confirmed']) && 
+        return in_array($this->status, ['scheduled', 'confirmed']) &&
                $this->appointment_datetime > now();
     }
 
@@ -185,14 +185,14 @@ class VisaAppointment extends Model
         }
 
         $diff = now()->diff($this->appointment_datetime);
-        
+
         if ($diff->days > 0) {
-            return $diff->days . ' day' . ($diff->days > 1 ? 's' : '');
+            return $diff->days.' day'.($diff->days > 1 ? 's' : '');
         } elseif ($diff->h > 0) {
-            return $diff->h . ' hour' . ($diff->h > 1 ? 's' : '');
+            return $diff->h.' hour'.($diff->h > 1 ? 's' : '');
         }
-        
-        return $diff->i . ' minute' . ($diff->i > 1 ? 's' : '');
+
+        return $diff->i.' minute'.($diff->i > 1 ? 's' : '');
     }
 
     public function getFormattedDatetimeAttribute()

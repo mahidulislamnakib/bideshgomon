@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\CvTemplate;
 use App\Models\UserCv;
-use App\Models\Country;
+use App\Services\CvBuilderService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Str;
 
 class CvBuilderController extends Controller
 {
+    protected CvBuilderService $cvBuilderService;
+
+    public function __construct(CvBuilderService $cvBuilderService)
+    {
+        $this->cvBuilderService = $cvBuilderService;
+    }
+
     /**
      * Display CV templates listing
      */
@@ -51,92 +57,10 @@ class CvBuilderController extends Controller
         $templateId = $request->query('template');
         $template = CvTemplate::findOrFail($templateId);
 
-        // Get user's profile data to pre-fill
-        $user = auth()->user()->load([
-            'profile',
-            'educations',
-            'workExperiences',
-            'skills',
-            'languages',
-            'phoneNumbers',
-            'wallet'
-        ]);
+        $user = auth()->user();
 
-        // Get user profile for additional data
-        $userProfile = $user->profile;
-
-        // Transform education data for CV format
-        $educationData = $user->educations->map(function ($edu) {
-            return [
-                'degree' => $edu->degree ?? '',
-                'institution' => $edu->institution_name ?? '',
-                'field_of_study' => $edu->field_of_study ?? '',
-                'start_date' => $edu->start_date ? date('Y-m', strtotime($edu->start_date)) : '',
-                'end_date' => $edu->end_date ? date('Y-m', strtotime($edu->end_date)) : '',
-                'grade' => $edu->gpa_or_grade ?? '',
-                'description' => $edu->courses_completed ?? '',
-            ];
-        })->toArray();
-
-        // Transform work experience data
-        $experienceData = $user->workExperiences->map(function ($exp) {
-            return [
-                'job_title' => $exp->job_title ?? '',
-                'company' => $exp->company_name ?? '',
-                'location' => $exp->location ?? '',
-                'start_date' => $exp->start_date ? date('Y-m', strtotime($exp->start_date)) : '',
-                'end_date' => $exp->is_current ? '' : ($exp->end_date ? date('Y-m', strtotime($exp->end_date)) : ''),
-                'is_current' => $exp->is_current ?? false,
-                'description' => $exp->description ?? '',
-            ];
-        })->toArray();
-
-        // Transform skills data
-        $skillsData = $user->skills->map(function ($skill) {
-            return [
-                'name' => $skill->name ?? '',
-                'level' => strtolower($skill->pivot->proficiency_level ?? 'intermediate'),
-            ];
-        })->toArray();
-
-        // Transform languages data
-        $languagesData = $user->languages->map(function ($lang) {
-            return [
-                'language' => $lang->language->name ?? $lang->language ?? '',
-                'proficiency' => strtolower($lang->proficiency_level ?? 'intermediate'),
-            ];
-        })->toArray();
-
-        // Get certifications from profile
-        $certificationsData = [];
-        if ($userProfile && $userProfile->certifications) {
-            $certificationsData = is_array($userProfile->certifications) 
-                ? $userProfile->certifications 
-                : json_decode($userProfile->certifications, true) ?? [];
-        }
-
-        // Primary phone number
-        $primaryPhone = $user->phoneNumbers->where('is_primary', true)->first();
-        $phoneNumber = '';
-        if ($primaryPhone) {
-            $phoneNumber = $primaryPhone->phone_number;
-        } elseif ($user->phoneNumbers->isNotEmpty()) {
-            // If no primary phone, get the first phone number
-            $phoneNumber = $user->phoneNumbers->first()->phone_number;
-        }
-
-        // Pre-fill data from profile
-        $profileData = [
-            'full_name' => $userProfile ? trim(($userProfile->first_name ?? '') . ' ' . ($userProfile->middle_name ?? '') . ' ' . ($userProfile->last_name ?? '')) : $user->name,
-            'email' => $user->email,
-            'phone' => $phoneNumber,
-            'address' => $userProfile ? ($userProfile->present_address_line ?? '') : '',
-            'city' => $userProfile ? ($userProfile->present_district ?? '') : '',
-            'country_id' => $userProfile ? ($userProfile->country_id ?? null) : null,
-            'linkedin_url' => $userProfile && $userProfile->social_links ? ($userProfile->social_links['linkedin'] ?? '') : '',
-            'website_url' => $userProfile && $userProfile->social_links ? ($userProfile->social_links['website'] ?? '') : '',
-            'professional_summary' => $userProfile ? ($userProfile->bio ?? '') : '',
-        ];
+        // Get profile data from service
+        $profileData = $this->cvBuilderService->getUserProfileData($user);
 
         $countries = Country::orderBy('name')->get();
 
@@ -144,12 +68,7 @@ class CvBuilderController extends Controller
             'template' => $template,
             'user' => $user,
             'countries' => $countries,
-            'profileData' => $profileData,
-            'profileEducation' => $educationData,
-            'profileExperience' => $experienceData,
-            'profileSkills' => $skillsData,
-            'profileLanguages' => $languagesData,
-            'profileCertifications' => $certificationsData,
+            ...$profileData,  // Spread the profile data array
         ]);
     }
 
@@ -177,41 +96,16 @@ class CvBuilderController extends Controller
             'certifications' => 'nullable|array',
         ]);
 
-        // Check if premium template and process payment
-        $template = CvTemplate::findOrFail($validated['cv_template_id']);
-        if ($template->is_premium && $template->price > 0) {
-            $user = auth()->user();
-            $wallet = $user->wallet;
-            
-            if (!$wallet || $wallet->balance < $template->price) {
-                return back()->withErrors([
-                    'payment' => 'Insufficient wallet balance. Please add funds to your wallet.'
-                ]);
-            }
-            
-            // Deduct payment using WalletService
-            $walletService = app(\App\Services\WalletService::class);
-            try {
-                $walletService->debitWallet(
-                    $wallet,
-                    (float) $template->price,
-                    "Payment for {$template->name} CV Template",
-                    'premium_cv_template',
-                    $template->id
-                );
-            } catch (\Exception $e) {
-                return back()->withErrors([
-                    'payment' => 'Payment failed: ' . $e->getMessage()
-                ]);
-            }
+        try {
+            $cv = $this->cvBuilderService->createCv($validated, auth()->user());
+
+            return redirect()->route('cv-builder.my-cvs')
+                ->with('success', 'CV created successfully!');
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'payment' => $e->getMessage(),
+            ])->withInput();
         }
-
-        $validated['user_id'] = auth()->user()->id;
-
-        $cv = UserCv::create($validated);
-
-        return redirect()->route('cv-builder.my-cvs')
-            ->with('success', 'CV created successfully!');
     }
 
     /**
@@ -276,7 +170,7 @@ class CvBuilderController extends Controller
             'references' => 'nullable|array',
         ]);
 
-        $cv->update($validated);
+        $this->cvBuilderService->updateCv($cv, $validated);
 
         return redirect()->back()->with('success', 'CV updated successfully!');
     }
@@ -290,7 +184,7 @@ class CvBuilderController extends Controller
             ->forUser(auth()->id())
             ->firstOrFail();
 
-        $cv->delete();
+        $this->cvBuilderService->deleteCv($cv);
 
         return redirect()->route('cv-builder.my-cvs')
             ->with('success', 'CV deleted successfully!');
@@ -322,29 +216,41 @@ class CvBuilderController extends Controller
             ->forUser(auth()->user()->id)
             ->findOrFail($id);
 
-        // Get template for styling
-        $template = $cv->cvTemplate;
-        
-        // Generate PDF
-        $pdf = Pdf::loadView('cv-pdf-template', [
-            'cv' => $cv,
-            'template' => $template,
-        ]);
-        
-        // Set paper size and orientation
-        $pdf->setPaper('A4', 'portrait');
-        
-        // Set options for better rendering
-        $pdf->setOption('isHtml5ParserEnabled', true);
-        $pdf->setOption('isRemoteEnabled', true);
-        
-        // Increment download count
-        $cv->incrementDownloadCount();
-        
-        // Generate filename
-        $filename = Str::slug($cv->title) . '-' . date('Y-m-d') . '.pdf';
-        
-        // Download PDF with proper headers
-        return $pdf->download($filename);
+        return $this->cvBuilderService->downloadCvPdf($cv);
+    }
+
+    /**
+     * Duplicate an existing CV
+     */
+    public function duplicate($id)
+    {
+        $cv = UserCv::where('id', $id)
+            ->forUser(auth()->id())
+            ->firstOrFail();
+
+        $newCv = $this->cvBuilderService->duplicateCv($cv, auth()->user());
+
+        return redirect()->route('cv-builder.edit', $newCv->id)
+            ->with('success', 'CV duplicated successfully! You can now edit it.');
+    }
+
+    /**
+     * Toggle CV sharing (public/private)
+     */
+    public function toggleShare($id)
+    {
+        $cv = UserCv::where('id', $id)
+            ->forUser(auth()->id())
+            ->firstOrFail();
+
+        if ($cv->is_public) {
+            $this->cvBuilderService->makePrivate($cv);
+            $message = 'CV is now private';
+        } else {
+            $this->cvBuilderService->makePublic($cv);
+            $message = 'CV is now public and shareable';
+        }
+
+        return back()->with('success', $message);
     }
 }

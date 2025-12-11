@@ -27,8 +27,8 @@ class Setting extends Model
     {
         return Cache::remember("setting.{$key}", 3600, function () use ($key, $default) {
             $setting = self::where('key', $key)->first();
-            
-            if (!$setting) {
+
+            if (! $setting) {
                 return $default;
             }
 
@@ -51,9 +51,9 @@ class Setting extends Model
         );
 
         Cache::forget("setting.{$key}");
-        Cache::forget("settings.all");
+        Cache::forget('settings.all');
         Cache::forget("settings.group.{$group}");
-        Cache::forget("settings.public");
+        Cache::forget('settings.public');
 
         return $setting;
     }
@@ -103,7 +103,7 @@ class Setting extends Model
     {
         Cache::forget('settings.all');
         Cache::forget('settings.public');
-        
+
         foreach (self::pluck('key') as $key) {
             Cache::forget("setting.{$key}");
         }
@@ -144,16 +144,16 @@ class Setting extends Model
 
         static::saved(function ($setting) {
             Cache::forget("setting.{$setting->key}");
-            Cache::forget("settings.all");
+            Cache::forget('settings.all');
             Cache::forget("settings.group.{$setting->group}");
-            Cache::forget("settings.public");
+            Cache::forget('settings.public');
         });
 
         static::deleted(function ($setting) {
             Cache::forget("setting.{$setting->key}");
-            Cache::forget("settings.all");
+            Cache::forget('settings.all');
             Cache::forget("settings.group.{$setting->group}");
-            Cache::forget("settings.public");
+            Cache::forget('settings.public');
         });
     }
 }

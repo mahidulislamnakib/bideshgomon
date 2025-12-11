@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\DataManagement;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Traits\BulkUploadable;
+use App\Http\Controllers\Controller;
 use App\Models\VisaType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,8 +15,11 @@ class VisaTypeController extends Controller
     use BulkUploadable;
 
     protected $entityName = 'Visa Type';
+
     protected $entityNamePlural = 'Visa Types';
+
     protected $indexRoute = 'admin.data.visa-types.index';
+
     protected $bulkUploadView = 'Admin/DataManagement/VisaTypes/BulkUpload';
 
     public function index(Request $request)
@@ -25,10 +28,10 @@ class VisaTypeController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('slug', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
             });
         }
 
@@ -64,10 +67,12 @@ class VisaTypeController extends Controller
 
         try {
             VisaType::create($validated);
+
             return redirect()->route('admin.data.visa-types.index')
                 ->with('success', 'Visa type created successfully.');
         } catch (\Exception $e) {
             Log::error('Visa type creation failed', ['error' => $e->getMessage()]);
+
             return back()->withInput()->with('error', 'Failed to create visa type.');
         }
     }
@@ -90,10 +95,12 @@ class VisaTypeController extends Controller
 
         try {
             $visaType->update($validated);
+
             return redirect()->route('admin.data.visa-types.index')
                 ->with('success', 'Visa type updated successfully.');
         } catch (\Exception $e) {
             Log::error('Visa type update failed', ['error' => $e->getMessage()]);
+
             return back()->withInput()->with('error', 'Failed to update visa type.');
         }
     }
@@ -102,10 +109,12 @@ class VisaTypeController extends Controller
     {
         try {
             $visaType->delete();
+
             return redirect()->route('admin.data.visa-types.index')
                 ->with('success', 'Visa type deleted successfully.');
         } catch (\Exception $e) {
             Log::error('Visa type deletion failed', ['error' => $e->getMessage()]);
+
             return back()->with('error', 'Failed to delete visa type.');
         }
     }
@@ -113,10 +122,12 @@ class VisaTypeController extends Controller
     public function toggleStatus(VisaType $visaType)
     {
         try {
-            $visaType->update(['is_active' => !$visaType->is_active]);
+            $visaType->update(['is_active' => ! $visaType->is_active]);
+
             return back()->with('success', 'Visa type status updated successfully.');
         } catch (\Exception $e) {
             Log::error('Visa type status toggle failed', ['error' => $e->getMessage()]);
+
             return back()->with('error', 'Failed to update status.');
         }
     }
@@ -154,6 +165,7 @@ class VisaTypeController extends Controller
         if (isset($data['is_active'])) {
             $data['is_active'] = in_array(strtolower($data['is_active']), ['true', '1', 'yes']);
         }
+
         return $data;
     }
 
@@ -168,9 +180,9 @@ class VisaTypeController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('description', 'like', "%{$search}%");
             });
         }
 

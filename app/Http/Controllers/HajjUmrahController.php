@@ -18,7 +18,7 @@ class HajjUmrahController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        $package = (object)['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
+        $package = (object) ['id' => uniqid(), 'user_id' => $request->user()->id ?? 1] + $validated;
         $this->createServiceApplicationFor($package, 'hajj-umrah', $validated);
 
         return response()->json(['message' => 'Hajj/Umrah package booking created']);

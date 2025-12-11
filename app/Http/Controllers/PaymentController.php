@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\PaymentGatewayService;
 use App\Models\PaymentTransaction;
+use App\Services\PaymentGatewayService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -37,7 +37,7 @@ class PaymentController extends Controller
             'gateway_fee' => $validated['amount'] * 0.015, // 1.5% fee
         ]));
 
-        if (!$result['success']) {
+        if (! $result['success']) {
             return back()->with('error', $result['message']);
         }
 
@@ -54,7 +54,7 @@ class PaymentController extends Controller
         if ($result['success']) {
             $transaction = $result['transaction'] ?? null;
             $user = auth()->user();
-            
+
             return Inertia::render('Success/PaymentSuccess', [
                 'transaction' => [
                     'id' => $transaction->id ?? null,
@@ -83,10 +83,10 @@ class PaymentController extends Controller
     {
         $transactionId = $request->input('tran_id');
         $amount = null;
-        
+
         if ($transactionId) {
             $transaction = PaymentTransaction::where('transaction_id', $transactionId)->first();
-            
+
             if ($transaction) {
                 $amount = $transaction->amount;
                 $transaction->markAsFailed(
@@ -109,10 +109,10 @@ class PaymentController extends Controller
     {
         $transactionId = $request->input('tran_id');
         $amount = null;
-        
+
         if ($transactionId) {
             $transaction = PaymentTransaction::where('transaction_id', $transactionId)->first();
-            
+
             if ($transaction) {
                 $amount = $transaction->amount;
                 $transaction->markAsCancelled('User cancelled the payment');
@@ -155,7 +155,7 @@ class PaymentController extends Controller
             'gateway_fee' => $validated['amount'] * 0.018, // 1.8% fee
         ]));
 
-        if (!$result['success']) {
+        if (! $result['success']) {
             return back()->with('error', $result['message']);
         }
 
@@ -207,7 +207,7 @@ class PaymentController extends Controller
             'gateway_fee' => $validated['amount'] * 0.016, // 1.6% fee
         ]));
 
-        if (!$result['success']) {
+        if (! $result['success']) {
             return back()->with('error', $result['message']);
         }
 

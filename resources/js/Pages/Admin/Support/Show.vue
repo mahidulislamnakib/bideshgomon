@@ -48,7 +48,7 @@
                             <select
                                 v-model="assignForm.assigned_to"
                                 @change="assignTicket"
-                                class="rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600 text-sm"
+                                class="border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm"
                                 :disabled="assignForm.processing"
                             >
                                 <option value="">Assign to...</option>
@@ -61,7 +61,7 @@
                             <select
                                 v-model="priorityForm.priority"
                                 @change="updatePriority"
-                                class="rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600 text-sm"
+                                class="border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm"
                                 :disabled="priorityForm.processing"
                             >
                                 <option value="low">Low Priority</option>
@@ -74,7 +74,7 @@
                             <select
                                 v-model="statusForm.status"
                                 @change="updateStatus"
-                                class="rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600 text-sm"
+                                class="border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm"
                                 :disabled="statusForm.processing"
                             >
                                 <option value="open">Open</option>
@@ -198,7 +198,7 @@
                                 <textarea
                                     v-model="replyForm.message"
                                     rows="4"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600"
+                                    class="w-full border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                     :class="{ 'border-red-500': replyForm.errors.message }"
                                     placeholder="Type your reply..."
                                     required
@@ -211,7 +211,7 @@
                                     <input
                                         v-model="replyForm.internal_note"
                                         type="checkbox"
-                                        class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600"
+                                        class="border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-indigo-600"
                                     />
                                     <span class="ml-2 text-sm text-gray-700">Internal Note (not visible to user)</span>
                                 </label>

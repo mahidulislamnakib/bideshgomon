@@ -25,7 +25,7 @@ return new class extends Migration
             $table->decimal('urgent_processing_fee', 10, 2)->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             // Indexes
             $table->index(['country_id', 'profession', 'visa_type']);
             $table->index('is_active');

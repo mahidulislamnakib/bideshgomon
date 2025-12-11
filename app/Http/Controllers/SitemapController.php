@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Spatie\Sitemap\Sitemap;
-use Spatie\Sitemap\Tags\Url;
+use App\Models\BlogPost;
+use App\Models\Country;
 use App\Models\Service;
 use App\Models\ServiceModule;
-use App\Models\Country;
-use App\Models\BlogPost;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
 
 class SitemapController extends Controller
 {
@@ -18,16 +17,16 @@ class SitemapController extends Controller
 
         // Add static pages
         $this->addStaticPages($sitemap);
-        
+
         // Add services
         $this->addServices($sitemap);
-        
+
         // Add service modules
         $this->addServiceModules($sitemap);
-        
+
         // Add countries
         $this->addCountries($sitemap);
-        
+
         // Add blog posts (if exists)
         $this->addBlogPosts($sitemap);
 
@@ -136,7 +135,7 @@ class SitemapController extends Controller
     protected function addBlogPosts($sitemap)
     {
         // Check if BlogPost model exists
-        if (!class_exists(BlogPost::class)) {
+        if (! class_exists(BlogPost::class)) {
             return;
         }
 

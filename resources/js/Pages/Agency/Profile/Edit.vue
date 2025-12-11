@@ -64,18 +64,18 @@
                                 <input 
                                     v-model="form.license_expiry" 
                                     type="date" 
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
+                                    class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" 
                                 />
                             </div>
 
                             <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Description *</label>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Description *</label>
                                 <textarea 
                                     v-model="form.description" 
                                     rows="4" 
                                     required
                                     placeholder="Describe your agency's services and expertise..."
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                    class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
                                 ></textarea>
                                 <p v-if="form.errors.description" class="mt-1 text-sm text-red-600">{{ form.errors.description }}</p>
                             </div>
@@ -241,32 +241,32 @@
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Address *</label>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Address *</label>
                                 <textarea 
                                     v-model="form.address" 
                                     rows="2" 
                                     required
                                     placeholder="Street address, district, division"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                    class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
                                 ></textarea>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">City *</label>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">City *</label>
                                 <input 
                                     v-model="form.city" 
                                     type="text" 
                                     required
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
+                                    class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" 
                                 />
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Postal Code</label>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Postal Code</label>
                                 <input 
                                     v-model="form.postal_code" 
                                     type="text" 
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
+                                    class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" 
                                 />
                             </div>
                         </div>
@@ -280,22 +280,22 @@
                         </h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Facebook URL</label>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Facebook URL</label>
                                 <input 
                                     v-model="form.facebook_url" 
                                     type="url" 
                                     placeholder="https://facebook.com/yourpage"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
+                                    class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" 
                                 />
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">LinkedIn URL</label>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">LinkedIn URL</label>
                                 <input 
                                     v-model="form.linkedin_url" 
                                     type="url" 
                                     placeholder="https://linkedin.com/company/yourcompany"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600" 
+                                    class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" 
                                 />
                             </div>
 

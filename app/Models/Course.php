@@ -82,9 +82,9 @@ class Course extends Model
     {
         return $query->where(function ($q) use ($search) {
             $q->where('name', 'like', "%{$search}%")
-              ->orWhere('code', 'like', "%{$search}%")
-              ->orWhere('description', 'like', "%{$search}%")
-              ->orWhere('subject', 'like', "%{$search}%");
+                ->orWhere('code', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%")
+                ->orWhere('subject', 'like', "%{$search}%");
         });
     }
 
@@ -101,21 +101,22 @@ class Course extends Model
     public function scopeAvailable($query)
     {
         return $query->where('is_active', true)
-                     ->where(function ($q) {
-                         $q->whereNull('enrollment_capacity')
-                           ->orWhereRaw('current_enrollment < enrollment_capacity');
-                     });
+            ->where(function ($q) {
+                $q->whereNull('enrollment_capacity')
+                    ->orWhereRaw('current_enrollment < enrollment_capacity');
+            });
     }
 
     // Accessors
     public function getFormattedTuitionAttribute()
     {
-        if (!$this->tuition_fee) {
+        if (! $this->tuition_fee) {
             return 'Contact for pricing';
         }
 
-        $symbol = $this->currency === 'USD' ? '$' : $this->currency . ' ';
-        return $symbol . number_format((float)$this->tuition_fee, 0);
+        $symbol = $this->currency === 'USD' ? '$' : $this->currency.' ';
+
+        return $symbol.number_format((float) $this->tuition_fee, 0);
     }
 
     public function getFormattedDurationAttribute()
@@ -125,21 +126,21 @@ class Course extends Model
         $remainingMonths = $months % 12;
 
         if ($years > 0 && $remainingMonths > 0) {
-            return "{$years} year" . ($years > 1 ? 's' : '') . " {$remainingMonths} month" . ($remainingMonths > 1 ? 's' : '');
+            return "{$years} year".($years > 1 ? 's' : '')." {$remainingMonths} month".($remainingMonths > 1 ? 's' : '');
         } elseif ($years > 0) {
-            return "{$years} year" . ($years > 1 ? 's' : '');
+            return "{$years} year".($years > 1 ? 's' : '');
         } else {
-            return "{$months} month" . ($months > 1 ? 's' : '');
+            return "{$months} month".($months > 1 ? 's' : '');
         }
     }
 
     public function getAvailabilityStatusAttribute()
     {
-        if (!$this->is_active) {
+        if (! $this->is_active) {
             return 'Inactive';
         }
 
-        if (!$this->enrollment_capacity) {
+        if (! $this->enrollment_capacity) {
             return 'Open';
         }
 

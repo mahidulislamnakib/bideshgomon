@@ -19,41 +19,41 @@ return new class extends Migration
                 'global_single',        // One agency worldwide (Air Tickets)
                 'multi_country',        // Multi-country specialists (Jobs)
                 'hybrid',               // API + Agency fallback (Hotels)
-                'peer_to_peer'          // No agency needed (CV Builder)
+                'peer_to_peer',          // No agency needed (CV Builder)
             ])->default('competitive')
                 ->after('service_type')
                 ->comment('How agencies are assigned');
-            
+
             $table->boolean('allows_multiple_agencies')
                 ->default(true)
                 ->after('assignment_model')
                 ->comment('Can multiple agencies handle same scope?');
-            
+
             $table->boolean('requires_admin_approval')
                 ->default(false)
                 ->after('allows_multiple_agencies')
                 ->comment('Admin must approve agency assignments?');
-            
+
             $table->boolean('resource_locking')
                 ->default(false)
                 ->after('requires_admin_approval')
                 ->comment('First agency locks resource (universities)?');
-            
+
             $table->boolean('requires_agency')
                 ->default(true)
                 ->after('resource_locking')
                 ->comment('Does this service need agency processing?');
-            
+
             $table->decimal('platform_commission_rate', 5, 2)
                 ->default(15.00)
                 ->after('base_price')
                 ->comment('Default platform commission %');
-            
+
             $table->integer('quote_timeout_hours')
                 ->default(24)
                 ->after('platform_commission_rate')
                 ->comment('Hours for agencies to respond with quotes');
-            
+
             $table->integer('min_quotes_required')
                 ->default(1)
                 ->after('quote_timeout_hours')

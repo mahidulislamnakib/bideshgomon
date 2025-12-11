@@ -91,7 +91,7 @@ class ProfileAssessment extends Model
      */
     public function getRiskColorAttribute(): string
     {
-        return match($this->risk_level) {
+        return match ($this->risk_level) {
             'low' => 'green',
             'medium' => 'yellow',
             'high' => 'red',
@@ -112,6 +112,6 @@ class ProfileAssessment extends Model
      */
     public function needsUpdate(): bool
     {
-        return !$this->assessed_at || $this->assessed_at->lt(now()->subDays(7));
+        return ! $this->assessed_at || $this->assessed_at->lt(now()->subDays(7));
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ServiceApplication;
 use App\Models\ServiceCategory;
 use App\Models\ServiceModule;
-use App\Models\ServiceApplication;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -20,42 +20,42 @@ class ServiceModuleController extends Controller
         $categories = ServiceCategory::with(['modules' => function ($query) {
             $query->withCount(['applications', 'reviews']);
         }])
-        ->ordered()
-        ->get()
-        ->map(function ($category) {
-            return [
-                'id' => $category->id,
-                'name' => $category->name,
-                'slug' => $category->slug,
-                'icon' => $category->icon,
-                'color' => $category->color,
-                'description' => $category->description,
-                'is_active' => $category->is_active,
-                'modules_count' => $category->modules->count(),
-                'active_modules_count' => $category->modules->where('is_active', true)->count(),
-                'modules' => $category->modules->map(function ($module) {
-                    return [
-                        'id' => $module->id,
-                        'name' => $module->name,
-                        'slug' => $module->slug,
-                        'short_description' => $module->short_description,
-                        'is_active' => $module->is_active,
-                        'is_featured' => $module->is_featured,
-                        'coming_soon' => $module->coming_soon,
-                        'formatted_price' => $module->formatted_price,
-                        'price_type' => $module->price_type,
-                        'base_price' => $module->base_price,
-                        'currency' => $module->currency,
-                        'applications_count' => $module->applications_count,
-                        'reviews_count' => $module->reviews_count,
-                        'completion_rate' => $module->completion_rate,
-                        'views_count' => $module->views_count,
-                        'route_prefix' => $module->route_prefix,
-                        'controller' => $module->controller,
-                    ];
-                }),
-            ];
-        });
+            ->ordered()
+            ->get()
+            ->map(function ($category) {
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'slug' => $category->slug,
+                    'icon' => $category->icon,
+                    'color' => $category->color,
+                    'description' => $category->description,
+                    'is_active' => $category->is_active,
+                    'modules_count' => $category->modules->count(),
+                    'active_modules_count' => $category->modules->where('is_active', true)->count(),
+                    'modules' => $category->modules->map(function ($module) {
+                        return [
+                            'id' => $module->id,
+                            'name' => $module->name,
+                            'slug' => $module->slug,
+                            'short_description' => $module->short_description,
+                            'is_active' => $module->is_active,
+                            'is_featured' => $module->is_featured,
+                            'coming_soon' => $module->coming_soon,
+                            'formatted_price' => $module->formatted_price,
+                            'price_type' => $module->price_type,
+                            'base_price' => $module->base_price,
+                            'currency' => $module->currency,
+                            'applications_count' => $module->applications_count,
+                            'reviews_count' => $module->reviews_count,
+                            'completion_rate' => $module->completion_rate,
+                            'views_count' => $module->views_count,
+                            'route_prefix' => $module->route_prefix,
+                            'controller' => $module->controller,
+                        ];
+                    }),
+                ];
+            });
 
         // Statistics
         $stats = [
@@ -86,7 +86,7 @@ class ServiceModuleController extends Controller
             },
             'reviews' => function ($query) {
                 $query->with('user')->approved()->latest()->take(5);
-            }
+            },
         ]);
 
         return Inertia::render('Admin/ServiceModules/Show', [
@@ -171,7 +171,7 @@ class ServiceModuleController extends Controller
     public function toggleActive(ServiceModule $serviceModule)
     {
         $serviceModule->update([
-            'is_active' => !$serviceModule->is_active,
+            'is_active' => ! $serviceModule->is_active,
         ]);
 
         $status = $serviceModule->is_active ? 'activated' : 'deactivated';
@@ -185,7 +185,7 @@ class ServiceModuleController extends Controller
     public function toggleFeatured(ServiceModule $serviceModule)
     {
         $serviceModule->update([
-            'is_featured' => !$serviceModule->is_featured,
+            'is_featured' => ! $serviceModule->is_featured,
         ]);
 
         return redirect()->back()->with('success', 'Service featured status updated!');
@@ -197,8 +197,8 @@ class ServiceModuleController extends Controller
     public function toggleComingSoon(ServiceModule $serviceModule)
     {
         $serviceModule->update([
-            'coming_soon' => !$serviceModule->coming_soon,
-            'launch_date' => !$serviceModule->coming_soon ? now() : null,
+            'coming_soon' => ! $serviceModule->coming_soon,
+            'launch_date' => ! $serviceModule->coming_soon ? now() : null,
         ]);
 
         return redirect()->back()->with('success', 'Service coming soon status updated!');
@@ -215,7 +215,7 @@ class ServiceModuleController extends Controller
             'action' => 'required|in:activate,deactivate,feature,unfeature',
         ]);
 
-        $updates = match($validated['action']) {
+        $updates = match ($validated['action']) {
             'activate' => ['is_active' => true],
             'deactivate' => ['is_active' => false],
             'feature' => ['is_featured' => true],

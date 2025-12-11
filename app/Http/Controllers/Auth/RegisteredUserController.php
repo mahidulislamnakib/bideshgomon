@@ -60,7 +60,7 @@ class RegisteredUserController extends Controller
 
         // Get default 'user' role
         $userRole = \App\Models\Role::where('slug', 'user')->first();
-        if (!$userRole) {
+        if (! $userRole) {
             throw new \Exception('Default user role not found. Please run seeders.');
         }
 
@@ -88,7 +88,7 @@ class RegisteredUserController extends Controller
                 $this->referralService->trackReferral($request->referral_code, $user->id);
             } catch (\Exception $e) {
                 // Log error but don't stop registration
-                Log::error('Referral tracking failed: ' . $e->getMessage());
+                Log::error('Referral tracking failed: '.$e->getMessage());
             }
         }
 

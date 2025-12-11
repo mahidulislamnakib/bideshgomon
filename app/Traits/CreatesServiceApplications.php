@@ -8,23 +8,22 @@ use Illuminate\Support\Facades\Log;
 
 /**
  * Trait for easily integrating any service with the Universal Plugin System
- * 
+ *
  * Usage in your controller:
- * 
+ *
  * use CreatesServiceApplications;
- * 
+ *
  * $this->createServiceApplicationFor($primaryModel, 'service-slug', $applicationData);
  */
 trait CreatesServiceApplications
 {
     /**
      * Create a ServiceApplication for any service type
-     * 
-     * @param mixed $primaryModel The main model (TouristVisa, TranslationRequest, FlightBooking, etc.)
-     * @param string $serviceSlug The service module slug (tourist-visa, translation, flight-booking, etc.)
-     * @param array $applicationData Service-specific data to store in JSON
-     * @param string|null $primaryModelKey Optional foreign key name (default: derived from class name)
-     * @return ServiceApplication|null
+     *
+     * @param  mixed  $primaryModel  The main model (TouristVisa, TranslationRequest, FlightBooking, etc.)
+     * @param  string  $serviceSlug  The service module slug (tourist-visa, translation, flight-booking, etc.)
+     * @param  array  $applicationData  Service-specific data to store in JSON
+     * @param  string|null  $primaryModelKey  Optional foreign key name (default: derived from class name)
      */
     protected function createServiceApplicationFor(
         $primaryModel,
@@ -35,16 +34,17 @@ trait CreatesServiceApplications
         try {
             // Get the service module
             $serviceModule = ServiceModule::where('slug', $serviceSlug)->first();
-            
-            if (!$serviceModule) {
+
+            if (! $serviceModule) {
                 Log::warning("Service module not found: {$serviceSlug}");
+
                 return null;
             }
 
             // Determine the foreign key name
-            if (!$primaryModelKey) {
+            if (! $primaryModelKey) {
                 $className = class_basename($primaryModel);
-                $primaryModelKey = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $className)) . '_id';
+                $primaryModelKey = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $className)).'_id';
             }
 
             // Create service application
@@ -72,24 +72,23 @@ trait CreatesServiceApplications
                 'service_slug' => $serviceSlug,
                 'primary_model' => get_class($primaryModel),
             ]);
-            
+
             return null;
         }
     }
 
     /**
      * Get agencies that can service this application based on various criteria
-     * 
-     * @param ServiceApplication $serviceApplication
-     * @param array $filters Additional filters (country_id, resource_id, etc.)
+     *
+     * @param  array  $filters  Additional filters (country_id, resource_id, etc.)
      * @return \Illuminate\Database\Eloquent\Collection
      */
     protected function getEligibleAgencies(ServiceApplication $serviceApplication, array $filters = [])
     {
         $serviceModule = $serviceApplication->serviceModule;
-        
+
         // Based on assignment model, find eligible agencies
-        return match($serviceModule->assignment_model) {
+        return match ($serviceModule->assignment_model) {
             'competitive' => $this->getCompetitiveAgencies($serviceApplication, $filters),
             'exclusive_resource' => $this->getExclusiveResourceAgencies($serviceApplication, $filters),
             'global_single' => $this->getGlobalSingleAgency($serviceModule),
@@ -107,9 +106,9 @@ trait CreatesServiceApplications
 
         // Filter by country if provided
         if (isset($filters['country_id'])) {
-            $query->whereHas('countryAssignments', function($q) use ($serviceApplication, $filters) {
+            $query->whereHas('countryAssignments', function ($q) use ($serviceApplication, $filters) {
                 $q->where('country_id', $filters['country_id'])
-                  ->where('service_module_id', $serviceApplication->service_module_id);
+                    ->where('service_module_id', $serviceApplication->service_module_id);
             });
         }
 
@@ -121,7 +120,7 @@ trait CreatesServiceApplications
      */
     private function getExclusiveResourceAgencies($serviceApplication, $filters)
     {
-        if (!isset($filters['resource_name'])) {
+        if (! isset($filters['resource_name'])) {
             return collect([]);
         }
 
@@ -140,9 +139,9 @@ trait CreatesServiceApplications
     private function getGlobalSingleAgency($serviceModule)
     {
         // Find the agency assigned globally for this service
-        $assignment = \App\Models\Agency::whereHas('countryAssignments', function($q) use ($serviceModule) {
+        $assignment = \App\Models\Agency::whereHas('countryAssignments', function ($q) use ($serviceModule) {
             $q->where('service_module_id', $serviceModule->id)
-              ->whereNull('country_id'); // Global assignment
+                ->whereNull('country_id'); // Global assignment
         })->first();
 
         return $assignment ? collect([$assignment]) : collect([]);
@@ -159,23 +158,37 @@ trait CreatesServiceApplications
 
     /**
      * Notify eligible agencies about new application
-     * 
-     * @param ServiceApplication $serviceApplication
-     * @param array $filters
      */
     protected function notifyEligibleAgencies(ServiceApplication $serviceApplication, array $filters = [])
     {
         $agencies = $this->getEligibleAgencies($serviceApplication, $filters);
-        
+
         foreach ($agencies as $agency) {
-            // TODO: Send notification (email, SMS, push)
+            // Send in-app notification to agency
+            if ($agency->user_id) {
+                app(\App\Services\NotificationService::class)->send(
+                    $agency->user_id,
+                    'New Application Available',
+                    'New '.$serviceApplication->serviceModule->name.' application #'.$serviceApplication->application_number.' is available.',
+                    [
+                        'type' => 'new_application',
+                        'priority' => 'normal',
+                        'data' => [
+                            'application_id' => $serviceApplication->id,
+                            'application_number' => $serviceApplication->application_number,
+                            'service_name' => $serviceApplication->serviceModule->name,
+                        ],
+                    ]
+                );
+            }
+
             Log::info('Notifying agency of new application', [
                 'agency_id' => $agency->id,
                 'agency_name' => $agency->name,
                 'application_number' => $serviceApplication->application_number,
                 'service_name' => $serviceApplication->serviceModule->name,
             ]);
-            
+
             // Placeholder for actual notification
             // Notification::send($agency, new NewApplicationNotification($serviceApplication));
         }

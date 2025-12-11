@@ -1,0 +1,55 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: bideshgomon
+  namespace: production
+spec:
+  hosts:
+  - bideshgomon.com
+  gateways:
+  - bideshgomon-gateway
+  http:
+  - match:
+    - headers:
+        x-canary:
+          exact: "true"
+    route:
+    - destination:
+        host: bideshgomon-canary
+        port:
+          number: 80
+  - route:
+    - destination:
+        host: bideshgomon-app
+        port:
+          number: 80
+      weight: 95  # 95% to stable
+    - destination:
+        host: bideshgomon-canary
+        port:
+          number: 80
+      weight: 5   # 5% to canary
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: bideshgomon
+  namespace: production
+spec:
+  host: bideshgomon-app
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 100
+      http:
+        http1MaxPendingRequests: 50
+        http2MaxRequests: 100
+        maxRequestsPerConnection: 2
+    loadBalancer:
+      simple: LEAST_REQUEST
+    outlierDetection:
+      consecutiveErrors: 5
+      interval: 30s
+      baseEjectionTime: 30s
+      maxEjectionPercent: 50
+      minHealthPercent: 50

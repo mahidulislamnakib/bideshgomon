@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use App\Models\User;
 use App\Models\Agency;
 use App\Models\Role;
+use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class AgencySeeder extends Seeder
 {
@@ -40,7 +39,7 @@ class AgencySeeder extends Seeder
                 'verified_at' => now(),
             ]);
 
-            $this->command->info('Agency profile created for user: ' . $agencyUser->email);
+            $this->command->info('Agency profile created for user: '.$agencyUser->email);
         } else {
             $this->command->warn('No agency user found. Please create a user with agency role first.');
         }

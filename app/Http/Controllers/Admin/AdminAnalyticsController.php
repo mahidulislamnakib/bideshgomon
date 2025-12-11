@@ -3,19 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\WalletTransaction;
 use App\Models\JobApplication;
 use App\Models\JobPosting;
 use App\Models\TravelInsuranceBooking;
+use App\Models\User;
 use App\Models\UserCv;
+use App\Models\WalletTransaction;
+use App\Services\AnalyticsService;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use Inertia\Inertia;
 
 class AdminAnalyticsController extends Controller
 {
+    protected AnalyticsService $analytics;
+
+    public function __construct(AnalyticsService $analytics)
+    {
+        $this->analytics = $analytics;
+    }
+
     public function index(Request $request)
     {
         $period = $request->get('period', '30'); // days
@@ -56,7 +63,7 @@ class AdminAnalyticsController extends Controller
             'active_postings' => JobPosting::where('is_active', true)->where('application_deadline', '>=', now())->count(),
             'total_applications' => JobApplication::count(),
             'period_applications' => JobApplication::where('created_at', '>=', $startDate)->count(),
-            'application_rate' => JobPosting::where('is_active', true)->count() > 0 
+            'application_rate' => JobPosting::where('is_active', true)->count() > 0
                 ? round(JobApplication::count() / JobPosting::where('is_active', true)->count(), 2)
                 : 0,
         ];
@@ -68,28 +75,19 @@ class AdminAnalyticsController extends Controller
             'total_cvs' => UserCv::count(),
         ];
 
-        // User Growth Chart (Last 30 days)
-        $userGrowthChart = [];
-        for ($i = 29; $i >= 0; $i--) {
-            $date = now()->subDays($i);
-            $userGrowthChart[] = [
-                'date' => $date->format('M d'),
-                'count' => User::whereDate('created_at', $date)->count(),
-            ];
-        }
+        // Optimized: Use AnalyticsService - 1 query instead of 30 queries
+        $userGrowthChart = $this->analytics->cached(
+            "user_growth_{$period}",
+            fn () => $this->analytics->getUserGrowthChart((int) $period),
+            15 // Cache for 15 minutes
+        );
 
-        // Revenue Chart (Last 30 days)
-        $revenueChart = [];
-        for ($i = 29; $i >= 0; $i--) {
-            $date = now()->subDays($i);
-            $revenueChart[] = [
-                'date' => $date->format('M d'),
-                'amount' => WalletTransaction::where('type', 'credit')
-                    ->where('status', 'completed')
-                    ->whereDate('created_at', $date)
-                    ->sum('amount'),
-            ];
-        }
+        // Optimized: Use AnalyticsService - 1 query instead of 30 queries
+        $revenueChart = $this->analytics->cached(
+            "revenue_chart_{$period}",
+            fn () => $this->analytics->getRevenueChart((int) $period),
+            15 // Cache for 15 minutes
+        );
 
         // Top Countries by Users
         $topCountries = User::select('country_id', DB::raw('count(*) as user_count'))
@@ -134,7 +132,7 @@ class AdminAnalyticsController extends Controller
             ->whereYear('created_at', now()->subMonth()->year)
             ->sum('amount');
 
-        $revenueGrowth = $previousMonthRevenue > 0 
+        $revenueGrowth = $previousMonthRevenue > 0
             ? round((($currentMonthRevenue - $previousMonthRevenue) / $previousMonthRevenue) * 100, 2)
             : 0;
 
@@ -147,7 +145,7 @@ class AdminAnalyticsController extends Controller
             ->whereYear('created_at', now()->subMonth()->year)
             ->count();
 
-        $userGrowthRate = $previousMonthUsers > 0 
+        $userGrowthRate = $previousMonthUsers > 0
             ? round((($currentMonthUsers - $previousMonthUsers) / $previousMonthUsers) * 100, 2)
             : 0;
 
@@ -210,7 +208,7 @@ class AdminAnalyticsController extends Controller
 
         return response($csv, 200, [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="users-report-' . now()->format('Y-m-d') . '.csv"',
+            'Content-Disposition' => 'attachment; filename="users-report-'.now()->format('Y-m-d').'.csv"',
         ]);
     }
 
@@ -237,7 +235,7 @@ class AdminAnalyticsController extends Controller
 
         return response($csv, 200, [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="revenue-report-' . now()->format('Y-m-d') . '.csv"',
+            'Content-Disposition' => 'attachment; filename="revenue-report-'.now()->format('Y-m-d').'.csv"',
         ]);
     }
 
@@ -265,7 +263,7 @@ class AdminAnalyticsController extends Controller
 
         return response($csv, 200, [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="jobs-report-' . now()->format('Y-m-d') . '.csv"',
+            'Content-Disposition' => 'attachment; filename="jobs-report-'.now()->format('Y-m-d').'.csv"',
         ]);
     }
 }

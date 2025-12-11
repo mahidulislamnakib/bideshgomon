@@ -17,42 +17,42 @@ return new class extends Migration
             $table->year('established_year')->nullable()->after('business_type');
             $table->string('license_number')->nullable()->after('established_year');
             $table->date('license_expiry')->nullable()->after('license_number');
-            
+
             // Services & Expertise
             $table->json('services_offered')->nullable()->after('license_expiry');
             $table->json('countries_expertise')->nullable()->after('services_offered');
             $table->json('languages_spoken')->nullable()->after('countries_expertise');
-            
+
             // Social & Contact
             $table->string('whatsapp')->nullable()->after('phone');
             $table->string('facebook_url')->nullable()->after('website');
             $table->string('linkedin_url')->nullable()->after('facebook_url');
             $table->string('twitter_url')->nullable()->after('linkedin_url');
             $table->string('instagram_url')->nullable()->after('twitter_url');
-            
+
             // Statistics & Performance
             $table->integer('total_clients')->default(0)->after('commission_rate');
             $table->integer('successful_applications')->default(0)->after('total_clients');
             $table->decimal('success_rate', 5, 2)->default(0)->after('successful_applications');
             $table->decimal('average_rating', 3, 2)->default(0)->after('success_rate');
             $table->integer('total_reviews')->default(0)->after('average_rating');
-            
+
             // Team & Office
             $table->integer('team_size')->default(1)->after('total_reviews');
             $table->text('office_hours')->nullable()->after('team_size');
             $table->json('office_images')->nullable()->after('office_hours');
-            
+
             // SEO & Marketing
             $table->string('slug')->unique()->nullable()->after('name');
             $table->text('meta_description')->nullable()->after('description');
             $table->json('certifications')->nullable()->after('meta_description');
             $table->json('awards')->nullable()->after('certifications');
-            
+
             // Verification Documents
             $table->json('verification_documents')->nullable()->after('verified_at');
             $table->text('verification_notes')->nullable()->after('verification_documents');
             $table->timestamp('profile_completed_at')->nullable()->after('verification_notes');
-            
+
             // Featured & Premium
             $table->boolean('is_featured')->default(false)->after('is_active');
             $table->boolean('is_premium')->default(false)->after('is_featured');

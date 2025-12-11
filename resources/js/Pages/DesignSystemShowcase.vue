@@ -282,10 +282,10 @@ const handleClick = () => {
 import { ref, reactive } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import BideshButton from '@/Components/UI/BideshButton.vue';
-import BideshCard from '@/Components/UI/BideshCard.vue';
-import BideshBadge from '@/Components/UI/BideshBadge.vue';
-import BideshInput from '@/Components/UI/BideshInput.vue';
+import BideshButton from '@/Components/ui/BideshButton.vue';
+import BideshCard from '@/Components/ui/BideshCard.vue';
+import BideshBadge from '@/Components/ui/BideshBadge.vue';
+import BideshInput from '@/Components/ui/BideshInput.vue';
 
 const form = reactive({
   name: '',

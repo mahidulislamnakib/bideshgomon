@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('is_capital')->default(false);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             // Indexes for fast lookup
             $table->index('country_id');
             $table->index(['country_id', 'name']);

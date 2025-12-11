@@ -20,10 +20,10 @@ class CityController extends Controller
         // Search
         if ($request->has('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'LIKE', "%{$search}%")
-                  ->orWhere('name_bn', 'LIKE', "%{$search}%")
-                  ->orWhere('state_province', 'LIKE', "%{$search}%");
+                    ->orWhere('name_bn', 'LIKE', "%{$search}%")
+                    ->orWhere('state_province', 'LIKE', "%{$search}%");
             });
         }
 
@@ -71,7 +71,7 @@ class CityController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -80,13 +80,14 @@ class CityController extends Controller
 
         return response()->json([
             'message' => 'City created successfully',
-            'data' => $city
+            'data' => $city,
         ], 201);
     }
 
     public function show($id)
     {
         $city = City::with('country')->findOrFail($id);
+
         return response()->json($city);
     }
 
@@ -109,7 +110,7 @@ class CityController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -118,37 +119,37 @@ class CityController extends Controller
 
         return response()->json([
             'message' => 'City updated successfully',
-            'data' => $city
+            'data' => $city,
         ]);
     }
 
     public function destroy($id)
     {
         $city = City::findOrFail($id);
-        
+
         // Check if city has airports
         if ($city->airports()->exists()) {
             return response()->json([
-                'message' => 'Cannot delete city with associated airports'
+                'message' => 'Cannot delete city with associated airports',
             ], 422);
         }
 
         $city->delete();
 
         return response()->json([
-            'message' => 'City deleted successfully'
+            'message' => 'City deleted successfully',
         ]);
     }
 
     public function toggleStatus($id)
     {
         $city = City::findOrFail($id);
-        $city->is_active = !$city->is_active;
+        $city->is_active = ! $city->is_active;
         $city->save();
 
         return response()->json([
             'message' => 'City status updated successfully',
-            'data' => $city
+            'data' => $city,
         ]);
     }
 
@@ -251,20 +252,20 @@ class CityController extends Controller
     {
         // Check if country exists
         $country = Country::where('code', $row['country_code'])->first();
-        if (!$country) {
+        if (! $country) {
             return "Row {$rowNumber}: Country with code '{$row['country_code']}' not found";
         }
 
         // Validate latitude
-        if (isset($row['latitude']) && !empty($row['latitude'])) {
-            if (!is_numeric($row['latitude']) || $row['latitude'] < -90 || $row['latitude'] > 90) {
+        if (isset($row['latitude']) && ! empty($row['latitude'])) {
+            if (! is_numeric($row['latitude']) || $row['latitude'] < -90 || $row['latitude'] > 90) {
                 return "Row {$rowNumber}: Invalid latitude value";
             }
         }
 
         // Validate longitude
-        if (isset($row['longitude']) && !empty($row['longitude'])) {
-            if (!is_numeric($row['longitude']) || $row['longitude'] < -180 || $row['longitude'] > 180) {
+        if (isset($row['longitude']) && ! empty($row['longitude'])) {
+            if (! is_numeric($row['longitude']) || $row['longitude'] < -180 || $row['longitude'] > 180) {
                 return "Row {$rowNumber}: Invalid longitude value";
             }
         }
@@ -285,8 +286,8 @@ class CityController extends Controller
             'timezone' => $row['timezone'] ?? null,
             'latitude' => isset($row['latitude']) && $row['latitude'] !== '' ? $row['latitude'] : null,
             'longitude' => isset($row['longitude']) && $row['longitude'] !== '' ? $row['longitude'] : null,
-            'is_capital' => isset($row['is_capital']) ? (bool)$row['is_capital'] : false,
-            'is_active' => isset($row['is_active']) ? (bool)$row['is_active'] : true,
+            'is_capital' => isset($row['is_capital']) ? (bool) $row['is_capital'] : false,
+            'is_active' => isset($row['is_active']) ? (bool) $row['is_active'] : true,
         ];
 
         return $data;

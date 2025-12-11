@@ -83,7 +83,11 @@ class Menu extends Model
     public static function clearMenuCache()
     {
         Cache::forget('menus');
-        $locations = ['header_main', 'footer_column_1', 'footer_column_2', 'footer_column_3', 'mobile_menu'];
+        $locations = [
+            'header_main', 'header_top', 'footer_column_1', 'footer_column_2',
+            'footer_column_3', 'footer_bottom', 'mobile_menu', 'user_dashboard',
+            'admin_quick_actions', 'services_menu',
+        ];
         foreach ($locations as $location) {
             Cache::forget("menu_{$location}");
         }
@@ -95,7 +99,7 @@ class Menu extends Model
         if ($this->is_external) {
             return $this->url;
         }
-        
+
         if ($this->route_name) {
             try {
                 return route($this->route_name);
@@ -103,7 +107,7 @@ class Menu extends Model
                 return $this->url ?? '#';
             }
         }
-        
+
         return $this->url ?? '#';
     }
 }

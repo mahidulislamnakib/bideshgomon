@@ -21,7 +21,7 @@ return new class extends Migration
             $table->decimal('additional_fee', 10, 2)->nullable();
             $table->integer('additional_processing_days')->nullable();
             $table->timestamps();
-            
+
             // Indexes
             $table->index('visa_requirement_id');
             $table->index('profession');

@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SupportTicket extends Model
 {
@@ -41,8 +41,8 @@ class SupportTicket extends Model
         parent::boot();
 
         static::creating(function ($ticket) {
-            if (!$ticket->ticket_number) {
-                $ticket->ticket_number = 'TKT-' . strtoupper(uniqid());
+            if (! $ticket->ticket_number) {
+                $ticket->ticket_number = 'TKT-'.strtoupper(uniqid());
             }
         });
     }

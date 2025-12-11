@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
-use App\Models\FlightRequest;
 use App\Models\FlightQuote;
+use App\Models\FlightRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -19,8 +19,8 @@ class FlightRequestController extends Controller
         $filter = $request->get('filter', 'all');
 
         $query = FlightRequest::with(['user', 'quotes' => function ($q) {
-                $q->where('quoted_by', Auth::id());
-            }])
+            $q->where('quoted_by', Auth::id());
+        }])
             ->where('assigned_to', Auth::id())
             ->orderBy('created_at', 'desc');
 
@@ -33,7 +33,7 @@ class FlightRequestController extends Controller
             } else {
                 $query->whereHas('quotes', function ($q) use ($filter) {
                     $q->where('quoted_by', Auth::id())
-                      ->where('status', $filter);
+                        ->where('status', $filter);
                 });
             }
         }
@@ -70,8 +70,8 @@ class FlightRequestController extends Controller
     public function show($id)
     {
         $flightRequest = FlightRequest::with(['user', 'quotes' => function ($q) {
-                $q->where('quoted_by', Auth::id());
-            }])
+            $q->where('quoted_by', Auth::id());
+        }])
             ->where('assigned_to', Auth::id())
             ->findOrFail($id);
 
@@ -108,7 +108,7 @@ class FlightRequestController extends Controller
         $flightRequest = FlightRequest::where('assigned_to', Auth::id())
             ->findOrFail($id);
 
-        if (!$flightRequest->canReceiveQuote()) {
+        if (! $flightRequest->canReceiveQuote()) {
             return back()->with('error', 'This request is no longer accepting quotes.');
         }
 

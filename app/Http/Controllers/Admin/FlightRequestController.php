@@ -28,12 +28,12 @@ class FlightRequestController extends Controller
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('request_reference', 'like', "%{$search}%")
-                  ->orWhere('origin_airport_code', 'like', "%{$search}%")
-                  ->orWhere('destination_airport_code', 'like', "%{$search}%")
-                  ->orWhereHas('user', function ($q) use ($search) {
-                      $q->where('name', 'like', "%{$search}%")
-                        ->orWhere('email', 'like', "%{$search}%");
-                  });
+                    ->orWhere('origin_airport_code', 'like', "%{$search}%")
+                    ->orWhere('destination_airport_code', 'like', "%{$search}%")
+                    ->orWhereHas('user', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%");
+                    });
             });
         }
 
@@ -102,7 +102,7 @@ class FlightRequestController extends Controller
             'status' => 'assigned',
         ]);
 
-        return back()->with('success', 'Flight request assigned to ' . $agency->name . ' successfully.');
+        return back()->with('success', 'Flight request assigned to '.$agency->name.' successfully.');
     }
 
     /**

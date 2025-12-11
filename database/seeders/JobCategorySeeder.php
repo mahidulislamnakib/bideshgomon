@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\JobCategory;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
 class JobCategorySeeder extends Seeder
@@ -201,13 +201,13 @@ class JobCategorySeeder extends Seeder
         foreach ($categories as $categoryData) {
             $children = $categoryData['children'] ?? [];
             unset($categoryData['children']);
-            
+
             $categoryData['slug'] = Str::slug($categoryData['name']);
             $categoryData['is_active'] = true;
-            
+
             $parent = JobCategory::create($categoryData);
-            
-            if (!empty($children)) {
+
+            if (! empty($children)) {
                 $order = 1;
                 foreach ($children as $childData) {
                     $childData['parent_id'] = $parent->id;
@@ -220,7 +220,7 @@ class JobCategorySeeder extends Seeder
         }
 
         $this->command->info('Job categories seeded successfully!');
-        $this->command->info('Total parent categories: ' . JobCategory::whereNull('parent_id')->count());
-        $this->command->info('Total child categories: ' . JobCategory::whereNotNull('parent_id')->count());
+        $this->command->info('Total parent categories: '.JobCategory::whereNull('parent_id')->count());
+        $this->command->info('Total child categories: '.JobCategory::whereNotNull('parent_id')->count());
     }
 }

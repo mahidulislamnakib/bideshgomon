@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\University;
 use App\Models\Country;
+use App\Models\University;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -82,7 +82,7 @@ class EducationController extends Controller
             ->when($university->world_ranking, function ($query) use ($university) {
                 $query->whereBetween('world_ranking', [
                     max(1, $university->world_ranking - 50),
-                    $university->world_ranking + 50
+                    $university->world_ranking + 50,
                 ]);
             })
             ->orderBy('world_ranking', 'asc')

@@ -18,8 +18,8 @@ class VerificationController extends Controller
     public function index(Request $request)
     {
         $agency = $request->user()->agency;
-        
-        if (!$agency) {
+
+        if (! $agency) {
             return redirect()->route('agency.dashboard')
                 ->with('error', 'Agency not found.');
         }
@@ -56,12 +56,12 @@ class VerificationController extends Controller
 
         $agency = $request->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             return back()->with('error', 'Agency not found.');
         }
 
         $file = $request->file('document');
-        $path = $file->store('verification-documents/' . $agency->id, 'public');
+        $path = $file->store('verification-documents/'.$agency->id, 'public');
 
         $document = AgencyVerificationDocument::create([
             'agency_id' => $agency->id,
@@ -83,7 +83,7 @@ class VerificationController extends Controller
     {
         $agency = $request->user()->agency;
 
-        if (!$agency || $document->agency_id !== $agency->id) {
+        if (! $agency || $document->agency_id !== $agency->id) {
             return back()->with('error', 'Unauthorized.');
         }
 
@@ -115,7 +115,7 @@ class VerificationController extends Controller
 
         $agency = $request->user()->agency;
 
-        if (!$agency) {
+        if (! $agency) {
             return back()->with('error', 'Agency not found.');
         }
 

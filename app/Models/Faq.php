@@ -55,9 +55,9 @@ class Faq extends Model
 
     public function scopeSearch($query, $search)
     {
-        return $query->where(function($q) use ($search) {
+        return $query->where(function ($q) use ($search) {
             $q->where('question', 'like', "%{$search}%")
-              ->orWhere('answer', 'like', "%{$search}%");
+                ->orWhere('answer', 'like', "%{$search}%");
         });
     }
 
@@ -80,6 +80,7 @@ class Faq extends Model
     public function getHelpfulPercentageAttribute(): float
     {
         $total = $this->helpful_count + $this->not_helpful_count;
+
         return $total > 0 ? round(($this->helpful_count / $total) * 100, 2) : 0;
     }
 }

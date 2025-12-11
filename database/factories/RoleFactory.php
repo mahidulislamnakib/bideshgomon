@@ -16,6 +16,7 @@ class RoleFactory extends Factory
     public function definition(): array
     {
         $name = ucfirst(fake()->unique()->word());
+
         return [
             'name' => $name,
             'slug' => Str::slug($name),
@@ -25,7 +26,7 @@ class RoleFactory extends Factory
 
     public function admin(): static
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'name' => 'Admin',
             'slug' => 'admin',
         ]);
@@ -33,7 +34,7 @@ class RoleFactory extends Factory
 
     public function user(): static
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'name' => 'User',
             'slug' => 'user',
         ]);

@@ -332,11 +332,11 @@ const formatDate = (date) => {
                     <!-- Purpose & Dates -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                            <InputLabel for="purpose" value="Purpose *" />
+                            <InputLabel for="purpose" value="Purpose *" class="block text-sm font-semibold text-gray-700 mb-2" />
                             <select
                                 id="purpose"
                                 v-model="form.purpose"
-                                class="mt-1 block w-full border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm transition-all bg-white"
                             >
                                 <option v-for="(label, value) in purposes" :key="value" :value="value">
                                     {{ label }}
@@ -388,11 +388,11 @@ const formatDate = (date) => {
                         </div>
 
                         <div>
-                            <InputLabel for="accommodation_type" value="Accommodation Type" />
+                            <InputLabel for="accommodation_type" value="Accommodation Type" class="block text-sm font-semibold text-gray-700 mb-2" />
                             <select
                                 id="accommodation_type"
                                 v-model="form.accommodation_type"
-                                class="mt-1 block w-full border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm transition-all bg-white"
                             >
                                 <option v-for="(label, value) in accommodationTypes" :key="value" :value="value">
                                     {{ label }}
@@ -418,11 +418,11 @@ const formatDate = (date) => {
                     <!-- Transportation & Ports -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                            <InputLabel for="transportation_mode" value="Transportation" />
+                            <InputLabel for="transportation_mode" value="Transportation" class="block text-sm font-semibold text-gray-700 mb-2" />
                             <select
                                 id="transportation_mode"
                                 v-model="form.transportation_mode"
-                                class="mt-1 block w-full border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm transition-all bg-white"
                             >
                                 <option v-for="(label, value) in transportationModes" :key="value" :value="value">
                                     {{ label }}
@@ -498,12 +498,12 @@ const formatDate = (date) => {
 
                     <!-- Notes -->
                     <div>
-                        <InputLabel for="notes" value="Additional Notes" />
+                        <InputLabel for="notes" value="Additional Notes" class="block text-sm font-semibold text-gray-700 mb-2" />
                         <textarea
                             id="notes"
                             v-model="form.notes"
                             rows="3"
-                            class="mt-1 block w-full border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm"
+                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm transition-all resize-none"
                             placeholder="Any additional information about this trip..."
                         ></textarea>
                         <InputError class="mt-2" :message="form.errors.notes" />

@@ -49,16 +49,16 @@ class TouristVisaController extends Controller
         // Load quotes if serviceApplication exists
         $quotes = [];
         $serviceApplication = null;
-        
+
         if ($touristVisa->serviceApplication) {
             $serviceApplication = $touristVisa->serviceApplication;
             $quotes = $serviceApplication->quotes()
-                ->with(['agency' => function($query) {
+                ->with(['agency' => function ($query) {
                     $query->select('id', 'name', 'email', 'phone', 'logo_path');
                 }])
                 ->orderBy('quoted_amount', 'asc')
                 ->get()
-                ->map(function($quote) {
+                ->map(function ($quote) {
                     return [
                         'id' => $quote->id,
                         'agency_name' => $quote->agency->name ?? 'Unknown Agency',
@@ -103,30 +103,30 @@ class TouristVisaController extends Controller
     public function getRequirements(Request $request, $countryId)
     {
         $country = Country::with([
-            'documentRequirements' => function($query) use ($request) {
+            'documentRequirements' => function ($query) use ($request) {
                 $query->where('visa_type', 'tourist')
                     ->orderBy('is_mandatory', 'desc')
                     ->orderBy('sort_order');
-                
+
                 // Filter by profession if provided
                 if ($request->profession) {
-                    $query->where(function($q) use ($request) {
+                    $query->where(function ($q) use ($request) {
                         $q->whereNull('profession_category')
-                          ->orWhere('profession_category', $request->profession);
+                            ->orWhere('profession_category', $request->profession);
                     });
                 }
             },
-            'documentRequirements.document.category'
+            'documentRequirements.document.category',
         ])->find($countryId);
-        
-        if (!$country) {
+
+        if (! $country) {
             return response()->json(['error' => 'Country not found'], 404);
         }
 
         // Group requirements by mandatory/optional
         $mandatoryDocs = $country->documentRequirements
             ->where('is_mandatory', true)
-            ->map(function($req) {
+            ->map(function ($req) {
                 return [
                     'id' => $req->document->id,
                     'name' => $req->document->document_name,
@@ -139,7 +139,7 @@ class TouristVisaController extends Controller
 
         $optionalDocs = $country->documentRequirements
             ->where('is_mandatory', false)
-            ->map(function($req) {
+            ->map(function ($req) {
                 return [
                     'id' => $req->document->id,
                     'name' => $req->document->document_name,

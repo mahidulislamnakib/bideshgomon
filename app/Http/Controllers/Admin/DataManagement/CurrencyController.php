@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\DataManagement;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Traits\BulkUploadable;
+use App\Http\Controllers\Controller;
 use App\Models\Currency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,8 +15,11 @@ class CurrencyController extends Controller
     use BulkUploadable;
 
     protected $entityName = 'Currency';
+
     protected $entityNamePlural = 'Currencies';
+
     protected $indexRoute = 'admin.data.currencies.index';
+
     protected $bulkUploadView = 'Admin/DataManagement/Currencies/BulkUpload';
 
     /**
@@ -29,10 +32,10 @@ class CurrencyController extends Controller
         // Search
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('code', 'like', "%{$search}%")
-                  ->orWhere('symbol', 'like', "%{$search}%");
+                    ->orWhere('code', 'like', "%{$search}%")
+                    ->orWhere('symbol', 'like', "%{$search}%");
             });
         }
 
@@ -94,7 +97,7 @@ class CurrencyController extends Controller
                 'data' => $validated,
             ]);
 
-            return back()->withInput()->with('error', 'Failed to create currency: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to create currency: '.$e->getMessage());
         }
     }
 
@@ -145,7 +148,7 @@ class CurrencyController extends Controller
                 'error' => $e->getMessage(),
             ]);
 
-            return back()->withInput()->with('error', 'Failed to update currency: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to update currency: '.$e->getMessage());
         }
     }
 
@@ -165,7 +168,7 @@ class CurrencyController extends Controller
                 'error' => $e->getMessage(),
             ]);
 
-            return back()->with('error', 'Failed to delete currency: ' . $e->getMessage());
+            return back()->with('error', 'Failed to delete currency: '.$e->getMessage());
         }
     }
 
@@ -175,7 +178,7 @@ class CurrencyController extends Controller
     public function toggleStatus(Currency $currency)
     {
         try {
-            $currency->update(['is_active' => !$currency->is_active]);
+            $currency->update(['is_active' => ! $currency->is_active]);
 
             return back()->with('success', 'Currency status updated successfully.');
         } catch (\Exception $e) {
@@ -197,7 +200,7 @@ class CurrencyController extends Controller
             'name',
             'symbol',
             'exchange_rate_to_bdt',
-            'is_active'
+            'is_active',
         ];
     }
 
@@ -207,7 +210,7 @@ class CurrencyController extends Controller
             'code',
             'name',
             'symbol',
-            'exchange_rate_to_bdt'
+            'exchange_rate_to_bdt',
         ];
     }
 
@@ -266,10 +269,10 @@ class CurrencyController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('code', 'like', "%{$search}%")
-                  ->orWhere('symbol', 'like', "%{$search}%");
+                    ->orWhere('code', 'like', "%{$search}%")
+                    ->orWhere('symbol', 'like', "%{$search}%");
             });
         }
 

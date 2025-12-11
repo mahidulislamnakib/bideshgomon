@@ -23,7 +23,7 @@ class NotificationCenterTest extends TestCase
     public function test_user_sees_notifications_and_can_mark_read(): void
     {
         $user = User::factory()->create(['role_id' => $this->userRole->id]);
-        $service = new NotificationService();
+        $service = new NotificationService;
         $n = $service->send($user->id, 'Test Title', 'Test Body', ['priority' => 'high']);
 
         $response = $this->actingAs($user)->get(route('notifications.index'));
@@ -38,9 +38,9 @@ class NotificationCenterTest extends TestCase
 
         $this->assertNotNull($n->fresh()->read_at);
         // After marking read, dashboard should not show badge number (still may show 0 but not pulse class)
-    $after = $this->actingAs($user)->get(route('notifications.index'));
-    $after->assertStatus(200);
-    $after->assertSee('"unread_notifications":0');
+        $after = $this->actingAs($user)->get(route('notifications.index'));
+        $after->assertStatus(200);
+        $after->assertSee('"unread_notifications":0');
     }
 
     public function test_admin_can_broadcast_notifications(): void
@@ -52,7 +52,7 @@ class NotificationCenterTest extends TestCase
             'title' => 'Maintenance Notice',
             'body' => 'System maintenance tonight 11 PM BST',
             'priority' => 'critical',
-            'scope' => 'all'
+            'scope' => 'all',
         ];
 
         $this->actingAs($admin)

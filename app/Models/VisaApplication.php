@@ -26,7 +26,7 @@ class VisaApplication extends Model
         'payment_status', 'payment_method', 'payment_reference', 'paid_at',
         'assigned_to', 'assigned_at', 'priority',
         'additional_info', 'required_documents', 'special_requests', 'internal_notes',
-        'ip_address', 'user_agent'
+        'ip_address', 'user_agent',
     ];
 
     protected $casts = [
@@ -56,10 +56,10 @@ class VisaApplication extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($application) {
             if (empty($application->application_reference)) {
-                $application->application_reference = 'VISA-' . strtoupper(uniqid());
+                $application->application_reference = 'VISA-'.strtoupper(uniqid());
             }
         });
     }
@@ -201,12 +201,12 @@ class VisaApplication extends Model
 
     public function getProcessingTypeDisplayAttribute()
     {
-        return ucfirst($this->processing_type) . ' Processing';
+        return ucfirst($this->processing_type).' Processing';
     }
 
     public function getFormattedTotalAttribute()
     {
-        return '৳' . number_format((float) $this->total_amount, 2);
+        return '৳'.number_format((float) $this->total_amount, 2);
     }
 
     public function getIsPaidAttribute()
@@ -231,12 +231,12 @@ class VisaApplication extends Model
 
     public function getIsAssignedAttribute()
     {
-        return !is_null($this->assigned_to);
+        return ! is_null($this->assigned_to);
     }
 
     public function getPassportExpiryStatusAttribute()
     {
-        if (!$this->passport_expiry_date) {
+        if (! $this->passport_expiry_date) {
             return null;
         }
 
@@ -253,7 +253,7 @@ class VisaApplication extends Model
 
     public function getDaysUntilTravelAttribute()
     {
-        if (!$this->intended_travel_date) {
+        if (! $this->intended_travel_date) {
             return null;
         }
 
@@ -263,10 +263,11 @@ class VisaApplication extends Model
     // Helper Methods
     public function calculateTotal()
     {
-        $total = ((float) $this->service_fee ?? 0) + 
-                 ((float) $this->government_fee ?? 0) + 
+        $total = ((float) $this->service_fee ?? 0) +
+                 ((float) $this->government_fee ?? 0) +
                  ((float) $this->processing_fee ?? 0);
         $this->total_amount = $total;
+
         return $total;
     }
 

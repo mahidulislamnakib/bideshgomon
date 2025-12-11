@@ -1,36 +1,33 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PhoneNumberController;
+use App\Http\Controllers\Admin\AdminAnalyticsController;
+use App\Http\Controllers\Admin\AdminJobApplicationController;
+use App\Http\Controllers\Admin\AdminJobPostingController;
+use App\Http\Controllers\Admin\AdminSettingsController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\HotelController as AdminHotelController;
+use App\Http\Controllers\Admin\VisaController as AdminVisaController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\SocialAuthController;
-use App\Http\Controllers\ReferralController;
-use App\Http\Controllers\TravelInsuranceController;
 use App\Http\Controllers\CvBuilderController;
+// use App\Http\Controllers\VisaApplicationController; // Removed - use bgproject's tourist-visa system
 use App\Http\Controllers\FlightBookingController;
 use App\Http\Controllers\FlightRequestController;
 use App\Http\Controllers\HotelBookingController;
-use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\ApplicationController;
-// use App\Http\Controllers\VisaApplicationController; // Removed - use bgproject's tourist-visa system
-use App\Http\Controllers\WalletController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\OnboardingController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\Admin\AdminJobPostingController;
-use App\Http\Controllers\Admin\AdminJobApplicationController;
-use App\Http\Controllers\Admin\AdminUserController;
-use App\Http\Controllers\Admin\AdminAnalyticsController;
-use App\Http\Controllers\Admin\AdminSettingsController;
-use App\Http\Controllers\Admin\AdminServiceController;
-use App\Http\Controllers\Admin\AdminServiceFieldController;
-use App\Http\Controllers\Admin\AdminApplicationController;
-use App\Http\Controllers\Admin\HotelController as AdminHotelController;
-use App\Http\Controllers\Admin\VisaController as AdminVisaController;
+use App\Http\Controllers\PhoneNumberController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReferralController;
+use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\TravelInsuranceController;
 use App\Http\Controllers\User\HelpController;
+use App\Http\Controllers\WalletController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\SitemapController;
 
 // Sitemap
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
@@ -66,14 +63,14 @@ Route::get('/failed/payment', function () {
     return Inertia::render('Success/PaymentFailed', [
         'errorMessage' => request('message', 'Payment could not be processed'),
         'amount' => request('amount'),
-        'retryUrl' => request('retry_url')
+        'retryUrl' => request('retry_url'),
     ]);
 })->name('failed.payment');
 
 Route::get('/cancelled/payment', function () {
     return Inertia::render('Success/PaymentCancelled', [
         'amount' => request('amount'),
-        'retryUrl' => request('retry_url')
+        'retryUrl' => request('retry_url'),
     ]);
 })->name('cancelled.payment');
 
@@ -113,23 +110,23 @@ Route::get('/demo/airbnb-design', function () {
 // Role-based dashboard routing
 Route::get('/dashboard', function () {
     $user = auth()->user();
-    
+
     // Redirect to appropriate dashboard based on role
     if ($user->hasRole('admin')) {
         return redirect()->route('admin.dashboard');
     }
-    
+
     if ($user->hasRole('agency')) {
         return redirect()->route('agency.dashboard');
     }
-    
+
     if ($user->hasRole('consultant')) {
         return redirect()->route('consultant.dashboard');
     }
-    
+
     // Default: User dashboard
     $profile = $user->userProfile;
-    
+
     // Calculate stats
     $stats = [
         'education_count' => $user->educations()->count(),
@@ -138,10 +135,10 @@ Route::get('/dashboard', function () {
         'languages_count' => $user->languages()->count(),
         'profile_strength' => $user->educations()->count() > 0 && $user->workExperiences()->count() > 0 ? 'Strong' : 'Basic',
     ];
-    
+
     // Calculate profile completion using User model method (12-section system)
     $completion = $user->calculateProfileCompletion();
-    
+
     // Load services from database - categorized by service_type for clear intent
     // Service Types:
     // - core_profile: Always visible profile essentials (Edit, Education, Work) - HARDCODED in frontend
@@ -149,10 +146,10 @@ Route::get('/dashboard', function () {
     // - platform_tool: Digital utilities shown in dashboard (AI Assessment, CV Builder, Wallet, etc.)
     // - revenue_service: Bookable services that generate revenue - shown on /services page ONLY
     // - support: Help and support features
-    
+
     $platformTools = [];  // For dashboard display (wallet, cv, ai, etc.)
     $suggestions = [];    // Profile completion suggestions (context-aware)
-    
+
     try {
         if (class_exists('App\Models\ServiceModule')) {
             // Map slugs to actual routes
@@ -181,7 +178,7 @@ Route::get('/dashboard', function () {
                 'security' => 'profile.edit',
                 'visa-history' => 'profile.visa-history.index',
             ];
-            
+
             // Fetch platform tools and support services for dashboard
             // Exclude: core_profile (hardcoded), extended_profile (as suggestions), revenue_service (on /services page)
             $allServices = \App\Models\ServiceModule::with('category')
@@ -190,11 +187,11 @@ Route::get('/dashboard', function () {
                 ->whereIn('service_type', ['platform_tool', 'support'])  // Only dashboard utilities
                 ->orderBy('sort_order')
                 ->get();
-                
+
             foreach ($allServices as $service) {
                 $route = $routeMapping[$service->slug] ?? null;
                 $params = null;
-                
+
                 $serviceData = [
                     'id' => $service->id,
                     'name' => $service->name,
@@ -207,10 +204,10 @@ Route::get('/dashboard', function () {
                     'route' => $route,
                     'route_params' => $params,
                 ];
-                
+
                 $platformTools[] = $serviceData;
             }
-            
+
             // Create profile completion suggestions (context-aware)
             // Only suggest extended_profile sections if profile is incomplete
             if ($completion < 80) {
@@ -220,11 +217,11 @@ Route::get('/dashboard', function () {
                     ->orderBy('sort_order')
                     ->limit(3)
                     ->get();
-                    
+
                 foreach ($extendedProfileSuggestions as $service) {
                     $route = $routeMapping[$service->slug] ?? 'profile.edit';
                     $params = null;
-                    
+
                     // Handle profile.edit with section params
                     if ($route === 'profile.edit') {
                         if ($service->slug === 'languages') {
@@ -237,9 +234,9 @@ Route::get('/dashboard', function () {
                             $params = ['section' => 'security'];
                         }
                     }
-                    
+
                     $suggestions[] = [
-                        'title' => 'Complete ' . $service->name,
+                        'title' => 'Complete '.$service->name,
                         'message' => $service->short_description ?? 'Improve your profile strength by adding this information.',
                         'action_route' => $route,
                         'action_text' => 'Add Now',
@@ -249,26 +246,26 @@ Route::get('/dashboard', function () {
             }
         }
     } catch (\Exception $e) {
-        \Log::warning('Failed to load services: ' . $e->getMessage());
+        Log::warning('Failed to load services: '.$e->getMessage());
     }
-    
+
     // Get leaderboard data
     $topReferrers = [];
     $userRank = null;
-    
+
     try {
         if (class_exists('App\Models\Referral')) {
             $period = now()->format('Y-m');
             [$year, $month] = explode('-', $period);
             $startDate = \Carbon\Carbon::create($year, $month, 1)->startOfMonth();
             $endDate = \Carbon\Carbon::create($year, $month, 1)->endOfMonth();
-            
+
             // Get top 5 referrers for this month
             $topReferrers = \App\Models\Referral::select(
-                    'referrals.referrer_id',
-                    \Illuminate\Support\Facades\DB::raw('COUNT(DISTINCT referrals.id) as referral_count'),
-                    \Illuminate\Support\Facades\DB::raw('COALESCE(SUM(CASE WHEN rewards.status = "paid" THEN rewards.amount ELSE 0 END), 0) as total_earnings')
-                )
+                'referrals.referrer_id',
+                \Illuminate\Support\Facades\DB::raw('COUNT(DISTINCT referrals.id) as referral_count'),
+                \Illuminate\Support\Facades\DB::raw('COALESCE(SUM(CASE WHEN rewards.status = "paid" THEN rewards.amount ELSE 0 END), 0) as total_earnings')
+            )
                 ->leftJoin('rewards', 'referrals.id', '=', 'rewards.referral_id')
                 ->whereBetween('referrals.created_at', [$startDate, $endDate])
                 ->where('referrals.status', 'completed')
@@ -279,6 +276,7 @@ Route::get('/dashboard', function () {
                 ->get()
                 ->map(function ($item, $index) {
                     $referrer = \App\Models\User::find($item->referrer_id);
+
                     return [
                         'rank' => $index + 1,
                         'user_id' => $item->referrer_id,
@@ -291,13 +289,13 @@ Route::get('/dashboard', function () {
                         'total_earnings' => (float) $item->total_earnings,
                     ];
                 });
-            
+
             // Get user's rank
             $allReferrers = \App\Models\Referral::select(
-                    'referrals.referrer_id',
-                    \Illuminate\Support\Facades\DB::raw('COUNT(DISTINCT referrals.id) as referral_count'),
-                    \Illuminate\Support\Facades\DB::raw('COALESCE(SUM(CASE WHEN rewards.status = "paid" THEN rewards.amount ELSE 0 END), 0) as total_earnings')
-                )
+                'referrals.referrer_id',
+                \Illuminate\Support\Facades\DB::raw('COUNT(DISTINCT referrals.id) as referral_count'),
+                \Illuminate\Support\Facades\DB::raw('COALESCE(SUM(CASE WHEN rewards.status = "paid" THEN rewards.amount ELSE 0 END), 0) as total_earnings')
+            )
                 ->leftJoin('rewards', 'referrals.id', '=', 'rewards.referral_id')
                 ->whereBetween('referrals.created_at', [$startDate, $endDate])
                 ->where('referrals.status', 'completed')
@@ -305,11 +303,11 @@ Route::get('/dashboard', function () {
                 ->orderByDesc('referral_count')
                 ->orderByDesc('total_earnings')
                 ->get();
-            
+
             $userRankIndex = $allReferrers->search(function ($item) use ($user) {
                 return $item->referrer_id == $user->id;
             });
-            
+
             if ($userRankIndex !== false) {
                 $userData = $allReferrers[$userRankIndex];
                 $userRank = [
@@ -322,10 +320,10 @@ Route::get('/dashboard', function () {
     } catch (\Exception $e) {
         // Silently fail if referral system not available
     }
-    
+
     // Generate smart suggestions based on profile completion
     $suggestions = [];
-    
+
     // Always show Profile Assessment as first suggestion if profile exists
     if ($profile) {
         $suggestions[] = [
@@ -336,8 +334,8 @@ Route::get('/dashboard', function () {
             'route' => 'profile.assessment.show',
         ];
     }
-    
-    if (!$profile || !$profile->phone) {
+
+    if (! $profile || ! $profile->phone) {
         $suggestions[] = [
             'title' => 'Add Contact Information',
             'description' => 'Complete your phone and address details to receive application updates',
@@ -346,8 +344,8 @@ Route::get('/dashboard', function () {
             'route' => 'profile.edit',
         ];
     }
-    
-    if (!$profile || !$profile->passport_number) {
+
+    if (! $profile || ! $profile->passport_number) {
         $suggestions[] = [
             'title' => 'Add Passport Details',
             'description' => 'Required for visa and travel applications',
@@ -356,7 +354,7 @@ Route::get('/dashboard', function () {
             'route' => 'profile.edit',
         ];
     }
-    
+
     if ($user->educations()->count() === 0) {
         $suggestions[] = [
             'title' => 'Add Education History',
@@ -366,7 +364,7 @@ Route::get('/dashboard', function () {
             'route' => 'profile.edit',
         ];
     }
-    
+
     if ($user->workExperiences()->count() === 0) {
         $suggestions[] = [
             'title' => 'Add Work Experience',
@@ -376,13 +374,13 @@ Route::get('/dashboard', function () {
             'route' => 'profile.edit',
         ];
     }
-    
+
     // Personalized service recommendations
     $recommendedServices = [];
-    
+
     // Note: Visa routes removed - using bgproject's tourist-visa system instead
     // Removed student visa and work visa recommendations that referenced non-existent routes
-    
+
     return Inertia::render('Dashboard', [
         'stats' => $stats,
         'profileCompletion' => min($completion, 100),
@@ -409,24 +407,26 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{id}', [CvBuilderController::class, 'destroy'])->name('destroy');
         Route::get('/{id}/preview', [CvBuilderController::class, 'preview'])->name('preview');
         Route::get('/{id}/download', [CvBuilderController::class, 'download'])->name('download');
+        Route::post('/{id}/duplicate', [CvBuilderController::class, 'duplicate'])->name('duplicate');
+        Route::post('/{id}/share', [CvBuilderController::class, 'toggleShare'])->name('toggle-share');
     });
 
     // User Services Routes
     Route::get('/services', [\App\Http\Controllers\ServiceController::class, 'index'])->name('services.index');
     Route::get('/services/{slug}', [\App\Http\Controllers\ServiceController::class, 'show'])->name('services.show');
     Route::get('/services/search', [\App\Http\Controllers\ServiceController::class, 'search'])->name('services.search');
-    
+
     // Course Catalog Routes
     Route::get('/courses', [\App\Http\Controllers\CourseController::class, 'index'])->name('courses.index');
     Route::get('/courses/{course}', [\App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
-    
+
     // Package Comparison Routes
     Route::prefix('packages')->name('packages.')->group(function () {
         Route::get('/', [\App\Http\Controllers\PackageController::class, 'index'])->name('index');
         Route::get('/compare', [\App\Http\Controllers\PackageController::class, 'compare'])->name('compare');
         Route::get('/{slug}', [\App\Http\Controllers\PackageController::class, 'show'])->name('show');
     });
-    
+
     // Travel Booking Routes
     Route::prefix('travel/bookings')->name('travel.bookings.')->middleware('auth')->group(function () {
         Route::get('/', [\App\Http\Controllers\TravelBookingController::class, 'index'])->name('index');
@@ -436,7 +436,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}', [\App\Http\Controllers\TravelBookingController::class, 'show'])->name('show');
         Route::post('/{id}/cancel', [\App\Http\Controllers\TravelBookingController::class, 'cancel'])->name('cancel');
     });
-    
+
     // Plugin Service Applications (User-facing)
     Route::prefix('applications')->name('applications.')->group(function () {
         Route::get('/', [\App\Http\Controllers\ApplicationController::class, 'index'])->name('index');
@@ -449,13 +449,13 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{application}', [\App\Http\Controllers\ApplicationController::class, 'destroy'])->name('destroy');
         Route::get('/{application}/download-pdf', [\App\Http\Controllers\ApplicationController::class, 'downloadPdf'])->name('download-pdf');
     });
-    
+
     // Visa Requirements API
     Route::get('/api/visa-requirements', [\App\Http\Controllers\VisaRequirementController::class, 'getRequirements'])->name('visa.requirements');
-    
+
     // Universal Visa Wizard Config API
     Route::get('/api/visa/config', [\App\Http\Controllers\VisaApplicationController::class, 'getConfig'])->name('visa.config');
-    
+
     // Universal Visa Wizard Routes
     Route::prefix('visa')->name('visa.')->group(function () {
         Route::get('/', [\App\Http\Controllers\VisaApplicationController::class, 'index'])->name('index');
@@ -468,35 +468,35 @@ Route::middleware('auth')->group(function () {
         Route::post('/{application}/payment', [\App\Http\Controllers\VisaApplicationController::class, 'processPayment'])->name('process-payment');
         Route::post('/{application}/cancel', [\App\Http\Controllers\VisaApplicationController::class, 'cancel'])->name('cancel');
     });
-    
+
     // Education & University Search Routes
     Route::prefix('education')->name('education.')->group(function () {
         Route::get('/', [\App\Http\Controllers\EducationController::class, 'index'])->name('index');
         Route::get('/{university}', [\App\Http\Controllers\EducationController::class, 'show'])->name('show');
         Route::post('/compare', [\App\Http\Controllers\EducationController::class, 'compare'])->name('compare');
     });
-    
+
     // User Applications Routes
     Route::post('/my-applications', [\App\Http\Controllers\User\UserApplicationController::class, 'store'])->name('user.applications.store');
     Route::get('/my-applications', [\App\Http\Controllers\User\UserApplicationController::class, 'index'])->name('user.applications.index');
     Route::get('/my-applications/{id}', [\App\Http\Controllers\User\UserApplicationController::class, 'show'])->name('user.applications.show');
-    
+
     // Payment Gateway Routes
     Route::prefix('payment')->name('payment.')->group(function () {
         // Payment history
         Route::get('/', [\App\Http\Controllers\PaymentController::class, 'index'])->name('index');
         Route::get('/{transaction}', [\App\Http\Controllers\PaymentController::class, 'show'])->name('show');
-        
+
         // SSLCommerz routes
         Route::post('/sslcommerz/initiate', [\App\Http\Controllers\PaymentController::class, 'initiateSSLCommerz'])->name('sslcommerz.initiate');
         Route::post('/sslcommerz/success', [\App\Http\Controllers\PaymentController::class, 'sslcommerzSuccess'])->name('sslcommerz.success');
         Route::post('/sslcommerz/fail', [\App\Http\Controllers\PaymentController::class, 'sslcommerzFail'])->name('sslcommerz.fail');
         Route::get('/sslcommerz/cancel', [\App\Http\Controllers\PaymentController::class, 'sslcommerzCancel'])->name('sslcommerz.cancel');
-        
+
         // bKash routes
         Route::post('/bkash/initiate', [\App\Http\Controllers\PaymentController::class, 'initiateBKash'])->name('bkash.initiate');
         Route::get('/bkash/callback', [\App\Http\Controllers\PaymentController::class, 'bkashCallback'])->name('bkash.callback');
-        
+
         // Nagad routes
         Route::post('/nagad/initiate', [\App\Http\Controllers\PaymentController::class, 'initiateNagad'])->name('nagad.initiate');
         Route::get('/nagad/callback', [\App\Http\Controllers\PaymentController::class, 'nagadCallback'])->name('nagad.callback');
@@ -515,10 +515,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-applications/{id}/quotes', [\App\Http\Controllers\User\UserApplicationController::class, 'quotes'])->name('user.applications.quotes');
     Route::post('/my-applications/{id}/quotes/{quoteId}/accept', [\App\Http\Controllers\User\UserApplicationController::class, 'acceptQuote'])->name('user.applications.quotes.accept');
     Route::post('/my-applications/{id}/quotes/{quoteId}/reject', [\App\Http\Controllers\User\UserApplicationController::class, 'rejectQuote'])->name('user.applications.quotes.reject');
-    
+
     // Onboarding
     Route::get('/onboarding/welcome', [OnboardingController::class, 'welcome'])->name('onboarding.welcome');
-    
+
     // API routes for profile sections
     Route::prefix('api/profile')->name('api.profile.')->group(function () {
         // Family Members
@@ -526,13 +526,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/family-members', [\App\Http\Controllers\Api\Profile\FamilyMemberController::class, 'store'])->name('family.store');
         Route::put('/family-members/{familyMember}', [\App\Http\Controllers\Api\Profile\FamilyMemberController::class, 'update'])->name('family.update');
         Route::delete('/family-members/{familyMember}', [\App\Http\Controllers\Api\Profile\FamilyMemberController::class, 'destroy'])->name('family.destroy');
-        
+
         // Languages
         Route::get('/languages', [\App\Http\Controllers\Api\UserProfile\UserLanguageController::class, 'index'])->name('languages.index');
         Route::post('/languages', [\App\Http\Controllers\Api\UserProfile\UserLanguageController::class, 'store'])->name('languages.store');
         Route::put('/languages/{userLanguage}', [\App\Http\Controllers\Api\UserProfile\UserLanguageController::class, 'update'])->name('languages.update');
         Route::delete('/languages/{userLanguage}', [\App\Http\Controllers\Api\UserProfile\UserLanguageController::class, 'destroy'])->name('languages.destroy');
-        
+
         // Security Information
         Route::get('/security', [\App\Http\Controllers\Api\UserProfile\UserSecurityInformationController::class, 'show'])->name('security.show');
         Route::post('/security', [\App\Http\Controllers\Api\UserProfile\UserSecurityInformationController::class, 'store'])->name('security.store');
@@ -555,13 +555,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/work-experience', [\App\Http\Controllers\Profile\UserWorkExperienceController::class, 'store'])->name('work-experience.store');
         Route::put('/work-experience/{userWorkExperience}', [\App\Http\Controllers\Profile\UserWorkExperienceController::class, 'update'])->name('work-experience.update');
         Route::delete('/work-experience/{userWorkExperience}', [\App\Http\Controllers\Profile\UserWorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
-        
+
         // Skills (profile-specific)
         Route::get('/skills', [\App\Http\Controllers\Api\UserSkillController::class, 'index'])->name('skills.index');
         Route::post('/skills', [\App\Http\Controllers\Api\UserSkillController::class, 'store'])->name('skills.store');
         Route::put('/skills/{id}', [\App\Http\Controllers\Api\UserSkillController::class, 'update'])->name('skills.update');
         Route::delete('/skills/{id}', [\App\Http\Controllers\Api\UserSkillController::class, 'destroy'])->name('skills.destroy');
-        
+
         // Phone Numbers
         Route::get('/phone-numbers', [PhoneNumberController::class, 'index'])->name('phone-numbers.index');
         Route::post('/phone-numbers', [PhoneNumberController::class, 'store'])->name('phone-numbers.store');
@@ -571,23 +571,24 @@ Route::middleware('auth')->group(function () {
         Route::post('/phone-numbers/{phoneNumber}/verify', [PhoneNumberController::class, 'verifyCode'])->name('phone-numbers.verify');
         Route::post('/phone-numbers/{phoneNumber}/resend-verification', [PhoneNumberController::class, 'resendVerificationCode'])->name('phone-numbers.resend-verification');
     });
-    
+
     // API route for all skills (not profile-specific)
     Route::get('/api/skills', [\App\Http\Controllers\Api\SkillController::class, 'index'])->name('api.skills.index');
-    
+
     // API routes for data management lookups
     Route::get('/api/countries', function () {
         return response()->json(\App\Models\Country::where('is_active', true)->orderBy('name')->get(['id', 'code', 'name', 'name_bn', 'phone_code', 'flag_emoji']));
     })->name('api.countries');
-    
+
     Route::get('/api/cities', function (Illuminate\Http\Request $request) {
         $query = \App\Models\City::where('is_active', true)->orderBy('name');
         if ($request->has('country_id')) {
             $query->where('country_id', $request->country_id);
         }
+
         return response()->json($query->get(['id', 'name', 'name_bn', 'country_id']));
     })->name('api.cities');
-    
+
     // Smart Suggestions
     Route::prefix('suggestions')->name('suggestions.')->group(function () {
         Route::get('/', [\App\Http\Controllers\SmartSuggestionsController::class, 'index'])->name('index');
@@ -596,19 +597,19 @@ Route::middleware('auth')->group(function () {
         Route::post('/refresh', [\App\Http\Controllers\SmartSuggestionsController::class, 'refresh'])->name('refresh');
         Route::get('/api', [\App\Http\Controllers\SmartSuggestionsController::class, 'apiIndex'])->name('api');
     });
-    
+
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/details', [ProfileController::class, 'updateDetails'])->name('profile.update.details');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
     // Profile section routes (redirect to profile edit with section)
     Route::get('/profile/financial', function () {
         return redirect()->route('profile.edit', ['section' => 'financial']);
     })->name('profile.financial.index');
     Route::post('/profile/financial', [ProfileController::class, 'updateDetails'])->name('profile.financial.update');
-    
+
     Route::get('/profile/languages', function () {
         return redirect()->route('profile.edit', ['section' => 'languages']);
     })->name('profile.languages.index');
@@ -663,19 +664,19 @@ Route::middleware('auth')->group(function () {
 
     // Social links
     Route::post('/profile/social-links', [ProfileController::class, 'updateSocialLinks'])->name('profile.social-links.update');
-    
+
     // Emergency contact
     Route::post('/profile/emergency-contact', [ProfileController::class, 'updateEmergencyContact'])->name('profile.emergency-contact.update');
-    
+
     // Medical information
     Route::post('/profile/medical-info', [ProfileController::class, 'updateMedicalInfo'])->name('profile.medical-info.update');
-    
+
     // References
     Route::post('/profile/references', [ProfileController::class, 'updateReferences'])->name('profile.references.update');
-    
+
     // Certifications
     Route::post('/profile/certifications', [ProfileController::class, 'updateCertifications'])->name('profile.certifications.update');
-    
+
     // Privacy & Data Control
     Route::post('/profile/privacy-settings', [ProfileController::class, 'updatePrivacySettings'])->name('profile.privacy-settings.update');
     Route::get('/profile/download-data', [ProfileController::class, 'downloadData'])->name('profile.download-data');
@@ -689,7 +690,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/{scan}/reprocess', [\App\Http\Controllers\User\DocumentScanController::class, 'reprocess'])->name('reprocess');
         Route::delete('/{scan}', [\App\Http\Controllers\User\DocumentScanController::class, 'destroy'])->name('destroy');
     });
-    
+
     // Preferences
     Route::post('/profile/preferences', [ProfileController::class, 'updatePreferences'])->name('profile.preferences.update');
 
@@ -761,7 +762,7 @@ Route::middleware('auth')->group(function () {
     // Suggestions route (dynamic smart suggestions)
     Route::get('/suggestions', function () {
         return Inertia::render('User/Suggestions', [
-            'suggestions' => auth()->user()->getSmartSuggestions()
+            'suggestions' => auth()->user()->getSmartSuggestions(),
         ]);
     })->name('suggestions');
 
@@ -773,7 +774,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/score-breakdown', [\App\Http\Controllers\ProfileAssessmentController::class, 'scoreBreakdown'])->name('score-breakdown');
         Route::get('/visa-eligibility', [\App\Http\Controllers\ProfileAssessmentController::class, 'visaEligibility'])->name('visa-eligibility');
     });
-    
+
     // Alias for profile-assessment (with hyphen)
     Route::get('/profile-assessment', [\App\Http\Controllers\ProfileAssessmentController::class, 'show'])->name('profile-assessment.show');
 
@@ -934,10 +935,22 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // Analytics Dashboard
     Route::get('/analytics', [\App\Http\Controllers\Admin\AnalyticsController::class, 'dashboard'])->name('analytics.dashboard');
-    
+
     // Service Management Dashboard
     Route::get('/services', [\App\Http\Controllers\Admin\ServiceManagementController::class, 'index'])->name('services.index');
-    
+
+    // Ad Management
+    Route::prefix('ads')->name('ads.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\AdManagementController::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\Admin\AdManagementController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\Admin\AdManagementController::class, 'store'])->name('store');
+        Route::get('/{ad}/edit', [\App\Http\Controllers\Admin\AdManagementController::class, 'edit'])->name('edit');
+        Route::put('/{ad}', [\App\Http\Controllers\Admin\AdManagementController::class, 'update'])->name('update');
+        Route::delete('/{ad}', [\App\Http\Controllers\Admin\AdManagementController::class, 'destroy'])->name('destroy');
+        Route::post('/{ad}/toggle-status', [\App\Http\Controllers\Admin\AdManagementController::class, 'toggleStatus'])->name('toggle-status');
+        Route::get('/{ad}/analytics', [\App\Http\Controllers\Admin\AdManagementController::class, 'analytics'])->name('analytics');
+    });
+
     // Data Management
     Route::prefix('data')->name('data.')->group(function () {
         // Data Management Dashboard
@@ -946,11 +959,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
                 'stats' => [
                     'geographic' => 227,  // Countries + Cities + Airports + Currencies
                     'professional' => 283, // Skills + Degrees + Languages + Job Categories
-                    'content' => 72       // Service Categories + Blog Categories + Tags
-                ]
+                    'content' => 72,       // Service Categories + Blog Categories + Tags
+                ],
             ]);
         })->name('index');
-        
+
         // Countries Management
         Route::resource('countries', \App\Http\Controllers\Admin\DataManagement\CountryController::class);
         Route::post('/countries/{country}/toggle-status', [\App\Http\Controllers\Admin\DataManagement\CountryController::class, 'toggleStatus'])->name('countries.toggle-status');
@@ -958,7 +971,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/countries-process-upload', [\App\Http\Controllers\Admin\DataManagement\CountryController::class, 'processBulkUpload'])->name('countries.process-upload');
         Route::get('/countries-template', [\App\Http\Controllers\Admin\DataManagement\CountryController::class, 'downloadTemplate'])->name('countries.template');
         Route::get('/countries-export', [\App\Http\Controllers\Admin\DataManagement\CountryController::class, 'export'])->name('countries.export');
-        
+
         // Currencies Management
         Route::resource('currencies', \App\Http\Controllers\Admin\DataManagement\CurrencyController::class);
         Route::post('/currencies/{currency}/toggle-status', [\App\Http\Controllers\Admin\DataManagement\CurrencyController::class, 'toggleStatus'])->name('currencies.toggle-status');
@@ -966,7 +979,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/currencies-process-upload', [\App\Http\Controllers\Admin\DataManagement\CurrencyController::class, 'processBulkUpload'])->name('currencies.process-upload');
         Route::get('/currencies-template', [\App\Http\Controllers\Admin\DataManagement\CurrencyController::class, 'downloadTemplate'])->name('currencies.template');
         Route::get('/currencies-export', [\App\Http\Controllers\Admin\DataManagement\CurrencyController::class, 'export'])->name('currencies.export');
-        
+
         // Languages Management
         Route::resource('languages', \App\Http\Controllers\Admin\DataManagement\LanguageController::class);
         Route::post('/languages/{language}/toggle-status', [\App\Http\Controllers\Admin\DataManagement\LanguageController::class, 'toggleStatus'])->name('languages.toggle-status');
@@ -974,7 +987,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/languages-process-upload', [\App\Http\Controllers\Admin\DataManagement\LanguageController::class, 'processBulkUpload'])->name('languages.process-upload');
         Route::get('/languages-template', [\App\Http\Controllers\Admin\DataManagement\LanguageController::class, 'downloadTemplate'])->name('languages.template');
         Route::get('/languages-export', [\App\Http\Controllers\Admin\DataManagement\LanguageController::class, 'export'])->name('languages.export');
-        
+
         // Language Tests Management
         Route::resource('language-tests', \App\Http\Controllers\Admin\DataManagement\LanguageTestController::class);
         Route::post('/language-tests/{languageTest}/toggle-status', [\App\Http\Controllers\Admin\DataManagement\LanguageTestController::class, 'toggleStatus'])->name('language-tests.toggle-status');
@@ -982,7 +995,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/language-tests-process-upload', [\App\Http\Controllers\Admin\DataManagement\LanguageTestController::class, 'processBulkUpload'])->name('language-tests.process-upload');
         Route::get('/language-tests-template', [\App\Http\Controllers\Admin\DataManagement\LanguageTestController::class, 'downloadTemplate'])->name('language-tests.template');
         Route::get('/language-tests-export', [\App\Http\Controllers\Admin\DataManagement\LanguageTestController::class, 'export'])->name('language-tests.export');
-        
+
         // Job Categories Management
         Route::resource('job-categories', \App\Http\Controllers\Admin\DataManagement\JobCategoryController::class);
         Route::post('/job-categories/{jobCategory}/toggle-status', [\App\Http\Controllers\Admin\DataManagement\JobCategoryController::class, 'toggleStatus'])->name('job-categories.toggle-status');
@@ -990,7 +1003,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/job-categories-process-upload', [\App\Http\Controllers\Admin\DataManagement\JobCategoryController::class, 'processBulkUpload'])->name('job-categories.process-upload');
         Route::get('/job-categories-template', [\App\Http\Controllers\Admin\DataManagement\JobCategoryController::class, 'downloadTemplate'])->name('job-categories.template');
         Route::get('/job-categories-export', [\App\Http\Controllers\Admin\DataManagement\JobCategoryController::class, 'export'])->name('job-categories.export');
-        
+
         // Skill Categories Management
         Route::resource('skill-categories', \App\Http\Controllers\Admin\DataManagement\SkillCategoryController::class);
         Route::post('/skill-categories/{skillCategory}/toggle-status', [\App\Http\Controllers\Admin\DataManagement\SkillCategoryController::class, 'toggleStatus'])->name('skill-categories.toggle-status');
@@ -998,7 +1011,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/skill-categories-process-upload', [\App\Http\Controllers\Admin\DataManagement\SkillCategoryController::class, 'processBulkUpload'])->name('skill-categories.process-upload');
         Route::get('/skill-categories-template', [\App\Http\Controllers\Admin\DataManagement\SkillCategoryController::class, 'downloadTemplate'])->name('skill-categories.template');
         Route::get('/skill-categories-export', [\App\Http\Controllers\Admin\DataManagement\SkillCategoryController::class, 'export'])->name('skill-categories.export');
-        
+
         // Skills Management
         Route::resource('skills', \App\Http\Controllers\Admin\DataManagement\SkillController::class);
         Route::post('/skills/{skill}/toggle-status', [\App\Http\Controllers\Admin\DataManagement\SkillController::class, 'toggleStatus'])->name('skills.toggle-status');
@@ -1006,7 +1019,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/skills-process-upload', [\App\Http\Controllers\Admin\DataManagement\SkillController::class, 'processBulkUpload'])->name('skills.process-upload');
         Route::get('/skills-template', [\App\Http\Controllers\Admin\DataManagement\SkillController::class, 'downloadTemplate'])->name('skills.template');
         Route::get('/skills-export', [\App\Http\Controllers\Admin\DataManagement\SkillController::class, 'export'])->name('skills.export');
-        
+
         // Cities Management
         Route::resource('cities', \App\Http\Controllers\Admin\DataManagement\CityController::class);
         Route::post('/cities/{city}/toggle-status', [\App\Http\Controllers\Admin\DataManagement\CityController::class, 'toggleStatus'])->name('cities.toggle-status');
@@ -1014,7 +1027,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/cities-process-upload', [\App\Http\Controllers\Admin\DataManagement\CityController::class, 'processBulkUpload'])->name('cities-process-upload');
         Route::get('/cities-template', [\App\Http\Controllers\Admin\DataManagement\CityController::class, 'downloadTemplate'])->name('cities-template');
         Route::get('/cities-export', [\App\Http\Controllers\Admin\DataManagement\CityController::class, 'export'])->name('cities-export');
-        
+
         // Airports Management
         Route::resource('airports', \App\Http\Controllers\API\AirportController::class);
         Route::post('/airports/{airport}/toggle-status', [\App\Http\Controllers\API\AirportController::class, 'toggleStatus'])->name('airports.toggle-status');
@@ -1022,7 +1035,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/airports-process-upload', [\App\Http\Controllers\API\AirportController::class, 'processBulkUpload'])->name('airports.process-upload');
         Route::get('/airports-template', [\App\Http\Controllers\API\AirportController::class, 'downloadTemplate'])->name('airports.template');
         Route::get('/airports-export', [\App\Http\Controllers\API\AirportController::class, 'export'])->name('airports.export');
-        
+
         // Degrees Management
         Route::resource('degrees', \App\Http\Controllers\Admin\DataManagement\DegreeController::class);
         Route::post('/degrees/{degree}/toggle-status', [\App\Http\Controllers\Admin\DataManagement\DegreeController::class, 'toggleStatus'])->name('degrees.toggle-status');
@@ -1030,7 +1043,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/degrees-process-upload', [\App\Http\Controllers\Admin\DataManagement\DegreeController::class, 'processBulkUpload'])->name('degrees.process-upload');
         Route::get('/degrees-template', [\App\Http\Controllers\Admin\DataManagement\DegreeController::class, 'downloadTemplate'])->name('degrees.template');
         Route::get('/degrees-export', [\App\Http\Controllers\Admin\DataManagement\DegreeController::class, 'export'])->name('degrees.export');
-        
+
         // Service Categories Management
         Route::resource('service-categories', \App\Http\Controllers\Admin\DataManagement\ServiceCategoryController::class);
         Route::post('/service-categories/{serviceCategory}/toggle-status', [\App\Http\Controllers\Admin\DataManagement\ServiceCategoryController::class, 'toggleStatus'])->name('service-categories.toggle-status');
@@ -1038,7 +1051,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/service-categories-process-upload', [\App\Http\Controllers\Admin\DataManagement\ServiceCategoryController::class, 'processBulkUpload'])->name('service-categories.process-upload');
         Route::get('/service-categories-template', [\App\Http\Controllers\Admin\DataManagement\ServiceCategoryController::class, 'downloadTemplate'])->name('service-categories.template');
         Route::get('/service-categories-export', [\App\Http\Controllers\Admin\DataManagement\ServiceCategoryController::class, 'export'])->name('service-categories.export');
-        
+
         // Blog Categories Management
         Route::resource('blog-categories', \App\Http\Controllers\Admin\DataManagement\BlogCategoryController::class);
         Route::post('/blog-categories/{blogCategory}/toggle-status', [\App\Http\Controllers\Admin\DataManagement\BlogCategoryController::class, 'toggleStatus'])->name('blog-categories.toggle-status');
@@ -1046,7 +1059,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/blog-categories-process-upload', [\App\Http\Controllers\Admin\DataManagement\BlogCategoryController::class, 'processBulkUpload'])->name('blog-categories.process-upload');
         Route::get('/blog-categories-template', [\App\Http\Controllers\Admin\DataManagement\BlogCategoryController::class, 'downloadTemplate'])->name('blog-categories.template');
         Route::get('/blog-categories-export', [\App\Http\Controllers\Admin\DataManagement\BlogCategoryController::class, 'export'])->name('blog-categories.export');
-        
+
         // Blog Tags Management
         Route::resource('blog-tags', \App\Http\Controllers\Admin\DataManagement\BlogTagController::class);
         Route::get('/blog-tags-bulk-upload', [\App\Http\Controllers\Admin\DataManagement\BlogTagController::class, 'bulkUpload'])->name('blog-tags.bulk-upload');
@@ -1133,7 +1146,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/institution-types-template', [\App\Http\Controllers\Admin\DataManagement\InstitutionTypeController::class, 'downloadTemplate'])->name('institution-types.template');
         Route::get('/institution-types-export', [\App\Http\Controllers\Admin\DataManagement\InstitutionTypeController::class, 'export'])->name('institution-types.export');
     });
-    
+
     // Plugin Service Architecture Routes
     Route::prefix('plugin-services')->name('plugin-services.')->group(function () {
         // Service Management
@@ -1148,7 +1161,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/{service}/toggle-status', [\App\Http\Controllers\Admin\AdminServiceController::class, 'toggleStatus'])->name('toggle-status');
         Route::post('/{service}/duplicate', [\App\Http\Controllers\Admin\AdminServiceController::class, 'duplicate'])->name('duplicate');
         Route::get('/{service}/statistics', [\App\Http\Controllers\Admin\AdminServiceController::class, 'statistics'])->name('statistics');
-        
+
         // Service Form Fields Management
         Route::prefix('{service}/fields')->name('fields.')->group(function () {
             Route::get('/', [\App\Http\Controllers\Admin\AdminServiceFieldController::class, 'index'])->name('index');
@@ -1166,7 +1179,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
             Route::post('/bulk-update', [\App\Http\Controllers\Admin\AdminServiceFieldController::class, 'bulkUpdate'])->name('bulk-update');
         });
     });
-    
+
     // Plugin Service Applications Management
     Route::prefix('plugin-applications')->name('plugin-applications.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\AdminApplicationController::class, 'index'])->name('index');
@@ -1181,7 +1194,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/statistics', [\App\Http\Controllers\Admin\AdminApplicationController::class, 'statistics'])->name('statistics');
         Route::get('/{application}/download-pdf', [\App\Http\Controllers\Admin\AdminApplicationController::class, 'downloadPdf'])->name('download-pdf');
     });
-    
+
     Route::get('/wallets', [\App\Http\Controllers\Admin\WalletController::class, 'index'])->name('wallets.index');
     Route::get('/wallets/{wallet}', [\App\Http\Controllers\Admin\WalletController::class, 'show'])->name('wallets.show');
     Route::post('/wallets/{wallet}/credit', [\App\Http\Controllers\Admin\WalletController::class, 'credit'])->name('wallets.credit');
@@ -1214,7 +1227,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::put('/{hotel}', [AdminHotelController::class, 'update'])->name('update');
         Route::delete('/{hotel}', [AdminHotelController::class, 'destroy'])->name('destroy');
         Route::post('/{hotel}/toggle-status', [AdminHotelController::class, 'toggleStatus'])->name('toggle-status');
-        
+
         // Hotel Rooms
         Route::get('/{hotel}/rooms', [AdminHotelController::class, 'rooms'])->name('rooms');
         Route::post('/{hotel}/rooms', [AdminHotelController::class, 'storeRoom'])->name('rooms.store');
@@ -1264,22 +1277,22 @@ Route::middleware(['auth', 'role:agency'])->prefix('agency')->name('agency.')->g
         Route::get('/', [\App\Http\Controllers\Agency\VisaManagementController::class, 'index'])->name('index');
         Route::get('/statistics', [\App\Http\Controllers\Agency\VisaManagementController::class, 'statistics'])->name('statistics');
         Route::get('/{country}/{visaType}', [\App\Http\Controllers\Agency\VisaManagementController::class, 'show'])->name('show');
-        
+
         // Update visa requirement fees
         Route::put('/visa-requirements/{visaRequirement}/fees', [\App\Http\Controllers\Agency\VisaManagementController::class, 'updateFees'])->name('update-fees');
         Route::put('/visa-requirements/{visaRequirement}', [\App\Http\Controllers\Agency\VisaManagementController::class, 'updateRequirement'])->name('update-requirement');
-        
+
         // Document management
         Route::post('/visa-requirements/{visaRequirement}/documents', [\App\Http\Controllers\Agency\VisaManagementController::class, 'storeDocument'])->name('store-document');
         Route::put('/documents/{document}', [\App\Http\Controllers\Agency\VisaManagementController::class, 'updateDocument'])->name('update-document');
         Route::delete('/documents/{document}', [\App\Http\Controllers\Agency\VisaManagementController::class, 'destroyDocument'])->name('destroy-document');
-        
+
         // Profession requirements management
         Route::post('/visa-requirements/{visaRequirement}/professions', [\App\Http\Controllers\Agency\VisaManagementController::class, 'storeProfession'])->name('store-profession');
         Route::put('/professions/{profession}', [\App\Http\Controllers\Agency\VisaManagementController::class, 'updateProfession'])->name('update-profession');
         Route::delete('/professions/{profession}', [\App\Http\Controllers\Agency\VisaManagementController::class, 'destroyProfession'])->name('destroy-profession');
     });
-    
+
     // Flight requests
     Route::prefix('flight-requests')->name('flight-requests.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Agency\FlightRequestController::class, 'index'])->name('index');
@@ -1289,7 +1302,6 @@ Route::middleware(['auth', 'role:agency'])->prefix('agency')->name('agency.')->g
         Route::put('/{id}/quote/{quoteId}', [\App\Http\Controllers\Agency\FlightRequestController::class, 'updateQuote'])->name('update-quote');
     });
 });
-
 
 require __DIR__.'/auth.php';
 
@@ -1312,14 +1324,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         'update' => 'blog.posts.update',
         'destroy' => 'blog.posts.destroy',
     ])->parameters(['blog-posts' => 'post']);
-    
+
     Route::resource('blog-categories', \App\Http\Controllers\Admin\BlogCategoryController::class)->names([
         'index' => 'blog.categories.index',
         'store' => 'blog.categories.store',
         'update' => 'blog.categories.update',
         'destroy' => 'blog.categories.destroy',
     ])->except(['show', 'create', 'edit'])->parameters(['blog-categories' => 'category']);
-    
+
     Route::resource('blog-tags', \App\Http\Controllers\Admin\BlogTagController::class)->names([
         'index' => 'blog.tags.index',
         'store' => 'blog.tags.store',
@@ -1334,17 +1346,17 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return redirect()->route('admin.dashboard');
     })->name('admin');
-    
+
     Route::get('/dashboard', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    
+
     // Translation Demo - Shows how multi-language system works
     Route::get('/translation-demo', function () {
         return inertia('Admin/TranslationDemo');
     })->name('admin.translation-demo');
-    
+
     // Admin Sitemap - Test all admin links
     Route::get('/sitemap', [\App\Http\Controllers\Admin\AdminSitemapController::class, 'index'])->name('admin.sitemap');
-    
+
     // Service Modules Management
     Route::prefix('service-modules')->name('admin.service-modules.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\ServiceModuleController::class, 'index'])->name('index');
@@ -1356,7 +1368,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('/bulk-update', [\App\Http\Controllers\Admin\ServiceModuleController::class, 'bulkUpdate'])->name('bulk-update');
         Route::get('/{serviceModule}/analytics', [\App\Http\Controllers\Admin\ServiceModuleController::class, 'analytics'])->name('analytics');
     });
-    
+
     // Plugin System - Service Applications Management
     Route::prefix('service-applications')->name('admin.service-applications.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\ServiceApplicationController::class, 'index'])->name('index');
@@ -1365,7 +1377,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::delete('/{serviceApplication}', [\App\Http\Controllers\Admin\ServiceApplicationController::class, 'destroy'])->name('destroy');
         Route::get('/export', [\App\Http\Controllers\Admin\ServiceApplicationController::class, 'export'])->name('export');
     });
-    
+
     // Plugin System - Service Quotes Management
     Route::prefix('service-quotes')->name('admin.service-quotes.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\ServiceQuoteController::class, 'index'])->name('index');
@@ -1373,7 +1385,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::put('/{serviceQuote}/status', [\App\Http\Controllers\Admin\ServiceQuoteController::class, 'updateStatus'])->name('update-status');
         Route::delete('/{serviceQuote}', [\App\Http\Controllers\Admin\ServiceQuoteController::class, 'destroy'])->name('destroy');
     });
-    
+
     // Visa Requirements Management
     Route::prefix('visa-requirements')->name('admin.visa-requirements.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\VisaRequirementController::class, 'index'])->name('index');
@@ -1391,7 +1403,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     // Document Hub System
     Route::resource('document-categories', \App\Http\Controllers\Admin\DocumentCategoryController::class)->names('admin.document-categories');
     Route::resource('master-documents', \App\Http\Controllers\Admin\MasterDocumentController::class)->names('admin.master-documents');
-    
+
     Route::prefix('document-assignments')->name('admin.document-assignments.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\CountryDocumentAssignmentController::class, 'index'])->name('index');
         Route::get('/create', [\App\Http\Controllers\Admin\CountryDocumentAssignmentController::class, 'create'])->name('create');
@@ -1400,7 +1412,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::delete('/{assignment}', [\App\Http\Controllers\Admin\CountryDocumentAssignmentController::class, 'destroy'])->name('destroy');
         Route::post('/bulk-assign', [\App\Http\Controllers\Admin\CountryDocumentAssignmentController::class, 'bulkAssign'])->name('bulk-assign');
     });
-    
+
     // Agency Country Assignments Management
     Route::prefix('agency-assignments')->name('admin.agency-assignments.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\AgencyAssignmentController::class, 'index'])->name('index');
@@ -1414,7 +1426,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('/visa-requirements/{visaRequirement}/unassign', [\App\Http\Controllers\Admin\AgencyAssignmentController::class, 'unassignRequirement'])->name('unassign-requirement');
         Route::post('/visa-requirements/{visaRequirement}/update-commission', [\App\Http\Controllers\Admin\AgencyAssignmentController::class, 'updateCommission'])->name('update-commission');
     });
-    
+
     // Agency Resources Management (Exclusive Resource Model)
     Route::prefix('agency-resources')->name('admin.agency-resources.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\AgencyResourceController::class, 'index'])->name('index');
@@ -1428,7 +1440,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('/{agencyResource}/reject', [\App\Http\Controllers\Admin\AgencyResourceController::class, 'reject'])->name('reject');
         Route::post('/check-availability', [\App\Http\Controllers\Admin\AgencyResourceController::class, 'checkAvailability'])->name('check-availability');
     });
-    
+
     // Job Postings Management
     Route::resource('jobs', AdminJobPostingController::class)->names([
         'index' => 'admin.jobs.index',
@@ -1445,7 +1457,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/jobs/{id}/reject', [AdminJobPostingController::class, 'reject'])->name('admin.jobs.reject');
     Route::post('/jobs/bulk-delete', [AdminJobPostingController::class, 'bulkDelete'])->name('admin.jobs.bulk-delete');
     Route::post('/jobs/bulk-update-status', [AdminJobPostingController::class, 'bulkUpdateStatus'])->name('admin.jobs.bulk-update-status');
-    
+
     // Job Applications Management
     Route::get('/applications', [AdminJobApplicationController::class, 'index'])->name('admin.applications.index');
     Route::get('/job-applications', [AdminJobApplicationController::class, 'index'])->name('admin.job-applications.index'); // Alias
@@ -1453,25 +1465,25 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/applications/{id}/update-status', [AdminJobApplicationController::class, 'updateStatus'])->name('admin.applications.update-status');
     Route::post('/applications/bulk-update-status', [AdminJobApplicationController::class, 'bulkUpdateStatus'])->name('admin.applications.bulk-update-status');
     Route::get('/applications/export', [AdminJobApplicationController::class, 'export'])->name('admin.applications.export');
-    
+
     // FAQ Management
     Route::resource('faqs', \App\Http\Controllers\Admin\FaqController::class)->names('admin.faqs');
     Route::post('/faqs/reorder', [\App\Http\Controllers\Admin\FaqController::class, 'reorder'])->name('admin.faqs.reorder');
-    
+
     // FAQ Categories Management
     Route::resource('faq-categories', \App\Http\Controllers\Admin\FaqCategoryController::class)->names('admin.faq-categories');
     Route::post('/faq-categories/reorder', [\App\Http\Controllers\Admin\FaqCategoryController::class, 'reorder'])->name('admin.faq-categories.reorder');
-    
+
     // Events Management
     Route::resource('events', \App\Http\Controllers\Admin\EventController::class)->names('admin.events');
     Route::post('/events/{event}/toggle-featured', [\App\Http\Controllers\Admin\EventController::class, 'toggleFeatured'])->name('admin.events.toggle-featured');
     Route::post('/events/{event}/toggle-published', [\App\Http\Controllers\Admin\EventController::class, 'togglePublished'])->name('admin.events.toggle-published');
-    
+
     // CMS Pages Management
     Route::resource('pages', \App\Http\Controllers\Admin\PageController::class)->names('admin.pages');
     Route::post('/pages/{page}/toggle-published', [\App\Http\Controllers\Admin\PageController::class, 'togglePublished'])->name('admin.pages.toggle-published');
     Route::post('/pages/{page}/duplicate', [\App\Http\Controllers\Admin\PageController::class, 'duplicate'])->name('admin.pages.duplicate');
-    
+
     // Site Settings Management
     Route::get('/settings', [\App\Http\Controllers\Admin\SiteSettingController::class, 'index'])->name('admin.settings.index');
     Route::post('/settings', [\App\Http\Controllers\Admin\SiteSettingController::class, 'update'])->name('admin.settings.update');
@@ -1479,7 +1491,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::delete('/settings/file', [\App\Http\Controllers\Admin\SiteSettingController::class, 'deleteFile'])->name('admin.settings.delete-file');
     Route::post('/settings/reset', [\App\Http\Controllers\Admin\SiteSettingController::class, 'reset'])->name('admin.settings.reset');
     Route::post('/settings/clear-cache', [\App\Http\Controllers\Admin\SiteSettingController::class, 'clearCache'])->name('admin.settings.clear-cache');
-    
+
     // Support Tickets Management
     Route::resource('support-tickets', \App\Http\Controllers\Admin\SupportTicketController::class)->names('admin.support-tickets');
     Route::post('/support-tickets/{supportTicket}/assign', [\App\Http\Controllers\Admin\SupportTicketController::class, 'assign'])->name('admin.support-tickets.assign');
@@ -1487,7 +1499,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/support-tickets/{supportTicket}/reopen', [\App\Http\Controllers\Admin\SupportTicketController::class, 'reopen'])->name('admin.support-tickets.reopen');
     Route::post('/support-tickets/{supportTicket}/reply', [\App\Http\Controllers\Admin\SupportTicketController::class, 'reply'])->name('admin.support-tickets.reply');
     Route::post('/support-tickets/{supportTicket}/update-priority', [\App\Http\Controllers\Admin\SupportTicketController::class, 'updatePriority'])->name('admin.support-tickets.update-priority');
-    
+
     // Appointments Management
     Route::resource('appointments', \App\Http\Controllers\Admin\AppointmentController::class)->names('admin.appointments');
     Route::post('/appointments/{appointment}/confirm', [\App\Http\Controllers\Admin\AppointmentController::class, 'confirm'])->name('admin.appointments.confirm');
@@ -1495,7 +1507,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/appointments/{appointment}/reschedule', [\App\Http\Controllers\Admin\AppointmentController::class, 'reschedule'])->name('admin.appointments.reschedule');
     Route::post('/appointments/{appointment}/complete', [\App\Http\Controllers\Admin\AppointmentController::class, 'complete'])->name('admin.appointments.complete');
     Route::get('/appointments/calendar', [\App\Http\Controllers\Admin\AppointmentController::class, 'calendar'])->name('admin.appointments.calendar');
-    
+
     // Marketing Campaigns Management
     Route::resource('marketing-campaigns', \App\Http\Controllers\Admin\MarketingCampaignController::class)->names('admin.marketing-campaigns');
     Route::post('/marketing-campaigns/{marketingCampaign}/activate', [\App\Http\Controllers\Admin\MarketingCampaignController::class, 'activate'])->name('admin.marketing-campaigns.activate');
@@ -1503,30 +1515,30 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/marketing-campaigns/{marketingCampaign}/complete', [\App\Http\Controllers\Admin\MarketingCampaignController::class, 'complete'])->name('admin.marketing-campaigns.complete');
     Route::post('/marketing-campaigns/{marketingCampaign}/duplicate', [\App\Http\Controllers\Admin\MarketingCampaignController::class, 'duplicate'])->name('admin.marketing-campaigns.duplicate');
     Route::get('/marketing-campaigns/{marketingCampaign}/analytics', [\App\Http\Controllers\Admin\MarketingCampaignController::class, 'analytics'])->name('admin.marketing-campaigns.analytics');
-    
+
     // Partners Management
     Route::resource('partners', \App\Http\Controllers\Admin\PartnerController::class)->names('admin.partners');
     Route::post('/partners/{partner}/toggle-active', [\App\Http\Controllers\Admin\PartnerController::class, 'toggleActive'])->name('admin.partners.toggle-active');
     Route::post('/partners/update-order', [\App\Http\Controllers\Admin\PartnerController::class, 'updateOrder'])->name('admin.partners.update-order');
-    
+
     // Testimonials Management
     Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class)->names('admin.testimonials');
     Route::post('/testimonials/{testimonial}/toggle-approved', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleApproved'])->name('admin.testimonials.toggle-approved');
     Route::post('/testimonials/{testimonial}/toggle-featured', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleFeatured'])->name('admin.testimonials.toggle-featured');
     Route::post('/testimonials/{testimonial}/toggle-active', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleActive'])->name('admin.testimonials.toggle-active');
     Route::post('/testimonials/update-order', [\App\Http\Controllers\Admin\TestimonialController::class, 'updateOrder'])->name('admin.testimonials.update-order');
-    
+
     // Directory Categories Management
     Route::resource('directory-categories', \App\Http\Controllers\Admin\DirectoryCategoryController::class)->names('admin.directory-categories');
     Route::post('/directory-categories/{directory_category}/toggle-active', [\App\Http\Controllers\Admin\DirectoryCategoryController::class, 'toggleActive'])->name('admin.directory-categories.toggle-active');
     Route::post('/directory-categories/update-order', [\App\Http\Controllers\Admin\DirectoryCategoryController::class, 'updateOrder'])->name('admin.directory-categories.update-order');
-    
+
     // Directories Management
     Route::resource('directories', \App\Http\Controllers\Admin\DirectoryController::class)->names('admin.directories');
     Route::post('/directories/{directory}/toggle-verified', [\App\Http\Controllers\Admin\DirectoryController::class, 'toggleVerified'])->name('admin.directories.toggle-verified');
     Route::post('/directories/{directory}/toggle-featured', [\App\Http\Controllers\Admin\DirectoryController::class, 'toggleFeatured'])->name('admin.directories.toggle-featured');
     Route::post('/directories/{directory}/toggle-published', [\App\Http\Controllers\Admin\DirectoryController::class, 'togglePublished'])->name('admin.directories.toggle-published');
-    
+
     // User Management
     Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
     Route::get('/users/create', [AdminUserController::class, 'create'])->name('admin.users.create');
@@ -1539,15 +1551,15 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/users/{id}/update-role', [AdminUserController::class, 'updateRole'])->name('admin.users.update-role');
     Route::post('/users/{id}/impersonate', [\App\Http\Controllers\Admin\ImpersonationController::class, 'impersonate'])->name('admin.users.impersonate');
     Route::post('/impersonate/leave', [\App\Http\Controllers\Admin\ImpersonationController::class, 'leave'])->name('admin.impersonate.leave');
-    
+
     // Admin Impersonation Logs (Audit)
     Route::get('/impersonations', [\App\Http\Controllers\Admin\AdminImpersonationLogController::class, 'index'])->name('admin.impersonations.index');
     Route::get('/impersonations/export', [\App\Http\Controllers\Admin\AdminImpersonationLogController::class, 'export'])->name('admin.impersonations.export');
-    
+
     // Activity Log (Audit)
     Route::get('/activity-log', [\App\Http\Controllers\Admin\ActivityLogController::class, 'index'])->name('admin.activity-log.index');
     Route::get('/activity-log/{activity}', [\App\Http\Controllers\Admin\ActivityLogController::class, 'show'])->name('admin.activity-log.show');
-    
+
     // Agency Verification
     Route::prefix('agency-verification')->name('agency-verification.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\AgencyVerificationController::class, 'index'])->name('index');
@@ -1556,27 +1568,27 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('/{verificationRequest}/update-status', [\App\Http\Controllers\Admin\AgencyVerificationController::class, 'updateStatus'])->name('update-status');
         Route::post('/documents/{document}/update-status', [\App\Http\Controllers\Admin\AgencyVerificationController::class, 'updateDocumentStatus'])->name('update-document-status');
     });
-    
+
     Route::delete('/users/{id}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
     Route::post('/users/bulk-suspend', [AdminUserController::class, 'bulkSuspend'])->name('admin.users.bulk-suspend');
     Route::post('/users/bulk-unsuspend', [AdminUserController::class, 'bulkUnsuspend'])->name('admin.users.bulk-unsuspend');
     Route::get('/users/export', [AdminUserController::class, 'export'])->name('admin.users.export');
-    
+
     // Analytics & Reports
     Route::get('/analytics', [AdminAnalyticsController::class, 'index'])->name('admin.analytics.index');
     Route::get('/analytics/export', [AdminAnalyticsController::class, 'export'])->name('admin.analytics.export');
-    
+
     // Settings Management
     Route::get('/settings', [AdminSettingsController::class, 'index'])->name('admin.settings.index');
     Route::post('/settings', [AdminSettingsController::class, 'update'])->name('admin.settings.update');
     Route::post('/settings/seed', [AdminSettingsController::class, 'seed'])->name('admin.settings.seed');
     Route::post('/settings/clear-cache', [AdminSettingsController::class, 'clearCache'])->name('admin.settings.clear-cache');
-    
+
     // Menu Management
     Route::resource('menus', \App\Http\Controllers\Admin\MenuController::class)->except(['show']);
     Route::post('/menus/reorder', [\App\Http\Controllers\Admin\MenuController::class, 'reorder'])->name('menus.reorder');
     Route::post('/menus/clear-cache', [\App\Http\Controllers\Admin\MenuController::class, 'clearCache'])->name('menus.clear-cache');
-    
+
     // SEO Settings Management
     Route::prefix('seo-settings')->name('seo-settings.')->middleware('role:admin')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\SeoSettingsController::class, 'index'])->name('index');
@@ -1584,7 +1596,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::delete('/{pageType}', [\App\Http\Controllers\Admin\SeoSettingsController::class, 'destroy'])->name('destroy');
         Route::post('/generate-sitemap', [\App\Http\Controllers\Admin\SeoSettingsController::class, 'generateSitemap'])->name('generate-sitemap');
     });
-    
+
     // Marketing Campaigns
     Route::prefix('marketing-campaigns')->name('marketing-campaigns.')->group(function () {
         Route::post('{campaign}/pause', [\App\Http\Controllers\Admin\MarketingCampaignController::class, 'pause'])->name('pause');
@@ -1593,7 +1605,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('{campaign}/duplicate', [\App\Http\Controllers\Admin\MarketingCampaignController::class, 'duplicate'])->name('duplicate');
     });
     Route::resource('marketing-campaigns', \App\Http\Controllers\Admin\MarketingCampaignController::class)->names('admin.marketing-campaigns');
-    
+
     // Service Applications Management
     Route::prefix('service-applications')->name('service-applications.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\ServiceApplicationController::class, 'index'])->name('index');
@@ -1612,24 +1624,24 @@ Route::get('/profile/{slug}', [\App\Http\Controllers\PublicProfileController::cl
 // Agency Routes (for agency users)
 Route::middleware(['auth', 'verified'])->prefix('agency')->name('agency.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Agency\DashboardController::class, 'index'])->name('dashboard');
-    
+
     // Earnings & Analytics
     Route::get('/earnings', [\App\Http\Controllers\Agency\EarningsController::class, 'index'])->name('earnings.index');
-    
+
     // Country Assignments
     Route::get('/country-assignments', [\App\Http\Controllers\Agency\CountryAssignmentController::class, 'index'])->name('country-assignments.index');
-    
+
     // Applications
     Route::get('/applications', [\App\Http\Controllers\Agency\ApplicationController::class, 'index'])->name('applications.index');
     Route::get('/applications/{application}', [\App\Http\Controllers\Agency\ApplicationController::class, 'show'])->name('applications.show');
     Route::post('/applications/{application}/update-status', [\App\Http\Controllers\Agency\ApplicationController::class, 'updateStatus'])->name('applications.update-status');
-    
+
     // Quotes
     Route::get('/applications/{application}/quote/create', [\App\Http\Controllers\Agency\QuoteController::class, 'create'])->name('quotes.create');
     Route::post('/applications/{application}/quote', [\App\Http\Controllers\Agency\QuoteController::class, 'store'])->name('quotes.store');
     Route::get('/quotes/{quote}/edit', [\App\Http\Controllers\Agency\QuoteController::class, 'edit'])->name('quotes.edit');
     Route::put('/quotes/{quote}', [\App\Http\Controllers\Agency\QuoteController::class, 'update'])->name('quotes.update');
-    
+
     // Agency Profile
     Route::get('/profile', [\App\Http\Controllers\Agency\ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [\App\Http\Controllers\Agency\ProfileController::class, 'edit'])->name('profile.edit');
@@ -1637,7 +1649,7 @@ Route::middleware(['auth', 'verified'])->prefix('agency')->name('agency.')->grou
     Route::post('/profile/logo', [\App\Http\Controllers\Agency\ProfileController::class, 'uploadLogo'])->name('profile.logo');
     Route::post('/profile/office-images', [\App\Http\Controllers\Agency\ProfileController::class, 'uploadOfficeImages'])->name('profile.office-images');
     Route::delete('/profile/office-images', [\App\Http\Controllers\Agency\ProfileController::class, 'deleteOfficeImage'])->name('profile.delete-office-image');
-    
+
     // Team Members
     Route::get('/team', [\App\Http\Controllers\Agency\TeamMemberController::class, 'index'])->name('team.index');
     Route::get('/team/create', [\App\Http\Controllers\Agency\TeamMemberController::class, 'create'])->name('team.create');
@@ -1647,11 +1659,11 @@ Route::middleware(['auth', 'verified'])->prefix('agency')->name('agency.')->grou
     Route::post('/team/{teamMember}/photo', [\App\Http\Controllers\Agency\TeamMemberController::class, 'uploadPhoto'])->name('team.photo');
     Route::delete('/team/{teamMember}', [\App\Http\Controllers\Agency\TeamMemberController::class, 'destroy'])->name('team.destroy');
     Route::post('/team/reorder', [\App\Http\Controllers\Agency\TeamMemberController::class, 'reorder'])->name('team.reorder');
-    
+
     // Consultant Invitations
     Route::get('/team/invite', [\App\Http\Controllers\Agency\ConsultantInvitationController::class, 'create'])->name('team.invite');
     Route::post('/team/invite', [\App\Http\Controllers\Agency\ConsultantInvitationController::class, 'store'])->name('team.invite.store');
-    
+
     // Verification
     Route::get('/verification', [\App\Http\Controllers\Agency\VerificationController::class, 'index'])->name('verification.index');
     Route::post('/verification/documents', [\App\Http\Controllers\Agency\VerificationController::class, 'uploadDocument'])->name('verification.upload-document');
@@ -1721,14 +1733,3 @@ Route::prefix('agencies')->name('agencies.')->group(function () {
 
 // Public Pages Routes (Terms, Privacy, About, etc.)
 Route::get('/page/{slug}', [\App\Http\Controllers\User\PageController::class, 'show'])->name('page.show');
-
-
-
-
-
-
-
-
-
-
-

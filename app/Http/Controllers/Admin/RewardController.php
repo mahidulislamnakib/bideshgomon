@@ -36,7 +36,7 @@ class RewardController extends Controller
         if ($search) {
             $query->whereHas('user', function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('email', 'like', "%{$search}%");
+                    ->orWhere('email', 'like', "%{$search}%");
             });
         }
 
@@ -58,12 +58,13 @@ class RewardController extends Controller
      */
     public function approve(Reward $reward): RedirectResponse
     {
-        if (!$reward->isPending()) {
+        if (! $reward->isPending()) {
             return redirect()->back()->with('error', 'Only pending rewards can be approved.');
         }
 
         try {
             $this->referralService->approveReward($reward, auth()->id());
+
             return redirect()->back()->with('success', 'Reward approved and credited to wallet!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -75,7 +76,7 @@ class RewardController extends Controller
      */
     public function reject(Request $request, Reward $reward): RedirectResponse
     {
-        if (!$reward->isPending()) {
+        if (! $reward->isPending()) {
             return redirect()->back()->with('error', 'Only pending rewards can be rejected.');
         }
 

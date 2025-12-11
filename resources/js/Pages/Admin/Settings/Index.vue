@@ -1,4 +1,4 @@
-ï»¿<script setup>
+<script setup>
 import { ref, computed } from 'vue';
 import { Head, useForm, Link } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -54,26 +54,27 @@ const toggleApiGroup = (group) => {
 
 // Settings organized by category for better UX
 const groupConfig = {
-    // 1ï¸âƒ£ ESSENTIAL SETTINGS (Site Identity & Contact)
+    // 1?? ESSENTIAL SETTINGS (Site Identity & Contact)
     general: { icon: CogIcon, label: 'General', color: 'indigo' },
     branding: { icon: SparklesIcon, label: 'Branding', color: 'purple' },
     contact: { icon: ChatBubbleLeftRightIcon, label: 'Contact', color: 'green' },
     
-    // 2ï¸âƒ£ FEATURE MANAGEMENT (Control what's enabled)
+    // 2?? FEATURE MANAGEMENT (Control what's enabled)
     modules: { icon: CogIcon, label: 'Modules', color: 'blue' },
     features: { icon: FlagIcon, label: 'Features', color: 'orange' },
     homepage: { icon: SparklesIcon, label: 'Homepage Widgets', color: 'purple' },
     
-    // 3ï¸âƒ£ MODULE-SPECIFIC SETTINGS
+    // 3?? MODULE-SPECIFIC SETTINGS
     jobs: { icon: BriefcaseIcon, label: 'Jobs Settings', color: 'purple' },
     wallet: { icon: WalletIcon, label: 'Wallet Settings', color: 'green' },
     
-    // 4ï¸âƒ£ MARKETING & SEO
+    // 4?? MARKETING & SEO
     seo: { icon: ShieldCheckIcon, label: 'SEO & Analytics', color: 'blue' },
+    menus: { icon: MapIcon, label: 'Navigation Menus', color: 'cyan' },
     social: { icon: ShareIcon, label: 'Social Media', color: 'pink' },
     email: { icon: EnvelopeIcon, label: 'Email', color: 'blue' },
     
-    // 5ï¸âƒ£ ADVANCED (Technical Settings)
+    // 5?? ADVANCED (Technical Settings)
     api: { icon: KeyIcon, label: 'API Keys', color: 'red' },
     advanced: { icon: CogIcon, label: 'Advanced', color: 'gray' },
 };
@@ -283,9 +284,9 @@ const updateSetting = (key, value) => {
                                 @click="switchTab(key)"
                                 :class="[
                                     activeTab === key
-                                        ? 'border-brand-red-600 text-brand-red-600'
+                                        ? 'border-blue-600 text-blue-600 bg-blue-50'
                                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-                                    'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 transition-colors'
+                                    'whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm flex items-center gap-2 transition-all duration-200 rounded-t-lg'
                                 ]"
                             >
                                 <component :is="groupConfig[key]?.icon || CogIcon" class="h-5 w-5" />
@@ -296,6 +297,105 @@ const updateSetting = (key, value) => {
 
                     <!-- Settings Form -->
                     <form @submit.prevent="submit" class="p-6">
+                        <!-- Navigation Menus Section -->
+                        <div v-if="activeTab === 'menus'" class="space-y-6">
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                                <div class="flex items-start gap-4">
+                                    <MapIcon class="h-8 w-8 text-blue-600 flex-shrink-0" />
+                                    <div class="flex-1">
+                                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Navigation Menu Management</h3>
+                                        <p class="text-sm text-gray-600 mb-4">
+                                            Configure your site's navigation menus, headers, and footers. Manage menu items, ordering, and visibility.
+                                        </p>
+                                        <Link
+                                            :href="route('menus.index')"
+                                            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+                                        >
+                                            <MapIcon class="h-5 w-5 mr-2" />
+                                            Manage Navigation Menus
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SEO Settings Section -->
+                        <div v-else-if="activeTab === 'seo'" class="space-y-6">
+                            <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                                <div class="flex items-start gap-4">
+                                    <ShieldCheckIcon class="h-8 w-8 text-purple-600 flex-shrink-0" />
+                                    <div class="flex-1">
+                                        <h3 class="text-lg font-semibold text-gray-900 mb-2">SEO & Meta Settings</h3>
+                                        <p class="text-sm text-gray-600 mb-4">
+                                            Configure page-specific SEO settings including meta titles, descriptions, keywords, Open Graph tags, and canonical URLs.
+                                        </p>
+                                        <Link
+                                            :href="route('seo-settings.index')"
+                                            class="inline-flex items-center px-4 py-2 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors shadow-sm"
+                                        >
+                                            <ShieldCheckIcon class="h-5 w-5 mr-2" />
+                                            Manage SEO Settings
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick SEO Settings (from general settings if any) -->
+                            <div v-if="activeSettings.length > 0" class="space-y-6 mt-8">
+                                <h4 class="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-2">General SEO Configuration</h4>
+                                <div
+                                    v-for="setting in activeSettings"
+                                    :key="setting.key"
+                                    class="pb-6 border-b border-gray-100 last:border-0"
+                                >
+                                    <div class="flex items-start justify-between gap-4">
+                                        <div class="flex-1">
+                                            <label :for="setting.key" class="block text-sm font-semibold text-gray-900 mb-1">
+                                                {{ setting.key.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') }}
+                                            </label>
+                                            <p v-if="setting.description" class="text-xs text-gray-500 mb-3">
+                                                {{ setting.description }}
+                                            </p>
+
+                                            <div v-if="setting.type === 'boolean'" class="mt-3">
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input
+                                                        :id="setting.key"
+                                                        type="checkbox"
+                                                        :checked="form.settings.find(s => s.key === setting.key)?.value === true || form.settings.find(s => s.key === setting.key)?.value === '1'"
+                                                        @change="updateSetting(setting.key, $event.target.checked)"
+                                                        class="sr-only peer"
+                                                    >
+                                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                                    <span class="ml-3 text-sm font-medium text-gray-900">
+                                                        {{ form.settings.find(s => s.key === setting.key)?.value ? 'Enabled' : 'Disabled' }}
+                                                    </span>
+                                                </label>
+                                            </div>
+
+                                            <textarea
+                                                v-else-if="setting.type === 'textarea'"
+                                                :id="setting.key"
+                                                :value="form.settings.find(s => s.key === setting.key)?.value"
+                                                @input="updateSetting(setting.key, $event.target.value)"
+                                                rows="3"
+                                                class="mt-3 w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all sm:text-sm"
+                                            ></textarea>
+
+                                            <input
+                                                v-else
+                                                :id="setting.key"
+                                                type="text"
+                                                :value="form.settings.find(s => s.key === setting.key)?.value"
+                                                @input="updateSetting(setting.key, $event.target.value)"
+                                                class="mt-3 w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all sm:text-sm"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- API Keys Section - Enhanced with Collapsible Groups -->
                         <div v-if="activeTab === 'api'" class="space-y-6">
                             <!-- Warning Banner -->
@@ -339,7 +439,7 @@ const updateSetting = (key, value) => {
                                             </h3>
                                             <p class="text-xs text-gray-500">
                                                 {{ (groupedApiSettings[groupKey] || []).length }} service{{ (groupedApiSettings[groupKey] || []).length === 1 ? '' : 's' }}
-                                                <span class="ml-1">â€¢</span>
+                                                <span class="ml-1">•</span>
                                                 <span class="ml-1">
                                                     {{ (groupedApiSettings[groupKey] || []).filter(s => form.settings.find(fs => fs.key === s.key)?.value).length }} configured
                                                 </span>
@@ -383,7 +483,7 @@ const updateSetting = (key, value) => {
                                                         v-if="form.settings.find(s => s.key === setting.key)?.value"
                                                         class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-700"
                                                     >
-                                                        âœ“
+                                                        ?
                                                     </span>
                                                 </div>
                                                 
@@ -398,8 +498,8 @@ const updateSetting = (key, value) => {
                                                         :type="visiblePasswords[setting.key] ? 'text' : 'password'"
                                                         :value="form.settings.find(s => s.key === setting.key)?.value"
                                                         @input="updateSetting(setting.key, $event.target.value)"
-                                                        :placeholder="form.settings.find(s => s.key === setting.key)?.value ? 'â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢' : `Enter ${setting.key.split('_').pop()}`"
-                                                        class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 text-sm pr-10 font-mono"
+                                                        :placeholder="form.settings.find(s => s.key === setting.key)?.value ? '••••••••••••••••••••' : `Enter ${setting.key.split('_').pop()}`"
+                                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm pr-10 font-mono"
                                                     >
                                                     <button
                                                         type="button"
@@ -466,7 +566,7 @@ const updateSetting = (key, value) => {
                                                 :value="form.settings.find(s => s.key === setting.key)?.value"
                                                 @input="updateSetting(setting.key, $event.target.value)"
                                                 rows="4"
-                                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all sm:text-sm"
                                             ></textarea>
                                         </div>
 
@@ -478,14 +578,14 @@ const updateSetting = (key, value) => {
                                                     type="color"
                                                     :value="form.settings.find(s => s.key === setting.key)?.value || '#3B82F6'"
                                                     @input="updateSetting(setting.key, $event.target.value)"
-                                                    class="h-10 w-20 rounded border-gray-300 cursor-pointer"
+                                                    class="h-10 w-20 rounded-xl border-2 border-gray-200 cursor-pointer transition-all"
                                                 >
                                                 <input
                                                     type="text"
                                                     :value="form.settings.find(s => s.key === setting.key)?.value"
                                                     @input="updateSetting(setting.key, $event.target.value)"
                                                     placeholder="#3B82F6"
-                                                    class="flex-1 rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm font-mono"
+                                                    class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all sm:text-sm font-mono"
                                                 >
                                             </div>
                                         </div>
@@ -498,7 +598,7 @@ const updateSetting = (key, value) => {
                                                 :value="form.settings.find(s => s.key === setting.key)?.value"
                                                 @input="updateSetting(setting.key, $event.target.value)"
                                                 :step="setting.type === 'number' ? 'any' : undefined"
-                                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all sm:text-sm"
                                             >
                                         </div>
 
@@ -510,8 +610,8 @@ const updateSetting = (key, value) => {
                                                     :type="visiblePasswords[setting.key] ? 'text' : 'password'"
                                                     :value="form.settings.find(s => s.key === setting.key)?.value"
                                                     @input="updateSetting(setting.key, $event.target.value)"
-                                                    :placeholder="form.settings.find(s => s.key === setting.key)?.value ? 'â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢' : 'Enter secure value'"
-                                                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm pr-10"
+                                                    :placeholder="form.settings.find(s => s.key === setting.key)?.value ? '••••••••••••' : 'Enter secure value'"
+                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all sm:text-sm pr-10"
                                                 >
                                                 <button
                                                     type="button"

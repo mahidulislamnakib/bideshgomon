@@ -45,12 +45,12 @@ class FaqCategoryController extends Controller
         ]);
 
         // Auto-generate slug if not provided
-        if (!isset($validated['slug'])) {
+        if (! isset($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['name']);
         }
 
         // Set default order if not provided
-        if (!isset($validated['order'])) {
+        if (! isset($validated['order'])) {
             $validated['order'] = FaqCategory::max('order') + 1;
         }
 
@@ -76,7 +76,7 @@ class FaqCategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:faq_categories,slug,' . $faqCategory->id,
+            'slug' => 'nullable|string|max:255|unique:faq_categories,slug,'.$faqCategory->id,
             'description' => 'nullable|string',
             'icon' => 'nullable|string|max:100',
             'order' => 'nullable|integer|min:0',
@@ -84,7 +84,7 @@ class FaqCategoryController extends Controller
         ]);
 
         // Auto-generate slug if not provided
-        if (!isset($validated['slug'])) {
+        if (! isset($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['name']);
         }
 

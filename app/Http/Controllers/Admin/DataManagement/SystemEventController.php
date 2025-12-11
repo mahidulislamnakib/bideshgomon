@@ -20,10 +20,10 @@ class SystemEventController extends Controller
         // Search
         if ($request->has('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('event_type', 'LIKE', "%{$search}%")
-                  ->orWhere('target_type', 'LIKE', "%{$search}%")
-                  ->orWhere('target_id', 'LIKE', "%{$search}%");
+                    ->orWhere('target_type', 'LIKE', "%{$search}%")
+                    ->orWhere('target_id', 'LIKE', "%{$search}%");
             });
         }
 
@@ -64,7 +64,7 @@ class SystemEventController extends Controller
     public function create()
     {
         $users = User::select('id', 'name', 'email')->orderBy('name')->get();
-        
+
         return Inertia::render('Admin/DataManagement/SystemEvents/Create', [
             'users' => $users,
         ]);
@@ -95,7 +95,7 @@ class SystemEventController extends Controller
     public function edit(SystemEvent $systemEvent)
     {
         $users = User::select('id', 'name', 'email')->orderBy('name')->get();
-        
+
         return Inertia::render('Admin/DataManagement/SystemEvents/Edit', [
             'event' => $systemEvent,
             'users' => $users,
@@ -217,8 +217,8 @@ class SystemEventController extends Controller
 
     protected function validateRow(array $row, int $rowNumber): ?string
     {
-        if (isset($row['user_id']) && !empty($row['user_id'])) {
-            if (!User::where('id', $row['user_id'])->exists()) {
+        if (isset($row['user_id']) && ! empty($row['user_id'])) {
+            if (! User::where('id', $row['user_id'])->exists()) {
                 return "Row {$rowNumber}: User with ID '{$row['user_id']}' does not exist";
             }
         }
@@ -230,10 +230,10 @@ class SystemEventController extends Controller
     {
         $data = [
             'event_type' => trim($row['event_type']),
-            'user_id' => !empty($row['user_id']) ? (int)$row['user_id'] : null,
-            'target_type' => !empty($row['target_type']) ? trim($row['target_type']) : null,
-            'target_id' => !empty($row['target_id']) ? (int)$row['target_id'] : null,
-            'data' => !empty($row['data']) ? json_decode($row['data'], true) : null,
+            'user_id' => ! empty($row['user_id']) ? (int) $row['user_id'] : null,
+            'target_type' => ! empty($row['target_type']) ? trim($row['target_type']) : null,
+            'target_id' => ! empty($row['target_id']) ? (int) $row['target_id'] : null,
+            'data' => ! empty($row['data']) ? json_decode($row['data'], true) : null,
         ];
 
         return $data;
@@ -257,7 +257,7 @@ class SystemEventController extends Controller
             'user_id' => $model->user_id ?? '',
             'target_type' => $model->target_type ?? '',
             'target_id' => $model->target_id ?? '',
-            'data' => !empty($model->data) ? json_encode($model->data) : '',
+            'data' => ! empty($model->data) ? json_encode($model->data) : '',
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
         ];
     }

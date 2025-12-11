@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\UserPassport;
-use App\Models\UserVisaHistory;
-use App\Models\UserTravelHistory;
-use App\Models\UserFamilyMember;
 use App\Models\UserEducation;
-use App\Models\UserWorkExperience;
-use App\Models\UserLanguage;
+use App\Models\UserFamilyMember;
 use App\Models\UserFinancialInformation;
+use App\Models\UserLanguage;
+use App\Models\UserPassport;
 use App\Models\UserSecurityInformation;
+use App\Models\UserTravelHistory;
+use App\Models\UserVisaHistory;
+use App\Models\UserWorkExperience;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class SimpleBangladeshiSeeder extends Seeder

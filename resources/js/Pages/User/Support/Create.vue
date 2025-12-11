@@ -34,7 +34,7 @@
                                     id="subject"
                                     v-model="form.subject"
                                     type="text"
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-ocean-500 focus:ring-brand-red-600 transition-colors"
+                                    class="w-full border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all transition-colors"
                                     :class="{ 'border-red-500': form.errors.subject }"
                                     required
                                     placeholder="Brief description of your issue"
@@ -50,7 +50,7 @@
                                 <select
                                     id="category"
                                     v-model="form.category"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                                    class="w-full border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                     :class="{ 'border-red-500': form.errors.category }"
                                     required
                                 >
@@ -73,7 +73,7 @@
                                 <select
                                     id="priority"
                                     v-model="form.priority"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                                    class="w-full border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                     :class="{ 'border-red-500': form.errors.priority }"
                                     required
                                 >
@@ -95,7 +95,7 @@
                                     id="message"
                                     v-model="form.message"
                                     rows="6"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                                    class="w-full border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                     :class="{ 'border-red-500': form.errors.message }"
                                     required
                                     placeholder="Please describe your issue in detail..."

@@ -39,7 +39,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <!-- Upload Section with modern card design -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden mb-8">
-                <div class="bg-brand-red-600 px-6 py-4 border-b-2 border-blue-700">
+                <div class="bg-emerald-600 px-6 py-4 border-b-2 border-emerald-700">
                     <h2 class="text-2xl font-bold text-white flex items-center gap-2">
                         <CloudArrowUpIcon class="h-7 w-7" />
                         Upload New Document

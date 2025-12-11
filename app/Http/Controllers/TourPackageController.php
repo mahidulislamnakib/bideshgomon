@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Traits\CreatesServiceApplications;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class TourPackageController extends Controller
 {
@@ -26,7 +25,7 @@ class TourPackageController extends Controller
         ]);
 
         // Create package booking (simplified for demo)
-        $booking = (object)[
+        $booking = (object) [
             'id' => uniqid(),
             'user_id' => $request->user()->id ?? 1,
             'package_name' => $validated['package_name'],

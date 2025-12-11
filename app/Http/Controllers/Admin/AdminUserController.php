@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\Role;
 use App\Models\Country;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -15,8 +15,8 @@ class AdminUserController extends Controller
 {
     public function index(Request $request)
     {
-    // Eager load role (new role_id-based system), profile, country
-    $query = User::with(['profile', 'country', 'role']);
+        // Eager load role (new role_id-based system), profile, country
+        $query = User::with(['profile', 'country', 'role']);
 
         // Search
         if ($request->filled('search')) {
@@ -69,7 +69,9 @@ class AdminUserController extends Controller
             'suspended' => User::whereNotNull('suspended_at')->count(),
             'verified' => User::whereNotNull('email_verified_at')->count(),
             'unverified' => User::whereNull('email_verified_at')->count(),
-            'admins' => User::whereHas('role', function ($q) { $q->where('slug', 'admin')->orWhere('name', 'admin'); })->count(),
+            'admins' => User::whereHas('role', function ($q) {
+                $q->where('slug', 'admin')->orWhere('name', 'admin');
+            })->count(),
         ];
 
         return Inertia::render('Admin/Users/Index', [
@@ -149,7 +151,7 @@ class AdminUserController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'email' => 'required|string|email|max:255|unique:users,email,'.$id,
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
             'phone' => 'nullable|string|max:20',
             'role_id' => 'required|exists:roles,id',
@@ -281,7 +283,7 @@ class AdminUserController extends Controller
             ]);
         }
 
-        return back()->with('success', count($users) . ' users suspended successfully.');
+        return back()->with('success', count($users).' users suspended successfully.');
     }
 
     public function bulkUnsuspend(Request $request)
@@ -296,12 +298,12 @@ class AdminUserController extends Controller
             'suspension_reason' => null,
         ]);
 
-        return back()->with('success', count($request->user_ids) . ' users unsuspended successfully.');
+        return back()->with('success', count($request->user_ids).' users unsuspended successfully.');
     }
 
     public function export(Request $request)
     {
-    $query = User::with(['profile', 'country', 'role']);
+        $query = User::with(['profile', 'country', 'role']);
 
         // Apply same filters as index
         if ($request->filled('search')) {
@@ -348,7 +350,7 @@ class AdminUserController extends Controller
 
         return response($csv, 200, [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="users-' . now()->format('Y-m-d') . '.csv"',
+            'Content-Disposition' => 'attachment; filename="users-'.now()->format('Y-m-d').'.csv"',
         ]);
     }
 }
