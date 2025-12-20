@@ -74,15 +74,15 @@ const submit = () => {
 
                 <!-- Welcome Text -->
                 <div class="text-center mb-8">
-                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200 mb-4">
-                        <RocketLaunchIcon class="h-4 w-4 text-emerald-600 mr-2" />
-                        <span class="text-xs font-medium text-emerald-900">Start Your Journey</span>
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-upwork-lightest border border-upwork-green/20 mb-4">
+                        <RocketLaunchIcon class="h-4 w-4 text-upwork-green mr-2" />
+                        <span class="text-xs font-medium text-upwork-dark">Start Your Journey</span>
                     </div>
                     <h1 class="text-3xl font-bold text-gray-900 mb-2">
                         Create Account 🚀
                     </h1>
                     <p class="text-gray-600">
-                        Join <span class="font-semibold text-emerald-600">50,000+</span> users going abroad with confidence
+                        Join <span class="font-semibold text-upwork-green">50,000+</span> users going abroad with confidence
                     </p>
                 </div>
 
@@ -116,23 +116,18 @@ const submit = () => {
                                 <label for="first_name" class="block text-sm font-semibold text-gray-700 mb-2">
                                     First Name *
                                 </label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                        <UserIcon class="h-5 w-5 text-gray-400" />
-                                    </div>
-                                    <input
-                                        id="first_name"
-                                        type="text"
-                                        v-model="form.first_name"
-                                        required
-                                        autofocus
-                                        autocomplete="given-name"
-                                        placeholder="FIRST"
-                                        class="block w-full pl-11 pr-4 py-4 text-base border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors uppercase"
-                                        style="font-size: 16px"
-                                        :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.first_name }"
-                                    />
-                                </div>
+                                <input
+                                    id="first_name"
+                                    type="text"
+                                    v-model="form.first_name"
+                                    required
+                                    autofocus
+                                    autocomplete="given-name"
+                                    placeholder="FIRST"
+                                    class="block w-full px-4 py-4 text-base text-gray-900 placeholder-gray-400 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-upwork-green focus:border-upwork-green transition-colors uppercase"
+                                    style="font-size: 16px"
+                                    :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.first_name }"
+                                />
                                 <p v-if="form.errors.first_name" class="mt-2 text-sm text-red-600 flex items-center">
                                     <span class="inline-block w-1 h-1 bg-red-600 rounded-full mr-2"></span>
                                     {{ form.errors.first_name }}
@@ -150,7 +145,7 @@ const submit = () => {
                                     v-model="form.middle_name"
                                     autocomplete="additional-name"
                                     placeholder="MIDDLE"
-                                    class="block w-full px-4 py-4 text-base border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors uppercase"
+                                    class="block w-full px-4 py-4 text-base text-gray-900 placeholder-gray-400 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-upwork-green focus:border-upwork-green transition-colors uppercase"
                                     style="font-size: 16px"
                                     :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.middle_name }"
                                 />
@@ -172,7 +167,7 @@ const submit = () => {
                                     required
                                     autocomplete="family-name"
                                     placeholder="LAST"
-                                    class="block w-full px-4 py-4 text-base border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors uppercase"
+                                    class="block w-full px-4 py-4 text-base text-gray-900 placeholder-gray-400 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-upwork-green focus:border-upwork-green transition-colors uppercase"
                                     style="font-size: 16px"
                                     :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.last_name }"
                                 />
@@ -188,21 +183,16 @@ const submit = () => {
                             <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
                                 Email
                             </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <EnvelopeIcon class="h-5 w-5 text-gray-400" />
-                                </div>
-                                <input
-                                    id="email"
-                                    type="email"
-                                    v-model="form.email"
-                                    required
-                                    autocomplete="username"
-                                    placeholder="your@email.com"
-                                    class="block w-full pl-11 pr-4 py-4 text-base border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
-                                    :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.email }"
-                                />
-                            </div>
+                            <input
+                                id="email"
+                                type="email"
+                                v-model="form.email"
+                                required
+                                autocomplete="username"
+                                placeholder="your@email.com"
+                                class="block w-full px-4 py-4 text-base text-gray-900 placeholder-gray-400 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-upwork-green focus:border-upwork-green transition-colors"
+                                :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.email }"
+                            />
                             <p v-if="form.errors.email" class="mt-2 text-sm text-red-600 flex items-center">
                                 <span class="inline-block w-1 h-1 bg-red-600 rounded-full mr-2"></span>
                                 {{ form.errors.email }}
@@ -227,20 +217,15 @@ const submit = () => {
                             <label for="referral_code" class="block text-sm font-semibold text-gray-700 mb-2">
                                 Referral Code (Optional)
                             </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <GiftIcon class="h-5 w-5 text-gray-400" />
-                                </div>
-                                <input
-                                    id="referral_code"
-                                    type="text"
-                                    v-model="form.referral_code"
-                                    :readonly="!!referralCode"
-                                    placeholder="Enter referral code"
-                                    class="block w-full pl-11 pr-4 py-4 text-base border-2 rounded-2xl font-mono uppercase transition-colors"
-                                    :class="referralCode ? 'border-amber-300 bg-amber-50 text-amber-900 font-semibold' : 'border-gray-200 bg-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500'"
-                                />
-                            </div>
+                            <input
+                                id="referral_code"
+                                type="text"
+                                v-model="form.referral_code"
+                                :readonly="!!referralCode"
+                                placeholder="ENTER REFERRAL CODE"
+                                class="block w-full px-4 py-4 text-base text-gray-900 placeholder-gray-400 border-2 rounded-2xl font-mono uppercase transition-colors"
+                                :class="referralCode ? 'border-amber-300 bg-amber-50 text-amber-900 font-semibold' : 'border-gray-200 bg-white focus:ring-2 focus:ring-upwork-green focus:border-upwork-green'"
+                            />
                             <p v-if="referralCode" class="mt-1 text-xs text-amber-600 flex items-center">
                                 <span class="inline-block w-1.5 h-1.5 bg-amber-600 rounded-full mr-2"></span>
                                 Referral code applied! You'll earn rewards after registration.
@@ -254,9 +239,6 @@ const submit = () => {
                                 Password
                             </label>
                             <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <LockClosedIcon class="h-5 w-5 text-gray-400" />
-                                </div>
                                 <input
                                     id="password"
                                     :type="showPassword ? 'text' : 'password'"
@@ -264,7 +246,7 @@ const submit = () => {
                                     required
                                     autocomplete="new-password"
                                     placeholder="At least 8 characters"
-                                    class="block w-full pl-11 pr-12 py-4 text-base border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                                    class="block w-full px-4 pr-12 py-4 text-base text-gray-900 placeholder-gray-400 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-upwork-green focus:border-upwork-green transition-colors"
                                     :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.password }"
                                 />
                                 <button
@@ -288,9 +270,6 @@ const submit = () => {
                                 Confirm Password
                             </label>
                             <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <LockClosedIcon class="h-5 w-5 text-gray-400" />
-                                </div>
                                 <input
                                     id="password_confirmation"
                                     :type="showConfirmPassword ? 'text' : 'password'"
@@ -298,7 +277,7 @@ const submit = () => {
                                     required
                                     autocomplete="new-password"
                                     placeholder="Re-enter your password"
-                                    class="block w-full pl-11 pr-12 py-4 text-base border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                                    class="block w-full px-4 pr-12 py-4 text-base text-gray-900 placeholder-gray-400 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-upwork-green focus:border-upwork-green transition-colors"
                                     :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.password_confirmation }"
                                 />
                                 <button
@@ -320,7 +299,7 @@ const submit = () => {
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="w-full flex justify-center items-center py-4 px-6 text-base font-semibold text-white bg-emerald-600 rounded-2xl shadow-lg hover:shadow-xl hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation min-h-[48px] mt-6"
+                            class="w-full flex justify-center items-center py-4 px-6 text-base font-semibold text-white bg-upwork-green rounded-2xl shadow-lg hover:shadow-xl hover:bg-upwork-green-dark focus:outline-none focus:ring-4 focus:ring-upwork-green focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation min-h-[48px] mt-6"
                         >
                             <svg v-if="form.processing" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -335,8 +314,8 @@ const submit = () => {
                     <div class="text-center text-xs text-gray-500 mt-4">
                         <p>
                             By registering, you agree to our
-                            <a href="#" class="text-emerald-600 hover:underline">Terms of Service</a> and
-                            <a href="#" class="text-emerald-600 hover:underline">Privacy Policy</a>
+                            <a href="#" class="text-upwork-green hover:underline">Terms of Service</a> and
+                            <a href="#" class="text-upwork-green hover:underline">Privacy Policy</a>
                         </p>
                     </div>
 
@@ -379,7 +358,7 @@ const submit = () => {
                             Already have an account?
                             <Link
                                 :href="route('login')"
-                                class="font-semibold text-emerald-600 hover:text-emerald-700 touch-manipulation"
+                                class="font-semibold text-upwork-green hover:text-upwork-green-dark touch-manipulation"
                             >
                                 Sign in
                             </Link>

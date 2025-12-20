@@ -113,11 +113,14 @@ class WalletTransaction extends Model
 
         $wallet->save();
 
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+
         $this->update([
             'status' => 'reversed',
             'metadata' => array_merge($this->metadata ?? [], [
                 'reversed_at' => now()->toIso8601String(),
-                'reversed_by' => auth()->id(),
+                'reversed_by' => $user ? $user->id : null,
             ]),
         ]);
     }

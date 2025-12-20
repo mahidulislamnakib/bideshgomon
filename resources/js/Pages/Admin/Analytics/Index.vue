@@ -84,22 +84,29 @@ const statusColors = {
     <Head title="Analytics & Reports" />
 
     <AdminLayout>
-        <!-- Header with AnimatedSection -->
-        <AnimatedSection variant="ocean" :blobs="true" :animated="true">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-rhythm-xl">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-rhythm-md">
-                    <div>
-                        <h1 class="font-display font-bold text-rhythm text-4xl sm:text-5xl">
-                            <span class="text-brand-red-600">Analytics</span> & Reports
-                        </h1>
-                        <p class="text-ocean-200 mt-rhythm-sm text-lg">Comprehensive platform insights and metrics</p>
+        <!-- Modern Hero Header -->
+        <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
+                                <ChartBarIcon class="h-8 w-8 text-white" />
+                            </div>
+                            <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                                Analytics & Reports
+                            </h1>
+                        </div>
+                        <p class="text-white/90 text-lg max-w-2xl">
+                            Comprehensive platform insights and metrics with real-time data
+                        </p>
                     </div>
-                    <div class="flex items-center gap-rhythm-sm bg-white/10 backdrop-blur-sm rounded-xl px-rhythm-md py-rhythm-sm border border-white/20">
-                        <CalendarIcon class="h-6 w-6 text-ocean-200" />
+                    <div class="flex items-center gap-3 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/30">
+                        <CalendarIcon class="h-5 w-5 text-white" />
                         <select
                             v-model="selectedPeriod"
                             @change="changePeriod(selectedPeriod)"
-                            class="px-rhythm-md py-rhythm-sm bg-white text-ocean-700 rounded-lg border-0 focus:ring-2 focus:ring-ocean-400 font-semibold"
+                            class="px-4 py-2 bg-white text-gray-900 rounded-lg border-0 focus:ring-2 focus:ring-white font-semibold text-sm"
                         >
                             <option value="7">Last 7 Days</option>
                             <option value="30">Last 30 Days</option>
@@ -109,7 +116,7 @@ const statusColors = {
                     </div>
                 </div>
             </div>
-        </AnimatedSection>
+        </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-rhythm-xl space-y-rhythm-xl">
 

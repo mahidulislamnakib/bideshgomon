@@ -75,7 +75,9 @@ class WorkVisaController extends Controller
     public function show(WorkVisa $workVisa): Response
     {
         // Ensure user can only view their own applications
-        if ($workVisa->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        if ($workVisa->user_id !== $user->id) {
             abort(403, 'Unauthorized access to this application.');
         }
 

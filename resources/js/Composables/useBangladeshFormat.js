@@ -4,20 +4,24 @@ import { computed } from 'vue'
  * Bangladeshi Localization Composable
  * Provides formatting functions for Bangladeshi context
  */
+
+// Taka symbol using Unicode escape to avoid encoding issues
+const TAKA_SYMBOL = '\u09F3'
+
 export function useBangladeshFormat() {
   
   /**
    * Format currency in BDT with symbol
    */
   const formatCurrency = (amount, showSymbol = true) => {
-    if (amount === null || amount === undefined) return showSymbol ? '৳0.00' : '0.00'
+    if (amount === null || amount === undefined) return showSymbol ? `${TAKA_SYMBOL}0.00` : '0.00'
     
     const formatted = Number(amount).toLocaleString('en-BD', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     })
     
-    return showSymbol ? `৳${formatted}` : formatted
+    return showSymbol ? `${TAKA_SYMBOL}${formatted}` : formatted
   }
 
   /**

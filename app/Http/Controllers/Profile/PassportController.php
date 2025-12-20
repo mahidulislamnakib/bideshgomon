@@ -17,7 +17,9 @@ class PassportController extends Controller
      */
     public function index()
     {
-        $passports = Auth::user()->passports()
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $passports = $user->passports()
             ->orderBy('is_current_passport', 'desc')
             ->orderBy('expiry_date', 'desc')
             ->get();
@@ -93,7 +95,9 @@ class PassportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $passport = Auth::user()->passports()->findOrFail($id);
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $passport = $user->passports()->findOrFail($id);
 
         $validated = $request->validate([
             'passport_number' => [
@@ -151,7 +155,9 @@ class PassportController extends Controller
      */
     public function destroy($id)
     {
-        $passport = Auth::user()->passports()->findOrFail($id);
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $passport = $user->passports()->findOrFail($id);
 
         // Check if passport is referenced in visa history or travel history
         if ($passport->visaHistory()->exists()) {

@@ -49,7 +49,9 @@ class HajjUmrahController extends Controller
 
     public function show(HajjUmrah $hajjUmrah): Response
     {
-        if ($hajjUmrah->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        if ($hajjUmrah->user_id !== $user->id) {
             abort(403);
         }
 

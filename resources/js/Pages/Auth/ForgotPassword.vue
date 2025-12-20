@@ -25,7 +25,7 @@ const submit = () => {
             <!-- Logo -->
             <Link href="/" class="flex justify-center">
                 <div class="flex items-center space-x-2">
-                    <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div class="w-12 h-12 bg-upwork-green rounded-xl flex items-center justify-center shadow-lg">
                         <span class="text-white font-bold text-xl">BG</span>
                     </div>
                     <span class="text-2xl font-bold text-gray-900">Bidesh Gomon</span>
@@ -34,8 +34,8 @@ const submit = () => {
 
             <!-- Header -->
             <div class="mt-8 text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 rounded-full mb-4">
-                    <EnvelopeIcon class="w-8 h-8 text-emerald-600" />
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-upwork-lightest rounded-full mb-4">
+                    <EnvelopeIcon class="w-8 h-8 text-upwork-green" />
                 </div>
                 <h2 class="text-3xl font-bold text-gray-900">Forgot Password?</h2>
                 <p class="mt-2 text-sm text-gray-600 max-w-sm mx-auto">
@@ -45,7 +45,7 @@ const submit = () => {
         </div>
 
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-            <div class="bg-white py-8 px-4 shadow-xl shadow-emerald-100/50 sm:rounded-2xl sm:px-10 border border-emerald-100">
+            <div class="bg-white py-8 px-4 shadow-xl shadow-upwork-lightest/50 sm:rounded-2xl sm:px-10 border border-upwork-lightest">
                 <!-- Success Message -->
                 <div v-if="status" class="mb-6 rounded-xl bg-green-50 border border-green-200 p-4">
                     <div class="flex">
@@ -85,7 +85,7 @@ const submit = () => {
                                 autofocus
                                 autocomplete="email"
                                 placeholder="your@email.com"
-                                class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+                                class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-upwork-green focus:border-transparent transition-all duration-200"
                                 :class="{ 'border-red-300 focus:ring-red-500': form.errors.email }"
                             />
                         </div>
@@ -95,7 +95,7 @@ const submit = () => {
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-sm font-semibold text-white bg-upwork-green hover:bg-upwork-green-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-upwork-green transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             <span v-if="form.processing">
                                 <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -116,7 +116,7 @@ const submit = () => {
                 <div class="mt-6">
                     <Link
                         :href="route('login')"
-                        class="flex items-center justify-center text-sm font-medium text-emerald-600 hover:text-emerald-700 transition-colors duration-200"
+                        class="flex items-center justify-center text-sm font-medium text-upwork-green hover:text-upwork-green-dark transition-colors duration-200"
                     >
                         <ArrowLeftIcon class="w-4 h-4 mr-2" />
                         Back to Login
@@ -128,7 +128,7 @@ const submit = () => {
             <div class="mt-6 text-center">
                 <p class="text-sm text-gray-600">
                     Need help? Contact us at 
-                    <a href="mailto:support@bideshgomon.com" class="font-medium text-emerald-600 hover:text-emerald-700">
+                    <a href="mailto:support@bideshgomon.com" class="font-medium text-upwork-green hover:text-upwork-green-dark">
                         support@bideshgomon.com
                     </a>
                 </p>

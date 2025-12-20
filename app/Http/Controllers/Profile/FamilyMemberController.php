@@ -16,7 +16,9 @@ class FamilyMemberController extends Controller
      */
     public function index(Request $request)
     {
-        $familyMembers = FamilyMember::where('user_id', auth()->id())
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $familyMembers = FamilyMember::where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -119,7 +121,9 @@ class FamilyMemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $familyMember = FamilyMember::where('user_id', auth()->id())
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $familyMember = FamilyMember::where('user_id', $user->id)
             ->findOrFail($id);
 
         $validated = $request->validate([
@@ -193,7 +197,9 @@ class FamilyMemberController extends Controller
      */
     public function destroy($id)
     {
-        $familyMember = FamilyMember::where('user_id', auth()->id())
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $familyMember = FamilyMember::where('user_id', $user->id)
             ->findOrFail($id);
 
         // Delete relationship proof file if exists

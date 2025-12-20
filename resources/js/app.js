@@ -1,16 +1,19 @@
-// CSS imports disabled due to Sucrase parser bug affecting PostCSS
-// Workaround: Using Tailwind CDN in app.blade.php
-// TODO: Fix Sucrase configuration or upgrade to newer parser
-// import '../css/app.css';
-// import '../css/layout-fixes.css';
-// import '../css/performance.css';
-// import 'flag-icons/css/flag-icons.min.css';
+// Import CSS - World Class UI/UX Redesign
+import '../css/app.css';
+
 import './bootstrap';
 
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
+import { createPinia } from 'pinia';
+import { Toaster } from 'vue-sonner';
+
+// Import stores
+import { useAuthStore } from './stores/auth';
+import { useWalletStore } from './stores/wallet';
+import { useNotificationStore } from './stores/notifications';
 
 // Import PWA Manager - PERMANENTLY DISABLED
 // import { pwa } from './pwa';
@@ -32,13 +35,30 @@ createInertiaApp({
             import.meta.glob('./Pages/**/*.vue'),
         ),
     setup({ el, App, props, plugin }) {
+        const pinia = createPinia();
+        
         const app = createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(ZiggyVue);
+            .use(ZiggyVue)
+            .use(pinia);
+        
+        // Register global components
+        app.component('Toaster', Toaster);
         
         // Register global directives
         app.directive('lazy', lazyLoadDirective);
         app.directive('lazy-bg', lazyLoadBgDirective);
+        
+        // Initialize stores with page props
+        const authStore = useAuthStore();
+        const walletStore = useWalletStore();
+        const notificationStore = useNotificationStore();
+        
+        if (props.initialPage.props) {
+            authStore.initFromPageProps(props.initialPage.props);
+            walletStore.initFromPageProps(props.initialPage.props);
+            notificationStore.initFromPageProps(props.initialPage.props);
+        }
         
         // Global error handler - prevents reload on uncaught errors
         app.config.errorHandler = (err, instance, info) => {

@@ -48,7 +48,9 @@ class AttestationController extends Controller
 
     public function show(Attestation $attestation): Response
     {
-        if ($attestation->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        if ($attestation->user_id !== $user->id) {
             abort(403);
         }
 

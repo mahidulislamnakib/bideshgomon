@@ -8,7 +8,6 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -35,7 +34,9 @@ class ConsultantInvitationController extends Controller
             'permissions' => 'nullable|array',
         ]);
 
-        $agency = auth()->user()->agency;
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $agency = $user->agency;
 
         // Check if user already exists
         $existingUser = User::where('email', $validated['email'])->first();
@@ -85,17 +86,27 @@ class ConsultantInvitationController extends Controller
         // Send invitation email
         $invitationUrl = route('consultant.accept-invitation', $invitationToken);
 
-        // Create a notification for the invited consultant (they'll see it after registration)
-        // For now, log the invitation details
-        \Illuminate\Support\Facades\Log::info('Consultant invitation created', [
-            'email' => $validated['email'],
-            'token' => $invitationToken,
-            'url' => $invitationUrl,
-            'agency' => auth()->user()->agency->name ?? 'Unknown',
-        ]);
+        // Send invitation email
+        try {
+            \Illuminate\Support\Facades\Mail::to($validated['email'])
+                ->send(new \App\Mail\ConsultantInvitation(
+                    $teamMember,
+                    $invitationUrl,
+                    auth()->user()->agency->name ?? 'Unknown Agency'
+                ));
 
-        // TODO: Integrate with mail service once mail configuration is ready
-        // Mail::to($validated['email'])->send(new ConsultantInvitation($teamMember, $invitationUrl));
+            \Illuminate\Support\Facades\Log::info('Consultant invitation email sent', [
+                'email' => $validated['email'],
+                'token' => $invitationToken,
+                'agency' => auth()->user()->agency->name ?? 'Unknown',
+            ]);
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Failed to send consultant invitation email', [
+                'email' => $validated['email'],
+                'error' => $e->getMessage(),
+            ]);
+            // Continue execution - invitation is created, email can be resent
+        }
 
         return redirect()->route('agency.team.index')
             ->with('success', 'Invitation sent successfully to '.$validated['email']);

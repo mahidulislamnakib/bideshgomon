@@ -109,10 +109,11 @@ Route::get('/demo/airbnb-design', function () {
 
 // Role-based dashboard routing
 Route::get('/dashboard', function () {
+    /** @var \App\Models\User $user */
     $user = auth()->user();
 
     // Redirect to appropriate dashboard based on role
-    if ($user->hasRole('admin')) {
+    if ($user && $user->hasRole('admin')) {
         return redirect()->route('admin.dashboard');
     }
 
@@ -761,8 +762,11 @@ Route::middleware('auth')->group(function () {
 
     // Suggestions route (dynamic smart suggestions)
     Route::get('/suggestions', function () {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
         return Inertia::render('User/Suggestions', [
-            'suggestions' => auth()->user()->getSmartSuggestions(),
+            'suggestions' => $user->getSmartSuggestions(),
         ]);
     })->name('suggestions');
 

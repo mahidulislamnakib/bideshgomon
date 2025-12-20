@@ -49,11 +49,11 @@ const submit = () => {
 
                 <!-- Welcome Text -->
                 <div class="text-center mb-8">
-                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200 mb-4">
-                        <ShieldCheckIcon class="h-4 w-4 text-emerald-600 mr-2" />
-                        <span class="text-xs font-medium text-emerald-900">Secure Login</span>
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-upwork-lightest border border-upwork-green/20 mb-4">
+                        <ShieldCheckIcon class="h-4 w-4 text-upwork-green mr-2" />
+                        <span class="text-xs font-medium text-upwork-dark">Secure Login</span>
                     </div>
-                    <h1 class="text-3xl font-bold text-gray-900 mb-2">
+                    <h1 class="text-3xl font-bold text-upwork-dark mb-2">
                         Welcome Back! 👋
                     </h1>
                     <p class="text-gray-600">
@@ -62,8 +62,8 @@ const submit = () => {
                 </div>
 
                 <!-- Success Status Message -->
-                <div v-if="status" class="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-2xl">
-                    <p class="text-sm font-medium text-emerald-800 text-center">{{ status }}</p>
+                <div v-if="status" class="mb-6 p-4 bg-upwork-lightest border border-upwork-green/20 rounded-2xl">
+                    <p class="text-sm font-medium text-upwork-dark text-center">{{ status }}</p>
                 </div>
 
                 <!-- Login Form Card -->
@@ -74,22 +74,17 @@ const submit = () => {
                             <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
                                 Email
                             </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <EnvelopeIcon class="h-5 w-5 text-gray-400" />
-                                </div>
-                                <input
-                                    id="email"
-                                    type="email"
-                                    v-model="form.email"
-                                    required
-                                    autofocus
-                                    autocomplete="username"
-                                    placeholder="your@email.com"
-                                    class="block w-full pl-11 pr-4 py-4 text-base border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
-                                    :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.email }"
-                                />
-                            </div>
+                            <input
+                                id="email"
+                                type="email"
+                                v-model="form.email"
+                                required
+                                autofocus
+                                autocomplete="username"
+                                placeholder="your@email.com"
+                                class="block w-full px-4 py-4 text-base text-gray-900 placeholder-gray-400 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-upwork-green focus:border-upwork-green transition-colors"
+                                :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.email }"
+                            />
                             <p v-if="form.errors.email" class="mt-2 text-sm text-red-600 flex items-center">
                                 <span class="inline-block w-1 h-1 bg-red-600 rounded-full mr-2"></span>
                                 {{ form.errors.email }}
@@ -102,9 +97,6 @@ const submit = () => {
                                 Password
                             </label>
                             <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <LockClosedIcon class="h-5 w-5 text-gray-400" />
-                                </div>
                                 <input
                                     id="password"
                                     :type="showPassword ? 'text' : 'password'"
@@ -112,7 +104,7 @@ const submit = () => {
                                     required
                                     autocomplete="current-password"
                                     placeholder="••••••••"
-                                    class="block w-full pl-11 pr-12 py-4 text-base border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                                    class="block w-full px-4 pr-12 py-4 text-base text-gray-900 placeholder-gray-400 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-upwork-green focus:border-upwork-green transition-colors"
                                     :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.password }"
                                 />
                                 <button
@@ -136,7 +128,7 @@ const submit = () => {
                                 <input
                                     type="checkbox"
                                     v-model="form.remember"
-                                    class="w-5 h-5 text-emerald-600 border-2 border-gray-300 rounded focus:ring-2 focus:ring-emerald-500 cursor-pointer"
+                                    class="w-5 h-5 text-upwork-green border-2 border-gray-300 rounded focus:ring-2 focus:ring-upwork-green cursor-pointer"
                                 />
                                 <span class="ml-2 text-sm font-medium text-gray-700">Remember me</span>
                             </label>
@@ -144,7 +136,7 @@ const submit = () => {
                             <Link
                                 v-if="canResetPassword"
                                 :href="route('password.request')"
-                                class="text-sm font-semibold text-emerald-600 hover:text-emerald-700 touch-manipulation"
+                                class="text-sm font-semibold text-upwork-green hover:text-upwork-green-dark touch-manipulation"
                             >
                                 Forgot password?
                             </Link>
@@ -154,7 +146,7 @@ const submit = () => {
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="w-full flex justify-center items-center py-4 px-6 text-base font-semibold text-white bg-emerald-600 rounded-2xl shadow-lg hover:shadow-xl hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation min-h-[48px]"
+                            class="w-full flex justify-center items-center py-4 px-6 text-base font-semibold text-white bg-upwork-green rounded-full shadow-lg hover:shadow-xl hover:bg-upwork-green-dark focus:outline-none focus:ring-4 focus:ring-upwork-green/50 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation min-h-[48px]"
                         >
                             <svg v-if="form.processing" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -204,7 +196,7 @@ const submit = () => {
                             New user?
                             <Link
                                 :href="route('register')"
-                                class="font-semibold text-emerald-600 hover:text-emerald-700 touch-manipulation"
+                                class="font-semibold text-upwork-green hover:text-upwork-green-dark touch-manipulation"
                             >
                                 Create account
                             </Link>

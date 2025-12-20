@@ -6,41 +6,19 @@
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
-        <meta name="theme-color" content="#4F46E5">
+        <meta name="theme-color" content="#64ac44">
         <meta name="format-detection" content="telephone=no">
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=proxima-nova:400,500,600,700&display=swap" rel="stylesheet" />
-        
-        <!-- Tailwind CSS CDN -->
-        <!-- NOTE: CSS imports disabled in app.js due to Sucrase parser bug -->
-        <!-- This CDN provides base Tailwind functionality until parser issue resolved -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            'brand-red': {
-                                600: '#e4282b',
-                                700: '#c02326'
-                            }
-                        }
-                    }
-                }
-            }
-        </script>
+        <!-- Fonts - Plus Jakarta Sans (Modern geometric sans-serif) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        <!-- Scripts -->
+        <!-- Scripts and Styles (CSS imported via app.js) -->
         @routes
-        @if(app()->environment('testing'))
-            @vite(['resources/js/app.js'])
-        @else
-            @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
-        @endif
+        @vite(['resources/js/app.js'])
         @inertiaHead
         
         <!-- Unregister any previously registered service workers -->

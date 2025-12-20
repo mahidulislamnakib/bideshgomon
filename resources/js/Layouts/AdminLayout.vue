@@ -11,6 +11,7 @@ import ImpersonationBanner from '@/Components/ImpersonationBanner.vue'
 import PWAInstallPrompt from '@/Components/PWAInstallPrompt.vue'
 import NetworkStatus from '@/Components/NetworkStatus.vue'
 import SlowConnectionWarning from '@/Components/SlowConnectionWarning.vue'
+import ErrorBoundary from '@/Components/ErrorBoundary.vue'
 import {
   HomeIcon,
   Bars3Icon,
@@ -1060,7 +1061,9 @@ const hasPermission = (item) => {
         </header>
 
         <main class="flex-1">
-          <slot></slot>
+          <ErrorBoundary>
+            <slot></slot>
+          </ErrorBoundary>
         </main>
       </div>
 
@@ -1183,5 +1186,8 @@ const hasPermission = (item) => {
     <NetworkStatus />
     <PWAInstallPrompt />
     <SlowConnectionWarning />
+    
+    <!-- Toast Notifications -->
+    <Toaster position="top-right" :rich-colors="true" />
   </div>
 </template>

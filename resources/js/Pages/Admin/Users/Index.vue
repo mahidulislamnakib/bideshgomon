@@ -175,128 +175,167 @@ const impersonateUser = (user) => {
     <Head title="User Management" />
 
     <AdminLayout>
-        <div class="min-h-screen bg-gray-50 py-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Header -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                                <UsersIcon class="h-6 w-6 text-brand-red-600" />
+        <!-- Modern Hero Header -->
+        <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
+                                <UsersIcon class="h-8 w-8 text-white" />
                             </div>
-                            <div>
-                                <h1 class="text-2xl font-bold text-gray-900">User Management</h1>
-                                <p class="text-sm text-gray-600 mt-0.5">Manage and moderate platform users</p>
-                            </div>
+                            <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                                User Management
+                            </h1>
                         </div>
-                        <div class="flex gap-3">
-                            <Link
-                                :href="route('admin.users.create')"
-                                class="bg-brand-red-600 text-white hover:bg-red-700 px-4 py-2.5 rounded-lg font-medium transition-colors flex items-center gap-2"
-                            >
-                                <UserPlusIcon class="h-5 w-5" />
-                                Create User
-                            </Link>
-                            <button
-                                @click="exportUsers"
-                                class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2.5 rounded-lg font-medium transition-colors flex items-center gap-2"
-                            >
-                                <ArrowDownTrayIcon class="h-5 w-5" />
-                                Export CSV
-                            </button>
-                        </div>
+                        <p class="text-white/90 text-lg max-w-2xl">
+                            Manage and moderate platform users with advanced filtering and bulk actions
+                        </p>
                     </div>
-                </div>
-
-                <!-- Stats Cards -->
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm font-medium text-gray-600 mb-1">Total Users</p>
-                                <p class="text-2xl font-bold text-gray-900">{{ stats.total }}</p>
-                            </div>
-                            <UsersIcon class="h-8 w-8 text-brand-red-600" />
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm font-medium text-gray-600 mb-1">Active</p>
-                                <p class="text-2xl font-bold text-green-600">{{ stats.active }}</p>
-                            </div>
-                            <CheckCircleIcon class="h-8 w-8 text-green-500" />
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm font-medium text-gray-600 mb-1">Suspended</p>
-                                <p class="text-2xl font-bold text-red-600">{{ stats.suspended }}</p>
-                            </div>
-                            <NoSymbolIcon class="h-8 w-8 text-red-500" />
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm font-medium text-gray-600 mb-1">Verified</p>
-                                <p class="text-2xl font-bold text-green-600">{{ stats.verified }}</p>
-                            </div>
-                            <ShieldCheckIcon class="h-8 w-8 text-green-500" />
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm font-medium text-gray-600 mb-1">Unverified</p>
-                                <p class="text-2xl font-bold text-amber-600">{{ stats.unverified }}</p>
-                            </div>
-                            <XCircleIcon class="h-8 w-8 text-amber-500" />
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm font-medium text-gray-600 mb-1">Admins</p>
-                                <p class="text-2xl font-bold text-brand-red-600">{{ stats.admins }}</p>
-                            </div>
-                            <ShieldCheckIcon class="h-8 w-8 text-brand-red-600" />
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Search and Filters -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-                    <div class="flex flex-col lg:flex-row gap-4">
-                        <div class="flex-1">
-                            <div class="relative">
-                                <MagnifyingGlassIcon class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
-                                <input
-                                    v-model="search"
-                                    type="text"
-                                    @keyup.enter="searchUsers"
-                                    placeholder="Search by name, email, or phone..."
-                                    class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
-                                />
-                            </div>
-                        </div>
-                        <button
-                            @click="showFilters = !showFilters"
-                            class="px-5 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+                    <div class="flex gap-3">
+                        <Link
+                            :href="route('admin.users.create')"
+                            class="inline-flex items-center px-6 py-3.5 bg-white hover:bg-gray-50 text-indigo-600 rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:scale-105 font-semibold gap-2"
                         >
-                            <FunnelIcon class="h-5 w-5" />
-                            Filters
+                            <UserPlusIcon class="h-5 w-5" />
+                            Create User
+                        </Link>
+                        <button
+                            @click="exportUsers"
+                            class="inline-flex items-center px-6 py-3.5 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white rounded-xl transition-all border border-white/30 font-semibold gap-2"
+                        >
+                            <ArrowDownTrayIcon class="h-5 w-5" />
+                            Export CSV
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
 
-                    <!-- Filters Panel -->
-                    <div v-if="showFilters" class="mt-4 pt-4 border-t border-gray-200">
+        <div class="min-h-screen bg-gray-50 py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
+
+                <!-- Modern Statistics Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
+                    <!-- Total Users -->
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
+                                    <UsersIcon class="h-6 w-6 text-white" />
+                                </div>
+                                <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Total</span>
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-600 mb-1">Total Users</h3>
+                            <p class="text-3xl font-bold text-gray-900">{{ stats.total }}</p>
+                        </div>
+                        <div class="h-1 bg-gradient-to-r from-indigo-500 to-indigo-600"></div>
+                    </div>
+
+                    <!-- Active Users -->
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
+                                    <CheckCircleIcon class="h-6 w-6 text-white" />
+                                </div>
+                                <span class="text-xs font-semibold text-green-600 bg-green-50 px-3 py-1 rounded-full">Active</span>
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-600 mb-1">Active</h3>
+                            <p class="text-3xl font-bold text-gray-900">{{ stats.active }}</p>
+                        </div>
+                        <div class="h-1 bg-gradient-to-r from-green-500 to-emerald-600"></div>
+                    </div>
+
+                    <!-- Suspended -->
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-br from-red-500 to-red-600 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
+                                    <NoSymbolIcon class="h-6 w-6 text-white" />
+                                </div>
+                                <span class="text-xs font-semibold text-red-600 bg-red-50 px-3 py-1 rounded-full">Blocked</span>
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-600 mb-1">Suspended</h3>
+                            <p class="text-3xl font-bold text-gray-900">{{ stats.suspended }}</p>
+                        </div>
+                        <div class="h-1 bg-gradient-to-r from-red-500 to-red-600"></div>
+                    </div>
+
+                    <!-- Verified -->
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
+                                    <ShieldCheckIcon class="h-6 w-6 text-white" />
+                                </div>
+                                <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">Verified</span>
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-600 mb-1">Verified</h3>
+                            <p class="text-3xl font-bold text-gray-900">{{ stats.verified }}</p>
+                        </div>
+                        <div class="h-1 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                    </div>
+
+                    <!-- Unverified -->
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
+                                    <XCircleIcon class="h-6 w-6 text-white" />
+                                </div>
+                                <span class="text-xs font-semibold text-amber-600 bg-amber-50 px-3 py-1 rounded-full">Pending</span>
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-600 mb-1">Unverified</h3>
+                            <p class="text-3xl font-bold text-gray-900">{{ stats.unverified }}</p>
+                        </div>
+                        <div class="h-1 bg-gradient-to-r from-amber-500 to-orange-600"></div>
+                    </div>
+
+                    <!-- Admins -->
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
+                                    <ShieldCheckIcon class="h-6 w-6 text-white" />
+                                </div>
+                                <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-3 py-1 rounded-full">Admin</span>
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-600 mb-1">Admins</h3>
+                            <p class="text-3xl font-bold text-gray-900">{{ stats.admins }}</p>
+                        </div>
+                        <div class="h-1 bg-gradient-to-r from-purple-500 to-purple-600"></div>
+                    </div>
+                </div>
+
+                <!-- Modern Search & Filters Card -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+                    <div class="flex flex-col gap-4">
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <!-- Search Input -->
+                            <div class="flex-1 relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <MagnifyingGlassIcon class="h-5 w-5 text-gray-400" />
+                                </div>
+                                <input
+                                    v-model="search"
+                                    @keyup.enter="searchUsers"
+                                    type="text"
+                                    placeholder="Search by name, email, or phone..."
+                                    class="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white text-gray-900 placeholder-gray-400"
+                                />
+                            </div>
+                            <button
+                                @click="showFilters = !showFilters"
+                                class="px-6 py-3.5 bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-700 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+                            >
+                                <FunnelIcon class="h-5 w-5" />
+                                Filters
+                            </button>
+                        </div>
+
+                        <!-- Filters Panel -->
+                        <div v-if="showFilters" class="mt-4 pt-4 border-t border-gray-200">
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
@@ -351,6 +390,7 @@ const impersonateUser = (user) => {
                         </div>
                     </div>
                 </div>
+            </div>
 
                 <!-- Bulk Actions -->
                 <div

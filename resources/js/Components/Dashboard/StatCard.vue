@@ -38,39 +38,53 @@ const props = defineProps({
 const variantClasses = computed(() => {
   const variants = {
     blue: {
-      bg: 'bg-blue-50 dark:bg-blue-900/20',
-      icon: 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400',
-      text: 'text-blue-600 dark:text-blue-400'
+      bg: 'bg-white',
+      icon: 'bg-gradient-to-br from-blue-500 to-blue-600',
+      text: 'text-blue-600',
+      badge: 'bg-blue-50 text-blue-600',
+      border: 'from-blue-500 to-blue-600'
     },
     emerald: {
-      bg: 'bg-emerald-50 dark:bg-emerald-900/20',
-      icon: 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400',
-      text: 'text-emerald-600 dark:text-emerald-400'
+      bg: 'bg-white',
+      icon: 'bg-gradient-to-br from-green-500 to-emerald-600',
+      text: 'text-emerald-600',
+      badge: 'bg-green-50 text-green-600',
+      border: 'from-green-500 to-emerald-600'
     },
     purple: {
-      bg: 'bg-purple-50 dark:bg-purple-900/20',
-      icon: 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400',
-      text: 'text-purple-600 dark:text-purple-400'
+      bg: 'bg-white',
+      icon: 'bg-gradient-to-br from-purple-500 to-purple-600',
+      text: 'text-purple-600',
+      badge: 'bg-purple-50 text-purple-600',
+      border: 'from-purple-500 to-purple-600'
     },
     amber: {
-      bg: 'bg-amber-50 dark:bg-amber-900/20',
-      icon: 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400',
-      text: 'text-amber-600 dark:text-amber-400'
+      bg: 'bg-white',
+      icon: 'bg-gradient-to-br from-amber-500 to-orange-600',
+      text: 'text-amber-600',
+      badge: 'bg-amber-50 text-amber-600',
+      border: 'from-amber-500 to-orange-600'
     },
     rose: {
-      bg: 'bg-rose-50 dark:bg-rose-900/20',
-      icon: 'bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400',
-      text: 'text-rose-600 dark:text-rose-400'
+      bg: 'bg-white',
+      icon: 'bg-gradient-to-br from-rose-500 to-rose-600',
+      text: 'text-rose-600',
+      badge: 'bg-rose-50 text-rose-600',
+      border: 'from-rose-500 to-rose-600'
     },
     cyan: {
-      bg: 'bg-cyan-50 dark:bg-cyan-900/20',
-      icon: 'bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400',
-      text: 'text-cyan-600 dark:text-cyan-400'
+      bg: 'bg-white',
+      icon: 'bg-gradient-to-br from-cyan-500 to-cyan-600',
+      text: 'text-cyan-600',
+      badge: 'bg-cyan-50 text-cyan-600',
+      border: 'from-cyan-500 to-cyan-600'
     },
     indigo: {
-      bg: 'bg-indigo-50 dark:bg-indigo-900/20',
-      icon: 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400',
-      text: 'text-indigo-600 dark:text-indigo-400'
+      bg: 'bg-white',
+      icon: 'bg-gradient-to-br from-indigo-500 to-indigo-600',
+      text: 'text-indigo-600',
+      badge: 'bg-indigo-50 text-indigo-600',
+      border: 'from-indigo-500 to-indigo-600'
     }
   }
   
@@ -94,48 +108,53 @@ const formattedValue = computed(() => {
 </script>
 
 <template>
-  <div class="relative overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 shadow-sm hover:shadow-md transition-shadow">
+  <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
     <!-- Loading overlay -->
-    <div v-if="loading" class="absolute inset-0 bg-white/50 dark:bg-gray-800/50 flex items-center justify-center z-10">
-      <div class="h-8 w-8 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin" />
+    <div v-if="loading" class="absolute inset-0 bg-white/80 flex items-center justify-center z-10">
+      <div class="h-8 w-8 border-4 border-gray-300 border-t-indigo-600 rounded-full animate-spin" />
     </div>
 
-    <div class="flex items-start justify-between">
-      <div class="flex-1">
-        <!-- Label -->
-        <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
-          {{ label }}
-        </p>
-
-        <!-- Value -->
-        <p class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          {{ formattedValue }}
-        </p>
-
-        <!-- Trend -->
-        <div v-if="trend" class="flex items-center space-x-1 text-sm font-medium" :class="trendClasses">
-          <component :is="trend.direction === 'up' ? ArrowUpIcon : ArrowDownIcon" class="h-4 w-4" />
-          <span>{{ trend.value }}</span>
-          <span v-if="trend.label" class="text-gray-500 dark:text-gray-400 font-normal">
-            {{ trend.label }}
-          </span>
+    <div class="p-6">
+      <div class="flex items-center justify-between mb-6">
+        <!-- Icon with gradient -->
+        <div v-if="icon" :class="[variantClasses.icon, 'p-4 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300']">
+          <component :is="icon" class="h-8 w-8 text-white" />
         </div>
-
-        <!-- Description -->
-        <p v-if="description" class="text-sm text-gray-500 dark:text-gray-400 mt-2">
-          {{ description }}
-        </p>
+        
+        <!-- Trend Badge -->
+        <span v-if="trend" :class="[variantClasses.badge, 'text-xs font-semibold px-3 py-1 rounded-full']">
+          {{ trend.direction === 'up' ? '↑' : '↓' }} {{ trend.label }}
+        </span>
       </div>
 
-      <!-- Icon -->
-      <div v-if="icon" :class="[variantClasses.icon, 'rounded-lg p-3']">
-        <component :is="icon" class="h-6 w-6" />
+      <!-- Label -->
+      <h3 class="text-sm font-medium text-gray-600 mb-1">
+        {{ label }}
+      </h3>
+
+      <!-- Value -->
+      <p class="text-3xl font-bold text-gray-900 mb-2">
+        {{ formattedValue }}
+      </p>
+
+      <!-- Trend Value -->
+      <div v-if="trend" class="flex items-center gap-1 text-sm font-medium" :class="trendClasses">
+        <component :is="trend.direction === 'up' ? ArrowUpIcon : ArrowDownIcon" class="h-4 w-4" />
+        <span>{{ trend.value }}</span>
+      </div>
+
+      <!-- Description -->
+      <p v-if="description" class="text-sm text-gray-500 mt-1">
+        {{ description }}
+      </p>
+
+      <!-- Additional content slot -->
+      <div v-if="$slots.default" class="mt-4 pt-4 border-t border-gray-200">
+        <slot />
       </div>
     </div>
 
-    <!-- Additional content slot -->
-    <div v-if="$slots.default" class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-      <slot />
-    </div>
+    <!-- Gradient bottom border -->
+    <div :class="['h-1 bg-gradient-to-r', variantClasses.border]"></div>
   </div>
 </template>

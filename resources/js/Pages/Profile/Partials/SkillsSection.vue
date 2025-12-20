@@ -13,7 +13,7 @@ import DangerButton from '@/Components/DangerButton.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
 import InputError from '@/Components/InputError.vue'
-import { SparklesIcon, PlusIcon, PencilSquareIcon, TrashIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
+import { SparklesIcon, PlusIcon, PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline'
 
 const props = defineProps({
     userProfile: Object,
@@ -323,16 +323,13 @@ const getProficiencyColor = (level) => {
                     <div class="space-y-4">
                         <div>
                             <InputLabel for="search" value="Search Skills" />
-                            <div class="relative mt-1">
-                                <MagnifyingGlassIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                                <TextInput
-                                    id="search"
-                                    v-model="searchQuery"
-                                    type="text"
-                                    class="pl-10 w-full"
-                                    placeholder="Search by name..."
-                                />
-                            </div>
+                            <TextInput
+                                id="search"
+                                v-model="searchQuery"
+                                type="text"
+                                class="mt-1 w-full"
+                                placeholder="Search by name..."
+                            />
                         </div>
 
                         <div>

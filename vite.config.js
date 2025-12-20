@@ -5,12 +5,12 @@ import path from 'path';
 
 export default defineConfig({
     server: {
-        host: '0.0.0.0',
+        host: '127.0.0.1',
         port: 5173,
         strictPort: true,
         hmr: {
             protocol: 'ws',
-            host: 'localhost',
+            host: '127.0.0.1',
             port: 5173,
             clientPort: 5173,
             overlay: true,

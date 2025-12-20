@@ -46,7 +46,9 @@ class TranslationController extends Controller
 
     public function show(Translation $translation): Response
     {
-        if ($translation->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        if ($translation->user_id !== $user->id) {
             abort(403);
         }
 

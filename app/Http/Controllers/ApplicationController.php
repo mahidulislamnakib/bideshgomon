@@ -8,6 +8,7 @@ use App\Services\DataMapperService;
 use App\Services\ServiceApplicationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -38,7 +39,9 @@ class ApplicationController extends Controller
             ->firstOrFail();
 
         // Check if user already has a pending application
-        $existingApplication = auth()->user()
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $existingApplication = $user
             ->serviceApplications()
             ->where('service_module_id', $service->id)
             ->whereIn('status', ['draft', 'pending', 'under_review'])
@@ -51,7 +54,7 @@ class ApplicationController extends Controller
         }
 
         // Get form with pre-filled data from user profile
-        $formWithData = $this->dataMapper->getFormWithData($service, auth()->user());
+        $formWithData = $this->dataMapper->getFormWithData($service, $user);
 
         return Inertia::render('Services/ApplicationForm', [
             'service' => $service,
@@ -76,23 +79,19 @@ class ApplicationController extends Controller
         try {
             DB::beginTransaction();
 
+            /** @var \App\Models\User $user */
+            $user = auth()->user();
             $application = $this->applicationService->createApplication(
+                $user,
                 $service,
-                auth()->user(),
                 $request->input('form_data', []),
+                [],
                 $isDraft
             );
 
             // Handle file uploads
             if ($request->hasFile('documents')) {
-                $documents = [];
-                foreach ($request->file('documents') as $fieldName => $file) {
-                    $documents[$fieldName] = [
-                        'file' => $file,
-                        'document_type' => $fieldName,
-                    ];
-                }
-                $this->applicationService->attachDocuments($application, $documents);
+                $this->applicationService->attachDocuments($application, $request->file('documents'));
             }
 
             // Update profile if user checked "save to profile"
@@ -143,7 +142,9 @@ class ApplicationController extends Controller
      */
     public function index(Request $request): Response
     {
-        $query = auth()->user()
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $query = $user
             ->serviceApplications()
             ->with(['serviceModule', 'statusHistory' => function ($q) {
                 $q->latest()->limit(1);
@@ -194,7 +195,9 @@ class ApplicationController extends Controller
     public function show(ServiceApplication $application): Response
     {
         // Ensure user owns this application
-        if ($application->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        if ($application->user_id !== $user->id) {
             abort(403, 'Unauthorized access to application.');
         }
 
@@ -264,7 +267,9 @@ class ApplicationController extends Controller
     public function update(Request $request, ServiceApplication $application)
     {
         // Ensure user owns this application
-        if ($application->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        if ($application->user_id !== $user->id) {
             abort(403, 'Unauthorized access to application.');
         }
 
@@ -283,14 +288,7 @@ class ApplicationController extends Controller
 
             // Handle file uploads
             if ($request->hasFile('documents')) {
-                $documents = [];
-                foreach ($request->file('documents') as $fieldName => $file) {
-                    $documents[$fieldName] = [
-                        'file' => $file,
-                        'document_type' => $fieldName,
-                    ];
-                }
-                $this->applicationService->attachDocuments($application, $documents);
+                $this->applicationService->attachDocuments($application, $request->file('documents'));
             }
 
             // Update profile if requested
@@ -319,7 +317,9 @@ class ApplicationController extends Controller
     public function submit(ServiceApplication $application)
     {
         // Ensure user owns this application
-        if ($application->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        if ($application->user_id !== $user->id) {
             abort(403, 'Unauthorized access to application.');
         }
 
@@ -345,7 +345,9 @@ class ApplicationController extends Controller
     public function cancel(ServiceApplication $application)
     {
         // Ensure user owns this application
-        if ($application->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        if ($application->user_id !== $user->id) {
             abort(403, 'Unauthorized access to application.');
         }
 
@@ -389,8 +391,8 @@ class ApplicationController extends Controller
 
             // Delete associated documents
             foreach ($application->documents as $document) {
-                if ($document->file_path && \Storage::disk('public')->exists($document->file_path)) {
-                    \Storage::disk('public')->delete($document->file_path);
+                if ($document->file_path && Storage::disk('public')->exists($document->file_path)) {
+                    Storage::disk('public')->delete($document->file_path);
                 }
                 $document->delete();
             }

@@ -48,8 +48,10 @@ trait CreatesServiceApplications
             }
 
             // Create service application
+            /** @var \App\Models\User $user */
+            $user = auth()->user();
             $serviceApplication = ServiceApplication::create([
-                'user_id' => $primaryModel->user_id ?? auth()->id(),
+                'user_id' => $primaryModel->user_id ?? $user->id,
                 'service_module_id' => $serviceModule->id,
                 $primaryModelKey => $primaryModel->id,
                 'status' => 'pending',

@@ -12,6 +12,7 @@ import NotificationBell from '@/Components/NotificationBell.vue';
 import PWAInstallPrompt from '@/Components/PWAInstallPrompt.vue';
 import NetworkStatus from '@/Components/NetworkStatus.vue';
 import SlowConnectionWarning from '@/Components/SlowConnectionWarning.vue';
+import ErrorBoundary from '@/Components/ErrorBoundary.vue';
 import { Link } from '@inertiajs/vue3';
 import { 
     SparklesIcon,
@@ -60,7 +61,7 @@ const leaveImpersonation = () => {
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-50">
             <!-- Impersonation Banner -->
             <div v-if="$page.props.auth.user?.impersonating" class="bg-red-600 text-white shadow-inner">
                 <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[13px]">
@@ -87,7 +88,7 @@ const leaveImpersonation = () => {
                 </div>
             </div>
             <nav
-                class="border-b border-gray-100 bg-white sticky top-0 z-40"
+                class="border-b border-gray-200 bg-white sticky top-0 z-40 shadow-sm"
             >
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-3 sm:px-4 md:px-6 lg:px-8">
@@ -759,7 +760,9 @@ const leaveImpersonation = () => {
 
             <!-- Page Content -->
             <main>
-                <slot />
+                <ErrorBoundary>
+                    <slot />
+                </ErrorBoundary>
             </main>
 
             <!-- Mobile Bottom Navigation -->
@@ -770,5 +773,8 @@ const leaveImpersonation = () => {
         <NetworkStatus />
         <PWAInstallPrompt />
         <SlowConnectionWarning />
+        
+        <!-- Toast Notifications -->
+        <Toaster position="top-right" :rich-colors="true" />
     </div>
 </template>

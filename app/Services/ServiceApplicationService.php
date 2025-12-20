@@ -8,6 +8,7 @@ use App\Models\ServiceApplication;
 use App\Models\ServiceModule;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
  * ServiceApplicationService
@@ -80,7 +81,7 @@ class ServiceApplicationService
             return $application->fresh();
         } catch (\Exception $e) {
             DB::rollBack();
-            \Log::error('Failed to create application', [
+            Log::error('Failed to create application', [
                 'user_id' => $user->id,
                 'service_id' => $service->id,
                 'error' => $e->getMessage(),
@@ -119,7 +120,7 @@ class ServiceApplicationService
             return $application->fresh();
         } catch (\Exception $e) {
             DB::rollBack();
-            \Log::error('Failed to update application', [
+            Log::error('Failed to update application', [
                 'application_id' => $application->id,
                 'error' => $e->getMessage(),
             ]);
@@ -220,7 +221,7 @@ class ServiceApplicationService
      *
      * @param  array  $files  Format: ['field_name' => UploadedFile]
      */
-    protected function attachDocuments(ServiceApplication $application, array $files): void
+    public function attachDocuments(ServiceApplication $application, array $files): void
     {
         foreach ($files as $fieldName => $file) {
             if (! $file || ! $file->isValid()) {

@@ -1,125 +1,189 @@
+<template>
+  <component
+    :is="componentType"
+    :href="href"
+    :type="buttonType"
+    :disabled="disabled || loading"
+    :class="buttonClasses"
+    @click="handleClick"
+    class="touch-manipulation no-tap-highlight"
+  >
+    <!-- Loading Spinner -->
+    <span v-if="loading" class="spinner" :class="spinnerSizeClass"></span>
+    
+    <!-- Leading Icon -->
+    <component v-if="leadingIcon && !loading" :is="leadingIcon" :class="iconSizeClass" />
+    
+    <!-- Default Slot (Text Content) -->
+    <span v-if="$slots.default">
+      <slot />
+    </span>
+    
+    <!-- Trailing Icon -->
+    <component v-if="trailingIcon && !loading" :is="trailingIcon" :class="iconSizeClass" />
+  </component>
+</template>
+
 <script setup>
 /**
- * Button Component
- * Design System V2 - BideshGomon
- *
- * Usage:
- * <Button variant="primary" size="md" @click="handleClick">Save</Button>
- * <Button variant="outline" :loading="isSubmitting">Submit</Button>
- * <Button variant="ghost" size="sm" :icon="PlusIcon">Add</Button>
+ * World-Class Button Component
+ * International UI/UX Standards
+ * Mobile-First, Accessible, Consistent
  */
 
-import { computed } from 'vue'
+import { computed } from 'vue';
+import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
+  // Variant
   variant: {
     type: String,
     default: 'primary',
-    validator: (value) => ['primary', 'secondary', 'outline', 'ghost', 'danger', 'success'].includes(value),
+    validator: (value) => ['primary', 'secondary', 'accent', 'ghost', 'outline', 'danger', 'success', 'warning'].includes(value),
   },
+  
+  // Size
   size: {
     type: String,
     default: 'md',
-    validator: (value) => ['sm', 'md', 'lg'].includes(value),
+    validator: (value) => ['xs', 'sm', 'md', 'lg', 'xl'].includes(value),
   },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  icon: {
-    type: [Object, Function], // Heroicon component (can be Function or Object)
-    default: null,
-  },
-  iconOnly: {
-    type: Boolean,
-    default: false,
-  },
+  
+  // Type (for button element)
   type: {
     type: String,
     default: 'button',
     validator: (value) => ['button', 'submit', 'reset'].includes(value),
   },
-})
+  
+  // Link behavior
+  href: {
+    type: String,
+    default: null,
+  },
+  
+  // State
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+  
+  // Icons
+  leadingIcon: {
+    type: Object,
+    default: null,
+  },
+  
+  trailingIcon: {
+    type: Object,
+    default: null,
+  },
+  
+  // Full width
+  fullWidth: {
+    type: Boolean,
+    default: false,
+  },
+  
+  // Icon only (no text)
+  iconOnly: {
+    type: Boolean,
+    default: false,
+  },
+});
 
-const buttonClasses = computed(() => {
-  const base = [
-    'inline-flex items-center justify-center gap-2',
-    'font-semibold transition-all duration-base',
-    'focus:outline-none focus:ring-2 focus:ring-offset-2',
-    'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
-    'active:scale-95',
-  ]
+const emit = defineEmits(['click']);
 
-  // Variant styles - Design System V2 (Brand Red + Brand Green)
-  const variants = {
-    primary: 'bg-brand-red-400 hover:bg-brand-red-600 text-white shadow-sm hover:shadow-brand-red focus:ring-brand-red-400',
-    secondary: 'bg-gray-100 hover:bg-gray-200 text-gray-700 shadow-sm focus:ring-gray-300',
-    success: 'bg-brand-green-400 hover:bg-brand-green-600 text-white shadow-sm hover:shadow-md focus:ring-brand-green-400',
-    outline: 'border-2 border-gray-200 hover:border-brand-red-400 text-gray-700 hover:text-brand-red-400 hover:bg-red-50 focus:ring-brand-red-400',
-    ghost: 'text-gray-700 hover:bg-gray-100 active:bg-gray-200 focus:ring-gray-300',
-    danger: 'bg-red-600 hover:bg-red-700 text-white shadow-sm hover:shadow-md focus:ring-red-500',
+// Determine component type
+const componentType = computed(() => {
+  if (props.href) {
+    return Link;
   }
+  return 'button';
+});
 
-  // Size styles - Rounded (Design System V2: rounded-md default)
-  const sizes = {
-    sm: props.iconOnly ? 'w-8 h-8 rounded-md' : 'h-9 px-4 text-sm rounded-md',
-    md: props.iconOnly ? 'w-10 h-10 rounded-md' : 'h-10 px-6 text-base rounded-md',
-    lg: props.iconOnly ? 'w-12 h-12 rounded-lg' : 'h-12 px-8 text-lg rounded-lg',
-  }
+const buttonType = computed(() => {
+  if (props.href) return undefined;
+  return props.type;
+});
 
-  return [...base, variants[props.variant], sizes[props.size]]
-})
+// Variant classes
+const variantClasses = {
+  primary: 'bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 focus-visible:ring-primary-100 shadow-sm hover:shadow-md',
+  secondary: 'bg-secondary-500 text-white hover:bg-secondary-600 active:bg-secondary-700 focus-visible:ring-secondary-100 shadow-sm hover:shadow-md',
+  accent: 'bg-accent-500 text-white hover:bg-accent-600 active:bg-accent-700 focus-visible:ring-accent-100 shadow-sm hover:shadow-md',
+  ghost: 'bg-transparent text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200 focus-visible:ring-neutral-100',
+  outline: 'bg-transparent border-2 border-neutral-300 text-neutral-700 hover:border-neutral-400 hover:bg-neutral-50 active:bg-neutral-100 focus-visible:ring-neutral-100',
+  danger: 'bg-error-500 text-white hover:bg-error-600 active:bg-error-700 focus-visible:ring-error-100 shadow-sm hover:shadow-md',
+  success: 'bg-success-500 text-white hover:bg-success-600 active:bg-success-700 focus-visible:ring-success-100 shadow-sm hover:shadow-md',
+  warning: 'bg-warning-500 text-white hover:bg-warning-600 active:bg-warning-700 focus-visible:ring-warning-100 shadow-sm hover:shadow-md',
+};
 
-const iconSize = computed(() => ({
+// Size classes
+const sizeClasses = {
+  xs: 'px-2.5 py-1.5 text-xs',
+  sm: 'px-3 py-2 text-sm',
+  md: 'px-4 py-2.5 text-sm',
+  lg: 'px-5 py-3 text-base',
+  xl: 'px-6 py-4 text-lg',
+};
+
+// Icon-only size classes
+const iconOnlySizeClasses = {
+  xs: 'p-1.5',
+  sm: 'p-2',
+  md: 'p-2.5',
+  lg: 'p-3',
+  xl: 'p-4',
+};
+
+// Icon size classes
+const iconSizeClasses = {
+  xs: 'w-3.5 h-3.5',
   sm: 'w-4 h-4',
   md: 'w-5 h-5',
-  lg: 'w-6 h-6',
-}[props.size]))
+  lg: 'w-5 h-5',
+  xl: 'w-6 h-6',
+};
+
+// Spinner size classes
+const spinnerSizeClasses = {
+  xs: 'w-3 h-3 border',
+  sm: 'w-3.5 h-3.5 border',
+  md: 'w-4 h-4 border-2',
+  lg: 'w-5 h-5 border-2',
+  xl: 'w-6 h-6 border-2',
+};
+
+const buttonClasses = computed(() => {
+  return [
+    // Base button styles
+    'inline-flex items-center justify-center gap-2 font-medium rounded-lg',
+    'transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-2',
+    'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
+    
+    // Variant
+    variantClasses[props.variant],
+    
+    // Size
+    props.iconOnly ? iconOnlySizeClasses[props.size] : sizeClasses[props.size],
+    
+    // Full width
+    props.fullWidth ? 'w-full' : '',
+  ];
+});
+
+const iconSizeClass = computed(() => iconSizeClasses[props.size]);
+const spinnerSizeClass = computed(() => spinnerSizeClasses[props.size]);
+
+const handleClick = (event) => {
+  if (!props.disabled && !props.loading) {
+    emit('click', event);
+  }
+};
 </script>
-
-<template>
-  <button
-    :type="type"
-    :disabled="disabled || loading"
-    :class="buttonClasses"
-  >
-    <!-- Loading Spinner -->
-    <svg
-      v-if="loading"
-      :class="['animate-spin', iconSize]"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <circle
-        class="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        stroke-width="4"
-      />
-      <path
-        class="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-      />
-    </svg>
-
-    <!-- Icon (if provided) -->
-    <component
-      :is="icon"
-      v-else-if="icon"
-      :class="iconSize"
-    />
-
-    <!-- Button Text -->
-    <span v-if="!iconOnly && !loading">
-      <slot></slot>
-    </span>
-  </button>
-</template>

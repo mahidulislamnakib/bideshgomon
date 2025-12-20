@@ -1,10 +1,15 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
-import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-import { ref } from 'vue'
+import { 
+  Bars3Icon, 
+  XMarkIcon, 
+  MagnifyingGlassIcon,
+  ChevronDownIcon 
+} from '@heroicons/vue/24/outline'
+import { ref, computed } from 'vue'
 
-defineProps({
+const props = defineProps({
   canLogin: {
     type: Boolean,
     default: false
@@ -15,7 +20,29 @@ defineProps({
   }
 })
 
+const page = usePage()
 const mobileMenuOpen = ref(false)
+const searchOpen = ref(false)
+const searchQuery = ref('')
+
+// Check if user is authenticated
+const isAuthenticated = computed(() => !!page.props.auth?.user)
+
+// Navigation items - Upwork style categories
+const navItems = [
+  { label: 'Find Work', href: '/jobs', children: [
+    { label: 'Browse Jobs', href: '/jobs' },
+    { label: 'Saved Jobs', href: '/jobs/saved' },
+    { label: 'My Applications', href: '/user/applications' },
+  ]},
+  { label: 'Services', href: '/services', children: [
+    { label: 'Visa Services', href: '/services?category=visa' },
+    { label: 'Job Placement', href: '/services?category=jobs' },
+    { label: 'Document Services', href: '/services?category=documents' },
+    { label: 'Travel Services', href: '/services?category=travel' },
+  ]},
+  { label: 'Why BideshGomon', href: '/about' },
+]
 
 // Helper function to safely get route URL
 const getMenuUrl = (item) => {
@@ -30,85 +57,191 @@ const getMenuUrl = (item) => {
   }
   return item.url || '#'
 }
+
+const handleSearch = () => {
+  if (searchQuery.value.trim()) {
+    window.location.href = `/search?q=${encodeURIComponent(searchQuery.value)}`
+  }
+}
 </script>
 
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-16 items-center justify-between">
+  <header class="nav-header">
+    <nav class="upwork-container h-full">
+      <div class="flex h-full items-center justify-between gap-4">
         <!-- Logo -->
-        <div class="flex items-center">
-          <Link :href="route('welcome')" class="flex items-center">
-            <ApplicationLogo class="h-10 w-auto" />
+        <div class="flex items-center shrink-0">
+          <Link :href="route('welcome')" class="flex items-center hover:opacity-80 transition-opacity">
+            <ApplicationLogo class="h-8 w-auto" />
           </Link>
         </div>
 
+        <!-- Search Bar (Desktop) - Upwork Style -->
+        <div class="hidden lg:flex flex-1 max-w-xl mx-8">
+          <div class="w-full">
+            <input
+              v-model="searchQuery"
+              type="text"
+              placeholder="Search for jobs, services..."
+              class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-full bg-gray-50 focus:bg-white focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all duration-200"
+              @keyup.enter="handleSearch"
+            />
+          </div>
+        </div>
+
         <!-- Desktop Navigation -->
-        <div class="hidden md:flex md:items-center md:space-x-8">
-          <template v-for="item in $page.props.menus?.header_main || []" :key="item.id">
-            <Link 
-              v-if="item.is_active"
-              :href="getMenuUrl(item)"
-              :target="item.target || '_self'"
-              class="text-gray-700 hover:text-green-600 font-medium transition-colors"
-            >
-              {{ item.label }}
-            </Link>
+        <div class="hidden md:flex md:items-center md:gap-1">
+          <!-- Dynamic Menu Items -->
+          <template v-for="item in $page.props.menus?.header_main || navItems" :key="item.id || item.label">
+            <div class="relative group">
+              <Link 
+                v-if="!item.children"
+                :href="item.href || getMenuUrl(item)"
+                :target="item.target || '_self'"
+                class="nav-link"
+              >
+                {{ item.label }}
+              </Link>
+              
+              <!-- Dropdown for items with children -->
+              <button 
+                v-else
+                class="nav-link inline-flex items-center"
+              >
+                {{ item.label }}
+                <ChevronDownIcon class="w-4 h-4 ml-1" />
+              </button>
+              
+              <!-- Dropdown Menu -->
+              <div 
+                v-if="item.children"
+                class="absolute top-full left-0 mt-1 w-56 bg-white rounded-2xl shadow-lg border border-[var(--border-light)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+              >
+                <div class="py-2">
+                  <Link
+                    v-for="child in item.children"
+                    :key="child.label"
+                    :href="child.href"
+                    class="block px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)] transition-colors"
+                  >
+                    {{ child.label }}
+                  </Link>
+                </div>
+              </div>
+            </div>
           </template>
         </div>
 
-        <!-- Auth Buttons -->
-        <div class="flex items-center space-x-4">
-          <template v-if="canLogin">
+        <!-- Auth Buttons - Upwork Style -->
+        <div class="flex items-center gap-3">
+          <!-- Mobile Search Toggle -->
+          <button
+            @click="searchOpen = !searchOpen"
+            class="lg:hidden p-2 rounded-full hover:bg-[var(--bg-tertiary)] transition-colors"
+          >
+            <MagnifyingGlassIcon class="w-5 h-5 text-[var(--text-primary)]" />
+          </button>
+
+          <template v-if="!isAuthenticated && canLogin">
             <Link
               :href="route('login')"
-              class="hidden md:inline-flex text-gray-700 hover:text-green-600 font-medium transition-colors"
+              class="hidden sm:inline-flex nav-link"
             >
-              Sign in
+              Log In
             </Link>
             <Link
               v-if="canRegister"
               :href="route('register')"
-              class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-all shadow-sm hover:shadow-md"
+              class="btn-primary btn-sm"
             >
-              Get Started
+              Sign Up
+            </Link>
+          </template>
+          
+          <template v-else-if="isAuthenticated">
+            <Link
+              :href="route('dashboard')"
+              class="btn-primary btn-sm"
+            >
+              Dashboard
             </Link>
           </template>
           
           <!-- Mobile menu button -->
           <button
             @click="mobileMenuOpen = !mobileMenuOpen"
-            class="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+            class="md:hidden p-2 rounded-full hover:bg-[var(--bg-tertiary)] transition-colors"
           >
-            <Bars3Icon v-if="!mobileMenuOpen" class="h-6 w-6" />
-            <XMarkIcon v-else class="h-6 w-6" />
+            <Bars3Icon v-if="!mobileMenuOpen" class="w-6 h-6 text-[var(--text-primary)]" />
+            <XMarkIcon v-else class="w-6 h-6 text-[var(--text-primary)]" />
           </button>
         </div>
       </div>
 
-      <!-- Mobile Menu -->
+      <!-- Mobile Search Bar -->
+      <div
+        v-show="searchOpen"
+        class="lg:hidden py-3 border-t border-[var(--border-light)]"
+      >
+        <div class="search-input-wrapper">
+          <MagnifyingGlassIcon class="search-icon" />
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Search for jobs, services..."
+            class="search-input"
+            @keyup.enter="handleSearch"
+          />
+        </div>
+      </div>
+
+      <!-- Mobile Menu - Upwork Style -->
       <div
         v-show="mobileMenuOpen"
-        class="md:hidden py-4 space-y-2 border-t border-gray-200"
+        class="md:hidden py-4 border-t border-[var(--border-light)] animate-slide-down"
       >
-        <template v-for="item in $page.props.menus?.header_main || []" :key="item.id">
-          <Link
-            v-if="item.is_active"
-            :href="getMenuUrl(item)"
-            :target="item.target || '_self'"
-            class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg font-medium"
-          >
-            {{ item.label }}
-          </Link>
-        </template>
-        <template v-if="canLogin">
+        <div class="space-y-1">
+          <template v-for="item in $page.props.menus?.header_main || navItems" :key="item.id || item.label">
+            <Link
+              :href="item.href || getMenuUrl(item)"
+              :target="item.target || '_self'"
+              class="block px-4 py-3 text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)] rounded-xl font-medium transition-colors"
+              @click="mobileMenuOpen = false"
+            >
+              {{ item.label }}
+            </Link>
+            
+            <!-- Children items for mobile -->
+            <template v-if="item.children">
+              <Link
+                v-for="child in item.children"
+                :key="child.label"
+                :href="child.href"
+                class="block px-8 py-2.5 text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-tertiary)] rounded-xl transition-colors"
+                @click="mobileMenuOpen = false"
+              >
+                {{ child.label }}
+              </Link>
+            </template>
+          </template>
+        </div>
+        
+        <!-- Mobile Auth -->
+        <div v-if="!isAuthenticated && canLogin" class="mt-4 pt-4 border-t border-[var(--border-light)] space-y-2">
           <Link
             :href="route('login')"
-            class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg font-medium"
+            class="block w-full text-center py-3 text-[var(--text-primary)] font-medium hover:bg-[var(--bg-tertiary)] rounded-xl transition-colors"
           >
-            Sign in
+            Log In
           </Link>
-        </template>
+          <Link
+            v-if="canRegister"
+            :href="route('register')"
+            class="block w-full btn-primary text-center"
+          >
+            Sign Up
+          </Link>
+        </div>
       </div>
     </nav>
   </header>

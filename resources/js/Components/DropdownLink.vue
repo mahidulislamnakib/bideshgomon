@@ -16,7 +16,7 @@ defineProps({
 <template>
     <Link
         :href="href"
-        class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+        class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-upwork-lightest hover:text-upwork-green focus:bg-upwork-lightest focus:outline-none"
     >
         <div class="flex items-center gap-3">
             <span v-if="$slots.icon" :class="iconClass">

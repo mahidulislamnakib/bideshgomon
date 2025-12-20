@@ -16,13 +16,17 @@ class TravelBookingController extends Controller
     public function create(Request $request)
     {
         // Get consultants (users with consultant role)
-        $consultants = User::role('consultant')
+        $consultants = User::whereHas('role', function ($query) {
+            $query->where('slug', 'consultant');
+        })
             ->select('id', 'name', 'email')
             ->get();
 
         // If no consultants, use admin users as fallback
         if ($consultants->isEmpty()) {
-            $consultants = User::role('admin')
+            $consultants = User::whereHas('role', function ($query) {
+                $query->where('slug', 'admin');
+            })
                 ->select('id', 'name', 'email')
                 ->take(3)
                 ->get();
@@ -69,8 +73,10 @@ class TravelBookingController extends Controller
         }
 
         // Create appointment
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
         $appointment = Appointment::create([
-            'user_id' => auth()->id(),
+            'user_id' => $user->id,
             'assigned_to' => $validated['consultant_id'],
             'appointment_type' => $validated['appointment_type'],
             'appointment_date' => $validated['appointment_date'],
@@ -86,14 +92,14 @@ class TravelBookingController extends Controller
         app(\App\Services\NotificationService::class)->send(
             $appointment->user_id,
             'Consultation Booked',
-            'Your travel consultation has been scheduled for '.$appointment->appointment_date->format('d/m/Y').' at '.$appointment->appointment_time.'.',
+            'Your travel consultation has been scheduled for '.Carbon::parse($appointment->appointment_date)->format('d/m/Y').' at '.$appointment->appointment_time.'.',
             [
                 'type' => 'appointment_confirmed',
                 'priority' => 'high',
                 'data' => [
                     'appointment_id' => $appointment->id,
                     'appointment_type' => $appointment->appointment_type,
-                    'appointment_date' => $appointment->appointment_date->toDateString(),
+                    'appointment_date' => Carbon::parse($appointment->appointment_date)->toDateString(),
                 ],
             ]
         );
@@ -103,7 +109,7 @@ class TravelBookingController extends Controller
             app(\App\Services\NotificationService::class)->send(
                 $appointment->consultant_id,
                 'New Consultation Booking',
-                'You have a new '.$appointment->appointment_type.' consultation scheduled for '.$appointment->appointment_date->format('d/m/Y').'.',
+                'You have a new '.$appointment->appointment_type.' consultation scheduled for '.Carbon::parse($appointment->appointment_date)->format('d/m/Y').'.',
                 [
                     'type' => 'new_appointment',
                     'priority' => 'high',
@@ -124,9 +130,11 @@ class TravelBookingController extends Controller
      */
     public function confirmation($id)
     {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
         $appointment = Appointment::with(['user', 'assignedTo'])
             ->where('id', $id)
-            ->where('user_id', auth()->id())
+            ->where('user_id', $user->id)
             ->firstOrFail();
 
         return Inertia::render('Services/Travel/Confirmation', [
@@ -213,9 +221,11 @@ class TravelBookingController extends Controller
      */
     public function show($id)
     {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
         $booking = Appointment::with(['assignedTo', 'user'])
             ->where('id', $id)
-            ->where('user_id', auth()->id())
+            ->where('user_id', $user->id)
             ->firstOrFail();
 
         return Inertia::render('Services/Travel/ShowBooking', [

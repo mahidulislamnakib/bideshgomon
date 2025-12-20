@@ -240,53 +240,63 @@ const updateSetting = (key, value) => {
     <Head title="Settings" />
 
     <AdminLayout>
-        <div class="py-6">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Header -->
-                <div class="mb-8">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h1 class="text-3xl font-bold text-gray-900">Platform Settings</h1>
-                            <p class="mt-2 text-sm text-gray-600">
-                                Configure your platform settings and preferences
-                            </p>
+        <!-- Modern Hero Header -->
+        <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
+                                <CogIcon class="h-8 w-8 text-white" />
+                            </div>
+                            <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                                Platform Settings
+                            </h1>
                         </div>
-                        <div class="flex gap-3">
-                            <Link
-                                :href="route('admin.settings.clear-cache')"
-                                method="post"
-                                as="button"
-                                class="inline-flex items-center px-4 py-2 border border-emerald-300 rounded-lg shadow-sm text-sm font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition-colors"
-                            >
-                                <ArrowPathIcon class="h-5 w-5 mr-2" />
-                                Clear Cache
-                            </Link>
-                            <Link
-                                :href="route('admin.settings.seed')"
-                                method="post"
-                                as="button"
-                                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-                            >
-                                <ArrowPathIcon class="h-5 w-5 mr-2" />
-                                Reset to Defaults
-                            </Link>
-                        </div>
+                        <p class="text-white/90 text-lg max-w-2xl">
+                            Configure your platform settings and preferences with granular control
+                        </p>
+                    </div>
+                    <div class="flex gap-3">
+                        <Link
+                            :href="route('admin.settings.clear-cache')"
+                            method="post"
+                            as="button"
+                            class="inline-flex items-center px-6 py-3.5 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white rounded-xl transition-all border border-white/30 font-semibold gap-2"
+                        >
+                            <ArrowPathIcon class="h-5 w-5" />
+                            Clear Cache
+                        </Link>
+                        <Link
+                            :href="route('admin.settings.seed')"
+                            method="post"
+                            as="button"
+                            class="inline-flex items-center px-6 py-3.5 bg-white hover:bg-gray-50 text-indigo-600 rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:scale-105 font-semibold gap-2"
+                        >
+                            <ArrowPathIcon class="h-5 w-5" />
+                            Reset to Defaults
+                        </Link>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
-                    <!-- Tabs -->
-                    <div class="border-b border-gray-200">
-                        <nav class="flex space-x-4 px-6 overflow-x-auto" aria-label="Tabs">
+        <div class="py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <!-- Modern Tabs -->
+                    <div class="border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
+                        <nav class="flex space-x-2 px-6 py-3 overflow-x-auto" aria-label="Tabs">
                             <button
                                 v-for="(label, key) in groups"
                                 :key="key"
                                 @click="switchTab(key)"
                                 :class="[
                                     activeTab === key
-                                        ? 'border-blue-600 text-blue-600 bg-blue-50'
-                                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-                                    'whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm flex items-center gap-2 transition-all duration-200 rounded-t-lg'
+                                        ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
+                                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100',
+                                    'whitespace-nowrap py-3 px-4 font-semibold text-sm flex items-center gap-2 transition-all duration-200 rounded-xl'
                                 ]"
                             >
                                 <component :is="groupConfig[key]?.icon || CogIcon" class="h-5 w-5" />
@@ -439,7 +449,7 @@ const updateSetting = (key, value) => {
                                             </h3>
                                             <p class="text-xs text-gray-500">
                                                 {{ (groupedApiSettings[groupKey] || []).length }} service{{ (groupedApiSettings[groupKey] || []).length === 1 ? '' : 's' }}
-                                                <span class="ml-1">•</span>
+                                                <span class="ml-1">ï¿½</span>
                                                 <span class="ml-1">
                                                     {{ (groupedApiSettings[groupKey] || []).filter(s => form.settings.find(fs => fs.key === s.key)?.value).length }} configured
                                                 </span>
@@ -498,7 +508,7 @@ const updateSetting = (key, value) => {
                                                         :type="visiblePasswords[setting.key] ? 'text' : 'password'"
                                                         :value="form.settings.find(s => s.key === setting.key)?.value"
                                                         @input="updateSetting(setting.key, $event.target.value)"
-                                                        :placeholder="form.settings.find(s => s.key === setting.key)?.value ? '••••••••••••••••••••' : `Enter ${setting.key.split('_').pop()}`"
+                                                        :placeholder="form.settings.find(s => s.key === setting.key)?.value ? 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' : `Enter ${setting.key.split('_').pop()}`"
                                                         class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm pr-10 font-mono"
                                                     >
                                                     <button
@@ -610,7 +620,7 @@ const updateSetting = (key, value) => {
                                                     :type="visiblePasswords[setting.key] ? 'text' : 'password'"
                                                     :value="form.settings.find(s => s.key === setting.key)?.value"
                                                     @input="updateSetting(setting.key, $event.target.value)"
-                                                    :placeholder="form.settings.find(s => s.key === setting.key)?.value ? '••••••••••••' : 'Enter secure value'"
+                                                    :placeholder="form.settings.find(s => s.key === setting.key)?.value ? 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' : 'Enter secure value'"
                                                     class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all sm:text-sm pr-10"
                                                 >
                                                 <button

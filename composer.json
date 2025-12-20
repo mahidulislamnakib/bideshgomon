@@ -16,6 +16,7 @@
         "laravel/scout": "^10.22",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.10.1",
+        "maatwebsite/excel": "^1.1",
         "resend/resend-php": "^1.0",
         "sentry/sentry-laravel": "*",
         "spatie/laravel-activitylog": "^4.10",

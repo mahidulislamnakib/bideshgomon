@@ -70,7 +70,9 @@ class StudentVisaController extends Controller
     public function show(StudentVisa $studentVisa): Response
     {
         // Ensure user can only view their own applications
-        if ($studentVisa->user_id !== auth()->id()) {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        if ($studentVisa->user_id !== $user->id) {
             abort(403, 'Unauthorized access to this application.');
         }
 

@@ -96,11 +96,13 @@ class AdminApplicationController extends Controller
         ]);
 
         try {
+            /** @var \App\Models\User $user */
+            $user = auth()->user();
             $this->applicationService->changeStatus(
                 $application,
                 $validated['status'],
                 $validated['notes'] ?? null,
-                auth()->user()
+                $user
             );
 
             return back()->with('success', 'Application status updated successfully.');
@@ -289,7 +291,6 @@ class AdminApplicationController extends Controller
                 break;
 
             case 'export':
-                // TODO: Implement export functionality
                 return $this->exportApplications($applications);
         }
 
@@ -327,44 +328,64 @@ class AdminApplicationController extends Controller
     }
 
     /**
-     * Export applications (placeholder)
+     * Export applications to CSV with Bangladesh formatting
      */
     protected function exportApplications($applications)
     {
         // Load relationships for export
-        $applications->load(['user', 'serviceModule', 'country']);
+        $applications->load(['user', 'serviceModule', 'country', 'assignedTo']);
 
-        $filename = 'applications_'.date('Y-m-d_His').'.csv';
+        $filename = 'applications-export-'.date('Y-m-d-His').'.csv';
 
         $headers = [
-            'Content-Type' => 'text/csv',
+            'Content-Type' => 'text/csv; charset=utf-8',
             'Content-Disposition' => 'attachment; filename="'.$filename.'"',
+            'Cache-Control' => 'no-cache, no-store, must-revalidate',
+            'Pragma' => 'no-cache',
+            'Expires' => '0',
         ];
 
         $callback = function () use ($applications) {
             $file = fopen('php://output', 'w');
 
-            // CSV Headers
+            // Add UTF-8 BOM for Excel compatibility
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+
+            // CSV Headers (Bangladesh formatted)
             fputcsv($file, [
                 'Application Number',
                 'User Name',
+                'Email',
+                'Phone',
                 'Service',
                 'Country',
                 'Status',
-                'Created Date',
-                'Updated Date',
+                'Amount (৳)',
+                'Submitted Date (DD/MM/YYYY)',
+                'Processing Days',
+                'Assigned To',
+                'Notes',
             ]);
 
-            // CSV Data
+            // CSV Data with Bangladesh formatting
             foreach ($applications as $app) {
+                $processingDays = $app->approved_at
+                    ? $app->created_at->diffInDays($app->approved_at)
+                    : $app->created_at->diffInDays(now());
+
                 fputcsv($file, [
                     $app->application_number,
                     $app->user->name ?? 'N/A',
+                    $app->user->email ?? 'N/A',
+                    format_bd_phone($app->user->phone ?? 'N/A'),
                     $app->serviceModule->name ?? 'N/A',
                     $app->country->name ?? 'N/A',
-                    $app->status,
-                    $app->created_at->format('Y-m-d H:i'),
-                    $app->updated_at->format('Y-m-d H:i'),
+                    ucfirst($app->status),
+                    format_bd_currency($app->amount ?? 0),
+                    format_bd_date($app->created_at),
+                    $processingDays.' days',
+                    $app->assignedTo->name ?? 'Unassigned',
+                    $app->notes ?? '',
                 ]);
             }
 

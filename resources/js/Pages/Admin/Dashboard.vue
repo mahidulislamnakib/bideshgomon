@@ -46,24 +46,30 @@ const formatDateTime = (date) => {
     <Head title="Admin Dashboard" />
 
     <AdminLayout>
-        <!-- Header -->
-        <div class="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h1 class="text-3xl font-bold text-gray-900">
-                            Admin Dashboard
-                        </h1>
-                        <p class="text-gray-600 mt-1 text-base">Monitor and manage your platform</p>
+        <!-- Modern Hero Header -->
+        <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
+                                <ChartBarIcon class="h-8 w-8 text-white" />
+                            </div>
+                            <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                                Admin Dashboard
+                            </h1>
+                        </div>
+                        <p class="text-white/90 text-lg max-w-2xl">
+                            Monitor and manage your platform with real-time insights and analytics
+                        </p>
                     </div>
-                    <ChartBarIcon class="h-12 w-12 text-gray-400" />
                 </div>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-rhythm-xl space-y-rhythm-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
             <!-- Stats Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-rhythm-lg">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Total Users -->
                 <StatCard
                     label="Total Users"
@@ -106,7 +112,7 @@ const formatDateTime = (date) => {
             </div>
 
             <!-- Hotel Bookings & Flight Requests Stats -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-rhythm-lg">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Hotel Bookings -->
                 <StatCard
                     label="Hotel Bookings"
@@ -454,7 +460,7 @@ const formatDateTime = (date) => {
             </Card>
 
             <!-- Wallet Stats -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-rhythm-lg">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <StatCard
                     label="Total Wallet Balance"
                     :value="formatCurrency(stats.wallet.total_balance)"
@@ -478,7 +484,7 @@ const formatDateTime = (date) => {
             </div>
 
             <!-- Charts Row -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-rhythm-lg">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- User Registrations Chart -->
                 <Card title="User Registrations (Last 7 Days)">
                     <div v-if="userChartData && userChartData.length > 0" class="space-y-rhythm-sm">
@@ -589,7 +595,7 @@ const formatDateTime = (date) => {
             </Card>
 
             <!-- Recent Activities -->
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-rhythm-lg">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
                 <!-- Recent Users -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200">
                     <div class="p-6 border-b border-gray-200">

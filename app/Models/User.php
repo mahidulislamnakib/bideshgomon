@@ -76,6 +76,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Alias for role relationship (backward compatibility).
+     * Some code may call roles() expecting a collection.
+     */
+    public function roles(): BelongsTo
+    {
+        return $this->role();
+    }
+
+    /**
      * Get the user's profile.
      */
     public function profile(): HasOne

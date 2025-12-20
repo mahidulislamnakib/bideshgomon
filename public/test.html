@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Page</title>
+    <style>body { font-family: Arial; padding: 50px; background: #f0f0f0; }</style>
+</head>
+<body>
+    <h1>Server Test</h1>
+    <p>If you see this, the server is working!</p>
+    <div id="js-test" style="color: red; font-size: 20px;">JavaScript NOT working</div>
+    <script>
+        document.getElementById('js-test').innerHTML = ' JavaScript IS working!';
+        document.getElementById('js-test').style.color = 'green';
+    </script>
+</body>
+</html>

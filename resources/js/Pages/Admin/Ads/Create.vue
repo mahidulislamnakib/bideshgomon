@@ -245,21 +245,28 @@
                             </div>
                             <h3 class="text-xl font-bold text-gray-900">Status</h3>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <div class="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl border-2 border-gray-200">
+                            <label class="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                <div class="p-1 bg-gradient-to-br from-green-500 to-emerald-600 rounded">
+                                    <svg class="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
                                 Initial Status <span class="text-red-500">*</span>
                             </label>
                             <select
                                 v-model="form.status"
-                                class="input-base"
-                                :class="{ 'border-red-500': form.errors.status }"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white font-medium"
+                                :class="{ 'border-red-500 focus:ring-red-500 focus:border-red-500': form.errors.status }"
                                 required
                             >
-                                <option value="draft">Draft (Not visible)</option>
-                                <option value="active">Active (Live now)</option>
-                                <option value="paused">Paused (Temporarily hidden)</option>
+                                <option value="" disabled>🎯 Select status</option>
+                                <option value="draft">📝 Draft (Not visible)</option>
+                                <option value="active">✅ Active (Live now)</option>
+                                <option value="paused">⏸️ Paused (Temporarily hidden)</option>
                             </select>
-                            <p v-if="form.errors.status" class="mt-1 text-sm text-red-600">{{ form.errors.status }}</p>
+                            <p v-if="form.errors.status" class="mt-2 text-sm text-red-600">{{ form.errors.status }}</p>
+                            <p class="mt-2 text-xs text-gray-500">💡 Set ad visibility status - can be changed later</p>
                         </div>
                     </div>
 

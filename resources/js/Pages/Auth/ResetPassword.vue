@@ -39,7 +39,7 @@ const submit = () => {
             <!-- Logo -->
             <Link href="/" class="flex justify-center">
                 <div class="flex items-center space-x-2">
-                    <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div class="w-12 h-12 bg-upwork-green rounded-xl flex items-center justify-center shadow-lg">
                         <span class="text-white font-bold text-xl">BG</span>
                     </div>
                     <span class="text-2xl font-bold text-gray-900">Bidesh Gomon</span>
@@ -48,8 +48,8 @@ const submit = () => {
 
             <!-- Header -->
             <div class="mt-8 text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 rounded-full mb-4">
-                    <LockClosedIcon class="w-8 h-8 text-emerald-600" />
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-upwork-lightest rounded-full mb-4">
+                    <LockClosedIcon class="w-8 h-8 text-upwork-green" />
                 </div>
                 <h2 class="text-3xl font-bold text-gray-900">Reset Password</h2>
                 <p class="mt-2 text-sm text-gray-600">
@@ -59,7 +59,7 @@ const submit = () => {
         </div>
 
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-            <div class="bg-white py-8 px-4 shadow-xl shadow-emerald-100/50 sm:rounded-2xl sm:px-10 border border-emerald-100">
+            <div class="bg-white py-8 px-4 shadow-xl shadow-upwork-lightest/50 sm:rounded-2xl sm:px-10 border border-upwork-lightest">
                 <form @submit.prevent="submit" class="space-y-6">
                     <!-- Email (readonly) -->
                     <div>
@@ -97,7 +97,7 @@ const submit = () => {
                                 required
                                 autocomplete="new-password"
                                 placeholder="Enter new password"
-                                class="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+                                class="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-upwork-green focus:border-transparent transition-all duration-200"
                                 :class="{ 'border-red-300 focus:ring-red-500': form.errors.password }"
                             />
                             <button
@@ -131,7 +131,7 @@ const submit = () => {
                                 required
                                 autocomplete="new-password"
                                 placeholder="Confirm new password"
-                                class="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+                                class="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-upwork-green focus:border-transparent transition-all duration-200"
                                 :class="{ 'border-red-300 focus:ring-red-500': form.errors.password_confirmation }"
                             />
                             <button
@@ -149,12 +149,12 @@ const submit = () => {
                     </div>
 
                     <!-- Password Requirements -->
-                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+                    <div class="bg-upwork-lightest border border-upwork-green/20 rounded-xl p-4">
                         <div class="flex items-start">
-                            <CheckCircleIcon class="h-5 w-5 text-emerald-600 mt-0.5 mr-3 flex-shrink-0" />
+                            <CheckCircleIcon class="h-5 w-5 text-upwork-green mt-0.5 mr-3 flex-shrink-0" />
                             <div>
-                                <h4 class="text-sm font-medium text-emerald-900 mb-1">Password Requirements</h4>
-                                <ul class="text-xs text-emerald-700 space-y-1">
+                                <h4 class="text-sm font-medium text-upwork-dark mb-1">Password Requirements</h4>
+                                <ul class="text-xs text-upwork-green-dark space-y-1">
                                     <li>• At least 8 characters long</li>
                                     <li>• Mix of uppercase and lowercase letters recommended</li>
                                     <li>• Include numbers and special characters for better security</li>
@@ -168,7 +168,7 @@ const submit = () => {
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-sm font-semibold text-white bg-upwork-green hover:bg-upwork-green-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-upwork-green transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             <span v-if="form.processing">
                                 <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

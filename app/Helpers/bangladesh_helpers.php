@@ -1,5 +1,8 @@
 <?php
 
+// Taka symbol using Unicode for encoding safety
+define('TAKA_SYMBOL', "\u{09F3}");
+
 if (! function_exists('format_bd_currency')) {
     /**
      * Format amount in Bangladeshi Taka.
@@ -12,7 +15,7 @@ if (! function_exists('format_bd_currency')) {
     {
         $formatted = number_format($amount, 2, '.', ',');
 
-        return $showSymbol ? '৳'.$formatted : $formatted;
+        return $showSymbol ? TAKA_SYMBOL.$formatted : $formatted;
     }
 }
 
