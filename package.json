@@ -34,7 +34,7 @@
         "pusher-js": "^8.4.0",
         "stylelint": "^16.26.1",
         "stylelint-config-standard": "^39.0.1",
-        "tailwindcss": "^3.4.15",
+        "tailwindcss": "^4.1.18",
         "vite": "^5.4.11",
         "vue": "^3.5.0"
     },
