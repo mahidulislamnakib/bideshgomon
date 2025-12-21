@@ -43,22 +43,24 @@ const closeModal = () => {
 
 <template>
     <section class="space-y-6">
-        <header class="flex items-start gap-3">
-            <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center shadow-rhythmic-md flex-shrink-0 border-2 border-red-200">
-                <ExclamationTriangleIcon class="w-6 h-6 text-red-600 opacity-70" />
+        <!-- Header -->
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center shadow-lg">
+                    <ExclamationTriangleIcon class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900">Delete Account</h3>
+                    <p class="text-sm text-gray-500">Permanently delete your account and all data</p>
+                </div>
             </div>
-            <div class="flex-1">
-                <h2 class="font-display font-bold text-xl text-gray-800">
-                    Delete Account
-                </h2>
-
-                <p class="mt-1 text-sm text-gray-600">
-                    Once your account is deleted, all of its resources and data will
-                    be permanently deleted. Before deleting your account, please
-                    download any data or information that you wish to retain.
-                </p>
-            </div>
-        </header>
+        </div>
+        
+        <p class="text-sm text-gray-600">
+            Once your account is deleted, all of its resources and data will
+            be permanently deleted. Before deleting your account, please
+            download any data or information that you wish to retain.
+        </p>
 
         <DangerButton @click="confirmUserDeletion" class="py-3 px-6 text-base touch-manipulation" style="min-height: 48px">Delete Account</DangerButton>
 

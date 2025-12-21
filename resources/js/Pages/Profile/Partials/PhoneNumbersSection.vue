@@ -347,29 +347,26 @@ onMounted(() => {
 </script>
 
 <template>
-    <section class="space-y-rhythm-md">
+    <section class="space-y-6">
         <!-- Section Header -->
-        <div class="flex items-center justify-between mb-rhythm-md">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-brand-red-600 flex items-center justify-center shadow-sm">
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-md">
                     <PhoneIcon class="w-6 h-6 text-white" />
                 </div>
                 <div>
-                    <h2 class="font-display font-bold text-xl text-gray-800">Phone Numbers</h2>
-                    <p class="text-xs text-gray-500">Manage contact numbers</p>
+                    <h2 class="font-semibold text-lg text-gray-900">Phone Numbers</h2>
+                    <p class="text-sm text-gray-500">Manage your contact numbers for verification</p>
                 </div>
             </div>
-            <FlowButton
+            <button
                 @click="openAddModal"
-                size="sm"
-                variant="primary"
+                class="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl shadow-sm hover:from-indigo-700 hover:to-purple-700 transition-all"
             >
-                <template #icon-left>
-                    <PlusIcon class="w-4 h-4" />
-                </template>
+                <PlusIcon class="w-4 h-4" />
                 <span class="hidden sm:inline">Add Number</span>
                 <span class="sm:hidden">Add</span>
-            </FlowButton>
+            </button>
         </div>
 
         <!-- Alert Messages -->
@@ -404,7 +401,7 @@ onMounted(() => {
                             <div class="flex-1 min-w-0">
                                 <a 
                                     :href="`tel:${phone.country_code}${phone.phone_number}`"
-                                    class="text-lg font-bold text-gray-900 dark:text-white hover:text-brand-red-600 dark:hover:text-indigo-400 transition-colors block"
+                                    class="text-lg font-bold text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors block"
                                 >
                                     {{ phone.country_code }} {{ phone.phone_number }}
                                 </a>
@@ -479,7 +476,7 @@ onMounted(() => {
             <p class="text-sm text-gray-500 dark:text-gray-500 mt-1">Add your contact numbers for communication</p>
             <button
                 @click="openAddModal"
-                class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-brand-red-600 rounded-lg hover:bg-red-700 transition-all shadow-md"
+                class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md"
                 style="min-height: 44px"
             >
                 <PlusIcon class="w-5 h-5" />
@@ -491,7 +488,7 @@ onMounted(() => {
         <Modal :show="showModal" @close="closeModal" max-width="2xl">
             <div class="p-6">
                 <div class="flex items-center gap-3 mb-6">
-                    <div class="w-12 h-12 rounded-xl bg-brand-red-600 flex items-center justify-center">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
                         <PhoneIcon class="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -511,7 +508,7 @@ onMounted(() => {
                         <div class="relative">
                             <select
                                 v-model="form.country_code"
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500 appearance-none bg-white dark:bg-gray-800 shadow-sm hover:border-gray-400 transition-colors cursor-pointer"
+                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none bg-white dark:bg-gray-800 shadow-sm hover:border-gray-400 transition-colors cursor-pointer"
                                 style="font-size: 15px; min-height: 48px; padding-right: 40px;"
                             >
                                 <option value="" disabled>Select country</option>
@@ -542,7 +539,7 @@ onMounted(() => {
                             v-model="form.phone_number"
                             type="tel"
                             placeholder="1712345678"
-                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500 shadow-sm hover:border-gray-400 transition-colors"
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm hover:border-gray-400 transition-colors"
                             :class="{ 'border-red-500': errors.phone_number }"
                             style="font-size: 16px; min-height: 48px"
                         />
@@ -560,7 +557,7 @@ onMounted(() => {
                         <div class="relative">
                             <select
                                 v-model="form.phone_type"
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500 appearance-none bg-white shadow-sm hover:border-gray-400 transition-colors cursor-pointer"
+                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none bg-white shadow-sm hover:border-gray-400 transition-colors cursor-pointer"
                                 style="font-size: 15px; min-height: 48px; padding-right: 40px;"
                             >
                                 <option v-for="type in phoneTypes" :key="type.value" :value="type.value" class="py-2">
@@ -587,7 +584,7 @@ onMounted(() => {
                             v-model="form.label"
                             type="text"
                             placeholder="e.g., Personal, Office, Emergency"
-                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500 shadow-sm hover:border-gray-400 transition-colors"
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm hover:border-gray-400 transition-colors"
                             :class="{ 'border-red-500': errors.label }"
                             style="font-size: 16px; min-height: 48px"
                         />
@@ -601,7 +598,7 @@ onMounted(() => {
                         <input
                             v-model="form.is_primary"
                             type="checkbox"
-                            class="w-5 h-5 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600 cursor-pointer"
+                            class="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 cursor-pointer"
                         />
                         <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Set as primary phone number</span>
                     </label>
@@ -629,7 +626,7 @@ onMounted(() => {
                         </button>
                         <button
                             type="submit"
-                            class="w-full sm:w-auto px-6 py-3 text-sm font-medium text-white bg-brand-red-600 rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md"
+                            class="w-full sm:w-auto px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl hover:from-indigo-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg"
                             style="min-height: 44px"
                             :disabled="isLoading"
                         >
@@ -730,7 +727,7 @@ onMounted(() => {
                         <button
                             type="button"
                             @click="resendVerificationCode"
-                            class="text-sm font-medium text-brand-red-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 disabled:opacity-50 transition-colors"
+                            class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 disabled:opacity-50 transition-colors"
                             :disabled="isSendingCode"
                         >
                             <span v-if="isSendingCode">Sending...</span>

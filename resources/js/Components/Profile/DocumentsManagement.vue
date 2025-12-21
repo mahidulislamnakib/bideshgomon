@@ -1,17 +1,22 @@
 <template>
     <div class="space-y-6">
         <!-- Header -->
-        <div class="border-b border-gray-200 pb-4">
-            <h3 class="text-lg font-semibold text-gray-900">Documents Management</h3>
-            <p class="mt-1 text-sm text-gray-600">
-                Upload and manage your important documents securely
-            </p>
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg">
+                    <DocumentTextIcon class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900">Documents Management</h3>
+                    <p class="text-sm text-gray-500">Upload and manage your important documents securely</p>
+                </div>
+            </div>
         </div>
 
         <!-- Upload Section -->
         <div class="bg-white rounded-lg border-2 border-dashed border-indigo-300 p-6">
             <div class="flex items-center gap-3 mb-4">
-                <div class="p-2 bg-brand-red-600 rounded-lg">
+                <div class="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg">
                     <CloudArrowUpIcon class="w-6 h-6 text-white" />
                 </div>
                 <div>

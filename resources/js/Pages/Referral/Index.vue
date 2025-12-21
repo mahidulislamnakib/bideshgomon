@@ -55,25 +55,29 @@ const shareViaEmail = () => {
     <Head title="Referrals" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <div class="flex items-center justify-between animate-fadeIn">
-                <div class="flex items-center gap-3">
-                    <div class="p-3 bg-red-100 rounded-xl border-2 border-red-200 relative">
-                        <ShareIcon class="h-8 w-8 text-red-600" />
-                        <div class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full"></div>
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-bold text-gray-900">
-                            Referral Dashboard
-                        </h2>
-                        <p class="text-sm text-gray-600">Share & earn rewards together</p>
+        <div class="min-h-screen bg-gray-50/50">
+            <!-- Hero Header Section -->
+            <div class="bg-gradient-to-br from-pink-500 via-rose-500 to-red-500 text-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                        <div class="flex items-center gap-4">
+                            <div class="p-3 bg-white/20 rounded-xl backdrop-blur-sm">
+                                <ShareIcon class="h-8 w-8 text-white" />
+                            </div>
+                            <div>
+                                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-1">
+                                    Referral Dashboard
+                                </h1>
+                                <p class="text-white/80 text-base">
+                                    Share & earn rewards together
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
                 <!-- Referral Code Card - Improved Design -->
                 <RhythmicCard variant="gradient" size="xl" class="animate-fadeInUp relative overflow-hidden">
                     <template #default>

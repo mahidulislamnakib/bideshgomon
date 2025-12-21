@@ -106,22 +106,25 @@ const securityStatus = computed(() => {
 
 <template>
   <section class="space-y-4">
-    <!-- Section Header -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-rhythm-lg">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-red-50 border-2 border-red-200 flex items-center justify-center shadow-sm">
-          <ShieldCheckIcon class="w-6 h-6 text-red-600 opacity-70" />
+    <!-- Header -->
+    <div class="flex items-center justify-between pb-4 border-b border-gray-100 mb-6">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-500 to-gray-600 flex items-center justify-center shadow-lg">
+          <ShieldCheckIcon class="w-6 h-6 text-white" />
         </div>
         <div>
-          <h2 class="font-display font-bold text-xl text-gray-800">Security & Background</h2>
-          <p class="text-xs text-gray-500">Background check information</p>
+          <h3 class="text-lg font-semibold text-gray-900">Security & Background</h3>
+          <p class="text-sm text-gray-500">Background check information for visa processing</p>
         </div>
       </div>
-      <FlowButton @click="openModal" variant="primary">
-        <template #icon-left><PencilIcon class="w-4 h-4" /></template>
+      <button
+        @click="openModal"
+        class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg"
+      >
+        <PencilIcon class="w-4 h-4" />
         <span class="hidden sm:inline">Edit Details</span>
         <span class="sm:hidden">Edit</span>
-      </FlowButton>
+      </button>
     </div>
 
     <!-- Status Card -->

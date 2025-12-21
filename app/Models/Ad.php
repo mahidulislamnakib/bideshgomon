@@ -109,36 +109,20 @@ class Ad extends Model
 
     /**
      * Fetch ad from database (extracted for caching flexibility)
+     * Uses PHP filtering for SQLite compatibility instead of JSON_CONTAINS
      */
     protected static function fetchAd(string $placement, string $page, ?string $userRole, string $deviceType): ?self
     {
-        return static::active()
+        // Fetch all active ads for placement and filter in PHP for SQLite compatibility
+        $ads = static::active()
             ->placement($placement)
-            ->where(function ($query) use ($page, $userRole, $deviceType) {
-                // Check targeting rules in meta field
-                $query->whereNull('meta')
-                    ->orWhereRaw("JSON_CONTAINS(meta->'$.pages', ?)", [json_encode($page)])
-                    ->orWhereRaw("JSON_LENGTH(meta->'$.pages') = 0")
-                    ->orWhereRaw("meta->'$.pages' IS NULL");
-
-                if ($userRole) {
-                    $query->where(function ($q) use ($userRole) {
-                        $q->whereRaw("JSON_CONTAINS(meta->'$.roles', ?)", [json_encode($userRole)])
-                            ->orWhereRaw("JSON_LENGTH(meta->'$.roles') = 0")
-                            ->orWhereRaw("meta->'$.roles' IS NULL");
-                    });
-                }
-
-                if ($deviceType) {
-                    $query->where(function ($q) use ($deviceType) {
-                        $q->whereRaw("JSON_CONTAINS(meta->'$.devices', ?)", [json_encode($deviceType)])
-                            ->orWhereRaw("JSON_LENGTH(meta->'$.devices') = 0")
-                            ->orWhereRaw("meta->'$.devices' IS NULL");
-                    });
-                }
-            })
             ->orderByDesc('priority')
-            ->first();
+            ->get();
+
+        // Filter by targeting criteria in PHP (works with both MySQL and SQLite)
+        return $ads->first(function ($ad) use ($page, $userRole, $deviceType) {
+            return $ad->matchesTargeting($page, $userRole, $deviceType);
+        });
     }
 
     /**

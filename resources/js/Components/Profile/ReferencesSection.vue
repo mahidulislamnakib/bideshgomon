@@ -85,11 +85,28 @@ const personalReferences = computed(() =>
 
 <template>
     <div class="space-y-6">
-        <div>
-            <h3 class="text-lg font-medium text-gray-900">References</h3>
-            <p class="mt-1 text-sm text-gray-600">
-                Add references who can vouch for your character, skills, and work ethic. Typically required for visa applications and job opportunities.
-            </p>
+        <!-- Section Header -->
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-500 to-gray-600 flex items-center justify-center shadow-md">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="font-semibold text-lg text-gray-900">References</h2>
+                    <p class="text-sm text-gray-500">Professional and personal references for verification</p>
+                </div>
+            </div>
+            <button
+                type="button"
+                @click="addReference"
+                class="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl shadow-sm hover:from-indigo-700 hover:to-purple-700 transition-all"
+            >
+                <PlusIcon class="w-4 h-4" />
+                <span class="hidden sm:inline">Add Reference</span>
+                <span class="sm:hidden">Add</span>
+            </button>
         </div>
 
         <form @submit.prevent="submit" class="space-y-6">

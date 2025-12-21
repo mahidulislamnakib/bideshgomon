@@ -80,13 +80,26 @@ const getPriorityColor = (priority) => {
         <div class="py-8">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
-                <div class="mb-8 bg-white border border-gray-200 rounded-lg p-6">
+                <div class="mb-8 bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+                    <!-- Back to Profile Link -->
+                    <Link
+                        :href="route('profile.edit')"
+                        class="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-indigo-600 mb-4 transition-colors"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Back to Profile
+                    </Link>
+                    
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <SparklesIcon class="w-8 h-8 text-gray-300" />
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+                                <SparklesIcon class="w-7 h-7 text-white" />
+                            </div>
                             <div>
-                                <h1 class="text-3xl font-bold text-gray-900">AI Profile Assessment</h1>
-                                <p class="mt-1 text-sm text-gray-600">
+                                <h1 class="text-2xl font-bold text-gray-900">AI Profile Assessment</h1>
+                                <p class="mt-1 text-sm text-gray-500">
                                     Comprehensive analysis of your visa application readiness
                                 </p>
                             </div>
@@ -94,7 +107,7 @@ const getPriorityColor = (priority) => {
                         <button
                             @click="refreshAssessment"
                             :disabled="refreshing"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-sm transition-all shadow-md hover:shadow-lg"
                         >
                             <ArrowPathIcon class="h-5 w-5" :class="{ 'animate-spin': refreshing }" />
                             {{ refreshing ? 'Refreshing...' : 'Refresh Assessment' }}
@@ -103,17 +116,20 @@ const getPriorityColor = (priority) => {
                 </div>
 
                 <!-- Overall Score Card -->
-                <div class="bg-white border border-gray-200 rounded-lg mb-8">
+                <div class="bg-white border border-gray-200 rounded-2xl mb-8 shadow-sm overflow-hidden">
+                    <div class="h-1 bg-gradient-to-r from-indigo-500 to-purple-600"></div>
                     <div class="p-8">
                         <div class="flex items-center justify-between">
                             <div class="flex-1">
                                 <div class="flex items-center gap-3 mb-4">
-                                    <CheckCircleIconSolid class="h-6 w-6 text-gray-300" />
-                                    <h2 class="text-2xl font-bold text-gray-900">Overall Assessment</h2>
+                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+                                        <CheckCircleIconSolid class="h-5 w-5 text-white" />
+                                    </div>
+                                    <h2 class="text-xl font-bold text-gray-900">Overall Assessment</h2>
                                 </div>
-                                <p class="text-gray-700 mb-6 leading-relaxed">{{ assessment.ai_summary }}</p>
+                                <p class="text-gray-600 mb-6 leading-relaxed">{{ assessment.ai_summary }}</p>
                                 <div class="flex items-center gap-4">
-                                    <span :class="riskBadgeColor" class="px-3 py-1.5 rounded-lg text-sm font-semibold uppercase">
+                                    <span :class="riskBadgeColor" class="px-3 py-1.5 rounded-xl text-sm font-semibold uppercase">
                                         {{ assessment.risk_level }} Risk
                                     </span>
                                     <span class="text-sm text-gray-500">
@@ -122,7 +138,7 @@ const getPriorityColor = (priority) => {
                                 </div>
                             </div>
                             <div class="ml-8 flex flex-col items-center">
-                                <div :class="[scoreBgColor, scoreColor]" class="w-32 h-32 rounded-lg flex items-center justify-center border border-gray-200">
+                                <div :class="[scoreBgColor, scoreColor]" class="w-32 h-32 rounded-2xl flex items-center justify-center border-2 border-gray-100 shadow-lg">
                                     <div class="text-center">
                                         <div class="text-4xl font-bold">{{ Math.round(assessment.overall_score) }}</div>
                                         <div class="text-sm font-medium">out of 100</div>
@@ -135,57 +151,63 @@ const getPriorityColor = (priority) => {
 
                 <!-- Key Metrics Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 hover:border-gray-300 transition-colors">
+                    <div class="bg-white border border-gray-200 rounded-2xl p-6 hover:border-gray-300 transition-all hover:shadow-md">
                         <div class="flex items-center gap-3 mb-4">
-                            <ChartBarIcon class="h-5 w-5 text-gray-400" />
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center">
+                                <ChartBarIcon class="h-5 w-5 text-white" />
+                            </div>
                             <h3 class="text-lg font-semibold text-gray-900">Profile Completeness</h3>
                         </div>
                         <div class="mb-2">
                             <div class="flex justify-between text-sm mb-1">
-                                <span>{{ Math.round(assessment.profile_completeness) }}%</span>
+                                <span class="font-medium text-gray-700">{{ Math.round(assessment.profile_completeness) }}%</span>
                             </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
                                 <div
                                     :class="getScoreBarColor(assessment.profile_completeness)"
-                                    class="h-2 rounded-full transition-all"
+                                    class="h-2.5 rounded-full transition-all"
                                     :style="{ width: getScoreWidth(assessment.profile_completeness) }"
                                 ></div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 hover:border-gray-300 transition-colors">
+                    <div class="bg-white border border-gray-200 rounded-2xl p-6 hover:border-gray-300 transition-all hover:shadow-md">
                         <div class="flex items-center gap-3 mb-4">
-                            <DocumentCheckIcon class="h-5 w-5 text-gray-400" />
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                                <DocumentCheckIcon class="h-5 w-5 text-white" />
+                            </div>
                             <h3 class="text-lg font-semibold text-gray-900">Document Readiness</h3>
                         </div>
                         <div class="mb-2">
                             <div class="flex justify-between text-sm mb-1">
-                                <span>{{ Math.round(assessment.document_readiness) }}%</span>
+                                <span class="font-medium text-gray-700">{{ Math.round(assessment.document_readiness) }}%</span>
                             </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
                                 <div
                                     :class="getScoreBarColor(assessment.document_readiness)"
-                                    class="h-2 rounded-full transition-all"
+                                    class="h-2.5 rounded-full transition-all"
                                     :style="{ width: getScoreWidth(assessment.document_readiness) }"
                                 ></div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 hover:border-gray-300 transition-colors">
+                    <div class="bg-white border border-gray-200 rounded-2xl p-6 hover:border-gray-300 transition-all hover:shadow-md">
                         <div class="flex items-center gap-3 mb-4">
-                            <GlobeAltIcon class="h-5 w-5 text-gray-400" />
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                                <GlobeAltIcon class="h-5 w-5 text-white" />
+                            </div>
                             <h3 class="text-lg font-semibold text-gray-900">Visa Eligibility</h3>
                         </div>
                         <div class="mb-2">
                             <div class="flex justify-between text-sm mb-1">
-                                <span>{{ Math.round(assessment.visa_eligibility) }}%</span>
+                                <span class="font-medium text-gray-700">{{ Math.round(assessment.visa_eligibility) }}%</span>
                             </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
                                 <div
                                     :class="getScoreBarColor(assessment.visa_eligibility)"
-                                    class="h-2 rounded-full transition-all"
+                                    class="h-2.5 rounded-full transition-all"
                                     :style="{ width: getScoreWidth(assessment.visa_eligibility) }"
                                 ></div>
                             </div>
@@ -194,10 +216,12 @@ const getPriorityColor = (priority) => {
                 </div>
 
                 <!-- Section Scores -->
-                <div class="bg-white border border-gray-200 rounded-lg mb-8">
-                    <div class="p-6 border-b border-gray-200">
+                <div class="bg-white border border-gray-200 rounded-2xl mb-8 shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-gray-100">
                         <div class="flex items-center gap-3">
-                            <ChartBarIcon class="h-5 w-5 text-gray-400" />
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+                                <ChartBarIcon class="h-5 w-5 text-white" />
+                            </div>
                             <h2 class="text-xl font-bold text-gray-900">Section Breakdown</h2>
                         </div>
                     </div>
@@ -226,10 +250,12 @@ const getPriorityColor = (priority) => {
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                     <!-- Strengths -->
-                    <div class="bg-white border border-gray-200 rounded-lg">
-                        <div class="p-6 border-b border-gray-200">
+                    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+                        <div class="p-6 border-b border-gray-100">
                             <div class="flex items-center gap-3">
-                                <TrophyIcon class="h-5 w-5 text-gray-400" />
+                                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+                                    <TrophyIcon class="h-5 w-5 text-white" />
+                                </div>
                                 <h2 class="text-xl font-bold text-gray-900">Strengths</h2>
                             </div>
                         </div>
@@ -247,10 +273,12 @@ const getPriorityColor = (priority) => {
                     </div>
 
                     <!-- Weaknesses -->
-                    <div class="bg-white border border-gray-200 rounded-lg">
-                        <div class="p-6 border-b border-gray-200">
+                    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+                        <div class="p-6 border-b border-gray-100">
                             <div class="flex items-center gap-3">
-                                <LightBulbIcon class="h-5 w-5 text-gray-400" />
+                                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                                    <LightBulbIcon class="h-5 w-5 text-white" />
+                                </div>
                                 <h2 class="text-xl font-bold text-gray-900">Areas for Improvement</h2>
                             </div>
                         </div>
@@ -269,10 +297,12 @@ const getPriorityColor = (priority) => {
                 </div>
 
                 <!-- Recommendations -->
-                <div class="bg-white border border-gray-200 rounded-lg mb-8">
-                    <div class="p-6 border-b border-gray-200">
+                <div class="bg-white border border-gray-200 rounded-2xl mb-8 shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-gray-100">
                         <div class="flex items-center gap-3">
-                            <ExclamationTriangleIcon class="h-5 w-5 text-gray-400" />
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center">
+                                <ExclamationTriangleIcon class="h-5 w-5 text-white" />
+                            </div>
                             <h2 class="text-xl font-bold text-gray-900">Actionable Recommendations</h2>
                         </div>
                     </div>
@@ -295,7 +325,7 @@ const getPriorityColor = (priority) => {
                                 <Link
                                     v-if="rec.route"
                                     :href="route(rec.route)"
-                                    class="inline-flex items-center gap-2 text-sm font-medium text-brand-red-600 hover:text-indigo-800 transition-colors"
+                                    class="inline-flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
                                 >
                                     Take Action →
                                 </Link>
@@ -308,10 +338,12 @@ const getPriorityColor = (priority) => {
                 </div>
 
                 <!-- Missing Documents -->
-                <div v-if="assessment.missing_documents.length > 0" class="bg-white border border-gray-200 rounded-lg mb-8">
-                    <div class="p-6 border-b border-gray-200">
+                <div v-if="assessment.missing_documents.length > 0" class="bg-white border border-gray-200 rounded-2xl mb-8 shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-gray-100">
                         <div class="flex items-center gap-3">
-                            <DocumentCheckIcon class="h-5 w-5 text-gray-400" />
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-500 to-gray-600 flex items-center justify-center">
+                                <DocumentCheckIcon class="h-5 w-5 text-white" />
+                            </div>
                             <h2 class="text-xl font-bold text-gray-900">Missing Documents</h2>
                         </div>
                     </div>
@@ -326,10 +358,12 @@ const getPriorityColor = (priority) => {
                 </div>
 
                 <!-- Recommended Visa Types -->
-                <div v-if="assessment.recommended_visa_types.length > 0" class="bg-white border border-gray-200 rounded-lg mb-8">
-                    <div class="p-6 border-b border-gray-200">
+                <div v-if="assessment.recommended_visa_types.length > 0" class="bg-white border border-gray-200 rounded-2xl mb-8 shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-gray-100">
                         <div class="flex items-center gap-3">
-                            <GlobeAltIcon class="h-5 w-5 text-gray-400" />
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                                <GlobeAltIcon class="h-5 w-5 text-white" />
+                            </div>
                             <h2 class="text-xl font-bold text-gray-900">Recommended Visa Types</h2>
                         </div>
                     </div>
@@ -342,7 +376,7 @@ const getPriorityColor = (priority) => {
                             >
                                 <div class="flex justify-between items-center mb-2">
                                     <h4 class="font-semibold text-gray-900">{{ visa.type }}</h4>
-                                    <span class="text-sm font-bold text-brand-red-600">{{ visa.suitability }}%</span>
+                                    <span class="text-sm font-bold text-indigo-600">{{ visa.suitability }}%</span>
                                 </div>
                                 <p class="text-sm text-gray-700">{{ visa.reason }}</p>
                             </div>
@@ -351,10 +385,12 @@ const getPriorityColor = (priority) => {
                 </div>
 
                 <!-- Eligible Countries -->
-                <div v-if="assessment.eligible_countries.length > 0" class="bg-white border border-gray-200 rounded-lg">
-                    <div class="p-6 border-b border-gray-200">
+                <div v-if="assessment.eligible_countries.length > 0" class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-gray-100">
                         <div class="flex items-center gap-3">
-                            <MapPinIcon class="h-5 w-5 text-gray-400" />
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center">
+                                <MapPinIcon class="h-5 w-5 text-white" />
+                            </div>
                             <h2 class="text-xl font-bold text-gray-900">Eligible Countries</h2>
                         </div>
                     </div>
@@ -363,10 +399,10 @@ const getPriorityColor = (priority) => {
                             <div
                                 v-for="(country, index) in assessment.eligible_countries"
                                 :key="index"
-                                class="border border-gray-200 rounded-lg p-5 text-center hover:border-gray-300 transition-colors"
+                                class="border border-gray-200 rounded-xl p-5 text-center hover:border-gray-300 hover:shadow-md transition-all"
                             >
                                 <h4 class="font-semibold text-gray-900 mb-2">{{ country.name }}</h4>
-                                <div class="text-2xl font-bold text-green-600">{{ country.probability }}%</div>
+                                <div class="text-2xl font-bold text-emerald-600">{{ country.probability }}%</div>
                                 <div class="text-xs text-gray-500 mt-1">Success Probability</div>
                             </div>
                         </div>

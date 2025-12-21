@@ -86,11 +86,26 @@ const expiringSoonCount = computed(() =>
 
 <template>
     <div class="space-y-6">
-        <div>
-            <h3 class="text-lg font-medium text-gray-900">Certifications & Licenses</h3>
-            <p class="mt-1 text-sm text-gray-600">
-                Manage your professional certifications, trade licenses, driving permits, and other credentials. Keep track of expiry dates to stay compliant.
-            </p>
+        <!-- Section Header -->
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-md">
+                    <CheckBadgeIcon class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                    <h2 class="font-semibold text-lg text-gray-900">Certifications & Licenses</h2>
+                    <p class="text-sm text-gray-500">Professional certifications, licenses, and credentials</p>
+                </div>
+            </div>
+            <button
+                type="button"
+                @click="addCertification"
+                class="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl shadow-sm hover:from-indigo-700 hover:to-purple-700 transition-all"
+            >
+                <PlusIcon class="w-4 h-4" />
+                <span class="hidden sm:inline">Add Certification</span>
+                <span class="sm:hidden">Add</span>
+            </button>
         </div>
 
         <form @submit.prevent="submit" class="space-y-6">

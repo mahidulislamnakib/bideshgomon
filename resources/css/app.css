@@ -494,6 +494,60 @@
   .card-header { @apply p-6 border-b; border-color: var(--border-light); }
   .card-footer { @apply p-6 border-t; border-color: var(--border-light); }
   
+  /* Upwork Card - Modern Dashboard Style */
+  .upwork-card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100;
+    transition: all var(--transition-normal);
+  }
+  
+  .upwork-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 30, 0, 0.08);
+  }
+  
+  .upwork-card-hover:hover {
+    border-color: var(--upwork-green);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 30, 0, 0.12);
+  }
+  
+  /* ===================================
+     UPWORK BUTTONS - Primary Style
+     =================================== */
+  .upwork-btn-primary {
+    @apply inline-flex items-center justify-center font-semibold text-white rounded-full;
+    background-color: var(--upwork-green);
+    padding: 0.75rem 1.5rem;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+  }
+  
+  .upwork-btn-primary:hover {
+    background-color: var(--upwork-green-hover);
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+  
+  .upwork-btn-primary:active {
+    background-color: var(--upwork-green-dark);
+    transform: translateY(0);
+  }
+  
+  .upwork-btn-secondary {
+    @apply inline-flex items-center justify-center font-semibold rounded-full;
+    color: var(--upwork-green);
+    border: 2px solid var(--upwork-green);
+    background: transparent;
+    padding: 0.625rem 1.375rem;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+  }
+  
+  .upwork-btn-secondary:hover {
+    background-color: var(--upwork-green);
+    color: white;
+    text-decoration: none;
+  }
+  
   /* ===================================
      BADGES - Upwork Style
      =================================== */

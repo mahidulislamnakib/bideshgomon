@@ -236,11 +236,11 @@ const categoryList = computed(() => {
         <AnimatedSection 
           variant="growth" 
           :show-blobs="true"
-          class="mb-rhythm-xl animate-fadeInUp"
+          class="mb-8 animate-fadeInUp"
         >
-          <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-rhythm-lg">
+          <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div class="flex-1">
-              <h1 class="text-2xl sm:text-3xl font-display font-bold text-white mb-rhythm-sm">
+              <h1 class="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white mb-2">
                 {{ services.length }} Services at Your Fingertips
               </h1>
               <p class="text-white/90 text-sm sm:text-base md:text-lg">

@@ -206,11 +206,19 @@ const getProgressColor = () => {
 
 <template>
     <div class="space-y-6">
-        <div>
-            <h3 class="text-lg font-medium text-gray-900">Profile Completeness</h3>
-            <p class="mt-1 text-sm text-gray-600">
-                Track your profile completion and improve your chances for visa applications and job opportunities.
-            </p>
+        <!-- Header -->
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900">Profile Completeness</h3>
+                    <p class="text-sm text-gray-500">Track completion for visa applications and opportunities</p>
+                </div>
+            </div>
         </div>
 
         <!-- Overall Progress -->
@@ -256,7 +264,7 @@ const getProgressColor = () => {
         <!-- Benefits Notice -->
         <div class="rounded-lg border border-blue-200 bg-blue-50 p-4">
             <div class="flex items-start">
-                <svg class="h-5 w-5 text-brand-red-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="h-5 w-5 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>

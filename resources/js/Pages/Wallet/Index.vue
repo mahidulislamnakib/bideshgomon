@@ -94,23 +94,24 @@ const submitWithdraw = () => {
 
     <AuthenticatedLayout>
         <!-- Desktop & Mobile Content -->
-        <div class="py-6 sm:py-12">
-            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <!-- Header Section -->
-                <div class="bg-growth-600 px-4 sm:px-6 lg:px-8 pt-6 pb-32 sm:rounded-3xl mb-6">
+        <div class="min-h-screen bg-gray-50/50">
+            <!-- Header Section -->
+            <div class="bg-gradient-to-br from-upwork-green via-upwork-green to-emerald-600 px-4 sm:px-6 lg:px-8 pt-6 pb-32">
+                <div class="max-w-7xl mx-auto">
                     <div class="flex items-center gap-3">
-                        <Link :href="route('dashboard')" class="text-white hover:text-emerald-100 transition-colors">
+                        <Link :href="route('dashboard')" class="text-white/80 hover:text-white transition-colors">
                             <ChevronLeftIcon class="h-6 w-6" />
                         </Link>
                         <div>
                             <h1 class="text-2xl sm:text-3xl font-bold text-white">My Wallet</h1>
-                            <p class="text-emerald-100 text-sm">Manage your balance and transactions</p>
+                            <p class="text-white/80 text-sm">Manage your balance and transactions</p>
                         </div>
                     </div>
                 </div>
+            </div>
 
             <!-- Balance Card - Overlapping -->
-            <div class="-mt-24 px-4 sm:px-0 mb-6">
+            <div class="-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
                 <RhythmicCard variant="light" size="xl" class="animate-fadeInUp">
                     <template #default>
                         <!-- Status Badge -->
@@ -163,7 +164,7 @@ const submitWithdraw = () => {
             </div>
 
             <!-- Quick Stats -->
-            <div class="px-4 sm:px-0 mb-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
                 <div class="grid grid-cols-3 gap-3 sm:gap-4">
                     <RhythmicCard variant="growth" size="sm" class="animate-fadeIn" style="animation-delay: 100ms;">
                         <template #icon>
@@ -196,8 +197,8 @@ const submitWithdraw = () => {
             </div>
             
             <!-- Quick Actions Bar -->
-            <div class="px-4 sm:px-0 mb-6">
-                <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+                <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100">
                     <div class="flex items-center justify-between gap-3">
                         <Link 
                             :href="route('wallet.transactions')"
@@ -224,7 +225,7 @@ const submitWithdraw = () => {
             </div>
 
             <!-- Recent Transactions -->
-            <div class="px-4 sm:px-0">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-lg font-semibold text-gray-900">Recent Transactions</h3>
                     <Link
@@ -289,7 +290,6 @@ const submitWithdraw = () => {
                     <p class="text-gray-500 font-medium mb-2">No transactions yet</p>
                     <p class="text-sm text-gray-400">Your transaction history will appear here</p>
                 </div>
-            </div>
             </div>
         </div>
 

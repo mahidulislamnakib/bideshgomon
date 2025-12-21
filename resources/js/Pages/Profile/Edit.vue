@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, router } from '@inertiajs/vue3';
+import { Head, router, Link } from '@inertiajs/vue3';
 import { ref, computed, onMounted, watch } from 'vue';
 import { useProfileCompletion } from '@/Composables/useProfileCompletion';
 import RhythmicCard from '@/Components/Rhythmic/RhythmicCard.vue';
@@ -536,33 +536,49 @@ const backToCards = () => {
     <Head title="Edit Profile" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <div class="flex items-center justify-between">
-                <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-                    {{ activeSection ? currentSection?.name : 'Edit Profile' }}
-                </h2>
-                <button
-                    v-if="activeSection"
-                    @click="backToCards"
-                    class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
-                >
-                    ← Back to Sections
-                </button>
+        <div class="min-h-screen bg-gray-50">
+            <!-- Hero Header Section -->
+            <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-white/20 rounded-2xl backdrop-blur-sm flex items-center justify-center">
+                                <UserCircleIcon class="h-8 w-8 text-white" />
+                            </div>
+                            <div>
+                                <h1 class="text-2xl sm:text-3xl font-bold text-white">
+                                    {{ activeSection ? currentSection?.name : 'Profile Settings' }}
+                                </h1>
+                                <p class="text-white/80 text-sm mt-1">
+                                    {{ activeSection ? currentSection?.description : 'Manage your complete profile across 25 sections' }}
+                                </p>
+                            </div>
+                        </div>
+                        <button
+                            v-if="activeSection && !isMobile"
+                            @click="backToCards"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/20 hover:bg-white/30 text-white rounded-xl font-semibold text-sm backdrop-blur-sm transition-all border border-white/20"
+                        >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                            Back to Sections
+                        </button>
+                    </div>
+                </div>
             </div>
-        </template>
 
-        <div class="py-6 md:py-8">
-            <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
                 <!-- Mobile Back Button (Sticky) -->
                 <div 
                     v-if="activeSection && isMobile"
-                    class="sticky top-0 z-20 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 -mx-2 px-4 py-3 mb-4 shadow-sm"
+                    class="sticky top-0 z-20 bg-white border-b border-gray-200 -mx-4 px-4 py-3 mb-4 shadow-sm"
                 >
                     <button
                         @click="backToCards"
-                        class="flex items-center gap-2 text-brand-red-600 dark:text-indigo-400 font-semibold text-base active:scale-95 transition-transform"
+                        class="flex items-center gap-2 text-indigo-600 font-semibold text-sm active:scale-95 transition-transform"
                     >
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                         </svg>
                         Back to All Sections
@@ -570,459 +586,414 @@ const backToCards = () => {
                 </div>
 
                 <!-- Profile Completion Progress -->
-                <RhythmicCard variant="gradient" class="mb-6">
-                    <div class="p-6">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 mb-6 overflow-hidden">
+                    <div class="p-5 sm:p-6">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-white border border-gray-200 flex items-center justify-center">
-                                    <CheckCircleIcon v-if="completion.isComplete" class="w-6 h-6 text-gray-400" />
-                                    <ExclamationCircleIcon v-else class="w-6 h-6 text-gray-400" />
+                                <div :class="[
+                                    'w-11 h-11 rounded-xl flex items-center justify-center',
+                                    completion.isComplete ? 'bg-green-100' : 'bg-amber-100'
+                                ]">
+                                    <CheckCircleIcon v-if="completion.isComplete" class="w-6 h-6 text-green-600" />
+                                    <ExclamationCircleIcon v-else class="w-6 h-6 text-amber-600" />
                                 </div>
-                                <h3 class="font-display font-bold text-lg text-gray-800">Profile Completion</h3>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Profile Completion</h3>
+                                    <p class="text-xs text-gray-500">{{ completion.completed }} of {{ completion.total }} sections completed</p>
+                                </div>
                             </div>
-                            <span :class="[
-                                'text-2xl md:text-3xl font-display font-bold',
-                                getCompletionColor(completion.percentage)
-                            ]">
-                                {{ completion.percentage }}%
-                            </span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-3 relative overflow-hidden">
-                            <div
-                                class="h-3 rounded-full transition-all duration-500 bg-brand-red-600 relative overflow-hidden"
-                                :style="{ width: completion.percentage + '%' }"
-                            >
-                                <div class="absolute inset-0 bg-white/20 animate-shimmer"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-start text-sm">
-                            <span class="text-gray-600 dark:text-gray-400 leading-snug">
-                                {{ completion.completed }} of {{ completion.total }} profile sections completed
-                                <span v-if="!completion.isComplete" class="block text-gray-500 dark:text-gray-500 mt-1">
-                                    Complete all sections to unlock full features
+                            <div class="text-right">
+                                <span :class="[
+                                    'text-3xl font-bold',
+                                    completion.percentage >= 80 ? 'text-green-600' : completion.percentage >= 50 ? 'text-amber-600' : 'text-red-500'
+                                ]">
+                                    {{ completion.percentage }}%
                                 </span>
-                            </span>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                                <div
+                                    :class="[
+                                        'h-2.5 rounded-full transition-all duration-700 ease-out',
+                                        completion.percentage >= 80 ? 'bg-gradient-to-r from-green-400 to-green-600' : 
+                                        completion.percentage >= 50 ? 'bg-gradient-to-r from-amber-400 to-amber-600' : 
+                                        'bg-gradient-to-r from-red-400 to-red-500'
+                                    ]"
+                                    :style="{ width: completion.percentage + '%' }"
+                                ></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+                            <p v-if="!completion.isComplete" class="text-xs text-gray-500">
+                                Complete all sections to unlock premium features
+                            </p>
+                            <p v-else class="text-xs text-green-600 font-medium">
+                                ✓ Profile complete! Ready for AI assessment
+                            </p>
+                            <Link
+                                :href="route('profile.assessment.show')"
+                                class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-semibold rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all shadow-sm hover:shadow-md"
+                            >
+                                <SparklesIcon class="w-4 h-4" />
+                                AI Assessment
+                            </Link>
                         </div>
                     </div>
-                </RhythmicCard>
+                </div>
 
                 <!-- Card View: Show when no section is active -->
-                <div v-if="!activeSection" class="space-y-8">
+                <div v-if="!activeSection" class="space-y-6">
                     <!-- Personal Information -->
-                    <div>
-                        <div class="flex items-center gap-3 mb-4 px-1">
-                            <div class="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center">
-                                <UserCircleIcon class="w-5 h-5 text-gray-400" />
-                            </div>
-                            <h3 class="font-display font-bold text-xl text-gray-800">
-                                Personal Information
-                            </h3>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                            <button
-                                v-for="section in sections.filter(s => s.category === 'personal')"
-                                :key="section.id"
-                                @click="changeSection(section.id)"
-                                :class="[
-                                    'group bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-all duration-200 p-4 md:p-5 text-left border-2 border-transparent touch-manipulation',
-                                    getSectionBorderColor(section.id)
-                                ]"
-                            >
-                                <div class="flex items-start justify-between">
-                                    <div class="flex items-start space-x-3 md:space-x-4 flex-1">
-                                        <div :class="[
-                                            'flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center border border-gray-200 transition-colors duration-200',
-                                            getSectionGradient(section.id)
-                                        ]">
-                                            <component :is="section.icon" class="w-5 h-5 md:w-6 md:h-6 text-white" />
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <div class="flex items-center gap-2 mb-1">
-                                                <h4 :class="[
-                                                    'text-sm md:text-base font-semibold text-gray-900 dark:text-white transition-colors',
-                                                    getSectionTextColor(section.id)
-                                                ]">
-                                                    {{ section.name }}
-                                                </h4>
-                                                <span :class="[
-                                                    'text-xs font-bold px-2 py-0.5 rounded-full',
-                                                    getCompletionColor(getSectionCompletion(section.id))
-                                                ]">
-                                                    {{ getSectionCompletion(section.id) }}%
-                                                </span>
-                                            </div>
-                                            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 line-clamp-2 leading-snug">
-                                                {{ section.description }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <ChevronRightIcon :class="[
-                                        'w-5 h-5 text-gray-400 transition-colors flex-shrink-0 ml-2',
-                                        getSectionTextColor(section.id)
-                                    ]" />
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="px-5 py-4 border-b border-gray-100 bg-gray-50/50">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                                    <UserCircleIcon class="w-5 h-5 text-white" />
                                 </div>
-                            </button>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Personal Information</h3>
+                                    <p class="text-xs text-gray-500">4 sections</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                                <button
+                                    v-for="section in sections.filter(s => s.category === 'personal')"
+                                    :key="section.id"
+                                    @click="changeSection(section.id)"
+                                    class="group flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:border-indigo-200 hover:bg-indigo-50/50 transition-all text-left"
+                                >
+                                    <div :class="[
+                                        'w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105',
+                                        getSectionGradient(section.id)
+                                    ]">
+                                        <component :is="section.icon" class="w-5 h-5 text-white" />
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2">
+                                            <h4 class="text-sm font-medium text-gray-900 truncate group-hover:text-indigo-700">{{ section.name }}</h4>
+                                            <span :class="[
+                                                'text-[10px] font-bold px-1.5 py-0.5 rounded',
+                                                getSectionCompletion(section.id) >= 80 ? 'bg-green-100 text-green-700' : 
+                                                getSectionCompletion(section.id) >= 50 ? 'bg-amber-100 text-amber-700' : 
+                                                getSectionCompletion(section.id) > 0 ? 'bg-orange-100 text-orange-700' : 'bg-gray-100 text-gray-500'
+                                            ]">
+                                                {{ getSectionCompletion(section.id) }}%
+                                            </span>
+                                        </div>
+                                        <p class="text-xs text-gray-500 truncate">{{ section.description }}</p>
+                                    </div>
+                                    <ChevronRightIcon class="w-4 h-4 text-gray-300 group-hover:text-indigo-500 flex-shrink-0" />
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Professional Profile -->
-                    <div>
-                        <div class="flex items-center gap-3 mb-4 px-1">
-                            <div class="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center">
-                                <BriefcaseIcon class="w-5 h-5 text-gray-400" />
-                            </div>
-                            <h3 class="font-display font-bold text-xl text-gray-800">
-                                Professional Profile
-                            </h3>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                            <button
-                                v-for="section in sections.filter(s => s.category === 'professional')"
-                                :key="section.id"
-                                @click="changeSection(section.id)"
-                                :class="[
-                                    'group bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-all duration-200 p-4 md:p-5 text-left border-2 border-transparent touch-manipulation',
-                                    getSectionBorderColor(section.id)
-                                ]"
-                            >
-                                <div class="flex items-start justify-between">
-                                    <div class="flex items-start space-x-3 md:space-x-4 flex-1">
-                                        <div :class="[
-                                            'flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center border border-gray-200 transition-colors duration-200',
-                                            getSectionGradient(section.id)
-                                        ]">
-                                            <component :is="section.icon" class="w-5 h-5 md:w-6 md:h-6 text-white" />
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <div class="flex items-center gap-2 mb-1">
-                                                <h4 :class="[
-                                                    'text-sm md:text-base font-semibold text-gray-900 dark:text-white transition-colors',
-                                                    getSectionTextColor(section.id)
-                                                ]">
-                                                    {{ section.name }}
-                                                </h4>
-                                                <span :class="[
-                                                    'text-xs font-bold px-2 py-0.5 rounded-full',
-                                                    getCompletionColor(getSectionCompletion(section.id))
-                                                ]">
-                                                    {{ getSectionCompletion(section.id) }}%
-                                                </span>
-                                            </div>
-                                            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 line-clamp-2 leading-snug">
-                                                {{ section.description }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <ChevronRightIcon :class="[
-                                        'w-5 h-5 text-gray-400 transition-colors flex-shrink-0 ml-2',
-                                        getSectionTextColor(section.id)
-                                    ]" />
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="px-5 py-4 border-b border-gray-100 bg-gray-50/50">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
+                                    <BriefcaseIcon class="w-5 h-5 text-white" />
                                 </div>
-                            </button>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Professional Profile</h3>
+                                    <p class="text-xs text-gray-500">6 sections</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                <button
+                                    v-for="section in sections.filter(s => s.category === 'professional')"
+                                    :key="section.id"
+                                    @click="changeSection(section.id)"
+                                    class="group flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:border-purple-200 hover:bg-purple-50/50 transition-all text-left"
+                                >
+                                    <div :class="[
+                                        'w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105',
+                                        getSectionGradient(section.id)
+                                    ]">
+                                        <component :is="section.icon" class="w-5 h-5 text-white" />
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2">
+                                            <h4 class="text-sm font-medium text-gray-900 truncate group-hover:text-purple-700">{{ section.name }}</h4>
+                                            <span :class="[
+                                                'text-[10px] font-bold px-1.5 py-0.5 rounded',
+                                                getSectionCompletion(section.id) >= 80 ? 'bg-green-100 text-green-700' : 
+                                                getSectionCompletion(section.id) >= 50 ? 'bg-amber-100 text-amber-700' : 
+                                                getSectionCompletion(section.id) > 0 ? 'bg-orange-100 text-orange-700' : 'bg-gray-100 text-gray-500'
+                                            ]">
+                                                {{ getSectionCompletion(section.id) }}%
+                                            </span>
+                                        </div>
+                                        <p class="text-xs text-gray-500 truncate">{{ section.description }}</p>
+                                    </div>
+                                    <ChevronRightIcon class="w-4 h-4 text-gray-300 group-hover:text-purple-500 flex-shrink-0" />
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Safety & Health -->
-                    <div>
-                        <div class="flex items-center gap-3 mb-4 px-1">
-                            <div class="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center">
-                                <HeartIcon class="w-5 h-5 text-gray-400" />
-                            </div>
-                            <h3 class="font-display font-bold text-xl text-gray-800">
-                                Safety & Health
-                            </h3>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                            <button
-                                v-for="section in sections.filter(s => s.category === 'safety')"
-                                :key="section.id"
-                                @click="changeSection(section.id)"
-                                :class="[
-                                    'group bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-all duration-200 p-4 md:p-5 text-left border-2 border-transparent touch-manipulation',
-                                    getSectionBorderColor(section.id)
-                                ]"
-                            >
-                                <div class="flex items-start justify-between">
-                                    <div class="flex items-start space-x-3 md:space-x-4 flex-1">
-                                        <div :class="[
-                                            'flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center border border-gray-200 transition-colors duration-200',
-                                            getSectionGradient(section.id)
-                                        ]">
-                                            <component :is="section.icon" class="w-5 h-5 md:w-6 md:h-6 text-white" />
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <div class="flex items-center gap-2 mb-1">
-                                                <h4 :class="[
-                                                    'text-sm md:text-base font-semibold text-gray-900 dark:text-white transition-colors',
-                                                    getSectionTextColor(section.id)
-                                                ]">
-                                                    {{ section.name }}
-                                                </h4>
-                                                <span :class="[
-                                                    'text-xs font-bold px-2 py-0.5 rounded-full',
-                                                    getCompletionColor(getSectionCompletion(section.id))
-                                                ]">
-                                                    {{ getSectionCompletion(section.id) }}%
-                                                </span>
-                                            </div>
-                                            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 line-clamp-2 leading-snug">
-                                                {{ section.description }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <ChevronRightIcon :class="[
-                                        'w-5 h-5 text-gray-400 transition-colors flex-shrink-0 ml-2',
-                                        getSectionTextColor(section.id)
-                                    ]" />
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="px-5 py-4 border-b border-gray-100 bg-gray-50/50">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center">
+                                    <HeartIcon class="w-5 h-5 text-white" />
                                 </div>
-                            </button>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Safety & Health</h3>
+                                    <p class="text-xs text-gray-500">2 sections</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <button
+                                    v-for="section in sections.filter(s => s.category === 'safety')"
+                                    :key="section.id"
+                                    @click="changeSection(section.id)"
+                                    class="group flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:border-rose-200 hover:bg-rose-50/50 transition-all text-left"
+                                >
+                                    <div :class="[
+                                        'w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105',
+                                        getSectionGradient(section.id)
+                                    ]">
+                                        <component :is="section.icon" class="w-5 h-5 text-white" />
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2">
+                                            <h4 class="text-sm font-medium text-gray-900 truncate group-hover:text-rose-700">{{ section.name }}</h4>
+                                            <span :class="[
+                                                'text-[10px] font-bold px-1.5 py-0.5 rounded',
+                                                getSectionCompletion(section.id) >= 80 ? 'bg-green-100 text-green-700' : 
+                                                getSectionCompletion(section.id) >= 50 ? 'bg-amber-100 text-amber-700' : 
+                                                getSectionCompletion(section.id) > 0 ? 'bg-orange-100 text-orange-700' : 'bg-gray-100 text-gray-500'
+                                            ]">
+                                                {{ getSectionCompletion(section.id) }}%
+                                            </span>
+                                        </div>
+                                        <p class="text-xs text-gray-500 truncate">{{ section.description }}</p>
+                                    </div>
+                                    <ChevronRightIcon class="w-4 h-4 text-gray-300 group-hover:text-rose-500 flex-shrink-0" />
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Immigration & Documents -->
-                    <div>
-                        <div class="flex items-center gap-3 mb-4 px-1">
-                            <div class="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center">
-                                <GlobeAltIcon class="w-5 h-5 text-gray-400" />
-                            </div>
-                            <h3 class="font-display font-bold text-xl text-gray-800">
-                                Immigration & Documents
-                            </h3>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                            <button
-                                v-for="section in sections.filter(s => s.category === 'immigration')"
-                                :key="section.id"
-                                @click="changeSection(section.id)"
-                                :class="[
-                                    'group bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-all duration-200 p-4 md:p-5 text-left border-2 border-transparent touch-manipulation',
-                                    getSectionBorderColor(section.id)
-                                ]"
-                            >
-                                <div class="flex items-start justify-between">
-                                    <div class="flex items-start space-x-3 md:space-x-4 flex-1">
-                                        <div :class="[
-                                            'flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center border border-gray-200 transition-colors duration-200',
-                                            getSectionGradient(section.id)
-                                        ]">
-                                            <component :is="section.icon" class="w-5 h-5 md:w-6 md:h-6 text-white" />
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <div class="flex items-center gap-2 mb-1">
-                                                <h4 :class="[
-                                                    'text-sm md:text-base font-semibold text-gray-900 dark:text-white transition-colors',
-                                                    getSectionTextColor(section.id)
-                                                ]">
-                                                    {{ section.name }}
-                                                </h4>
-                                                <span :class="[
-                                                    'text-xs font-bold px-2 py-0.5 rounded-full',
-                                                    getCompletionColor(getSectionCompletion(section.id))
-                                                ]">
-                                                    {{ getSectionCompletion(section.id) }}%
-                                                </span>
-                                            </div>
-                                            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 line-clamp-2 leading-snug">
-                                                {{ section.description }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <ChevronRightIcon :class="[
-                                        'w-5 h-5 text-gray-400 transition-colors flex-shrink-0 ml-2',
-                                        getSectionTextColor(section.id)
-                                    ]" />
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="px-5 py-4 border-b border-gray-100 bg-gray-50/50">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center">
+                                    <GlobeAltIcon class="w-5 h-5 text-white" />
                                 </div>
-                            </button>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Immigration & Documents</h3>
+                                    <p class="text-xs text-gray-500">4 sections</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                                <button
+                                    v-for="section in sections.filter(s => s.category === 'immigration')"
+                                    :key="section.id"
+                                    @click="changeSection(section.id)"
+                                    class="group flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:border-teal-200 hover:bg-teal-50/50 transition-all text-left"
+                                >
+                                    <div :class="[
+                                        'w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105',
+                                        getSectionGradient(section.id)
+                                    ]">
+                                        <component :is="section.icon" class="w-5 h-5 text-white" />
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2">
+                                            <h4 class="text-sm font-medium text-gray-900 truncate group-hover:text-teal-700">{{ section.name }}</h4>
+                                            <span :class="[
+                                                'text-[10px] font-bold px-1.5 py-0.5 rounded',
+                                                getSectionCompletion(section.id) >= 80 ? 'bg-green-100 text-green-700' : 
+                                                getSectionCompletion(section.id) >= 50 ? 'bg-amber-100 text-amber-700' : 
+                                                getSectionCompletion(section.id) > 0 ? 'bg-orange-100 text-orange-700' : 'bg-gray-100 text-gray-500'
+                                            ]">
+                                                {{ getSectionCompletion(section.id) }}%
+                                            </span>
+                                        </div>
+                                        <p class="text-xs text-gray-500 truncate">{{ section.description }}</p>
+                                    </div>
+                                    <ChevronRightIcon class="w-4 h-4 text-gray-300 group-hover:text-teal-500 flex-shrink-0" />
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Family & Financial -->
-                    <div>
-                        <div class="flex items-center gap-3 mb-4 px-1">
-                            <div class="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center">
-                                <UsersIcon class="w-5 h-5 text-gray-400" />
-                            </div>
-                            <h3 class="font-display font-bold text-xl text-gray-800">
-                                Family & Financial
-                            </h3>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                            <button
-                                v-for="section in sections.filter(s => s.category === 'family-financial')"
-                                :key="section.id"
-                                @click="changeSection(section.id)"
-                                :class="[
-                                    'group bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-all duration-200 p-4 md:p-5 text-left border-2 border-transparent touch-manipulation',
-                                    getSectionBorderColor(section.id)
-                                ]"
-                            >
-                                <div class="flex items-start justify-between">
-                                    <div class="flex items-start space-x-3 md:space-x-4 flex-1">
-                                        <div :class="[
-                                            'flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center border border-gray-200 transition-colors duration-200',
-                                            getSectionGradient(section.id)
-                                        ]">
-                                            <component :is="section.icon" class="w-5 h-5 md:w-6 md:h-6 text-white" />
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <div class="flex items-center gap-2 mb-1">
-                                                <h4 :class="[
-                                                    'text-sm md:text-base font-semibold text-gray-900 dark:text-white transition-colors',
-                                                    getSectionTextColor(section.id)
-                                                ]">
-                                                    {{ section.name }}
-                                                </h4>
-                                                <span :class="[
-                                                    'text-xs font-bold px-2 py-0.5 rounded-full',
-                                                    getCompletionColor(getSectionCompletion(section.id))
-                                                ]">
-                                                    {{ getSectionCompletion(section.id) }}%
-                                                </span>
-                                            </div>
-                                            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 line-clamp-2 leading-snug">
-                                                {{ section.description }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <ChevronRightIcon :class="[
-                                        'w-5 h-5 text-gray-400 transition-colors flex-shrink-0 ml-2',
-                                        getSectionTextColor(section.id)
-                                    ]" />
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="px-5 py-4 border-b border-gray-100 bg-gray-50/50">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                                    <UsersIcon class="w-5 h-5 text-white" />
                                 </div>
-                            </button>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Family & Financial</h3>
+                                    <p class="text-xs text-gray-500">2 sections</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <button
+                                    v-for="section in sections.filter(s => s.category === 'family-financial')"
+                                    :key="section.id"
+                                    @click="changeSection(section.id)"
+                                    class="group flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:border-amber-200 hover:bg-amber-50/50 transition-all text-left"
+                                >
+                                    <div :class="[
+                                        'w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105',
+                                        getSectionGradient(section.id)
+                                    ]">
+                                        <component :is="section.icon" class="w-5 h-5 text-white" />
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2">
+                                            <h4 class="text-sm font-medium text-gray-900 truncate group-hover:text-amber-700">{{ section.name }}</h4>
+                                            <span :class="[
+                                                'text-[10px] font-bold px-1.5 py-0.5 rounded',
+                                                getSectionCompletion(section.id) >= 80 ? 'bg-green-100 text-green-700' : 
+                                                getSectionCompletion(section.id) >= 50 ? 'bg-amber-100 text-amber-700' : 
+                                                getSectionCompletion(section.id) > 0 ? 'bg-orange-100 text-orange-700' : 'bg-gray-100 text-gray-500'
+                                            ]">
+                                                {{ getSectionCompletion(section.id) }}%
+                                            </span>
+                                        </div>
+                                        <p class="text-xs text-gray-500 truncate">{{ section.description }}</p>
+                                    </div>
+                                    <ChevronRightIcon class="w-4 h-4 text-gray-300 group-hover:text-amber-500 flex-shrink-0" />
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Background & Security -->
-                    <div>
-                        <div class="flex items-center gap-3 mb-4 px-1">
-                            <div class="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center">
-                                <ShieldCheckIcon class="w-5 h-5 text-gray-400" />
-                            </div>
-                            <h3 class="font-display font-bold text-xl text-gray-800">
-                                Background & Security
-                            </h3>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                            <button
-                                v-for="section in sections.filter(s => s.category === 'background')"
-                                :key="section.id"
-                                @click="changeSection(section.id)"
-                                :class="[
-                                    'group bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-all duration-200 p-4 md:p-5 text-left border-2 border-transparent touch-manipulation',
-                                    getSectionBorderColor(section.id)
-                                ]"
-                            >
-                                <div class="flex items-start justify-between">
-                                    <div class="flex items-start space-x-3 md:space-x-4 flex-1">
-                                        <div :class="[
-                                            'flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center border border-gray-200 transition-colors duration-200',
-                                            getSectionGradient(section.id)
-                                        ]">
-                                            <component :is="section.icon" class="w-5 h-5 md:w-6 md:h-6 text-white" />
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <div class="flex items-center gap-2 mb-1">
-                                                <h4 :class="[
-                                                    'text-sm md:text-base font-semibold text-gray-900 dark:text-white transition-colors',
-                                                    getSectionTextColor(section.id)
-                                                ]">
-                                                    {{ section.name }}
-                                                </h4>
-                                                <span :class="[
-                                                    'text-xs font-bold px-2 py-0.5 rounded-full',
-                                                    getCompletionColor(getSectionCompletion(section.id))
-                                                ]">
-                                                    {{ getSectionCompletion(section.id) }}%
-                                                </span>
-                                            </div>
-                                            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 line-clamp-2 leading-snug">
-                                                {{ section.description }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <ChevronRightIcon :class="[
-                                        'w-5 h-5 text-gray-400 transition-colors flex-shrink-0 ml-2',
-                                        getSectionTextColor(section.id)
-                                    ]" />
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="px-5 py-4 border-b border-gray-100 bg-gray-50/50">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-slate-600 to-slate-700 flex items-center justify-center">
+                                    <ShieldCheckIcon class="w-5 h-5 text-white" />
                                 </div>
-                            </button>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Background & Security</h3>
+                                    <p class="text-xs text-gray-500">1 section</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                <button
+                                    v-for="section in sections.filter(s => s.category === 'background')"
+                                    :key="section.id"
+                                    @click="changeSection(section.id)"
+                                    class="group flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:border-slate-200 hover:bg-slate-50/50 transition-all text-left"
+                                >
+                                    <div :class="[
+                                        'w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105',
+                                        getSectionGradient(section.id)
+                                    ]">
+                                        <component :is="section.icon" class="w-5 h-5 text-white" />
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2">
+                                            <h4 class="text-sm font-medium text-gray-900 truncate group-hover:text-slate-700">{{ section.name }}</h4>
+                                            <span :class="[
+                                                'text-[10px] font-bold px-1.5 py-0.5 rounded',
+                                                getSectionCompletion(section.id) >= 80 ? 'bg-green-100 text-green-700' : 
+                                                getSectionCompletion(section.id) >= 50 ? 'bg-amber-100 text-amber-700' : 
+                                                getSectionCompletion(section.id) > 0 ? 'bg-orange-100 text-orange-700' : 'bg-gray-100 text-gray-500'
+                                            ]">
+                                                {{ getSectionCompletion(section.id) }}%
+                                            </span>
+                                        </div>
+                                        <p class="text-xs text-gray-500 truncate">{{ section.description }}</p>
+                                    </div>
+                                    <ChevronRightIcon class="w-4 h-4 text-gray-300 group-hover:text-slate-500 flex-shrink-0" />
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Account & Settings -->
-                    <div>
-                        <div class="flex items-center gap-3 mb-4 px-1">
-                            <div class="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center">
-                                <Cog6ToothIcon class="w-5 h-5 text-gray-400" />
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="px-5 py-4 border-b border-gray-100 bg-gray-50/50">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-gray-600 to-gray-700 flex items-center justify-center">
+                                    <Cog6ToothIcon class="w-5 h-5 text-white" />
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Account & Settings</h3>
+                                    <p class="text-xs text-gray-500">6 sections</p>
+                                </div>
                             </div>
-                            <h3 class="font-display font-bold text-xl text-gray-800">
-                                Account & Settings
-                            </h3>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                            <button
-                                v-for="section in sections.filter(s => s.category === 'settings')"
-                                :key="section.id"
-                                @click="changeSection(section.id)"
-                                :class="[
-                                    'group rounded-lg shadow hover:shadow-md transition-all duration-200 p-4 md:p-5 text-left border-2 border-transparent touch-manipulation',
-                                    section.id === 'delete' 
-                                        ? 'bg-red-50 dark:bg-red-900/20 hover:border-red-500 dark:hover:border-red-400' 
-                                        : 'bg-white dark:bg-gray-800 ' + getSectionBorderColor(section.id)
-                                ]"
-                            >
-                                <div class="flex items-start justify-between">
-                                    <div class="flex items-start space-x-3 md:space-x-4 flex-1">
-                                        <div :class="[
-                                            'flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center border transition-colors duration-200',
-                                            section.id === 'delete' 
-                                                ? 'bg-red-50 border-2 border-red-300' 
-                                                : 'border-gray-200 ' + getSectionGradient(section.id)
-                                        ]">
-                                            <component :is="section.icon" :class="[
-                                                'w-5 h-5 md:w-6 md:h-6',
-                                                section.id === 'delete' ? 'text-red-600 opacity-70' : 'text-white'
-                                            ]" />
+                        <div class="p-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                <button
+                                    v-for="section in sections.filter(s => s.category === 'settings')"
+                                    :key="section.id"
+                                    @click="changeSection(section.id)"
+                                    :class="[
+                                        'group flex items-center gap-3 p-3 rounded-xl border transition-all text-left',
+                                        section.id === 'delete' 
+                                            ? 'border-red-200 bg-red-50/50 hover:bg-red-100/50 hover:border-red-300' 
+                                            : 'border-gray-100 hover:border-gray-200 hover:bg-gray-50/50'
+                                    ]"
+                                >
+                                    <div :class="[
+                                        'w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105',
+                                        section.id === 'delete' ? 'bg-red-100' : getSectionGradient(section.id)
+                                    ]">
+                                        <component :is="section.icon" :class="[
+                                            'w-5 h-5',
+                                            section.id === 'delete' ? 'text-red-600' : 'text-white'
+                                        ]" />
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2">
+                                            <h4 :class="[
+                                                'text-sm font-medium truncate',
+                                                section.id === 'delete' ? 'text-red-700 group-hover:text-red-800' : 'text-gray-900 group-hover:text-gray-700'
+                                            ]">
+                                                {{ section.name }}
+                                            </h4>
+                                            <span v-if="section.id !== 'delete'" :class="[
+                                                'text-[10px] font-bold px-1.5 py-0.5 rounded',
+                                                getSectionCompletion(section.id) >= 80 ? 'bg-green-100 text-green-700' : 
+                                                getSectionCompletion(section.id) >= 50 ? 'bg-amber-100 text-amber-700' : 
+                                                getSectionCompletion(section.id) > 0 ? 'bg-orange-100 text-orange-700' : 'bg-gray-100 text-gray-500'
+                                            ]">
+                                                {{ getSectionCompletion(section.id) }}%
+                                            </span>
                                         </div>
-                                        <div class="flex-1 min-w-0">
-                                            <div class="flex items-center gap-2 mb-1">
-                                                <h4 :class="[
-                                                    'text-sm md:text-base font-semibold transition-colors',
-                                                    section.id === 'delete'
-                                                        ? 'text-red-900 dark:text-red-200 group-hover:text-red-600 dark:group-hover:text-red-400'
-                                                        : 'text-gray-900 dark:text-white ' + getSectionTextColor(section.id)
-                                                ]">
-                                                    {{ section.name }}
-                                                </h4>
-                                                <span v-if="section.id !== 'delete'" :class="[
-                                                    'text-xs font-bold px-2 py-0.5 rounded-full',
-                                                    getCompletionColor(getSectionCompletion(section.id))
-                                                ]">
-                                                    {{ getSectionCompletion(section.id) }}%
-                                                </span>
-                                            </div>
-                                            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 line-clamp-2 leading-snug">
-                                                {{ section.description }}
-                                            </p>
-                                        </div>
+                                        <p class="text-xs text-gray-500 truncate">{{ section.description }}</p>
                                     </div>
                                     <ChevronRightIcon :class="[
-                                        'w-5 h-5 transition-colors flex-shrink-0 ml-2',
-                                        section.id === 'delete'
-                                            ? 'text-red-400 group-hover:text-red-600 dark:group-hover:text-red-400'
-                                            : 'text-gray-400 ' + getSectionTextColor(section.id)
+                                        'w-4 h-4 flex-shrink-0',
+                                        section.id === 'delete' ? 'text-red-400 group-hover:text-red-600' : 'text-gray-300 group-hover:text-gray-500'
                                     ]" />
-                                </div>
-                            </button>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Section Detail View: Show when a section is active -->
-                <div v-else class="bg-white dark:bg-gray-800 shadow-lg sm:rounded-lg overflow-hidden">
+                <div v-else class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <!-- Section Content -->
-                    <div class="p-4 md:p-6">
+                    <div class="p-5 sm:p-6">
                         <!-- Basic Information -->
                         <UpdateProfileInformationForm
                             v-if="activeSection === 'basic'"
@@ -1181,21 +1152,26 @@ const backToCards = () => {
 
                         <!-- Public Profile & Sharing -->
                         <div v-if="activeSection === 'public-profile'" class="space-y-6">
-                            <div class="bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                                <div class="px-4 py-5 sm:p-6">
-                                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">
-                                        Public Profile & Sharing
-                                    </h3>
-                                    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                        Share your profile with others and generate a QR code for easy access.
-                                    </p>
-                                    <div class="mt-6">
-                                        <a
-                                            :href="route('profile.public.settings')"
-                                            class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
-                                        >
-                                            Manage Public Profile
-                                        </a>
+                            <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl border border-indigo-100 p-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                                        <UserCircleIcon class="w-6 h-6 text-white" />
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-lg font-semibold text-gray-900">
+                                            Public Profile & Sharing
+                                        </h3>
+                                        <p class="mt-1 text-sm text-gray-600">
+                                            Share your profile with others and generate a QR code for easy access.
+                                        </p>
+                                        <div class="mt-4">
+                                            <a
+                                                :href="route('profile.public.settings')"
+                                                class="inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 border border-transparent rounded-xl font-semibold text-sm text-white shadow-sm hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all"
+                                            >
+                                                Manage Public Profile
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1226,12 +1202,15 @@ const backToCards = () => {
                     </div>
 
                     <!-- Bottom Back Button (Mobile Friendly) -->
-                    <div class="border-t border-gray-200 dark:border-gray-700 px-4 py-4 bg-gray-50 dark:bg-gray-900/50 md:hidden">
+                    <div class="border-t border-gray-100 px-4 py-4 bg-gray-50 md:hidden">
                         <button
                             @click="backToCards"
-                            class="w-full inline-flex items-center justify-center px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg font-semibold text-sm text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                            class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-white border border-gray-200 rounded-xl font-semibold text-sm text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all"
                         >
-                            ← Back to All Sections
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                            Back to All Sections
                         </button>
                     </div>
                 </div>
@@ -1239,4 +1218,3 @@ const backToCards = () => {
         </div>
     </AuthenticatedLayout>
 </template>
-

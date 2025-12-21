@@ -1,18 +1,23 @@
 <template>
     <div class="space-y-6">
         <!-- Header -->
-        <div class="border-b border-gray-200 pb-4">
-            <h3 class="text-lg font-semibold text-gray-900">Preferences & Settings</h3>
-            <p class="mt-1 text-sm text-gray-600">
-                Customize your experience and manage your preferences
-            </p>
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg">
+                    <CogIcon class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900">Preferences & Settings</h3>
+                    <p class="text-sm text-gray-500">Customize your experience and manage preferences</p>
+                </div>
+            </div>
         </div>
 
         <!-- Preferred Destinations -->
         <div class="bg-white rounded-lg border border-gray-200 p-6">
             <div class="flex items-center gap-3 mb-4">
                 <div class="p-2 bg-blue-100 rounded-lg">
-                    <GlobeAltIcon class="w-6 h-6 text-brand-red-600" />
+                    <GlobeAltIcon class="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
                     <h4 class="font-semibold text-gray-900">Preferred Destinations</h4>
@@ -32,7 +37,7 @@
                             :class="[
                                 'px-4 py-2 rounded-full text-sm font-medium transition-all',
                                 form.preferred_destinations?.includes(destination)
-                                    ? 'bg-brand-red-600 text-white shadow-md'
+                                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md'
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             ]"
                         >
@@ -339,7 +344,8 @@ import {
     BellIcon,
     PhoneIcon,
     ChatBubbleLeftIcon,
-    DevicePhoneMobileIcon
+    DevicePhoneMobileIcon,
+    CogIcon
 } from '@heroicons/vue/24/outline';
 
 const props = defineProps({

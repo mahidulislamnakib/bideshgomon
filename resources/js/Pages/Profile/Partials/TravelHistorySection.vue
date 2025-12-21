@@ -168,26 +168,26 @@ const formatDate = (date) => {
 
 <template>
     <section>
-        <header class="mb-rhythm-lg">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-brand-red-600 flex items-center justify-center shadow-sm">
-                        <GlobeAltIcon class="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                        <h2 class="font-display font-bold text-xl text-gray-800">Travel History</h2>
-                        <p class="text-xs text-gray-500">
-                            International travel history for visa applications
-                        </p>
-                    </div>
+        <!-- Header -->
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100 mb-6">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg">
+                    <GlobeAltIcon class="w-6 h-6 text-white" />
                 </div>
-                <FlowButton @click="openAddModal" variant="primary">
-                    <template #icon-left><PlusIcon class="w-4 h-4" /></template>
-                    <span class="hidden sm:inline">Add Travel</span>
-                    <span class="sm:hidden">Add</span>
-                </FlowButton>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900">Travel History</h3>
+                    <p class="text-sm text-gray-500">International travel history for visa applications</p>
+                </div>
             </div>
-        </header>
+            <button
+                @click="openAddModal"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg"
+            >
+                <PlusIcon class="w-4 h-4" />
+                <span class="hidden sm:inline">Add Travel</span>
+                <span class="sm:hidden">Add</span>
+            </button>
+        </div>
 
         <!-- Travel History List -->
         <div class="space-y-4">

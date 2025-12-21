@@ -1,10 +1,5 @@
 <script setup>
 import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import RhythmicCard from '@/Components/Rhythmic/RhythmicCard.vue';
-import FlowButton from '@/Components/Rhythmic/FlowButton.vue';
 import { DocumentTextIcon } from '@heroicons/vue/24/solid';
 import { useForm } from '@inertiajs/vue3';
 import { computed, ref, watch } from 'vue';
@@ -130,68 +125,66 @@ const submit = () => {
 </script>
 
 <template>
-    <section>
-        <header class="mb-6">
-            <div class="flex items-center gap-3 mb-2">
-                <div class="w-10 h-10 rounded-xl bg-green-600 flex items-center justify-center shadow-sm">
-                    <DocumentTextIcon class="h-6 w-6 text-white" />
-                </div>
-                <div>
-                    <h2 class="font-display font-bold text-xl text-gray-800">Profile Details</h2>
-                    <p class="text-xs text-gray-500">Personal information and address</p>
-                </div>
+    <section class="space-y-6">
+        <!-- Section Header -->
+        <div class="flex items-center gap-4 pb-4 border-b border-gray-100">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-md">
+                <DocumentTextIcon class="h-6 w-6 text-white" />
             </div>
-        </header>
+            <div>
+                <h2 class="font-semibold text-lg text-gray-900">Profile Details</h2>
+                <p class="text-sm text-gray-500">Personal information, addresses and identification</p>
+            </div>
+        </div>
 
-        <form @submit.prevent="submit" class="space-y-rhythm-md">
-            <RhythmicCard variant="light" class="space-y-rhythm-md">
+        <form @submit.prevent="submit" class="space-y-6">
             <!-- Bio -->
-            <div class="space-y-rhythm-sm mb-6">
-                <InputLabel for="bio" value="Bio" class="block text-sm font-semibold text-gray-700 mb-2" />
+            <div class="space-y-2">
+                <label for="bio" class="block text-sm font-medium text-gray-700">Bio</label>
                 <textarea
                     id="bio"
                     v-model="form.bio"
-                    class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none text-base"
+                    class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none placeholder:text-gray-400"
                     rows="3"
                     placeholder="Tell us about yourself..."
-                />
-                <InputError class="mt-1" :message="form.errors.bio" />
+                ></textarea>
+                <InputError :message="form.errors.bio" />
             </div>
 
             <!-- Date of Birth, NID & Gender -->
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                <div class="space-y-rhythm-xs">
-                    <InputLabel for="dob" value="Date of Birth" class="block text-sm font-semibold text-gray-700 mb-2" />
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="space-y-2">
+                    <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
                     <input
                         id="dob"
                         type="text"
                         v-model="displayDob"
                         @blur="updateDob(displayDob)"
-                        class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                        class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-gray-400"
                         placeholder="DD/MM/YYYY"
                     />
-                    <p class="text-xs text-gray-500">Format: DD/MM/YYYY (e.g., 15/08/1990)</p>
+                    <p class="text-xs text-gray-500">Format: DD/MM/YYYY</p>
                     <InputError :message="form.errors.dob" />
                 </div>
 
-                <div class="space-y-rhythm-xs">
-                    <InputLabel for="nid" value="National ID (NID)" />
-                    <TextInput
+                <div class="space-y-2">
+                    <label for="nid" class="block text-sm font-medium text-gray-700">National ID (NID)</label>
+                    <input
                         id="nid"
                         type="text"
-                        class="block w-full"
                         v-model="form.nid"
+                        class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-gray-400"
                         placeholder="10 or 17 digits"
                     />
                     <InputError :message="form.errors.nid" />
                 </div>
 
-                <div class="space-y-rhythm-xs">
-                    <InputLabel for="gender" value="Gender" class="block text-sm font-semibold text-gray-700 mb-2" />
+                <div class="space-y-2">
+                    <label for="gender" class="block text-sm font-medium text-gray-700">Gender <span class="text-red-500">*</span></label>
                     <select
                         id="gender"
                         v-model="form.gender"
-                        class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                        class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
                     >
                         <option value="">Select Gender</option>
                         <option v-for="gender in GENDER_OPTIONS" :key="gender" :value="gender.toLowerCase()">
@@ -203,15 +196,15 @@ const submit = () => {
             </div>
 
             <!-- Nationality -->
-            <div class="space-y-rhythm-xs">
-                <InputLabel for="nationality" value="Nationality" class="block text-sm font-semibold text-gray-700 mb-2" />
+            <div class="space-y-2">
+                <label for="nationality" class="block text-sm font-medium text-gray-700">Nationality <span class="text-red-500">*</span></label>
                 <input
                     id="nationality"
                     v-model="form.nationality"
                     list="nationalities-list"
                     type="text"
                     placeholder="Type to search nationality..."
-                    class="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                    class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-gray-400"
                 />
                 <datalist id="nationalities-list">
                     <option v-for="country in countries" :key="country.id" :value="country.nationality">
@@ -222,24 +215,29 @@ const submit = () => {
             </div>
 
             <!-- Present Address -->
-            <div class="border-t pt-6">
-                <h3 class="text-md font-medium text-gray-900 mb-4">Present Address</h3>
+            <div class="pt-6 border-t border-gray-100">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h3 class="text-base font-medium text-gray-900">Present Address</h3>
+                </div>
                 <div class="space-y-4">
                     <!-- Country Selector -->
-                    <div>
-                        <InputLabel for="present_country" value="Country" class="block text-sm font-semibold text-gray-700 mb-2" />
+                    <div class="space-y-2">
+                        <label for="present_country" class="block text-sm font-medium text-gray-700">Country</label>
                         <select
                             id="present_country"
                             v-model="form.present_country"
                             @change="form.present_division = ''; form.present_district = ''"
-                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                            class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
                         >
                             <option value="">Select Country</option>
                             <option v-for="country in countries" :key="country.id" :value="country.name">
                                 {{ country.flag_emoji }} {{ country.name }}
                             </option>
                         </select>
-                        <InputError class="mt-2" :message="form.errors.present_country" />
+                        <InputError :message="form.errors.present_country" />
                     </div>
 
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -494,47 +492,51 @@ const submit = () => {
                 </div>
 
                 <!-- Desktop Save Button -->
-                <div class="hidden md:flex items-center gap-4 mt-rhythm-lg">
-                    <FlowButton 
+                <div class="hidden md:flex items-center gap-4 pt-4 border-t border-gray-100">
+                    <button
                         type="submit"
                         :disabled="form.processing"
-                        :loading="form.processing"
+                        class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl shadow-sm hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                     >
-                        Save Changes
-                    </FlowButton>
+                        <svg v-if="form.processing" class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        {{ form.processing ? 'Saving...' : 'Save Changes' }}
+                    </button>
                     <Transition
-                        enter-active-class="transition ease-in-out"
-                        enter-from-class="opacity-0"
-                        leave-active-class="transition ease-in-out"
+                        enter-active-class="transition ease-out duration-200"
+                        enter-from-class="opacity-0 translate-x-2"
+                        leave-active-class="transition ease-in duration-150"
                         leave-to-class="opacity-0"
                     >
-                        <p v-if="form.recentlySuccessful" class="text-sm text-green-600 font-medium">
-                            ? Saved successfully!
-                        </p>
+                        <span v-if="form.recentlySuccessful" class="inline-flex items-center gap-1.5 text-sm text-green-600 font-medium">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            Saved successfully
+                        </span>
                     </Transition>
                 </div>
                 </div>
-            </RhythmicCard>
         </form>
         
         <!-- Mobile Sticky Save Button -->
-        <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-4 shadow-2xl z-30 safe-area-bottom">
+        <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-200 p-4 shadow-lg z-30">
             <button
                 @click="submit"
                 :disabled="form.processing"
-                class="w-full bg-brand-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg active:scale-98 transition-all touch-manipulation disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-base"
+                type="button"
+                class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl shadow-sm disabled:opacity-50 transition-all active:scale-[0.98]"
             >
-                <svg v-if="form.processing" class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg v-if="form.processing" class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                {{ form.processing ? 'Saving...' : (form.recentlySuccessful ? '? Saved!' : 'Save Changes') }}
+                {{ form.processing ? 'Saving...' : (form.recentlySuccessful ? '✓ Saved!' : 'Save Changes') }}
             </button>
         </div>
         <!-- Mobile Spacer -->
-        <div class="md:hidden h-24"></div>
+        <div class="md:hidden h-20"></div>
     </section>
 </template>

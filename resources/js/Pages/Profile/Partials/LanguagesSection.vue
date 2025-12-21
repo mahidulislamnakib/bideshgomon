@@ -240,27 +240,27 @@ const formatDate = dateString => {
 </script>
 
 <template>
-  <section>
-    <header class="mb-rhythm-lg">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-brand-red-600 flex items-center justify-center shadow-rhythmic-md">
-            <GlobeAltIcon class="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h2 class="font-display font-bold text-xl text-gray-800">Language Proficiency</h2>
-            <p class="text-xs text-gray-500">
-              Languages with test scores and certificates
-            </p>
-          </div>
+  <section class="space-y-6">
+    <!-- Section Header -->
+    <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center shadow-md">
+          <GlobeAltIcon class="w-6 h-6 text-white" />
         </div>
-        <FlowButton @click="openEditModal(null)" variant="primary">
-          <template #icon-left><PlusIcon class="w-4 h-4" /></template>
-          <span class="hidden sm:inline">Add Language</span>
-          <span class="sm:hidden">Add</span>
-        </FlowButton>
+        <div>
+          <h2 class="font-semibold text-lg text-gray-900">Language Proficiency</h2>
+          <p class="text-sm text-gray-500">Languages with test scores and certificates</p>
+        </div>
       </div>
-    </header>
+      <button
+        @click="openEditModal(null)"
+        class="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl shadow-sm hover:from-indigo-700 hover:to-purple-700 transition-all"
+      >
+        <PlusIcon class="w-4 h-4" />
+        <span class="hidden sm:inline">Add Language</span>
+        <span class="sm:hidden">Add</span>
+      </button>
+    </div>
 
     <!-- Empty State -->
     <div

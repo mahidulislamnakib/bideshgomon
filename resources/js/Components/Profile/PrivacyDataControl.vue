@@ -61,17 +61,23 @@ const getVisibilityInfo = (value) => {
 
 <template>
     <div class="space-y-6">
-        <div>
-            <h3 class="text-lg font-medium text-gray-900">Privacy & Data Control</h3>
-            <p class="mt-1 text-sm text-gray-600">
-                Manage your privacy settings, control who can see your information, and download your data.
-            </p>
+        <!-- Header -->
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg">
+                    <LockClosedIcon class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900">Privacy & Data Control</h3>
+                    <p class="text-sm text-gray-500">Manage privacy settings and download your data</p>
+                </div>
+            </div>
         </div>
 
         <!-- GDPR Notice -->
         <div class="rounded-lg border border-blue-200 bg-blue-50 p-4">
             <div class="flex items-start">
-                <ShieldCheckIcon class="h-5 w-5 text-brand-red-600 mr-3 mt-0.5" />
+                <ShieldCheckIcon class="h-5 w-5 text-blue-600 mr-3 mt-0.5" />
                 <div>
                     <h4 class="text-sm font-medium text-blue-900">Your Privacy Rights</h4>
                     <p class="mt-1 text-sm text-blue-800">

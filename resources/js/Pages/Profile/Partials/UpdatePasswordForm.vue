@@ -63,17 +63,18 @@ const updatePassword = () => {
 
 <template>
     <section>
-        <header class="mb-6">
-            <div class="flex items-center gap-3 mb-2">
-                <div class="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center shadow-sm">
+        <!-- Header -->
+        <div class="flex items-center justify-between pb-4 border-b border-gray-100 mb-6">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg">
                     <KeyIcon class="h-6 w-6 text-white" />
                 </div>
                 <div>
-                    <h2 class="font-display font-bold text-xl text-gray-800">Update Password</h2>
-                    <p class="text-xs text-gray-500">Keep your account secure</p>
+                    <h3 class="text-lg font-semibold text-gray-900">Update Password</h3>
+                    <p class="text-sm text-gray-500">Keep your account secure with a strong password</p>
                 </div>
             </div>
-        </header>
+        </div>
 
         <form @submit.prevent="updatePassword" class="mt-4 md:mt-6">
             <RhythmicCard variant="light" class="space-y-rhythm-md">

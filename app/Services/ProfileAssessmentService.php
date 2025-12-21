@@ -141,17 +141,17 @@ class ProfileAssessmentService
             return 0;
         }
 
-        // Basic fields (60 points)
-        if ($profile->full_name) {
+        // Basic fields (60 points) - using actual UserProfile field names
+        if ($profile->first_name || $profile->last_name || $profile->name_as_per_passport) {
             $score += 10;
         }
-        if ($profile->phone) {
+        if ($user->phone || $user->phoneNumbers()->exists()) {
             $score += 10;
         }
-        if ($profile->email) {
+        if ($user->email) {
             $score += 10;
         }
-        if ($profile->date_of_birth) {
+        if ($profile->dob) {
             $score += 10;
         }
         if ($profile->gender) {
@@ -162,16 +162,16 @@ class ProfileAssessmentService
         }
 
         // Address fields (20 points)
-        if ($profile->present_address) {
+        if ($profile->present_address_line || $profile->present_city) {
             $score += 5;
         }
-        if ($profile->permanent_address) {
+        if ($profile->permanent_address_line || $profile->permanent_city) {
             $score += 5;
         }
-        if ($profile->city) {
+        if ($profile->present_city || $profile->permanent_city) {
             $score += 5;
         }
-        if ($profile->postal_code) {
+        if ($profile->present_postal_code || $profile->permanent_postal_code) {
             $score += 5;
         }
 
@@ -179,10 +179,10 @@ class ProfileAssessmentService
         if ($profile->marital_status) {
             $score += 5;
         }
-        if ($profile->religion) {
+        if ($profile->bio) {
             $score += 5;
         }
-        if ($profile->nid_number) {
+        if ($profile->nid) {
             $score += 5;
         }
         if ($profile->passport_number) {
@@ -834,7 +834,9 @@ class ProfileAssessmentService
      */
     protected function generateAISummary(User $user, float $overallScore, array $strengths, array $weaknesses): string
     {
-        $name = $user->userProfile->full_name ?? $user->name;
+        // Build full name from UserProfile fields or fallback to User name
+        $profile = $user->userProfile;
+        $name = trim(($profile->first_name ?? '').' '.($profile->last_name ?? '')) ?: $user->name;
 
         if ($overallScore >= 80) {
             $assessment = 'excellent visa application readiness';

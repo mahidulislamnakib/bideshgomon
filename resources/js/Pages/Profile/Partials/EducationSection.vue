@@ -245,29 +245,27 @@ const formatDate = (dateString) => {
 </script>
 
 <template>
-  <section>
-    <header class="mb-rhythm-lg">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-growth-500 flex items-center justify-center shadow-rhythmic-md">
-            <AcademicCapIcon class="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h2 class="font-display font-bold text-xl text-gray-800">Education History</h2>
-            <p class="text-xs text-gray-500">Academic qualifications and degrees</p>
-          </div>
+  <section class="space-y-6">
+    <!-- Section Header -->
+    <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-md">
+          <AcademicCapIcon class="w-6 h-6 text-white" />
         </div>
-        <FlowButton
-          @click="openAddModal"
-          variant="primary"
-        >
-          <template #icon-left>
-            <PlusIcon class="w-5 h-5" />
-          </template>
-          Add Education
-        </FlowButton>
+        <div>
+          <h2 class="font-semibold text-lg text-gray-900">Education History</h2>
+          <p class="text-sm text-gray-500">Academic qualifications and degrees</p>
+        </div>
       </div>
-    </header>
+      <button
+        @click="openAddModal"
+        class="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl shadow-sm hover:from-indigo-700 hover:to-purple-700 transition-all"
+      >
+        <PlusIcon class="w-4 h-4" />
+        <span class="hidden sm:inline">Add Education</span>
+        <span class="sm:hidden">Add</span>
+      </button>
+    </div>
 
     <!-- Loading State -->
     <div v-if="isLoading" class="text-center py-8">
