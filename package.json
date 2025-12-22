@@ -41,7 +41,7 @@
     "dependencies": {
         "@headlessui/vue": "^1.7.23",
         "@heroicons/vue": "^2.2.0",
-        "@sentry/vue": "^10.28.0",
+        "@sentry/vue": "^10.32.1",
         "@vueuse/core": "^14.1.0",
         "chart.js": "^4.5.1",
         "flag-icons": "^7.5.0",
