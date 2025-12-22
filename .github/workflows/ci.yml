@@ -40,7 +40,7 @@ jobs:
       
       - name: Setup Node.js
         if: contains(matrix.check.name, 'JavaScript') || contains(matrix.check.name, 'CSS') || contains(matrix.check.name, 'Build')
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
           cache: 'npm'
@@ -87,7 +87,7 @@ jobs:
         run: composer audit
       
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
       
