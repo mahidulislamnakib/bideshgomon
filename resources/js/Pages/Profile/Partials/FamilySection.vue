@@ -531,7 +531,7 @@ onMounted(() => {
                 <select
                   id="relationship"
                   v-model="form.relationship"
-                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl transition-all bg-white"
+                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-growth-600 focus:border-growth-600 rounded-xl transition-all bg-white"
                   required
                 >
                   <option value="">Select relationship</option>
@@ -575,7 +575,7 @@ onMounted(() => {
                 <select
                   id="gender"
                   v-model="form.gender"
-                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl transition-all bg-white"
+                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-growth-600 focus:border-growth-600 rounded-xl transition-all bg-white"
                   required
                 >
                   <option value="">Select gender</option>
@@ -682,7 +682,7 @@ onMounted(() => {
                 <select
                   id="education_level"
                   v-model="form.education_level"
-                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl transition-all bg-white"
+                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-growth-600 focus:border-growth-600 rounded-xl transition-all bg-white"
                 >
                   <option value="">Select education level</option>
                   <option v-for="level in educationLevelOptions" :key="level" :value="level">
@@ -697,7 +697,7 @@ onMounted(() => {
                 <select
                   id="marital_status"
                   v-model="form.marital_status"
-                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl transition-all bg-white"
+                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-growth-600 focus:border-growth-600 rounded-xl transition-all bg-white"
                 >
                   <option value="">Select marital status</option>
                   <option v-for="status in maritalStatusOptions" :key="status" :value="status">
@@ -732,7 +732,7 @@ onMounted(() => {
                 <select
                   id="immigration_status"
                   v-model="form.immigration_status"
-                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl transition-all bg-white"
+                  class="mt-1 block w-full px-4 py-3 text-base border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-growth-600 focus:border-growth-600 rounded-xl transition-all bg-white"
                 >
                   <option value="">Select immigration status</option>
                   <option v-for="status in visaStatusOptions" :key="status" :value="status">

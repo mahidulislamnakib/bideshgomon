@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <AdminLayout>
         <Head title="SEO Settings" />
 
@@ -8,8 +8,8 @@
                 <div class="mb-8">
                     <div class="flex justify-between items-center">
                         <div>
-                            <h1 class="text-3xl font-bold text-gray-900">SEO Settings</h1>
-                            <p class="mt-2 text-sm text-gray-600">
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">SEO Settings</h1>
+                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
                                 Configure meta tags, social media previews, and structured data for each page type
                             </p>
                         </div>
@@ -17,7 +17,7 @@
                             <button
                                 @click="generateSitemap"
                                 :disabled="generating"
-                                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-2xl shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <svg v-if="!generating" class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -32,9 +32,9 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
                     <!-- Tabs -->
-                    <div class="border-b border-gray-200">
+                    <div class="border-b border-gray-200 dark:border-gray-700">
                         <nav class="flex space-x-4 px-6 overflow-x-auto" aria-label="Tabs">
                             <button
                                 v-for="page in pageTypes"
@@ -43,8 +43,8 @@
                                 @click="activeTab = page"
                                 :class="[
                                     activeTab === page
-                                        ? 'border-brand-red-600 text-brand-red-600'
-                                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
+                                        ? 'border-growth-600 text-growth-600'
+                                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300',
                                     'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm capitalize transition-colors'
                                 ]"
                             >
@@ -57,62 +57,62 @@
                     <form @submit.prevent="submit" class="p-6">
                         <div class="space-y-8">
                             <!-- Basic Meta Tags Section -->
-                            <div class="pb-8 border-b border-gray-200">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Basic Meta Tags</h3>
+                            <div class="pb-8 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Basic Meta Tags</h3>
                                 <div class="space-y-6">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-900 mb-2">
+                                        <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">
                                             Meta Title <span class="text-red-500">*</span>
                                         </label>
                                         <input
                                             v-model="form.title"
                                             type="text"
                                             maxlength="255"
-                                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                            class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                             :class="{ 'border-red-500': form.errors.title }"
                                             placeholder="Enter meta title (recommended: 50-60 characters)"
                                         />
                                         <div class="flex justify-between items-center mt-2">
                                             <p v-if="form.errors.title" class="text-red-600 text-sm">{{ form.errors.title }}</p>
-                                            <span class="ml-auto text-xs text-gray-500">{{ form.title.length }}/255 characters</span>
+                                            <span class="ml-auto text-xs text-gray-500 dark:text-gray-400">{{ form.title.length }}/255 characters</span>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-900 mb-2">
+                                        <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">
                                             Meta Description <span class="text-red-500">*</span>
                                         </label>
                                         <textarea
                                             v-model="form.description"
                                             rows="3"
                                             maxlength="500"
-                                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                            class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                             :class="{ 'border-red-500': form.errors.description }"
                                             placeholder="Enter meta description (recommended: 150-160 characters)"
                                         ></textarea>
                                         <div class="flex justify-between items-center mt-2">
                                             <p v-if="form.errors.description" class="text-red-600 text-sm">{{ form.errors.description }}</p>
-                                            <span class="ml-auto text-xs text-gray-500">{{ form.description.length }}/500 characters</span>
+                                            <span class="ml-auto text-xs text-gray-500 dark:text-gray-400">{{ form.description.length }}/500 characters</span>
                                         </div>
                                     </div>
 
                                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-900 mb-2">Meta Keywords</label>
+                                            <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">Meta Keywords</label>
                                             <input
                                                 v-model="form.keywords"
                                                 type="text"
-                                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                                 placeholder="keyword1, keyword2, keyword3"
                                             />
                                         </div>
 
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-900 mb-2">Canonical URL</label>
+                                            <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">Canonical URL</label>
                                             <input
                                                 v-model="form.canonical_url"
                                                 type="url"
-                                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                                 :class="{ 'border-red-500': form.errors.canonical_url }"
                                                 placeholder="https://example.com/page"
                                             />
@@ -123,46 +123,46 @@
                             </div>
 
                             <!-- Open Graph Section -->
-                            <div class="pb-8 border-b border-gray-200">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Open Graph (Facebook)</h3>
+                            <div class="pb-8 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Open Graph (Facebook)</h3>
                                 <div class="space-y-6">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-900 mb-2">OG Title</label>
+                                        <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">OG Title</label>
                                         <input
                                             v-model="form.og_title"
                                             type="text"
-                                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                            class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                             placeholder="Title for social media sharing"
                                         />
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-900 mb-2">OG Description</label>
+                                        <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">OG Description</label>
                                         <textarea
                                             v-model="form.og_description"
                                             rows="3"
-                                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                            class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                             placeholder="Description for social media sharing"
                                         ></textarea>
                                     </div>
 
                                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-900 mb-2">OG Image URL</label>
+                                            <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">OG Image URL</label>
                                             <input
                                                 v-model="form.og_image"
                                                 type="url"
-                                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                                 placeholder="https://example.com/image.jpg"
                                             />
-                                            <p class="text-xs text-gray-500 mt-1">Recommended: 1200×630px</p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Recommended: 1200×630px</p>
                                         </div>
 
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-900 mb-2">OG Type</label>
+                                            <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">OG Type</label>
                                             <select
                                                 v-model="form.og_type"
-                                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                             >
                                                 <option value="website">Website</option>
                                                 <option value="article">Article</option>
@@ -174,15 +174,15 @@
                             </div>
 
                             <!-- Twitter Card Section -->
-                            <div class="pb-8 border-b border-gray-200">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Twitter Cards</h3>
+                            <div class="pb-8 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Twitter Cards</h3>
                                 <div class="space-y-6">
                                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-900 mb-2">Card Type</label>
+                                            <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">Card Type</label>
                                             <select
                                                 v-model="form.twitter_card"
-                                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                             >
                                                 <option value="summary">Summary</option>
                                                 <option value="summary_large_image">Summary Large Image</option>
@@ -192,67 +192,67 @@
                                         </div>
 
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-900 mb-2">Twitter Handle</label>
+                                            <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">Twitter Handle</label>
                                             <input
                                                 v-model="form.twitter_site"
                                                 type="text"
-                                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                                 placeholder="@yourusername"
                                             />
                                         </div>
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-900 mb-2">Twitter Title</label>
+                                        <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">Twitter Title</label>
                                         <input
                                             v-model="form.twitter_title"
                                             type="text"
-                                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                            class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                             placeholder="Title for Twitter cards"
                                         />
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-900 mb-2">Twitter Description</label>
+                                        <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">Twitter Description</label>
                                         <textarea
                                             v-model="form.twitter_description"
                                             rows="3"
-                                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                            class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                             placeholder="Description for Twitter cards"
                                         ></textarea>
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-900 mb-2">Twitter Image URL</label>
+                                        <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">Twitter Image URL</label>
                                         <input
                                             v-model="form.twitter_image"
                                             type="url"
-                                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                            class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                             placeholder="https://example.com/twitter-image.jpg"
                                         />
-                                        <p class="text-xs text-gray-500 mt-1">Recommended: 1200×600px</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Recommended: 1200×600px</p>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Schema.org Section -->
-                            <div class="pb-8 border-b border-gray-200">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Schema.org Structured Data</h3>
+                            <div class="pb-8 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Schema.org Structured Data</h3>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-900 mb-2">JSON-LD Markup</label>
+                                    <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">JSON-LD Markup</label>
                                     <textarea
                                         v-model="schemaMarkup"
                                         rows="8"
-                                        class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm font-mono bg-gray-50"
+                                        class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm font-mono bg-gray-50 dark:bg-gray-700"
                                         placeholder='{"@context": "https://schema.org", "@type": "Organization", "name": "Your Company"}'
                                     ></textarea>
-                                    <p class="text-xs text-gray-500 mt-1">Enter valid JSON-LD structured data markup</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Enter valid JSON-LD structured data markup</p>
                                 </div>
                             </div>
 
                             <!-- Robots Meta Section -->
                             <div>
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Robots Directives</h3>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Robots Directives</h3>
                                 <div class="space-y-6">
                                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                         <div class="relative inline-flex items-center">
@@ -260,9 +260,9 @@
                                                 id="index-checkbox"
                                                 v-model="form.index"
                                                 type="checkbox"
-                                                class="h-4 w-4 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
+                                                class="h-4 w-4 text-growth-600 border-gray-300 rounded focus:ring-growth-600"
                                             />
-                                            <label for="index-checkbox" class="ml-3 block text-sm font-medium text-gray-900">
+                                            <label for="index-checkbox" class="ml-3 block text-sm font-medium text-gray-900 dark:text-white">
                                                 Allow search engines to index this page
                                             </label>
                                         </div>
@@ -272,28 +272,28 @@
                                                 id="follow-checkbox"
                                                 v-model="form.follow"
                                                 type="checkbox"
-                                                class="h-4 w-4 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
+                                                class="h-4 w-4 text-growth-600 border-gray-300 rounded focus:ring-growth-600"
                                             />
-                                            <label for="follow-checkbox" class="ml-3 block text-sm font-medium text-gray-900">
+                                            <label for="follow-checkbox" class="ml-3 block text-sm font-medium text-gray-900 dark:text-white">
                                                 Allow search engines to follow links
                                             </label>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-900 mb-2">Additional Directives</label>
+                                        <label class="block text-sm font-medium text-gray-900 dark:text-white mb-2">Additional Directives</label>
                                         <input
                                             v-model="form.robots"
                                             type="text"
-                                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 sm:text-sm"
+                                            class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 sm:text-sm"
                                             placeholder="e.g., noarchive, noimageindex"
                                         />
-                                        <p class="text-xs text-gray-500 mt-1">Comma-separated directives like: noarchive, noimageindex, nosnippet</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Comma-separated directives like: noarchive, noimageindex, nosnippet</p>
                                     </div>
 
-                                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                        <h4 class="text-sm font-medium text-gray-900 mb-2">Preview</h4>
-                                        <code class="block p-3 bg-white rounded border border-gray-300 text-sm font-mono text-gray-800">
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-2xl border border-gray-200 dark:border-gray-600">
+                                        <h4 class="text-sm font-medium text-gray-900 dark:text-white mb-2">Preview</h4>
+                                        <code class="block p-3 bg-white dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-600 text-sm font-mono text-gray-800 dark:text-gray-200">
                                             &lt;meta name="robots" content="{{ robotsContent }}" /&gt;
                                         </code>
                                     </div>
@@ -306,14 +306,14 @@
                             <button
                                 type="button"
                                 @click="resetForm"
-                                class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                                class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-2xl shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
                             >
                                 Reset
                             </button>
                             <button
                                 type="submit"
                                 :disabled="form.processing"
-                                class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                class="inline-flex items-center px-6 py-3 border border-transparent rounded-2xl shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                             >
                                 {{ form.processing ? 'Saving...' : 'Save SEO Settings' }}
                             </button>
@@ -322,7 +322,7 @@
                 </div>
 
                 <!-- Info Panel -->
-                <div class="mt-6 bg-red-50 border border-red-200 rounded-lg p-4">
+                <div class="mt-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-4">
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <svg class="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -330,8 +330,8 @@
                             </svg>
                         </div>
                         <div class="ml-3">
-                            <h3 class="text-sm font-medium text-brand-red-600">SEO Information</h3>
-                            <div class="mt-2 text-sm text-blue-700">
+                            <h3 class="text-sm font-medium text-blue-800 dark:text-blue-300">SEO Information</h3>
+                            <div class="mt-2 text-sm text-blue-700 dark:text-blue-400">
                                 <ul class="list-disc list-inside space-y-1">
                                     <li>Configure unique SEO settings for each page type</li>
                                     <li>Optimal title length: 50-60 characters</li>

@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <Head title="Blog Tags" />
 
     <AdminLayout>
@@ -12,7 +12,7 @@
                     </div>
                     <button
                         @click="showCreateModal = true"
-                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
+                        class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700"
                     >
                         <PlusIcon class="h-5 w-5 mr-2" />
                         New Tag
@@ -36,7 +36,7 @@
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-semibold text-gray-900 truncate">{{ tag.name }}</p>
                                     <p class="text-xs text-gray-500 truncate">{{ tag.slug }}</p>
-                                    <p v-if="tag.posts_count !== undefined" class="text-xs text-brand-red-600 mt-1">
+                                    <p v-if="tag.posts_count !== undefined" class="text-xs text-growth-600 mt-1">
                                         {{ tag.posts_count }} {{ tag.posts_count === 1 ? 'post' : 'posts' }}
                                     </p>
                                 </div>
@@ -44,7 +44,7 @@
                             <div class="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button
                                     @click="editTag(tag)"
-                                    class="p-2 text-brand-red-600 hover:text-brand-red-600 hover:bg-red-100 rounded-md transition-colors"
+                                    class="p-2 text-growth-600 hover:text-growth-600 hover:bg-red-100 rounded-md transition-colors"
                                     title="Edit"
                                 >
                                     <PencilIcon class="h-4 w-4" />
@@ -67,7 +67,7 @@
                         <div class="mt-6">
                             <button
                                 @click="showCreateModal = true"
-                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
+                                class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700"
                             >
                                 <PlusIcon class="h-5 w-5 mr-2" />
                                 Create Your First Tag
@@ -106,7 +106,7 @@
                                         <form @submit.prevent="submitForm">
                                             <div>
                                                 <div class="flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mx-auto">
-                                                    <TagIcon class="h-6 w-6 text-brand-red-600" />
+                                                    <TagIcon class="h-6 w-6 text-growth-600" />
                                                 </div>
                                                 <h3 class="text-lg font-medium leading-6 text-gray-900 text-center mt-3 mb-4">
                                                     {{ showEditModal ? 'Edit Tag' : 'Create New Tag' }}
@@ -122,7 +122,7 @@
                                                             v-model="form.name"
                                                             type="text"
                                                             placeholder="e.g., Technology, Travel, Lifestyle"
-                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                                             @input="generateSlug"
                                                             autofocus
                                                         />
@@ -142,7 +142,7 @@
                                                                 v-model="form.slug"
                                                                 type="text"
                                                                 placeholder="auto-generated"
-                                                                class="flex-1 block w-full rounded-none rounded-r-md border-gray-300 focus:border-brand-red-600 focus:ring-brand-red-600"
+                                                                class="flex-1 block w-full rounded-none rounded-r-md border-gray-300 focus:border-growth-600 focus:ring-growth-600"
                                                             />
                                                         </div>
                                                         <p class="mt-1 text-xs text-gray-500">
@@ -172,7 +172,7 @@
                                                 <button
                                                     type="submit"
                                                     :disabled="form.processing"
-                                                    class="inline-flex w-full justify-center items-center rounded-md bg-brand-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:col-start-2 disabled:opacity-50"
+                                                    class="inline-flex w-full justify-center items-center rounded-md bg-growth-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:col-start-2 disabled:opacity-50"
                                                 >
                                                     <CheckIcon v-if="!form.processing" class="h-5 w-5 mr-1" />
                                                     <svg v-else class="animate-spin h-5 w-5 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

@@ -189,7 +189,7 @@ const impersonateUser = (user) => {
             <div class="grid-stats">
                 <div class="stat-card">
                     <div class="stat-card-icon bg-blue-100">
-                        <UsersIcon class="h-6 w-6 text-blue-600" />
+                        <UsersIcon class="h-6 w-6 text-growth-600" />
                     </div>
                     <div>
                         <p class="stat-card-label">Total Users</p>
@@ -253,14 +253,14 @@ const impersonateUser = (user) => {
                                 @enter="searchUsers"
                             />
                         </div>
-                        <select v-model="filters.role" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white">
+                        <select v-model="filters.role" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white">
                             <option value="">All Roles</option>
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
                             <option value="agency">Agency</option>
                             <option value="consultant">Consultant</option>
                         </select>
-                        <select v-model="filters.status" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white">
+                        <select v-model="filters.status" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white">
                             <option value="">All Status</option>
                             <option value="active">Active</option>
                             <option value="suspended">Suspended</option>
@@ -270,12 +270,12 @@ const impersonateUser = (user) => {
                     <!-- Collapsible Advanced Filters -->
                     <div v-if="showFilters" class="pt-4 border-t border-gray-200">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <select v-model="filters.email_verified" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white">
+                            <select v-model="filters.email_verified" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white">
                                 <option value="">All Verification Status</option>
                                 <option value="1">Verified</option>
                                 <option value="0">Unverified</option>
                             </select>
-                            <select v-model="filters.country_id" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white">
+                            <select v-model="filters.country_id" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white">
                                 <option value="">All Countries</option>
                                 <!-- Add country options here -->
                             </select>
@@ -307,7 +307,7 @@ const impersonateUser = (user) => {
 
                     <!-- Bulk Actions -->
                     <div v-if="selectedUsers.length > 0" class="pt-4 border-t border-gray-200">
-                        <div class="flex items-center justify-between bg-blue-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between bg-blue-50 rounded-2xl p-4">
                             <span class="text-sm font-medium text-blue-900">
                                 {{ selectedUsers.length }} user(s) selected
                             </span>
@@ -362,7 +362,7 @@ const impersonateUser = (user) => {
                                             {{ user.name.charAt(0).toUpperCase() }}
                                         </div>
                                         <div class="min-w-0">
-                                            <p class="font-medium text-gray-900 truncate">{{ user.name }}</p>
+                                            <p class="font-medium text-gray-900 dark:text-white truncate">{{ user.name }}</p>
                                             <p class="text-xs text-gray-500 truncate">{{ user.email }}</p>
                                         </div>
                                     </div>
@@ -391,7 +391,7 @@ const impersonateUser = (user) => {
                                     <div class="flex items-center justify-end gap-2">
                                         <Link
                                             :href="route('admin.users.show', user.id)"
-                                            class="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                                            class="text-growth-600 hover:text-blue-700 text-sm font-medium"
                                         >
                                             View
                                         </Link>

@@ -2,13 +2,13 @@
     <AdminLayout title="Edit Partner">
         <div class="max-w-3xl mx-auto">
             <div class="mb-6">
-                <Link :href="route('admin.partners.index')" class="text-brand-red-600 hover:text-brand-red-600">
+                <Link :href="route('admin.partners.index')" class="text-growth-600 hover:text-growth-600">
                     ? Back to Partners
                 </Link>
             </div>
 
-            <div class="bg-white rounded-lg shadow-sm p-6">
-                <h1 class="text-2xl font-bold text-gray-900 mb-6">Edit Partner</h1>
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Edit Partner</h1>
 
                 <form @submit.prevent="submit" class="space-y-6">
                     <div>
@@ -77,7 +77,7 @@
                             v-model="form.is_active" 
                             type="checkbox" 
                             id="is_active"
-                            class="form-checkbox h-4 w-4 text-brand-red-600"
+                            class="form-checkbox h-4 w-4 text-growth-600"
                         />
                         <label for="is_active" class="ml-2 block text-sm text-gray-700">Active</label>
                     </div>

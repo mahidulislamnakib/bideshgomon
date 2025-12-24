@@ -10,7 +10,7 @@
                         <img :src="`/storage/${agency.logo_path}`" :alt="agency.name" class="h-16 w-16 object-contain" />
                     </div>
                     <div v-else class="mx-auto h-16 w-16 flex items-center justify-center bg-indigo-100 rounded-full">
-                        <BuildingOfficeIcon class="h-8 w-8 text-brand-red-600" />
+                        <BuildingOfficeIcon class="h-8 w-8 text-growth-600" />
                     </div>
                     <h2 class="mt-4 text-2xl sm:text-3xl font-bold text-gray-900">Join {{ agency.name }}</h2>
                     <p class="mt-2 text-sm text-gray-600">{{ agency.company_name }}</p>
@@ -66,7 +66,7 @@
                                 type="password"
                                 required
                                 autocomplete="new-password"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-red-600 focus:border-indigo-500"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-growth-600 focus:border-growth-600"
                                 :class="{ 'border-red-500': form.errors.password }"
                                 placeholder="Minimum 8 characters"
                             />
@@ -84,7 +84,7 @@
                                 type="password"
                                 required
                                 autocomplete="new-password"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-red-600 focus:border-indigo-500"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-growth-600 focus:border-growth-600"
                                 :class="{ 'border-red-500': form.errors.password_confirmation }"
                                 placeholder="Re-enter your password"
                             />
@@ -98,10 +98,10 @@
                                 v-model="form.terms"
                                 type="checkbox"
                                 required
-                                class="mt-1 h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded"
+                                class="mt-1 h-4 w-4 text-growth-600 focus:ring-growth-600 border-gray-300 rounded"
                             />
                             <label for="terms" class="ml-2 block text-sm text-gray-700">
-                                I agree to the <a href="#" class="text-brand-red-600 hover:text-indigo-500">Terms of Service</a> and <a href="#" class="text-brand-red-600 hover:text-indigo-500">Privacy Policy</a>
+                                I agree to the <a href="#" class="text-growth-600 hover:text-growth-600">Terms of Service</a> and <a href="#" class="text-growth-600 hover:text-growth-600">Privacy Policy</a>
                             </label>
                         </div>
 
@@ -109,7 +109,7 @@
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             <span v-if="form.processing">Creating Account...</span>
                             <span v-else>Create Account & Join Team</span>

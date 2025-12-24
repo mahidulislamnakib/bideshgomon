@@ -30,48 +30,48 @@
             <!-- Summary Stats -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <!-- Total Impressions -->
-                <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl">
                             <EyeIcon class="h-6 w-6 text-white" />
                         </div>
                     </div>
-                    <h3 class="text-sm font-medium text-gray-600 mb-1">Total Impressions</h3>
-                    <p class="text-3xl font-bold text-gray-900">{{ formatNumber(ad.impressions) }}</p>
+                    <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Total Impressions</h3>
+                    <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ formatNumber(ad.impressions) }}</p>
                 </div>
 
                 <!-- Total Clicks -->
-                <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="p-3 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl">
                             <CursorArrowRaysIcon class="h-6 w-6 text-white" />
                         </div>
                     </div>
-                    <h3 class="text-sm font-medium text-gray-600 mb-1">Total Clicks</h3>
-                    <p class="text-3xl font-bold text-gray-900">{{ formatNumber(ad.clicks) }}</p>
+                    <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Total Clicks</h3>
+                    <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ formatNumber(ad.clicks) }}</p>
                 </div>
 
                 <!-- CTR -->
-                <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="p-3 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl">
                             <ArrowTrendingUpIcon class="h-6 w-6 text-white" />
                         </div>
                     </div>
-                    <h3 class="text-sm font-medium text-gray-600 mb-1">Click-Through Rate</h3>
-                    <p class="text-3xl font-bold text-gray-900">{{ formatCTR(ad.ctr) }}%</p>
+                    <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Click-Through Rate</h3>
+                    <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ formatCTR(ad.ctr) }}%</p>
                 </div>
 
                 <!-- Status -->
-                <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="p-3 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl">
                             <CheckCircleIcon class="h-6 w-6 text-white" />
                         </div>
                     </div>
-                    <h3 class="text-sm font-medium text-gray-600 mb-1">Status</h3>
+                    <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Status</h3>
                     <span :class="{
-                        'inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-semibold': true,
+                        'inline-flex items-center px-3 py-1.5 rounded-2xl text-sm font-semibold': true,
                         'bg-green-100 text-green-800': ad.status === 'active',
                         'bg-yellow-100 text-yellow-800': ad.status === 'paused',
                         'bg-gray-100 text-gray-800': ad.status === 'draft',
@@ -85,17 +85,17 @@
             <!-- Charts Row -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 <!-- Impressions Chart -->
-                <div class="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                        <div class="p-2 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                        <div class="p-2 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl">
                             <EyeIcon class="h-4 w-4 text-white" />
                         </div>
                         Impressions (Last 30 Days)
                     </h3>
                     <div v-if="impressionsByDay.length > 0" class="space-y-2">
                         <div v-for="item in impressionsByDay" :key="item.date" class="flex items-center gap-3">
-                            <span class="text-sm text-gray-600 w-24">{{ formatDate(item.date) }}</span>
-                            <div class="flex-1 bg-gray-100 rounded-full h-8 relative overflow-hidden">
+                            <span class="text-sm text-gray-600 dark:text-gray-400 w-24">{{ formatDate(item.date) }}</span>
+                            <div class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full h-8 relative overflow-hidden">
                                 <div 
                                     class="bg-gradient-to-r from-purple-500 to-purple-600 h-full flex items-center px-3 rounded-full transition-all"
                                     :style="{ width: `${(item.count / maxImpressions) * 100}%` }"
@@ -105,23 +105,23 @@
                             </div>
                         </div>
                     </div>
-                    <div v-else class="text-center py-12 text-gray-500">
+                    <div v-else class="text-center py-12 text-gray-500 dark:text-gray-400">
                         No impression data yet
                     </div>
                 </div>
 
                 <!-- Clicks Chart -->
-                <div class="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                        <div class="p-2 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                        <div class="p-2 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl">
                             <CursorArrowRaysIcon class="h-4 w-4 text-white" />
                         </div>
                         Clicks (Last 30 Days)
                     </h3>
                     <div v-if="clicksByDay.length > 0" class="space-y-2">
                         <div v-for="item in clicksByDay" :key="item.date" class="flex items-center gap-3">
-                            <span class="text-sm text-gray-600 w-24">{{ formatDate(item.date) }}</span>
-                            <div class="flex-1 bg-gray-100 rounded-full h-8 relative overflow-hidden">
+                            <span class="text-sm text-gray-600 dark:text-gray-400 w-24">{{ formatDate(item.date) }}</span>
+                            <div class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full h-8 relative overflow-hidden">
                                 <div 
                                     class="bg-gradient-to-r from-amber-500 to-orange-600 h-full flex items-center px-3 rounded-full transition-all"
                                     :style="{ width: `${(item.count / maxClicks) * 100}%` }"
@@ -131,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-else class="text-center py-12 text-gray-500">
+                    <div v-else class="text-center py-12 text-gray-500 dark:text-gray-400">
                         No click data yet
                     </div>
                 </div>
@@ -140,9 +140,9 @@
             <!-- Additional Stats Row -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- Top Pages -->
-                <div class="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                        <div class="p-2 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                        <div class="p-2 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl">
                             <DocumentTextIcon class="h-4 w-4 text-white" />
                         </div>
                         Top Pages
@@ -152,19 +152,19 @@
                             <div class="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-xs font-bold">
                                 {{ index + 1 }}
                             </div>
-                            <span class="flex-1 text-sm font-medium text-gray-900">{{ page.page || 'Unknown' }}</span>
-                            <span class="text-sm font-semibold text-gray-600">{{ page.count }}</span>
+                            <span class="flex-1 text-sm font-medium text-gray-900 dark:text-white">{{ page.page || 'Unknown' }}</span>
+                            <span class="text-sm font-semibold text-gray-600 dark:text-gray-400">{{ page.count }}</span>
                         </div>
                     </div>
-                    <div v-else class="text-center py-8 text-gray-500">
+                    <div v-else class="text-center py-8 text-gray-500 dark:text-gray-400">
                         No page data yet
                     </div>
                 </div>
 
                 <!-- Device Breakdown -->
-                <div class="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                        <div class="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                        <div class="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl">
                             <DevicePhoneMobileIcon class="h-4 w-4 text-white" />
                         </div>
                         Device Types
@@ -172,10 +172,10 @@
                     <div v-if="deviceBreakdown.length > 0" class="space-y-4">
                         <div v-for="device in deviceBreakdown" :key="device.device_type" class="space-y-2">
                             <div class="flex items-center justify-between">
-                                <span class="text-sm font-medium text-gray-900 capitalize">{{ device.device_type || 'Unknown' }}</span>
-                                <span class="text-sm font-semibold text-gray-600">{{ device.count }} ({{ getPercentage(device.count) }}%)</span>
+                                <span class="text-sm font-medium text-gray-900 dark:text-white capitalize">{{ device.device_type || 'Unknown' }}</span>
+                                <span class="text-sm font-semibold text-gray-600 dark:text-gray-400">{{ device.count }} ({{ getPercentage(device.count) }}%)</span>
                             </div>
-                            <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                            <div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
                                 <div 
                                     class="bg-gradient-to-r from-green-500 to-emerald-600 h-full rounded-full transition-all"
                                     :style="{ width: `${getPercentage(device.count)}%` }"
@@ -183,7 +183,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-else class="text-center py-8 text-gray-500">
+                    <div v-else class="text-center py-8 text-gray-500 dark:text-gray-400">
                         No device data yet
                     </div>
                 </div>

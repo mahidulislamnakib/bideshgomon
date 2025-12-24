@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { ref } from 'vue'
 import { Head, Link, router } from '@inertiajs/vue3'
 import AdminLayout from '@/Layouts/AdminLayout.vue'
@@ -76,7 +76,7 @@ const getStatusIcon = (status) => {
                     <div :class="[
                         'px-4 py-2 rounded-full text-sm font-semibold',
                         getStatusColor(application.status) === 'yellow' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
-                        getStatusColor(application.status) === 'blue' ? 'bg-red-100 text-brand-red-600 dark:bg-blue-900 dark:text-blue-200' :
+                        getStatusColor(application.status) === 'blue' ? 'bg-red-100 text-growth-600 dark:bg-blue-900 dark:text-blue-200' :
                         getStatusColor(application.status) === 'purple' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200' :
                         getStatusColor(application.status) === 'green' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
                         'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
@@ -89,7 +89,7 @@ const getStatusIcon = (status) => {
                     <!-- Main Content -->
                     <div class="lg:col-span-2 space-y-6">
                         <!-- User Information -->
-                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-2xl">
                             <div class="p-6 border-b border-gray-200 dark:border-gray-700">
                                 <h2 class="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                                     <UserIcon class="w-5 h-5" />
@@ -127,7 +127,7 @@ const getStatusIcon = (status) => {
                         </div>
 
                         <!-- Application Data -->
-                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-2xl">
                             <div class="p-6 border-b border-gray-200 dark:border-gray-700">
                                 <h2 class="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                                     <DocumentTextIcon class="w-5 h-5" />
@@ -150,7 +150,7 @@ const getStatusIcon = (status) => {
                         </div>
 
                         <!-- Quotes -->
-                        <div v-if="quotes && quotes.length > 0" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div v-if="quotes && quotes.length > 0" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-2xl">
                             <div class="p-6 border-b border-gray-200 dark:border-gray-700">
                                 <h2 class="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                                     <CurrencyDollarIcon class="w-5 h-5" />
@@ -159,7 +159,7 @@ const getStatusIcon = (status) => {
                             </div>
                             <div class="p-6">
                                 <div class="space-y-4">
-                                    <div v-for="quote in quotes" :key="quote.id" class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                                    <div v-for="quote in quotes" :key="quote.id" class="border border-gray-200 dark:border-gray-700 rounded-2xl p-4">
                                         <div class="flex justify-between items-start mb-3">
                                             <div>
                                                 <p class="font-semibold text-gray-900 dark:text-white">{{ quote.agency?.name || 'Agency' }}</p>
@@ -169,7 +169,7 @@ const getStatusIcon = (status) => {
                                                 'px-3 py-1 rounded-full text-xs font-semibold',
                                                 quote.status === 'accepted' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
                                                 quote.status === 'rejected' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' :
-                                                'bg-red-100 text-brand-red-600 dark:bg-blue-900 dark:text-blue-200'
+                                                'bg-red-100 text-growth-600 dark:bg-blue-900 dark:text-blue-200'
                                             ]">
                                                 {{ quote.status }}
                                             </span>
@@ -196,7 +196,7 @@ const getStatusIcon = (status) => {
                     <!-- Sidebar -->
                     <div class="space-y-6">
                         <!-- Actions -->
-                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-2xl">
                             <div class="p-6 border-b border-gray-200 dark:border-gray-700">
                                 <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Actions</h2>
                             </div>
@@ -205,7 +205,7 @@ const getStatusIcon = (status) => {
                                     v-if="application.status === 'pending'"
                                     @click="updateStatus('in_progress')"
                                     :disabled="isUpdating"
-                                    class="w-full px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 transition"
+                                    class="w-full px-4 py-2 bg-growth-600 text-white rounded-xl hover:bg-growth-700 disabled:opacity-50 transition"
                                 >
                                     Mark In Progress
                                 </button>
@@ -213,7 +213,7 @@ const getStatusIcon = (status) => {
                                     v-if="application.status === 'in_progress'"
                                     @click="updateStatus('completed')"
                                     :disabled="isUpdating"
-                                    class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 transition"
+                                    class="w-full px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 disabled:opacity-50 transition"
                                 >
                                     Mark Completed
                                 </button>
@@ -221,7 +221,7 @@ const getStatusIcon = (status) => {
                                     v-if="application.status !== 'cancelled'"
                                     @click="updateStatus('cancelled')"
                                     :disabled="isUpdating"
-                                    class="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 transition"
+                                    class="w-full px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-growth-700 disabled:opacity-50 transition"
                                 >
                                     Cancel Application
                                 </button>
@@ -229,7 +229,7 @@ const getStatusIcon = (status) => {
                         </div>
 
                         <!-- Timeline -->
-                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-2xl">
                             <div class="p-6 border-b border-gray-200 dark:border-gray-700">
                                 <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Timeline</h2>
                             </div>
@@ -252,7 +252,7 @@ const getStatusIcon = (status) => {
                                     <div v-if="application.quoted_at" class="flex gap-3">
                                         <div class="flex-shrink-0">
                                             <div class="w-8 h-8 rounded-full bg-red-100 dark:bg-blue-900 flex items-center justify-center">
-                                                <CurrencyDollarIcon class="w-5 h-5 text-brand-red-600 dark:text-blue-400" />
+                                                <CurrencyDollarIcon class="w-5 h-5 text-growth-600 dark:text-blue-400" />
                                             </div>
                                         </div>
                                         <div>

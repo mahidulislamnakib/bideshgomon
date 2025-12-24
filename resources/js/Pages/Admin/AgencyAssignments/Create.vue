@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <Head title="Assign Agency to Country" />
 
     <AdminLayout>
@@ -8,12 +8,12 @@
                 <div class="mb-8">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h1 class="text-3xl font-bold text-gray-900">Assign Agency to Country</h1>
-                            <p class="mt-2 text-gray-600">Set up agency management for visa applications</p>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Assign Agency to Country</h1>
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">Set up agency management for visa applications</p>
                         </div>
                         <Link 
                             :href="route('admin.agency-assignments.index')"
-                            class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition"
+                            class="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition"
                         >
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
@@ -24,18 +24,18 @@
                 </div>
 
                 <!-- Form -->
-                <div class="bg-white rounded-lg shadow">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow">
                     <form @submit.prevent="submitForm">
                         <div class="p-6 space-y-6">
                             <!-- Agency Selection -->
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Select Agency</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Select Agency</h3>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Agency *</label>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Agency *</label>
                                     <select 
                                         v-model="form.agency_id"
                                         required
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                        class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     >
                                         <option value="">Select an agency</option>
                                         <option v-for="agency in agencies" :key="agency.id" :value="agency.id">
@@ -48,7 +48,7 @@
 
                             <!-- Service Module Selection -->
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Select Service</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Select Service</h3>
                                 
                                 <!-- Enable Multiple Service Selection -->
                                 <div class="mb-4">
@@ -57,18 +57,18 @@
                                             <input 
                                                 v-model="enableMultipleServices"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                                class="rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                                             />
                                         </div>
                                         <div class="ml-3">
-                                            <label class="font-medium text-gray-900">Assign multiple services at once</label>
-                                            <p class="text-sm text-gray-500">Select multiple services to create bulk assignments with same settings</p>
+                                            <label class="font-medium text-gray-900 dark:text-white">Assign multiple services at once</label>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">Select multiple services to create bulk assignments with same settings</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                         {{ enableMultipleServices ? 'Service Modules *' : 'Service Module *' }}
                                     </label>
                                     
@@ -78,7 +78,7 @@
                                         v-model="selectedServiceModule"
                                         @change="onServiceModuleChange"
                                         required
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                        class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     >
                                         <option value="">Select a service</option>
                                         <option v-for="module in serviceModules" :key="module.id" :value="module.id">
@@ -87,22 +87,22 @@
                                     </select>
                                     
                                     <!-- Multiple Service Selection -->
-                                    <div v-else class="border border-gray-300 rounded-md max-h-60 overflow-y-auto p-3 bg-white">
+                                    <div v-else class="border border-gray-300 dark:border-gray-600 rounded-xl max-h-60 overflow-y-auto p-3 bg-white dark:bg-gray-700">
                                         <div v-for="module in serviceModules" :key="module.id" class="flex items-center mb-2">
                                             <input 
                                                 :id="'service-' + module.id"
                                                 v-model="selectedServiceModules"
                                                 :value="module.id"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                                class="rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                                             />
-                                            <label :for="'service-' + module.id" class="ml-2 text-sm text-gray-700">
-                                                {{ module.name }} <span class="text-gray-500">({{ module.service_type }})</span>
+                                            <label :for="'service-' + module.id" class="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                                                {{ module.name }} <span class="text-gray-500 dark:text-gray-400">({{ module.service_type }})</span>
                                             </label>
                                         </div>
                                     </div>
                                     
-                                    <p v-if="enableMultipleServices && selectedServiceModules.length > 0" class="mt-2 text-sm text-gray-600">
+                                    <p v-if="enableMultipleServices && selectedServiceModules.length > 0" class="mt-2 text-sm text-gray-600 dark:text-gray-400">
                                         {{ selectedServiceModules.length }} services selected
                                     </p>
                                     <p v-if="form.errors.service_module_id" class="mt-1 text-sm text-red-600">{{ form.errors.service_module_id }}</p>
@@ -111,19 +111,19 @@
 
                             <!-- Assignment Scope -->
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Assignment Scope</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Assignment Scope</h3>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Scope *</label>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Scope *</label>
                                     <select 
                                         v-model="form.assignment_scope"
                                         required
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                        class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     >
                                         <option value="global">Global (All Countries)</option>
                                         <option value="country_specific">Country Specific</option>
                                         <option value="visa_specific">Visa Type Specific</option>
                                     </select>
-                                    <p class="mt-1 text-sm text-gray-500">
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
                                         Global: Agency handles all applications. Country: Specific to one country. Visa: Specific country + visa type.
                                     </p>
                                 </div>
@@ -131,7 +131,7 @@
 
                             <!-- Country & Visa Type -->
                             <div v-if="form.assignment_scope !== 'global'">
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Country & Visa Type</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Country & Visa Type</h3>
                                 
                                 <!-- Enable Multiple Country Selection -->
                                 <div class="mb-4">
@@ -140,19 +140,19 @@
                                             <input 
                                                 v-model="enableMultipleCountries"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                                class="rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                                             />
                                         </div>
                                         <div class="ml-3">
-                                            <label class="font-medium text-gray-900">Assign multiple countries at once</label>
-                                            <p class="text-sm text-gray-500">Select multiple countries to create bulk assignments with same settings</p>
+                                            <label class="font-medium text-gray-900 dark:text-white">Assign multiple countries at once</label>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">Select multiple countries to create bulk assignments with same settings</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                         {{ enableMultipleCountries ? 'Countries *' : 'Country *' }}
                                     </label>
                                     
@@ -162,7 +162,7 @@
                                         v-model="selectedCountry"
                                         @change="onCountryChange"
                                         :required="form.assignment_scope !== 'global'"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                        class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     >
                                         <option value="">Select a country</option>
                                         <option v-for="country in countries" :key="country.id" :value="country.id">
@@ -171,42 +171,42 @@
                                     </select>
                                     
                                     <!-- Multiple Country Selection -->
-                                    <div v-else class="border border-gray-300 rounded-md max-h-60 overflow-y-auto p-3 bg-white">
+                                    <div v-else class="border border-gray-300 dark:border-gray-600 rounded-xl max-h-60 overflow-y-auto p-3 bg-white dark:bg-gray-700">
                                         <div v-for="country in countries" :key="country.id" class="flex items-center mb-2">
                                             <input 
                                                 :id="'country-' + country.id"
                                                 v-model="selectedCountries"
                                                 :value="country.id"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                                class="rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                                             />
-                                            <label :for="'country-' + country.id" class="ml-2 text-sm text-gray-700">
+                                            <label :for="'country-' + country.id" class="ml-2 text-sm text-gray-700 dark:text-gray-300">
                                                 {{ country.name }} ({{ country.iso_code_2 }})
                                             </label>
                                         </div>
                                     </div>
                                     
-                                    <p v-if="enableMultipleCountries && selectedCountries.length > 0" class="mt-2 text-sm text-gray-600">
+                                    <p v-if="enableMultipleCountries && selectedCountries.length > 0" class="mt-2 text-sm text-gray-600 dark:text-gray-400">
                                         {{ selectedCountries.length }} countries selected
                                     </p>
                                     <p v-if="form.errors.country" class="mt-1 text-sm text-red-600">{{ form.errors.country }}</p>
                                 </div>                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Country Code</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Country Code</label>
                                         <input 
                                             v-model="form.country_code"
                                             type="text"
                                             readonly
-                                            class="w-full rounded-md border-gray-300 bg-gray-50 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         />
                                     </div>
 
                                     <div class="md:col-span-2" v-if="form.assignment_scope === 'visa_specific'">
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Visa Type *</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Visa Type *</label>
                                         <select 
                                             v-model="form.visa_type_id"
                                             @change="onVisaTypeChange"
                                             :required="form.assignment_scope === 'visa_specific'"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         >
                                             <option value="">Select visa type</option>
                                             <option v-for="type in visaTypes" :key="type.id" :value="type.id">
@@ -220,14 +220,14 @@
 
                             <!-- Commission Settings -->
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Commission Settings</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Commission Settings</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Commission Type *</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Commission Type *</label>
                                         <select 
                                             v-model="form.commission_type"
                                             required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         >
                                             <option value="percentage">Percentage</option>
                                             <option value="fixed">Fixed Amount</option>
@@ -235,7 +235,7 @@
                                     </div>
 
                                     <div v-if="form.commission_type === 'percentage'">
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Commission Rate (%) *</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Commission Rate (%) *</label>
                                         <input 
                                             v-model.number="form.platform_commission_rate"
                                             type="number"
@@ -243,43 +243,43 @@
                                             max="100"
                                             step="0.01"
                                             required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="e.g., 15"
                                         />
-                                        <p class="mt-1 text-sm text-gray-500">Platform commission on agency earnings</p>
+                                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Platform commission on agency earnings</p>
                                     </div>
 
                                     <div v-if="form.commission_type === 'fixed'">
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Fixed Commission Amount (৳) *</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fixed Commission Amount (?) *</label>
                                         <input 
                                             v-model.number="form.fixed_commission_amount"
                                             type="number"
                                             min="0"
                                             step="0.01"
                                             required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="e.g., 5000"
                                         />
-                                        <p class="mt-1 text-sm text-gray-500">Fixed amount per application</p>
+                                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Fixed amount per application</p>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Agency Permissions -->
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Agency Permissions</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Agency Permissions</h3>
                                 <div class="space-y-4">
                                     <div class="flex items-start">
                                         <div class="flex items-center h-5">
                                             <input 
                                                 v-model="form.can_edit_requirements"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                                class="rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                                             />
                                         </div>
                                         <div class="ml-3">
-                                            <label class="font-medium text-gray-900">Can Edit Requirements</label>
-                                            <p class="text-sm text-gray-500">Allow agency to modify visa requirements</p>
+                                            <label class="font-medium text-gray-900 dark:text-white">Can Edit Requirements</label>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">Allow agency to modify visa requirements</p>
                                         </div>
                                     </div>
 
@@ -288,12 +288,12 @@
                                             <input 
                                                 v-model="form.can_set_fees"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                                class="rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                                             />
                                         </div>
                                         <div class="ml-3">
-                                            <label class="font-medium text-gray-900">Can Set Fees</label>
-                                            <p class="text-sm text-gray-500">Allow agency to set their service and processing fees</p>
+                                            <label class="font-medium text-gray-900 dark:text-white">Can Set Fees</label>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">Allow agency to set their service and processing fees</p>
                                         </div>
                                     </div>
 
@@ -302,12 +302,12 @@
                                             <input 
                                                 v-model="form.can_process_applications"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                                class="rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                                             />
                                         </div>
                                         <div class="ml-3">
-                                            <label class="font-medium text-gray-900">Can Process Applications</label>
-                                            <p class="text-sm text-gray-500">Allow agency to process visa applications</p>
+                                            <label class="font-medium text-gray-900 dark:text-white">Can Process Applications</label>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">Allow agency to process visa applications</p>
                                         </div>
                                     </div>
                                 </div>
@@ -315,13 +315,13 @@
 
                             <!-- Additional Settings -->
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Additional Settings</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Additional Settings</h3>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Assignment Notes</label>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Assignment Notes</label>
                                     <textarea 
                                         v-model="form.assignment_notes"
                                         rows="3"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                        class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         placeholder="Add any notes about this assignment..."
                                     />
                                 </div>
@@ -332,12 +332,12 @@
                                             <input 
                                                 v-model="form.auto_assign_requirements"
                                                 type="checkbox"
-                                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                                class="rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                                             />
                                         </div>
                                         <div class="ml-3">
-                                            <label class="font-medium text-gray-900">Auto-assign existing requirements</label>
-                                            <p class="text-sm text-gray-500">Automatically assign existing visa requirements for this country to the agency</p>
+                                            <label class="font-medium text-gray-900 dark:text-white">Auto-assign existing requirements</label>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">Automatically assign existing visa requirements for this country to the agency</p>
                                         </div>
                                     </div>
                                 </div>
@@ -345,17 +345,17 @@
                         </div>
 
                         <!-- Form Actions -->
-                        <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3 rounded-b-lg">
+                        <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 flex justify-end space-x-3 rounded-b-2xl">
                             <Link 
                                 :href="route('admin.agency-assignments.index')"
-                                class="px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition"
+                                class="px-4 py-2 bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-500 transition"
                             >
                                 Cancel
                             </Link>
                             <button 
                                 type="submit"
                                 :disabled="form.processing"
-                                class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 transition disabled:opacity-50"
+                                class="px-4 py-2 bg-growth-600 text-white rounded-xl hover:bg-growth-700 transition disabled:opacity-50"
                             >
                                 {{ form.processing ? 'Assigning...' : 'Assign Agency' }}
                             </button>

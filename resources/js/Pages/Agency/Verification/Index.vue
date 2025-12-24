@@ -56,7 +56,7 @@
             </div>
 
             <!-- No Status Card -->
-            <div v-else class="mb-8 bg-brand-red-600 rounded-lg shadow-md p-6 text-white border-2 border-blue-700">
+            <div v-else class="mb-8 bg-growth-600 rounded-lg shadow-md p-6 text-white border-2 border-blue-700">
                 <h2 class="text-2xl font-bold mb-2">Get Verified Today!</h2>
                 <p class="mb-4">Verified agencies receive more applications and build stronger trust with clients.</p>
                 <ul class="space-y-2">
@@ -100,7 +100,7 @@
                             id="document_type"
                             v-model="uploadForm.document_type"
                             required
-                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                         >
                             <option value="">Select document type</option>
                             <option v-for="(label, type) in requiredDocumentTypes" :key="type" :value="type">
@@ -115,7 +115,7 @@
                             type="text"
                             id="document_name"
                             v-model="uploadForm.document_name"
-                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                             placeholder="e.g., Trade License 2024"
                         />
                     </div>
@@ -136,7 +136,7 @@
                     <button
                         type="submit"
                         :disabled="uploading"
-                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50"
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600 disabled:opacity-50"
                     >
                         <span v-if="uploading">Uploading...</span>
                         <span v-else>Upload Document</span>
@@ -195,7 +195,7 @@
                             id="message"
                             v-model="submitForm.message"
                             rows="4"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             placeholder="Any additional information for the review team..."
                         ></textarea>
                     </div>

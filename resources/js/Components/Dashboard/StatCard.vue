@@ -40,8 +40,8 @@ const variantClasses = computed(() => {
     blue: {
       bg: 'bg-white',
       icon: 'bg-gradient-to-br from-blue-500 to-blue-600',
-      text: 'text-blue-600',
-      badge: 'bg-blue-50 text-blue-600',
+      text: 'text-growth-600',
+      badge: 'bg-blue-50 text-growth-600',
       border: 'from-blue-500 to-blue-600'
     },
     emerald: {
@@ -82,8 +82,8 @@ const variantClasses = computed(() => {
     indigo: {
       bg: 'bg-white',
       icon: 'bg-gradient-to-br from-indigo-500 to-indigo-600',
-      text: 'text-indigo-600',
-      badge: 'bg-indigo-50 text-indigo-600',
+      text: 'text-growth-600',
+      badge: 'bg-indigo-50 text-growth-600',
       border: 'from-indigo-500 to-indigo-600'
     }
   }

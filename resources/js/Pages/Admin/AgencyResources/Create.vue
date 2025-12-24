@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { ref, computed } from 'vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -186,7 +186,7 @@ const submit = () => {
                     <div class="flex items-center justify-between mb-4">
                         <Link
                             :href="route('admin.agency-resources.index')"
-                            class="text-sm text-gray-600 hover:text-gray-900 inline-flex items-center transition"
+                            class="text-sm text-gray-600 hover:text-gray-900 dark:text-white inline-flex items-center transition"
                         >
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -197,7 +197,7 @@ const submit = () => {
                                 <button
                                     type="button"
                                     @click="clearForm"
-                                    class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2"
+                                    class="inline-flex items-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-700 border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2"
                                 >
                                     <svg class="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
@@ -208,7 +208,7 @@ const submit = () => {
                                     <button
                                         type="button"
                                         @click="showDemoMenu = !showDemoMenu"
-                                        class="inline-flex items-center rounded-md bg-brand-red-600 px-3 py-2 text-sm font-semibold text-white hover:bg-red-700 transition"
+                                        class="inline-flex items-center rounded-xl bg-growth-600 px-3 py-2 text-sm font-semibold text-white hover:bg-growth-700 transition"
                                     >
                                         <svg class="-ml-0.5 mr-1.5 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
@@ -220,11 +220,11 @@ const submit = () => {
                                     </button>                                <!-- Demo Data Dropdown Menu -->
                                 <div
                                     v-show="showDemoMenu"
-                                    class="absolute right-0 z-10 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                    class="absolute right-0 z-10 mt-2 w-80 origin-top-right rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                 >
                                     <div class="py-1">
                                         <div class="px-4 py-2 border-b border-gray-200">
-                                            <p class="text-xs font-medium text-gray-900">Select Demo Resource</p>
+                                            <p class="text-xs font-medium text-gray-900 dark:text-white">Select Demo Resource</p>
                                             <p class="text-xs text-gray-500">Choose a sample to auto-fill the form</p>
                                         </div>
                                         <button
@@ -241,7 +241,7 @@ const submit = () => {
                                                     </span>
                                                 </div>
                                                 <div class="flex-1 min-w-0">
-                                                    <p class="font-medium text-gray-900 truncate">{{ demo.data.resource_name }}</p>
+                                                    <p class="font-medium text-gray-900 dark:text-white truncate">{{ demo.data.resource_name }}</p>
                                                     <p class="text-xs text-gray-500 mt-0.5">{{ demo.data.city }}</p>
                                                 </div>
                                             </div>
@@ -251,12 +251,12 @@ const submit = () => {
                             </div>
                         </div>
                     </div>
-                    <h2 class="text-3xl font-bold text-gray-900">Add Exclusive Resource</h2>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Add Exclusive Resource</h2>
                     <p class="mt-1 text-sm text-gray-600">Assign an exclusive resource (university, school, etc.) to an agency</p>
                 </div>
 
                 <!-- Form -->
-                <div class="bg-white shadow-sm rounded-lg p-6">
+                <div class="bg-white shadow-sm rounded-2xl p-6">
                     <form @submit.prevent="submit" class="space-y-6">
                         <!-- Agency Selection -->
                         <div>
@@ -266,7 +266,7 @@ const submit = () => {
                             <select
                                 v-model="form.agency_id"
                                 required
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="">Select Agency</option>
                                 <option v-for="agency in agencies" :key="agency.id" :value="agency.id">
@@ -285,7 +285,7 @@ const submit = () => {
                                 v-model="form.service_module_id"
                                 @change="checkAvailability"
                                 required
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="">Select Service (Exclusive Resource Only)</option>
                                 <option v-for="service in serviceModules" :key="service.id" :value="service.id">
@@ -307,7 +307,7 @@ const submit = () => {
                                 v-model="form.resource_type"
                                 @change="checkAvailability"
                                 required
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option v-for="(label, value) in resourceTypes" :key="value" :value="value">
                                     {{ label }}
@@ -327,7 +327,7 @@ const submit = () => {
                                 type="text"
                                 required
                                 placeholder="e.g., Harvard University, Oxford International School"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             />
                             <p v-if="checkingAvailability" class="mt-1 text-sm text-gray-500">Checking availability...</p>
                             <p
@@ -349,7 +349,7 @@ const submit = () => {
                                 v-model="form.resource_code"
                                 type="text"
                                 placeholder="University code, school ID, etc."
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             />
                             <p class="mt-1 text-xs text-gray-500">Internal identifier for the resource</p>
                         </div>
@@ -362,7 +362,7 @@ const submit = () => {
                             <select
                                 v-model="form.country_id"
                                 required
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="">Select Country</option>
                                 <option v-for="country in countries" :key="country.id" :value="country.id">
@@ -381,7 +381,7 @@ const submit = () => {
                                 v-model="form.city"
                                 type="text"
                                 placeholder="e.g., Cambridge, Boston"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             />
                         </div>
 
@@ -394,7 +394,7 @@ const submit = () => {
                                 v-model="form.description"
                                 rows="3"
                                 placeholder="Additional details about this resource..."
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             ></textarea>
                         </div>
 
@@ -411,7 +411,7 @@ const submit = () => {
                                     min="0"
                                     max="100"
                                     placeholder="Leave empty to use default"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 />
                                 <span class="absolute right-3 top-2 text-gray-500">%</span>
                             </div>
@@ -421,7 +421,7 @@ const submit = () => {
                         </div>
 
                         <!-- Info Box -->
-                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-4">
                             <div class="flex">
                                 <svg class="w-5 h-5 text-gray-400 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
@@ -436,14 +436,14 @@ const submit = () => {
                         <div class="flex items-center justify-end space-x-3 pt-4 border-t">
                             <Link
                                 :href="route('admin.agency-resources.index')"
-                                class="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                                class="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50"
                             >
                                 Cancel
                             </Link>
                             <button
                                 type="submit"
                                 :disabled="form.processing || !isAvailable"
-                                class="px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                class="px-4 py-2 bg-growth-600 border border-transparent rounded-xl font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <span v-if="form.processing">Creating...</span>
                                 <span v-else>Create Resource Assignment</span>

@@ -12,6 +12,11 @@ import PWAInstallPrompt from '@/Components/PWAInstallPrompt.vue'
 import NetworkStatus from '@/Components/NetworkStatus.vue'
 import SlowConnectionWarning from '@/Components/SlowConnectionWarning.vue'
 import ErrorBoundary from '@/Components/ErrorBoundary.vue'
+import KeyboardShortcutsModal from '@/Components/ui/KeyboardShortcutsModal.vue'
+import ConfirmModalProvider from '@/Components/ui/ConfirmModalProvider.vue'
+import Breadcrumbs from '@/Components/ui/Breadcrumbs.vue'
+import { useKeyboardShortcuts } from '@/Composables/useKeyboardShortcuts'
+import { useFlashMessages } from '@/Composables/useFlashMessages'
 import {
   HomeIcon,
   Bars3Icon,
@@ -75,6 +80,12 @@ const showCommandPalette = ref(false)
 const menuSearch = ref('')
 const page = usePage()
 const user = computed(() => page.props.auth.user)
+
+// Keyboard shortcuts
+const { showHelp: showKeyboardShortcuts, globalShortcuts } = useKeyboardShortcuts()
+
+// Flash messages to toast notifications
+useFlashMessages()
 
 
 // Toggle dark mode
@@ -513,7 +524,7 @@ const hasPermission = (item) => {
             <!-- Header -->
             <div class="border-b border-gray-200 dark:border-gray-700 px-6 py-4">
               <div class="flex items-center gap-3">
-                <CommandLineIcon class="w-6 h-6 text-brand-red-600 dark:text-indigo-400" />
+                <CommandLineIcon class="w-6 h-6 text-growth-600 dark:text-indigo-400" />
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                   Quick Navigation
                 </h3>
@@ -545,7 +556,7 @@ const hasPermission = (item) => {
                 >
                   <component
                     :is="item.icon"
-                    class="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-400"
+                    class="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-growth-600 dark:group-hover:text-indigo-400"
                   />
                   <span class="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">
                     {{ item.name }}
@@ -580,7 +591,7 @@ const hasPermission = (item) => {
         >
           <Link :href="route('admin.dashboard')" class="flex items-center">
             <ApplicationLogo class="h-8 w-auto" v-if="!sidebarCollapsed" />
-            <div v-else class="w-8 h-8 rounded-lg bg-brand-red-600 flex items-center justify-center">
+            <div v-else class="w-8 h-8 rounded-lg bg-growth-600 flex items-center justify-center">
               <SparklesIcon class="w-4 h-4 text-white" />
             </div>
           </Link>
@@ -611,15 +622,12 @@ const hasPermission = (item) => {
         <div class="flex-1 overflow-y-auto px-3 py-4">
           <!-- Smart Search (when expanded) -->
           <div v-if="!sidebarCollapsed" class="mb-4">
-            <div class="relative">
-              <MagnifyingGlassIcon class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
-                v-model="menuSearch"
-                type="text"
-                placeholder="Search menu..."
-                class="w-full pl-9 pr-3 py-2 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-              />
-            </div>
+            <input
+              v-model="menuSearch"
+              type="text"
+              placeholder="Search menu..."
+              class="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
+            />
           </div>
 
           <!-- Search Results (when searching) -->
@@ -629,7 +637,7 @@ const hasPermission = (item) => {
                 :href="item.href"
                 :class="[
                   item.current
-                    ? 'bg-indigo-600 text-white shadow-sm'
+                    ? 'bg-growth-600 text-white shadow-sm'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
                   sidebarCollapsed ? 'justify-center px-2' : 'px-3',
                   'group flex items-center gap-x-3 rounded-xl py-2.5 text-sm font-medium transition-all',
@@ -670,7 +678,7 @@ const hasPermission = (item) => {
                 :href="item.href"
                 :class="[
                   item.current
-                    ? 'bg-indigo-600 text-white shadow-sm'
+                    ? 'bg-growth-600 text-white shadow-sm'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
                   sidebarCollapsed ? 'justify-center px-2' : 'px-3',
                   'group flex items-center gap-x-3 rounded-xl py-2.5 text-sm font-semibold transition-all',
@@ -726,7 +734,7 @@ const hasPermission = (item) => {
                     :href="item.href"
                     :class="[
                       item.current
-                        ? 'bg-indigo-600 text-white shadow-sm'
+                        ? 'bg-growth-600 text-white shadow-sm'
                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
                       sidebarCollapsed ? 'justify-center px-2' : 'px-3 ml-4',
                       'group flex items-center gap-x-3 rounded-xl py-2.5 text-sm font-medium transition-all',
@@ -784,7 +792,7 @@ const hasPermission = (item) => {
                     :href="item.href"
                     :class="[
                       item.current
-                        ? 'bg-indigo-600 text-white shadow-sm'
+                        ? 'bg-growth-600 text-white shadow-sm'
                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
                       sidebarCollapsed ? 'justify-center px-2' : 'px-3 ml-4',
                       'group flex items-center gap-x-3 rounded-xl py-2.5 text-sm font-medium transition-all',
@@ -902,7 +910,7 @@ const hasPermission = (item) => {
           <div class="flex items-center gap-2">
             <!-- Mobile Search Icon -->
             <button
-              class="lg:hidden p-2.5 text-gray-600 dark:text-gray-400 hover:text-brand-red-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-xl transition-all transform hover:scale-105"
+              class="lg:hidden p-2.5 text-gray-600 dark:text-gray-400 hover:text-growth-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-xl transition-all transform hover:scale-105"
               title="Search"
               @click="showMobileSearch = !showMobileSearch"
             >
@@ -927,6 +935,15 @@ const hasPermission = (item) => {
               <RealtimeNotifications />
             </div>
 
+            <!-- Keyboard Shortcuts Button -->
+            <button
+              @click="showKeyboardShortcuts = true"
+              class="hidden md:flex items-center justify-center w-10 h-10 rounded-xl text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-200 transition-all"
+              title="Keyboard shortcuts (?)"
+            >
+              <CommandLineIcon class="w-5 h-5" />
+            </button>
+
             <!-- Language Switcher -->
             <LanguageSwitcher />
 
@@ -939,7 +956,7 @@ const hasPermission = (item) => {
                 >
                   <div class="relative">
                     <div
-                      class="w-10 h-10 rounded-xl bg-brand-red-600 flex items-center justify-center text-white font-bold text-sm shadow-lg transform group-hover:scale-105 transition-transform border-2 border-blue-700"
+                      class="w-10 h-10 rounded-xl bg-growth-600 flex items-center justify-center text-white font-bold text-sm shadow-lg transform group-hover:scale-105 transition-transform border-2 border-blue-700"
                     >
                       {{ (user.name || '').charAt(0).toUpperCase() }}
                     </div>
@@ -952,7 +969,7 @@ const hasPermission = (item) => {
                     <span class="text-xs text-gray-500 dark:text-gray-400">{{ user.role?.name || 'Admin' }}</span>
                   </div>
                   <ChevronDownIcon
-                    class="hidden lg:block h-4 w-4 text-gray-400 group-hover:text-brand-red-600 dark:group-hover:text-indigo-400 transition-all"
+                    class="hidden lg:block h-4 w-4 text-gray-400 group-hover:text-growth-600 dark:group-hover:text-indigo-400 transition-all"
                   />
                 </button>
               </template>
@@ -974,7 +991,7 @@ const hasPermission = (item) => {
                     :href="route(profileRoute)"
                     class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors"
                   >
-                    <UsersIcon class="w-5 h-5 text-brand-red-600 dark:text-indigo-400" />
+                    <UsersIcon class="w-5 h-5 text-growth-600 dark:text-indigo-400" />
                     <div class="flex flex-col">
                       <span class="font-medium">My Profile</span>
                       <span class="text-xs text-gray-500 dark:text-gray-400">View and edit your profile</span>
@@ -1013,7 +1030,7 @@ const hasPermission = (item) => {
             <div class="flex items-center justify-between mb-4">
               <div class="flex items-center gap-3">
                 <div
-                  class="w-10 h-10 rounded-lg bg-brand-red-600 flex items-center justify-center shadow-md border-2 border-blue-700"
+                  class="w-10 h-10 rounded-lg bg-growth-600 flex items-center justify-center shadow-md border-2 border-blue-700"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1060,6 +1077,13 @@ const hasPermission = (item) => {
           </div>
         </header>
 
+        <!-- Breadcrumbs -->
+        <div v-if="$slots.breadcrumbs" class="bg-white dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-700">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <slot name="breadcrumbs"></slot>
+          </div>
+        </div>
+
         <main class="flex-1">
           <ErrorBoundary>
             <slot></slot>
@@ -1090,7 +1114,7 @@ const hasPermission = (item) => {
             <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
               <button
                 type="button"
-                class="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-brand-red-600 hover:bg-brand-red-700 transition-all duration-150 active:scale-95 shadow-lg"
+                class="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-growth-600 hover:bg-growth-700 transition-all duration-150 active:scale-95 shadow-lg"
                 @click="showingNavigationDropdown = false"
               >
                 <span class="sr-only">Close sidebar</span>
@@ -1102,7 +1126,7 @@ const hasPermission = (item) => {
             <div class="flex grow flex-col gap-y-3 overflow-y-auto bg-white pb-4">
               <!-- Mobile Logo -->
               <div
-                class="flex h-16 shrink-0 items-center justify-center bg-brand-red-600 px-4 border-b-2 border-blue-700"
+                class="flex h-16 shrink-0 items-center justify-center bg-growth-600 px-4 border-b-2 border-blue-700"
               >
                 <Link :href="route('admin.dashboard')">
                   <ApplicationLogo class="block h-10 w-auto brightness-0 invert" />
@@ -1139,8 +1163,8 @@ const hasPermission = (item) => {
                             :href="item.disabled ? '#' : item.href"
                             :class="[
                               item.current
-                                ? 'bg-brand-red-50 text-brand-red-700 border-l-4 border-brand-red-600'
-                                : 'text-gray-700 hover:text-brand-red-600 hover:bg-gray-50 border-l-4 border-transparent',
+                                ? 'bg-growth-50 text-growth-700 border-l-4 border-growth-600'
+                                : 'text-gray-700 hover:text-growth-600 hover:bg-gray-50 border-l-4 border-transparent',
                               'group flex items-center px-3 py-2.5 text-sm font-medium rounded-r-lg transition-all duration-150',
                               item.disabled ? 'opacity-50 cursor-not-allowed' : '',
                             ]"
@@ -1152,14 +1176,14 @@ const hasPermission = (item) => {
                               :is="item.icon"
                               :class="[
                                 'h-6 w-6 shrink-0',
-                                item.current ? 'text-brand-red-600' : '',
+                                item.current ? 'text-growth-600' : '',
                               ]"
                               aria-hidden="true"
                             />
                             <span class="flex-1">{{ item.name }}</span>
                             <ChevronRightIcon
                               v-if="item.current && !item.disabled"
-                              class="w-4 h-4 text-brand-red-600"
+                              class="w-4 h-4 text-growth-600"
                             />
                           </Link>
                         </li>
@@ -1187,7 +1211,16 @@ const hasPermission = (item) => {
     <PWAInstallPrompt />
     <SlowConnectionWarning />
     
+    <!-- Keyboard Shortcuts Modal -->
+    <KeyboardShortcutsModal
+      v-model:show="showKeyboardShortcuts"
+      :global-shortcuts="globalShortcuts"
+    />
+    
     <!-- Toast Notifications -->
     <Toaster position="top-right" :rich-colors="true" />
+    
+    <!-- Confirmation Modal Provider -->
+    <ConfirmModalProvider />
   </div>
 </template>

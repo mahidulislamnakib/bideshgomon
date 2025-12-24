@@ -12,7 +12,7 @@
             <nav class="flex items-center gap-2 text-sm mb-8 overflow-x-auto">
                 <Link 
                     :href="route('directory.index')" 
-                    class="flex items-center gap-1 px-3 py-1.5 bg-white rounded-lg hover:bg-blue-50 hover:text-brand-red-600 transition-all group border border-gray-200"
+                    class="flex items-center gap-1 px-3 py-1.5 bg-white rounded-lg hover:bg-blue-50 hover:text-growth-600 transition-all group border border-gray-200"
                 >
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -25,7 +25,7 @@
                 <Link
                     v-if="directory.category"
                     :href="route('directory.category', directory.category.slug)"
-                    class="flex items-center gap-1 px-3 py-1.5 bg-white rounded-lg hover:bg-blue-50 hover:text-brand-red-600 transition-all border border-gray-200"
+                    class="flex items-center gap-1 px-3 py-1.5 bg-white rounded-lg hover:bg-blue-50 hover:text-growth-600 transition-all border border-gray-200"
                 >
                     <span class="font-medium">{{ directory.category.name }}</span>
                 </Link>
@@ -90,7 +90,7 @@
                         <div class="flex items-center flex-wrap gap-6 pb-6 border-b border-gray-200">
                             <div class="flex items-center gap-2 text-gray-600">
                                 <div class="p-2 bg-blue-50 rounded-lg">
-                                    <EyeIcon class="h-5 w-5 text-brand-red-600" />
+                                    <EyeIcon class="h-5 w-5 text-growth-600" />
                                 </div>
                                 <div>
                                     <p class="text-xs text-gray-500">Views</p>
@@ -122,7 +122,7 @@
                     <div v-if="directory.description" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="p-2 bg-blue-50 rounded-lg">
-                                <svg class="h-6 w-6 text-brand-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg class="h-6 w-6 text-growth-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
@@ -147,7 +147,7 @@
                                 :key="index"
                                 class="flex items-center gap-3 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100"
                             >
-                                <svg class="h-5 w-5 text-brand-red-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg class="h-5 w-5 text-growth-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                                 <span class="text-gray-900 font-medium">{{ service }}</span>
@@ -194,7 +194,7 @@
                                     <p class="text-sm text-gray-600 mb-4">Coordinates: {{ directory.gps_latitude }}, {{ directory.gps_longitude }}</p>
                                     <button
                                         @click="openDirections"
-                                        class="inline-flex items-center gap-2 px-6 py-3 bg-brand-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-semibold shadow-lg"
+                                        class="inline-flex items-center gap-2 px-6 py-3 bg-growth-600 text-white rounded-xl hover:bg-growth-700 transition-colors font-semibold shadow-lg"
                                     >
                                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
@@ -213,7 +213,7 @@
                     <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-4">
                         <div class="flex items-center gap-3 mb-6 pb-6 border-b border-gray-200">
                             <div class="p-3 bg-blue-50 rounded-xl">
-                                <svg class="h-7 w-7 text-brand-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg class="h-7 w-7 text-growth-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                 </svg>
                             </div>
@@ -261,13 +261,13 @@
                                     class="flex items-start gap-4 p-4 bg-white rounded-xl hover:shadow-md transition-all border border-gray-100 group"
                                 >
                                     <div class="p-2 bg-blue-50 rounded-lg flex-shrink-0">
-                                        <EnvelopeIcon class="h-5 w-5 text-brand-red-600" />
+                                        <EnvelopeIcon class="h-5 w-5 text-growth-600" />
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Email</p>
-                                        <p class="text-sm font-medium text-gray-900 group-hover:text-brand-red-600 break-all">{{ directory.email }}</p>
+                                        <p class="text-sm font-medium text-gray-900 group-hover:text-growth-600 break-all">{{ directory.email }}</p>
                                     </div>
-                                    <svg class="h-5 w-5 text-gray-400 group-hover:text-brand-red-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg class="h-5 w-5 text-gray-400 group-hover:text-growth-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                     </svg>
                                 </a>
@@ -322,7 +322,7 @@
                     <!-- Related Directories -->
                     <div v-if="relatedDirectories && relatedDirectories.length > 0" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
                         <h3 class="text-lg font-bold text-gray-900 mb-5 flex items-center gap-2">
-                            <svg class="h-5 w-5 text-brand-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg class="h-5 w-5 text-growth-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                             </svg>
                             Related Listings
@@ -334,7 +334,7 @@
                                 :href="route('directory.show', related.slug)"
                                 class="block p-4 bg-gray-50 rounded-xl hover:bg-blue-50 hover:border-blue-200 transition-all border border-gray-100 group"
                             >
-                                <h4 class="font-semibold text-gray-900 group-hover:text-brand-red-600 mb-1 line-clamp-2">{{ related.name }}</h4>
+                                <h4 class="font-semibold text-gray-900 group-hover:text-growth-600 mb-1 line-clamp-2">{{ related.name }}</h4>
                                 <p v-if="related.city" class="text-xs text-gray-600 flex items-center gap-1">
                                     <MapPinIcon class="h-3 w-3" />
                                     {{ related.city }}

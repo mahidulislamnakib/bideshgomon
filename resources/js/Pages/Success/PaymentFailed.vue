@@ -105,7 +105,7 @@ const nextSteps = [
             <div v-if="retryUrl" class="pt-6 border-t">
               <a
                 :href="retryUrl"
-                class="w-full inline-flex items-center justify-center px-6 py-3 bg-brand-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
+                class="w-full inline-flex items-center justify-center px-6 py-3 bg-growth-600 text-white font-semibold rounded-lg hover:bg-growth-700 transition"
               >
                 <ArrowPathIcon class="h-5 w-5 mr-2" />
                 Retry Payment
@@ -165,7 +165,7 @@ const nextSteps = [
             </div>
 
             <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center">
-              <CreditCardIcon class="h-8 w-8 text-brand-red-600 mx-auto mb-2" />
+              <CreditCardIcon class="h-8 w-8 text-growth-600 mx-auto mb-2" />
               <p class="font-semibold text-gray-900">Credit/Debit Card</p>
               <p class="text-xs text-gray-600 mt-1">Visa, Mastercard</p>
             </div>
@@ -192,7 +192,7 @@ const nextSteps = [
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <a
                 href="mailto:support@bideshgomon.com"
-                class="flex items-center justify-center px-6 py-3 bg-brand-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
+                class="flex items-center justify-center px-6 py-3 bg-growth-600 text-white font-semibold rounded-lg hover:bg-growth-700 transition"
               >
                 <EnvelopeIcon class="h-5 w-5 mr-2" />
                 Email Support
@@ -222,7 +222,7 @@ const nextSteps = [
           <Link
             v-if="retryUrl"
             :href="retryUrl"
-            class="inline-flex items-center justify-center px-6 py-3 bg-brand-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
+            class="inline-flex items-center justify-center px-6 py-3 bg-growth-600 text-white font-semibold rounded-lg hover:bg-growth-700 transition"
           >
             <ArrowPathIcon class="h-5 w-5 mr-2" />
             Try Again

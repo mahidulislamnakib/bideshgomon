@@ -5,7 +5,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="mb-8 flex items-center justify-between">
                     <h1 class="text-3xl font-bold text-gray-900">My Translation Requests</h1>
-                    <Link :href="route('translation.create')" class="px-4 py-2 bg-brand-red-600 text-white rounded-lg">New Request</Link>
+                    <Link :href="route('translation.create')" class="px-4 py-2 bg-growth-600 text-white rounded-lg">New Request</Link>
                 </div>
 
                 <div v-if="requests.data.length > 0" class="space-y-4">
@@ -21,7 +21,7 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="text-2xl font-bold text-brand-red-600">৳{{ req.total_amount }}</div>
+                                <div class="text-2xl font-bold text-growth-600">৳{{ req.total_amount }}</div>
                                 <Link :href="route('translation.show', req.id)" class="mt-2 inline-block px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-lg">View</Link>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
 
                 <div v-else class="bg-white rounded-lg shadow-sm border p-12 text-center">
                     <p class="text-gray-600">No translation requests yet</p>
-                    <Link :href="route('translation.create')" class="mt-4 inline-block px-4 py-2 bg-brand-red-600 text-white rounded-lg">Create Request</Link>
+                    <Link :href="route('translation.create')" class="mt-4 inline-block px-4 py-2 bg-growth-600 text-white rounded-lg">Create Request</Link>
                 </div>
             </div>
         </div>

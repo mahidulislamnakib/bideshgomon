@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -29,7 +29,7 @@ const clearCache = () => {
 
 const getLocationBadgeColor = (location) => {
     const colors = {
-        'header_main': 'bg-red-100 text-brand-red-600',
+        'header_main': 'bg-red-100 text-growth-600',
         'header_top': 'bg-blue-100 text-blue-800',
         'footer_column_1': 'bg-green-100 text-green-800',
         'footer_column_2': 'bg-purple-100 text-purple-800',
@@ -54,7 +54,7 @@ const getLocationBadgeColor = (location) => {
                 <div class="mb-8">
                     <div class="flex justify-between items-center">
                         <div>
-                            <h1 class="text-3xl font-bold text-gray-900">Menu Management</h1>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Menu Management</h1>
                             <p class="mt-2 text-sm text-gray-600">
                                 Manage navigation menus for header, footer, and mobile
                             </p>
@@ -62,14 +62,14 @@ const getLocationBadgeColor = (location) => {
                         <div class="flex gap-3">
                             <button
                                 @click="clearCache"
-                                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-2xl shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
                             >
                                 <ArrowPathIcon class="h-5 w-5 mr-2" />
                                 Clear Cache
                             </button>
                             <Link
                                 :href="route('menus.create')"
-                                class="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 transition-colors"
+                                class="inline-flex items-center px-4 py-2 border border-transparent rounded-2xl shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 transition-colors"
                             >
                                 <PlusIcon class="h-5 w-5 mr-2" />
                                 Add Menu Item
@@ -112,13 +112,13 @@ const getLocationBadgeColor = (location) => {
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center gap-2">
                                             <Bars3Icon class="h-4 w-4 text-gray-400" />
-                                            <span class="text-sm font-medium text-gray-900">{{ menu.order }}</span>
+                                            <span class="text-sm font-medium text-gray-900 dark:text-white">{{ menu.order }}</span>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center gap-2">
                                             <span v-if="menu.parent_id" class="text-gray-400">↳</span>
-                                            <span class="text-sm font-medium text-gray-900">{{ menu.label }}</span>
+                                            <span class="text-sm font-medium text-gray-900 dark:text-white">{{ menu.label }}</span>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -153,7 +153,7 @@ const getLocationBadgeColor = (location) => {
                                         <div class="flex items-center justify-end gap-2">
                                             <Link
                                                 :href="route('menus.edit', menu.id)"
-                                                class="text-brand-red-600 hover:text-red-900"
+                                                class="text-growth-600 hover:text-red-900"
                                             >
                                                 <PencilIcon class="h-5 w-5" />
                                             </Link>
@@ -170,12 +170,12 @@ const getLocationBadgeColor = (location) => {
                                     <td colspan="7" class="px-6 py-12 text-center">
                                         <div class="text-gray-500">
                                             <Bars3Icon class="mx-auto h-12 w-12 text-gray-400" />
-                                            <h3 class="mt-2 text-sm font-medium text-gray-900">No menu items</h3>
+                                            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No menu items</h3>
                                             <p class="mt-1 text-sm text-gray-500">Get started by creating a new menu item.</p>
                                             <div class="mt-6">
                                                 <Link
                                                     :href="route('menus.create')"
-                                                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700"
+                                                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-2xl shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700"
                                                 >
                                                     <PlusIcon class="h-5 w-5 mr-2" />
                                                     Add Menu Item
@@ -195,14 +195,14 @@ const getLocationBadgeColor = (location) => {
                                 <Link
                                     v-if="menus.prev_page_url"
                                     :href="menus.prev_page_url"
-                                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50"
                                 >
                                     Previous
                                 </Link>
                                 <Link
                                     v-if="menus.next_page_url"
                                     :href="menus.next_page_url"
-                                    class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                                    class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50"
                                 >
                                     Next
                                 </Link>
@@ -220,14 +220,14 @@ const getLocationBadgeColor = (location) => {
                                     </p>
                                 </div>
                                 <div>
-                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+                                    <nav class="relative z-0 inline-flex rounded-xl shadow-sm -space-x-px">
                                         <Link
                                             v-for="link in menus.links"
                                             :key="link.label"
                                             :href="link.url"
                                             :class="[
                                                 link.active
-                                                    ? 'z-10 bg-red-50 border-brand-red-600 text-brand-red-600'
+                                                    ? 'z-10 bg-red-50 border-growth-600 text-growth-600'
                                                     : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
                                                 'relative inline-flex items-center px-4 py-2 border text-sm font-medium'
                                             ]"
@@ -241,13 +241,13 @@ const getLocationBadgeColor = (location) => {
                 </div>
 
                 <!-- Info Panel -->
-                <div class="mt-6 bg-red-50 border border-red-200 rounded-lg p-4">
+                <div class="mt-6 bg-red-50 border border-red-200 rounded-2xl p-4">
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <Bars3Icon class="h-5 w-5 text-blue-400" />
                         </div>
                         <div class="ml-3">
-                            <h3 class="text-sm font-medium text-brand-red-600">Menu Locations</h3>
+                            <h3 class="text-sm font-medium text-growth-600">Menu Locations</h3>
                             <div class="mt-2 text-sm text-blue-700">
                                 <ul class="list-disc list-inside space-y-1">
                                     <li><strong>Header Main:</strong> Primary navigation at top of website</li>

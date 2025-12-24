@@ -213,7 +213,7 @@ const submitApplication = () => {
         </Link>
 
         <!-- Header (Only shows basic info, no price until country selected) -->
-        <div class="bg-brand-red-600 rounded-2xl shadow-xl p-6 md:p-8 mb-6 text-white">
+        <div class="bg-growth-600 rounded-2xl shadow-xl p-6 md:p-8 mb-6 text-white">
           <div class="flex items-center justify-between flex-wrap gap-4">
             <div class="flex items-center gap-4">
               <div class="p-3 bg-white/20 rounded-xl backdrop-blur-sm">
@@ -248,7 +248,7 @@ const submitApplication = () => {
                   :class="[
                     'w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all',
                     currentStep >= step
-                      ? 'bg-brand-red-600 text-white'
+                      ? 'bg-growth-600 text-white'
                       : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
                   ]"
                 >
@@ -275,7 +275,7 @@ const submitApplication = () => {
                 :class="[
                   'flex-1 h-1 mx-2 transition-all',
                   currentStep > step
-                    ? 'bg-brand-red-600'
+                    ? 'bg-growth-600'
                     : 'bg-gray-200 dark:bg-gray-700'
                 ]"
               ></div>
@@ -301,7 +301,7 @@ const submitApplication = () => {
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   <span class="flex items-center gap-2">
-                    <GlobeAsiaAustraliaIcon class="h-5 w-5 text-brand-red-600" />
+                    <GlobeAsiaAustraliaIcon class="h-5 w-5 text-growth-600" />
                     Destination Country <span class="text-red-500">*</span>
                   </span>
                 </label>
@@ -309,7 +309,7 @@ const submitApplication = () => {
                   <select
                     :value="selectedCountry"
                     @change="handleCountryChange"
-                    class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-blue-500 dark:bg-gray-700 dark:text-white appearance-none bg-white pr-10 transition-all"
+                    class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-growth-600 dark:bg-gray-700 dark:text-white appearance-none bg-white pr-10 transition-all"
                     required
                   >
                     <option value="">Select destination country...</option>
@@ -334,7 +334,7 @@ const submitApplication = () => {
                     :value="selectedProfession"
                     @change="handleProfessionChange"
                     :disabled="!selectedCountry"
-                    class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-blue-500 dark:bg-gray-700 dark:text-white appearance-none bg-white pr-10 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-growth-600 dark:bg-gray-700 dark:text-white appearance-none bg-white pr-10 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     required
                   >
                     <option value="">Select your profession...</option>
@@ -359,7 +359,7 @@ const submitApplication = () => {
                     </h3>
                     <div class="grid grid-cols-2 gap-3 text-sm">
                       <div class="flex items-center gap-2">
-                        <ClockIcon class="h-4 w-4 text-brand-red-600" />
+                        <ClockIcon class="h-4 w-4 text-growth-600" />
                         <div>
                           <div class="text-xs text-gray-600 dark:text-gray-400">Processing</div>
                           <div class="font-semibold text-gray-900 dark:text-white">
@@ -379,7 +379,7 @@ const submitApplication = () => {
                     </div>
                     
                     <!-- Loading Requirements -->
-                    <div v-if="loadingRequirements" class="mt-3 flex items-center gap-2 text-sm text-brand-red-600">
+                    <div v-if="loadingRequirements" class="mt-3 flex items-center gap-2 text-sm text-growth-600">
                       <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -395,7 +395,7 @@ const submitApplication = () => {
                 <button
                   @click="goToStep(2)"
                   :disabled="!canProceedToStep2"
-                  class="bg-brand-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg hover:shadow-xl"
+                  class="bg-growth-600 hover:bg-growth-700 text-white font-semibold py-3 px-8 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg hover:shadow-xl"
                 >
                   Continue
                   <ArrowRightIcon class="h-5 w-5" />
@@ -438,7 +438,7 @@ const submitApplication = () => {
                 </div>
                 <button
                   @click="goToStep(1)"
-                  class="text-sm text-brand-red-600 hover:text-blue-700 dark:text-blue-400 font-medium"
+                  class="text-sm text-growth-600 hover:text-blue-700 dark:text-blue-400 font-medium"
                 >
                   Change
                 </button>
@@ -453,7 +453,7 @@ const submitApplication = () => {
                 </label>
                 <select
                   v-model="form.purpose"
-                  class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-700 dark:text-white"
+                  class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-growth-600 dark:bg-gray-700 dark:text-white"
                   required
                 >
                   <option value="Tourism">Tourism</option>
@@ -475,7 +475,7 @@ const submitApplication = () => {
                     v-model="form.travel_dates.departure"
                     type="date"
                     :min="new Date().toISOString().split('T')[0]"
-                    class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-700 dark:text-white"
+                    class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-growth-600 dark:bg-gray-700 dark:text-white"
                     required
                   />
                 </div>
@@ -487,7 +487,7 @@ const submitApplication = () => {
                     v-model="form.travel_dates.return"
                     type="date"
                     :min="form.travel_dates.departure"
-                    class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-700 dark:text-white"
+                    class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-growth-600 dark:bg-gray-700 dark:text-white"
                     required
                   />
                 </div>
@@ -501,7 +501,7 @@ const submitApplication = () => {
                 <textarea
                   v-model="form.notes"
                   rows="3"
-                  class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-700 dark:text-white"
+                  class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-growth-600 dark:bg-gray-700 dark:text-white"
                   placeholder="Any special requirements or additional information..."
                 ></textarea>
               </div>
@@ -518,7 +518,7 @@ const submitApplication = () => {
               <button
                 @click="goToStep(3)"
                 :disabled="!form.travel_dates.departure || !form.travel_dates.return"
-                class="flex-1 bg-brand-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg"
+                class="flex-1 bg-growth-600 hover:bg-growth-700 text-white font-semibold py-3 px-6 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg"
               >
                 Continue to Review
                 <ArrowRightIcon class="h-5 w-5" />
@@ -549,7 +549,7 @@ const submitApplication = () => {
                     </div>
                     <button
                       @click="goToStep(1)"
-                      class="text-xs text-brand-red-600 hover:text-blue-700 dark:text-blue-400"
+                      class="text-xs text-growth-600 hover:text-blue-700 dark:text-blue-400"
                     >
                       Change
                     </button>
@@ -617,7 +617,7 @@ const submitApplication = () => {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                 <h4 class="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                  <CheckCircleIcon class="h-5 w-5 text-brand-red-600" />
+                  <CheckCircleIcon class="h-5 w-5 text-growth-600" />
                   General Documents
                 </h4>
                 <ul class="space-y-2 text-sm">
@@ -644,7 +644,7 @@ const submitApplication = () => {
             <!-- View Full Requirements Button -->
             <button
               @click="viewRequirements"
-              class="w-full p-4 border-2 border-blue-600 text-brand-red-600 dark:text-blue-400 rounded-lg font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all mb-6"
+              class="w-full p-4 border-2 border-blue-600 text-growth-600 dark:text-blue-400 rounded-lg font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all mb-6"
             >
               View Complete Requirements & Checklist
             </button>
@@ -659,7 +659,7 @@ const submitApplication = () => {
               </button>
               <button
                 @click="proceedToApplication"
-                class="flex-1 bg-brand-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                class="flex-1 bg-growth-600 hover:bg-growth-700 text-white font-semibold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
               >
                 <ShieldCheckIcon class="h-5 w-5" />
                 Start Application
@@ -688,7 +688,7 @@ const submitApplication = () => {
         <!-- 360° Solution Banner -->
         <div class="bg-sky-50 dark:bg-sky-900/30 border border-sky-200 dark:border-sky-800 rounded-xl p-4 mb-6">
           <div class="flex items-start gap-3">
-            <InformationCircleIcon class="h-6 w-6 text-brand-red-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+            <InformationCircleIcon class="h-6 w-6 text-growth-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
             <div>
               <h4 class="font-semibold text-gray-900 dark:text-white mb-1">
                 360° Travel Solution Platform
@@ -705,7 +705,7 @@ const submitApplication = () => {
           <!-- General Requirements -->
           <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <CheckCircleIcon class="h-5 w-5 text-brand-red-600" />
+              <CheckCircleIcon class="h-5 w-5 text-growth-600" />
               General Requirements
             </h3>
             <ul class="space-y-3">
@@ -720,7 +720,7 @@ const submitApplication = () => {
                   v-else
                   :href="req.link"
                   target="_blank"
-                  class="text-brand-red-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline decoration-dotted underline-offset-2 hover:decoration-solid transition-all font-medium"
+                  class="text-growth-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline decoration-dotted underline-offset-2 hover:decoration-solid transition-all font-medium"
                 >
                   {{ req.text }} ↗
                 </a>
@@ -791,7 +791,7 @@ const submitApplication = () => {
           </button>
           <button
             @click="proceedToApplication"
-            class="flex-1 bg-brand-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-xl transition-all"
+            class="flex-1 bg-growth-600 hover:bg-growth-700 text-white font-semibold py-3 px-6 rounded-xl transition-all"
           >
             Proceed to Application
           </button>
@@ -826,7 +826,7 @@ const submitApplication = () => {
                 type="date"
                 required
                 :min="new Date().toISOString().split('T')[0]"
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-700 dark:text-white"
+                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-growth-600 dark:bg-gray-700 dark:text-white"
               />
             </div>
             <div>
@@ -838,7 +838,7 @@ const submitApplication = () => {
                 type="date"
                 required
                 :min="form.travel_dates.departure"
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-700 dark:text-white"
+                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-growth-600 dark:bg-gray-700 dark:text-white"
               />
             </div>
           </div>
@@ -851,7 +851,7 @@ const submitApplication = () => {
             <select
               v-model="form.purpose"
               required
-              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-700 dark:text-white"
+              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-growth-600 dark:bg-gray-700 dark:text-white"
             >
               <option value="Tourism">Tourism</option>
               <option value="Business">Business</option>
@@ -864,7 +864,7 @@ const submitApplication = () => {
           <!-- Document Upload Section -->
           <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
             <div class="flex items-center gap-2 mb-4">
-              <ArrowUpTrayIcon class="h-6 w-6 text-brand-red-600" />
+              <ArrowUpTrayIcon class="h-6 w-6 text-growth-600" />
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                 Upload Required Documents
               </h3>
@@ -889,7 +889,7 @@ const submitApplication = () => {
             <textarea
               v-model="form.notes"
               rows="4"
-              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-700 dark:text-white"
+              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-growth-600 dark:bg-gray-700 dark:text-white"
               placeholder="Any additional details or special requests..."
             ></textarea>
           </div>
@@ -950,7 +950,7 @@ const submitApplication = () => {
             <button
               type="submit"
               :disabled="form.processing || uploadedDocuments.length === 0"
-              class="flex-1 bg-brand-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              class="flex-1 bg-growth-600 hover:bg-growth-700 text-white font-semibold py-3 px-6 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
             >
               <span v-if="form.processing">Submitting...</span>
               <span v-else>Submit Application</span>

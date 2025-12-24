@@ -66,7 +66,7 @@ const exportData = () => {
             <div class="grid-stats">
                 <div class="stat-card">
                     <div class="stat-card-icon bg-blue-100">
-                        <UsersIcon class="h-6 w-6 text-blue-600" />
+                        <UsersIcon class="h-6 w-6 text-growth-600" />
                     </div>
                     <div>
                         <p class="stat-card-label">Total Users</p>
@@ -105,7 +105,7 @@ const exportData = () => {
 
                 <div class="stat-card">
                     <div class="stat-card-icon bg-indigo-100">
-                        <DocumentTextIcon class="h-6 w-6 text-indigo-600" />
+                        <DocumentTextIcon class="h-6 w-6 text-growth-600" />
                     </div>
                     <div>
                         <p class="stat-card-label">CVs Created</p>
@@ -244,7 +244,7 @@ const exportData = () => {
                             :href="route('admin.master-documents.index')"
                             class="card-hover p-4 flex items-center gap-4 group"
                         >
-                            <div class="p-3 bg-blue-600 rounded-lg group-hover:bg-blue-700 transition-colors">
+                            <div class="p-3 bg-growth-600 rounded-lg group-hover:bg-growth-700 transition-colors">
                                 <DocumentTextIcon class="h-6 w-6 text-white" />
                             </div>
                             <div>
@@ -257,7 +257,7 @@ const exportData = () => {
                             :href="route('admin.document-categories.index')"
                             class="card-hover p-4 flex items-center gap-4 group"
                         >
-                            <div class="p-3 bg-indigo-600 rounded-lg group-hover:bg-indigo-700 transition-colors">
+                            <div class="p-3 bg-growth-600 rounded-lg group-hover:bg-growth-700 transition-colors">
                                 <RectangleStackIcon class="h-6 w-6 text-white" />
                             </div>
                             <div>

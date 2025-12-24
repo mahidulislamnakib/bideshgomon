@@ -72,7 +72,7 @@
         aria-live="polite"
       >
         <svg
-          class="animate-spin h-8 w-8 text-blue-600"
+          class="animate-spin h-8 w-8 text-growth-600"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -126,7 +126,7 @@
         <button
           v-if="onRetry"
           @click="onRetry"
-          class="mt-4 text-sm text-blue-600 hover:text-blue-700 font-medium"
+          class="mt-4 text-sm text-growth-600 hover:text-blue-700 font-medium"
         >
           Try again
         </button>
@@ -264,7 +264,7 @@ const shadowClass = computed(() => {
 // Icon background color
 const iconBgClass = computed(() => {
   const variants = {
-    blue: 'bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400',
+    blue: 'bg-blue-100 dark:bg-blue-900/20 text-growth-600 dark:text-blue-400',
     green:
       'bg-emerald-100 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400',
     purple:

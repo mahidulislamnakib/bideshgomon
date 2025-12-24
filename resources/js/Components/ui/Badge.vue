@@ -54,14 +54,14 @@ const badgeClasses = computed(() => {
   // Border radius (Design System V2: rounded-full for badges)
   base.push(props.rounded ? 'rounded-full' : 'rounded-md')
 
-  // Variant colors - Design System V2 (brand-red-400, brand-green-400)
+  // Variant colors - Design System V2 (growth-400, brand-green-400)
   const variants = {
     default: 'bg-gray-100 text-gray-700 border border-gray-200',
     success: 'bg-brand-green-100 text-brand-green-700 border border-brand-green-200',
     error: 'bg-red-100 text-red-700 border border-red-200',
     warning: 'bg-yellow-100 text-yellow-700 border border-yellow-200',
     info: 'bg-blue-100 text-blue-700 border border-blue-200',
-    primary: 'bg-red-100 text-brand-red-700 border border-red-200',
+    primary: 'bg-red-100 text-growth-700 border border-red-200',
   }
   base.push(variants[props.variant])
 

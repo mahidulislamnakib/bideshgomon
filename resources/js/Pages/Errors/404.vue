@@ -62,11 +62,11 @@ const handleSearch = () => {
                 v-model="searchQuery"
                 type="text"
                 placeholder="Search for services, pages, or help..."
-                class="w-full px-6 py-4 pr-12 text-gray-900 placeholder-gray-500 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
+                class="w-full px-6 py-4 pr-12 text-gray-900 placeholder-gray-500 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-growth-600 focus:ring-2 focus:ring-growth-200 transition"
               />
               <button
                 type="submit"
-                class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition"
+                class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-growth-600 text-white rounded-lg hover:bg-growth-700 transition"
               >
                 <MagnifyingGlassIcon class="h-5 w-5" />
               </button>
@@ -86,10 +86,10 @@ const handleSearch = () => {
             >
               <component
                 :is="page.icon"
-                class="h-6 w-6 text-brand-red-600 mr-3 flex-shrink-0 group-hover:scale-110 transition"
+                class="h-6 w-6 text-growth-600 mr-3 flex-shrink-0 group-hover:scale-110 transition"
               />
               <div class="text-left">
-                <p class="font-semibold text-gray-900 group-hover:text-brand-red-600 transition">
+                <p class="font-semibold text-gray-900 group-hover:text-growth-600 transition">
                   {{ page.name }}
                 </p>
                 <p class="text-sm text-gray-600">{{ page.description }}</p>
@@ -146,7 +146,7 @@ const handleSearch = () => {
         <!-- Footer Note -->
         <p class="mt-8 text-sm text-gray-500">
           If you believe this is an error, please 
-          <a href="mailto:support@bideshgomon.com?subject=404 Error Report" class="text-brand-red-600 hover:underline">
+          <a href="mailto:support@bideshgomon.com?subject=404 Error Report" class="text-growth-600 hover:underline">
             report this issue
           </a>
         </p>

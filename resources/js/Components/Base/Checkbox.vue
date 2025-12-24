@@ -73,9 +73,9 @@ const checkboxClasses = computed(() => {
   } else if (props.disabled) {
     stateClasses = 'border-gray-300 bg-gray-100 cursor-not-allowed opacity-50'
   } else if (isChecked.value || props.indeterminate) {
-    stateClasses = 'border-blue-600 bg-blue-600 text-white focus:ring-blue-500'
+    stateClasses = 'border-blue-600 bg-growth-600 text-white focus:ring-growth-600'
   } else {
-    stateClasses = 'border-gray-300 hover:border-gray-400 focus:ring-blue-500 dark:border-gray-600'
+    stateClasses = 'border-gray-300 hover:border-gray-400 focus:ring-growth-600 dark:border-gray-600'
   }
   
   return [base, sizeClasses[props.size], stateClasses].join(' ')

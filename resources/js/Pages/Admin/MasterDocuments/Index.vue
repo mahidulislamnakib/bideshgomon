@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { ref, computed } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -40,12 +40,12 @@ const deleteDocument = (id) => {
 
 const getCategoryBadgeColor = (categoryName) => {
     const colors = {
-        'Identity Documents': 'bg-red-100 text-brand-red-600',
+        'Identity Documents': 'bg-red-100 text-growth-600',
         'Financial Documents': 'bg-green-100 text-green-800',
         'Employment Documents': 'bg-purple-100 text-purple-800',
         'Business Documents': 'bg-orange-100 text-orange-800',
         'Educational Documents': 'bg-pink-100 text-pink-800',
-        'Travel Documents': 'bg-red-100 text-brand-red-600',
+        'Travel Documents': 'bg-red-100 text-growth-600',
         'Supporting Documents': 'bg-yellow-100 text-yellow-800',
         'Medical Documents': 'bg-red-100 text-red-800',
     };
@@ -62,12 +62,12 @@ const getCategoryBadgeColor = (categoryName) => {
                 <!-- Header -->
                 <div class="flex justify-between items-center mb-6">
                     <div>
-                        <h1 class="text-2xl font-bold text-gray-900">Master Documents Library</h1>
+                        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Master Documents Library</h1>
                         <p class="mt-1 text-sm text-gray-600">International standard visa document templates</p>
                     </div>
                     <Link
                         :href="route('admin.master-documents.create')"
-                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150"
+                        class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-xl font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2 transition ease-in-out duration-150"
                     >
                         <PlusIcon class="w-4 h-4 mr-2" />
                         Add Document
@@ -75,20 +75,17 @@ const getCategoryBadgeColor = (categoryName) => {
                 </div>
 
                 <!-- Filters -->
-                <div class="bg-white rounded-lg shadow p-4 mb-6">
+                <div class="bg-white rounded-2xl shadow p-4 mb-6">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
-                            <div class="relative">
-                                <MagnifyingGlassIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                                <input
-                                    v-model="search"
-                                    @keyup.enter="searchDocuments"
-                                    type="text"
-                                    placeholder="Search documents..."
-                                    class="pl-10 w-full border-gray-300 rounded-md shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                />
-                            </div>
+                            <input
+                                v-model="search"
+                                @keyup.enter="searchDocuments"
+                                type="text"
+                                placeholder="Search documents..."
+                                class="w-full px-4 py-2 border-gray-300 rounded-xl shadow-sm focus:border-growth-600 focus:ring-growth-600"
+                            />
                         </div>
 
                         <div>
@@ -96,7 +93,7 @@ const getCategoryBadgeColor = (categoryName) => {
                             <select
                                 v-model="selectedCategory"
                                 @change="searchDocuments"
-                                class="w-full border-gray-300 rounded-md shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full border-gray-300 rounded-xl shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="">All Categories</option>
                                 <option v-for="category in categories" :key="category.id" :value="category.id">
@@ -108,7 +105,7 @@ const getCategoryBadgeColor = (categoryName) => {
                         <div class="flex items-end">
                             <button
                                 @click="searchDocuments"
-                                class="w-full px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 flex items-center justify-center"
+                                class="w-full px-4 py-2 bg-gray-600 text-white rounded-xl hover:bg-gray-700 flex items-center justify-center"
                             >
                                 <FunnelIcon class="w-4 h-4 mr-2" />
                                 Filter
@@ -118,7 +115,7 @@ const getCategoryBadgeColor = (categoryName) => {
                 </div>
 
                 <!-- Documents Table -->
-                <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="bg-white rounded-2xl shadow overflow-hidden">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
@@ -148,7 +145,7 @@ const getCategoryBadgeColor = (categoryName) => {
                                     <div class="flex items-center">
                                         <DocumentTextIcon class="w-5 h-5 text-gray-400 mr-3" />
                                         <div>
-                                            <div class="text-sm font-medium text-gray-900">{{ document.document_name }}</div>
+                                            <div class="text-sm font-medium text-gray-900 dark:text-white">{{ document.document_name }}</div>
                                             <div v-if="document.description" class="text-xs text-gray-500 mt-1">
                                                 {{ document.description.substring(0, 60) }}{{ document.description.length > 60 ? '...' : '' }}
                                             </div>
@@ -173,7 +170,7 @@ const getCategoryBadgeColor = (categoryName) => {
                                     <div class="flex space-x-2">
                                         <span 
                                             v-if="document.translation_required"
-                                            class="inline-flex items-center px-2 py-1 text-xs font-medium rounded bg-red-100 text-brand-red-600"
+                                            class="inline-flex items-center px-2 py-1 text-xs font-medium rounded bg-red-100 text-growth-600"
                                             title="Translation Required"
                                         >
                                             🌐 Translation
@@ -183,7 +180,7 @@ const getCategoryBadgeColor = (categoryName) => {
                                             class="inline-flex items-center px-2 py-1 text-xs font-medium rounded bg-purple-100 text-purple-800"
                                             title="Notarization Required"
                                         >
-                                            ⚖️ Notarization
+                                            📜 Notarization
                                         </span>
                                     </div>
                                 </td>
@@ -201,14 +198,14 @@ const getCategoryBadgeColor = (categoryName) => {
                                     <div class="flex justify-end space-x-2">
                                         <Link
                                             :href="route('admin.master-documents.show', document.id)"
-                                            class="text-brand-red-600 hover:text-red-900"
+                                            class="text-growth-600 hover:text-red-900"
                                             title="View"
                                         >
                                             View
                                         </Link>
                                         <Link
                                             :href="route('admin.master-documents.edit', document.id)"
-                                            class="text-brand-red-600 hover:text-red-900"
+                                            class="text-growth-600 hover:text-red-900"
                                             title="Edit"
                                         >
                                             <PencilIcon class="w-4 h-4" />
@@ -239,9 +236,9 @@ const getCategoryBadgeColor = (categoryName) => {
                                     :key="index"
                                     :href="link.url"
                                     :class="[
-                                        'px-3 py-2 text-sm rounded-md',
+                                        'px-3 py-2 text-sm rounded-xl',
                                         link.active
-                                            ? 'bg-brand-red-600 text-white'
+                                            ? 'bg-growth-600 text-white'
                                             : link.url 
                                                 ? 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 cursor-pointer'
                                                 : 'bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed'
@@ -255,23 +252,23 @@ const getCategoryBadgeColor = (categoryName) => {
 
                 <!-- Stats -->
                 <div class="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div class="bg-white rounded-lg shadow p-4">
+                    <div class="bg-white rounded-2xl shadow p-4">
                         <div class="text-sm text-gray-600">Total Documents</div>
-                        <div class="text-2xl font-bold text-gray-900">{{ documents.total }}</div>
+                        <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ documents.total }}</div>
                     </div>
-                    <div class="bg-white rounded-lg shadow p-4">
+                    <div class="bg-white rounded-2xl shadow p-4">
                         <div class="text-sm text-gray-600">Categories</div>
-                        <div class="text-2xl font-bold text-gray-900">{{ categories.length }}</div>
+                        <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ categories.length }}</div>
                     </div>
-                    <div class="bg-white rounded-lg shadow p-4">
+                    <div class="bg-white rounded-2xl shadow p-4">
                         <div class="text-sm text-gray-600">Translation Required</div>
-                        <div class="text-2xl font-bold text-gray-900">
+                        <div class="text-2xl font-bold text-gray-900 dark:text-white">
                             {{ documents.data.filter(d => d.translation_required).length }}
                         </div>
                     </div>
-                    <div class="bg-white rounded-lg shadow p-4">
+                    <div class="bg-white rounded-2xl shadow p-4">
                         <div class="text-sm text-gray-600">Notarization Required</div>
-                        <div class="text-2xl font-bold text-gray-900">
+                        <div class="text-2xl font-bold text-gray-900 dark:text-white">
                             {{ documents.data.filter(d => d.notarization_required).length }}
                         </div>
                     </div>

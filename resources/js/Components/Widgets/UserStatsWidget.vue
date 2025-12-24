@@ -35,7 +35,7 @@
             <!-- New This Month -->
             <div class="text-center p-4 bg-blue-50 rounded-lg">
                 <div class="flex items-center justify-center mb-2">
-                    <UserPlusIcon class="h-6 w-6 text-blue-600" />
+                    <UserPlusIcon class="h-6 w-6 text-growth-600" />
                 </div>
                 <p class="text-2xl font-bold text-blue-700">{{ formatNumber(stats.newThisMonth) }}</p>
                 <p class="text-xs text-neutral-600 mt-1">New This Month</p>

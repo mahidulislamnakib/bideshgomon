@@ -53,7 +53,7 @@ const handleStepClick = (index) => {
                     <div
                         v-if="index !== items.length - 1"
                         class="absolute top-4 left-4 -ml-px mt-0.5 h-0.5 w-full"
-                        :class="getStepStatus(index) === 'completed' ? 'bg-brand-red-600' : 'bg-gray-300'"
+                        :class="getStepStatus(index) === 'completed' ? 'bg-growth-600' : 'bg-gray-300'"
                     ></div>
                     
                     <!-- Step -->
@@ -71,7 +71,7 @@ const handleStepClick = (index) => {
                                 :class="[
                                     'relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 transition-all duration-300',
                                     getStepStatus(index) === 'completed' 
-                                        ? 'bg-brand-red-600 border-ocean-500' 
+                                        ? 'bg-growth-600 border-ocean-500' 
                                         : getStepStatus(index) === 'active'
                                         ? 'border-ocean-500 bg-white'
                                         : 'border-gray-300 bg-white',
@@ -94,7 +94,7 @@ const handleStepClick = (index) => {
                                     v-else
                                     :class="[
                                         'text-sm font-semibold',
-                                        getStepStatus(index) === 'active' ? 'text-brand-red-600' : 'text-gray-500'
+                                        getStepStatus(index) === 'active' ? 'text-growth-600' : 'text-gray-500'
                                     ]"
                                 >
                                     {{ index + 1 }}
@@ -105,7 +105,7 @@ const handleStepClick = (index) => {
                             <span
                                 :class="[
                                     'text-sm font-medium transition-colors',
-                                    getStepStatus(index) === 'active' ? 'text-brand-red-600' : 'text-gray-900'
+                                    getStepStatus(index) === 'active' ? 'text-growth-600' : 'text-gray-900'
                                 ]"
                             >
                                 {{ step.title }}
@@ -134,7 +134,7 @@ const handleStepClick = (index) => {
                     <div
                         v-if="index !== items.length - 1"
                         class="absolute left-4 top-4 -ml-px mt-0.5 h-full w-0.5"
-                        :class="getStepStatus(index) === 'completed' ? 'bg-brand-red-600' : 'bg-gray-300'"
+                        :class="getStepStatus(index) === 'completed' ? 'bg-growth-600' : 'bg-gray-300'"
                     ></div>
                     
                     <!-- Step -->
@@ -152,7 +152,7 @@ const handleStepClick = (index) => {
                                 :class="[
                                     'relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 transition-all duration-300',
                                     getStepStatus(index) === 'completed' 
-                                        ? 'bg-brand-red-600 border-ocean-500' 
+                                        ? 'bg-growth-600 border-ocean-500' 
                                         : getStepStatus(index) === 'active'
                                         ? 'border-ocean-500 bg-white'
                                         : 'border-gray-300 bg-white',
@@ -175,7 +175,7 @@ const handleStepClick = (index) => {
                                     v-else
                                     :class="[
                                         'text-sm font-semibold',
-                                        getStepStatus(index) === 'active' ? 'text-brand-red-600' : 'text-gray-500'
+                                        getStepStatus(index) === 'active' ? 'text-growth-600' : 'text-gray-500'
                                     ]"
                                 >
                                     {{ index + 1 }}
@@ -186,7 +186,7 @@ const handleStepClick = (index) => {
                             <span
                                 :class="[
                                     'text-sm font-medium transition-colors',
-                                    getStepStatus(index) === 'active' ? 'text-brand-red-600' : 'text-gray-900'
+                                    getStepStatus(index) === 'active' ? 'text-growth-600' : 'text-gray-900'
                                 ]"
                             >
                                 {{ step.title }}

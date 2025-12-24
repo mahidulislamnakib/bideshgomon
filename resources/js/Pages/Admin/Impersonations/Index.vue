@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
@@ -38,7 +38,7 @@ function exportCsv() {
   window.location.href = route('admin.impersonations.export') + (params ? ('?' + params) : '');
 }
 
-const formatDateTime = (dt) => dt ? new Date(dt).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '—';
+const formatDateTime = (dt) => dt ? new Date(dt).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '�';
 
 </script>
 
@@ -47,22 +47,22 @@ const formatDateTime = (dt) => dt ? new Date(dt).toLocaleString('en-US', { month
   <AdminLayout>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
       <!-- Header -->
-      <div class="bg-white border border-gray-200 rounded-lg">
+      <div class="bg-white border border-gray-200 rounded-2xl">
         <div class="px-6 py-4 flex items-center justify-between">
           <div class="flex items-center space-x-3">
             <div class="flex-shrink-0">
-              <div class="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+              <div class="w-10 h-10 bg-gray-200 rounded-2xl flex items-center justify-center">
                 <EyeIcon class="w-6 h-6 text-gray-600" />
               </div>
             </div>
             <div>
-              <h1 class="text-2xl font-bold text-gray-900">Impersonation Logs</h1>
+              <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Impersonation Logs</h1>
               <p class="text-sm text-gray-600 mt-1">Admin user impersonation audit trail</p>
             </div>
           </div>
           <button
             @click="exportCsv"
-            class="inline-flex items-center px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors duration-150"
+            class="inline-flex items-center px-4 py-2 bg-growth-600 hover:bg-growth-700 text-white text-sm font-medium rounded-2xl transition-colors duration-150"
           >
             <ArrowDownTrayIcon class="w-4 h-4 mr-2" />
             Export CSV
@@ -71,7 +71,7 @@ const formatDateTime = (dt) => dt ? new Date(dt).toLocaleString('en-US', { month
       </div>
 
       <!-- Filters -->
-      <div class="bg-white rounded-lg border border-gray-200 p-6">
+      <div class="bg-white rounded-2xl border border-gray-200 p-6">
         <div class="flex items-center mb-4">
           <FunnelIcon class="h-5 w-5 text-gray-500 mr-2" />
           <h2 class="text-sm font-semibold text-gray-700">Filters</h2>
@@ -79,7 +79,7 @@ const formatDateTime = (dt) => dt ? new Date(dt).toLocaleString('en-US', { month
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
             <label class="block text-xs font-medium text-gray-600 mb-1">Status</label>
-            <select v-model="localFilters.status" class="w-full rounded-md border-gray-300 text-sm">
+            <select v-model="localFilters.status" class="w-full rounded-xl border-gray-300 text-sm">
               <option value="">All</option>
               <option value="active">Active</option>
               <option value="ended">Ended</option>
@@ -87,28 +87,28 @@ const formatDateTime = (dt) => dt ? new Date(dt).toLocaleString('en-US', { month
           </div>
           <div>
             <label class="block text-xs font-medium text-gray-600 mb-1">Admin</label>
-            <select v-model="localFilters.admin_id" class="w-full rounded-md border-gray-300 text-sm">
+            <select v-model="localFilters.admin_id" class="w-full rounded-xl border-gray-300 text-sm">
               <option value="">All</option>
               <option v-for="admin in admins" :key="admin.id" :value="admin.id">{{ admin.name }}</option>
             </select>
           </div>
           <div>
             <label class="block text-xs font-medium text-gray-600 mb-1">From Date</label>
-            <input type="date" v-model="localFilters.from" class="w-full rounded-md border-gray-300 text-sm" />
+            <input type="date" v-model="localFilters.from" class="w-full rounded-xl border-gray-300 text-sm" />
           </div>
           <div>
             <label class="block text-xs font-medium text-gray-600 mb-1">To Date</label>
-            <input type="date" v-model="localFilters.to" class="w-full rounded-md border-gray-300 text-sm" />
+            <input type="date" v-model="localFilters.to" class="w-full rounded-xl border-gray-300 text-sm" />
           </div>
         </div>
         <div class="mt-4 flex items-center space-x-3">
-          <button @click="applyFilters" class="px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors duration-150">Apply</button>
-          <button @click="resetFilters" class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors duration-150">Reset</button>
+          <button @click="applyFilters" class="px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-2xl hover:bg-growth-700 transition-colors duration-150">Apply</button>
+          <button @click="resetFilters" class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-2xl hover:bg-gray-200 transition-colors duration-150">Reset</button>
         </div>
       </div>
 
       <!-- Logs Table -->
-      <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
         <div class="overflow-x-auto p-4">
           <table class="min-w-full divide-y divide-gray-200 text-sm">
             <thead class="bg-gray-50">
@@ -127,17 +127,17 @@ const formatDateTime = (dt) => dt ? new Date(dt).toLocaleString('en-US', { month
               <tr v-for="log in logs.data" :key="log.id" class="hover:bg-gray-50">
                 <td class="px-3 py-2 text-gray-600">{{ log.id }}</td>
                 <td class="px-3 py-2">
-                  <span v-if="log.impersonator" class="font-medium text-gray-900">{{ log.impersonator.name }}</span>
+                  <span v-if="log.impersonator" class="font-medium text-gray-900 dark:text-white">{{ log.impersonator.name }}</span>
                   <span v-else class="text-gray-400">Unknown</span>
                 </td>
                 <td class="px-3 py-2">
-                  <span v-if="log.target" class="font-medium text-gray-900">{{ log.target.name }}</span>
+                  <span v-if="log.target" class="font-medium text-gray-900 dark:text-white">{{ log.target.name }}</span>
                   <span v-else class="text-gray-400">Unknown</span>
                 </td>
-                <td class="px-3 py-2 text-gray-700"><span class="line-clamp-2 max-w-xs block">{{ log.purpose || '—' }}</span></td>
+                <td class="px-3 py-2 text-gray-700"><span class="line-clamp-2 max-w-xs block">{{ log.purpose || '�' }}</span></td>
                 <td class="px-3 py-2 text-gray-600">{{ formatDateTime(log.started_at) }}</td>
-                <td class="px-3 py-2 text-gray-600">{{ log.ended_at ? formatDateTime(log.ended_at) : '—' }}</td>
-                <td class="px-3 py-2 text-gray-600">{{ log.duration_minutes !== null ? (log.duration_minutes + ' min') : '—' }}</td>
+                <td class="px-3 py-2 text-gray-600">{{ log.ended_at ? formatDateTime(log.ended_at) : '�' }}</td>
+                <td class="px-3 py-2 text-gray-600">{{ log.duration_minutes !== null ? (log.duration_minutes + ' min') : '�' }}</td>
                 <td class="px-3 py-2">
                   <span class="px-2 py-1 rounded-full text-xs font-semibold" :class="{
                     'bg-green-100 text-green-700': log.status === 'ended',
@@ -154,8 +154,8 @@ const formatDateTime = (dt) => dt ? new Date(dt).toLocaleString('en-US', { month
         <!-- Pagination -->
         <div v-if="logs.links" class="px-4 pb-4 flex flex-wrap gap-2">
           <Link v-for="link in logs.links" :key="link.url || link.label" :href="link.url || '#'" v-html="link.label" :class="[
-            'px-3 py-1 text-xs rounded-lg border',
-            link.active ? 'bg-brand-red-600 text-white border-brand-red-600' : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300',
+            'px-3 py-1 text-xs rounded-2xl border',
+            link.active ? 'bg-growth-600 text-white border-growth-600' : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300',
             !link.url ? 'opacity-50 cursor-not-allowed' : ''
           ]" />
         </div>

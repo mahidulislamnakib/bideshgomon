@@ -118,7 +118,7 @@ const maintenanceReason = 'System Upgrade'
         <!-- Email Notification Signup -->
         <div class="bg-white shadow-lg rounded-lg p-8 mb-8">
           <div class="text-center mb-6">
-            <EnvelopeIcon class="h-12 w-12 text-brand-red-600 mx-auto mb-3" />
+            <EnvelopeIcon class="h-12 w-12 text-growth-600 mx-auto mb-3" />
             <h3 class="text-xl font-bold text-gray-900 mb-2">Get Notified When We're Back</h3>
             <p class="text-gray-600">
               We'll send you an email as soon as the maintenance is complete.
@@ -132,11 +132,11 @@ const maintenanceReason = 'System Upgrade'
                 type="email"
                 placeholder="your.email@example.com"
                 required
-                class="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                class="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-growth-600 focus:ring-2 focus:ring-growth-200"
               />
               <button
                 type="submit"
-                class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-xl"
+                class="px-6 py-3 bg-gradient-to-r from-growth-600 to-growth-700 text-white font-semibold rounded-lg hover:from-growth-700 hover:to-growth-800 transition shadow-lg hover:shadow-xl"
               >
                 Notify Me
               </button>
@@ -200,7 +200,7 @@ const maintenanceReason = 'System Upgrade'
           <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a
               href="mailto:support@bideshgomon.com"
-              class="inline-flex items-center justify-center px-5 py-2 bg-brand-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
+              class="inline-flex items-center justify-center px-5 py-2 bg-growth-600 text-white font-semibold rounded-lg hover:bg-growth-700 transition"
             >
               <EnvelopeIcon class="h-5 w-5 mr-2" />
               Email Support

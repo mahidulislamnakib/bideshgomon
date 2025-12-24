@@ -52,7 +52,7 @@ const formatTime = (time) => {
                             <div class="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                                 <div class="flex-shrink-0">
                                     <div class="p-2 bg-ocean-100 dark:bg-ocean-900 rounded-lg">
-                                        <CalendarIcon class="h-6 w-6 text-brand-red-600 dark:text-ocean-400" />
+                                        <CalendarIcon class="h-6 w-6 text-growth-600 dark:text-ocean-400" />
                                     </div>
                                 </div>
                                 <div>
@@ -86,8 +86,8 @@ const formatTime = (time) => {
                             <div class="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                                 <div class="flex-shrink-0">
                                     <div class="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                                        <VideoCameraIcon v-if="appointment.is_online" class="h-6 w-6 text-brand-red-600 dark:text-blue-400" />
-                                        <MapPinIcon v-else class="h-6 w-6 text-brand-red-600 dark:text-blue-400" />
+                                        <VideoCameraIcon v-if="appointment.is_online" class="h-6 w-6 text-growth-600 dark:text-blue-400" />
+                                        <MapPinIcon v-else class="h-6 w-6 text-growth-600 dark:text-blue-400" />
                                     </div>
                                 </div>
                                 <div>
@@ -95,7 +95,7 @@ const formatTime = (time) => {
                                     <p class="text-base font-semibold text-gray-900 dark:text-white mt-1">
                                         {{ appointment.is_online ? 'Online Meeting' : 'Office Visit' }}
                                     </p>
-                                    <p v-if="appointment.meeting_link" class="text-sm text-brand-red-600 dark:text-blue-400 mt-1">
+                                    <p v-if="appointment.meeting_link" class="text-sm text-growth-600 dark:text-blue-400 mt-1">
                                         Meeting link will be sent via email
                                     </p>
                                     <p v-else-if="appointment.location" class="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -164,7 +164,7 @@ const formatTime = (time) => {
 
                         <!-- Action Buttons -->
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <Link :href="route('travel.bookings.index')" class="flex-1 text-center bg-brand-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors font-medium">
+                            <Link :href="route('travel.bookings.index')" class="flex-1 text-center bg-growth-600 text-white px-6 py-3 rounded-lg hover:bg-growth-700 transition-colors font-medium">
                                 View My Bookings
                             </Link>
                             <Link :href="route('dashboard')" class="flex-1 text-center border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium">
@@ -177,7 +177,7 @@ const formatTime = (time) => {
                 <!-- Need Help -->
                 <div class="mt-8 text-center">
                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                        Need help? <Link :href="route('support.tickets.create')" class="text-brand-red-600 hover:text-ocean-700 font-medium">Contact Support</Link>
+                        Need help? <Link :href="route('support.tickets.create')" class="text-growth-600 hover:text-ocean-700 font-medium">Contact Support</Link>
                     </p>
                 </div>
             </div>

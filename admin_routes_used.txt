@@ -1,0 +1,857 @@
+﻿resources\js\Pages\Admin\Dashboard.vue:195:@click="$inertia.visit(route('admin.visa-applications.index'))"
+resources\js\Pages\Admin\Dashboard.vue:221::href="route('admin.master-documents.index')"
+resources\js\Pages\Admin\Dashboard.vue:234::href="route('admin.document-categories.index')"
+resources\js\Pages\Admin\Dashboard.vue:247::href="route('admin.document-assignments.index')"
+resources\js\Pages\Admin\Dashboard.vue:266::href="route('admin.visa-requirements.index')"
+resources\js\Pages\Admin\Dashboard.vue:279::href="route('admin.visa-applications.index')"
+resources\js\Pages\Admin\Dashboard.vue:292::href="route('admin.agency-assignments.index')"
+resources\js\Pages\Admin\Dashboard.vue:311::href="route('admin.service-modules.index')"
+resources\js\Pages\Admin\Dashboard.vue:324::href="route('admin.users.index')"
+resources\js\Pages\Admin\Dashboard.vue:343::href="route('admin.hotels.index')"
+resources\js\Pages\Admin\Dashboard.vue:356::href="route('admin.hotel-bookings.index')"
+resources\js\Pages\Admin\Dashboard.vue:369::href="route('admin.flight-requests.index')"
+resources\js\Pages\Admin\Dashboard.vue:382::href="route('admin.visa-applications.index')"
+resources\js\Pages\Admin\Dashboard.vue:401::href="route('admin.jobs.index')"
+resources\js\Pages\Admin\Dashboard.vue:414::href="route('admin.applications.index')"
+resources\js\Pages\Admin\Dashboard.vue:433::href="route('admin.analytics.index')"
+resources\js\Pages\Admin\Dashboard.vue:446::href="route('admin.settings.index')"
+resources\js\Pages\Admin\DashboardModern.vue:244::href="route('admin.master-documents.index')"
+resources\js\Pages\Admin\DashboardModern.vue:257::href="route('admin.document-categories.index')"
+resources\js\Pages\Admin\DashboardModern.vue:270::href="route('admin.document-assignments.index')"
+resources\js\Pages\Admin\DashboardModern.vue:291::href="route('admin.service-modules.index')"
+resources\js\Pages\Admin\DashboardModern.vue:304::href="route('admin.users.index')"
+resources\js\Pages\Admin\DashboardModern.vue:317::href="route('admin.analytics.index')"
+resources\js\Pages\Admin\DashboardModern.vue:330::href="route('admin.settings.index')"
+resources\js\Pages\Admin\DashboardNew.vue:20::action="{ label: 'View all', href: route('admin.users.index') }"
+resources\js\Pages\Admin\DashboardNew.vue:31::action="{ label: 'View details', href: route('admin.wallets.index') }"
+resources\js\Pages\Admin\DashboardNew.vue:41::action="{ label: 'View all', href: route('admin.visa-applications.index') }"
+resources\js\Pages\Admin\DashboardNew.vue:51::action="{ label: 'Manage', href: route('admin.agencies.index') }"
+resources\js\Pages\Admin\DashboardNew.vue:126::href="route('admin.users.show', row.id)"
+resources\js\Pages\Admin\ServiceManagement.vue:113::href="route('admin.job-applications.index')"
+resources\js\Pages\Admin\ServiceManagement.vue:150::href="route('admin.users.index')"
+resources\js\Pages\Admin\ServiceManagement.vue:187::href="route('admin.users.index')"
+resources\js\Pages\Admin\ServiceManagement.vue:290::href="route('admin.visa-applications.index')"
+resources\js\Pages\Admin\ServiceManagement.vue:399::href="route('admin.job-applications.index', { filter: 'pending' })"
+resources\js\Pages\Admin\ServiceManagement.vue:408::href="route('admin.users.index', { filter: 'high_risk' })"
+resources\js\Pages\Admin\ServiceManagement.vue:417::href="route('admin.users.index', { filter: 'public_profiles' })"
+resources\js\Pages\Admin\ServiceManagement.vue:426::href="route('admin.visa-applications.index', { filter: 'pending' })"
+resources\js\Pages\Admin\ActivityLog\Index.vue:34:router.get(route('admin.activity-log.index'), {
+resources\js\Pages\Admin\ActivityLog\Index.vue:205::href="route('admin.activity-log.show', activity.id)"
+resources\js\Pages\Admin\ActivityLog\Show.vue:37:<Link :href="route('admin.activity-log.index')">
+resources\js\Pages\Admin\Ads\Analytics.vue:10:<Link :href="route('admin.ads.index')" class="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors w-fit group">
+resources\js\Pages\Admin\Ads\Create.vue:10:<Link :href="route('admin.ads.index')" class="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors w-fit group">
+resources\js\Pages\Admin\Ads\Create.vue:392::href="route('admin.ads.index')"
+resources\js\Pages\Admin\Ads\Create.vue:492:form.post(route('admin.ads.store'), {
+resources\js\Pages\Admin\Ads\Edit.vue:10:<Link :href="route('admin.ads.index')" class="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors w-fit group">
+resources\js\Pages\Admin\Ads\Edit.vue:424::href="route('admin.ads.analytics', ad.id)"
+resources\js\Pages\Admin\Ads\Edit.vue:435::href="route('admin.ads.index')"
+resources\js\Pages\Admin\Ads\Edit.vue:599:form.post(route('admin.ads.update', props.ad.id), {
+resources\js\Pages\Admin\Ads\Index.vue:24::href="route('admin.ads.create')"
+resources\js\Pages\Admin\Ads\Index.vue:309::href="route('admin.ads.analytics', ad.id)"
+resources\js\Pages\Admin\Ads\Index.vue:317::href="route('admin.ads.edit', ad.id)"
+resources\js\Pages\Admin\Ads\Index.vue:353::action="hasActiveFilters ? null : { label: 'Create First Ad', onClick: () => router.visit(route('admin.ads.create')) }"
+resources\js\Pages\Admin\Ads\Index.vue:481:router.get(route('admin.ads.index'), {
+resources\js\Pages\Admin\Ads\Index.vue:504:router.post(route('admin.ads.toggle-status', ad.id), {}, {
+resources\js\Pages\Admin\Ads\Index.vue:513:router.delete(route('admin.ads.destroy', ad.id), {
+resources\js\Pages\Admin\Agencies\IndexRedesigned.vue:13::href="route('admin.agencies.create')"
+resources\js\Pages\Admin\Agencies\IndexRedesigned.vue:183::href="route('admin.agencies.show', row.id)"
+resources\js\Pages\Admin\Agencies\IndexRedesigned.vue:189::href="route('admin.agencies.edit', row.id)"
+resources\js\Pages\Admin\Agencies\IndexRedesigned.vue:256:router.get(route('admin.agencies.index'), {
+resources\js\Pages\Admin\Agencies\IndexRedesigned.vue:266:router.get(route('admin.agencies.index'), {
+resources\js\Pages\Admin\Agencies\IndexRedesigned.vue:281:router.get(route('admin.agencies.index'), filters.value, {
+resources\js\Pages\Admin\Agencies\IndexRedesigned.vue:293:router.get(route('admin.agencies.index'));
+resources\js\Pages\Admin\Agencies\IndexRedesigned.vue:298:router.post(route('admin.agencies.verify', id));
+resources\js\Pages\Admin\Agencies\IndexRedesigned.vue:307:router.post(route('admin.agencies.suspend', id), { reason });
+resources\js\Pages\Admin\Agencies\IndexRedesigned.vue:313:router.delete(route('admin.agencies.destroy', id));
+resources\js\Pages\Admin\AgencyAssignments\Create.vue:15::href="route('admin.agency-assignments.index')"
+resources\js\Pages\Admin\AgencyAssignments\Create.vue:350::href="route('admin.agency-assignments.index')"
+resources\js\Pages\Admin\AgencyAssignments\Create.vue:487:form.post(route('admin.agency-assignments.store'));
+resources\js\Pages\Admin\AgencyAssignments\Index.vue:17::href="route('admin.agency-assignments.create')"
+resources\js\Pages\Admin\AgencyAssignments\Index.vue:204::href="route('admin.agency-assignments.show', assignment.id)"
+resources\js\Pages\Admin\AgencyAssignments\Index.vue:269::href="route('admin.agency-assignments.create')"
+resources\js\Pages\Admin\AgencyAssignments\Index.vue:302:router.get(route('admin.agency-assignments.index'), filters.value, {
+resources\js\Pages\Admin\AgencyAssignments\Index.vue:310:router.post(route('admin.agency-assignments.toggle-active', assignment.id), {}, {
+resources\js\Pages\Admin\AgencyAssignments\Index.vue:318:router.delete(route('admin.agency-assignments.destroy', assignment.id));
+resources\js\Pages\Admin\AgencyAssignments\Show.vue:39::href="route('admin.agency-assignments.index')"
+resources\js\Pages\Admin\AgencyAssignments\Show.vue:197::href="route('admin.visa-requirements.show', requirement.id)"
+resources\js\Pages\Admin\AgencyAssignments\Show.vue:312:router.post(route('admin.agency-assignments.toggle-active', props.assignment.id), {}, {
+resources\js\Pages\Admin\AgencyAssignments\Show.vue:320:router.delete(route('admin.agency-assignments.destroy', props.assignment.id));
+resources\js\Pages\Admin\AgencyResources\Create.vue:149:const response = await fetch(route('admin.agency-resources.check-availability'), {
+resources\js\Pages\Admin\AgencyResources\Create.vue:172:form.post(route('admin.agency-resources.store'), {
+resources\js\Pages\Admin\AgencyResources\Create.vue:188::href="route('admin.agency-resources.index')"
+resources\js\Pages\Admin\AgencyResources\Create.vue:438::href="route('admin.agency-resources.index')"
+resources\js\Pages\Admin\AgencyResources\Index.vue:42:router.get(route('admin.agency-resources.index'), {
+resources\js\Pages\Admin\AgencyResources\Index.vue:56:router.get(route('admin.agency-resources.index'));
+resources\js\Pages\Admin\AgencyResources\Index.vue:84:approveForm.post(route('admin.agency-resources.approve', selectedResource.value.id), {
+resources\js\Pages\Admin\AgencyResources\Index.vue:93:rejectForm.post(route('admin.agency-resources.reject', selectedResource.value.id), {
+resources\js\Pages\Admin\AgencyResources\Index.vue:102:router.delete(route('admin.agency-resources.destroy', selectedResource.value.id), {
+resources\js\Pages\Admin\AgencyResources\Index.vue:136::href="route('admin.agency-resources.create')"
+resources\js\Pages\Admin\AgencyResources\Index.vue:270::href="route('admin.agency-resources.edit', resource.id)"
+resources\js\Pages\Admin\AgencyVerification\Dashboard.vue:175::href="route('admin.users.index', { role: 'agency' })"
+resources\js\Pages\Admin\AgencyVerification\Index.vue:97::href="route('admin.agency-verification.show', request.id)"
+resources\js\Pages\Admin\AgencyVerification\Index.vue:141:router.get(route('admin.agency-verification.index'), filterForm.value, {
+resources\js\Pages\Admin\AgencyVerification\Show.vue:8::href="route('admin.agency-verification.index')"
+resources\js\Pages\Admin\AgencyVerification\Show.vue:243:route('admin.agency-verification.update-status', props.request.id),
+resources\js\Pages\Admin\AgencyVerification\Show.vue:259:route('admin.agency-verification.update-document-status', documentId),
+resources\js\Pages\Admin\Analytics\Index.vue:39:router.get(route('admin.analytics.index'), { period }, {
+resources\js\Pages\Admin\Analytics\Index.vue:46:window.location.href = route('admin.analytics.export', {
+resources\js\Pages\Admin\Blog\Categories\Index.vue:322:form.put(route('admin.blog.categories.update', editingCategory.value.id), {
+resources\js\Pages\Admin\Blog\Categories\Index.vue:327:form.post(route('admin.blog.categories.store'), {
+resources\js\Pages\Admin\Blog\Categories\Index.vue:335:router.post(route('admin.data.blog-categories.toggle-status', category.id), {}, {
+resources\js\Pages\Admin\Blog\Categories\Index.vue:342:router.delete(route('admin.blog.categories.destroy', category.id), {
+resources\js\Pages\Admin\Blog\Posts\Create.vue:14::href="route('admin.blog.posts.index')"
+resources\js\Pages\Admin\Blog\Posts\Create.vue:283::href="route('admin.blog.posts.index')"
+resources\js\Pages\Admin\Blog\Posts\Create.vue:348:form.post(route('admin.blog.posts.store'), {
+resources\js\Pages\Admin\Blog\Posts\Edit.vue:14::href="route('admin.blog.posts.index')"
+resources\js\Pages\Admin\Blog\Posts\Edit.vue:302::href="route('admin.blog.posts.index')"
+resources\js\Pages\Admin\Blog\Posts\Edit.vue:370:form.put(route('admin.blog.posts.update', props.post.id), {
+resources\js\Pages\Admin\Blog\Posts\Index.vue:13::href="route('admin.blog.posts.create')"
+resources\js\Pages\Admin\Blog\Posts\Index.vue:139::href="route('admin.blog.posts.edit', post.id)"
+resources\js\Pages\Admin\Blog\Posts\Index.vue:162::href="route('admin.blog.posts.create')"
+resources\js\Pages\Admin\Blog\Posts\Index.vue:235:router.get(route('admin.blog.posts.index'), {
+resources\js\Pages\Admin\Blog\Posts\Index.vue:247:router.delete(route('admin.blog.posts.destroy', post.id));
+resources\js\Pages\Admin\Blog\Posts\IndexModern.vue:12:onClick: () => router.visit(route('admin.blog.posts.create')),
+resources\js\Pages\Admin\Blog\Posts\IndexModern.vue:16:{ label: 'Categories', onClick: () => router.visit(route('admin.blog.categories.index')), icon: FolderIcon },
+resources\js\Pages\Admin\Blog\Posts\IndexModern.vue:17:{ label: 'Tags', onClick: () => router.visit(route('admin.blog.tags.index')), icon: TagIcon }
+resources\js\Pages\Admin\Blog\Posts\IndexModern.vue:162::href="route('admin.blog.posts.edit', post.id)"
+resources\js\Pages\Admin\Blog\Posts\IndexModern.vue:225::href="route('admin.blog.posts.edit', post.id)"
+resources\js\Pages\Admin\Blog\Posts\IndexModern.vue:257::action="hasActiveFilters ? null : { label: 'Create First Post', onClick: () => router.visit(route('admin.blog.posts.create')) }"
+resources\js\Pages\Admin\Blog\Posts\IndexModern.vue:373:router.get(route('admin.blog.posts.index'), {
+resources\js\Pages\Admin\Blog\Posts\IndexModern.vue:408:router.delete(route('admin.blog.posts.destroy', post.id), {
+resources\js\Pages\Admin\Blog\Posts\IndexModern.vue:420:router.post(route('admin.blog.posts.duplicate', post.id), {}, {
+resources\js\Pages\Admin\Blog\Posts\IndexRedesigned.vue:14::href="route('admin.blog.categories.index')"
+resources\js\Pages\Admin\Blog\Posts\IndexRedesigned.vue:21::href="route('admin.blog.posts.create')"
+resources\js\Pages\Admin\Blog\Posts\IndexRedesigned.vue:202::href="route('admin.blog.posts.edit', row.id)"
+resources\js\Pages\Admin\Blog\Posts\IndexRedesigned.vue:273:router.get(route('admin.blog.posts.index'), {
+resources\js\Pages\Admin\Blog\Posts\IndexRedesigned.vue:283:router.get(route('admin.blog.posts.index'), {
+resources\js\Pages\Admin\Blog\Posts\IndexRedesigned.vue:298:router.get(route('admin.blog.posts.index'), filters.value, {
+resources\js\Pages\Admin\Blog\Posts\IndexRedesigned.vue:310:router.get(route('admin.blog.posts.index'));
+resources\js\Pages\Admin\Blog\Posts\IndexRedesigned.vue:315:router.post(route('admin.blog.posts.publish', id));
+resources\js\Pages\Admin\Blog\Posts\IndexRedesigned.vue:321:router.post(route('admin.blog.posts.unpublish', id));
+resources\js\Pages\Admin\Blog\Posts\IndexRedesigned.vue:327:router.delete(route('admin.blog.posts.destroy', id));
+resources\js\Pages\Admin\Blog\Tags\Index.vue:259:form.put(route('admin.blog.tags.update', editingTag.value.id), {
+resources\js\Pages\Admin\Blog\Tags\Index.vue:264:form.post(route('admin.blog.tags.store'), {
+resources\js\Pages\Admin\Blog\Tags\Index.vue:273:router.delete(route('admin.blog.tags.destroy', tag.id), {
+resources\js\Pages\Admin\DataManagement\Index.vue:71::route="route('admin.data.countries.index')"
+resources\js\Pages\Admin\DataManagement\Index.vue:79::route="route('admin.data.cities.index')"
+resources\js\Pages\Admin\DataManagement\Index.vue:95::route="route('admin.data.currencies.index')"
+resources\js\Pages\Admin\DataManagement\Index.vue:110::route="route('admin.data.skills.index')"
+resources\js\Pages\Admin\DataManagement\Index.vue:134::route="route('admin.data.degrees.index')"
+resources\js\Pages\Admin\DataManagement\Index.vue:142::route="route('admin.data.languages.index')"
+resources\js\Pages\Admin\DataManagement\Index.vue:173::route="route('admin.data.blog-categories.index')"
+resources\js\Pages\Admin\DataManagement\Index.vue:181::route="route('admin.data.blog-tags.index')"
+resources\js\Pages\Admin\DataManagement\Index.vue:189::route="route('admin.data.document-types.index')"
+resources\js\Pages\Admin\DataManagement\Index.vue:197::route="route('admin.data.bank-names.index')"
+resources\js\Pages\Admin\DataManagement\Index.vue:205::route="route('admin.data.visa-types.index')"
+resources\js\Pages\Admin\DataManagement\Airports\BulkUpload.vue:9:<Link :href="route('admin.data.airports.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Airports\BulkUpload.vue:39::href="route('admin.data.airports-template')"
+resources\js\Pages\Admin\DataManagement\Airports\BulkUpload.vue:140::href="route('admin.data.airports.index')"
+resources\js\Pages\Admin\DataManagement\Airports\BulkUpload.vue:195:form.post(route('admin.data.airports-process-upload'), {
+resources\js\Pages\Admin\DataManagement\Airports\Create.vue:9:<Link :href="route('admin.data.airports.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Airports\Create.vue:154::href="route('admin.data.airports.index')"
+resources\js\Pages\Admin\DataManagement\Airports\Create.vue:199:form.post(route('admin.data.airports.store'));
+resources\js\Pages\Admin\DataManagement\Airports\Edit.vue:9:<Link :href="route('admin.data.airports.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Airports\Edit.vue:146::href="route('admin.data.airports.index')"
+resources\js\Pages\Admin\DataManagement\Airports\Edit.vue:195:form.put(route('admin.data.airports.update', props.airport.id));
+resources\js\Pages\Admin\DataManagement\Airports\Index.vue:16::href="route('admin.data.airports-bulk-upload')"
+resources\js\Pages\Admin\DataManagement\Airports\Index.vue:25::href="route('admin.data.airports.create')"
+resources\js\Pages\Admin\DataManagement\Airports\Index.vue:89::href="route('admin.data.airports-export', form)"
+resources\js\Pages\Admin\DataManagement\Airports\Index.vue:155::href="route('admin.data.airports.edit', airport.id)"
+resources\js\Pages\Admin\DataManagement\Airports\Index.vue:204:router.get(route('admin.data.airports.index'), form, {
+resources\js\Pages\Admin\DataManagement\Airports\Index.vue:217:router.get(route('admin.data.airports.index'), {
+resources\js\Pages\Admin\DataManagement\Airports\Index.vue:236:router.post(route('admin.data.airports.toggle-status', airport.id), {}, {
+resources\js\Pages\Admin\DataManagement\Airports\Index.vue:244:router.delete(route('admin.data.airports.destroy', airport.id), {
+resources\js\Pages\Admin\DataManagement\BankNames\BulkUpload.vue:27:<Link :href="route('admin.data.bank-names.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\BankNames\BulkUpload.vue:34:<a :href="route('admin.data.bank-names.template')" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\BankNames\BulkUpload.vue:40:<a :href="route('admin.data.bank-names.template', { with_sample: 1 })" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\BankNames\BulkUpload.vue:124:form.post(route('admin.data.bank-names.process-upload'), {
+resources\js\Pages\Admin\DataManagement\BankNames\Create.vue:94:<Link :href="route('admin.data.bank-names.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\BankNames\Create.vue:124:form.post(route('admin.data.bank-names.store'));
+resources\js\Pages\Admin\DataManagement\BankNames\Edit.vue:93:<Link :href="route('admin.data.bank-names.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\BankNames\Edit.vue:127:form.put(route('admin.data.bank-names.update', props.bankName.id));
+resources\js\Pages\Admin\DataManagement\BankNames\Index.vue:12:<Link :href="route('admin.data.bank-names.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-md hover:bg-growth-700">
+resources\js\Pages\Admin\DataManagement\BankNames\Index.vue:19:<Link :href="route('admin.data.bank-names.bulk-upload')" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700">
+resources\js\Pages\Admin\DataManagement\BankNames\Index.vue:26:<a :href="route('admin.data.bank-names.export', filters)" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\BankNames\Index.vue:102:<Link :href="route('admin.data.bank-names.edit', bank.id)" class="text-growth-600 hover:text-red-900 mr-3">Edit</Link>
+resources\js\Pages\Admin\DataManagement\BankNames\Index.vue:172:router.get(route('admin.data.bank-names.index'), filters, {
+resources\js\Pages\Admin\DataManagement\BankNames\Index.vue:179:router.post(route('admin.data.bank-names.toggle-status', bank.id), {}, {
+resources\js\Pages\Admin\DataManagement\BankNames\Index.vue:187:router.delete(route('admin.data.bank-names.destroy', bank.id), {
+resources\js\Pages\Admin\DataManagement\BlogCategories\BulkUpload.vue:27:<Link :href="route('admin.data.blog-categories.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\BlogCategories\BulkUpload.vue:34:<a :href="route('admin.data.blog-categories.template')" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\BlogCategories\BulkUpload.vue:40:<a :href="route('admin.data.blog-categories.template', { with_sample: 1 })" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\BlogCategories\BulkUpload.vue:120:form.post(route('admin.data.blog-categories.process-upload'), {
+resources\js\Pages\Admin\DataManagement\BlogCategories\Create.vue:62:<Link :href="route('admin.data.blog-categories.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\BlogCategories\Create.vue:88:form.post(route('admin.data.blog-categories.store'));
+resources\js\Pages\Admin\DataManagement\BlogCategories\Edit.vue:65:<Link :href="route('admin.data.blog-categories.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\BlogCategories\Edit.vue:95:form.put(route('admin.data.blog-categories.update', props.blogCategory.id));
+resources\js\Pages\Admin\DataManagement\BlogCategories\Index.vue:12:<Link :href="route('admin.data.blog-categories.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-md hover:bg-growth-700">
+resources\js\Pages\Admin\DataManagement\BlogCategories\Index.vue:19:<Link :href="route('admin.data.blog-categories.bulk-upload')" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700">
+resources\js\Pages\Admin\DataManagement\BlogCategories\Index.vue:26:<a :href="route('admin.data.blog-categories.export', filters)" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\BlogCategories\Index.vue:110:<Link :href="route('admin.data.blog-categories.edit', category.id)" class="text-growth-600 hover:text-red-900 mr-3">Edit</Link>
+resources\js\Pages\Admin\DataManagement\BlogCategories\Index.vue:179:router.get(route('admin.data.blog-categories.index'), filters, {
+resources\js\Pages\Admin\DataManagement\BlogCategories\Index.vue:186:router.post(route('admin.data.blog-categories.toggle-status', category.id), {}, {
+resources\js\Pages\Admin\DataManagement\BlogCategories\Index.vue:199:router.delete(route('admin.data.blog-categories.destroy', category.id), {
+resources\js\Pages\Admin\DataManagement\BlogTags\BulkUpload.vue:27:<Link :href="route('admin.data.blog-tags.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\BlogTags\BulkUpload.vue:34:<a :href="route('admin.data.blog-tags.template')" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\BlogTags\BulkUpload.vue:40:<a :href="route('admin.data.blog-tags.template', { with_sample: 1 })" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\BlogTags\BulkUpload.vue:120:form.post(route('admin.data.blog-tags.process-upload'), {
+resources\js\Pages\Admin\DataManagement\BlogTags\Create.vue:28:<Link :href="route('admin.data.blog-tags.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\BlogTags\Create.vue:49:form.post(route('admin.data.blog-tags.store'));
+resources\js\Pages\Admin\DataManagement\BlogTags\Edit.vue:32:<Link :href="route('admin.data.blog-tags.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\BlogTags\Edit.vue:57:form.put(route('admin.data.blog-tags.update', props.blogTag.id));
+resources\js\Pages\Admin\DataManagement\BlogTags\Index.vue:12:<Link :href="route('admin.data.blog-tags.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-md hover:bg-growth-700">
+resources\js\Pages\Admin\DataManagement\BlogTags\Index.vue:19:<Link :href="route('admin.data.blog-tags.bulk-upload')" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700">
+resources\js\Pages\Admin\DataManagement\BlogTags\Index.vue:26:<a :href="route('admin.data.blog-tags.export', filters)" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\BlogTags\Index.vue:79:<Link :href="route('admin.data.blog-tags.edit', tag.id)" class="text-growth-600 hover:text-red-900 mr-3">Edit</Link>
+resources\js\Pages\Admin\DataManagement\BlogTags\Index.vue:147:router.get(route('admin.data.blog-tags.index'), filters, {
+resources\js\Pages\Admin\DataManagement\BlogTags\Index.vue:160:router.delete(route('admin.data.blog-tags.destroy', tag.id), {
+resources\js\Pages\Admin\DataManagement\Cities\BulkUpload.vue:9:<Link :href="route('admin.data.cities.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Cities\BulkUpload.vue:37::href="route('admin.data.cities-template')"
+resources\js\Pages\Admin\DataManagement\Cities\BulkUpload.vue:132::href="route('admin.data.cities.index')"
+resources\js\Pages\Admin\DataManagement\Cities\BulkUpload.vue:187:form.post(route('admin.data.cities-process-upload'), {
+resources\js\Pages\Admin\DataManagement\Cities\Create.vue:9:<Link :href="route('admin.data.cities.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Cities\Create.vue:144::href="route('admin.data.cities.index')"
+resources\js\Pages\Admin\DataManagement\Cities\Create.vue:189:form.post(route('admin.data.cities.store'));
+resources\js\Pages\Admin\DataManagement\Cities\Edit.vue:9:<Link :href="route('admin.data.cities.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Cities\Edit.vue:137::href="route('admin.data.cities.index')"
+resources\js\Pages\Admin\DataManagement\Cities\Edit.vue:186:form.put(route('admin.data.cities.update', props.city.id));
+resources\js\Pages\Admin\DataManagement\Cities\Index.vue:16::href="route('admin.data.cities-bulk-upload')"
+resources\js\Pages\Admin\DataManagement\Cities\Index.vue:25::href="route('admin.data.cities.create')"
+resources\js\Pages\Admin\DataManagement\Cities\Index.vue:88::href="route('admin.data.cities-export', form)"
+resources\js\Pages\Admin\DataManagement\Cities\Index.vue:148::href="route('admin.data.cities.edit', city.id)"
+resources\js\Pages\Admin\DataManagement\Cities\Index.vue:198:router.get(route('admin.data.cities.index'), form, {
+resources\js\Pages\Admin\DataManagement\Cities\Index.vue:211:router.get(route('admin.data.cities.index'), {
+resources\js\Pages\Admin\DataManagement\Cities\Index.vue:230:router.post(route('admin.data.cities.toggle-status', city.id), {}, {
+resources\js\Pages\Admin\DataManagement\Cities\Index.vue:238:router.delete(route('admin.data.cities.destroy', city.id), {
+resources\js\Pages\Admin\DataManagement\Countries\BulkUpload.vue:9:<Link :href="route('admin.data.countries.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Countries\BulkUpload.vue:37::href="route('admin.data.countries.template')"
+resources\js\Pages\Admin\DataManagement\Countries\BulkUpload.vue:130::href="route('admin.data.countries.index')"
+resources\js\Pages\Admin\DataManagement\Countries\BulkUpload.vue:185:form.post(route('admin.data.countries.process-upload'), {
+resources\js\Pages\Admin\DataManagement\Countries\Create.vue:9:<Link :href="route('admin.data.countries.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Countries\Create.vue:168::href="route('admin.data.countries.index')"
+resources\js\Pages\Admin\DataManagement\Countries\Create.vue:205:form.post(route('admin.data.countries.store'));
+resources\js\Pages\Admin\DataManagement\Countries\Edit.vue:9:<Link :href="route('admin.data.countries.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Countries\Edit.vue:168::href="route('admin.data.countries.index')"
+resources\js\Pages\Admin\DataManagement\Countries\Edit.vue:209:form.put(route('admin.data.countries.update', props.country.id));
+resources\js\Pages\Admin\DataManagement\Countries\Index.vue:16::href="route('admin.data.countries.bulk-upload')"
+resources\js\Pages\Admin\DataManagement\Countries\Index.vue:25::href="route('admin.data.countries.create')"
+resources\js\Pages\Admin\DataManagement\Countries\Index.vue:88::href="route('admin.data.countries.export', form)"
+resources\js\Pages\Admin\DataManagement\Countries\Index.vue:159::href="route('admin.data.countries.edit', country.id)"
+resources\js\Pages\Admin\DataManagement\Countries\Index.vue:210:router.get(route('admin.data.countries.index'), form, {
+resources\js\Pages\Admin\DataManagement\Countries\Index.vue:223:router.get(route('admin.data.countries.index'), {
+resources\js\Pages\Admin\DataManagement\Countries\Index.vue:242:router.post(route('admin.data.countries.toggle-status', country.id), {}, {
+resources\js\Pages\Admin\DataManagement\Countries\Index.vue:250:router.delete(route('admin.data.countries.destroy', country.id), {
+resources\js\Pages\Admin\DataManagement\Currencies\BulkUpload.vue:9:<Link :href="route('admin.data.currencies.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Currencies\BulkUpload.vue:37::href="route('admin.data.currencies.template')"
+resources\js\Pages\Admin\DataManagement\Currencies\BulkUpload.vue:125::href="route('admin.data.currencies.index')"
+resources\js\Pages\Admin\DataManagement\Currencies\BulkUpload.vue:180:form.post(route('admin.data.currencies.process-upload'), {
+resources\js\Pages\Admin\DataManagement\Currencies\Create.vue:9:<Link :href="route('admin.data.currencies.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Currencies\Create.vue:107::href="route('admin.data.currencies.index')"
+resources\js\Pages\Admin\DataManagement\Currencies\Create.vue:139:form.post(route('admin.data.currencies.store'));
+resources\js\Pages\Admin\DataManagement\Currencies\Edit.vue:9:<Link :href="route('admin.data.currencies.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Currencies\Edit.vue:107::href="route('admin.data.currencies.index')"
+resources\js\Pages\Admin\DataManagement\Currencies\Edit.vue:143:form.put(route('admin.data.currencies.update', props.currency.id));
+resources\js\Pages\Admin\DataManagement\Currencies\Index.vue:16::href="route('admin.data.currencies.bulk-upload')"
+resources\js\Pages\Admin\DataManagement\Currencies\Index.vue:25::href="route('admin.data.currencies.create')"
+resources\js\Pages\Admin\DataManagement\Currencies\Index.vue:75::href="route('admin.data.currencies.export', form)"
+resources\js\Pages\Admin\DataManagement\Currencies\Index.vue:147::href="route('admin.data.currencies.edit', currency.id)"
+resources\js\Pages\Admin\DataManagement\Currencies\Index.vue:195:router.get(route('admin.data.currencies.index'), form, {
+resources\js\Pages\Admin\DataManagement\Currencies\Index.vue:208:router.get(route('admin.data.currencies.index'), {
+resources\js\Pages\Admin\DataManagement\Currencies\Index.vue:226:router.post(route('admin.data.currencies.toggle-status', currency.id), {}, {
+resources\js\Pages\Admin\DataManagement\Currencies\Index.vue:234:router.delete(route('admin.data.currencies.destroy', currency.id), {
+resources\js\Pages\Admin\DataManagement\CvTemplates\BulkUpload.vue:6:<Link :href="route('admin.data.cv-templates.index')" class="text-sm font-medium text-growth-600 hover:text-growth-600 dark:text-blue-400 flex items-center gap-1 mb-4">
+resources\js\Pages\Admin\DataManagement\CvTemplates\BulkUpload.vue:52:<Link :href="route('admin.data.cv-templates.index')" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\CvTemplates\BulkUpload.vue:105:<a :href="route('admin.data.cv-templates.template')" class="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\CvTemplates\BulkUpload.vue:112:<a :href="route('admin.data.cv-templates.template', { sample: 1 })" class="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\CvTemplates\BulkUpload.vue:119:<a :href="route('admin.data.cv-templates.export')" class="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\CvTemplates\BulkUpload.vue:218:form.post(route('admin.data.cv-templates.process-upload'), {
+resources\js\Pages\Admin\DataManagement\CvTemplates\Create.vue:6:<Link :href="route('admin.data.cv-templates.index')" class="text-sm font-medium text-growth-600 hover:text-growth-600 dark:text-blue-400 flex items-center gap-1 mb-4">
+resources\js\Pages\Admin\DataManagement\CvTemplates\Create.vue:179:<Link :href="route('admin.data.cv-templates.index')" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\CvTemplates\Create.vue:216:form.post(route('admin.data.cv-templates.store'))
+resources\js\Pages\Admin\DataManagement\CvTemplates\Edit.vue:6:<Link :href="route('admin.data.cv-templates.index')" class="text-sm font-medium text-growth-600 hover:text-growth-600 dark:text-blue-400 flex items-center gap-1 mb-4">
+resources\js\Pages\Admin\DataManagement\CvTemplates\Edit.vue:220:<Link :href="route('admin.data.cv-templates.index')" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\CvTemplates\Edit.vue:261:form.put(route('admin.data.cv-templates.update', props.template.id))
+resources\js\Pages\Admin\DataManagement\CvTemplates\Index.vue:11:<Link :href="route('admin.data.cv-templates.bulk-upload')" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\CvTemplates\Index.vue:15:<Link :href="route('admin.data.cv-templates.create')" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-growth-600 hover:bg-growth-700">
+resources\js\Pages\Admin\DataManagement\CvTemplates\Index.vue:167:<Link :href="route('admin.data.cv-templates.edit', template.id)" class="text-growth-600 hover:text-red-900 dark:text-blue-400 dark:hover:text-blue-300">
+resources\js\Pages\Admin\DataManagement\CvTemplates\Index.vue:305:router.get(route('admin.data.cv-templates.index'), filters, {
+resources\js\Pages\Admin\DataManagement\CvTemplates\Index.vue:332:router.post(route('admin.data.cv-templates.toggle-status', template.id), {}, {
+resources\js\Pages\Admin\DataManagement\CvTemplates\Index.vue:346:router.delete(route('admin.data.cv-templates.destroy', templateToDelete.value.id), {
+resources\js\Pages\Admin\DataManagement\Degrees\BulkUpload.vue:28:<Link :href="route('admin.data.degrees.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+resources\js\Pages\Admin\DataManagement\Degrees\BulkUpload.vue:38:<a :href="route('admin.data.degrees.template')" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\Degrees\BulkUpload.vue:44:<a :href="route('admin.data.degrees.template', { with_sample: 1 })" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\Degrees\BulkUpload.vue:128:form.post(route('admin.data.degrees.process-upload'), {
+resources\js\Pages\Admin\DataManagement\Degrees\Create.vue:75:<Link :href="route('admin.data.degrees.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+resources\js\Pages\Admin\DataManagement\Degrees\Create.vue:102:form.post(route('admin.data.degrees.store'));
+resources\js\Pages\Admin\DataManagement\Degrees\Edit.vue:75:<Link :href="route('admin.data.degrees.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+resources\js\Pages\Admin\DataManagement\Degrees\Edit.vue:106:form.put(route('admin.data.degrees.update', props.degree.id));
+resources\js\Pages\Admin\DataManagement\Degrees\Index.vue:12:<Link :href="route('admin.data.degrees.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-md hover:bg-growth-700">
+resources\js\Pages\Admin\DataManagement\Degrees\Index.vue:19:<Link :href="route('admin.data.degrees.bulk-upload')" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700">
+resources\js\Pages\Admin\DataManagement\Degrees\Index.vue:26:<a :href="route('admin.data.degrees.export', filters)" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\Degrees\Index.vue:118:<Link :href="route('admin.data.degrees.edit', degree.id)" class="text-growth-600 hover:text-red-900 mr-3">Edit</Link>
+resources\js\Pages\Admin\DataManagement\Degrees\Index.vue:188:router.get(route('admin.data.degrees.index'), filters, {
+resources\js\Pages\Admin\DataManagement\Degrees\Index.vue:195:router.post(route('admin.data.degrees.toggle-status', degree.id), {}, {
+resources\js\Pages\Admin\DataManagement\Degrees\Index.vue:203:router.delete(route('admin.data.degrees.destroy', degree.id), {
+resources\js\Pages\Admin\DataManagement\DocumentTypes\BulkUpload.vue:27:<Link :href="route('admin.data.document-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\DocumentTypes\BulkUpload.vue:34:<a :href="route('admin.data.document-types.template')" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\DocumentTypes\BulkUpload.vue:40:<a :href="route('admin.data.document-types.template', { with_sample: 1 })" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\DocumentTypes\BulkUpload.vue:122:form.post(route('admin.data.document-types.process-upload'), {
+resources\js\Pages\Admin\DataManagement\DocumentTypes\Create.vue:77:<Link :href="route('admin.data.document-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\DocumentTypes\Create.vue:104:form.post(route('admin.data.document-types.store'));
+resources\js\Pages\Admin\DataManagement\DocumentTypes\Edit.vue:76:<Link :href="route('admin.data.document-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\DocumentTypes\Edit.vue:107:form.put(route('admin.data.document-types.update', props.documentType.id));
+resources\js\Pages\Admin\DataManagement\DocumentTypes\Index.vue:12:<Link :href="route('admin.data.document-types.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-md hover:bg-growth-700">
+resources\js\Pages\Admin\DataManagement\DocumentTypes\Index.vue:19:<Link :href="route('admin.data.document-types.bulk-upload')" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700">
+resources\js\Pages\Admin\DataManagement\DocumentTypes\Index.vue:26:<a :href="route('admin.data.document-types.export', filters)" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\DocumentTypes\Index.vue:117:<Link :href="route('admin.data.document-types.edit', doc.id)" class="text-growth-600 hover:text-red-900 mr-3">Edit</Link>
+resources\js\Pages\Admin\DataManagement\DocumentTypes\Index.vue:188:router.get(route('admin.data.document-types.index'), filters, {
+resources\js\Pages\Admin\DataManagement\DocumentTypes\Index.vue:195:router.post(route('admin.data.document-types.toggle-status', doc.id), {}, {
+resources\js\Pages\Admin\DataManagement\DocumentTypes\Index.vue:203:router.delete(route('admin.data.document-types.destroy', doc.id), {
+resources\js\Pages\Admin\DataManagement\EmailTemplates\BulkUpload.vue:27:<Link :href="route('admin.data.email-templates.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\EmailTemplates\BulkUpload.vue:34:<a :href="route('admin.data.email-templates.template')" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\EmailTemplates\BulkUpload.vue:40:<a :href="route('admin.data.email-templates.template', { with_sample: 1 })" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\EmailTemplates\BulkUpload.vue:122:form.post(route('admin.data.email-templates.process-upload'), {
+resources\js\Pages\Admin\DataManagement\EmailTemplates\Create.vue:82:<Link :href="route('admin.data.email-templates.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\EmailTemplates\Create.vue:109:form.post(route('admin.data.email-templates.store'));
+resources\js\Pages\Admin\DataManagement\EmailTemplates\Edit.vue:86:<Link :href="route('admin.data.email-templates.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\EmailTemplates\Edit.vue:117:form.put(route('admin.data.email-templates.update', props.template.id));
+resources\js\Pages\Admin\DataManagement\EmailTemplates\Index.vue:11:<Link :href="route('admin.data.email-templates.bulk-upload')" class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+resources\js\Pages\Admin\DataManagement\EmailTemplates\Index.vue:17:<Link :href="route('admin.data.email-templates.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 text-white rounded-md hover:bg-growth-700">
+resources\js\Pages\Admin\DataManagement\EmailTemplates\Index.vue:99:<Link :href="route('admin.data.email-templates.edit', template.id)" class="text-growth-600 hover:text-red-900">Edit</Link>
+resources\js\Pages\Admin\DataManagement\EmailTemplates\Index.vue:152:router.get(route('admin.data.email-templates.index'), filters, {
+resources\js\Pages\Admin\DataManagement\EmailTemplates\Index.vue:159:router.post(route('admin.data.email-templates.toggle-status', template.id), {}, {
+resources\js\Pages\Admin\DataManagement\EmailTemplates\Index.vue:171:router.delete(route('admin.data.email-templates.destroy', template.id));
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\BulkUpload.vue:27:<Link :href="route('admin.data.institution-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\BulkUpload.vue:34:<a :href="route('admin.data.institution-types.template')" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\BulkUpload.vue:40:<a :href="route('admin.data.institution-types.template', { with_sample: 1 })" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\BulkUpload.vue:121:form.post(route('admin.data.institution-types.process-upload'), {
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\Create.vue:81:<Link :href="route('admin.data.institution-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\Create.vue:108:form.post(route('admin.data.institution-types.store'));
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\Edit.vue:80:<Link :href="route('admin.data.institution-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\Edit.vue:111:form.put(route('admin.data.institution-types.update', props.institutionType.id));
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\Index.vue:12:<Link :href="route('admin.data.institution-types.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-md hover:bg-growth-700">
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\Index.vue:19:<Link :href="route('admin.data.institution-types.bulk-upload')" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700">
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\Index.vue:26:<a :href="route('admin.data.institution-types.export', filters)" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\Index.vue:109:<Link :href="route('admin.data.institution-types.edit', institution.id)" class="text-growth-600 hover:text-red-900 mr-3">Edit</Link>
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\Index.vue:181:router.get(route('admin.data.institution-types.index'), filters, {
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\Index.vue:188:router.post(route('admin.data.institution-types.toggle-status', institution.id), {}, {
+resources\js\Pages\Admin\DataManagement\InstitutionTypes\Index.vue:196:router.delete(route('admin.data.institution-types.destroy', institution.id), {
+resources\js\Pages\Admin\DataManagement\JobCategories\BulkUpload.vue:9:<Link :href="route('admin.data.job-categories.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\JobCategories\BulkUpload.vue:142::href="route('admin.data.job-categories.template')"
+resources\js\Pages\Admin\DataManagement\JobCategories\BulkUpload.vue:149::href="route('admin.data.job-categories.export')"
+resources\js\Pages\Admin\DataManagement\JobCategories\BulkUpload.vue:210:uploadForm.post(route('admin.data.job-categories.process-upload'), {
+resources\js\Pages\Admin\DataManagement\JobCategories\Create.vue:9:<Link :href="route('admin.data.job-categories.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\JobCategories\Create.vue:120::href="route('admin.data.job-categories.index')"
+resources\js\Pages\Admin\DataManagement\JobCategories\Create.vue:158:form.post(route('admin.data.job-categories.store'));
+resources\js\Pages\Admin\DataManagement\JobCategories\Edit.vue:9:<Link :href="route('admin.data.job-categories.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\JobCategories\Edit.vue:120::href="route('admin.data.job-categories.index')"
+resources\js\Pages\Admin\DataManagement\JobCategories\Edit.vue:159:form.put(route('admin.data.job-categories.update', props.jobCategory.id));
+resources\js\Pages\Admin\DataManagement\JobCategories\Index.vue:16::href="route('admin.data.job-categories.bulk-upload')"
+resources\js\Pages\Admin\DataManagement\JobCategories\Index.vue:25::href="route('admin.data.job-categories.create')"
+resources\js\Pages\Admin\DataManagement\JobCategories\Index.vue:91::href="route('admin.data.job-categories.export', form)"
+resources\js\Pages\Admin\DataManagement\JobCategories\Index.vue:158::href="route('admin.data.job-categories.edit', category.id)"
+resources\js\Pages\Admin\DataManagement\JobCategories\Index.vue:208:router.get(route('admin.data.job-categories.index'), form, {
+resources\js\Pages\Admin\DataManagement\JobCategories\Index.vue:221:router.get(route('admin.data.job-categories.index'), {
+resources\js\Pages\Admin\DataManagement\JobCategories\Index.vue:240:router.post(route('admin.data.job-categories.toggle-status', category.id), {}, {
+resources\js\Pages\Admin\DataManagement\JobCategories\Index.vue:248:router.delete(route('admin.data.job-categories.destroy', category.id), {
+resources\js\Pages\Admin\DataManagement\Languages\BulkUpload.vue:9:<Link :href="route('admin.data.languages.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Languages\BulkUpload.vue:37::href="route('admin.data.languages.template')"
+resources\js\Pages\Admin\DataManagement\Languages\BulkUpload.vue:125::href="route('admin.data.languages.index')"
+resources\js\Pages\Admin\DataManagement\Languages\BulkUpload.vue:180:form.post(route('admin.data.languages.process-upload'), {
+resources\js\Pages\Admin\DataManagement\Languages\Create.vue:9:<Link :href="route('admin.data.languages.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Languages\Create.vue:95::href="route('admin.data.languages.index')"
+resources\js\Pages\Admin\DataManagement\Languages\Create.vue:127:form.post(route('admin.data.languages.store'));
+resources\js\Pages\Admin\DataManagement\Languages\Edit.vue:9:<Link :href="route('admin.data.languages.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Languages\Edit.vue:95::href="route('admin.data.languages.index')"
+resources\js\Pages\Admin\DataManagement\Languages\Edit.vue:131:form.put(route('admin.data.languages.update', props.language.id));
+resources\js\Pages\Admin\DataManagement\Languages\Index.vue:16::href="route('admin.data.languages.bulk-upload')"
+resources\js\Pages\Admin\DataManagement\Languages\Index.vue:25::href="route('admin.data.languages.create')"
+resources\js\Pages\Admin\DataManagement\Languages\Index.vue:75::href="route('admin.data.languages.export', form)"
+resources\js\Pages\Admin\DataManagement\Languages\Index.vue:137::href="route('admin.data.languages.edit', language.id)"
+resources\js\Pages\Admin\DataManagement\Languages\Index.vue:185:router.get(route('admin.data.languages.index'), form, {
+resources\js\Pages\Admin\DataManagement\Languages\Index.vue:198:router.get(route('admin.data.languages.index'), {
+resources\js\Pages\Admin\DataManagement\Languages\Index.vue:216:router.post(route('admin.data.languages.toggle-status', language.id), {}, {
+resources\js\Pages\Admin\DataManagement\Languages\Index.vue:224:router.delete(route('admin.data.languages.destroy', language.id), {
+resources\js\Pages\Admin\DataManagement\LanguageTests\BulkUpload.vue:9:<Link :href="route('admin.data.language-tests.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\LanguageTests\BulkUpload.vue:38::href="route('admin.data.language-tests.template')"
+resources\js\Pages\Admin\DataManagement\LanguageTests\BulkUpload.vue:133::href="route('admin.data.language-tests.index')"
+resources\js\Pages\Admin\DataManagement\LanguageTests\BulkUpload.vue:188:form.post(route('admin.data.language-tests.process-upload'), {
+resources\js\Pages\Admin\DataManagement\LanguageTests\Create.vue:9:<Link :href="route('admin.data.language-tests.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\LanguageTests\Create.vue:160::href="route('admin.data.language-tests.index')"
+resources\js\Pages\Admin\DataManagement\LanguageTests\Create.vue:200:form.post(route('admin.data.language-tests.store'));
+resources\js\Pages\Admin\DataManagement\LanguageTests\Edit.vue:9:<Link :href="route('admin.data.language-tests.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\LanguageTests\Edit.vue:160::href="route('admin.data.language-tests.index')"
+resources\js\Pages\Admin\DataManagement\LanguageTests\Edit.vue:201:form.put(route('admin.data.language-tests.update', props.languageTest.id));
+resources\js\Pages\Admin\DataManagement\LanguageTests\Index.vue:16::href="route('admin.data.language-tests.bulk-upload')"
+resources\js\Pages\Admin\DataManagement\LanguageTests\Index.vue:25::href="route('admin.data.language-tests.create')"
+resources\js\Pages\Admin\DataManagement\LanguageTests\Index.vue:88::href="route('admin.data.language-tests.export', form)"
+resources\js\Pages\Admin\DataManagement\LanguageTests\Index.vue:162::href="route('admin.data.language-tests.edit', test.id)"
+resources\js\Pages\Admin\DataManagement\LanguageTests\Index.vue:212:router.get(route('admin.data.language-tests.index'), form, {
+resources\js\Pages\Admin\DataManagement\LanguageTests\Index.vue:225:router.get(route('admin.data.language-tests.index'), {
+resources\js\Pages\Admin\DataManagement\LanguageTests\Index.vue:244:router.post(route('admin.data.language-tests.toggle-status', test.id), {}, {
+resources\js\Pages\Admin\DataManagement\LanguageTests\Index.vue:252:router.delete(route('admin.data.language-tests.destroy', test.id), {
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\BulkUpload.vue:27:<Link :href="route('admin.data.relationship-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\BulkUpload.vue:34:<a :href="route('admin.data.relationship-types.template')" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\BulkUpload.vue:40:<a :href="route('admin.data.relationship-types.template', { with_sample: 1 })" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\BulkUpload.vue:121:form.post(route('admin.data.relationship-types.process-upload'), {
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\Create.vue:66:<Link :href="route('admin.data.relationship-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\Create.vue:92:form.post(route('admin.data.relationship-types.store'));
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\Edit.vue:65:<Link :href="route('admin.data.relationship-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\Edit.vue:95:form.put(route('admin.data.relationship-types.update', props.relationshipType.id));
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\Index.vue:12:<Link :href="route('admin.data.relationship-types.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-md hover:bg-growth-700">
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\Index.vue:19:<Link :href="route('admin.data.relationship-types.bulk-upload')" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700">
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\Index.vue:26:<a :href="route('admin.data.relationship-types.export', filters)" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\Index.vue:99:<Link :href="route('admin.data.relationship-types.edit', rel.id)" class="text-growth-600 hover:text-red-900 mr-3">Edit</Link>
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\Index.vue:169:router.get(route('admin.data.relationship-types.index'), filters, {
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\Index.vue:176:router.post(route('admin.data.relationship-types.toggle-status', rel.id), {}, {
+resources\js\Pages\Admin\DataManagement\RelationshipTypes\Index.vue:184:router.delete(route('admin.data.relationship-types.destroy', rel.id), {
+resources\js\Pages\Admin\DataManagement\SeoSettings\BulkUpload.vue:6:<Link :href="route('admin.data.seo-settings.index')" class="text-sm font-medium text-growth-600 hover:text-growth-600 dark:text-blue-400 flex items-center gap-1 mb-4">
+resources\js\Pages\Admin\DataManagement\SeoSettings\BulkUpload.vue:52:<Link :href="route('admin.data.seo-settings.index')" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\SeoSettings\BulkUpload.vue:105:<a :href="route('admin.data.seo-settings.template')" class="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\SeoSettings\BulkUpload.vue:112:<a :href="route('admin.data.seo-settings.template', { sample: 1 })" class="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\SeoSettings\BulkUpload.vue:119:<a :href="route('admin.data.seo-settings.export')" class="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\SeoSettings\BulkUpload.vue:216:form.post(route('admin.data.seo-settings.process-upload'), {
+resources\js\Pages\Admin\DataManagement\SeoSettings\Create.vue:6:<Link :href="route('admin.data.seo-settings.index')" class="text-sm font-medium text-growth-600 hover:text-growth-600 dark:text-blue-400 flex items-center gap-1 mb-4">
+resources\js\Pages\Admin\DataManagement\SeoSettings\Create.vue:253:<Link :href="route('admin.data.seo-settings.index')" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\SeoSettings\Create.vue:297:form.post(route('admin.data.seo-settings.store'))
+resources\js\Pages\Admin\DataManagement\SeoSettings\Edit.vue:6:<Link :href="route('admin.data.seo-settings.index')" class="text-sm font-medium text-growth-600 hover:text-growth-600 dark:text-blue-400 flex items-center gap-1 mb-4">
+resources\js\Pages\Admin\DataManagement\SeoSettings\Edit.vue:253:<Link :href="route('admin.data.seo-settings.index')" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\SeoSettings\Edit.vue:301:form.put(route('admin.data.seo-settings.update', props.seoSetting.id))
+resources\js\Pages\Admin\DataManagement\SeoSettings\Index.vue:11:<Link :href="route('admin.data.seo-settings.bulk-upload')" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\SeoSettings\Index.vue:15:<Link :href="route('admin.data.seo-settings.create')" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-growth-600 hover:bg-growth-700">
+resources\js\Pages\Admin\DataManagement\SeoSettings\Index.vue:118:<Link :href="route('admin.data.seo-settings.edit', setting.id)" class="text-growth-600 hover:text-red-900 dark:text-blue-400 dark:hover:text-blue-300">
+resources\js\Pages\Admin\DataManagement\SeoSettings\Index.vue:248:router.get(route('admin.data.seo-settings.index'), filters, {
+resources\js\Pages\Admin\DataManagement\SeoSettings\Index.vue:269:router.delete(route('admin.data.seo-settings.destroy', settingToDelete.value.id), {
+resources\js\Pages\Admin\DataManagement\ServiceCategories\BulkUpload.vue:28:<Link :href="route('admin.data.service-categories.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+resources\js\Pages\Admin\DataManagement\ServiceCategories\BulkUpload.vue:38:<a :href="route('admin.data.service-categories.template')" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\ServiceCategories\BulkUpload.vue:44:<a :href="route('admin.data.service-categories.template', { with_sample: 1 })" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\ServiceCategories\BulkUpload.vue:129:form.post(route('admin.data.service-categories.process-upload'), {
+resources\js\Pages\Admin\DataManagement\ServiceCategories\Create.vue:82:<Link :href="route('admin.data.service-categories.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+resources\js\Pages\Admin\DataManagement\ServiceCategories\Create.vue:110:form.post(route('admin.data.service-categories.store'));
+resources\js\Pages\Admin\DataManagement\ServiceCategories\Edit.vue:89:<Link :href="route('admin.data.service-categories.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+resources\js\Pages\Admin\DataManagement\ServiceCategories\Edit.vue:121:form.put(route('admin.data.service-categories.update', props.serviceCategory.id));
+resources\js\Pages\Admin\DataManagement\ServiceCategories\Index.vue:12:<Link :href="route('admin.data.service-categories.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-md hover:bg-growth-700">
+resources\js\Pages\Admin\DataManagement\ServiceCategories\Index.vue:19:<Link :href="route('admin.data.service-categories.bulk-upload')" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700">
+resources\js\Pages\Admin\DataManagement\ServiceCategories\Index.vue:26:<a :href="route('admin.data.service-categories.export', filters)" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\ServiceCategories\Index.vue:110:<Link :href="route('admin.data.service-categories.edit', category.id)" class="text-growth-600 hover:text-red-900 mr-3">Edit</Link>
+resources\js\Pages\Admin\DataManagement\ServiceCategories\Index.vue:179:router.get(route('admin.data.service-categories.index'), filters, {
+resources\js\Pages\Admin\DataManagement\ServiceCategories\Index.vue:186:router.post(route('admin.data.service-categories.toggle-status', category.id), {}, {
+resources\js\Pages\Admin\DataManagement\ServiceCategories\Index.vue:199:router.delete(route('admin.data.service-categories.destroy', category.id), {
+resources\js\Pages\Admin\DataManagement\SkillCategories\BulkUpload.vue:9:<Link :href="route('admin.data.languages.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\SkillCategories\BulkUpload.vue:37::href="route('admin.data.languages.template')"
+resources\js\Pages\Admin\DataManagement\SkillCategories\BulkUpload.vue:125::href="route('admin.data.languages.index')"
+resources\js\Pages\Admin\DataManagement\SkillCategories\BulkUpload.vue:180:form.post(route('admin.data.languages.process-upload'), {
+resources\js\Pages\Admin\DataManagement\SkillCategories\Create.vue:9:<Link :href="route('admin.data.skill-categories.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\SkillCategories\Create.vue:104::href="route('admin.data.skill-categories.index')"
+resources\js\Pages\Admin\DataManagement\SkillCategories\Create.vue:137:form.post(route('admin.data.skill-categories.store'));
+resources\js\Pages\Admin\DataManagement\SkillCategories\Edit.vue:9:<Link :href="route('admin.data.languages.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\SkillCategories\Edit.vue:95::href="route('admin.data.languages.index')"
+resources\js\Pages\Admin\DataManagement\SkillCategories\Edit.vue:131:form.put(route('admin.data.languages.update', props.language.id));
+resources\js\Pages\Admin\DataManagement\SkillCategories\Index.vue:16::href="route('admin.data.skill-categories.bulk-upload')"
+resources\js\Pages\Admin\DataManagement\SkillCategories\Index.vue:25::href="route('admin.data.skill-categories.create')"
+resources\js\Pages\Admin\DataManagement\SkillCategories\Index.vue:70::href="route('admin.data.skill-categories.export', form)"
+resources\js\Pages\Admin\DataManagement\SkillCategories\Index.vue:132::href="route('admin.data.skill-categories.edit', category.id)"
+resources\js\Pages\Admin\DataManagement\SkillCategories\Index.vue:180:router.get(route('admin.data.skill-categories.index'), form, {
+resources\js\Pages\Admin\DataManagement\SkillCategories\Index.vue:193:router.get(route('admin.data.skill-categories.index'), {
+resources\js\Pages\Admin\DataManagement\SkillCategories\Index.vue:211:router.post(route('admin.data.skill-categories.toggle-status', category.id), {}, {
+resources\js\Pages\Admin\DataManagement\SkillCategories\Index.vue:219:router.delete(route('admin.data.skill-categories.destroy', category.id), {
+resources\js\Pages\Admin\DataManagement\Skills\BulkUpload.vue:9:<Link :href="route('admin.data.languages.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Skills\BulkUpload.vue:37::href="route('admin.data.languages.template')"
+resources\js\Pages\Admin\DataManagement\Skills\BulkUpload.vue:125::href="route('admin.data.languages.index')"
+resources\js\Pages\Admin\DataManagement\Skills\BulkUpload.vue:180:form.post(route('admin.data.languages.process-upload'), {
+resources\js\Pages\Admin\DataManagement\Skills\Create.vue:9:<Link :href="route('admin.data.skills.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Skills\Create.vue:107::href="route('admin.data.skills.index')"
+resources\js\Pages\Admin\DataManagement\Skills\Create.vue:144:form.post(route('admin.data.skills.store'));
+resources\js\Pages\Admin\DataManagement\Skills\Edit.vue:9:<Link :href="route('admin.data.languages.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+resources\js\Pages\Admin\DataManagement\Skills\Edit.vue:95::href="route('admin.data.languages.index')"
+resources\js\Pages\Admin\DataManagement\Skills\Edit.vue:131:form.put(route('admin.data.languages.update', props.language.id));
+resources\js\Pages\Admin\DataManagement\Skills\Index.vue:16::href="route('admin.data.skills.bulk-upload')"
+resources\js\Pages\Admin\DataManagement\Skills\Index.vue:25::href="route('admin.data.skills.create')"
+resources\js\Pages\Admin\DataManagement\Skills\Index.vue:82::href="route('admin.data.skills.export', form)"
+resources\js\Pages\Admin\DataManagement\Skills\Index.vue:136::href="route('admin.data.skills.edit', skill.id)"
+resources\js\Pages\Admin\DataManagement\Skills\Index.vue:186:router.get(route('admin.data.skills.index'), form, {
+resources\js\Pages\Admin\DataManagement\Skills\Index.vue:199:router.get(route('admin.data.skills.index'), {
+resources\js\Pages\Admin\DataManagement\Skills\Index.vue:218:router.post(route('admin.data.skills.toggle-status', skill.id), {}, {
+resources\js\Pages\Admin\DataManagement\Skills\Index.vue:226:router.delete(route('admin.data.skills.destroy', skill.id), {
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\BulkUpload.vue:17::href="route('admin.data.smart-suggestions.index')"
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\BulkUpload.vue:43::href="route('admin.data.smart-suggestions.template')"
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\BulkUpload.vue:49::href="route('admin.data.smart-suggestions.template') + '?sample=true'"
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\BulkUpload.vue:192:form.post(route('admin.data.smart-suggestions.process-upload'), {
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Create.vue:17::href="route('admin.data.smart-suggestions.index')"
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Create.vue:221::href="route('admin.data.smart-suggestions.index')"
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Create.vue:265:form.post(route('admin.data.smart-suggestions.store'))
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Edit.vue:17::href="route('admin.data.smart-suggestions.index')"
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Edit.vue:259::href="route('admin.data.smart-suggestions.index')"
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Edit.vue:306:form.put(route('admin.data.smart-suggestions.update', props.suggestion.id))
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Index.vue:18::href="route('admin.data.smart-suggestions.bulk-upload')"
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Index.vue:24::href="route('admin.data.smart-suggestions.create')"
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Index.vue:174::href="route('admin.data.smart-suggestions.edit', suggestion.id)"
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Index.vue:274:searchForm.get(route('admin.data.smart-suggestions.index'), {
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Index.vue:329:router.post(route('admin.data.smart-suggestions.mark-completed', id))
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Index.vue:335:router.post(route('admin.data.smart-suggestions.dismiss', id))
+resources\js\Pages\Admin\DataManagement\SmartSuggestions\Index.vue:341:router.delete(route('admin.data.smart-suggestions.destroy', id))
+resources\js\Pages\Admin\DataManagement\SystemEvents\BulkUpload.vue:17::href="route('admin.data.system-events.index')"
+resources\js\Pages\Admin\DataManagement\SystemEvents\BulkUpload.vue:42::href="route('admin.data.system-events.template')"
+resources\js\Pages\Admin\DataManagement\SystemEvents\BulkUpload.vue:48::href="route('admin.data.system-events.template') + '?sample=true'"
+resources\js\Pages\Admin\DataManagement\SystemEvents\BulkUpload.vue:176:form.post(route('admin.data.system-events.process-upload'), {
+resources\js\Pages\Admin\DataManagement\SystemEvents\Create.vue:17::href="route('admin.data.system-events.index')"
+resources\js\Pages\Admin\DataManagement\SystemEvents\Create.vue:110::href="route('admin.data.system-events.index')"
+resources\js\Pages\Admin\DataManagement\SystemEvents\Create.vue:148:form.post(route('admin.data.system-events.store'))
+resources\js\Pages\Admin\DataManagement\SystemEvents\Edit.vue:17::href="route('admin.data.system-events.index')"
+resources\js\Pages\Admin\DataManagement\SystemEvents\Edit.vue:104::href="route('admin.data.system-events.index')"
+resources\js\Pages\Admin\DataManagement\SystemEvents\Edit.vue:143:form.put(route('admin.data.system-events.update', props.event.id))
+resources\js\Pages\Admin\DataManagement\SystemEvents\Index.vue:18::href="route('admin.data.system-events.bulk-upload')"
+resources\js\Pages\Admin\DataManagement\SystemEvents\Index.vue:24::href="route('admin.data.system-events.create')"
+resources\js\Pages\Admin\DataManagement\SystemEvents\Index.vue:65::href="route('admin.data.system-events.export')"
+resources\js\Pages\Admin\DataManagement\SystemEvents\Index.vue:128::href="route('admin.data.system-events.edit', event.id)"
+resources\js\Pages\Admin\DataManagement\SystemEvents\Index.vue:185:searchForm.get(route('admin.data.system-events.index'), {
+resources\js\Pages\Admin\DataManagement\SystemEvents\Index.vue:193:router.delete(route('admin.data.system-events.destroy', id))
+resources\js\Pages\Admin\DataManagement\VisaTypes\BulkUpload.vue:27:<Link :href="route('admin.data.visa-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\VisaTypes\BulkUpload.vue:34:<a :href="route('admin.data.visa-types.template')" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\VisaTypes\BulkUpload.vue:40:<a :href="route('admin.data.visa-types.template', { with_sample: 1 })" class="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-md hover:bg-gray-200">
+resources\js\Pages\Admin\DataManagement\VisaTypes\BulkUpload.vue:118:form.post(route('admin.data.visa-types.process-upload'), {
+resources\js\Pages\Admin\DataManagement\VisaTypes\Create.vue:41:<Link :href="route('admin.data.visa-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\VisaTypes\Create.vue:64:form.post(route('admin.data.visa-types.store'));
+resources\js\Pages\Admin\DataManagement\VisaTypes\Edit.vue:40:<Link :href="route('admin.data.visa-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
+resources\js\Pages\Admin\DataManagement\VisaTypes\Edit.vue:67:form.put(route('admin.data.visa-types.update', props.visaType.id));
+resources\js\Pages\Admin\DataManagement\VisaTypes\Index.vue:12:<Link :href="route('admin.data.visa-types.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-md hover:bg-growth-700">
+resources\js\Pages\Admin\DataManagement\VisaTypes\Index.vue:19:<Link :href="route('admin.data.visa-types.bulk-upload')" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700">
+resources\js\Pages\Admin\DataManagement\VisaTypes\Index.vue:26:<a :href="route('admin.data.visa-types.export', filters)" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700">
+resources\js\Pages\Admin\DataManagement\VisaTypes\Index.vue:85:<Link :href="route('admin.data.visa-types.edit', visa.id)" class="text-growth-600 hover:text-red-900 mr-3">Edit</Link>
+resources\js\Pages\Admin\DataManagement\VisaTypes\Index.vue:153:router.get(route('admin.data.visa-types.index'), filters, {
+resources\js\Pages\Admin\DataManagement\VisaTypes\Index.vue:160:router.post(route('admin.data.visa-types.toggle-status', visa.id), {}, {
+resources\js\Pages\Admin\DataManagement\VisaTypes\Index.vue:168:router.delete(route('admin.data.visa-types.destroy', visa.id), {
+resources\js\Pages\Admin\Directories\Create.vue:11::href="route('admin.directories.index')"
+resources\js\Pages\Admin\Directories\Create.vue:433::href="route('admin.directories.index')"
+resources\js\Pages\Admin\Directories\Create.vue:517:form.post(route('admin.directories.store'), {
+resources\js\Pages\Admin\Directories\Edit.vue:11::href="route('admin.directories.index')"
+resources\js\Pages\Admin\Directories\Edit.vue:467::href="route('admin.directories.index')"
+resources\js\Pages\Admin\Directories\Edit.vue:560:form.post(route('admin.directories.update', props.directory.id), {
+resources\js\Pages\Admin\Directories\Index.vue:14::href="route('admin.directories.create')"
+resources\js\Pages\Admin\Directories\Index.vue:233::href="route('admin.directories.edit', directory.id)"
+resources\js\Pages\Admin\Directories\Index.vue:266::href="route('admin.directories.create')"
+resources\js\Pages\Admin\Directories\Index.vue:405:router.get(route('admin.directories.index'), filters, {
+resources\js\Pages\Admin\Directories\Index.vue:413:route('admin.directories.toggle-published', directory.id),
+resources\js\Pages\Admin\Directories\Index.vue:424:route('admin.directories.toggle-verified', directory.id),
+resources\js\Pages\Admin\Directories\Index.vue:435:route('admin.directories.toggle-featured', directory.id),
+resources\js\Pages\Admin\Directories\Index.vue:455:router.delete(route('admin.directories.destroy', deleteModal.directory.id), {
+resources\js\Pages\Admin\DirectoryCategories\Create.vue:11::href="route('admin.directory-categories.index')"
+resources\js\Pages\Admin\DirectoryCategories\Create.vue:176::href="route('admin.directory-categories.index')"
+resources\js\Pages\Admin\DirectoryCategories\Create.vue:225:form.post(route('admin.directory-categories.store'), {
+resources\js\Pages\Admin\DirectoryCategories\Edit.vue:11::href="route('admin.directory-categories.index')"
+resources\js\Pages\Admin\DirectoryCategories\Edit.vue:210::href="route('admin.directory-categories.index')"
+resources\js\Pages\Admin\DirectoryCategories\Edit.vue:271:form.put(route('admin.directory-categories.update', props.category.id), {
+resources\js\Pages\Admin\DirectoryCategories\Index.vue:14::href="route('admin.directory-categories.create')"
+resources\js\Pages\Admin\DirectoryCategories\Index.vue:146::href="route('admin.directory-categories.edit', category.id)"
+resources\js\Pages\Admin\DirectoryCategories\Index.vue:179::href="route('admin.directory-categories.create')"
+resources\js\Pages\Admin\DirectoryCategories\Index.vue:319:router.get(route('admin.directory-categories.index'), filters, {
+resources\js\Pages\Admin\DirectoryCategories\Index.vue:327:route('admin.directory-categories.toggle-active', category.id),
+resources\js\Pages\Admin\DirectoryCategories\Index.vue:350:router.delete(route('admin.directory-categories.destroy', deleteModal.category.id), {
+resources\js\Pages\Admin\DocumentAssignments\Index.vue:20:router.get(route('admin.document-assignments.index'), {
+resources\js\Pages\Admin\DocumentAssignments\Index.vue:62::href="route('admin.document-assignments.show', country.id)"
+resources\js\Pages\Admin\DocumentAssignments\Index.vue:118::href="route('admin.master-documents.index')"
+resources\js\Pages\Admin\DocumentAssignments\Index.vue:128::href="route('admin.document-categories.index')"
+resources\js\Pages\Admin\DocumentAssignments\Show.vue:54:form.post(route('admin.document-assignments.bulk-assign'), {
+resources\js\Pages\Admin\DocumentAssignments\Show.vue:64:router.delete(route('admin.document-assignments.destroy', assignmentId));
+resources\js\Pages\Admin\DocumentAssignments\Show.vue:84::href="route('admin.document-assignments.index')"
+resources\js\Pages\Admin\DocumentCategories\Index.vue:17:router.delete(route('admin.document-categories.destroy', id));
+resources\js\Pages\Admin\DocumentCategories\Index.vue:35::href="route('admin.document-categories.create')"
+resources\js\Pages\Admin\DocumentCategories\Index.vue:57::href="route('admin.document-categories.edit', category.id)"
+resources\js\Pages\Admin\Documents\Verify.vue:33:approveForm.post(route('admin.documents.approve', doc.id))
+resources\js\Pages\Admin\Documents\Verify.vue:36:rejectForm.post(route('admin.documents.reject', doc.id), {
+resources\js\Pages\Admin\Events\Create.vue:58:form.post(route('admin.events.store'), {
+resources\js\Pages\Admin\Events\Create.vue:74::href="route('admin.events.index')"
+resources\js\Pages\Admin\Events\Create.vue:326::href="route('admin.events.index')"
+resources\js\Pages\Admin\Events\Index.vue:25:router.get(route('admin.events.index'), {
+resources\js\Pages\Admin\Events\Index.vue:48:router.delete(route('admin.events.destroy', eventId));
+resources\js\Pages\Admin\Events\Index.vue:53:router.post(route('admin.events.toggle-featured', eventId));
+resources\js\Pages\Admin\Events\Index.vue:57:router.post(route('admin.events.toggle-published', eventId));
+resources\js\Pages\Admin\Events\Index.vue:101::href="route('admin.events.create')"
+resources\js\Pages\Admin\Events\Index.vue:198::href="route('admin.events.create')"
+resources\js\Pages\Admin\Events\Index.vue:301::href="route('admin.events.show', event.id)"
+resources\js\Pages\Admin\Events\Index.vue:308::href="route('admin.events.edit', event.id)"
+resources\js\Pages\Admin\Faqs\Create.vue:19:form.post(route('admin.faqs.store'), {
+resources\js\Pages\Admin\Faqs\Create.vue:34::href="route('admin.faqs.index')"
+resources\js\Pages\Admin\Faqs\Create.vue:147::href="route('admin.faqs.index')"
+resources\js\Pages\Admin\Faqs\Index.vue:23:router.get(route('admin.faqs.index'), {
+resources\js\Pages\Admin\Faqs\Index.vue:46:router.delete(route('admin.faqs.destroy', faqId));
+resources\js\Pages\Admin\Faqs\Index.vue:51:router.patch(route('admin.faqs.update', faqId), {
+resources\js\Pages\Admin\Faqs\Index.vue:100::href="route('admin.faq-categories.index')"
+resources\js\Pages\Admin\Faqs\Index.vue:106::href="route('admin.faqs.create')"
+resources\js\Pages\Admin\Faqs\Index.vue:199::href="route('admin.faqs.create')"
+resources\js\Pages\Admin\Faqs\Index.vue:281::href="route('admin.faqs.edit', faq.id)"
+resources\js\Pages\Admin\Faqs\IndexModern.vue:29:router.get(route('admin.faqs.index'), {
+resources\js\Pages\Admin\Faqs\IndexModern.vue:52:router.delete(route('admin.faqs.destroy', faqId));
+resources\js\Pages\Admin\Faqs\IndexModern.vue:92:onClick: () => router.visit(route('admin.faqs.create')),
+resources\js\Pages\Admin\Faqs\IndexModern.vue:96:{ label: 'Manage Categories', onClick: () => router.visit(route('admin.faq-categories.index')), icon: RectangleStackIcon }
+resources\js\Pages\Admin\Faqs\IndexModern.vue:263::href="route('admin.faqs.show', faq.id)"
+resources\js\Pages\Admin\Faqs\IndexModern.vue:270::href="route('admin.faqs.edit', faq.id)"
+resources\js\Pages\Admin\Faqs\IndexModern.vue:297:onClick: () => router.visit(route('admin.faqs.create')),
+resources\js\Pages\Admin\FlightRequests\Index.vue:97::href="route('admin.flight-requests.index')"
+resources\js\Pages\Admin\FlightRequests\Index.vue:108::href="route('admin.flight-requests.index', { filter: 'pending' })"
+resources\js\Pages\Admin\FlightRequests\Index.vue:119::href="route('admin.flight-requests.index', { filter: 'assigned' })"
+resources\js\Pages\Admin\FlightRequests\Index.vue:130::href="route('admin.flight-requests.index', { filter: 'quoted' })"
+resources\js\Pages\Admin\FlightRequests\Index.vue:141::href="route('admin.flight-requests.index', { filter: 'completed' })"
+resources\js\Pages\Admin\FlightRequests\Index.vue:254::href="route('admin.flight-requests.show', request.id)"
+resources\js\Pages\Admin\FlightRequests\Index.vue:403:router.get(route('admin.flight-requests.index'), {
+resources\js\Pages\Admin\FlightRequests\Index.vue:430:router.post(route('admin.flight-requests.bulk-assign'), {
+resources\js\Pages\Admin\FlightRequests\Index.vue:459:router.post(route('admin.flight-requests.assign', assignModal.value.request.id), {
+resources\js\Pages\Admin\Hotels\Bookings.vue:21:router.get(route('admin.hotel-bookings.index'), {
+resources\js\Pages\Admin\Hotels\Bookings.vue:35:router.post(route('admin.hotel-bookings.update-status', bookingId), {
+resources\js\Pages\Admin\Hotels\Bookings.vue:234::href="route('admin.hotel-bookings.show', booking.id)"
+resources\js\Pages\Admin\Hotels\Create.vue:24:form.post(route('admin.hotels.store'));
+resources\js\Pages\Admin\Hotels\Create.vue:222::href="route('admin.hotels.index')"
+resources\js\Pages\Admin\Hotels\Index.vue:17:router.get(route('admin.hotels.index'), {
+resources\js\Pages\Admin\Hotels\Index.vue:29:router.delete(route('admin.hotels.destroy', id));
+resources\js\Pages\Admin\Hotels\Index.vue:34:router.post(route('admin.hotels.toggle-status', id));
+resources\js\Pages\Admin\Hotels\Index.vue:53::href="route('admin.hotels.create')"
+resources\js\Pages\Admin\Hotels\Index.vue:156::href="route('admin.hotels.rooms', hotel.id)"
+resources\js\Pages\Admin\Hotels\Index.vue:162::href="route('admin.hotels.edit', hotel.id)"
+resources\js\Pages\Admin\Hotels\IndexModern.vue:12:onClick: () => router.visit(route('admin.hotels.create')),
+resources\js\Pages\Admin\Hotels\IndexModern.vue:16:{ label: 'Room Categories', onClick: () => router.visit(route('admin.hotel-rooms.categories')), icon: Squares2X2Icon },
+resources\js\Pages\Admin\Hotels\IndexModern.vue:228::href="route('admin.hotels.rooms', hotel.id)"
+resources\js\Pages\Admin\Hotels\IndexModern.vue:235::href="route('admin.hotels.edit', hotel.id)"
+resources\js\Pages\Admin\Hotels\IndexModern.vue:270::action="hasActiveFilters ? null : { label: 'Add First Hotel', onClick: () => router.visit(route('admin.hotels.create')) }"
+resources\js\Pages\Admin\Hotels\IndexModern.vue:367:router.get(route('admin.hotels.index'), {
+resources\js\Pages\Admin\Hotels\IndexModern.vue:390:router.post(route('admin.hotels.toggle-status', id), {}, {
+resources\js\Pages\Admin\Hotels\IndexModern.vue:401:router.delete(route('admin.hotels.destroy', id), {
+resources\js\Pages\Admin\Hotels\IndexModern.vue:409:router.get(route('admin.hotels.export'), {
+resources\js\Pages\Admin\Impersonations\Index.vue:28:router.get(route('admin.impersonations.index'), localFilters.value, { preserveState: true, replace: true });
+resources\js\Pages\Admin\Impersonations\Index.vue:38:window.location.href = route('admin.impersonations.export') + (params ? ('?' + params) : '');
+resources\js\Pages\Admin\JobApplications\Index.vue:26:router.get(route('admin.applications.index'), {
+resources\js\Pages\Admin\JobApplications\Index.vue:67:router.post(route('admin.applications.bulk-update-status'), {
+resources\js\Pages\Admin\JobApplications\Index.vue:82:window.location.href = route('admin.applications.export') + '?' + params.toString();
+resources\js\Pages\Admin\JobApplications\Index.vue:347::href="route('admin.applications.show', app.id)"
+resources\js\Pages\Admin\JobApplications\Show.vue:21:form.post(route('admin.applications.update-status', props.application.id), {
+resources\js\Pages\Admin\JobApplications\Show.vue:60::href="route('admin.applications.index')"
+resources\js\Pages\Admin\Jobs\Create.vue:71:form.post(route('admin.jobs.store'));
+resources\js\Pages\Admin\Jobs\Create.vue:82::href="route('admin.jobs.index')"
+resources\js\Pages\Admin\Jobs\Create.vue:544::href="route('admin.jobs.index')"
+resources\js\Pages\Admin\Jobs\Edit.vue:69:form.put(route('admin.jobs.update', props.job.id));
+resources\js\Pages\Admin\Jobs\Edit.vue:80::href="route('admin.jobs.index')"
+resources\js\Pages\Admin\Jobs\Edit.vue:480::href="route('admin.jobs.index')"
+resources\js\Pages\Admin\Jobs\Index.vue:29:router.get(route('admin.jobs.index'), {
+resources\js\Pages\Admin\Jobs\Index.vue:80:router.post(route('admin.jobs.bulk-update-status'), {
+resources\js\Pages\Admin\Jobs\Index.vue:96:router.post(route('admin.jobs.bulk-delete'), {
+resources\js\Pages\Admin\Jobs\Index.vue:106:router.delete(route('admin.jobs.destroy', jobId));
+resources\js\Pages\Admin\Jobs\Index.vue:153::href="route('admin.jobs.create')"
+resources\js\Pages\Admin\Jobs\Index.vue:324::href="route('admin.jobs.create')"
+resources\js\Pages\Admin\Jobs\Index.vue:424::href="route('admin.jobs.show', job.id)"
+resources\js\Pages\Admin\Jobs\Index.vue:431::href="route('admin.jobs.edit', job.id)"
+resources\js\Pages\Admin\Jobs\IndexRedesigned.vue:13::href="route('admin.jobs.create')"
+resources\js\Pages\Admin\Jobs\IndexRedesigned.vue:175::href="route('admin.jobs.show', row.id)"
+resources\js\Pages\Admin\Jobs\IndexRedesigned.vue:181::href="route('admin.jobs.edit', row.id)"
+resources\js\Pages\Admin\Jobs\IndexRedesigned.vue:187::href="route('admin.jobs.applications', row.id)"
+resources\js\Pages\Admin\Jobs\IndexRedesigned.vue:249:router.get(route('admin.jobs.index'), {
+resources\js\Pages\Admin\Jobs\IndexRedesigned.vue:259:router.get(route('admin.jobs.index'), {
+resources\js\Pages\Admin\Jobs\IndexRedesigned.vue:274:router.get(route('admin.jobs.index'), filters.value, {
+resources\js\Pages\Admin\Jobs\IndexRedesigned.vue:286:router.get(route('admin.jobs.index'));
+resources\js\Pages\Admin\Jobs\IndexRedesigned.vue:291:router.post(route('admin.jobs.close', id));
+resources\js\Pages\Admin\Jobs\IndexRedesigned.vue:297:router.delete(route('admin.jobs.destroy', id));
+resources\js\Pages\Admin\Jobs\Show.vue:44:approvalForm.post(route('admin.jobs.approve', props.job.id), {
+resources\js\Pages\Admin\Jobs\Show.vue:54:rejectionForm.post(route('admin.jobs.reject', props.job.id), {
+resources\js\Pages\Admin\Jobs\Show.vue:121:router.post(route('admin.jobs.toggle-featured', props.job.id));
+resources\js\Pages\Admin\Jobs\Show.vue:127:router.post(route('admin.jobs.toggle-active', props.job.id));
+resources\js\Pages\Admin\Jobs\Show.vue:133:router.delete(route('admin.jobs.destroy', props.job.id));
+resources\js\Pages\Admin\Jobs\Show.vue:151::href="route('admin.jobs.index')"
+resources\js\Pages\Admin\Jobs\Show.vue:228::href="route('admin.jobs.edit', job.id)"
+resources\js\Pages\Admin\Jobs\Show.vue:301::href="route('admin.applications.index', { job_id: job.id })"
+resources\js\Pages\Admin\Jobs\Show.vue:343::href="route('admin.applications.show', application.id)"
+resources\js\Pages\Admin\MarketingCampaigns\Create.vue:27:form.post(route('admin.marketing-campaigns.store'))
+resources\js\Pages\Admin\MarketingCampaigns\Create.vue:50::href="route('admin.marketing-campaigns.index')"
+resources\js\Pages\Admin\MarketingCampaigns\Create.vue:754::href="route('admin.marketing-campaigns.index')"
+resources\js\Pages\Admin\MarketingCampaigns\Edit.vue:26:form.put(route('admin.marketing-campaigns.update', props.campaign.id))
+resources\js\Pages\Admin\MarketingCampaigns\Edit.vue:303:<a :href="route('admin.marketing-campaigns.index')">
+resources\js\Pages\Admin\MarketingCampaigns\Index.vue:40:router.get(route('admin.marketing-campaigns.index'), filterForm.value, {
+resources\js\Pages\Admin\MarketingCampaigns\Index.vue:89:router.post(route('admin.marketing-campaigns.pause', campaignId), {}, {
+resources\js\Pages\Admin\MarketingCampaigns\Index.vue:97:router.post(route('admin.marketing-campaigns.resume', campaignId), {}, {
+resources\js\Pages\Admin\MarketingCampaigns\Index.vue:105:router.post(route('admin.marketing-campaigns.cancel', campaignId), {}, {
+resources\js\Pages\Admin\MarketingCampaigns\Index.vue:111:router.post(route('admin.marketing-campaigns.duplicate', campaignId), {}, {
+resources\js\Pages\Admin\MarketingCampaigns\Index.vue:119:router.delete(route('admin.marketing-campaigns.destroy', campaignId), {
+resources\js\Pages\Admin\MarketingCampaigns\Index.vue:133::href="route('admin.marketing-campaigns.create')"
+resources\js\Pages\Admin\MarketingCampaigns\Index.vue:249::href="route('admin.marketing-campaigns.create')"
+resources\js\Pages\Admin\MarketingCampaigns\Index.vue:284::href="route('admin.marketing-campaigns.show', campaign.id)"
+resources\js\Pages\Admin\MarketingCampaigns\Index.vue:317::href="route('admin.marketing-campaigns.show', campaign.id)"
+resources\js\Pages\Admin\MarketingCampaigns\Index.vue:325::href="route('admin.marketing-campaigns.edit', campaign.id)"
+resources\js\Pages\Admin\MarketingCampaigns\Show.vue:48::href="route('admin.marketing-campaigns.index')"
+resources\js\Pages\Admin\MarketingCampaigns\Show.vue:68::href="route('admin.marketing-campaigns.edit', campaign.id)"
+resources\js\Pages\Admin\MasterDocuments\Create.vue:13:<Link :href="route('admin.master-documents.index')" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition">
+resources\js\Pages\Admin\MasterDocuments\Create.vue:195:<Link :href="route('admin.master-documents.index')" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition">
+resources\js\Pages\Admin\MasterDocuments\Create.vue:239:form.post(route('admin.master-documents.store'));
+resources\js\Pages\Admin\MasterDocuments\Edit.vue:14:<Link :href="route('admin.master-documents.show', document.id)" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition">
+resources\js\Pages\Admin\MasterDocuments\Edit.vue:17:<Link :href="route('admin.master-documents.index')" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition">
+resources\js\Pages\Admin\MasterDocuments\Edit.vue:203:<Link :href="route('admin.master-documents.show', document.id)" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition">
+resources\js\Pages\Admin\MasterDocuments\Edit.vue:248:form.put(route('admin.master-documents.update', props.document.id));
+resources\js\Pages\Admin\MasterDocuments\Edit.vue:253:router.delete(route('admin.master-documents.destroy', props.document.id));
+resources\js\Pages\Admin\MasterDocuments\Index.vue:26:router.get(route('admin.master-documents.index'), {
+resources\js\Pages\Admin\MasterDocuments\Index.vue:37:router.delete(route('admin.master-documents.destroy', id));
+resources\js\Pages\Admin\MasterDocuments\Index.vue:69::href="route('admin.master-documents.create')"
+resources\js\Pages\Admin\MasterDocuments\Index.vue:203::href="route('admin.master-documents.show', document.id)"
+resources\js\Pages\Admin\MasterDocuments\Index.vue:210::href="route('admin.master-documents.edit', document.id)"
+resources\js\Pages\Admin\MasterDocuments\Show.vue:18:<Link :href="route('admin.master-documents.edit', document.id)" class="px-4 py-2 bg-growth-600 hover:bg-growth-700 text-white rounded-lg transition">
+resources\js\Pages\Admin\MasterDocuments\Show.vue:21:<Link :href="route('admin.master-documents.index')" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition">
+resources\js\Pages\Admin\MasterDocuments\Show.vue:82:<Link :href="route('admin.document-assignments.show', assignment.country_id)" class="text-growth-600 hover:text-growth-600 font-medium">
+resources\js\Pages\Admin\Notifications\Index.vue:27:form.post(route('admin.notifications.broadcast'), {
+resources\js\Pages\Admin\Pages\Create.vue:36:form.post(route('admin.pages.store'), {
+resources\js\Pages\Admin\Pages\Create.vue:52::href="route('admin.pages.index')"
+resources\js\Pages\Admin\Pages\Create.vue:250::href="route('admin.pages.index')"
+resources\js\Pages\Admin\Pages\Index.vue:20:router.get(route('admin.pages.index'), {
+resources\js\Pages\Admin\Pages\Index.vue:39:router.post(route('admin.pages.toggle-published', page.id));
+resources\js\Pages\Admin\Pages\Index.vue:45:router.post(route('admin.pages.duplicate', page.id));
+resources\js\Pages\Admin\Pages\Index.vue:51:router.delete(route('admin.pages.destroy', page.id));
+resources\js\Pages\Admin\Pages\Index.vue:76::href="route('admin.pages.create')"
+resources\js\Pages\Admin\Pages\Index.vue:126::href="route('admin.pages.create')"
+resources\js\Pages\Admin\Pages\Index.vue:187::href="route('admin.pages.edit', page.id)"
+resources\js\Pages\Admin\Partners\Create.vue:6:<Link :href="route('admin.partners.index')" class="inline-flex items-center text-sm text-growth-600 hover:text-primary-800">
+resources\js\Pages\Admin\Partners\Create.vue:156:<Link :href="route('admin.partners.index')" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+resources\js\Pages\Admin\Partners\Create.vue:203:form.post(route('admin.partners.store'));
+resources\js\Pages\Admin\Partners\Edit.vue:5:<Link :href="route('admin.partners.index')" class="text-growth-600 hover:text-growth-600">
+resources\js\Pages\Admin\Partners\Edit.vue:86:<Link :href="route('admin.partners.index')" class="btn btn-secondary">
+resources\js\Pages\Admin\Partners\Edit.vue:129:form.post(route('admin.partners.update', props.partner.id));
+resources\js\Pages\Admin\Partners\Index.vue:6:<Link :href="route('admin.partners.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 hover:bg-growth-700 text-white font-medium rounded-lg transition-colors">
+resources\js\Pages\Admin\Partners\Index.vue:109:<Link :href="route('admin.partners.edit', partner.id)" class="text-growth-600 hover:text-red-900 transition-colors">
+resources\js\Pages\Admin\Partners\Index.vue:158:router.get(route('admin.partners.index'), form, {
+resources\js\Pages\Admin\Partners\Index.vue:173:router.post(route('admin.partners.toggle-active', partner.id), {}, {
+resources\js\Pages\Admin\Partners\Index.vue:181:router.delete(route('admin.partners.destroy', partner.id));
+resources\js\Pages\Admin\Rewards\Index.vue:39:searchForm.get(route('admin.rewards.index'), {
+resources\js\Pages\Admin\Rewards\Index.vue:52:router.post(route('admin.rewards.approve', rewardId), {}, {
+resources\js\Pages\Admin\Rewards\Index.vue:64:router.post(route('admin.rewards.reject', rewardId), {
+resources\js\Pages\Admin\SeoSettings\Index.vue:452:form.put(route('admin.seo-settings.update', activeTab.value), {
+resources\js\Pages\Admin\SeoSettings\Index.vue:468:router.post(route('admin.seo-settings.generate-sitemap'), {}, {
+resources\js\Pages\Admin\ServiceModules\Index.vue:204::href="route('admin.service-modules.show', service.id)"
+resources\js\Pages\Admin\ServiceModules\Index.vue:262:router.post(route('admin.service-modules.toggle-active', service.id), {}, {
+resources\js\Pages\Admin\ServiceModules\IndexModern.vue:12:onClick: () => router.visit(route('admin.service-modules.create')),
+resources\js\Pages\Admin\ServiceModules\IndexModern.vue:215::href="route('admin.service-modules.show', service.id)"
+resources\js\Pages\Admin\ServiceModules\IndexModern.vue:304::href="route('admin.service-modules.show', service.id)"
+resources\js\Pages\Admin\ServiceModules\IndexModern.vue:431:router.post(route('admin.service-modules.toggle-active', service.id), {}, {
+resources\js\Pages\Admin\ServiceModules\IndexModern.vue:442:router.get(route('admin.service-modules.export'), {}, {
+resources\js\Pages\Admin\ServiceQuotes\Index.vue:29:router.get(route('admin.service-quotes.index'), {
+resources\js\Pages\Admin\ServiceQuotes\Index.vue:41:router.get(route('admin.service-quotes.index'));
+resources\js\Pages\Admin\ServiceQuotes\Index.vue:55:router.delete(route('admin.service-quotes.destroy', quoteId));
+resources\js\Pages\Admin\ServiceQuotes\Index.vue:290::href="route('admin.service-quotes.show', quote.id)"
+resources\js\Pages\Admin\ServiceQuotes\Show.vue:26:statusForm.put(route('admin.service-quotes.update-status', props.quote.id));
+resources\js\Pages\Admin\ServiceQuotes\Show.vue:51::href="route('admin.service-quotes.index')"
+resources\js\Pages\Admin\Settings\Index.vue:203:submitForm.post(route('admin.settings.update', { group: activeTab.value }), {
+resources\js\Pages\Admin\Settings\Index.vue:216:window.history.pushState({}, '', route('admin.settings.index', { group }));
+resources\js\Pages\Admin\Settings\Index.vue:262::href="route('admin.settings.clear-cache')"
+resources\js\Pages\Admin\Settings\Index.vue:271::href="route('admin.settings.seed')"
+resources\js\Pages\Admin\Settings\IndexAccordion.vue:193:submitForm.post(route('admin.settings.update', { group: groupKey }), {
+resources\js\Pages\Admin\Settings\IndexAccordion.vue:249::href="route('admin.settings.clear-cache')"
+resources\js\Pages\Admin\Settings\IndexAccordion.vue:258::href="route('admin.settings.seed')"
+resources\js\Pages\Admin\Settings\IndexRedesigned.vue:14::href="route('admin.settings.clear-cache')"
+resources\js\Pages\Admin\Settings\IndexRedesigned.vue:21::href="route('admin.settings.seed')"
+resources\js\Pages\Admin\Settings\IndexRedesigned.vue:118::href="route('admin.blog.posts.index')"
+resources\js\Pages\Admin\Settings\IndexRedesigned.vue:125::href="route('admin.blog.categories.index')"
+resources\js\Pages\Admin\Settings\IndexRedesigned.vue:154::href="route('admin.ads.index')"
+resources\js\Pages\Admin\Settings\IndexRedesigned.vue:390:submitForm.post(route('admin.settings.update', { group }), {
+resources\js\Pages\Admin\Support\Index.vue:210:<Link :href="route('admin.support-tickets.show', ticket.id)" class="text-growth-600 hover:text-red-900">
+resources\js\Pages\Admin\Support\Index.vue:258:router.get(route('admin.support-tickets.index'), {
+resources\js\Pages\Admin\Support\Show.vue:9:<Link :href="route('admin.support-tickets.index')" class="inline-flex items-center text-sm text-gray-600 hover:text-gray-900">
+resources\js\Pages\Admin\Support\Show.vue:284:assignForm.post(route('admin.support-tickets.assign', props.ticket.id), {
+resources\js\Pages\Admin\Support\Show.vue:290:priorityForm.post(route('admin.support-tickets.update-priority', props.ticket.id), {
+resources\js\Pages\Admin\Support\Show.vue:296:statusForm.put(route('admin.support-tickets.update', props.ticket.id), {
+resources\js\Pages\Admin\Support\Show.vue:305:router.post(route('admin.support-tickets.close', props.ticket.id), {}, {
+resources\js\Pages\Admin\Support\Show.vue:315:router.post(route('admin.support-tickets.reopen', props.ticket.id), {}, {
+resources\js\Pages\Admin\Support\Show.vue:334:replyForm.post(route('admin.support-tickets.reply', props.ticket.id), {
+resources\js\Pages\Admin\SupportTickets\Index.vue:23:searchForm.get(route('admin.support-tickets.index'), {
+resources\js\Pages\Admin\SupportTickets\Index.vue:36:router.delete(route('admin.support-tickets.destroy', ticketId), {
+resources\js\Pages\Admin\SupportTickets\Index.vue:78::href="route('admin.support-tickets.create')"
+resources\js\Pages\Admin\SupportTickets\Index.vue:266::href="route('admin.support-tickets.show', ticket.id)"
+resources\js\Pages\Admin\SupportTickets\Index.vue:272::href="route('admin.support-tickets.edit', ticket.id)"
+resources\js\Pages\Admin\Testimonials\Create.vue:5:<Link :href="route('admin.testimonials.index')" class="inline-flex items-center text-gray-600 hover:text-gray-900">
+resources\js\Pages\Admin\Testimonials\Create.vue:220::href="route('admin.testimonials.index')"
+resources\js\Pages\Admin\Testimonials\Create.vue:268:form.post(route('admin.testimonials.store'));
+resources\js\Pages\Admin\Testimonials\Edit.vue:5:<Link :href="route('admin.testimonials.index')" class="inline-flex items-center text-gray-600 hover:text-gray-900">
+resources\js\Pages\Admin\Testimonials\Edit.vue:229::href="route('admin.testimonials.index')"
+resources\js\Pages\Admin\Testimonials\Edit.vue:282:form.post(route('admin.testimonials.update', props.testimonial.id));
+resources\js\Pages\Admin\Testimonials\Index.vue:13::href="route('admin.testimonials.create')"
+resources\js\Pages\Admin\Testimonials\Index.vue:143::href="route('admin.testimonials.edit', testimonial.id)"
+resources\js\Pages\Admin\Testimonials\Index.vue:211:router.get(route('admin.testimonials.index'), filters, {
+resources\js\Pages\Admin\Testimonials\Index.vue:232:router.post(route('admin.testimonials.toggle-approved', testimonial.id), {}, {
+resources\js\Pages\Admin\Testimonials\Index.vue:241:router.post(route('admin.testimonials.toggle-featured', testimonial.id), {}, {
+resources\js\Pages\Admin\Testimonials\Index.vue:249:router.delete(route('admin.testimonials.destroy', testimonial.id));
+resources\js\Pages\Admin\Users\Create.vue:23:form.post(route('admin.users.store'));
+resources\js\Pages\Admin\Users\Create.vue:47::href="route('admin.users.index')"
+resources\js\Pages\Admin\Users\Create.vue:210::href="route('admin.users.index')"
+resources\js\Pages\Admin\Users\Edit.vue:24:form.put(route('admin.users.update', props.user.id));
+resources\js\Pages\Admin\Users\Edit.vue:48::href="route('admin.users.index')"
+resources\js\Pages\Admin\Users\Edit.vue:259::href="route('admin.users.index')"
+resources\js\Pages\Admin\Users\Index.vue:55:router.get(route('admin.users.index'), {
+resources\js\Pages\Admin\Users\Index.vue:65:router.get(route('admin.users.index'), {
+resources\js\Pages\Admin\Users\Index.vue:82:router.get(route('admin.users.index'));
+resources\js\Pages\Admin\Users\Index.vue:95:router.post(route('admin.users.bulk-suspend'), {
+resources\js\Pages\Admin\Users\Index.vue:113:router.post(route('admin.users.bulk-unsuspend'), {
+resources\js\Pages\Admin\Users\Index.vue:124:window.location.href = route('admin.users.export', {
+resources\js\Pages\Admin\Users\Index.vue:158:router.post(route('admin.users.impersonate', user.id), {
+resources\js\Pages\Admin\Users\Index.vue:197::href="route('admin.users.create')"
+resources\js\Pages\Admin\Users\Index.vue:515::href="route('admin.users.show', user.id)"
+resources\js\Pages\Admin\Users\Index.vue:522::href="route('admin.users.edit', user.id)"
+resources\js\Pages\Admin\Users\IndexModern.vue:68:router.get(route('admin.users.index'), {
+resources\js\Pages\Admin\Users\IndexModern.vue:85:router.get(route('admin.users.index'));
+resources\js\Pages\Admin\Users\IndexModern.vue:98:router.post(route('admin.users.bulk-suspend'), {
+resources\js\Pages\Admin\Users\IndexModern.vue:116:router.post(route('admin.users.bulk-unsuspend'), {
+resources\js\Pages\Admin\Users\IndexModern.vue:127:window.location.href = route('admin.users.export', {
+resources\js\Pages\Admin\Users\IndexModern.vue:152:router.post(route('admin.users.impersonate', user.id), {
+resources\js\Pages\Admin\Users\IndexModern.vue:177:onClick: () => router.visit(route('admin.users.create')),
+resources\js\Pages\Admin\Users\IndexModern.vue:393::href="route('admin.users.show', user.id)"
+resources\js\Pages\Admin\Users\IndexModern.vue:399::href="route('admin.users.edit', user.id)"
+resources\js\Pages\Admin\Users\IndexModern.vue:426:onClick: () => router.visit(route('admin.users.create')),
+resources\js\Pages\Admin\Users\IndexRedesigned.vue:13::href="route('admin.users.create')"
+resources\js\Pages\Admin\Users\IndexRedesigned.vue:180::href="route('admin.users.show', row.id)"
+resources\js\Pages\Admin\Users\IndexRedesigned.vue:186::href="route('admin.users.edit', row.id)"
+resources\js\Pages\Admin\Users\IndexRedesigned.vue:246:router.get(route('admin.users.index'), {
+resources\js\Pages\Admin\Users\IndexRedesigned.vue:256:router.get(route('admin.users.index'), {
+resources\js\Pages\Admin\Users\IndexRedesigned.vue:271:router.get(route('admin.users.index'), filters.value, {
+resources\js\Pages\Admin\Users\IndexRedesigned.vue:283:router.get(route('admin.users.index'));
+resources\js\Pages\Admin\Users\IndexRedesigned.vue:291:router.post(route('admin.users.suspend', id), { reason });
+resources\js\Pages\Admin\Users\IndexRedesigned.vue:297:router.delete(route('admin.users.destroy', id));
+resources\js\Pages\Admin\Users\Show.vue:49:suspendForm.post(route('admin.users.suspend', props.user.id), {
+resources\js\Pages\Admin\Users\Show.vue:60:router.post(route('admin.users.unsuspend', props.user.id), {}, {
+resources\js\Pages\Admin\Users\Show.vue:68:roleForm.post(route('admin.users.update-role', props.user.id), {
+resources\js\Pages\Admin\Users\Show.vue:76:router.delete(route('admin.users.destroy', props.user.id));
+resources\js\Pages\Admin\Users\Show.vue:100:router.post(route('admin.users.impersonate', props.user.id), {
+resources\js\Pages\Admin\Users\Show.vue:172::href="route('admin.users.index')"
+resources\js\Pages\Admin\Users\Show.vue:195::href="route('admin.users.edit', user.id)"
+resources\js\Pages\Admin\Users\Show.vue:446::href="route('admin.applications.show', application.id)"
+resources\js\Pages\Admin\Visa\Index.vue:34:router.get(route('admin.visa-applications.index'), {
+resources\js\Pages\Admin\Visa\Index.vue:310::href="route('admin.visa-applications.show', application.id)"
+resources\js\Pages\Admin\Visa\IndexModern.vue:12:onClick: () => router.visit(route('admin.visa-applications.create')),
+resources\js\Pages\Admin\Visa\IndexModern.vue:235::href="route('admin.visa-applications.show', application.id)"
+resources\js\Pages\Admin\Visa\IndexModern.vue:242::href="route('admin.visa-applications.edit', application.id)"
+resources\js\Pages\Admin\Visa\IndexModern.vue:267::action="hasActiveFilters ? null : { label: 'Create Application', onClick: () => router.visit(route('admin.visa-applications.create')) }"
+resources\js\Pages\Admin\Visa\IndexModern.vue:399:router.get(route('admin.visa-applications.index'), {
+resources\js\Pages\Admin\Visa\IndexModern.vue:426:router.visit(route('admin.visa-applications.update-status', application.id));
+resources\js\Pages\Admin\Visa\IndexModern.vue:431:router.get(route('admin.visa-applications.export'), {
+resources\js\Pages\Admin\VisaRequirements\Create.vue:15::href="route('admin.visa-requirements.index')"
+resources\js\Pages\Admin\VisaRequirements\Create.vue:42:<Link :href="route('admin.document-assignments.index')" class="font-semibold underline hover:text-red-900">Document Hub System</Link>
+resources\js\Pages\Admin\VisaRequirements\Create.vue:332::href="route('admin.visa-requirements.index')"
+resources\js\Pages\Admin\VisaRequirements\Create.vue:454:form.transform(() => formData).post(route('admin.visa-requirements.store'));
+resources\js\Pages\Admin\VisaRequirements\Edit.vue:16::href="route('admin.visa-requirements.show', visaRequirement.id)"
+resources\js\Pages\Admin\VisaRequirements\Edit.vue:22::href="route('admin.visa-requirements.index')"
+resources\js\Pages\Admin\VisaRequirements\Edit.vue:271::href="route('admin.visa-requirements.index')"
+resources\js\Pages\Admin\VisaRequirements\Edit.vue:335:form.put(route('admin.visa-requirements.update', props.visaRequirement.id));
+resources\js\Pages\Admin\VisaRequirements\Edit.vue:340:router.delete(route('admin.visa-requirements.destroy', props.visaRequirement.id));
+resources\js\Pages\Admin\VisaRequirements\Index.vue:15::href="route('admin.visa-requirements.create')"
+resources\js\Pages\Admin\VisaRequirements\Index.vue:214::href="route('admin.visa-requirements.show', requirement.id)"
+resources\js\Pages\Admin\VisaRequirements\Index.vue:220::href="route('admin.visa-requirements.edit', requirement.id)"
+resources\js\Pages\Admin\VisaRequirements\Index.vue:290:router.get(route('admin.visa-requirements.index'), filterForm.value, {
+resources\js\Pages\Admin\VisaRequirements\Index.vue:307:route('admin.visa-requirements.toggle-active', requirement.id),
+resources\js\Pages\Admin\VisaRequirements\Show.vue:30::href="route('admin.visa-requirements.edit', visaRequirement.id)"
+resources\js\Pages\Admin\VisaRequirements\Show.vue:39::href="route('admin.visa-requirements.index')"
+resources\js\Pages\Admin\VisaRequirements\Show.vue:240::href="route('admin.visa-requirements.edit', visaRequirement.id)"
+resources\js\Pages\Admin\VisaRequirements\Show.vue:264:route('admin.visa-requirements.toggle-active', props.visaRequirement.id),
+resources\js\Pages\Admin\Wallets\Index.vue:32:router.get(route('admin.wallets.index'), searchForm.value, {
+resources\js\Pages\Admin\Wallets\Index.vue:239::href="route('admin.wallets.show', wallet.id)"
+resources\js\Pages\Admin\Wallets\IndexRedesigned.vue:151::href="route('admin.wallets.show', row.id)"
+resources\js\Pages\Admin\Wallets\IndexRedesigned.vue:209:router.get(route('admin.wallets.index'), {
+resources\js\Pages\Admin\Wallets\IndexRedesigned.vue:219:router.get(route('admin.wallets.index'), {
+resources\js\Pages\Admin\Wallets\IndexRedesigned.vue:230:router.get(route('admin.wallets.index'), filters.value, {
+resources\js\Pages\Admin\Wallets\IndexRedesigned.vue:241:router.get(route('admin.wallets.index'));
+resources\js\Pages\Admin\Wallets\IndexRedesigned.vue:251:router.post(route('admin.wallets.credit', wallet.id), {
+resources\js\Pages\Admin\Wallets\IndexRedesigned.vue:265:router.post(route('admin.wallets.debit', wallet.id), {
+resources\js\Pages\Admin\Wallets\IndexRedesigned.vue:273:window.location.href = route('admin.wallets.export');
+resources\js\Pages\Admin\Wallets\Show.vue:40:creditForm.post(route('admin.wallets.credit', props.wallet.id), {
+resources\js\Pages\Admin\Wallets\Show.vue:50:debitForm.post(route('admin.wallets.debit', props.wallet.id), {
+resources\js\Pages\Admin\Wallets\Show.vue:61:router.post(route('admin.wallets.toggle-status', props.wallet.id));
+resources\js\Pages\Admin\Wallets\Show.vue:67:router.post(route('admin.wallets.reverse-transaction', transactionId));
+resources\js\Pages\Admin\Wallets\Show.vue:97:<Link :href="route('admin.wallets.index')" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">

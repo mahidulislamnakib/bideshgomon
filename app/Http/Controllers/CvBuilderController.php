@@ -253,4 +253,29 @@ class CvBuilderController extends Controller
 
         return back()->with('success', $message);
     }
+
+    /**
+     * Generate AI-powered professional summary
+     */
+    public function generateAiSummary(Request $request)
+    {
+        $validated = $request->validate([
+            'full_name' => 'required|string',
+            'experience' => 'nullable|array',
+            'skills' => 'nullable|array',
+            'education' => 'nullable|array',
+        ]);
+
+        $summary = $this->cvBuilderService->generateProfessionalSummary(
+            $validated['full_name'],
+            $validated['experience'] ?? [],
+            $validated['skills'] ?? [],
+            $validated['education'] ?? []
+        );
+
+        return response()->json([
+            'success' => true,
+            'summary' => $summary,
+        ]);
+    }
 }

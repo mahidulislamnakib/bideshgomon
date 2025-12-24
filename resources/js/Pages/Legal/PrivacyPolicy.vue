@@ -17,27 +17,28 @@ const companyAddress = 'Dhaka, Bangladesh'
   <div>
     <Head title="Privacy Policy - BideshGomon" />
 
-    <div class="min-h-screen bg-gray-50 py-12">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
-        <div class="bg-white shadow rounded-lg overflow-hidden mb-6">
-          <div class="bg-gradient-to-r from-green-600 to-green-700 px-6 py-8">
-            <div class="flex items-center justify-center mb-4">
-              <LockClosedIcon class="h-12 w-12 text-white" />
-            </div>
-            <h1 class="text-3xl font-bold text-white text-center">Privacy Policy</h1>
-            <p class="text-green-100 text-center mt-2">Last Updated: December 1, 2025</p>
+    <div class="min-h-screen bg-gray-50 dark:bg-neutral-900">
+      <!-- Compact Hero -->
+      <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+        <div class="max-w-4xl mx-auto flex items-center gap-4">
+          <LockClosedIcon class="h-8 w-8 text-white" />
+          <div>
+            <h1 class="text-xl md:text-2xl font-bold text-white">Privacy Policy</h1>
+            <p class="text-sm text-white/80 mt-0.5">Last Updated: December 1, 2025</p>
           </div>
+        </div>
+      </div>
 
-          <div class="px-6 py-4 bg-green-50 border-b border-green-100">
-            <p class="text-sm text-green-800 text-center">
-              Your privacy is critically important to us. This policy explains how we collect, use, and protect your personal data.
-            </p>
-          </div>
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Notice Card -->
+        <div class="bg-growth-50 dark:bg-growth-900/20 border border-growth-200 dark:border-growth-800 rounded-xl p-4 mb-6">
+          <p class="text-sm text-growth-800 dark:text-growth-200">
+            Your privacy is critically important to us. This policy explains how we collect, use, and protect your personal data.
+          </p>
         </div>
 
         <!-- Content -->
-        <div class="bg-white shadow rounded-lg p-8 space-y-8">
+        <div class="bg-white dark:bg-neutral-800 rounded-xl border border-gray-200 dark:border-neutral-700 p-8 space-y-8">
           <!-- Introduction -->
           <section>
             <h2 class="text-2xl font-semibold text-gray-900 mb-4">Introduction</h2>

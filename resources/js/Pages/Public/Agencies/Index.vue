@@ -20,7 +20,7 @@
                                 @input="applyFilters"
                                 type="text" 
                                 placeholder="Agency name or location..."
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             />
                         </div>
 
@@ -29,7 +29,7 @@
                             <select 
                                 v-model="filters.country"
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="">All Countries</option>
                                 <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
@@ -41,7 +41,7 @@
                             <select 
                                 v-model="filters.business_type"
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="">All Types</option>
                                 <option value="recruitment">Recruitment Agency</option>
@@ -57,7 +57,7 @@
                             <select 
                                 v-model="filters.min_rating"
                                 @change="applyFilters"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="">Any Rating</option>
                                 <option value="4">4+ Stars</option>
@@ -75,7 +75,7 @@
                             <select 
                                 v-model="filters.sort"
                                 @change="applyFilters"
-                                class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                class="rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="featured">Featured</option>
                                 <option value="rating">Highest Rated</option>
@@ -111,13 +111,13 @@
                                         class="h-16 w-16 object-cover rounded-lg"
                                     />
                                     <div v-else class="h-16 w-16 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                        <BuildingOfficeIcon class="h-8 w-8 text-brand-red-600" />
+                                        <BuildingOfficeIcon class="h-8 w-8 text-growth-600" />
                                     </div>
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <h3 class="text-lg font-semibold text-gray-900 truncate flex items-center">
                                         {{ agency.name }}
-                                        <CheckBadgeIcon v-if="agency.is_verified" class="h-5 w-5 text-blue-500 ml-1" />
+                                        <CheckBadgeIcon v-if="agency.is_verified" class="h-5 w-5 text-growth-600 ml-1" />
                                     </h3>
                                     <p v-if="agency.company_name" class="text-sm text-gray-600 truncate">{{ agency.company_name }}</p>
                                     <div v-if="agency.agency_type" class="mt-1">
@@ -200,7 +200,7 @@
                                 :class="[
                                     'px-3 py-2 text-sm font-medium rounded-md',
                                     link.active 
-                                        ? 'bg-brand-red-600 text-white' 
+                                        ? 'bg-growth-600 text-white' 
                                         : link.url 
                                             ? 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300' 
                                             : 'bg-gray-100 text-gray-400 cursor-not-allowed'

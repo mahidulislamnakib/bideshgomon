@@ -104,10 +104,10 @@ const titleSizeClass = computed(() => {
 
 const iconColorClass = computed(() => {
   const colors = {
-    default: 'text-gray-400',
-    search: 'text-blue-400',
-    error: 'text-red-400',
-    success: 'text-green-400',
+    default: 'text-gray-400 dark:text-gray-500',
+    search: 'text-blue-400 dark:text-blue-500',
+    error: 'text-red-400 dark:text-red-500',
+    success: 'text-green-400 dark:text-green-500',
   };
   return colors[props.variant];
 });
@@ -116,7 +116,13 @@ const iconColorClass = computed(() => {
 <template>
   <div :class="['text-center flex flex-col items-center justify-center', containerPadding]">
     <!-- Icon -->
-    <div :class="['rounded-full p-4 mb-4', variant === 'error' ? 'bg-red-50' : variant === 'success' ? 'bg-green-50' : 'bg-gray-50']">
+    <div :class="[
+      'rounded-2xl p-5 mb-6 transition-all duration-300',
+      variant === 'error' ? 'bg-red-50 dark:bg-red-900/20' : 
+      variant === 'success' ? 'bg-green-50 dark:bg-green-900/20' : 
+      variant === 'search' ? 'bg-blue-50 dark:bg-blue-900/20' :
+      'bg-gray-100 dark:bg-gray-700/50'
+    ]">
       <component
         :is="iconComponent"
         :class="[iconSizeClass, iconColorClass]"
@@ -124,27 +130,27 @@ const iconColorClass = computed(() => {
     </div>
 
     <!-- Title -->
-    <h3 :class="['font-semibold text-gray-900 mb-2', titleSizeClass]">
+    <h3 :class="['font-semibold text-gray-900 dark:text-white mb-3', titleSizeClass]">
       {{ title }}
     </h3>
 
     <!-- Description -->
-    <p v-if="description" class="text-sm text-gray-500 max-w-md mb-6">
+    <p v-if="description" class="text-sm text-gray-500 dark:text-gray-400 max-w-md mb-8 leading-relaxed">
       {{ description }}
     </p>
 
     <!-- Actions -->
-    <div v-if="action || secondaryAction" class="flex items-center gap-3">
+    <div v-if="action || secondaryAction" class="flex items-center gap-3 flex-wrap justify-center">
       <!-- Primary Action -->
       <button
         v-if="action"
         @click="action.onClick"
         :class="[
-          'inline-flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200',
-          'focus:outline-none focus:ring-2 focus:ring-offset-2',
+          'inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-xl transition-all duration-200',
+          'focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900',
           action.variant === 'secondary' 
-            ? 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 focus:ring-gray-500'
-            : 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-sm'
+            ? 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 focus:ring-gray-500'
+            : 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-lg shadow-red-500/25'
         ]"
       >
         <component
@@ -159,7 +165,7 @@ const iconColorClass = computed(() => {
       <button
         v-if="secondaryAction"
         @click="secondaryAction.onClick"
-        class="inline-flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-200"
+        class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-gray-500 transition-all duration-200"
       >
         <component
           v-if="secondaryAction.icon"

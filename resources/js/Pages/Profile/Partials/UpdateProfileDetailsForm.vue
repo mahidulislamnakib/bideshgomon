@@ -144,7 +144,7 @@ const submit = () => {
                 <textarea
                     id="bio"
                     v-model="form.bio"
-                    class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none placeholder:text-gray-400"
+                    class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none placeholder:text-gray-400"
                     rows="3"
                     placeholder="Tell us about yourself..."
                 ></textarea>
@@ -160,7 +160,7 @@ const submit = () => {
                         type="text"
                         v-model="displayDob"
                         @blur="updateDob(displayDob)"
-                        class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-gray-400"
+                        class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all placeholder:text-gray-400"
                         placeholder="DD/MM/YYYY"
                     />
                     <p class="text-xs text-gray-500">Format: DD/MM/YYYY</p>
@@ -173,7 +173,7 @@ const submit = () => {
                         id="nid"
                         type="text"
                         v-model="form.nid"
-                        class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-gray-400"
+                        class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all placeholder:text-gray-400"
                         placeholder="10 or 17 digits"
                     />
                     <InputError :message="form.errors.nid" />
@@ -184,7 +184,7 @@ const submit = () => {
                     <select
                         id="gender"
                         v-model="form.gender"
-                        class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                        class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                     >
                         <option value="">Select Gender</option>
                         <option v-for="gender in GENDER_OPTIONS" :key="gender" :value="gender.toLowerCase()">
@@ -204,7 +204,7 @@ const submit = () => {
                     list="nationalities-list"
                     type="text"
                     placeholder="Type to search nationality..."
-                    class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-gray-400"
+                    class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all placeholder:text-gray-400"
                 />
                 <datalist id="nationalities-list">
                     <option v-for="country in countries" :key="country.id" :value="country.nationality">
@@ -218,7 +218,7 @@ const submit = () => {
             <div class="pt-6 border-t border-gray-100">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
-                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <svg class="w-4 h-4 text-growth-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </div>
                     <h3 class="text-base font-medium text-gray-900">Present Address</h3>
                 </div>
@@ -230,7 +230,7 @@ const submit = () => {
                             id="present_country"
                             v-model="form.present_country"
                             @change="form.present_division = ''; form.present_district = ''"
-                            class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                            class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                         >
                             <option value="">Select Country</option>
                             <option v-for="country in countries" :key="country.id" :value="country.name">
@@ -251,7 +251,7 @@ const submit = () => {
                                 id="present_division"
                                 v-model="form.present_division"
                                 @change="form.present_district = ''"
-                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                             >
                                 <option value="">Select Division</option>
                                 <option v-for="division in BANGLADESH_DIVISIONS" :key="division" :value="division">
@@ -263,7 +263,7 @@ const submit = () => {
                                 type="text"
                                 id="present_division"
                                 v-model="form.present_division"
-                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                 placeholder="Enter state/province/region"
                             />
                             <InputError class="mt-2" :message="form.errors.present_division" />
@@ -278,7 +278,7 @@ const submit = () => {
                                 v-if="form.present_country === 'Bangladesh' && form.present_division"
                                 id="present_district"
                                 v-model="form.present_district"
-                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                             >
                                 <option value="">Select District</option>
                                 <option v-for="district in presentDistricts" :key="district" :value="district">
@@ -290,7 +290,7 @@ const submit = () => {
                                 type="text"
                                 id="present_district"
                                 v-model="form.present_district"
-                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                 :placeholder="form.present_country === 'Bangladesh' ? 'Select division first' : 'Enter city/district'"
                                 :disabled="form.present_country === 'Bangladesh' && !form.present_division"
                             />
@@ -329,7 +329,7 @@ const submit = () => {
                         <textarea
                             id="present_address_line"
                             v-model="form.present_address_line"
-                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
+                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"
                             rows="2"
                             placeholder="House/Apartment number, Street, Area"
                         />
@@ -346,7 +346,7 @@ const submit = () => {
                         <input
                             v-model="sameAsPresent"
                             type="checkbox"
-                            class="w-4 h-4 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
+                            class="w-4 h-4 text-growth-600 border-gray-300 rounded focus:ring-growth-600"
                         />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Same as Present Address</span>
                     </label>
@@ -359,7 +359,7 @@ const submit = () => {
                             id="permanent_country"
                             v-model="form.permanent_country"
                             @change="form.permanent_division = ''; form.permanent_district = ''"
-                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                         >
                             <option value="">Select Country</option>
                             <option v-for="country in countries" :key="country.id" :value="country.name">
@@ -380,7 +380,7 @@ const submit = () => {
                                 id="permanent_division"
                                 v-model="form.permanent_division"
                                 @change="form.permanent_district = ''"
-                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                             >
                                 <option value="">Select Division</option>
                                 <option v-for="division in BANGLADESH_DIVISIONS" :key="division" :value="division">
@@ -392,7 +392,7 @@ const submit = () => {
                                 type="text"
                                 id="permanent_division"
                                 v-model="form.permanent_division"
-                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                 placeholder="Enter state/province/region"
                             />
                             <InputError class="mt-2" :message="form.errors.permanent_division" />
@@ -407,7 +407,7 @@ const submit = () => {
                                 v-if="form.permanent_country === 'Bangladesh' && form.permanent_division"
                                 id="permanent_district"
                                 v-model="form.permanent_district"
-                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                             >
                                 <option value="">Select District</option>
                                 <option v-for="district in permanentDistricts" :key="district" :value="district">
@@ -419,7 +419,7 @@ const submit = () => {
                                 type="text"
                                 id="permanent_district"
                                 v-model="form.permanent_district"
-                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                 :placeholder="form.permanent_country === 'Bangladesh' ? 'Select division first' : 'Enter city/district'"
                                 :disabled="form.permanent_country === 'Bangladesh' && !form.permanent_division"
                             />
@@ -459,7 +459,7 @@ const submit = () => {
                             id="permanent_address_line"
                             v-model="form.permanent_address_line"
                             :disabled="sameAsPresent"
-                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed"
+                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed"
                             rows="2"
                             placeholder="House/Apartment number, Street, Area"
                         />
@@ -496,7 +496,7 @@ const submit = () => {
                     <button
                         type="submit"
                         :disabled="form.processing"
-                        class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl shadow-sm hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                        class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl shadow-sm hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                     >
                         <svg v-if="form.processing" class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

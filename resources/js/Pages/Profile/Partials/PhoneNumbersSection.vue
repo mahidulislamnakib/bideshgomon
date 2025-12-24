@@ -401,7 +401,7 @@ onMounted(() => {
                             <div class="flex-1 min-w-0">
                                 <a 
                                     :href="`tel:${phone.country_code}${phone.phone_number}`"
-                                    class="text-lg font-bold text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors block"
+                                    class="text-lg font-bold text-gray-900 dark:text-white hover:text-growth-600 dark:hover:text-indigo-400 transition-colors block"
                                 >
                                     {{ phone.country_code }} {{ phone.phone_number }}
                                 </a>
@@ -508,7 +508,7 @@ onMounted(() => {
                         <div class="relative">
                             <select
                                 v-model="form.country_code"
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none bg-white dark:bg-gray-800 shadow-sm hover:border-gray-400 transition-colors cursor-pointer"
+                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 appearance-none bg-white dark:bg-gray-800 shadow-sm hover:border-gray-400 transition-colors cursor-pointer"
                                 style="font-size: 15px; min-height: 48px; padding-right: 40px;"
                             >
                                 <option value="" disabled>Select country</option>
@@ -539,7 +539,7 @@ onMounted(() => {
                             v-model="form.phone_number"
                             type="tel"
                             placeholder="1712345678"
-                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm hover:border-gray-400 transition-colors"
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 shadow-sm hover:border-gray-400 transition-colors"
                             :class="{ 'border-red-500': errors.phone_number }"
                             style="font-size: 16px; min-height: 48px"
                         />
@@ -557,7 +557,7 @@ onMounted(() => {
                         <div class="relative">
                             <select
                                 v-model="form.phone_type"
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none bg-white shadow-sm hover:border-gray-400 transition-colors cursor-pointer"
+                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 appearance-none bg-white shadow-sm hover:border-gray-400 transition-colors cursor-pointer"
                                 style="font-size: 15px; min-height: 48px; padding-right: 40px;"
                             >
                                 <option v-for="type in phoneTypes" :key="type.value" :value="type.value" class="py-2">
@@ -584,7 +584,7 @@ onMounted(() => {
                             v-model="form.label"
                             type="text"
                             placeholder="e.g., Personal, Office, Emergency"
-                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm hover:border-gray-400 transition-colors"
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 shadow-sm hover:border-gray-400 transition-colors"
                             :class="{ 'border-red-500': errors.label }"
                             style="font-size: 16px; min-height: 48px"
                         />
@@ -598,7 +598,7 @@ onMounted(() => {
                         <input
                             v-model="form.is_primary"
                             type="checkbox"
-                            class="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 cursor-pointer"
+                            class="w-5 h-5 text-growth-600 border-gray-300 rounded focus:ring-growth-600 cursor-pointer"
                         />
                         <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Set as primary phone number</span>
                     </label>
@@ -727,7 +727,7 @@ onMounted(() => {
                         <button
                             type="button"
                             @click="resendVerificationCode"
-                            class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 disabled:opacity-50 transition-colors"
+                            class="text-sm font-medium text-growth-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 disabled:opacity-50 transition-colors"
                             :disabled="isSendingCode"
                         >
                             <span v-if="isSendingCode">Sending...</span>

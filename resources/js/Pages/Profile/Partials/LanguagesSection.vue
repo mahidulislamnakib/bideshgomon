@@ -194,6 +194,9 @@ const deleteLanguage = () => {
 
 // Helper to get language name from ID
 const getLanguageName = id => {
+  if (!id || !props.languages || !Array.isArray(props.languages)) {
+    return 'Unknown'
+  }
   const lang = props.languages.find(l => l.id === id)
   return lang ? lang.name : 'Unknown'
 }
@@ -289,12 +292,12 @@ const formatDate = dateString => {
         :key="lang.id"
         class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
       >
-        <div class="h-1 bg-brand-red-600"></div>
+        <div class="h-1 bg-growth-600"></div>
         <div class="p-4 sm:p-6">
           <div class="flex items-start justify-between gap-3 mb-3">
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2 mb-1">
-                <GlobeAltIcon class="w-6 h-6 md:w-7 md:h-7 text-brand-red-600 dark:text-blue-400 flex-shrink-0" />
+                <GlobeAltIcon class="w-6 h-6 md:w-7 md:h-7 text-growth-600 dark:text-blue-400 flex-shrink-0" />
                 <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white truncate">
                   {{ getLanguageName(lang.language_id) }}
                 </h3>
@@ -320,7 +323,7 @@ const formatDate = dateString => {
           >
             <div v-if="lang.overall_score" class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-2 border border-blue-200 dark:border-blue-700">
               <div class="text-xs text-gray-600 dark:text-gray-400 font-medium">Overall</div>
-              <div class="text-lg font-bold text-brand-red-600 dark:text-blue-400">{{ lang.overall_score }}</div>
+              <div class="text-lg font-bold text-growth-600 dark:text-blue-400">{{ lang.overall_score }}</div>
             </div>
             <div v-if="lang.reading_score" class="bg-gray-50 dark:bg-gray-700 rounded-lg p-2 border border-gray-200 dark:border-gray-600">
               <div class="text-xs text-gray-600 dark:text-gray-400 font-medium">Reading</div>
@@ -385,7 +388,7 @@ const formatDate = dateString => {
       <!-- Add More Button -->
       <button
         @click="openEditModal(null)"
-        class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-brand-red-600 hover:bg-red-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-base"
+        class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-growth-600 hover:bg-growth-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-base"
       >
         <PlusIcon class="h-5 w-5" />
         <span>ADD MORE LANGUAGES</span>
@@ -398,7 +401,7 @@ const formatDate = dateString => {
       <!-- Modal Header -->
       <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
         <div
-          class="w-12 h-12 bg-brand-red-600 rounded-xl flex items-center justify-center shadow-lg"
+          class="w-12 h-12 bg-growth-600 rounded-xl flex items-center justify-center shadow-lg"
         >
           <GlobeAltIcon class="w-7 h-7 text-white" />
         </div>
@@ -415,7 +418,7 @@ const formatDate = dateString => {
             <select
               id="language_id"
               v-model="form.language_id"
-              class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl dark:bg-gray-700 dark:text-white transition-all bg-white"
+              class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-growth-600 focus:border-growth-600 rounded-xl dark:bg-gray-700 dark:text-white transition-all bg-white"
               required
             >
               <option value="" disabled>Select a language</option>
@@ -434,7 +437,7 @@ const formatDate = dateString => {
             <select
               id="proficiency_level"
               v-model="form.proficiency_level"
-              class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl dark:bg-gray-700 dark:text-white transition-all bg-white"
+              class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-growth-600 focus:border-growth-600 rounded-xl dark:bg-gray-700 dark:text-white transition-all bg-white"
               required
             >
               <option value="" disabled>Select proficiency</option>
@@ -459,7 +462,7 @@ const formatDate = dateString => {
           class="p-4 bg-sky-50 dark:bg-sky-900/20 rounded-lg border border-sky-200 dark:border-sky-800"
         >
           <div class="flex items-center gap-2 mb-4">
-            <AcademicCapIcon class="w-5 h-5 text-brand-red-600 dark:text-cyan-400" />
+            <AcademicCapIcon class="w-5 h-5 text-growth-600 dark:text-cyan-400" />
             <h3 class="font-semibold text-gray-900 dark:text-white">
               Language Test Details (Optional)
             </h3>
@@ -475,7 +478,7 @@ const formatDate = dateString => {
               <select
                 id="language_test_id"
                 v-model="form.language_test_id"
-                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl dark:bg-gray-700 dark:text-white transition-all bg-white"
+                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-growth-600 focus:border-growth-600 rounded-xl dark:bg-gray-700 dark:text-white transition-all bg-white"
               >
                 <option :value="null">No test taken / Not applicable</option>
                 <optgroup v-if="languageTestsList && languageTestsList.length > 0" label="Available Tests">

@@ -10,8 +10,8 @@
             <h3 class="font-semibold text-lg mb-1">{{ service.title }}</h3>
             <p class="text-gray-600 text-sm mb-3">{{ service.description }}</p>
             <div class="flex items-center justify-between">
-                <span class="text-brand-red-600 font-bold">৳{{ service.price }}</span>
-                <button class="bg-brand-red-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-700 transition">
+                <span class="text-growth-600 font-bold">৳{{ service.price }}</span>
+                <button class="bg-growth-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-growth-700 transition">
                     View Details
                 </button>
             </div>

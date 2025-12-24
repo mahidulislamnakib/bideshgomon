@@ -246,7 +246,7 @@
                                 v-model="selectedFields"
                                 type="checkbox"
                                 :value="key"
-                                class="mt-1 rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                class="mt-1 rounded border-gray-300 text-growth-600 focus:ring-growth-600"
                             />
                             <div class="flex-1">
                                 <p class="font-medium text-gray-900 capitalize">{{ (key || '').replace(/_/g, ' ') }}</p>
@@ -266,7 +266,7 @@
                         <button
                             type="submit"
                             :disabled="selectedFields.length === 0 || applyForm.processing"
-                            class="px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            class="px-4 py-2 bg-growth-600 text-white rounded-lg hover:bg-growth-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                         >
                             {{ applyForm.processing ? 'Applying...' : `Apply ${selectedFields.length} Field${selectedFields.length !== 1 ? 's' : ''}` }}
                         </button>

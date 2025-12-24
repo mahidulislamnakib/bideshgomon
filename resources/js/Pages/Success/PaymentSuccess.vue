@@ -99,7 +99,7 @@ const downloadReceipt = () => {
             <div class="mt-6 pt-6 border-t">
               <button
                 @click="downloadReceipt"
-                class="w-full inline-flex items-center justify-center px-6 py-3 bg-brand-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
+                class="w-full inline-flex items-center justify-center px-6 py-3 bg-growth-600 text-white font-semibold rounded-lg hover:bg-growth-700 transition"
               >
                 <ArrowDownTrayIcon class="h-5 w-5 mr-2" />
                 Download Receipt
@@ -166,7 +166,7 @@ const downloadReceipt = () => {
               :href="route('applications.show', transaction.reference_id)"
               class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition text-center"
             >
-              <DocumentTextIcon class="h-8 w-8 text-brand-red-600 mb-2" />
+              <DocumentTextIcon class="h-8 w-8 text-growth-600 mb-2" />
               <span class="font-semibold text-gray-900">View Application</span>
               <span class="text-sm text-gray-600 mt-1">Check status</span>
             </Link>
@@ -196,7 +196,7 @@ const downloadReceipt = () => {
           <p class="text-sm">Transaction ID: <span class="font-mono text-gray-900">{{ transaction.transaction_id }}</span></p>
           <p class="mt-2 text-sm">
             Need help? Contact us at 
-            <a href="mailto:support@bideshgomon.com" class="text-brand-red-600 hover:underline">support@bideshgomon.com</a>
+            <a href="mailto:support@bideshgomon.com" class="text-growth-600 hover:underline">support@bideshgomon.com</a>
           </p>
         </div>
       </div>

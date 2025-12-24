@@ -83,7 +83,7 @@ function isPdf(filename) {
         </div>
       </div>
 
-      <div class="bg-white shadow rounded-lg p-6 mb-10">
+      <div class="bg-white shadow rounded-2xl p-6 mb-10">
         <h2 class="text-lg font-semibold mb-4">Pending Documents</h2>
         <div v-if="pending.data.length === 0" class="text-center py-8 text-sm text-gray-500">No pending documents.</div>
         <div v-else class="overflow-x-auto">
@@ -104,16 +104,16 @@ function isPdf(filename) {
                 <td class="px-3 py-2 text-sm">{{ doc.original_filename }}</td>
                 <td class="px-3 py-2 text-sm">{{ formatDate(doc.created_at) }}</td>
                 <td class="px-3 py-2 text-sm text-right space-x-2">
-                  <button @click="viewDocument(doc)" class="bg-brand-red-600 hover:bg-red-700 text-white text-xs px-3 py-1 rounded inline-flex items-center gap-1">
+                  <button @click="viewDocument(doc)" class="bg-growth-600 hover:bg-growth-700 text-white text-xs px-3 py-1 rounded inline-flex items-center gap-1">
                     <EyeIcon class="h-3 w-3" />
                     View
                   </button>
                   <button @click="approve(doc)" :disabled="approveForm.processing" class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1 rounded">Approve</button>
                   <details class="inline-block">
-                    <summary class="cursor-pointer bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1 rounded inline-block">Reject</summary>
+                    <summary class="cursor-pointer bg-red-600 hover:bg-growth-700 text-white text-xs px-3 py-1 rounded inline-block">Reject</summary>
                     <div class="mt-2 bg-white border rounded p-3 w-64 shadow">
                       <textarea v-model="rejectForm.reason" rows="3" class="w-full border rounded p-2 text-sm" placeholder="Reason"></textarea>
-                      <button @click.prevent="reject(doc)" :disabled="rejectForm.processing" class="mt-2 w-full bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1 rounded">Confirm Reject</button>
+                      <button @click.prevent="reject(doc)" :disabled="rejectForm.processing" class="mt-2 w-full bg-red-600 hover:bg-growth-700 text-white text-xs px-3 py-1 rounded">Confirm Reject</button>
                     </div>
                   </details>
                 </td>
@@ -123,13 +123,13 @@ function isPdf(filename) {
           <div class="mt-4 flex items-center justify-between" v-if="pending.links.length > 3">
             <div class="text-sm text-gray-600">Showing {{ pending.data.length }} of {{ pending.total }}</div>
             <div class="flex gap-1">
-              <Link v-for="l in pending.links" :key="l.url + l.label" :href="l.url" v-html="l.label" :class="['px-2 py-1 rounded text-xs', l.active ? 'bg-brand-red-600 text-white' : 'bg-gray-100 text-gray-700']" />
+              <Link v-for="l in pending.links" :key="l.url + l.label" :href="l.url" v-html="l.label" :class="['px-2 py-1 rounded text-xs', l.active ? 'bg-growth-600 text-white' : 'bg-gray-100 text-gray-700']" />
             </div>
           </div>
         </div>
       </div>
 
-      <div class="bg-white shadow rounded-lg p-6">
+      <div class="bg-white shadow rounded-2xl p-6">
         <h2 class="text-lg font-semibold mb-4">Recently Reviewed</h2>
         <div v-if="recent.length === 0" class="text-center py-8 text-sm text-gray-500">No reviewed documents yet.</div>
         <div v-else class="overflow-x-auto">
@@ -151,8 +151,8 @@ function isPdf(filename) {
                   <span :class="badgeClass(doc.status)" class="px-2 py-1 rounded-full text-xs font-semibold">{{ doc.status }}</span>
                   <div v-if="doc.rejection_reason" class="text-xs text-red-600 mt-1">{{ doc.rejection_reason }}</div>
                 </td>
-                <td class="px-3 py-2 text-sm">{{ doc.reviewer?.name || '—' }}</td>
-                <td class="px-3 py-2 text-sm">{{ doc.reviewed_at ? formatDate(doc.reviewed_at) : '—' }}</td>
+                <td class="px-3 py-2 text-sm">{{ doc.reviewer?.name || 'ï¿½' }}</td>
+                <td class="px-3 py-2 text-sm">{{ doc.reviewed_at ? formatDate(doc.reviewed_at) : 'ï¿½' }}</td>
               </tr>
             </tbody>
           </table>
@@ -164,7 +164,7 @@ function isPdf(filename) {
         <div class="p-6">
           <div class="flex items-center justify-between mb-4">
             <div>
-              <h2 class="text-xl font-semibold text-gray-900">Document Preview</h2>
+              <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Document Preview</h2>
               <p v-if="viewingDocument" class="text-sm text-gray-600 mt-1">
                 {{ viewingDocument.document_type.replace('_',' ') }} - {{ viewingDocument.original_filename }}
               </p>
@@ -174,7 +174,7 @@ function isPdf(filename) {
             </button>
           </div>
 
-          <div v-if="viewingDocument" class="bg-gray-100 rounded-lg p-4 min-h-[500px] flex items-center justify-center">
+          <div v-if="viewingDocument" class="bg-gray-100 rounded-2xl p-4 min-h-[500px] flex items-center justify-center">
             <!-- Image Preview -->
             <img 
               v-if="isImage(viewingDocument.original_filename)"
@@ -198,7 +198,7 @@ function isPdf(filename) {
                 :href="getDocumentUrl(viewingDocument)"
                 target="_blank"
                 download
-                class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700"
+                class="inline-flex items-center px-4 py-2 bg-growth-600 text-white rounded-2xl hover:bg-growth-700"
               >
                 Download {{ viewingDocument.original_filename }}
               </a>
@@ -215,13 +215,13 @@ function isPdf(filename) {
                 v-if="viewingDocument"
                 @click="approve(viewingDocument); closeModal()" 
                 :disabled="approveForm.processing"
-                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-2xl"
               >
                 Approve Document
               </button>
               <button 
                 @click="closeModal"
-                class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg"
+                class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-2xl"
               >
                 Close
               </button>

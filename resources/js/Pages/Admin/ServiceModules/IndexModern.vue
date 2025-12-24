@@ -78,7 +78,7 @@
                             class="flex-1"
                             @input="handleSearch"
                         />
-                        <select v-model="filterStatus" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white">
+                        <select v-model="filterStatus" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white">
                             <option value="">All Status</option>
                             <option value="active">Active</option>
                             <option value="inactive">Inactive</option>
@@ -89,14 +89,14 @@
                     <div class="flex items-center gap-2">
                         <button
                             @click="viewMode = 'grid'"
-                            class="p-2 rounded-lg border transition-colors"
+                            class="p-2 rounded-2xl border transition-colors"
                             :class="viewMode === 'grid' ? 'bg-red-50 border-red-200 text-red-600' : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'"
                         >
                             <Squares2X2Icon class="h-5 w-5" />
                         </button>
                         <button
                             @click="viewMode = 'list'"
-                            class="p-2 rounded-lg border transition-colors"
+                            class="p-2 rounded-2xl border transition-colors"
                             :class="viewMode === 'list' ? 'bg-red-50 border-red-200 text-red-600' : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'"
                         >
                             <ListBulletIcon class="h-5 w-5" />
@@ -126,13 +126,13 @@
                                 <i :class="`fa ${category.icon}`"></i>
                             </div>
                             <div>
-                                <h2 class="text-xl font-semibold text-gray-900">{{ category.name }}</h2>
+                                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ category.name }}</h2>
                                 <p class="text-sm text-gray-600 mt-1">{{ category.description }}</p>
                             </div>
                         </div>
                         <div class="flex items-center space-x-6">
                             <div class="text-center">
-                                <div class="text-2xl font-bold text-gray-900">{{ category.modules_count }}</div>
+                                <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ category.modules_count }}</div>
                                 <div class="text-xs text-gray-500">Total</div>
                             </div>
                             <div class="text-center">
@@ -178,7 +178,7 @@
 
                                 <!-- Service Info -->
                                 <div class="mt-8">
-                                    <h3 class="text-lg font-semibold text-gray-900 mb-2 pr-20">{{ service.name }}</h3>
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 pr-20">{{ service.name }}</h3>
                                     <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ service.short_description }}</p>
 
                                     <!-- Price & Applications -->
@@ -220,7 +220,7 @@
                                         </Link>
                                         <button
                                             @click.stop="toggleServiceActive(service)"
-                                            class="px-4 py-2 text-sm font-medium rounded-lg border transition-colors"
+                                            class="px-4 py-2 text-sm font-medium rounded-2xl border transition-colors"
                                             :class="service.is_active 
                                                 ? 'border-red-200 text-red-700 bg-red-50 hover:bg-red-100' 
                                                 : 'border-green-200 text-green-700 bg-green-50 hover:bg-green-100'"
@@ -255,14 +255,14 @@
                             >
                                 <div class="flex items-center gap-4 flex-1">
                                     <div 
-                                        class="w-12 h-12 rounded-lg flex items-center justify-center text-white text-lg flex-shrink-0"
+                                        class="w-12 h-12 rounded-2xl flex items-center justify-center text-white text-lg flex-shrink-0"
                                         :style="{ backgroundColor: category.color }"
                                     >
                                         <i :class="`fa ${category.icon}`"></i>
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex items-center gap-2 mb-1">
-                                            <h3 class="text-base font-semibold text-gray-900">{{ service.name }}</h3>
+                                            <h3 class="text-base font-semibold text-gray-900 dark:text-white">{{ service.name }}</h3>
                                             <StatusBadge
                                                 v-if="service.is_featured"
                                                 status="featured"
@@ -292,24 +292,24 @@
                                         <div class="text-xs text-gray-500">Price</div>
                                     </div>
                                     <div class="text-center">
-                                        <div class="text-lg font-bold text-gray-900">{{ service.applications_count }}</div>
+                                        <div class="text-lg font-bold text-gray-900 dark:text-white">{{ service.applications_count }}</div>
                                         <div class="text-xs text-gray-500">Applications</div>
                                     </div>
                                     <div v-if="service.applications_count > 0" class="text-center">
-                                        <div class="text-lg font-bold text-gray-900">{{ service.completion_rate }}%</div>
+                                        <div class="text-lg font-bold text-gray-900 dark:text-white">{{ service.completion_rate }}%</div>
                                         <div class="text-xs text-gray-500">Completion</div>
                                     </div>
                                     <div class="flex gap-2">
                                         <Link
                                             :href="route('admin.service-modules.show', service.id)"
-                                            class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                            class="p-2 text-growth-600 hover:bg-blue-50 rounded-2xl transition-colors"
                                             title="View Details"
                                         >
                                             <EyeIcon class="h-5 w-5" />
                                         </Link>
                                         <button
                                             @click.stop="toggleServiceActive(service)"
-                                            class="p-2 rounded-lg transition-colors"
+                                            class="p-2 rounded-2xl transition-colors"
                                             :class="service.is_active 
                                                 ? 'text-red-600 hover:bg-red-50' 
                                                 : 'text-green-600 hover:bg-green-50'"

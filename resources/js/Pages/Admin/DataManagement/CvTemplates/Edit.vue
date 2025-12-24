@@ -1,9 +1,9 @@
-﻿<template>
+<template>
     <AdminLayout>
         <div class="px-4 sm:px-6 lg:px-8 py-8">
             <!-- Header -->
             <div class="mb-6">
-                <Link :href="route('admin.data.cv-templates.index')" class="text-sm font-medium text-brand-red-600 hover:text-brand-red-600 dark:text-blue-400 flex items-center gap-1 mb-4">
+                <Link :href="route('admin.data.cv-templates.index')" class="text-sm font-medium text-growth-600 hover:text-growth-600 dark:text-blue-400 flex items-center gap-1 mb-4">
                     <ChevronLeftIcon class="h-4 w-4" />
                     Back to CV Templates
                 </Link>
@@ -13,7 +13,7 @@
                 <!-- Usage Stats -->
                 <div v-if="template.user_cvs_count > 0" class="mt-4 p-4 bg-red-50 dark:bg-blue-900/20 border border-red-200 dark:border-blue-800 rounded-lg">
                     <div class="flex items-start gap-3">
-                        <InformationCircleIcon class="h-5 w-5 text-brand-red-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                        <InformationCircleIcon class="h-5 w-5 text-growth-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
                         <div>
                             <p class="text-sm font-medium text-red-900 dark:text-blue-300">Template In Use</p>
                             <p class="text-sm text-blue-700 dark:text-blue-400 mt-1">
@@ -42,7 +42,7 @@
                                 Premium
                             </span>
                             <span v-else class="text-lg font-semibold text-green-600 dark:text-green-400">Free</span>
-                            <span v-if="template.is_premium" class="text-sm text-gray-500 dark:text-gray-400">(৳{{ formatNumber(template.price) }})</span>
+                            <span v-if="template.is_premium" class="text-sm text-gray-500 dark:text-gray-400">(?{{ formatNumber(template.price) }})</span>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                             type="text"
                             id="name"
                             v-model="form.name"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             required
                         />
                         <p v-if="form.errors.name" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.name }}</p>
@@ -71,7 +71,7 @@
                             type="text"
                             id="slug"
                             v-model="form.slug"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             placeholder="Leave empty to auto-generate"
                         />
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">URL-friendly identifier. Auto-generated from name if left empty.</p>
@@ -85,7 +85,7 @@
                             id="description"
                             v-model="form.description"
                             rows="3"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         ></textarea>
                         <p v-if="form.errors.description" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.description }}</p>
                     </div>
@@ -101,7 +101,7 @@
                             type="text"
                             id="thumbnail"
                             v-model="form.thumbnail"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             placeholder="/images/templates/my-template.png"
                         />
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Path or URL to template preview image.</p>
@@ -115,7 +115,7 @@
                             <select
                                 id="category"
                                 v-model="form.category"
-                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 required
                             >
                                 <option value="">Select Category</option>
@@ -136,7 +136,7 @@
                                 id="sort_order"
                                 v-model.number="form.sort_order"
                                 min="0"
-                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             />
                             <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Lower numbers appear first.</p>
                             <p v-if="form.errors.sort_order" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.sort_order }}</p>
@@ -150,7 +150,7 @@
                                 type="checkbox"
                                 id="is_premium"
                                 v-model="form.is_premium"
-                                class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-brand-red-600 focus:ring-brand-red-600"
+                                class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                             />
                             <label for="is_premium" class="text-sm font-medium text-gray-900 dark:text-white">Premium Template</label>
                         </div>
@@ -159,7 +159,7 @@
                             <label for="price" class="block text-sm font-medium text-gray-900 dark:text-white">Price (BDT) <span class="text-red-500">*</span></label>
                             <div class="mt-1 relative rounded-md shadow-sm">
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 dark:text-gray-400 sm:text-sm">৳</span>
+                                    <span class="text-gray-500 dark:text-gray-400 sm:text-sm">?</span>
                                 </div>
                                 <input
                                     type="number"
@@ -167,7 +167,7 @@
                                     v-model.number="form.price"
                                     min="0"
                                     step="0.01"
-                                    class="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white pl-7 focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white pl-7 focus:border-growth-600 focus:ring-growth-600"
                                     :required="form.is_premium"
                                 />
                             </div>
@@ -182,7 +182,7 @@
                             id="color_scheme"
                             v-model="form.color_scheme"
                             rows="3"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 font-mono text-sm"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 font-mono text-sm"
                             placeholder='{"primary":"#2563EB","secondary":"#64748B"}'
                         ></textarea>
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">JSON object defining template colors. Example: {"primary":"#2563EB","secondary":"#64748B"}</p>
@@ -196,7 +196,7 @@
                             id="sections"
                             v-model="form.sections"
                             rows="4"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 font-mono text-sm"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 font-mono text-sm"
                             placeholder='["personal_info","education","experience","skills"]'
                         ></textarea>
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">JSON array of section identifiers. Example: ["personal_info","education","experience","skills","certifications"]</p>
@@ -209,7 +209,7 @@
                             type="checkbox"
                             id="is_active"
                             v-model="form.is_active"
-                            class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-brand-red-600 focus:ring-brand-red-600"
+                            class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                         />
                         <label for="is_active" class="text-sm font-medium text-gray-900 dark:text-white">Active</label>
                     </div>
@@ -223,7 +223,7 @@
                     <button
                         type="submit"
                         :disabled="form.processing"
-                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50"
+                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600 disabled:opacity-50"
                     >
                         <span v-if="form.processing">Updating...</span>
                         <span v-else>Update Template</span>

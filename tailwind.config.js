@@ -98,6 +98,20 @@ export default {
                     950: '#0a0a0a',
                 },
                 
+                // Growth Greens - Success & aspiration (CV Builder, Services)
+                growth: {
+                    50: '#ecfdf5',
+                    100: '#d1fae5',
+                    200: '#a7f3d0',
+                    300: '#6ee7b7',
+                    400: '#34d399',
+                    500: '#10b981', // Primary growth green
+                    600: '#059669',
+                    700: '#047857',
+                    800: '#065f46',
+                    900: '#064e3b',
+                },
+                
                 // Success
                 success: {
                     50: '#f0fdf4',

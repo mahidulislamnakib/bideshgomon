@@ -31,7 +31,7 @@
                         <div>
                             <h3 class="text-lg font-semibold text-red-900">Unable to Load Configuration</h3>
                             <p class="mt-1 text-red-700">{{ error }}</p>
-                            <button @click="fetchConfig" class="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                            <button @click="fetchConfig" class="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-growth-700">
                                 Try Again
                             </button>
                         </div>
@@ -67,7 +67,7 @@
                                                 :placeholder="field.placeholder"
                                                 :min="field.min"
                                                 :max="field.max"
-                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                             />
                                             <p v-if="errors[field.name]" class="mt-1 text-sm text-red-600">{{ errors[field.name] }}</p>
                                         </div>
@@ -84,7 +84,7 @@
                                                 :required="field.required"
                                                 :placeholder="field.placeholder"
                                                 :rows="field.rows || 4"
-                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                             ></textarea>
                                             <p v-if="errors[field.name]" class="mt-1 text-sm text-red-600">{{ errors[field.name] }}</p>
                                         </div>
@@ -99,7 +99,7 @@
                                                 :id="field.name"
                                                 v-model="form[field.name]"
                                                 :required="field.required"
-                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                             >
                                                 <option value="">Select {{ field.label }}</option>
                                                 <option v-for="option in field.options" :key="option.value" :value="option.value">

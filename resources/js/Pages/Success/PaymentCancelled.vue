@@ -103,7 +103,7 @@ const reasons = [
             <div v-if="retryUrl" class="pt-6 border-t">
               <a
                 :href="retryUrl"
-                class="w-full inline-flex items-center justify-center px-6 py-3 bg-brand-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
+                class="w-full inline-flex items-center justify-center px-6 py-3 bg-growth-600 text-white font-semibold rounded-lg hover:bg-growth-700 transition"
               >
                 <ArrowPathIcon class="h-5 w-5 mr-2" />
                 Resume Payment
@@ -128,7 +128,7 @@ const reasons = [
               <p class="text-gray-600 text-sm mb-4">{{ item.description }}</p>
               <Link
                 :href="route(item.link)"
-                class="inline-flex items-center text-brand-red-600 hover:text-blue-700 font-medium text-sm"
+                class="inline-flex items-center text-growth-600 hover:text-blue-700 font-medium text-sm"
               >
                 {{ item.action }} →
               </Link>
@@ -163,7 +163,7 @@ const reasons = [
         <!-- Support Section -->
         <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
           <div class="p-6 text-center">
-            <ChatBubbleLeftRightIcon class="h-12 w-12 text-brand-red-600 mx-auto mb-4" />
+            <ChatBubbleLeftRightIcon class="h-12 w-12 text-growth-600 mx-auto mb-4" />
             <h3 class="text-xl font-semibold text-gray-900 mb-2">Still Have Questions?</h3>
             <p class="text-gray-600 mb-6">
               Our support team is here to help you 24/7. Feel free to reach out!
@@ -172,7 +172,7 @@ const reasons = [
             <div class="flex flex-col sm:flex-row justify-center gap-4">
               <a
                 href="mailto:support@bideshgomon.com"
-                class="inline-flex items-center justify-center px-6 py-3 bg-brand-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
+                class="inline-flex items-center justify-center px-6 py-3 bg-growth-600 text-white font-semibold rounded-lg hover:bg-growth-700 transition"
               >
                 Email Support
               </a>
@@ -195,7 +195,7 @@ const reasons = [
           <Link
             v-if="retryUrl"
             :href="retryUrl"
-            class="inline-flex items-center justify-center px-8 py-3 bg-brand-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
+            class="inline-flex items-center justify-center px-8 py-3 bg-growth-600 text-white font-semibold rounded-lg hover:bg-growth-700 transition"
           >
             <ArrowPathIcon class="h-5 w-5 mr-2" />
             Complete Payment

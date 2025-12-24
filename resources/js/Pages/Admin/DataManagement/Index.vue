@@ -1,71 +1,47 @@
 <template>
     <Head title="Data Management" />
     
-    <AuthenticatedLayout>
-        <div class="py-6">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Header -->
-                <div class="mb-8">
-                    <h1 class="text-3xl font-bold text-gray-900">Data Management</h1>
-                    <p class="mt-2 text-sm text-gray-600">
-                        Manage all pre-seeded reference data with CRUD operations and CSV import/export
-                    </p>
-                </div>
-
-                <!-- Statistics Overview -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-white rounded-lg shadow p-6">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-red-100 rounded-md p-3">
-                                <svg class="h-6 w-6 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
-                            <div class="ml-5">
-                                <p class="text-sm font-medium text-gray-500">Geographic Data</p>
-                                <p class="mt-1 text-2xl font-semibold text-gray-900">{{ stats.geographic || 0 }}</p>
-                            </div>
+    <AdminLayout>
+        <div class="min-h-screen bg-gray-50 dark:bg-neutral-900">
+            <!-- Compact Hero -->
+            <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold text-white">Data Management</h1>
+                            <p class="text-sm text-white/80 mt-0.5">Manage reference data with CRUD operations and CSV import/export</p>
                         </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow p-6">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-green-100 rounded-md p-3">
-                                <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
+                        <div class="flex flex-wrap gap-2">
+                            <div class="bg-white/10 backdrop-blur-sm rounded-2xl px-4 py-2">
+                                <span class="text-lg font-bold text-white">{{ stats.geographic }}</span>
+                                <span class="text-xs text-white/80 ml-1">Geographic</span>
                             </div>
-                            <div class="ml-5">
-                                <p class="text-sm font-medium text-gray-500">Professional Data</p>
-                                <p class="mt-1 text-2xl font-semibold text-gray-900">{{ stats.professional || 0 }}</p>
+                            <div class="bg-white/10 backdrop-blur-sm rounded-2xl px-4 py-2">
+                                <span class="text-lg font-bold text-white">{{ stats.professional }}</span>
+                                <span class="text-xs text-white/80 ml-1">Professional</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow p-6">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-purple-100 rounded-md p-3">
-                                <svg class="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                                </svg>
-                            </div>
-                            <div class="ml-5">
-                                <p class="text-sm font-medium text-gray-500">Content Data</p>
-                                <p class="mt-1 text-2xl font-semibold text-gray-900">{{ stats.content || 0 }}</p>
+                            <div class="bg-white/10 backdrop-blur-sm rounded-2xl px-4 py-2">
+                                <span class="text-lg font-bold text-white">{{ stats.content }}</span>
+                                <span class="text-xs text-white/80 ml-1">Content</span>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                 <!-- Data Management Sections -->
                 <div class="space-y-8">
                     <!-- Geographic Data -->
                     <section>
-                        <h2 class="text-xl font-bold text-gray-900 mb-4">Geographic & Location Data</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                            <GlobeAltIcon class="h-5 w-5 text-blue-500" />
+                            Geographic & Location Data
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                             <DataCard
                                 title="Countries"
-                                :count="60"
+                                :count="stats.countries || 0"
                                 icon="globe"
                                 description="Manage countries with ISO codes, flags, and regions"
                                 :route="route('admin.data.countries.index')"
@@ -73,7 +49,7 @@
                             />
                             <DataCard
                                 title="Cities"
-                                :count="70"
+                                :count="stats.cities || 0"
                                 icon="building"
                                 description="Major cities with coordinates and timezones"
                                 :route="route('admin.data.cities.index')"
@@ -81,15 +57,15 @@
                             />
                             <DataCard
                                 title="Airports"
-                                :count="55"
+                                :count="stats.airports || 0"
                                 icon="plane"
                                 description="International airports with IATA codes"
-                                route="#"
+                                :route="route('admin.data.airports.index')"
                                 color="blue"
                             />
                             <DataCard
                                 title="Currencies"
-                                :count="42"
+                                :count="stats.currencies || 0"
                                 icon="currency"
                                 description="World currencies with BDT exchange rates"
                                 :route="route('admin.data.currencies.index')"
@@ -100,11 +76,14 @@
 
                     <!-- Professional & Education Data -->
                     <section>
-                        <h2 class="text-xl font-bold text-gray-900 mb-4">Professional & Education Data</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                            <BriefcaseIcon class="h-5 w-5 text-green-500" />
+                            Professional & Education Data
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                             <DataCard
                                 title="Skills"
-                                :count="100"
+                                :count="stats.skills || 0"
                                 icon="star"
                                 description="Professional skills database"
                                 :route="route('admin.data.skills.index')"
@@ -112,23 +91,23 @@
                             />
                             <DataCard
                                 title="Skill Categories"
-                                :count="15"
+                                :count="stats.skillCategories || 0"
                                 icon="folder"
                                 description="Skill categorization hierarchy"
-                                route="#"
+                                :route="route('admin.data.skill-categories.index')"
                                 color="green"
                             />
                             <DataCard
                                 title="Job Categories"
-                                :count="73"
+                                :count="stats.jobCategories || 0"
                                 icon="briefcase"
                                 description="Hierarchical job classifications"
-                                route="#"
+                                :route="route('admin.data.job-categories.index')"
                                 color="green"
                             />
                             <DataCard
                                 title="Degrees"
-                                :count="40"
+                                :count="stats.degrees || 0"
                                 icon="academic"
                                 description="Educational qualifications"
                                 :route="route('admin.data.degrees.index')"
@@ -136,7 +115,7 @@
                             />
                             <DataCard
                                 title="Languages"
-                                :count="35"
+                                :count="stats.languages || 0"
                                 icon="language"
                                 description="World languages with proficiency levels"
                                 :route="route('admin.data.languages.index')"
@@ -144,10 +123,18 @@
                             />
                             <DataCard
                                 title="Language Tests"
-                                :count="25"
+                                :count="stats.languageTests || 0"
                                 icon="clipboard"
                                 description="IELTS, TOEFL, and other test types"
-                                route="#"
+                                :route="route('admin.data.language-tests.index')"
+                                color="green"
+                            />
+                            <DataCard
+                                title="Institution Types"
+                                :count="stats.institutionTypes || 0"
+                                icon="building"
+                                description="University, college, and school types"
+                                :route="route('admin.data.institution-types.index')"
                                 color="green"
                             />
                         </div>
@@ -155,19 +142,22 @@
 
                     <!-- System & Content Data -->
                     <section>
-                        <h2 class="text-xl font-bold text-gray-900 mb-4">System & Content Data</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                            <CogIcon class="h-5 w-5 text-purple-500" />
+                            System & Content Data
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                             <DataCard
                                 title="Service Categories"
-                                :count="8"
+                                :count="stats.serviceCategories || 0"
                                 icon="grid"
                                 description="Main service classification"
-                                route="#"
+                                :route="route('admin.data.service-categories.index')"
                                 color="purple"
                             />
                             <DataCard
                                 title="Blog Categories"
-                                :count="10"
+                                :count="stats.blogCategories || 0"
                                 icon="book"
                                 description="Blog content categories"
                                 :route="route('admin.data.blog-categories.index')"
@@ -175,7 +165,7 @@
                             />
                             <DataCard
                                 title="Blog Tags"
-                                :count="44"
+                                :count="stats.blogTags || 0"
                                 icon="tag"
                                 description="Content tagging system"
                                 :route="route('admin.data.blog-tags.index')"
@@ -183,7 +173,7 @@
                             />
                             <DataCard
                                 title="Document Types"
-                                :count="10"
+                                :count="stats.documentTypes || 0"
                                 icon="document"
                                 description="Required document classifications"
                                 :route="route('admin.data.document-types.index')"
@@ -191,7 +181,7 @@
                             />
                             <DataCard
                                 title="Bank Names"
-                                :count="50"
+                                :count="stats.bankNames || 0"
                                 icon="bank"
                                 description="Bangladeshi bank directory"
                                 :route="route('admin.data.bank-names.index')"
@@ -199,40 +189,92 @@
                             />
                             <DataCard
                                 title="Visa Types"
-                                :count="20"
+                                :count="stats.visaTypes || 0"
                                 icon="passport"
                                 description="Visa category classifications"
                                 :route="route('admin.data.visa-types.index')"
                                 color="purple"
+                            />
+                            <DataCard
+                                title="Relationship Types"
+                                :count="stats.relationshipTypes || 0"
+                                icon="users"
+                                description="Family relationship categories"
+                                :route="route('admin.data.relationship-types.index')"
+                                color="purple"
+                            />
+                        </div>
+                    </section>
+
+                    <!-- Templates & Advanced -->
+                    <section>
+                        <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                            <DocumentDuplicateIcon class="h-5 w-5 text-indigo-500" />
+                            Templates & Advanced
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <DataCard
+                                title="CV Templates"
+                                :count="stats.cvTemplates || 0"
+                                icon="template"
+                                description="Resume/CV templates for builder"
+                                :route="route('admin.data.cv-templates.index')"
+                                color="indigo"
+                            />
+                            <DataCard
+                                title="Email Templates"
+                                :count="stats.emailTemplates || 0"
+                                icon="email"
+                                description="System email templates"
+                                :route="route('admin.data.email-templates.index')"
+                                color="indigo"
+                            />
+                            <DataCard
+                                title="SEO Settings"
+                                :count="stats.seoSettings || 0"
+                                icon="search"
+                                description="Page SEO configurations"
+                                :route="route('admin.data.seo-settings.index')"
+                                color="indigo"
+                            />
+                            <DataCard
+                                title="Smart Suggestions"
+                                :count="stats.smartSuggestions || 0"
+                                icon="alert"
+                                description="AI-powered suggestions system"
+                                :route="route('admin.data.smart-suggestions.index')"
+                                color="indigo"
+                            />
+                            <DataCard
+                                title="System Events"
+                                :count="stats.systemEvents || 0"
+                                icon="cog"
+                                description="Event triggers and notifications"
+                                :route="route('admin.data.system-events.index')"
+                                color="indigo"
                             />
                         </div>
                     </section>
                 </div>
 
                 <!-- Bulk Operations -->
-                <div class="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6">
-                    <div class="flex items-start">
+                <div class="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                    <div class="flex items-start gap-4">
                         <div class="flex-shrink-0">
-                            <svg class="h-8 w-8 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                            </svg>
+                            <CloudArrowUpIcon class="h-8 w-8 text-growth-600" />
                         </div>
-                        <div class="ml-4">
-                            <h3 class="text-lg font-medium text-gray-900">Bulk Import/Export</h3>
-                            <p class="mt-1 text-sm text-gray-600">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Bulk Import/Export</h3>
+                            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
                                 Each data section supports CSV bulk upload and export. Download templates, fill in your data, and import hundreds of records at once.
                             </p>
-                            <div class="mt-4 flex gap-3">
-                                <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700">
-                                    <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                    </svg>
+                            <div class="mt-4 flex flex-wrap gap-3">
+                                <a href="#" class="inline-flex items-center px-4 py-2 bg-growth-600 hover:bg-growth-700 text-white text-sm font-medium rounded-2xl transition-colors">
+                                    <DocumentTextIcon class="mr-2 h-4 w-4" />
                                     View Documentation
                                 </a>
-                                <a href="#" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                                    <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                    </svg>
+                                <a href="#" class="inline-flex items-center px-4 py-2 bg-white dark:bg-neutral-700 border border-gray-300 dark:border-neutral-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-600 text-sm font-medium rounded-2xl transition-colors">
+                                    <ArrowDownTrayIcon class="mr-2 h-4 w-4" />
                                     Download All Templates
                                 </a>
                             </div>
@@ -241,14 +283,17 @@
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </AdminLayout>
 </template>
 
 <script setup>
 import { Head } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AdminLayout from '@/Layouts/AdminLayout.vue';
 import DataCard from '@/Components/Admin/DataManagement/DataCard.vue';
-import { computed } from 'vue';
+import { 
+    GlobeAltIcon, BriefcaseIcon, CogIcon, DocumentDuplicateIcon,
+    CloudArrowUpIcon, DocumentTextIcon, ArrowDownTrayIcon
+} from '@heroicons/vue/24/outline';
 
 defineProps({
     stats: {
@@ -256,7 +301,30 @@ defineProps({
         default: () => ({
             geographic: 227,
             professional: 283,
-            content: 72
+            content: 72,
+            countries: 60,
+            cities: 70,
+            airports: 55,
+            currencies: 42,
+            skills: 100,
+            skillCategories: 15,
+            jobCategories: 73,
+            degrees: 40,
+            languages: 35,
+            languageTests: 25,
+            institutionTypes: 10,
+            serviceCategories: 8,
+            blogCategories: 10,
+            blogTags: 44,
+            documentTypes: 10,
+            bankNames: 50,
+            visaTypes: 20,
+            relationshipTypes: 8,
+            cvTemplates: 12,
+            emailTemplates: 15,
+            seoSettings: 20,
+            smartSuggestions: 5,
+            systemEvents: 10
         })
     }
 });

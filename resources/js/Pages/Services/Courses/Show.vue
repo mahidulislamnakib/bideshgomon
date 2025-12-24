@@ -19,7 +19,7 @@ const { formatDate } = useBangladeshFormat();
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <!-- Back Button -->
-                <Link :href="route('courses.index')" class="inline-flex items-center text-brand-red-600 hover:text-ocean-700 mb-6">
+                <Link :href="route('courses.index')" class="inline-flex items-center text-growth-600 hover:text-ocean-700 mb-6">
                     <ArrowLeftIcon class="h-5 w-5 mr-2" />
                     Back to Courses
                 </Link>
@@ -36,7 +36,7 @@ const { formatDate } = useBangladeshFormat();
                                         <span v-if="course.is_featured" class="inline-block px-3 py-1 text-sm font-semibold text-yellow-800 bg-yellow-100 rounded-full">Featured</span>
                                     </div>
                                     <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">{{ course.name }}</h1>
-                                    <Link :href="route('universities.show', course.university.id)" class="text-lg text-brand-red-600 hover:text-ocean-700">{{ course.university.name }}</Link>
+                                    <Link :href="route('universities.show', course.university.id)" class="text-lg text-growth-600 hover:text-ocean-700">{{ course.university.name }}</Link>
                                 </div>
                             </div>
 
@@ -216,7 +216,7 @@ const { formatDate } = useBangladeshFormat();
                             </div>
 
                             <div class="mt-6 space-y-3">
-                                <button class="w-full bg-brand-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors font-medium">
+                                <button class="w-full bg-growth-600 text-white px-4 py-2 rounded-lg hover:bg-growth-700 transition-colors font-medium">
                                     Apply Now
                                 </button>
                                 <Link :href="route('courses.index')" class="block w-full text-center border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium">

@@ -22,7 +22,7 @@
             <div class="grid-stats mb-8">
                 <div class="stat-card">
                     <div class="stat-card-icon bg-blue-100">
-                        <DocumentTextIcon class="h-6 w-6 text-blue-600" />
+                        <DocumentTextIcon class="h-6 w-6 text-growth-600" />
                     </div>
                     <div>
                         <p class="stat-card-label">Total Applications</p>
@@ -92,10 +92,10 @@
                     </div>
 
                     <!-- Filters Panel -->
-                    <div v-if="showFilters" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-4 border-t border-gray-200">
+                    <div v-if="showFilters" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                            <select v-model="status" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" @change="applyFilters">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Status</label>
+                            <select v-model="status" class="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white dark:bg-gray-700 dark:text-white" @change="applyFilters">
                                 <option value="">All Statuses</option>
                                 <option value="submitted">Submitted</option>
                                 <option value="under_review">Under Review</option>
@@ -106,8 +106,8 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Visa Type</label>
-                            <select v-model="visaType" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" @change="applyFilters">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Visa Type</label>
+                            <select v-model="visaType" class="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white dark:bg-gray-700 dark:text-white" @change="applyFilters">
                                 <option value="">All Types</option>
                                 <option value="tourist">Tourist</option>
                                 <option value="student">Student</option>
@@ -118,7 +118,7 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Destination</label>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Destination</label>
                             <FormInput
                                 v-model="destination"
                                 placeholder="Enter country"
@@ -126,8 +126,8 @@
                             />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Assigned To</label>
-                            <select v-model="assignedTo" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" @change="applyFilters">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Assigned To</label>
+                            <select v-model="assignedTo" class="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white dark:bg-gray-700 dark:text-white" @change="applyFilters">
                                 <option value="">All Staff</option>
                                 <option v-for="staff in staffMembers" :key="staff.id" :value="staff.id">
                                     {{ staff.name }}
@@ -135,8 +135,8 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Payment Status</label>
-                            <select v-model="paymentStatus" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" @change="applyFilters">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Payment Status</label>
+                            <select v-model="paymentStatus" class="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white dark:bg-gray-700 dark:text-white" @change="applyFilters">
                                 <option value="">All Payments</option>
                                 <option value="paid">Paid</option>
                                 <option value="unpaid">Unpaid</option>
@@ -153,7 +153,7 @@
             </div>
 
             <!-- Results Info -->
-            <div v-if="hasActiveFilters" class="mb-4 text-sm text-gray-600">
+            <div v-if="hasActiveFilters" class="mb-4 text-sm text-gray-600 dark:text-gray-400">
                 Showing {{ applications.from }} to {{ applications.to }} of {{ applications.total }} results
             </div>
 
@@ -176,8 +176,8 @@
                     <tbody v-if="applications.data.length > 0">
                         <tr v-for="application in applications.data" :key="application.id">
                             <td>
-                                <div class="font-semibold text-gray-900">{{ application.application_reference }}</div>
-                                <div class="text-xs text-gray-500 mt-1">{{ formatDate(application.created_at) }}</div>
+                                <div class="font-semibold text-gray-900 dark:text-white">{{ application.application_reference }}</div>
+                                <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ formatDate(application.created_at) }}</div>
                             </td>
                             <td>
                                 <div class="flex items-start gap-3">
@@ -185,9 +185,9 @@
                                         {{ getInitials(application.applicant_name) }}
                                     </div>
                                     <div class="min-w-0">
-                                        <div class="font-medium text-gray-900">{{ application.applicant_name }}</div>
-                                        <div class="text-sm text-gray-500 truncate">{{ application.applicant_email }}</div>
-                                        <div class="text-xs text-gray-400 mt-0.5">
+                                        <div class="font-medium text-gray-900 dark:text-white">{{ application.applicant_name }}</div>
+                                        <div class="text-sm text-gray-500 dark:text-gray-400 truncate">{{ application.applicant_email }}</div>
+                                        <div class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
                                             <DocumentIcon class="inline h-3 w-3 mr-1" />
                                             {{ application.passport_number }}
                                         </div>
@@ -196,7 +196,7 @@
                             </td>
                             <td>
                                 <div class="flex items-center gap-2">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 text-sm font-medium">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-2xl bg-blue-50 text-blue-700 text-sm font-medium">
                                         {{ getVisaIcon(application.visa_type) }}
                                         <span class="ml-1.5 capitalize">{{ application.visa_type }}</span>
                                     </span>
@@ -204,13 +204,13 @@
                             </td>
                             <td>
                                 <div class="flex items-center gap-2">
-                                    <GlobeAltIcon class="h-4 w-4 text-gray-400" />
-                                    <span class="text-sm font-medium text-gray-900">{{ application.destination_country }}</span>
+                                    <GlobeAltIcon class="h-4 w-4 text-gray-400 dark:text-gray-500" />
+                                    <span class="text-sm font-medium text-gray-900 dark:text-white">{{ application.destination_country }}</span>
                                 </div>
                             </td>
                             <td>
-                                <div class="flex items-center gap-2 text-sm text-gray-900">
-                                    <CalendarIcon class="h-4 w-4 text-gray-400" />
+                                <div class="flex items-center gap-2 text-sm text-gray-900 dark:text-white">
+                                    <CalendarIcon class="h-4 w-4 text-gray-400 dark:text-gray-500" />
                                     {{ formatDate(application.travel_date) }}
                                 </div>
                             </td>
@@ -227,27 +227,27 @@
                                 />
                             </td>
                             <td>
-                                <span class="text-base font-bold text-gray-900">{{ formatCurrency(application.total_amount) }}</span>
+                                <span class="text-base font-bold text-gray-900 dark:text-white">{{ formatCurrency(application.total_amount) }}</span>
                             </td>
                             <td>
                                 <div class="flex items-center justify-end gap-2">
                                     <Link
                                         :href="route('admin.visa-applications.show', application.id)"
-                                        class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                        class="p-2 text-growth-600 hover:bg-blue-50 rounded-2xl transition-colors"
                                         title="View Details"
                                     >
                                         <EyeIcon class="h-5 w-5" />
                                     </Link>
                                     <Link
                                         :href="route('admin.visa-applications.edit', application.id)"
-                                        class="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                                        class="p-2 text-gray-600 hover:bg-gray-100 rounded-2xl transition-colors"
                                         title="Edit"
                                     >
                                         <PencilIcon class="h-5 w-5" />
                                     </Link>
                                     <button
                                         @click="updateStatus(application)"
-                                        class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                                        class="p-2 text-green-600 hover:bg-green-50 rounded-2xl transition-colors"
                                         title="Update Status"
                                     >
                                         <CheckCircleIcon class="h-5 w-5" />
@@ -268,9 +268,9 @@
                 />
 
                 <!-- Pagination -->
-                <div v-if="applications.data.length > 0" class="border-t border-gray-200 px-6 py-4 bg-gray-50">
+                <div v-if="applications.data.length > 0" class="border-t border-gray-200 dark:border-gray-700 px-6 py-4 bg-gray-50 dark:bg-gray-800">
                     <div class="flex items-center justify-between">
-                        <div class="text-sm text-gray-700">
+                        <div class="text-sm text-gray-700 dark:text-gray-300">
                             Showing <span class="font-semibold">{{ applications.from }}</span> to <span class="font-semibold">{{ applications.to }}</span> of <span class="font-semibold">{{ applications.total }}</span> applications
                         </div>
                         <div class="flex gap-1">
@@ -279,7 +279,7 @@
                                 :key="link.label"
                                 :href="link.url"
                                 :class="[
-                                    'px-3 py-2 text-sm font-medium rounded-lg transition-colors',
+                                    'px-3 py-2 text-sm font-medium rounded-2xl transition-colors',
                                     link.active
                                         ? 'bg-red-600 text-white shadow-sm'
                                         : link.url

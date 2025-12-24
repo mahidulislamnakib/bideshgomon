@@ -304,7 +304,7 @@ const getDaysUntilExpiry = (expiryDate) => {
                             <select
                                 id="passport_type"
                                 v-model="form.passport_type"
-                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
+                                class="mt-1 block w-full border-gray-300 focus:border-growth-600 focus:ring-growth-600 rounded-md shadow-sm"
                                 required
                             >
                                 <option v-for="type in passportTypes" :key="type.value" :value="type.value">
@@ -319,7 +319,7 @@ const getDaysUntilExpiry = (expiryDate) => {
                             <select
                                 id="issuing_country"
                                 v-model="form.issuing_country"
-                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
+                                class="mt-1 block w-full border-gray-300 focus:border-growth-600 focus:ring-growth-600 rounded-md shadow-sm"
                                 required
                             >
                                 <option v-for="country in countries" :key="country.code" :value="country.code">
@@ -388,7 +388,7 @@ const getDaysUntilExpiry = (expiryDate) => {
                             <input
                                 type="checkbox"
                                 v-model="form.is_current_passport"
-                                class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:ring-brand-red-600"
+                                class="rounded border-gray-300 text-growth-600 shadow-sm focus:ring-growth-600"
                             />
                             <span class="ml-2 text-sm text-gray-600">This is my current passport</span>
                         </label>
@@ -397,7 +397,7 @@ const getDaysUntilExpiry = (expiryDate) => {
                             <input
                                 type="checkbox"
                                 v-model="form.is_lost_or_stolen"
-                                class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:ring-brand-red-600"
+                                class="rounded border-gray-300 text-growth-600 shadow-sm focus:ring-growth-600"
                             />
                             <span class="ml-2 text-sm text-gray-600">This passport is lost or stolen</span>
                         </label>
@@ -410,7 +410,7 @@ const getDaysUntilExpiry = (expiryDate) => {
                             id="notes"
                             v-model="form.notes"
                             rows="3"
-                            class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
+                            class="mt-1 block w-full border-gray-300 focus:border-growth-600 focus:ring-growth-600 rounded-md shadow-sm"
                             placeholder="Any additional notes about this passport..."
                         ></textarea>
                         <InputError :message="form.errors.notes" class="mt-2" />

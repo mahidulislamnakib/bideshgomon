@@ -25,7 +25,7 @@
                 class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg hover:shadow-md transition-all group"
             >
                 <div class="p-3 bg-white rounded-full shadow-sm mb-2 group-hover:scale-110 transition-transform">
-                    <DocumentPlusIcon class="h-6 w-6 text-blue-600" />
+                    <DocumentPlusIcon class="h-6 w-6 text-growth-600" />
                 </div>
                 <span class="text-sm font-medium text-neutral-900">New Post</span>
             </Link>

@@ -68,7 +68,7 @@ const cardClasses = computed(() => {
       warning: 'bg-yellow-50 border-l-4 border-yellow-400',
       danger: 'bg-red-50 border-l-4 border-red-400',
       info: 'bg-blue-50 border-l-4 border-blue-400',
-      red: 'bg-red-50 border-l-4 border-brand-red-400',
+      red: 'bg-red-50 border-l-4 border-growth-400',
       green: 'bg-brand-green-50 border-l-4 border-brand-green-400',
     }
   }
@@ -91,7 +91,7 @@ const cardClasses = computed(() => {
 
   // Interactive states
   if (props.hoverable || props.clickable) {
-    base.push('hover:shadow-lg hover:border-brand-red-400')
+    base.push('hover:shadow-lg hover:border-growth-400')
   }
 
   if (props.clickable) {

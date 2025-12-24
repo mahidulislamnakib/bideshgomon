@@ -32,36 +32,36 @@ const categoryIcons = {
     <Head title="CV Builder" />
 
     <AuthenticatedLayout>
-        <!-- Header with gradient -->
-        <div class="bg-growth-600 text-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h1 class="text-xl sm:text-2xl font-bold">CV Builder</h1>
-                        <p class="mt-1 text-sm sm:text-base text-emerald-100">Create professional CVs in minutes</p>
+        <div class="min-h-screen bg-gray-50 dark:bg-neutral-900">
+            <!-- Compact Hero -->
+            <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex items-center gap-4">
+                        <PencilSquareIcon class="h-8 w-8 text-white" />
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold text-white">CV Builder</h1>
+                            <p class="text-sm text-white/80 mt-0.5">Create professional CVs in minutes</p>
+                        </div>
                     </div>
-                    <PencilSquareIcon class="h-12 w-12 sm:h-16 sm:w-16 text-emerald-200 opacity-50" />
-                </div>
-
-                <!-- Quick Stats -->
-                <div class="mt-6 grid grid-cols-3 gap-2 sm:gap-4">
-                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-4 py-3">
-                        <div class="text-xl sm:text-2xl font-bold">{{ Object.keys(templates).reduce((sum, key) => sum + templates[key].length, 0) }}</div>
-                        <div class="text-[10px] sm:text-xs text-emerald-100">Templates</div>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-4 py-3">
-                        <div class="text-xl sm:text-2xl font-bold">{{ userCvs.length }}</div>
-                        <div class="text-[10px] sm:text-xs text-emerald-100">My CVs</div>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-4 py-3">
-                        <div class="text-xl sm:text-2xl font-bold">3</div>
-                        <div class="text-[10px] sm:text-xs text-emerald-100">Free</div>
+                    <!-- Quick Stats -->
+                    <div class="mt-4 flex flex-wrap gap-4">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <span class="text-lg font-bold text-white">{{ Object.keys(templates).reduce((sum, key) => sum + templates[key].length, 0) }}</span>
+                            <span class="text-xs text-white/80 ml-1">Templates</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <span class="text-lg font-bold text-white">{{ userCvs.length }}</span>
+                            <span class="text-xs text-white/80 ml-1">My CVs</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <span class="text-lg font-bold text-white">3</span>
+                            <span class="text-xs text-white/80 ml-1">Free</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
             <!-- My CVs Section (if any) -->
             <div v-if="userCvs.length > 0" class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
                 <div class="flex items-center justify-between mb-4">
@@ -201,6 +201,7 @@ const categoryIcons = {
                 <DocumentTextIcon class="mx-auto h-12 w-12 text-gray-400" />
                 <h3 class="mt-2 text-sm font-medium text-gray-900">No templates available</h3>
                 <p class="mt-1 text-sm text-gray-500">Check back soon for new templates!</p>
+            </div>
             </div>
         </div>
     </AuthenticatedLayout>

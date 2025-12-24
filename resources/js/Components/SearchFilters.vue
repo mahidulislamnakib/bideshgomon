@@ -149,7 +149,7 @@
                 </button>
                 <button
                     @click="applyFilters"
-                    class="px-4 py-2 text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 rounded-lg"
+                    class="px-4 py-2 text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 rounded-lg"
                 >
                     Apply Filters
                 </button>

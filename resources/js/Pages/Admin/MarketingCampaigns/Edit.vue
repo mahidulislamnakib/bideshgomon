@@ -31,7 +31,7 @@ const submit = () => {
   <AdminLayout>
     <div class="container mx-auto px-4 py-8 max-w-4xl">
       <div class="mb-6">
-        <h1 class="text-3xl font-bold text-gray-900">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
           Edit Marketing Campaign
         </h1>
         <p class="text-gray-600 mt-1">
@@ -39,7 +39,7 @@ const submit = () => {
         </p>
       </div>
 
-      <form class="bg-white rounded-lg shadow-sm p-6 space-y-6" @submit.prevent="submit">
+      <form class="bg-white rounded-2xl shadow-sm p-6 space-y-6" @submit.prevent="submit">
         <!-- Campaign Name -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -48,7 +48,7 @@ const submit = () => {
           <input
             v-model="form.name"
             type="text"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-600"
+            class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-growth-600"
             placeholder="e.g., Summer 2024 Promotion"
             required
           />
@@ -67,10 +67,10 @@ const submit = () => {
               v-for="type in ['email', 'sms', 'push', 'notification']"
               :key="type"
               :class="[
-                'flex items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition',
+                'flex items-center justify-center p-4 border-2 rounded-2xl cursor-pointer transition',
                 form.type === type
-                  ? 'border-brand-red-600 bg-brand-red/10'
-                  : 'border-gray-300 hover:border-brand-red-600',
+                  ? 'border-growth-600 bg-growth-100'
+                  : 'border-gray-300 hover:border-growth-600',
               ]"
             >
               <input
@@ -81,7 +81,7 @@ const submit = () => {
               />
               <div class="text-center">
                 <div class="text-2xl mb-1">
-                  {{ type === 'email' ? '??' : type === 'sms' ? '??' : type === 'push' ? '??' : '??' }}
+                  {{ type === 'email' ? '✉️' : type === 'sms' ? '💬' : type === 'push' ? '🔔' : '📢' }}
                 </div>
                 <div class="text-sm font-medium capitalize">{{ type }}</div>
               </div>
@@ -99,7 +99,7 @@ const submit = () => {
           </label>
           <select
             v-model="form.email_template_id"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-600"
+            class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-growth-600"
             required
           >
             <option value="">
@@ -134,10 +134,10 @@ const submit = () => {
               v-for="type in ['all_users', 'segment', 'custom']"
               :key="type"
               :class="[
-                'flex flex-wrap items-start p-4 border-2 rounded-lg cursor-pointer transition',
+                'flex flex-wrap items-start p-4 border-2 rounded-2xl cursor-pointer transition',
                 form.audience_type === type
-                  ? 'border-brand-red-600 bg-brand-red/10'
-                  : 'border-gray-300 hover:border-brand-red-600',
+                  ? 'border-growth-600 bg-growth-100'
+                  : 'border-gray-300 hover:border-growth-600',
               ]"
             >
               <input
@@ -147,7 +147,7 @@ const submit = () => {
                 class="mt-1 mr-3"
               />
               <div>
-                <div class="font-medium text-gray-900">
+                <div class="font-medium text-gray-900 dark:text-white">
                   {{ type === 'all_users' ? 'All Users' : type === 'segment' ? 'Segment' : 'Custom List' }}
                 </div>
                 <div class="text-sm text-gray-600 mt-1">
@@ -168,14 +168,14 @@ const submit = () => {
         </div>
 
         <!-- Audience Filters (for segment) -->
-        <div v-if="form.audience_type === 'segment'" class="bg-gray-50 p-4 rounded-lg">
+        <div v-if="form.audience_type === 'segment'" class="bg-gray-50 p-4 rounded-2xl">
           <label class="block text-sm font-medium text-gray-700 mb-3">Segment Filters</label>
           <div class="space-y-3">
             <div>
               <label class="block text-xs text-gray-600 mb-1">User Status</label>
               <select
                 v-model="form.audience_filters.status"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                class="w-full px-3 py-2 border border-gray-300 rounded-2xl"
               >
                 <option value="">
                   Any Status
@@ -192,7 +192,7 @@ const submit = () => {
               <label class="block text-xs text-gray-600 mb-1">Has Application</label>
               <select
                 v-model="form.audience_filters.has_application"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                class="w-full px-3 py-2 border border-gray-300 rounded-2xl"
               >
                 <option value="">
                   Any
@@ -217,11 +217,11 @@ const submit = () => {
         </div>
 
         <!-- Recipient IDs (for custom) -->
-        <div v-if="form.audience_type === 'custom'" class="bg-gray-50 p-4 rounded-lg">
+        <div v-if="form.audience_type === 'custom'" class="bg-gray-50 p-4 rounded-2xl">
           <label class="block text-sm font-medium text-gray-700 mb-2">Recipient IDs</label>
           <textarea
             v-model="form.recipient_ids_text"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            class="w-full px-3 py-2 border border-gray-300 rounded-2xl"
             rows="4"
             placeholder="Enter user IDs separated by commas (e.g., 1, 2, 3, 4)"
             @input="form.recipient_ids = $event.target.value.split(',').map(id => id.trim()).filter(Boolean)"
@@ -239,7 +239,7 @@ const submit = () => {
           <input
             v-model="form.scheduled_at"
             type="datetime-local"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red-600"
+            class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-growth-600"
           />
           <p class="text-xs text-gray-600 mt-1">
             Leave empty to save as draft. Set a future date to schedule.
@@ -255,7 +255,7 @@ const submit = () => {
             <input
               v-model="form.is_ab_test"
               type="checkbox"
-              class="w-4 h-4 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
+              class="w-4 h-4 text-growth-600 border-gray-300 rounded focus:ring-growth-600"
             />
             <span class="ml-2 text-sm font-medium text-gray-700">Enable A/B Testing</span>
           </label>
@@ -265,8 +265,8 @@ const submit = () => {
         </div>
 
         <!-- A/B Test Configuration -->
-        <div v-if="form.is_ab_test" class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-          <h3 class="font-medium text-gray-900 mb-3">
+        <div v-if="form.is_ab_test" class="bg-yellow-50 border border-yellow-200 rounded-2xl p-4">
+          <h3 class="font-medium text-gray-900 dark:text-white mb-3">
             A/B Test Configuration
           </h3>
           <div class="space-y-3">
@@ -277,7 +277,7 @@ const submit = () => {
                 type="number"
                 min="10"
                 max="90"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                class="w-full px-3 py-2 border border-gray-300 rounded-2xl"
                 placeholder="50"
               />
               <p class="text-xs text-gray-500 mt-1">
@@ -291,7 +291,7 @@ const submit = () => {
                 type="number"
                 min="1"
                 max="168"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                class="w-full px-3 py-2 border border-gray-300 rounded-2xl"
                 placeholder="24"
               />
             </div>
@@ -308,7 +308,7 @@ const submit = () => {
           <button
             type="submit"
             :disabled="form.processing"
-            class="px-6 py-2 bg-brand-red-600 hover:bg-red-700 transition-colors text-white rounded-lg hover:bg-brand-red-dark transition disabled:opacity-50"
+            class="px-6 py-2 bg-growth-600 hover:bg-growth-700 transition-colors text-white rounded-2xl hover:bg-growth-700 transition disabled:opacity-50"
           >
             {{ form.processing ? 'Updating...' : 'Update Campaign' }}
           </button>

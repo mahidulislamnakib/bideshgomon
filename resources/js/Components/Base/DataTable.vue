@@ -149,7 +149,7 @@ const getCellValue = (row, column) => {
           v-model="searchQuery"
           type="search"
           placeholder="Search..."
-          class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+          class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-growth-600 dark:bg-gray-700 dark:text-white"
           @input="handleSearch"
         />
       </div>
@@ -180,7 +180,7 @@ const getCellValue = (row, column) => {
                     :class="[
                       'h-3 w-3 -mb-1',
                       sortKey === column.key && sortDirection === 'asc'
-                        ? 'text-blue-600'
+                        ? 'text-growth-600'
                         : 'text-gray-400'
                     ]"
                   />
@@ -188,7 +188,7 @@ const getCellValue = (row, column) => {
                     :class="[
                       'h-3 w-3',
                       sortKey === column.key && sortDirection === 'desc'
-                        ? 'text-blue-600'
+                        ? 'text-growth-600'
                         : 'text-gray-400'
                     ]"
                   />
@@ -282,7 +282,7 @@ const getCellValue = (row, column) => {
             :class="[
               'px-3 py-2 text-sm font-medium rounded-lg transition-colors',
               page === pagination.current_page
-                ? 'bg-blue-600 text-white'
+                ? 'bg-growth-600 text-white'
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
             ]"
             @click="handlePageChange(page)"

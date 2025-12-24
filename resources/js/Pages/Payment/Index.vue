@@ -65,7 +65,7 @@
                                                 {{ formatDate(transaction.created_at) }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <Link :href="route('payment.show', transaction.id)" class="text-brand-red-600 hover:text-red-900">
+                                                <Link :href="route('payment.show', transaction.id)" class="text-growth-600 hover:text-red-900">
                                                     View Details
                                                 </Link>
                                             </td>
@@ -82,7 +82,7 @@
                                         :key="index"
                                         :href="link.url"
                                         :class="{
-                                            'bg-brand-red-600 text-white': link.active,
+                                            'bg-growth-600 text-white': link.active,
                                             'text-gray-700 hover:bg-gray-50': !link.active,
                                             'cursor-not-allowed opacity-50': !link.url
                                         }"

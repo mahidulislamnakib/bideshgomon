@@ -1,61 +1,58 @@
 <template>
-    <Head title="Help Center - BideshGomon Support" />
+    <Head title="Help Center - Bidesh Gomon Support" />
 
-    <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+    <div class="min-h-screen bg-gray-50 dark:bg-neutral-950">
         <Header />
         
-        <!-- Hero Section -->
-        <div class="relative bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 text-white overflow-hidden">
-            <div class="absolute inset-0 opacity-10">
-                <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl"></div>
-                <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl"></div>
-            </div>
-            
-            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-                <QuestionMarkCircleIcon class="h-16 w-16 mx-auto mb-6 text-blue-200" />
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">সাহায্য কেন্দ্র</h1>
-                <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                    আপনার যেকোনো প্রশ্নের উত্তর খুঁজুন বা আমাদের সাথে যোগাযোগ করুন
-                </p>
+        <!-- Compact Hero -->
+        <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-xl md:text-2xl font-bold text-white">সাহায্য কেন্দ্র</h1>
+                <p class="text-sm text-white/80 mt-0.5">আপনার যেকোনো প্রশ্নের উত্তর খুঁজুন</p>
                 
-                <!-- Search Bar -->
-                <div class="max-w-2xl mx-auto">
-                    <div class="relative">
-                        <MagnifyingGlassIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-400" />
-                        <input
-                            v-model="searchQuery"
-                            @keyup.enter="searchHelp"
-                            type="text"
-                            placeholder="আপনার প্রশ্ন লিখুন..."
-                            class="w-full pl-14 pr-4 py-4 text-lg rounded-2xl border-0 focus:ring-4 focus:ring-blue-300 text-gray-900 placeholder-gray-400 shadow-2xl"
-                        />
-                    </div>
+                <!-- Search in Hero -->
+                <div class="flex flex-wrap items-center gap-3 mt-4">
+                    <input
+                        v-model="searchQuery"
+                        @keyup.enter="searchHelp"
+                        type="text"
+                        placeholder="আপনার প্রশ্ন লিখুন..."
+                        class="w-48 md:w-64 px-4 py-2 text-sm border-0 bg-white/95 dark:bg-neutral-800 rounded-lg focus:ring-2 focus:ring-white/50 placeholder-gray-500"
+                    />
+                    <Link
+                        :href="route('help.faq')"
+                        class="px-4 py-2 text-sm font-medium bg-white/20 text-white rounded-lg hover:bg-white/30 transition-colors"
+                    >
+                        FAQ
+                    </Link>
+                    <Link
+                        :href="route('support.create')"
+                        class="px-4 py-2 text-sm font-medium bg-white text-growth-600 rounded-lg hover:bg-gray-100 transition-colors"
+                    >
+                        যোগাযোগ করুন
+                    </Link>
                 </div>
             </div>
         </div>
 
         <!-- Main Content -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
             <!-- Popular Categories -->
-            <div class="mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">জনপ্রিয় বিষয়</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="mb-12">
+                <h2 class="text-sm font-semibold text-gray-900 dark:text-white mb-4">জনপ্রিয় বিষয়</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <!-- Visa & Immigration -->
                     <Link
                         :href="route('help.category', 'visa-immigration')"
-                        class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-blue-500"
+                        class="group bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700 hover:border-growth-500 transition-colors"
                     >
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 p-3 bg-blue-100 rounded-xl group-hover:bg-brand-red-600 transition-colors">
-                                <DocumentTextIcon class="h-8 w-8 text-brand-red-600 group-hover:text-white transition-colors" />
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-growth-100 dark:bg-growth-900/30 rounded-lg">
+                                <DocumentTextIcon class="h-5 w-5 text-growth-600" />
                             </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-red-600 transition-colors">ভিসা ও ইমিগ্রেশন</h3>
-                                <p class="text-gray-600 mb-3">ভিসা আবেদন, প্রক্রিয়া এবং প্রয়োজনীয় ডকুমেন্ট সম্পর্কে জানুন</p>
-                                <span class="inline-flex items-center text-brand-red-600 font-semibold text-sm">
-                                    বিস্তারিত দেখুন
-                                    <ArrowRightIcon class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                                </span>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-growth-600 transition-colors">ভিসা ও ইমিগ্রেশন</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">ভিসা আবেদন, প্রক্রিয়া এবং প্রয়োজনীয় ডকুমেন্ট</p>
                             </div>
                         </div>
                     </Link>
@@ -63,19 +60,15 @@
                     <!-- Jobs & Applications -->
                     <Link
                         :href="route('help.category', 'jobs')"
-                        class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-green-500"
+                        class="group bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700 hover:border-green-500 transition-colors"
                     >
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 p-3 bg-green-100 rounded-xl group-hover:bg-green-500 transition-colors">
-                                <BriefcaseIcon class="h-8 w-8 text-green-600 group-hover:text-white transition-colors" />
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                                <BriefcaseIcon class="h-5 w-5 text-green-600" />
                             </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">চাকরি ও আবেদন</h3>
-                                <p class="text-gray-600 mb-3">চাকরির খোঁজ, আবেদন প্রক্রিয়া এবং ইন্টারভিউ টিপস</p>
-                                <span class="inline-flex items-center text-green-600 font-semibold text-sm">
-                                    বিস্তারিত দেখুন
-                                    <ArrowRightIcon class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                                </span>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-green-600 transition-colors">চাকরি ও আবেদন</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">চাকরির খোঁজ, আবেদন প্রক্রিয়া এবং ইন্টারভিউ টিপস</p>
                             </div>
                         </div>
                     </Link>
@@ -83,19 +76,15 @@
                     <!-- Account & Profile -->
                     <Link
                         :href="route('help.category', 'account')"
-                        class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-purple-500"
+                        class="group bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700 hover:border-purple-500 transition-colors"
                     >
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 p-3 bg-purple-100 rounded-xl group-hover:bg-purple-500 transition-colors">
-                                <UserCircleIcon class="h-8 w-8 text-purple-600 group-hover:text-white transition-colors" />
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                                <UserCircleIcon class="h-5 w-5 text-purple-600" />
                             </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">অ্যাকাউন্ট ও প্রোফাইল</h3>
-                                <p class="text-gray-600 mb-3">একাউন্ট সেটআপ, প্রোফাইল সম্পূর্ণ করা এবং সিকিউরিটি</p>
-                                <span class="inline-flex items-center text-purple-600 font-semibold text-sm">
-                                    বিস্তারিত দেখুন
-                                    <ArrowRightIcon class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                                </span>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-purple-600 transition-colors">অ্যাকাউন্ট ও প্রোফাইল</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">একাউন্ট সেটআপ, প্রোফাইল সম্পূর্ণ করা এবং সিকিউরিটি</p>
                             </div>
                         </div>
                     </Link>
@@ -103,19 +92,15 @@
                     <!-- Payment & Wallet -->
                     <Link
                         :href="route('help.category', 'payment')"
-                        class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-orange-500"
+                        class="group bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700 hover:border-orange-500 transition-colors"
                     >
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 p-3 bg-orange-100 rounded-xl group-hover:bg-orange-500 transition-colors">
-                                <CreditCardIcon class="h-8 w-8 text-orange-600 group-hover:text-white transition-colors" />
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                                <CreditCardIcon class="h-5 w-5 text-orange-600" />
                             </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">পেমেন্ট ও ওয়ালেট</h3>
-                                <p class="text-gray-600 mb-3">পেমেন্ট মেথড, ওয়ালেট রিচার্জ এবং রিফান্ড নীতি</p>
-                                <span class="inline-flex items-center text-orange-600 font-semibold text-sm">
-                                    বিস্তারিত দেখুন
-                                    <ArrowRightIcon class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                                </span>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-orange-600 transition-colors">পেমেন্ট ও ওয়ালেট</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">পেমেন্ট মেথড, ওয়ালেট রিচার্জ এবং রিফান্ড নীতি</p>
                             </div>
                         </div>
                     </Link>
@@ -123,19 +108,15 @@
                     <!-- Services & Booking -->
                     <Link
                         :href="route('help.category', 'services')"
-                        class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-indigo-500"
+                        class="group bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700 hover:border-indigo-500 transition-colors"
                     >
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 p-3 bg-indigo-100 rounded-xl group-hover:bg-brand-red-600 transition-colors">
-                                <SparklesIcon class="h-8 w-8 text-brand-red-600 group-hover:text-white transition-colors" />
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg">
+                                <SparklesIcon class="h-5 w-5 text-indigo-600" />
                             </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-red-600 transition-colors">সেবা ও বুকিং</h3>
-                                <p class="text-gray-600 mb-3">সেবা নির্বাচন, বুকিং এবং অ্যাপয়েন্টমেন্ট ম্যানেজমেন্ট</p>
-                                <span class="inline-flex items-center text-brand-red-600 font-semibold text-sm">
-                                    বিস্তারিত দেখুন
-                                    <ArrowRightIcon class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                                </span>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-indigo-600 transition-colors">সেবা ও বুকিং</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">সেবা নির্বাচন, বুকিং এবং অ্যাপয়েন্টমেন্ট</p>
                             </div>
                         </div>
                     </Link>
@@ -143,19 +124,15 @@
                     <!-- Technical Support -->
                     <Link
                         :href="route('help.category', 'technical')"
-                        class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-red-500"
+                        class="group bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700 hover:border-red-500 transition-colors"
                     >
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 p-3 bg-red-100 rounded-xl group-hover:bg-red-500 transition-colors">
-                                <WrenchScrewdriverIcon class="h-8 w-8 text-red-600 group-hover:text-white transition-colors" />
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-red-100 dark:bg-red-900/30 rounded-lg">
+                                <WrenchScrewdriverIcon class="h-5 w-5 text-red-600" />
                             </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">টেকনিক্যাল সাপোর্ট</h3>
-                                <p class="text-gray-600 mb-3">ওয়েবসাইট সমস্যা, লগইন ইস্যু এবং টেকনিক্যাল হেল্প</p>
-                                <span class="inline-flex items-center text-red-600 font-semibold text-sm">
-                                    বিস্তারিত দেখুন
-                                    <ArrowRightIcon class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                                </span>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-red-600 transition-colors">টেকনিক্যাল সাপোর্ট</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">ওয়েবসাইট সমস্যা, লগইন ইস্যু এবং টেকনিক্যাল হেল্প</p>
                             </div>
                         </div>
                     </Link>
@@ -163,68 +140,53 @@
             </div>
 
             <!-- Quick Actions -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
                 <Link
                     :href="route('faqs.index')"
-                    class="group bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                    class="group bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700 hover:border-growth-500 transition-colors"
                 >
-                    <QuestionMarkCircleIcon class="h-12 w-12 mb-4" />
-                    <h3 class="text-2xl font-bold mb-2">সচরাচর জিজ্ঞাসা (FAQ)</h3>
-                    <p class="text-blue-100 mb-4">সবচেয়ে কমন প্রশ্নের উত্তর দেখুন</p>
-                    <span class="inline-flex items-center font-semibold">
-                        FAQ দেখুন
-                        <ArrowRightIcon class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </span>
+                    <QuestionMarkCircleIcon class="h-6 w-6 text-growth-600 mb-2" />
+                    <h3 class="text-sm font-medium text-gray-900 dark:text-white">সাধারণ প্রশ্ন (FAQ)</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">সচরাচর জিজ্ঞাসিত প্রশ্নের উত্তর</p>
                 </Link>
 
                 <Link
                     :href="route('support.create')"
-                    class="group bg-gradient-to-br from-green-600 to-green-700 rounded-2xl p-8 text-white shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                    class="group bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700 hover:border-green-500 transition-colors"
                 >
-                    <ChatBubbleLeftRightIcon class="h-12 w-12 mb-4" />
-                    <h3 class="text-2xl font-bold mb-2">টিকেট তৈরি করুন</h3>
-                    <p class="text-green-100 mb-4">সমস্যা সমাধানের জন্য সাপোর্ট টিকেট খুলুন</p>
-                    <span class="inline-flex items-center font-semibold">
-                        টিকেট তৈরি করুন
-                        <ArrowRightIcon class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </span>
+                    <ChatBubbleLeftRightIcon class="h-6 w-6 text-green-600 mb-2" />
+                    <h3 class="text-sm font-medium text-gray-900 dark:text-white">টিকেট তৈরি করুন</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">সমস্যা সমাধানের জন্য সাপোর্ট টিকেট</p>
                 </Link>
 
                 <a
                     href="mailto:support@bideshgomon.com"
-                    class="group bg-gradient-to-br from-purple-600 to-purple-700 rounded-2xl p-8 text-white shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                    class="group bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700 hover:border-purple-500 transition-colors"
                 >
-                    <EnvelopeIcon class="h-12 w-12 mb-4" />
-                    <h3 class="text-2xl font-bold mb-2">ইমেইল করুন</h3>
-                    <p class="text-purple-100 mb-4">আমাদের সাথে সরাসরি যোগাযোগ করুন</p>
-                    <span class="inline-flex items-center font-semibold">
-                        support@bideshgomon.com
-                        <ArrowRightIcon class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </span>
+                    <EnvelopeIcon class="h-6 w-6 text-purple-600 mb-2" />
+                    <h3 class="text-sm font-medium text-gray-900 dark:text-white">ইমেইল করুন</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">support@bideshgomon.com</p>
                 </a>
             </div>
 
             <!-- Contact Information -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">যোগাযোগের তথ্য</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white dark:bg-neutral-800 rounded-xl border border-gray-200 dark:border-neutral-700 p-6 mb-8">
+                <h2 class="text-sm font-semibold text-gray-900 dark:text-white mb-4">যোগাযোগের তথ্য</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="text-center">
-                        <PhoneIcon class="h-10 w-10 mx-auto mb-3 text-brand-red-600" />
-                        <h3 class="font-semibold text-gray-900 mb-2">ফোন</h3>
-                        <p class="text-gray-600">+880 1700-000000</p>
-                        <p class="text-sm text-gray-500 mt-1">সকাল ৯টা - রাত ৮টা</p>
+                        <PhoneIcon class="h-6 w-6 mx-auto mb-2 text-growth-600" />
+                        <h3 class="text-sm font-medium text-gray-900 dark:text-white">ফোন</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">+880 1700-000000</p>
                     </div>
                     <div class="text-center">
-                        <EnvelopeIcon class="h-10 w-10 mx-auto mb-3 text-green-600" />
-                        <h3 class="font-semibold text-gray-900 mb-2">ইমেইল</h3>
-                        <p class="text-gray-600">support@bideshgomon.com</p>
-                        <p class="text-sm text-gray-500 mt-1">২৪ ঘন্টার মধ্যে উত্তর</p>
+                        <EnvelopeIcon class="h-6 w-6 mx-auto mb-2 text-green-600" />
+                        <h3 class="text-sm font-medium text-gray-900 dark:text-white">ইমেইল</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">support@bideshgomon.com</p>
                     </div>
                     <div class="text-center">
-                        <MapPinIcon class="h-10 w-10 mx-auto mb-3 text-purple-600" />
-                        <h3 class="font-semibold text-gray-900 mb-2">অফিস</h3>
-                        <p class="text-gray-600">ঢাকা, বাংলাদেশ</p>
-                        <p class="text-sm text-gray-500 mt-1">সাপ্তাহিক ছুটি: শুক্রবার</p>
+                        <MapPinIcon class="h-6 w-6 mx-auto mb-2 text-purple-600" />
+                        <h3 class="text-sm font-medium text-gray-900 dark:text-white">অফিস</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">ঢাকা, বাংলাদেশ</p>
                     </div>
                 </div>
             </div>
@@ -283,9 +245,9 @@ const categoryIcons = {
 const colorClasses = {
     blue: {
         bg: 'bg-blue-100',
-        hover: 'group-hover:bg-brand-red-600',
-        text: 'text-brand-red-600',
-        textHover: 'group-hover:text-brand-red-600',
+        hover: 'group-hover:bg-growth-600',
+        text: 'text-growth-600',
+        textHover: 'group-hover:text-growth-600',
         textWhite: 'group-hover:text-white',
         border: 'hover:border-blue-500',
     },
@@ -315,9 +277,9 @@ const colorClasses = {
     },
     indigo: {
         bg: 'bg-indigo-100',
-        hover: 'group-hover:bg-brand-red-600',
-        text: 'text-brand-red-600',
-        textHover: 'group-hover:text-brand-red-600',
+        hover: 'group-hover:bg-growth-600',
+        text: 'text-growth-600',
+        textHover: 'group-hover:text-growth-600',
         textWhite: 'group-hover:text-white',
         border: 'hover:border-indigo-500',
     },

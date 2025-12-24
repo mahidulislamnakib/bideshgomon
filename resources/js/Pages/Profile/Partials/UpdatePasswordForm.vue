@@ -37,7 +37,7 @@ const passwordStrength = computed(() => {
     
     if (strength <= 2) return { level: 1, text: 'Weak', color: 'bg-red-500' };
     if (strength === 3) return { level: 2, text: 'Fair', color: 'bg-yellow-500' };
-    if (strength === 4) return { level: 3, text: 'Good', color: 'bg-brand-red-600' };
+    if (strength === 4) return { level: 3, text: 'Good', color: 'bg-growth-600' };
     return { level: 4, text: 'Strong', color: 'bg-green-500' };
 });
 
@@ -138,7 +138,7 @@ const updatePassword = () => {
                         <span class="text-xs font-medium" :class="{
                             'text-red-600': passwordStrength.level === 1,
                             'text-yellow-600': passwordStrength.level === 2,
-                            'text-brand-red-600': passwordStrength.level === 3,
+                            'text-growth-600': passwordStrength.level === 3,
                             'text-green-600': passwordStrength.level === 4
                         }">{{ passwordStrength.text }}</span>
                     </div>
@@ -228,7 +228,7 @@ const updatePassword = () => {
                 <button
                     @click="updatePassword"
                     :disabled="form.processing"
-                    class="w-full bg-brand-red-600 hover:bg-red-700 active:bg-indigo-800 disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-200 active:scale-98 touch-manipulation flex items-center justify-center gap-2"
+                    class="w-full bg-growth-600 hover:bg-growth-700 active:bg-indigo-800 disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-200 active:scale-98 touch-manipulation flex items-center justify-center gap-2"
                     type="button"
                 >
                     <svg v-if="form.processing" class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

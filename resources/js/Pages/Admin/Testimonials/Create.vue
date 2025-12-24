@@ -2,7 +2,7 @@
     <AdminLayout title="Create Testimonial">
         <div class="max-w-4xl mx-auto">
             <div class="mb-6">
-                <Link :href="route('admin.testimonials.index')" class="inline-flex items-center text-gray-600 hover:text-gray-900">
+                <Link :href="route('admin.testimonials.index')" class="inline-flex items-center text-gray-600 hover:text-gray-900 dark:text-white">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                     </svg>
@@ -10,7 +10,7 @@
                 </Link>
             </div>
 
-            <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="bg-white rounded-2xl shadow-sm p-6">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6">Create New Testimonial</h2>
 
                 <form @submit.prevent="submit" class="space-y-6">
@@ -24,7 +24,7 @@
                                 v-model="form.author_name"
                                 type="text"
                                 required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"
                                 :class="{ 'border-red-500': form.errors.author_name }"
                             />
                             <div v-if="form.errors.author_name" class="mt-1 text-sm text-red-600">
@@ -39,7 +39,7 @@
                             <input
                                 v-model="form.author_name_bn"
                                 type="text"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"
                             />
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                             <input
                                 v-model="form.position"
                                 type="text"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"
                             />
                         </div>
 
@@ -64,7 +64,7 @@
                             <input
                                 v-model="form.position_bn"
                                 type="text"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"
                             />
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                             <input
                                 v-model="form.company"
                                 type="text"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"
                             />
                         </div>
 
@@ -89,7 +89,7 @@
                             <input
                                 v-model="form.company_bn"
                                 type="text"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"
                             />
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                             v-model="form.location"
                             type="text"
                             placeholder="e.g., Dhaka, Bangladesh"
-                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"
                         />
                     </div>
 
@@ -117,7 +117,7 @@
                                 v-model="form.content"
                                 required
                                 rows="6"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"
                                 :class="{ 'border-red-500': form.errors.content }"
                             />
                             <div v-if="form.errors.content" class="mt-1 text-sm text-red-600">
@@ -132,7 +132,7 @@
                             <textarea
                                 v-model="form.content_bn"
                                 rows="6"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"
                             />
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                             @change="handleFileChange"
                             type="file"
                             accept="image/*"
-                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"
                         />
                         <p class="mt-1 text-sm text-gray-500">Maximum file size: 2MB</p>
                         <div v-if="imagePreview" class="mt-3">
@@ -192,7 +192,7 @@
                             <input
                                 v-model="form.is_featured"
                                 type="checkbox"
-                                class="w-4 h-4 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
+                                class="w-4 h-4 text-growth-600 border-gray-300 rounded focus:ring-growth-600"
                             />
                             <span class="ml-2 text-sm font-medium text-gray-700">Featured on Homepage</span>
                         </label>
@@ -201,7 +201,7 @@
                             <input
                                 v-model="form.is_approved"
                                 type="checkbox"
-                                class="w-4 h-4 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
+                                class="w-4 h-4 text-growth-600 border-gray-300 rounded focus:ring-growth-600"
                             />
                             <span class="ml-2 text-sm font-medium text-gray-700">Approved</span>
                         </label>
@@ -212,13 +212,13 @@
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="px-6 py-2 bg-brand-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="px-6 py-2 bg-growth-600 hover:bg-growth-700 text-white font-medium rounded-2xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {{ form.processing ? 'Creating...' : 'Create Testimonial' }}
                         </button>
                         <Link
                             :href="route('admin.testimonials.index')"
-                            class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors"
+                            class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-2xl transition-colors"
                         >
                             Cancel
                         </Link>

@@ -159,7 +159,7 @@ const getStatusText = (status) => {
                     <span class="text-green-600 dark:text-green-400 font-medium">
                       {{ application.quotes_count }} quote{{ application.quotes_count !== 1 ? 's' : '' }} available - 
                     </span>
-                    <Link :href="`/my-applications/${application.id}/quotes`" class="text-brand-red-600 dark:text-indigo-400 hover:underline">
+                    <Link :href="`/my-applications/${application.id}/quotes`" class="text-growth-600 dark:text-indigo-400 hover:underline">
                       Review quotes
                     </Link>
                   </div>

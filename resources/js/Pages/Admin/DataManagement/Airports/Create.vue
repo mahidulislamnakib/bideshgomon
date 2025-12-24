@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <AdminLayout>
         <Head title="Add Airport" />
 
@@ -6,8 +6,8 @@
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
                 <div class="mb-6">
-                    <Link :href="route('admin.data.airports.index')" class="text-sm text-brand-red-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
-                        ← Back to Airports
+                    <Link :href="route('admin.data.airports.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+                        ? Back to Airports
                     </Link>
                     <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Add New Airport</h1>
                 </div>
@@ -24,7 +24,7 @@
                                 id="city_id"
                                 v-model="form.city_id"
                                 required
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                                 :class="{ 'border-red-500': form.errors.city_id }"
                             >
                                 <option value="">Select a city</option>
@@ -44,7 +44,7 @@
                                 type="text"
                                 required
                                 placeholder="Hazrat Shahjalal International Airport"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                                 :class="{ 'border-red-500': form.errors.name }"
                             />
                             <p v-if="form.errors.name" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.name }}</p>
@@ -57,8 +57,8 @@
                                 id="name_bn"
                                 v-model="form.name_bn"
                                 type="text"
-                                placeholder="হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                placeholder="???? ???????? ??????????? ??????????"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                             />
                         </div>
 
@@ -74,7 +74,7 @@
                                 maxlength="3"
                                 required
                                 placeholder="DAC"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600 uppercase"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600 uppercase"
                                 :class="{ 'border-red-500': form.errors.iata_code }"
                                 @input="form.iata_code = form.iata_code.toUpperCase()"
                             />
@@ -91,7 +91,7 @@
                                 type="text"
                                 maxlength="4"
                                 placeholder="VGHS"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600 uppercase"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600 uppercase"
                                 @input="form.icao_code = form.icao_code.toUpperCase()"
                             />
                             <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">4-letter ICAO code (e.g., VGHS, OMDB, EGLL)</p>
@@ -108,7 +108,7 @@
                                 min="-90"
                                 max="90"
                                 placeholder="23.8433"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                             />
                         </div>
 
@@ -123,7 +123,7 @@
                                 min="-180"
                                 max="180"
                                 placeholder="90.3978"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                             />
                         </div>
 
@@ -133,7 +133,7 @@
                                 <input
                                     v-model="form.is_international"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:ring-brand-red-600"
+                                    class="rounded border-gray-300 text-growth-600 shadow-sm focus:ring-growth-600"
                                 />
                                 <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">International Airport</span>
                             </label>
@@ -141,7 +141,7 @@
                                 <input
                                     v-model="form.is_active"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:ring-brand-red-600"
+                                    class="rounded border-gray-300 text-growth-600 shadow-sm focus:ring-growth-600"
                                 />
                                 <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Active</span>
                             </label>
@@ -159,7 +159,7 @@
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition-colors disabled:opacity-50"
+                            class="px-4 py-2 bg-growth-600 hover:bg-growth-700 text-white rounded-lg transition-colors disabled:opacity-50"
                         >
                             {{ form.processing ? 'Saving...' : 'Save Airport' }}
                         </button>

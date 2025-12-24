@@ -30,7 +30,7 @@
                                     id="subject"
                                     v-model="form.subject"
                                     type="text"
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.subject }"
                                     required
                                     placeholder="Brief description of your issue"
@@ -46,7 +46,7 @@
                                 <select
                                     id="category"
                                     v-model="form.category"
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.category }"
                                     required
                                 >
@@ -68,7 +68,7 @@
                                 <select
                                     id="priority"
                                     v-model="form.priority"
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.priority }"
                                     required
                                 >
@@ -90,7 +90,7 @@
                                     id="message"
                                     v-model="form.message"
                                     rows="6"
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.message }"
                                     required
                                     placeholder="Please describe your issue in detail..."
@@ -115,7 +115,7 @@
                                 <button
                                     type="submit"
                                     :disabled="form.processing"
-                                    class="px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150"
+                                    class="px-4 py-2 bg-growth-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2 transition ease-in-out duration-150"
                                     :class="{ 'opacity-50 cursor-not-allowed': form.processing }"
                                 >
                                     {{ form.processing ? 'Updating...' : 'Update Ticket' }}

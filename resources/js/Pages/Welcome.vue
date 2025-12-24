@@ -51,7 +51,7 @@ onMounted(() => {
 
 // Categories like Upwork's design
 const categories = [
-    { name: 'Student Visa', icon: AcademicCapIcon, count: '2.5K+', color: 'bg-blue-50 text-blue-600' },
+    { name: 'Student Visa', icon: AcademicCapIcon, count: '2.5K+', color: 'bg-blue-50 text-growth-600' },
     { name: 'Work Visa', icon: BriefcaseIcon, count: '1.8K+', color: 'bg-green-50 text-green-600' },
     { name: 'Tourist Visa', icon: GlobeAltIcon, count: '3.2K+', color: 'bg-purple-50 text-purple-600' },
     { name: 'Business Visa', icon: BuildingOfficeIcon, count: '890+', color: 'bg-orange-50 text-orange-600' },

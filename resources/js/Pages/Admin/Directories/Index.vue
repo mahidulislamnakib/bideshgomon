@@ -1,375 +1,19 @@
-﻿<template>
-    <AdminLayout>
-        <Head title="Directories" />
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <!-- Header -->
-                <div class="mb-6 flex justify-between items-center">
-                    <div>
-                        <h2 class="text-2xl font-bold text-gray-900">Directories</h2>
-                        <p class="mt-1 text-sm text-gray-600">Manage embassies, airlines, training centers, and other directories</p>
-                    </div>
-                    <Link
-                        :href="route('admin.directories.create')"
-                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150"
-                    >
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                        </svg>
-                        Add Directory
-                    </Link>
-                </div>
-
-                <!-- Filters -->
-                <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
-                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-                        <!-- Search -->
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
-                            <input
-                                v-model="filters.search"
-                                @input="debouncedSearch"
-                                type="text"
-                                placeholder="Search by name, email, phone..."
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                            />
-                        </div>
-
-                        <!-- Category Filter -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                            <select
-                                v-model="filters.category"
-                                @change="filterDirectories"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                            >
-                                <option value="">All Categories</option>
-                                <option v-for="cat in categories" :key="cat.id" :value="cat.id">
-                                    {{ cat.name }}
-                                </option>
-                            </select>
-                        </div>
-
-                        <!-- Country Filter -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Country</label>
-                            <select
-                                v-model="filters.country"
-                                @change="filterDirectories"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                            >
-                                <option value="">All Countries</option>
-                                <option v-for="country in countries" :key="country.id" :value="country.id">
-                                    {{ country.name }}
-                                </option>
-                            </select>
-                        </div>
-
-                        <!-- Status Filter -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                            <select
-                                v-model="filters.status"
-                                @change="filterDirectories"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                            >
-                                <option value="">All Status</option>
-                                <option value="published">Published</option>
-                                <option value="draft">Draft</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Additional Filters -->
-                    <div class="mt-4 flex items-center space-x-4">
-                        <label class="flex items-center">
-                            <input
-                                v-model="filters.verified"
-                                @change="filterDirectories"
-                                type="checkbox"
-                                class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                            />
-                            <span class="ml-2 text-sm text-gray-700">Verified Only</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input
-                                v-model="filters.featured"
-                                @change="filterDirectories"
-                                type="checkbox"
-                                class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                            />
-                            <span class="ml-2 text-sm text-gray-700">Featured Only</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Directories Table -->
-                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div v-if="directories.data.length > 0" class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Directory
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Category
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Contact
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Status
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Views
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <tr v-for="directory in directories.data" :key="directory.id" class="hover:bg-gray-50">
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center">
-                                            <div v-if="directory.logo_url" class="flex-shrink-0 h-12 w-12">
-                                                <img :src="directory.logo_url" :alt="directory.name" class="h-12 w-12 rounded-lg object-cover">
-                                            </div>
-                                            <div v-else class="flex-shrink-0 h-12 w-12 bg-gray-200 rounded-lg flex items-center justify-center">
-                                                <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                                                </svg>
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900 flex items-center">
-                                                    {{ directory.name }}
-                                                    <span v-if="directory.is_verified" class="ml-2" title="Verified">
-                                                        <svg class="w-4 h-4 text-brand-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                                        </svg>
-                                                    </span>
-                                                    <span v-if="directory.is_featured" class="ml-1" title="Featured">
-                                                        <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                                        </svg>
-                                                    </span>
-                                                </div>
-                                                <div class="text-sm text-gray-500">{{ directory.name_bn }}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span v-if="directory.category" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                                              :style="{ 
-                                                  backgroundColor: directory.category.color + '20',
-                                                  color: directory.category.color
-                                              }">
-                                            {{ directory.category.name }}
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-900">
-                                            <div v-if="directory.email" class="flex items-center">
-                                                <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                                                </svg>
-                                                {{ directory.email }}
-                                            </div>
-                                            <div v-if="directory.phone" class="flex items-center mt-1">
-                                                <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                                                </svg>
-                                                {{ directory.phone }}
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex flex-col space-y-1">
-                                            <button
-                                                @click="togglePublished(directory)"
-                                                :class="[
-                                                    'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium cursor-pointer transition-colors',
-                                                    directory.is_published
-                                                        ? 'bg-green-100 text-green-800 hover:bg-green-200'
-                                                        : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
-                                                ]"
-                                            >
-                                                {{ directory.is_published ? 'Published' : 'Draft' }}
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ directory.views_count || 0 }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button
-                                                @click="toggleVerified(directory)"
-                                                :class="[
-                                                    'p-1 rounded hover:bg-gray-100',
-                                                    directory.is_verified ? 'text-brand-red-600' : 'text-gray-400'
-                                                ]"
-                                                :title="directory.is_verified ? 'Verified' : 'Not Verified'"
-                                            >
-                                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                                </svg>
-                                            </button>
-                                            <button
-                                                @click="toggleFeatured(directory)"
-                                                :class="[
-                                                    'p-1 rounded hover:bg-gray-100',
-                                                    directory.is_featured ? 'text-yellow-500' : 'text-gray-400'
-                                                ]"
-                                                :title="directory.is_featured ? 'Featured' : 'Not Featured'"
-                                            >
-                                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                                </svg>
-                                            </button>
-                                            <Link
-                                                :href="route('admin.directories.edit', directory.id)"
-                                                class="text-brand-red-600 hover:text-red-900 p-1"
-                                                title="Edit"
-                                            >
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                                </svg>
-                                            </Link>
-                                            <button
-                                                @click="confirmDelete(directory)"
-                                                class="text-red-600 hover:text-red-900 p-1"
-                                                title="Delete"
-                                            >
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Empty State -->
-                    <div v-else class="text-center py-12">
-                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                        </svg>
-                        <h3 class="mt-2 text-sm font-medium text-gray-900">No directories found</h3>
-                        <p class="mt-1 text-sm text-gray-500">Get started by creating a new directory.</p>
-                        <div class="mt-6">
-                            <Link
-                                :href="route('admin.directories.create')"
-                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
-                            >
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                                </svg>
-                                Add Directory
-                            </Link>
-                        </div>
-                    </div>
-
-                    <!-- Pagination -->
-                    <div v-if="directories.data.length > 0" class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-                        <div class="flex items-center justify-between">
-                            <div class="flex-1 flex justify-between sm:hidden">
-                                <Link
-                                    v-if="directories.prev_page_url"
-                                    :href="directories.prev_page_url"
-                                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-                                >
-                                    Previous
-                                </Link>
-                                <Link
-                                    v-if="directories.next_page_url"
-                                    :href="directories.next_page_url"
-                                    class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-                                >
-                                    Next
-                                </Link>
-                            </div>
-                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                                <div>
-                                    <p class="text-sm text-gray-700">
-                                        Showing
-                                        <span class="font-medium">{{ directories.from }}</span>
-                                        to
-                                        <span class="font-medium">{{ directories.to }}</span>
-                                        of
-                                        <span class="font-medium">{{ directories.total }}</span>
-                                        results
-                                    </p>
-                                </div>
-                                <div>
-                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                                        <Link
-                                            v-if="directories.prev_page_url"
-                                            :href="directories.prev_page_url"
-                                            class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                                        >
-                                            <span class="sr-only">Previous</span>
-                                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                                            </svg>
-                                        </Link>
-                                        <Link
-                                            v-if="directories.next_page_url"
-                                            :href="directories.next_page_url"
-                                            class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                                        >
-                                            <span class="sr-only">Next</span>
-                                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-                                            </svg>
-                                        </Link>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Delete Confirmation Modal -->
-        <Modal :show="deleteModal.show" @close="closeDeleteModal">
-            <div class="p-6">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Delete Directory</h3>
-                <p class="text-sm text-gray-600 mb-6">
-                    Are you sure you want to delete "{{ deleteModal.directory?.name }}"?
-                    This action cannot be undone.
-                </p>
-                <div class="flex justify-end space-x-3">
-                    <button
-                        @click="closeDeleteModal"
-                        type="button"
-                        class="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        @click="deleteDirectory"
-                        type="button"
-                        class="px-4 py-2 bg-red-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-red-700"
-                    >
-                        Delete
-                    </button>
-                </div>
-            </div>
-        </Modal>
-    </AdminLayout>
-</template>
-
 <script setup>
-import { ref, reactive } from 'vue';
+import { reactive, computed } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Modal from '@/Components/Modal.vue';
+import EmptyState from '@/Components/Base/EmptyState.vue';
+import { 
+    PlusIcon, FunnelIcon, ArrowPathIcon,
+    PencilSquareIcon, TrashIcon, BuildingOffice2Icon,
+    CheckCircleIcon, XCircleIcon, StarIcon, EyeIcon,
+    PhoneIcon, EnvelopeIcon
+} from '@heroicons/vue/24/outline';
+import { 
+    CheckBadgeIcon as CheckBadgeSolidIcon, 
+    StarIcon as StarSolidIcon 
+} from '@heroicons/vue/24/solid';
 
 const props = defineProps({
     directories: Object,
@@ -408,14 +52,21 @@ const filterDirectories = () => {
     });
 };
 
+const resetFilters = () => {
+    filters.search = '';
+    filters.category = '';
+    filters.country = '';
+    filters.status = '';
+    filters.verified = false;
+    filters.featured = false;
+    filterDirectories();
+};
+
 const togglePublished = (directory) => {
     router.post(
         route('admin.directories.toggle-published', directory.id),
         {},
-        {
-            preserveState: true,
-            preserveScroll: true
-        }
+        { preserveState: true, preserveScroll: true }
     );
 };
 
@@ -423,10 +74,7 @@ const toggleVerified = (directory) => {
     router.post(
         route('admin.directories.toggle-verified', directory.id),
         {},
-        {
-            preserveState: true,
-            preserveScroll: true
-        }
+        { preserveState: true, preserveScroll: true }
     );
 };
 
@@ -434,10 +82,7 @@ const toggleFeatured = (directory) => {
     router.post(
         route('admin.directories.toggle-featured', directory.id),
         {},
-        {
-            preserveState: true,
-            preserveScroll: true
-        }
+        { preserveState: true, preserveScroll: true }
     );
 };
 
@@ -455,9 +100,329 @@ const deleteDirectory = () => {
     router.delete(route('admin.directories.destroy', deleteModal.directory.id), {
         preserveState: true,
         preserveScroll: true,
-        onSuccess: () => {
-            closeDeleteModal();
-        }
+        onSuccess: () => closeDeleteModal()
     });
 };
+
+const stats = computed(() => [
+    { label: 'Total Directories', value: props.directories?.total || 0, icon: BuildingOffice2Icon, color: 'blue' },
+    { label: 'Published', value: props.directories?.data?.filter(d => d.is_published).length || 0, icon: CheckCircleIcon, color: 'green' },
+    { label: 'Featured', value: props.directories?.data?.filter(d => d.is_featured).length || 0, icon: StarIcon, color: 'yellow' },
+    { label: 'Verified', value: props.directories?.data?.filter(d => d.is_verified).length || 0, icon: CheckBadgeSolidIcon, color: 'purple' },
+]);
 </script>
+
+<template>
+    <Head title="Directories Management" />
+
+    <AdminLayout>
+        <div class="min-h-screen bg-gray-50 dark:bg-neutral-900 pb-12">
+            <!-- Hero Header -->
+            <div class="relative overflow-hidden" style="background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #1f2937 100%);">
+                <div class="absolute inset-0 opacity-20">
+                    <div class="absolute top-0 left-0 w-96 h-96 bg-growth-500 rounded-full filter blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl translate-x-1/2 translate-y-1/2"></div>
+                </div>
+                
+                <div class="relative z-10 px-4 py-8 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                            <div>
+                                <h1 class="text-2xl lg:text-3xl font-bold text-white flex items-center gap-3">
+                                    <div class="p-2 bg-white/10 rounded-xl backdrop-blur">
+                                        <BuildingOffice2Icon class="h-7 w-7 text-white" />
+                                    </div>
+                                    Directories Management
+                                </h1>
+                                <p class="text-gray-400 mt-2">Manage embassies, airlines, training centers, and other directories</p>
+                            </div>
+                            
+                            <Link :href="route('admin.directories.create')" 
+                                class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-growth-500 to-teal-600 text-white rounded-xl font-semibold hover:from-growth-600 hover:to-teal-700 transition-all shadow-lg shadow-growth-500/25">
+                                <PlusIcon class="h-5 w-5 mr-2" />
+                                Add Directory
+                            </Link>
+                        </div>
+
+                        <!-- Stats Cards -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                            <div v-for="stat in stats" :key="stat.label" 
+                                class="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/20">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 rounded-2xl" :class="{
+                                        'bg-blue-500/20': stat.color === 'blue',
+                                        'bg-green-500/20': stat.color === 'green',
+                                        'bg-yellow-500/20': stat.color === 'yellow',
+                                        'bg-purple-500/20': stat.color === 'purple'
+                                    }">
+                                        <component :is="stat.icon" class="h-5 w-5" :class="{
+                                            'text-blue-400': stat.color === 'blue',
+                                            'text-green-400': stat.color === 'green',
+                                            'text-yellow-400': stat.color === 'yellow',
+                                            'text-purple-400': stat.color === 'purple'
+                                        }" />
+                                    </div>
+                                    <div>
+                                        <p class="text-2xl font-bold text-white">{{ stat.value }}</p>
+                                        <p class="text-sm text-gray-400">{{ stat.label }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-10">
+                <!-- Filters Card -->
+                <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-neutral-100 dark:border-neutral-700 p-6 mb-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <FunnelIcon class="h-5 w-5 text-gray-500" />
+                        <h3 class="font-semibold text-gray-900 dark:text-white">Filters</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                        <div class="md:col-span-2">
+                            <input 
+                                v-model="filters.search" 
+                                @input="debouncedSearch"
+                                type="text" 
+                                placeholder="Search by name, email, phone..." 
+                                class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent"
+                            />
+                        </div>
+                        <div>
+                            <select v-model="filters.category" @change="filterDirectories" 
+                                class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent">
+                                <option value="">All Categories</option>
+                                <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <select v-model="filters.country" @change="filterDirectories" 
+                                class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent">
+                                <option value="">All Countries</option>
+                                <option v-for="country in countries" :key="country.id" :value="country.id">{{ country.name }}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <select v-model="filters.status" @change="filterDirectories" 
+                                class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent">
+                                <option value="">All Status</option>
+                                <option value="published">Published</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Filters -->
+                    <div class="mt-4 flex flex-wrap items-center gap-6">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input v-model="filters.verified" @change="filterDirectories" type="checkbox" 
+                                class="w-4 h-4 rounded border-gray-300 text-growth-600 focus:ring-growth-500" />
+                            <span class="text-sm text-gray-700 dark:text-gray-300">Verified Only</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input v-model="filters.featured" @change="filterDirectories" type="checkbox" 
+                                class="w-4 h-4 rounded border-gray-300 text-growth-600 focus:ring-growth-500" />
+                            <span class="text-sm text-gray-700 dark:text-gray-300">Featured Only</span>
+                        </label>
+                        <button @click="resetFilters"
+                            class="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-neutral-700 hover:bg-gray-200 dark:hover:bg-neutral-600 text-gray-700 dark:text-gray-300 rounded-xl font-medium transition-colors text-sm">
+                            <ArrowPathIcon class="h-4 w-4 mr-2" />
+                            Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Directories Table -->
+                <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-neutral-100 dark:border-neutral-700 overflow-hidden">
+                    <!-- Empty State -->
+                    <EmptyState
+                        v-if="directories.data.length === 0"
+                        icon="FolderIcon"
+                        title="No directories found"
+                        description="Create directories to organize and categorize your content."
+                        :action="{
+                            label: 'Create Directory',
+                            onClick: () => router.visit(route('admin.directories.create')),
+                        }"
+                    />
+
+                    <!-- Table -->
+                    <div v-else class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                            <thead class="bg-gray-50 dark:bg-neutral-900/50">
+                                <tr>
+                                    <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Directory</th>
+                                    <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Category</th>
+                                    <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Contact</th>
+                                    <th class="px-6 py-4 text-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Views</th>
+                                    <th class="px-6 py-4 text-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-4 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                                <tr v-for="directory in directories.data" :key="directory.id" class="hover:bg-gray-50 dark:hover:bg-neutral-700/50 transition-colors">
+                                    <!-- Directory Info -->
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-4">
+                                            <div class="h-12 w-12 flex items-center justify-center bg-gray-100 dark:bg-neutral-700 rounded-xl overflow-hidden flex-shrink-0">
+                                                <img v-if="directory.logo_url" :src="directory.logo_url" :alt="directory.name" class="h-full w-full object-cover"/>
+                                                <BuildingOffice2Icon v-else class="h-6 w-6 text-gray-400" />
+                                            </div>
+                                            <div class="min-w-0">
+                                                <div class="flex items-center gap-2">
+                                                    <p class="font-semibold text-gray-900 dark:text-white truncate">{{ directory.name }}</p>
+                                                    <CheckBadgeSolidIcon v-if="directory.is_verified" class="h-4 w-4 text-blue-500 flex-shrink-0" title="Verified" />
+                                                    <StarSolidIcon v-if="directory.is_featured" class="h-4 w-4 text-yellow-500 flex-shrink-0" title="Featured" />
+                                                </div>
+                                                <p v-if="directory.name_bn" class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{{ directory.name_bn }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                    <!-- Category -->
+                                    <td class="px-6 py-4">
+                                        <span v-if="directory.category" 
+                                            class="inline-flex items-center px-2.5 py-1 rounded-2xl text-xs font-medium"
+                                            :style="{ 
+                                                backgroundColor: (directory.category.color || '#6b7280') + '20',
+                                                color: directory.category.color || '#6b7280'
+                                            }">
+                                            {{ directory.category.name }}
+                                        </span>
+                                        <span v-else class="text-gray-400">—</span>
+                                    </td>
+                                    
+                                    <!-- Contact -->
+                                    <td class="px-6 py-4">
+                                        <div class="space-y-1">
+                                            <div v-if="directory.email" class="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400">
+                                                <EnvelopeIcon class="h-3.5 w-3.5" />
+                                                <span class="truncate max-w-32">{{ directory.email }}</span>
+                                            </div>
+                                            <div v-if="directory.phone" class="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400">
+                                                <PhoneIcon class="h-3.5 w-3.5" />
+                                                <span>{{ directory.phone }}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                    <!-- Views -->
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="inline-flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400">
+                                            <EyeIcon class="h-4 w-4" />
+                                            <span>{{ directory.views_count || 0 }}</span>
+                                        </div>
+                                    </td>
+                                    
+                                    <!-- Status -->
+                                    <td class="px-6 py-4 text-center">
+                                        <button @click="togglePublished(directory)" class="transition-colors">
+                                            <span v-if="directory.is_published" 
+                                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 hover:bg-green-200 dark:hover:bg-green-900/50">
+                                                <CheckCircleIcon class="h-3.5 w-3.5" />
+                                                Published
+                                            </span>
+                                            <span v-else 
+                                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 dark:bg-neutral-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-neutral-600">
+                                                <XCircleIcon class="h-3.5 w-3.5" />
+                                                Draft
+                                            </span>
+                                        </button>
+                                    </td>
+                                    
+                                    <!-- Actions -->
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center justify-end gap-1">
+                                            <button @click="toggleVerified(directory)" 
+                                                class="inline-flex items-center justify-center w-8 h-8 rounded-2xl transition-colors"
+                                                :class="directory.is_verified 
+                                                    ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-200' 
+                                                    : 'bg-gray-100 dark:bg-neutral-700 text-gray-400 hover:bg-gray-200'"
+                                                :title="directory.is_verified ? 'Verified' : 'Not Verified'">
+                                                <CheckBadgeSolidIcon class="h-4 w-4" />
+                                            </button>
+                                            <button @click="toggleFeatured(directory)" 
+                                                class="inline-flex items-center justify-center w-8 h-8 rounded-2xl transition-colors"
+                                                :class="directory.is_featured 
+                                                    ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-200' 
+                                                    : 'bg-gray-100 dark:bg-neutral-700 text-gray-400 hover:bg-gray-200'"
+                                                :title="directory.is_featured ? 'Featured' : 'Not Featured'">
+                                                <StarSolidIcon class="h-4 w-4" />
+                                            </button>
+                                            <Link :href="route('admin.directories.edit', directory.id)" 
+                                                class="inline-flex items-center justify-center w-8 h-8 rounded-2xl bg-growth-50 dark:bg-growth-900/20 text-growth-600 dark:text-growth-400 hover:bg-growth-100 dark:hover:bg-growth-900/40 transition-colors">
+                                                <PencilSquareIcon class="h-4 w-4" />
+                                            </Link>
+                                            <button @click="confirmDelete(directory)" 
+                                                class="inline-flex items-center justify-center w-8 h-8 rounded-2xl bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors">
+                                                <TrashIcon class="h-4 w-4" />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div v-if="directories.data.length > 0" class="px-6 py-4 border-t border-gray-200 dark:border-neutral-700 bg-gray-50 dark:bg-neutral-900/50">
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                Showing <span class="font-semibold text-gray-900 dark:text-white">{{ directories.from }}</span> 
+                                to <span class="font-semibold text-gray-900 dark:text-white">{{ directories.to }}</span> 
+                                of <span class="font-semibold text-gray-900 dark:text-white">{{ directories.total }}</span> directories
+                            </p>
+                            <div class="flex items-center gap-2">
+                                <Link v-if="directories.prev_page_url" :href="directories.prev_page_url" 
+                                    class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-600 rounded-2xl hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors">
+                                    Previous
+                                </Link>
+                                <span v-else class="px-4 py-2 text-sm font-medium text-gray-400 dark:text-gray-600 bg-gray-100 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl cursor-not-allowed">
+                                    Previous
+                                </span>
+                                <Link v-if="directories.next_page_url" :href="directories.next_page_url" 
+                                    class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-600 rounded-2xl hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors">
+                                    Next
+                                </Link>
+                                <span v-else class="px-4 py-2 text-sm font-medium text-gray-400 dark:text-gray-600 bg-gray-100 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-2xl cursor-not-allowed">
+                                    Next
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <Modal :show="deleteModal.show" @close="closeDeleteModal">
+            <div class="p-6">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                        <TrashIcon class="h-6 w-6 text-red-600 dark:text-red-400" />
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Delete Directory</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">This action cannot be undone.</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                    Are you sure you want to delete "<strong>{{ deleteModal.directory?.name }}</strong>"?
+                </p>
+                <div class="flex justify-end gap-3">
+                    <button @click="closeDeleteModal" type="button" 
+                        class="px-4 py-2 bg-white dark:bg-neutral-700 border border-gray-300 dark:border-neutral-600 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-600 transition-colors">
+                        Cancel
+                    </button>
+                    <button @click="deleteDirectory" type="button" 
+                        class="px-4 py-2 bg-red-600 border border-transparent rounded-xl text-sm font-medium text-white hover:bg-red-700 transition-colors">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </Modal>
+    </AdminLayout>
+</template>

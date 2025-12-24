@@ -131,7 +131,7 @@ const submit = () => {
             <!-- Passport Name Notice -->
             <div class="flex items-start gap-3 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-xl">
                 <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-4 h-4 text-growth-600" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                     </svg>
                 </div>
@@ -155,7 +155,7 @@ const submit = () => {
                         required
                         placeholder="JOHN"
                         autocomplete="given-name"
-                        class="w-full px-4 py-3 uppercase text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-gray-400"
+                        class="w-full px-4 py-3 uppercase text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all placeholder:text-gray-400"
                     />
                     <InputError :message="form.errors.first_name" />
                 </div>
@@ -171,7 +171,7 @@ const submit = () => {
                         @input="autoGeneratePassportName"
                         placeholder="WILLIAM"
                         autocomplete="additional-name"
-                        class="w-full px-4 py-3 uppercase text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-gray-400"
+                        class="w-full px-4 py-3 uppercase text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all placeholder:text-gray-400"
                     />
                     <InputError :message="form.errors.middle_name" />
                 </div>
@@ -188,7 +188,7 @@ const submit = () => {
                         required
                         placeholder="DOE"
                         autocomplete="family-name"
-                        class="w-full px-4 py-3 uppercase text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-gray-400"
+                        class="w-full px-4 py-3 uppercase text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all placeholder:text-gray-400"
                     />
                     <InputError :message="form.errors.last_name" />
                 </div>
@@ -223,7 +223,7 @@ const submit = () => {
                     required
                     autocomplete="username"
                     placeholder="john.doe@example.com"
-                    class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-gray-400"
+                    class="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all placeholder:text-gray-400"
                 />
                 <InputError :message="form.errors.email" />
             </div>
@@ -265,7 +265,7 @@ const submit = () => {
                 <button
                     type="submit"
                     :disabled="form.processing"
-                    class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl shadow-sm hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl shadow-sm hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                 >
                     <svg v-if="form.processing" class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

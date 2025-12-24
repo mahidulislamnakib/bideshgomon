@@ -25,7 +25,7 @@
             <div v-if="$slots.header || title || subtitle" :class="['text-center mb-rhythm-2xl', headerAlignClass]">
                 <!-- Badge/Label -->
                 <div v-if="badge" class="inline-flex items-center px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 mb-rhythm-md">
-                    <component v-if="badgeIcon" :is="badgeIcon" class="h-4 w-4 text-brand-red-600 mr-2" />
+                    <component v-if="badgeIcon" :is="badgeIcon" class="h-4 w-4 text-growth-600 mr-2" />
                     <span class="text-sm font-semibold text-ocean-900">{{ badge }}</span>
                 </div>
 
@@ -109,7 +109,7 @@ const bgClass = computed(() => {
         light: 'bg-white',
         dark: 'bg-gray-900',
         ocean: 'bg-ocean-50',
-        sky: 'bg-brand-red-600',
+        sky: 'bg-growth-600',
         growth: 'bg-growth-500',
         sunrise: 'bg-sunrise-50',
         heritage: 'bg-heritage-50',

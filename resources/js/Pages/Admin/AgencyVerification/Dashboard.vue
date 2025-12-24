@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
@@ -10,7 +10,7 @@ const props = defineProps({
 const getStatusBadgeClass = (status) => {
     const classes = {
         pending: 'bg-yellow-100 text-yellow-800',
-        under_review: 'bg-red-100 text-brand-red-600',
+        under_review: 'bg-red-100 text-growth-600',
         approved: 'bg-green-100 text-green-800',
         rejected: 'bg-red-100 text-red-800',
         requires_changes: 'bg-orange-100 text-orange-800',
@@ -46,20 +46,20 @@ const formatDate = (date) => {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <!-- Header -->
                 <div class="mb-8">
-                    <h2 class="text-3xl font-bold text-gray-900">Agency Verification Dashboard</h2>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Agency Verification Dashboard</h2>
                     <p class="mt-1 text-sm text-gray-600">Monitor and manage agency verification requests</p>
                 </div>
 
                 <!-- Statistics Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <!-- Pending Requests -->
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-600">Pending Requests</p>
                                 <p class="mt-2 text-3xl font-bold text-yellow-600">{{ stats.pending }}</p>
                             </div>
-                            <div class="p-3 bg-yellow-100 rounded-lg">
+                            <div class="p-3 bg-yellow-100 rounded-2xl">
                                 <svg class="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
@@ -70,20 +70,20 @@ const formatDate = (date) => {
                                 :href="route('agency-verification.index', { status: 'pending' })"
                                 class="text-sm text-yellow-600 hover:text-yellow-700 font-medium"
                             >
-                                View all pending →
+                                View all pending ?
                             </Link>
                         </div>
                     </div>
 
                     <!-- Under Review -->
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-600">Under Review</p>
-                                <p class="mt-2 text-3xl font-bold text-brand-red-600">{{ stats.under_review }}</p>
+                                <p class="mt-2 text-3xl font-bold text-growth-600">{{ stats.under_review }}</p>
                             </div>
-                            <div class="p-3 bg-red-100 rounded-lg">
-                                <svg class="h-8 w-8 text-brand-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <div class="p-3 bg-red-100 rounded-2xl">
+                                <svg class="h-8 w-8 text-growth-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
@@ -91,21 +91,21 @@ const formatDate = (date) => {
                         <div class="mt-4">
                             <Link
                                 :href="route('agency-verification.index', { status: 'under_review' })"
-                                class="text-sm text-brand-red-600 hover:text-red-700 font-medium"
+                                class="text-sm text-growth-600 hover:text-growth-700 font-medium"
                             >
-                                View in review →
+                                View in review ?
                             </Link>
                         </div>
                     </div>
 
                     <!-- Verified Agencies -->
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-600">Verified Agencies</p>
                                 <p class="mt-2 text-3xl font-bold text-green-600">{{ stats.verified_agencies }}</p>
                             </div>
-                            <div class="p-3 bg-green-100 rounded-lg">
+                            <div class="p-3 bg-green-100 rounded-2xl">
                                 <svg class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                                 </svg>
@@ -122,17 +122,17 @@ const formatDate = (date) => {
                 <!-- Monthly Statistics -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <!-- Approved This Month -->
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-gray-900">This Month</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">This Month</h3>
                             <span class="text-sm text-gray-500">{{ new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }) }}</span>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="text-center p-4 bg-green-50 rounded-lg">
+                            <div class="text-center p-4 bg-green-50 rounded-2xl">
                                 <p class="text-2xl font-bold text-green-600">{{ stats.approved_this_month }}</p>
                                 <p class="text-sm text-gray-600 mt-1">Approved</p>
                             </div>
-                            <div class="text-center p-4 bg-red-50 rounded-lg">
+                            <div class="text-center p-4 bg-red-50 rounded-2xl">
                                 <p class="text-2xl font-bold text-red-600">{{ stats.rejected_this_month }}</p>
                                 <p class="text-sm text-gray-600 mt-1">Rejected</p>
                             </div>
@@ -140,12 +140,12 @@ const formatDate = (date) => {
                     </div>
 
                     <!-- Quick Actions -->
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h3>
                         <div class="space-y-3">
                             <Link
                                 :href="route('agency-verification.index')"
-                                class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                                class="flex items-center justify-between p-3 rounded-2xl hover:bg-gray-50 transition-colors"
                             >
                                 <div class="flex items-center gap-3">
                                     <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -159,7 +159,7 @@ const formatDate = (date) => {
                             </Link>
                             <Link
                                 :href="route('agency-verification.index', { status: 'pending' })"
-                                class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                                class="flex items-center justify-between p-3 rounded-2xl hover:bg-gray-50 transition-colors"
                             >
                                 <div class="flex items-center gap-3">
                                     <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -173,7 +173,7 @@ const formatDate = (date) => {
                             </Link>
                             <Link
                                 :href="route('admin.users.index', { role: 'agency' })"
-                                class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                                class="flex items-center justify-between p-3 rounded-2xl hover:bg-gray-50 transition-colors"
                             >
                                 <div class="flex items-center gap-3">
                                     <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -190,15 +190,15 @@ const formatDate = (date) => {
                 </div>
 
                 <!-- Recent Requests -->
-                <div class="bg-white shadow-sm rounded-lg border border-gray-200">
+                <div class="bg-white shadow-sm rounded-2xl border border-gray-200">
                     <div class="px-6 py-4 border-b border-gray-200">
                         <div class="flex items-center justify-between">
-                            <h3 class="text-lg font-semibold text-gray-900">Recent Verification Requests</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Recent Verification Requests</h3>
                             <Link
                                 :href="route('agency-verification.index')"
-                                class="text-sm text-brand-red-600 hover:text-red-700 font-medium"
+                                class="text-sm text-growth-600 hover:text-growth-700 font-medium"
                             >
-                                View all →
+                                View all ?
                             </Link>
                         </div>
                     </div>
@@ -219,7 +219,7 @@ const formatDate = (date) => {
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div>
-                                                <div class="text-sm font-medium text-gray-900">{{ request.agency?.name }}</div>
+                                                <div class="text-sm font-medium text-gray-900 dark:text-white">{{ request.agency?.name }}</div>
                                                 <div class="text-sm text-gray-500">{{ request.agency?.email }}</div>
                                             </div>
                                         </div>
@@ -242,7 +242,7 @@ const formatDate = (date) => {
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <Link
                                             :href="route('agency-verification.show', request.id)"
-                                            class="text-brand-red-600 hover:text-red-900"
+                                            class="text-growth-600 hover:text-red-900"
                                         >
                                             Review
                                         </Link>

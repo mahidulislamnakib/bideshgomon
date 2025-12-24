@@ -184,7 +184,7 @@ const formatFieldValue = (value, fieldType) => {
             <Link
               v-if="application.status === 'draft'"
               :href="route('services.show', application.service.slug) + '?edit=' + application.id"
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-brand-red-600 border border-transparent rounded-md hover:bg-red-700"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-growth-600 border border-transparent rounded-md hover:bg-growth-700"
             >
               <PencilSquareIcon class="h-4 w-4 mr-2" />
               Edit Application
@@ -336,7 +336,7 @@ const formatFieldValue = (value, fieldType) => {
                   <a
                     :href="document.file_path"
                     target="_blank"
-                    class="ml-4 flex-shrink-0 text-brand-red-600 hover:text-primary-700"
+                    class="ml-4 flex-shrink-0 text-growth-600 hover:text-primary-700"
                   >
                     <ArrowDownTrayIcon class="h-5 w-5" />
                   </a>
@@ -352,7 +352,7 @@ const formatFieldValue = (value, fieldType) => {
                 :href="route('services.show', application.service.slug)"
                 class="block hover:bg-gray-50 rounded-lg p-3 -m-3"
               >
-                <p class="text-sm font-medium text-brand-red-600">
+                <p class="text-sm font-medium text-growth-600">
                   {{ application.service.name }}
                 </p>
                 <p v-if="application.service.short_description" class="text-sm text-gray-600 mt-1">

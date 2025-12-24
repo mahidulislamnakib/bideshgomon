@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <Head title="Bank Names" />
   <AdminLayout>
     <div class="p-6">
@@ -9,7 +9,7 @@
 
       <!-- Actions Bar -->
       <div class="mb-6 flex flex-col sm:flex-row gap-4">
-        <Link :href="route('admin.data.bank-names.create')" class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700">
+        <Link :href="route('admin.data.bank-names.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-md hover:bg-growth-700">
           <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
           </svg>
@@ -36,12 +36,12 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
-            <input v-model="filters.search" type="text" placeholder="Search banks..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" @input="debounceSearch"/>
+            <input v-model="filters.search" type="text" placeholder="Search banks..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-growth-600 focus:border-growth-600" @input="debounceSearch"/>
           </div>
 
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Type</label>
-            <select v-model="filters.type" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white" @change="applyFilters">
+            <select v-model="filters.type" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-growth-600 bg-white" @change="applyFilters">
               <option value="">All Types</option>
               <option v-for="type in types" :key="type" :value="type">{{ type }}</option>
             </select>
@@ -49,7 +49,7 @@
 
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <select v-model="filters.is_active" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white" @change="applyFilters">
+            <select v-model="filters.is_active" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-growth-600 bg-white" @change="applyFilters">
               <option value="">All Status</option>
               <option value="true">Active</option>
               <option value="false">Inactive</option>
@@ -88,7 +88,7 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ bank.short_name || '-' }}</td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-brand-red-600">
+                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-growth-600">
                   {{ bank.type }}
                 </span>
               </td>
@@ -99,7 +99,7 @@
                 </button>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <Link :href="route('admin.data.bank-names.edit', bank.id)" class="text-brand-red-600 hover:text-red-900 mr-3">Edit</Link>
+                <Link :href="route('admin.data.bank-names.edit', bank.id)" class="text-growth-600 hover:text-red-900 mr-3">Edit</Link>
                 <button @click="confirmDelete(bank)" class="text-red-600 hover:text-red-900">Delete</button>
               </td>
             </tr>
@@ -128,13 +128,13 @@
                   :href="link.url"
                   v-html="link.label"
                   class="px-3 py-1 border rounded-md text-sm"
-                  :class="link.active ? 'bg-brand-red-600 text-white border-brand-red-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'"
+                  :class="link.active ? 'bg-growth-600 text-white border-growth-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'"
                 />
                 <span
                   v-else
                   v-html="link.label"
                   class="px-3 py-1 border rounded-md text-sm opacity-50 cursor-not-allowed"
-                  :class="link.active ? 'bg-brand-red-600 text-white border-brand-red-600' : 'bg-white text-gray-700 border-gray-300'"
+                  :class="link.active ? 'bg-growth-600 text-white border-growth-600' : 'bg-white text-gray-700 border-gray-300'"
                 />
               </template>
             </div>

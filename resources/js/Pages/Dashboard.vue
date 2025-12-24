@@ -98,7 +98,7 @@ const platformServices = computed(() => {
         'wallet': { bg: 'bg-emerald-50', text: 'text-emerald-600', iconBg: 'bg-emerald-100' },
         'referrals': { bg: 'bg-pink-50', text: 'text-pink-600', iconBg: 'bg-pink-100' },
         'ai-profile-assessment': { bg: 'bg-purple-50', text: 'text-purple-600', iconBg: 'bg-purple-100' },
-        'cv-builder': { bg: 'bg-indigo-50', text: 'text-indigo-600', iconBg: 'bg-indigo-100' },
+        'cv-builder': { bg: 'bg-indigo-50', text: 'text-growth-600', iconBg: 'bg-indigo-100' },
         'document-scanner': { bg: 'bg-cyan-50', text: 'text-cyan-600', iconBg: 'bg-cyan-100' },
         'public-profile': { bg: 'bg-teal-50', text: 'text-teal-600', iconBg: 'bg-teal-100' },
         'payments': { bg: 'bg-amber-50', text: 'text-amber-600', iconBg: 'bg-amber-100' },
@@ -191,7 +191,7 @@ const platformServices = computed(() => {
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition-shadow">
                         <div class="flex items-center gap-3">
                             <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
-                                <AcademicCapIcon class="w-6 h-6 text-blue-600" />
+                                <AcademicCapIcon class="w-6 h-6 text-growth-600" />
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500 font-medium">Education</p>

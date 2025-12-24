@@ -92,7 +92,7 @@ const inputClasses = computed(() => {
     'border',
     'rounded-md', // Design System V2: rounded-md (6px)
     'transition-all duration-base',
-    'focus:outline-none focus:ring-2 focus:ring-brand-red-400 focus:border-brand-red-400',
+    'focus:outline-none focus:ring-2 focus:ring-growth-400 focus:border-growth-400',
     'bg-white',
     'placeholder:text-gray-400',
     'disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50',

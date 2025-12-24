@@ -424,4 +424,171 @@ class CvBuilderService
 
         return true;
     }
+
+    /**
+     * Generate AI-powered professional summary
+     * Uses profile data to create a compelling summary
+     */
+    public function generateProfessionalSummary(string $fullName, array $experience = [], array $skills = [], array $education = []): string
+    {
+        // Extract key information
+        $firstName = explode(' ', trim($fullName))[0];
+        $yearsExperience = $this->calculateYearsOfExperience($experience);
+        $latestRole = $this->getLatestRole($experience);
+        $topSkills = $this->getTopSkills($skills, 5);
+        $highestEducation = $this->getHighestEducation($education);
+
+        // Build the summary dynamically
+        $summary = [];
+
+        // Opening statement
+        if ($latestRole && $yearsExperience > 0) {
+            $summary[] = sprintf(
+                '%s professional with %s years of experience as a %s.',
+                $yearsExperience >= 5 ? 'Seasoned' : ($yearsExperience >= 2 ? 'Experienced' : 'Motivated'),
+                $yearsExperience,
+                $latestRole['job_title']
+            );
+        } elseif ($latestRole) {
+            $summary[] = sprintf(
+                'Dedicated professional currently working as a %s%s.',
+                $latestRole['job_title'],
+                ! empty($latestRole['company']) ? ' at '.$latestRole['company'] : ''
+            );
+        } else {
+            $summary[] = 'Dedicated professional seeking to leverage skills and experience in a challenging role.';
+        }
+
+        // Skills highlight
+        if (! empty($topSkills)) {
+            $skillsList = implode(', ', array_slice($topSkills, 0, 4));
+            $summary[] = sprintf(
+                'Proficient in %s, with a proven track record of delivering high-quality results.',
+                $skillsList
+            );
+        }
+
+        // Education mention
+        if ($highestEducation) {
+            $summary[] = sprintf(
+                'Holds a %s%s%s.',
+                $highestEducation['degree'] ?? 'degree',
+                ! empty($highestEducation['field_of_study']) ? ' in '.$highestEducation['field_of_study'] : '',
+                ! empty($highestEducation['institution']) ? ' from '.$highestEducation['institution'] : ''
+            );
+        }
+
+        // Closing statement
+        $summary[] = 'Committed to continuous learning and professional growth, with excellent communication and problem-solving abilities.';
+
+        return implode(' ', $summary);
+    }
+
+    /**
+     * Calculate approximate years of experience from work history
+     */
+    protected function calculateYearsOfExperience(array $experience): int
+    {
+        if (empty($experience)) {
+            return 0;
+        }
+
+        $totalMonths = 0;
+        foreach ($experience as $exp) {
+            $startDate = $exp['start_date'] ?? null;
+            $endDate = $exp['end_date'] ?? null;
+            $isCurrent = $exp['is_current'] ?? false;
+
+            if ($startDate) {
+                try {
+                    $start = new \DateTime($startDate);
+                    $end = $isCurrent || ! $endDate ? new \DateTime : new \DateTime($endDate);
+                    $diff = $start->diff($end);
+                    $totalMonths += ($diff->y * 12) + $diff->m;
+                } catch (\Exception $e) {
+                    continue;
+                }
+            }
+        }
+
+        return (int) floor($totalMonths / 12);
+    }
+
+    /**
+     * Get the latest/current role from experience
+     */
+    protected function getLatestRole(array $experience): ?array
+    {
+        if (empty($experience)) {
+            return null;
+        }
+
+        // First try to find a current role
+        foreach ($experience as $exp) {
+            if (! empty($exp['is_current'])) {
+                return $exp;
+            }
+        }
+
+        // Otherwise return the first one (usually most recent)
+        return $experience[0];
+    }
+
+    /**
+     * Get top skills by level
+     */
+    protected function getTopSkills(array $skills, int $limit = 5): array
+    {
+        if (empty($skills)) {
+            return [];
+        }
+
+        // Sort by level (expert > advanced > intermediate > beginner)
+        $levelOrder = ['expert' => 4, 'advanced' => 3, 'intermediate' => 2, 'beginner' => 1];
+
+        usort($skills, function ($a, $b) use ($levelOrder) {
+            $levelA = $levelOrder[strtolower($a['level'] ?? 'intermediate')] ?? 2;
+            $levelB = $levelOrder[strtolower($b['level'] ?? 'intermediate')] ?? 2;
+
+            return $levelB - $levelA;
+        });
+
+        return array_slice(array_column($skills, 'name'), 0, $limit);
+    }
+
+    /**
+     * Get highest education
+     */
+    protected function getHighestEducation(array $education): ?array
+    {
+        if (empty($education)) {
+            return null;
+        }
+
+        // Priority order for degrees
+        $degreeOrder = [
+            'phd' => 6, 'doctorate' => 6, 'doctor' => 6,
+            'master' => 5, 'mba' => 5, 'msc' => 5, 'ma' => 5,
+            'bachelor' => 4, 'bsc' => 4, 'ba' => 4, 'bba' => 4,
+            'diploma' => 3,
+            'associate' => 2,
+            'certificate' => 1,
+        ];
+
+        $highest = $education[0];
+        $highestScore = 0;
+
+        foreach ($education as $edu) {
+            $degree = strtolower($edu['degree'] ?? '');
+            foreach ($degreeOrder as $keyword => $score) {
+                if (str_contains($degree, $keyword) && $score > $highestScore) {
+                    $highestScore = $score;
+                    $highest = $edu;
+                    break;
+                }
+            }
+        }
+
+        return $highest;
+    }
 }

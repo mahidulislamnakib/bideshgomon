@@ -8,7 +8,7 @@
                     <div class="p-4 sm:p-6">
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
                             <h2 class="text-xl sm:text-2xl font-bold text-gray-900">Invite Consultant</h2>
-                            <Link :href="route('agency.team.index')" class="text-brand-red-600 hover:text-red-900 text-sm">
+                            <Link :href="route('agency.team.index')" class="text-growth-600 hover:text-red-900 text-sm">
                                 ← Back to Team
                             </Link>
                         </div>
@@ -24,7 +24,7 @@
                                     v-model="form.name"
                                     type="text"
                                     required
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-red-600 focus:border-indigo-500"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-growth-600 focus:border-growth-600"
                                     :class="{ 'border-red-500': form.errors.name }"
                                 />
                                 <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">{{ form.errors.name }}</p>
@@ -40,7 +40,7 @@
                                     v-model="form.email"
                                     type="email"
                                     required
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-red-600 focus:border-indigo-500"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-growth-600 focus:border-growth-600"
                                     :class="{ 'border-red-500': form.errors.email }"
                                 />
                                 <p v-if="form.errors.email" class="mt-1 text-sm text-red-600">{{ form.errors.email }}</p>
@@ -60,7 +60,7 @@
                                     type="text"
                                     required
                                     placeholder="e.g., Senior Consultant, Visa Specialist"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-red-600 focus:border-indigo-500"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-growth-600 focus:border-growth-600"
                                     :class="{ 'border-red-500': form.errors.position }"
                                 />
                                 <p v-if="form.errors.position" class="mt-1 text-sm text-red-600">{{ form.errors.position }}</p>
@@ -75,7 +75,7 @@
                                     id="role"
                                     v-model="form.role"
                                     required
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-red-600 focus:border-indigo-500"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-growth-600 focus:border-growth-600"
                                     :class="{ 'border-red-500': form.errors.role }"
                                 >
                                     <option value="">Select role</option>
@@ -105,14 +105,14 @@
                                 <button
                                     type="submit"
                                     :disabled="form.processing"
-                                    class="inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50"
+                                    class="inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600 disabled:opacity-50"
                                 >
                                     <span v-if="form.processing">Sending...</span>
                                     <span v-else>Send Invitation</span>
                                 </button>
                                 <Link
                                     :href="route('agency.team.index')"
-                                    class="inline-flex justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600"
+                                    class="inline-flex justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600"
                                 >
                                     Cancel
                                 </Link>

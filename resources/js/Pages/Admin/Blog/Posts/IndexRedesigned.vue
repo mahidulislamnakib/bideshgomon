@@ -200,7 +200,7 @@
                     </a>
                     <Link
                         :href="route('admin.blog.posts.edit', row.id)"
-                        class="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                        class="text-growth-600 hover:text-blue-700 text-sm font-medium"
                     >
                         Edit
                     </Link>
@@ -220,7 +220,7 @@
                     </button>
                     <button
                         @click="deletePost(row.id)"
-                        class="text-red-600 hover:text-red-700 text-sm font-medium"
+                        class="text-red-600 hover:text-growth-700 text-sm font-medium"
                     >
                         Delete
                     </button>

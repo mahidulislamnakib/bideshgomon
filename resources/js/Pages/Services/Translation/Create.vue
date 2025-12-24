@@ -59,7 +59,7 @@
 
                     <div class="flex items-center justify-between">
                         <Link :href="route('translation.index')" class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg">Cancel</Link>
-                        <button type="submit" :disabled="form.processing" class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700">
+                        <button type="submit" :disabled="form.processing" class="px-6 py-3 bg-growth-600 text-white rounded-lg hover:bg-growth-700">
                             {{ form.processing ? 'Submitting...' : 'Submit Request' }}
                         </button>
                     </div>

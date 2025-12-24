@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <Head title="Bulk Upload Relationship Types" />
   <AdminLayout>
     <div class="p-6">
@@ -16,12 +16,12 @@
               <label class="block text-sm font-medium text-gray-700 mb-2">
                 Select CSV File <span class="text-red-500">*</span>
               </label>
-              <input type="file" @change="handleFileChange" accept=".csv" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600"/>
+              <input type="file" @change="handleFileChange" accept=".csv" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-growth-600 focus:border-growth-600"/>
               <p v-if="form.errors.file" class="mt-1 text-sm text-red-600">{{ form.errors.file }}</p>
             </div>
 
             <div class="flex gap-3">
-              <button type="submit" :disabled="form.processing" class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50">
+              <button type="submit" :disabled="form.processing" class="px-4 py-2 bg-growth-600 text-white rounded-md hover:bg-growth-700 disabled:opacity-50">
                 {{ form.processing ? 'Uploading...' : 'Upload & Process' }}
               </button>
               <Link :href="route('admin.data.relationship-types.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</Link>
@@ -72,7 +72,7 @@
 
             <div class="bg-red-50 border border-red-200 rounded-md p-3">
               <h3 class="font-medium text-red-900 mb-2">Important Notes:</h3>
-              <ul class="list-disc list-inside text-brand-red-600 text-xs space-y-1">
+              <ul class="list-disc list-inside text-growth-600 text-xs space-y-1">
                 <li>Names must be unique</li>
                 <li>Category must match available options</li>
                 <li>Family relationships are most commonly used</li>
@@ -82,9 +82,9 @@
             <div>
               <h3 class="font-medium text-gray-900 mb-2">Example CSV:</h3>
               <pre class="bg-gray-50 border border-gray-200 rounded p-2 text-xs overflow-x-auto">name,name_bn,category,sort_order,is_active
-Spouse,স্বামী/স্ত্রী,family,1,1
-Father,পিতা,family,2,1
-Mother,মাতা,family,3,1</pre>
+Spouse,??????/??????,family,1,1
+Father,????,family,2,1
+Mother,????,family,3,1</pre>
             </div>
           </div>
         </div>

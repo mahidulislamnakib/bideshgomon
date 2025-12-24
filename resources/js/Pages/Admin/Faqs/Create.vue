@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ArrowLeftIcon } from '@heroicons/vue/24/outline';
@@ -32,14 +32,14 @@ const submit = () => {
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <Link
                     :href="route('admin.faqs.index')"
-                    class="inline-flex items-center text-gray-600 hover:text-gray-900 mb-6"
+                    class="inline-flex items-center text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white mb-6"
                 >
                     <ArrowLeftIcon class="h-5 w-5 mr-2" />
                     Back to FAQs
                 </Link>
 
                 <div class="bg-white rounded-2xl shadow-sm p-8">
-                    <h1 class="text-2xl font-bold text-gray-900 mb-6">Create New FAQ</h1>
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Create New FAQ</h1>
 
                     <form @submit.prevent="submit" class="space-y-6">
                         <!-- Category Selection -->
@@ -50,7 +50,7 @@ const submit = () => {
                             <select
                                 v-model="form.faq_category_id"
                                 required
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-growth-600"
                             >
                                 <option value="">Select Category</option>
                                 <option v-for="category in categories" :key="category.id" :value="category.id">
@@ -72,7 +72,7 @@ const submit = () => {
                                 type="text"
                                 required
                                 maxlength="500"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-growth-600"
                                 placeholder="e.g., What documents do I need for a student visa?"
                             />
                             <p class="text-xs text-gray-500 mt-1">
@@ -92,7 +92,7 @@ const submit = () => {
                                 v-model="form.answer"
                                 required
                                 rows="8"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-growth-600"
                                 placeholder="Provide a detailed answer to the question..."
                             ></textarea>
                             <p class="text-xs text-gray-500 mt-1">
@@ -112,7 +112,7 @@ const submit = () => {
                                 v-model="form.order"
                                 type="number"
                                 min="0"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-growth-600"
                                 placeholder="Leave empty to add at the end"
                             />
                             <p class="text-xs text-gray-500 mt-1">
@@ -130,7 +130,7 @@ const submit = () => {
                                     v-model="form.is_published"
                                     type="checkbox"
                                     id="is_published"
-                                    class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded"
+                                    class="h-4 w-4 text-growth-600 focus:ring-growth-600 border-gray-300 rounded"
                                 />
                                 <label for="is_published" class="ml-2 text-sm font-medium text-gray-700">
                                     Publish immediately
@@ -145,14 +145,14 @@ const submit = () => {
                         <div class="flex items-center justify-between pt-6 border-t border-gray-200">
                             <Link
                                 :href="route('admin.faqs.index')"
-                                class="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+                                class="px-6 py-3 bg-gray-100 text-gray-700 rounded-2xl hover:bg-gray-200 transition-colors font-medium"
                             >
                                 Cancel
                             </Link>
                             <button
                                 type="submit"
                                 :disabled="form.processing"
-                                class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                                class="px-6 py-3 bg-growth-600 text-white rounded-2xl hover:bg-growth-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <span v-if="form.processing">Creating...</span>
                                 <span v-else>Create FAQ</span>

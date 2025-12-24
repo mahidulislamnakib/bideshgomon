@@ -147,7 +147,7 @@ const handleFocus = () => {
 const inputClasses = computed(() => {
     return [
         'w-full pl-10 pr-4 py-2 border rounded-lg transition-colors',
-        'focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500',
+        'focus:ring-2 focus:ring-growth-600 focus:border-growth-600',
         'disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed',
         props.error ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
     ];
@@ -217,7 +217,7 @@ const helperText = computed(() => {
         <!-- Format Hint (on focus) -->
         <p 
             v-if="isFocused && !error"
-            class="mt-1 text-sm text-brand-red-600"
+            class="mt-1 text-sm text-growth-600"
         >
             💡 Type: 15 Dec 2025 or 15 12 2025 or 15/12/2025
         </p>

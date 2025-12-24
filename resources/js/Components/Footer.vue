@@ -10,15 +10,15 @@ const footerSections = {
     title: 'For Job Seekers',
     links: [
       { label: 'Browse Jobs', href: '/jobs' },
-      { label: 'My Applications', href: '/user/applications' },
-      { label: 'Build Your CV', href: '/cv-builder' },
+      { label: 'My Applications', href: '/jobs/my/applications' },
+      { label: 'Build Your CV', href: '/services/cv-builder' },
       { label: 'Profile Tips', href: '/help/profile' },
     ]
   },
   forEmployers: {
     title: 'For Employers',
     links: [
-      { label: 'Post a Job', href: '/employer/jobs/create' },
+      { label: 'Post a Job', href: '/contact?subject=Post a Job' },
       { label: 'Find Talent', href: '/talent' },
       { label: 'Pricing', href: '/pricing' },
       { label: 'Enterprise Solutions', href: '/enterprise' },
@@ -208,7 +208,7 @@ const getMenuUrl = (item) => {
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
           <!-- Copyright -->
           <p class="text-sm text-gray-400">
-            © {{ currentYear }} BideshGomon. All rights reserved.
+            © {{ currentYear }} Bidesh Gomon. All rights reserved.
           </p>
 
           <!-- Legal Links -->

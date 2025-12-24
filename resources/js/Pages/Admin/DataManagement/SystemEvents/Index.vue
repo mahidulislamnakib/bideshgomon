@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <AdminLayout>
     <Head title="System Events" />
 
@@ -22,7 +22,7 @@
                 </Link>
                 <Link
                   :href="route('admin.data.system-events.create')"
-                  class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
+                  class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700"
                 >
                   Create Event
                 </Link>
@@ -36,14 +36,14 @@
                   v-model="searchForm.search"
                   type="text"
                   placeholder="Search events..."
-                  class="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                  class="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   @input="debouncedSearch"
                 />
               </div>
               <div>
                 <select
                   v-model="searchForm.event_type"
-                  class="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                  class="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   @change="search"
                 >
                   <option value="">All Event Types</option>
@@ -53,7 +53,7 @@
               <div>
                 <select
                   v-model="searchForm.target_type"
-                  class="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                  class="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   @change="search"
                 >
                   <option value="">All Target Types</option>
@@ -99,7 +99,7 @@
                   <tr v-for="event in events.data" :key="event.id">
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="flex items-center">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 dark:bg-blue-900 text-brand-red-600 dark:text-blue-200">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 dark:bg-blue-900 text-growth-600 dark:text-blue-200">
                           {{ event.event_type }}
                         </span>
                       </div>
@@ -126,7 +126,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <Link
                         :href="route('admin.data.system-events.edit', event.id)"
-                        class="text-brand-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-indigo-300 mr-3"
+                        class="text-growth-600 dark:text-red-400 hover:text-red-900 dark:hover:text-indigo-300 mr-3"
                       >
                         Edit
                       </Link>

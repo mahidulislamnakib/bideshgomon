@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <Head title="Blog Categories" />
 
     <AdminLayout>
@@ -11,7 +11,7 @@
                 </div>
                 <button
                     @click="showCreateModal = true"
-                    class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-sm text-white hover:bg-red-700 transition-colors"
+                    class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-md font-semibold text-sm text-white hover:bg-growth-700 transition-colors"
                 >
                     <PlusIcon class="h-5 w-5 mr-2" />
                     New Category
@@ -75,7 +75,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <button
                                         @click="editCategory(category)"
-                                        class="text-brand-red-600 hover:text-red-900 mr-4"
+                                        class="text-growth-600 hover:text-red-900 mr-4"
                                     >
                                         Edit
                                     </button>
@@ -140,7 +140,7 @@
                                                             id="name"
                                                             v-model="form.name"
                                                             type="text"
-                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                                             @input="generateSlug"
                                                         />
                                                         <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">{{ form.errors.name }}</p>
@@ -154,7 +154,7 @@
                                                             id="slug"
                                                             v-model="form.slug"
                                                             type="text"
-                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                                         />
                                                         <p v-if="form.errors.slug" class="mt-1 text-sm text-red-600">{{ form.errors.slug }}</p>
                                                     </div>
@@ -167,7 +167,7 @@
                                                             id="description"
                                                             v-model="form.description"
                                                             rows="3"
-                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                                         ></textarea>
                                                     </div>
 
@@ -180,9 +180,9 @@
                                                                 id="icon"
                                                                 v-model="form.icon"
                                                                 type="text"
-                                                                placeholder="📝"
+                                                                placeholder="??"
                                                                 maxlength="2"
-                                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                                             />
                                                         </div>
 
@@ -194,7 +194,7 @@
                                                                 id="color"
                                                                 v-model="form.color"
                                                                 type="color"
-                                                                class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                                                class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                                             />
                                                         </div>
                                                     </div>
@@ -208,7 +208,7 @@
                                                             v-model="form.order"
                                                             type="number"
                                                             min="0"
-                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                                         />
                                                     </div>
 
@@ -217,7 +217,7 @@
                                                             id="is_active"
                                                             v-model="form.is_active"
                                                             type="checkbox"
-                                                            class="h-4 w-4 rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                                            class="h-4 w-4 rounded border-gray-300 text-growth-600 focus:ring-growth-600"
                                                         />
                                                         <label for="is_active" class="ml-2 block text-sm text-gray-700">
                                                             Active
@@ -230,7 +230,7 @@
                                                 <button
                                                     type="submit"
                                                     :disabled="form.processing"
-                                                    class="inline-flex w-full justify-center rounded-md bg-brand-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:col-start-2 disabled:opacity-50"
+                                                    class="inline-flex w-full justify-center rounded-md bg-growth-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:col-start-2 disabled:opacity-50"
                                                 >
                                                     {{ form.processing ? 'Saving...' : 'Save' }}
                                                 </button>

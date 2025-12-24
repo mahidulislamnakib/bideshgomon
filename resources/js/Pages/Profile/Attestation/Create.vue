@@ -51,7 +51,7 @@ const submit = () => {
                         <!-- Form fields will be added here -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Additional Notes</label>
-                            <textarea v-model="form.user_notes" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500" placeholder="Any additional information..."></textarea>
+                            <textarea v-model="form.user_notes" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-growth-600" placeholder="Any additional information..."></textarea>
                         </div>
 
                         <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
@@ -78,7 +78,7 @@ const submit = () => {
                         <Link :href="route('profile.attestation.index')" class="inline-flex items-center justify-center px-6 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
                             Cancel
                         </Link>
-                        <button type="submit" :disabled="form.processing" class="inline-flex items-center justify-center px-6 py-2 bg-brand-red-600 border border-transparent rounded-lg text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button type="submit" :disabled="form.processing" class="inline-flex items-center justify-center px-6 py-2 bg-growth-600 border border-transparent rounded-lg text-sm font-medium text-white hover:bg-growth-700 disabled:opacity-50 disabled:cursor-not-allowed">
                             {{ form.processing ? 'Creating...' : 'Create Application' }}
                         </button>
                     </div>

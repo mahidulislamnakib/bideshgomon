@@ -2,6 +2,11 @@
     <Head title="Agencies" />
 
     <DashboardShell>
+        <!-- Loading Skeleton -->
+        <PageSkeleton v-if="loading" />
+
+        <!-- Main Content -->
+        <template v-else>
         <!-- Page Header -->
         <div class="flex items-center justify-between mb-8">
             <div>
@@ -71,7 +76,7 @@
                         <select
                             v-model="filters.status"
                             @change="applyFilters"
-                            class="w-full rounded-lg border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
+                            class="w-full rounded-2xl border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
                         >
                             <option value="">All Status</option>
                             <option value="active">Active</option>
@@ -85,7 +90,7 @@
                         <select
                             v-model="filters.verification"
                             @change="applyFilters"
-                            class="w-full rounded-lg border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
+                            class="w-full rounded-2xl border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
                         >
                             <option value="">All</option>
                             <option value="verified">Verified</option>
@@ -99,7 +104,7 @@
                         <select
                             v-model="filters.type"
                             @change="applyFilters"
-                            class="w-full rounded-lg border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
+                            class="w-full rounded-2xl border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
                         >
                             <option value="">All Types</option>
                             <option value="recruitment">Recruitment</option>
@@ -187,7 +192,7 @@
                     </Link>
                     <Link
                         :href="route('admin.agencies.edit', row.id)"
-                        class="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                        class="text-growth-600 hover:text-blue-700 text-sm font-medium"
                     >
                         Edit
                     </Link>
@@ -207,13 +212,14 @@
                     </button>
                     <button
                         @click="deleteAgency(row.id)"
-                        class="text-red-600 hover:text-red-700 text-sm font-medium"
+                        class="text-red-600 hover:text-growth-700 text-sm font-medium"
                     >
                         Delete
                     </button>
                 </div>
             </template>
         </TableWrapper>
+        </template>
     </DashboardShell>
 </template>
 
@@ -221,6 +227,7 @@
 import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import DashboardShell from '@/Layouts/DashboardShell.vue';
+import PageSkeleton from '@/Components/ui/PageSkeleton.vue';
 import StatsCard from '@/Components/UI/StatsCard.vue';
 import TableWrapper from '@/Components/UI/TableWrapper.vue';
 import ActionButton from '@/Components/UI/ActionButton.vue';
@@ -237,6 +244,8 @@ const props = defineProps({
     stats: Object,
     filters: Object
 });
+
+const loading = ref(false);
 
 const columns = [
     { key: 'name', label: 'Agency', sortable: true },

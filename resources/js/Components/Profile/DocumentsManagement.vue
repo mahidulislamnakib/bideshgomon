@@ -36,7 +36,7 @@
                             type="text"
                             required
                             placeholder="e.g., Passport Copy"
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         />
                     </div>
 
@@ -47,7 +47,7 @@
                         <select
                             v-model="uploadForm.document_type"
                             required
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         >
                             <option value="">Select type...</option>
                             <option v-for="(label, value) in documentTypes" :key="value" :value="value">
@@ -65,7 +65,7 @@
                         v-model="uploadForm.description"
                         rows="2"
                         placeholder="Optional description..."
-                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     ></textarea>
                 </div>
 
@@ -77,7 +77,7 @@
                         <input
                             v-model="uploadForm.issue_date"
                             type="date"
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         />
                     </div>
 
@@ -88,7 +88,7 @@
                         <input
                             v-model="uploadForm.expiry_date"
                             type="date"
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         />
                     </div>
 
@@ -100,7 +100,7 @@
                             v-model="uploadForm.document_number"
                             type="text"
                             placeholder="e.g., A12345678"
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         />
                     </div>
 
@@ -112,7 +112,7 @@
                             v-model="uploadForm.issuing_authority"
                             type="text"
                             placeholder="e.g., DIP, Bangladesh"
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         />
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                     <button
                         type="submit"
                         :disabled="uploadForm.processing || !uploadForm.file"
-                        class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center gap-2"
+                        class="px-6 py-3 bg-growth-600 text-white rounded-lg hover:bg-growth-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center gap-2"
                     >
                         <CloudArrowUpIcon class="w-5 h-5" />
                         <span v-if="!uploadForm.processing">Upload Document</span>
@@ -159,7 +159,7 @@
                         :class="[
                             'px-3 py-1 rounded-lg text-sm font-medium transition',
                             filter === filterType
-                                ? 'bg-brand-red-600 text-white'
+                                ? 'bg-growth-600 text-white'
                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         ]"
                     >
@@ -251,7 +251,7 @@
                         <div class="flex gap-2 ml-4">
                             <button
                                 @click="downloadDocument(doc)"
-                                class="p-2 text-brand-red-600 hover:bg-blue-50 rounded-lg transition"
+                                class="p-2 text-growth-600 hover:bg-blue-50 rounded-lg transition"
                                 title="Download"
                             >
                                 <ArrowDownTrayIcon class="w-5 h-5" />
@@ -285,7 +285,7 @@
         <div class="grid md:grid-cols-4 gap-4">
             <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
                 <div class="flex items-center gap-3 mb-2">
-                    <div class="p-2 bg-brand-red-600 rounded-lg">
+                    <div class="p-2 bg-growth-600 rounded-lg">
                         <DocumentTextIcon class="w-5 h-5 text-white" />
                     </div>
                     <div class="text-2xl font-bold text-blue-700">{{ documents.length }}</div>
@@ -384,21 +384,26 @@ const handleFileSelect = (event) => {
 };
 
 const uploadDocument = () => {
-    uploadForm.post(route('profile.documents.store'), {
+    uploadForm.post(route('api.profile.documents.store'), {
         preserveScroll: true,
+        forceFormData: true,
         onSuccess: () => {
             uploadForm.reset();
+            // Clear file input
+            const fileInput = document.querySelector('input[type="file"]');
+            if (fileInput) fileInput.value = '';
             // Refresh documents list
             window.location.reload();
         },
         onError: (errors) => {
             console.error('Upload failed:', errors);
+            alert('Upload failed. Please check the form and try again.');
         }
     });
 };
 
 const downloadDocument = (doc) => {
-    window.location.href = route('profile.documents.download', doc.id);
+    window.location.href = route('api.profile.documents.download', doc.id);
 };
 
 const toggleSharing = (doc) => {
@@ -408,7 +413,7 @@ const toggleSharing = (doc) => {
 
 const deleteDocument = (doc) => {
     if (confirm('Are you sure you want to delete this document?')) {
-        useForm({}).delete(route('profile.documents.destroy', doc.id), {
+        useForm({}).delete(route('api.profile.documents.destroy', doc.id), {
             preserveScroll: true,
             onSuccess: () => {
                 documents.value = documents.value.filter(d => d.id !== doc.id);
@@ -459,15 +464,15 @@ const formatDate = (date) => {
 
 const getDocumentColor = (type) => {
     const colors = {
-        'passport': 'bg-brand-red-600',
+        'passport': 'bg-growth-600',
         'visa': 'bg-purple-600',
-        'nid': 'bg-brand-red-600',
+        'nid': 'bg-growth-600',
         'birth_certificate': 'bg-pink-600',
         'driving_license': 'bg-green-600',
         'educational_certificate': 'bg-yellow-600',
         'work_permit': 'bg-orange-600',
-        'bank_statement': 'bg-brand-red-600',
-        'police_clearance': 'bg-brand-red-600',
+        'bank_statement': 'bg-growth-600',
+        'police_clearance': 'bg-growth-600',
         'medical_certificate': 'bg-red-600',
         'insurance': 'bg-violet-600',
         'reference_letter': 'bg-emerald-600',

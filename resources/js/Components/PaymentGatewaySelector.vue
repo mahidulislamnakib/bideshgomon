@@ -27,7 +27,7 @@
                             type="radio"
                             name="gateway"
                             :checked="selectedGateway === 'sslcommerz'"
-                            class="text-brand-red-600 focus:ring-brand-red-600"
+                            class="text-growth-600 focus:ring-growth-600"
                         />
                     </div>
                 </template>
@@ -132,10 +132,10 @@
                 type="checkbox"
                 id="terms"
                 v-model="agreeToTerms"
-                class="mt-1 rounded border-gray-300 dark:border-gray-600 text-brand-red-600 focus:ring-brand-red-600"
+                class="mt-1 rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
             />
             <label for="terms" class="text-sm text-gray-600 dark:text-gray-400">
-                I agree to the <a href="#" class="text-brand-red-600 hover:underline font-medium">Terms and Conditions</a> and understand that payment gateway fees are non-refundable.
+                I agree to the <a href="#" class="text-growth-600 hover:underline font-medium">Terms and Conditions</a> and understand that payment gateway fees are non-refundable.
             </label>
         </div>
     </div>

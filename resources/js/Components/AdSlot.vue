@@ -29,7 +29,7 @@
                     @click="handleClick"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="block w-full bg-red-600 hover:bg-red-700 text-white text-center px-4 py-2 rounded-lg font-medium transition-colors"
+                    class="block w-full bg-red-600 hover:bg-growth-700 text-white text-center px-4 py-2 rounded-lg font-medium transition-colors"
                 >
                     {{ ad.cta_text }}
                 </a>
@@ -48,7 +48,7 @@
                 />
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="text-xs font-semibold text-blue-600 uppercase">Sponsored</span>
+                        <span class="text-xs font-semibold text-growth-600 uppercase">Sponsored</span>
                         <button
                             v-if="dismissible"
                             @click="dismiss"
@@ -66,7 +66,7 @@
                         @click="handleClick"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                        class="inline-flex items-center gap-2 bg-growth-600 hover:bg-growth-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                     >
                         {{ ad.cta_text }}
                         <ArrowRightIcon class="h-4 w-4" />
@@ -107,7 +107,7 @@
                     @click="handleClick"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl text-lg font-bold transition-colors shadow-lg"
+                    class="inline-flex items-center gap-2 bg-red-600 hover:bg-growth-700 text-white px-8 py-4 rounded-xl text-lg font-bold transition-colors shadow-lg"
                 >
                     {{ ad.cta_text }}
                     <ArrowRightIcon class="h-6 w-6" />
@@ -177,7 +177,7 @@
                         @click="handleClick"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors whitespace-nowrap"
+                        class="bg-red-600 hover:bg-growth-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors whitespace-nowrap"
                     >
                         {{ ad.cta_text }}
                     </a>

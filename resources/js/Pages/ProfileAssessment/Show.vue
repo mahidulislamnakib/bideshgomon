@@ -84,7 +84,7 @@ const getPriorityColor = (priority) => {
                     <!-- Back to Profile Link -->
                     <Link
                         :href="route('profile.edit')"
-                        class="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-indigo-600 mb-4 transition-colors"
+                        class="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-growth-600 mb-4 transition-colors"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -107,7 +107,7 @@ const getPriorityColor = (priority) => {
                         <button
                             @click="refreshAssessment"
                             :disabled="refreshing"
-                            class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-sm transition-all shadow-md hover:shadow-lg"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-sm transition-all shadow-md hover:shadow-lg"
                         >
                             <ArrowPathIcon class="h-5 w-5" :class="{ 'animate-spin': refreshing }" />
                             {{ refreshing ? 'Refreshing...' : 'Refresh Assessment' }}
@@ -325,7 +325,7 @@ const getPriorityColor = (priority) => {
                                 <Link
                                     v-if="rec.route"
                                     :href="route(rec.route)"
-                                    class="inline-flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
+                                    class="inline-flex items-center gap-2 text-sm font-medium text-growth-600 hover:text-indigo-800 transition-colors"
                                 >
                                     Take Action →
                                 </Link>
@@ -376,7 +376,7 @@ const getPriorityColor = (priority) => {
                             >
                                 <div class="flex justify-between items-center mb-2">
                                     <h4 class="font-semibold text-gray-900">{{ visa.type }}</h4>
-                                    <span class="text-sm font-bold text-indigo-600">{{ visa.suitability }}%</span>
+                                    <span class="text-sm font-bold text-growth-600">{{ visa.suitability }}%</span>
                                 </div>
                                 <p class="text-sm text-gray-700">{{ visa.reason }}</p>
                             </div>

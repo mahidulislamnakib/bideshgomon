@@ -30,22 +30,20 @@ const getBadgeClass = (color) => {
 
     <AuthenticatedLayout>
         <!-- Mobile-First Content -->
-        <div class="min-h-screen bg-gray-50 pb-20">
-            <!-- Header Section with Gradient -->
-            <div class="bg-growth-600 text-white px-4 pt-8 pb-32">
-                <div class="max-w-4xl mx-auto">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <ShieldCheckIcon class="h-10 w-10" />
-                        <h1 class="text-3xl font-bold">Travel Insurance</h1>
+        <div class="min-h-screen bg-gray-50 dark:bg-neutral-900 pb-20">
+            <!-- Compact Hero -->
+            <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+                <div class="max-w-7xl mx-auto flex items-center gap-4">
+                    <ShieldCheckIcon class="h-8 w-8 text-white" />
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold text-white">Travel Insurance</h1>
+                        <p class="text-sm text-white/80 mt-0.5">Protect your journey with comprehensive coverage</p>
                     </div>
-                    <p class="text-emerald-100 text-lg">
-                        Protect your journey with comprehensive travel insurance coverage
-                    </p>
                 </div>
             </div>
 
             <!-- Main Content -->
-            <div class="max-w-4xl mx-auto px-4 -mt-24 space-y-6">
+            <div class="max-w-4xl mx-auto px-4 py-6 space-y-6">
                 <!-- Popular Packages -->
                 <div v-if="popularPackages.length > 0" class="mb-6">
                     <h2 class="text-xl font-bold text-white mb-4 px-1">⭐ Popular Packages</h2>

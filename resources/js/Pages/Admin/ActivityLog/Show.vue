@@ -40,8 +40,8 @@ const getEventVariant = (event) => {
                         </BaseButton>
                     </Link>
                     <div>
-                        <h1 class="text-display-md font-bold text-gray-900">Activity Details</h1>
-                        <p class="mt-1 text-gray-600">Activity #{{ activity.id }}</p>
+                        <h1 class="text-display-md font-bold text-gray-900 dark:text-white">Activity Details</h1>
+                        <p class="mt-1 text-gray-600 dark:text-gray-400">Activity #{{ activity.id }}</p>
                     </div>
                 </div>
             </div>
@@ -50,10 +50,10 @@ const getEventVariant = (event) => {
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- Main Information -->
                 <BaseCard padding="lg">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Main Information</h2>
+                    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Main Information</h2>
                     <dl class="space-y-4">
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Event</dt>
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Event</dt>
                             <dd class="mt-1">
                                 <BaseBadge :variant="getEventVariant(activity.event)" rounded>
                                     {{ activity.event || 'unknown' }}
@@ -61,22 +61,22 @@ const getEventVariant = (event) => {
                             </dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Description</dt>
-                            <dd class="mt-1 text-sm text-gray-900">{{ activity.description }}</dd>
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Description</dt>
+                            <dd class="mt-1 text-sm text-gray-900 dark:text-white">{{ activity.description }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Log Name</dt>
-                            <dd class="mt-1 text-sm text-gray-900">{{ activity.log_name || 'default' }}</dd>
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Log Name</dt>
+                            <dd class="mt-1 text-sm text-gray-900 dark:text-white">{{ activity.log_name || 'default' }}</dd>
                         </div>
                         <div>
-                            <dt class="text-sm font-medium text-gray-500">Date & Time</dt>
-                            <dd class="mt-1 text-sm text-gray-900">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Date & Time</dt>
+                            <dd class="mt-1 text-sm text-gray-900 dark:text-white">
                                 {{ formatDate(activity.created_at) }} at {{ formatTime(activity.created_at) }}
                             </dd>
                         </div>
                         <div v-if="activity.batch_uuid">
-                            <dt class="text-sm font-medium text-gray-500">Batch UUID</dt>
-                            <dd class="mt-1 text-sm text-gray-900 font-mono">{{ activity.batch_uuid }}</dd>
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Batch UUID</dt>
+                            <dd class="mt-1 text-sm text-gray-900 dark:text-white font-mono">{{ activity.batch_uuid }}</dd>
                         </div>
                     </dl>
                 </BaseCard>
@@ -85,50 +85,50 @@ const getEventVariant = (event) => {
                 <div class="space-y-6">
                     <!-- Subject -->
                     <BaseCard padding="lg">
-                        <h2 class="text-lg font-semibold text-gray-900 mb-4">Subject</h2>
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Subject</h2>
                         <dl class="space-y-4">
                             <div>
-                                <dt class="text-sm font-medium text-gray-500">Type</dt>
-                                <dd class="mt-1 text-sm text-gray-900">
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Type</dt>
+                                <dd class="mt-1 text-sm text-gray-900 dark:text-white">
                                     {{ activity.subject_type ? activity.subject_type.split('\\').pop() : 'N/A' }}
                                 </dd>
                             </div>
                             <div v-if="activity.subject_id">
-                                <dt class="text-sm font-medium text-gray-500">ID</dt>
-                                <dd class="mt-1 text-sm text-gray-900">{{ activity.subject_id }}</dd>
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">ID</dt>
+                                <dd class="mt-1 text-sm text-gray-900 dark:text-white">{{ activity.subject_id }}</dd>
                             </div>
                         </dl>
                     </BaseCard>
 
                     <!-- Causer -->
                     <BaseCard padding="lg">
-                        <h2 class="text-lg font-semibold text-gray-900 mb-4">Performed By</h2>
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Performed By</h2>
                         <div v-if="activity.causer">
                             <dl class="space-y-4">
                                 <div>
-                                    <dt class="text-sm font-medium text-gray-500">Name</dt>
-                                    <dd class="mt-1 text-sm text-gray-900">{{ activity.causer.name }}</dd>
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Name</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">{{ activity.causer.name }}</dd>
                                 </div>
                                 <div>
-                                    <dt class="text-sm font-medium text-gray-500">Email</dt>
-                                    <dd class="mt-1 text-sm text-gray-900">{{ activity.causer.email }}</dd>
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Email</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">{{ activity.causer.email }}</dd>
                                 </div>
                                 <div>
-                                    <dt class="text-sm font-medium text-gray-500">ID</dt>
-                                    <dd class="mt-1 text-sm text-gray-900">{{ activity.causer.id }}</dd>
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">ID</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">{{ activity.causer.id }}</dd>
                                 </div>
                             </dl>
                         </div>
-                        <p v-else class="text-sm text-gray-500">System action</p>
+                        <p v-else class="text-sm text-gray-500 dark:text-gray-400">System action</p>
                     </BaseCard>
                 </div>
             </div>
 
             <!-- Properties -->
             <BaseCard v-if="activity.properties && Object.keys(activity.properties).length > 0" padding="lg">
-                <h2 class="text-lg font-semibold text-gray-900 mb-4">Properties</h2>
-                <div class="bg-gray-50 rounded-lg p-4 overflow-auto">
-                    <pre class="text-sm text-gray-900">{{ JSON.stringify(activity.properties, null, 2) }}</pre>
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Properties</h2>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-2xl p-4 overflow-auto">
+                    <pre class="text-sm text-gray-900 dark:text-white">{{ JSON.stringify(activity.properties, null, 2) }}</pre>
                 </div>
             </BaseCard>
         </div>

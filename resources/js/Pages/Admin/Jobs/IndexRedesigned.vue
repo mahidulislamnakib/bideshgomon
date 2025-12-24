@@ -72,7 +72,7 @@
                         <select
                             v-model="filters.status"
                             @change="applyFilters"
-                            class="w-full rounded-lg border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
+                            class="w-full rounded-2xl border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
                         >
                             <option value="">All Status</option>
                             <option value="active">Active</option>
@@ -87,7 +87,7 @@
                         <select
                             v-model="filters.category"
                             @change="applyFilters"
-                            class="w-full rounded-lg border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
+                            class="w-full rounded-2xl border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
                         >
                             <option value="">All Categories</option>
                             <option value="skilled">Skilled Worker</option>
@@ -103,7 +103,7 @@
                         <select
                             v-model="filters.country"
                             @change="applyFilters"
-                            class="w-full rounded-lg border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
+                            class="w-full rounded-2xl border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
                         >
                             <option value="">All Countries</option>
                             <option value="ae">UAE</option>
@@ -179,7 +179,7 @@
                     </Link>
                     <Link
                         :href="route('admin.jobs.edit', row.id)"
-                        class="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                        class="text-growth-600 hover:text-blue-700 text-sm font-medium"
                     >
                         Edit
                     </Link>
@@ -198,7 +198,7 @@
                     </button>
                     <button
                         @click="deleteJob(row.id)"
-                        class="text-red-600 hover:text-red-700 text-sm font-medium"
+                        class="text-red-600 hover:text-growth-700 text-sm font-medium"
                     >
                         Delete
                     </button>

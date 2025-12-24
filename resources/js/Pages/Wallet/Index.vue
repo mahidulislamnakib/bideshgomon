@@ -19,7 +19,8 @@ import {
     ArrowPathIcon,
     ChartBarIcon,
     DocumentArrowDownIcon,
-    ChevronLeftIcon
+    ChevronLeftIcon,
+    TrophyIcon
 } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
@@ -30,6 +31,8 @@ const props = defineProps({
     totalIn: [Number, String],
     totalOut: [Number, String],
     transactionCount: Number,
+    topReferrers: Array,
+    userRank: Object,
 });
 
 const { formatCurrency, formatDate, formatTime } = useBangladeshFormat();
@@ -93,42 +96,43 @@ const submitWithdraw = () => {
     <Head title="My Wallet" />
 
     <AuthenticatedLayout>
-        <!-- Desktop & Mobile Content -->
-        <div class="min-h-screen bg-gray-50/50">
-            <!-- Header Section -->
-            <div class="bg-gradient-to-br from-upwork-green via-upwork-green to-emerald-600 px-4 sm:px-6 lg:px-8 pt-6 pb-32">
+        <div class="min-h-screen bg-gray-50 dark:bg-neutral-950">
+            <!-- Compact Hero -->
+            <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
                 <div class="max-w-7xl mx-auto">
-                    <div class="flex items-center gap-3">
-                        <Link :href="route('dashboard')" class="text-white/80 hover:text-white transition-colors">
-                            <ChevronLeftIcon class="h-6 w-6" />
-                        </Link>
+                    <div class="flex flex-wrap items-center justify-between gap-4">
                         <div>
-                            <h1 class="text-2xl sm:text-3xl font-bold text-white">My Wallet</h1>
-                            <p class="text-white/80 text-sm">Manage your balance and transactions</p>
+                            <h1 class="text-xl md:text-2xl font-bold text-white">My Wallet</h1>
+                            <p class="text-sm text-white/80 mt-0.5">Manage your balance and transactions</p>
                         </div>
+                        <Link
+                            :href="route('wallet.transactions')"
+                            class="px-4 py-2 text-sm font-medium bg-white/20 text-white rounded-lg hover:bg-white/30 transition-colors"
+                        >
+                            View All Transactions
+                        </Link>
                     </div>
                 </div>
             </div>
 
-            <!-- Balance Card - Overlapping -->
-            <div class="-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-                <RhythmicCard variant="light" size="xl" class="animate-fadeInUp">
-                    <template #default>
-                        <!-- Status Badge -->
-                        <div class="flex justify-between items-start mb-4">
-                            <StatusBadge :status="wallet.status === 'active' ? 'active' : 'inactive'" />
-                            <span class="text-xs text-gray-500">#{{ wallet.id }}</span>
-                        </div>
+            <!-- Balance Card -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 -mt-4">
+                <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-gray-200 dark:border-neutral-700 shadow-sm">
+                    <!-- Status Badge -->
+                    <div class="flex justify-between items-start mb-4">
+                        <StatusBadge :status="wallet.status === 'active' ? 'active' : 'inactive'" />
+                        <span class="text-xs text-gray-500 dark:text-gray-400">#{{ wallet.id }}</span>
+                    </div>
 
                     <!-- Balance Display -->
                     <div class="text-center py-4">
-                        <p class="text-sm text-gray-600 mb-2">Available Balance</p>
-                        <h2 class="text-5xl font-bold text-gray-900 mb-1">{{ formattedBalance }}</h2>
-                        <p class="text-sm text-gray-500">Bangladeshi Taka (BDT)</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Available Balance</p>
+                        <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-1">{{ formattedBalance }}</h2>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Bangladeshi Taka (BDT)</p>
                         
                         <!-- Zero Balance Hint -->
-                        <div v-if="balance === 0 || balance === '0'" class="mt-4 px-4 py-3 bg-amber-50 rounded-lg border border-amber-200">
-                            <p class="text-xs text-amber-800">
+                        <div v-if="balance === 0 || balance === '0'" class="mt-4 px-4 py-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
+                            <p class="text-xs text-amber-800 dark:text-amber-300">
                                 💡 <span class="font-semibold">Get Started:</span> Add funds to your wallet to start using our services
                             </p>
                         </div>
@@ -159,67 +163,130 @@ const submitWithdraw = () => {
                             Withdraw
                         </FlowButton>
                     </div>
-                    </template>
-                </RhythmicCard>
+                </div>
             </div>
 
             <!-- Quick Stats -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-                <div class="grid grid-cols-3 gap-3 sm:gap-4">
-                    <RhythmicCard variant="growth" size="sm" class="animate-fadeIn" style="animation-delay: 100ms;">
-                        <template #icon>
-                            <ArrowTrendingUpIcon class="h-5 w-5 sm:h-6 sm:w-6" />
-                        </template>
-                        <template #default>
-                            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">Total In</p>
-                            <p class="text-lg sm:text-xl font-bold text-growth-600">{{ formatCurrency(totalIn || 0) }}</p>
-                        </template>
-                    </RhythmicCard>
-                    <RhythmicCard variant="sunrise" size="sm" class="animate-fadeIn" style="animation-delay: 200ms;">
-                        <template #icon>
-                            <ArrowTrendingDownIcon class="h-5 w-5 sm:h-6 sm:w-6" />
-                        </template>
-                        <template #default>
-                            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">Total Out</p>
-                            <p class="text-lg sm:text-xl font-bold text-sunrise-600">{{ formatCurrency(totalOut || 0) }}</p>
-                        </template>
-                    </RhythmicCard>
-                    <RhythmicCard variant="sky" size="sm" class="animate-fadeIn" style="animation-delay: 300ms;">
-                        <template #icon>
-                            <ChartBarIcon class="h-5 w-5 sm:h-6 sm:w-6" />
-                        </template>
-                        <template #default>
-                            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">Transactions</p>
-                            <p class="text-lg sm:text-xl font-bold text-brand-red-600">{{ transactionCount || 0 }}</p>
-                        </template>
-                    </RhythmicCard>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700">
+                        <ArrowTrendingUpIcon class="h-5 w-5 text-green-600 mb-2" />
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Total In</p>
+                        <p class="text-lg font-bold text-gray-900 dark:text-white">{{ formatCurrency(totalIn || 0) }}</p>
+                    </div>
+                    <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700">
+                        <ArrowTrendingDownIcon class="h-5 w-5 text-red-600 mb-2" />
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Total Out</p>
+                        <p class="text-lg font-bold text-gray-900 dark:text-white">{{ formatCurrency(totalOut || 0) }}</p>
+                    </div>
+                    <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700">
+                        <ChartBarIcon class="h-5 w-5 text-growth-600 mb-2" />
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Transactions</p>
+                        <p class="text-lg font-bold text-gray-900 dark:text-white">{{ transactionCount || 0 }}</p>
+                    </div>
                 </div>
             </div>
             
             <!-- Quick Actions Bar -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-                <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100">
-                    <div class="flex items-center justify-between gap-3">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-6">
+                <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 border border-gray-200 dark:border-neutral-700">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         <Link 
                             :href="route('wallet.transactions')"
-                            class="flex-1 flex items-center justify-center gap-2 py-3 bg-indigo-50 text-indigo-700 rounded-xl font-medium hover:bg-indigo-100 transition-colors"
+                            class="flex items-center justify-center gap-2 py-2 px-3 bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-neutral-600 transition-colors"
                         >
-                            <ClockIcon class="h-5 w-5" />
-                            <span class="text-sm">History</span>
+                            <ClockIcon class="h-4 w-4" />
+                            History
+                        </Link>
+                        <Link 
+                            :href="route('referral.index')"
+                            class="flex items-center justify-center gap-2 py-2 px-3 bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-neutral-600 transition-colors"
+                        >
+                            <TrophyIcon class="h-4 w-4" />
+                            Leaderboard
                         </Link>
                         <button 
-                            @click="router.reload({ only: ['wallet', 'recentTransactions'] })"
-                            class="flex-1 flex items-center justify-center gap-2 py-3 bg-gray-50 text-gray-700 rounded-xl font-medium hover:bg-gray-100 transition-colors"
+                            @click="$inertia.reload({ only: ['wallet', 'recentTransactions'] })"
+                            class="flex items-center justify-center gap-2 py-2 px-3 bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-neutral-600 transition-colors"
                         >
-                            <ArrowPathIcon class="h-5 w-5" />
-                            <span class="text-sm">Refresh</span>
+                            <ArrowPathIcon class="h-4 w-4" />
+                            Refresh
                         </button>
                         <button 
-                            class="flex-1 flex items-center justify-center gap-2 py-3 bg-gray-50 text-gray-700 rounded-xl font-medium hover:bg-gray-100 transition-colors"
+                            class="flex items-center justify-center gap-2 py-2 px-3 bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-neutral-600 transition-colors"
                         >
-                            <DocumentArrowDownIcon class="h-5 w-5" />
-                            <span class="text-sm">Export</span>
+                            <DocumentArrowDownIcon class="h-4 w-4" />
+                            Export
                         </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaderboard Section -->
+            <div v-if="topReferrers && topReferrers.length > 0" class="max-w-7xl mx-auto px-4 sm:px-6 mb-6">
+                <div class="bg-white dark:bg-neutral-800 rounded-xl border border-gray-200 dark:border-neutral-700 overflow-hidden">
+                    <!-- Header -->
+                    <div class="bg-gradient-to-r from-growth-600 to-teal-600 p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <TrophyIcon class="h-5 w-5 text-white" />
+                                <div>
+                                    <h2 class="text-sm font-semibold text-white">Top Referrers</h2>
+                                    <p class="text-xs text-white/70">This month's leaderboard</p>
+                                </div>
+                            </div>
+                            <Link 
+                                :href="route('referral.index')"
+                                class="px-3 py-1.5 bg-white/20 hover:bg-white/30 text-white text-xs font-medium rounded-lg transition-colors"
+                            >
+                                View All
+                            </Link>
+                        </div>
+                    </div>
+                    <!-- Leaderboard List -->
+                    <div class="p-4">
+                        <div class="space-y-2">
+                            <div 
+                                v-for="(referrer, index) in topReferrers.slice(0, 5)" 
+                                :key="referrer.id" 
+                                class="flex items-center justify-between p-3 rounded-lg transition-colors"
+                                :class="userRank && userRank.user_id === referrer.id ? 'bg-growth-50 dark:bg-growth-900/20 border border-growth-200 dark:border-growth-800' : 'bg-gray-50 dark:bg-neutral-700 hover:bg-gray-100 dark:hover:bg-neutral-600'"
+                            >
+                                <div class="flex items-center gap-3">
+                                    <!-- Rank Badge -->
+                                    <div class="w-6 h-6 flex items-center justify-center">
+                                        <span v-if="index === 0" class="text-lg">🥇</span>
+                                        <span v-else-if="index === 1" class="text-lg">🥈</span>
+                                        <span v-else-if="index === 2" class="text-lg">🥉</span>
+                                        <span v-else class="w-6 h-6 rounded-full bg-gray-200 dark:bg-neutral-600 flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-300">{{ index + 1 }}</span>
+                                    </div>
+                                    <!-- User Info -->
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-growth-400 to-growth-600 flex items-center justify-center text-white font-bold text-sm">
+                                            {{ referrer.name?.charAt(0)?.toUpperCase() || '?' }}
+                                        </div>
+                                        <span class="text-sm font-medium text-gray-900 dark:text-white">{{ referrer.name }}</span>
+                                        <span v-if="userRank && userRank.user_id === referrer.id" class="px-1.5 py-0.5 bg-growth-100 dark:bg-growth-900/50 text-growth-700 dark:text-growth-300 text-xs font-medium rounded">You</span>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-bold text-growth-600 bg-growth-100 dark:bg-growth-900/50 px-2 py-1 rounded">
+                                    {{ referrer.total_referrals }} referrals
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- User's Rank if not in top 5 -->
+                        <div v-if="userRank && userRank.rank > 5" class="mt-4 pt-4 border-t border-gray-200">
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-growth-50 border-2 border-growth-200">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-8 h-8 rounded-full bg-growth-200 flex items-center justify-center text-sm font-bold text-growth-700">{{ userRank.rank }}</span>
+                                    <span class="font-medium text-gray-900">Your Rank</span>
+                                </div>
+                                <span class="text-sm font-bold text-growth-600 bg-growth-100 px-3 py-1.5 rounded-full">
+                                    {{ userRank.referral_count }} referrals
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -303,7 +370,7 @@ const submitWithdraw = () => {
                 <div class="p-rhythm-lg pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
                     <!-- Modal Header with gradient accent -->
                     <div class="flex items-center gap-3 mb-rhythm-lg">
-                        <div class="w-12 h-12 rounded-xl bg-brand-red-600 flex items-center justify-center shadow-rhythmic-md">
+                        <div class="w-12 h-12 rounded-xl bg-growth-600 flex items-center justify-center shadow-rhythmic-md">
                             <PlusCircleIcon class="h-6 w-6 text-white" />
                         </div>
                         <div>
@@ -323,11 +390,11 @@ const submitWithdraw = () => {
                                 min="100"
                                 max="100000"
                                 placeholder="Enter amount (min ৳100)"
-                                class="w-full px-rhythm-md py-rhythm-md text-lg border-2 border-ocean-200 rounded-xl focus:ring-2 focus:ring-brand-red-600 focus:border-ocean-500 transition-all bg-white"
+                                class="w-full px-rhythm-md py-rhythm-md text-lg border-2 border-ocean-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-ocean-500 transition-all bg-white"
                                 required
                             />
                             <p class="text-xs text-gray-500 mt-rhythm-xs flex items-center gap-1">
-                                <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-red-600"></span>
+                                <span class="inline-block w-1.5 h-1.5 rounded-full bg-growth-600"></span>
                                 Minimum: ৳100 • Maximum: ৳100,000
                             </p>
                         </template>
@@ -336,7 +403,7 @@ const submitWithdraw = () => {
                     <!-- Payment Gateway Selector -->
                     <div v-if="addFundsForm.amount >= 100" class="animate-fadeIn">
                         <label class="block text-sm font-semibold text-gray-800 mb-rhythm-sm flex items-center gap-2">
-                            <span class="inline-block w-2 h-2 rounded-full bg-brand-red-600"></span>
+                            <span class="inline-block w-2 h-2 rounded-full bg-growth-600"></span>
                             Select Payment Gateway
                         </label>
                         <PaymentGatewaySelector

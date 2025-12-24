@@ -2,10 +2,18 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { useBangladeshFormat } from '@/Composables/useBangladeshFormat';
-import RhythmicCard from '@/Components/Rhythmic/RhythmicCard.vue';
-import StatusBadge from '@/Components/Rhythmic/StatusBadge.vue';
-import FlowButton from '@/Components/Rhythmic/FlowButton.vue';
 import { ref } from 'vue';
+import {
+    ArrowTrendingUpIcon,
+    ArrowTrendingDownIcon,
+    ClockIcon,
+    ChevronLeftIcon,
+    MagnifyingGlassIcon,
+    FunnelIcon,
+    XMarkIcon,
+    DocumentTextIcon,
+    ArrowPathIcon
+} from '@heroicons/vue/24/outline';
 
 const props = defineProps({
     transactions: Object,
@@ -33,12 +41,29 @@ const clearFilters = () => {
     filterTransactions();
 };
 
+const getTransactionIcon = (transactionType) => {
+    return transactionType === 'credit' ? ArrowTrendingUpIcon : ArrowTrendingDownIcon;
+};
+
 const getTransactionColor = (transactionType) => {
     return transactionType === 'credit' ? 'text-green-600' : 'text-red-600';
 };
 
+const getTransactionBg = (transactionType) => {
+    return transactionType === 'credit' ? 'bg-green-100' : 'bg-red-100';
+};
+
 const getTransactionSign = (transactionType) => {
     return transactionType === 'credit' ? '+' : '-';
+};
+
+const getStatusBadge = (status) => {
+    const badges = {
+        completed: 'bg-green-100 text-green-800',
+        pending: 'bg-yellow-100 text-yellow-800',
+        failed: 'bg-red-100 text-red-800',
+    };
+    return badges[status] || 'bg-gray-100 text-gray-800';
 };
 </script>
 
@@ -46,181 +71,182 @@ const getTransactionSign = (transactionType) => {
     <Head title="Transaction History" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <div class="flex justify-between items-center">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">Transaction History</h2>
-                <Link :href="route('wallet.index')" class="text-sm text-brand-red-600 hover:text-indigo-800">
-                    ← Back to Wallet
-                </Link>
-            </div>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <!-- Filters -->
-                <RhythmicCard variant="light" size="lg" class="animate-fadeIn">
-                    <template #default>
-                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div class="min-h-screen bg-gray-50 dark:bg-neutral-950">
+            <!-- Compact Hero -->
+            <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-wrap items-center justify-between gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
-                            <input 
-                                v-model="search"
-                                type="text" 
-                                placeholder="Search description..."
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
-                                @keyup.enter="filterTransactions"
-                            />
+                            <h1 class="text-xl md:text-2xl font-bold text-white">Transaction History</h1>
+                            <p class="text-sm text-white/80 mt-0.5">View all your wallet transactions</p>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Type</label>
-                            <select 
-                                v-model="type"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
-                                @change="filterTransactions"
-                            >
-                                <option value="">All Types</option>
-                                <option value="credit">Credit (+)</option>
-                                <option value="debit">Debit (-)</option>
-                            </select>
-                        </div>
-                        <div class="flex items-end space-x-2">
-                            <FlowButton
-                                @click="filterTransactions"
-                                variant="primary"
-                                size="md"
-                            >
-                                Apply Filters
-                            </FlowButton>
-                            <FlowButton
-                                @click="clearFilters"
-                                variant="secondary"
-                                size="md"
-                            >
-                                Clear
-                            </FlowButton>
-                        </div>
+                        <Link
+                            :href="route('wallet.index')"
+                            class="px-4 py-2 text-sm font-medium bg-white/20 text-white rounded-lg hover:bg-white/30 transition-colors"
+                        >
+                            Back to Wallet
+                        </Link>
                     </div>
-                    </template>
-                </RhythmicCard>
+                    
+                    <!-- Filters in Hero -->
+                    <div class="flex flex-wrap items-center gap-3 mt-4">
+                        <input
+                            v-model="search"
+                            @keyup.enter="filterTransactions"
+                            type="text"
+                            placeholder="Search transactions..."
+                            class="w-48 md:w-64 px-4 py-2 text-sm border-0 bg-white/95 dark:bg-neutral-800 rounded-lg focus:ring-2 focus:ring-white/50 placeholder-gray-500"
+                        />
+                        <select
+                            v-model="type"
+                            @change="filterTransactions"
+                            class="px-3 py-2 text-sm border-0 bg-white/95 dark:bg-neutral-800 rounded-lg focus:ring-2 focus:ring-white/50"
+                        >
+                            <option value="">All Types</option>
+                            <option value="credit">Credit</option>
+                            <option value="debit">Debit</option>
+                        </select>
+                        <button
+                            @click="filterTransactions"
+                            class="px-4 py-2 text-sm font-medium bg-white text-growth-600 rounded-lg hover:bg-gray-100 transition-colors"
+                        >
+                            Search
+                        </button>
+                        <button
+                            v-if="search || type"
+                            @click="clearFilters"
+                            class="px-3 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors"
+                        >
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions List -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 pb-8">
+                <!-- Results Count -->
+                <p class="text-xs text-gray-500 dark:text-gray-400 py-4">{{ transactions?.total || 0 }} transactions found</p>
 
                 <!-- Transactions List -->
-                <div class="bg-white shadow sm:rounded-lg overflow-hidden">
-                    <div v-if="transactions.data.length > 0">
-                        <!-- Desktop View -->
-                        <div class="hidden sm:block">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Date & Time
-                                        </th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Description
-                                        </th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Type
-                                        </th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Amount
-                                        </th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Balance After
-                                        </th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Status
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr v-for="transaction in transactions.data" :key="transaction.id" class="hover:bg-gray-50">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            <div>{{ formatDate(transaction.created_at) }}</div>
-                                            <div class="text-xs text-gray-500">{{ formatTime(transaction.created_at) }}</div>
-                                        </td>
-                                        <td class="px-6 py-4 text-sm text-gray-900">
-                                            <div>{{ transaction.description }}</div>
-                                            <div v-if="transaction.reference_type" class="text-xs text-gray-500">
-                                                {{ (transaction?.reference_type || '').replace('_', ' ') }}
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <StatusBadge :status="transaction.transaction_type" size="sm" />
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold" 
-                                            :class="getTransactionColor(transaction.transaction_type)">
-                                            {{ getTransactionSign(transaction.transaction_type) }}{{ formatCurrency(transaction.amount) }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ formatCurrency(transaction.balance_after) }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <StatusBadge :status="transaction.status" size="sm" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- Mobile View -->
-                        <div class="sm:hidden divide-y divide-gray-200">
-                            <div v-for="transaction in transactions.data" :key="transaction.id" class="p-4">
-                                <div class="flex justify-between items-start mb-2">
-                                    <span class="text-sm font-medium text-gray-900">{{ transaction.description }}</span>
-                                    <span class="text-sm font-bold" :class="getTransactionColor(transaction.transaction_type)">
-                                        {{ getTransactionSign(transaction.transaction_type) }}{{ formatCurrency(transaction.amount) }}
-                                    </span>
-                                </div>
-                                <div class="flex justify-between text-xs text-gray-500">
-                                    <span>{{ formatDate(transaction.created_at) }} {{ formatTime(transaction.created_at) }}</span>
-                                    <span class="capitalize">{{ transaction.status }}</span>
-                                </div>
-                                <div class="mt-1 text-xs text-gray-500">
-                                    Balance: {{ formatCurrency(transaction.balance_after) }}
-                                </div>
+                <div v-if="transactions.data.length > 0" class="space-y-3">
+                    <!-- Transaction Cards -->
+                    <div 
+                        v-for="transaction in transactions.data" 
+                        :key="transaction.id"
+                        class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-5 hover:shadow-md transition-shadow"
+                    >
+                        <div class="flex items-start sm:items-center gap-4">
+                            <!-- Icon -->
+                            <div 
+                                class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+                                :class="getTransactionBg(transaction.transaction_type)"
+                            >
+                                <component 
+                                    :is="getTransactionIcon(transaction.transaction_type)"
+                                    class="h-6 w-6"
+                                    :class="getTransactionColor(transaction.transaction_type)"
+                                />
                             </div>
-                        </div>
 
-                        <!-- Pagination -->
-                        <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-                            <div class="flex items-center justify-between">
-                                <div class="flex-1 flex justify-between sm:hidden">
-                                    <Link v-if="transactions.prev_page_url" :href="transactions.prev_page_url"
-                                          class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                        Previous
-                                    </Link>
-                                    <Link v-if="transactions.next_page_url" :href="transactions.next_page_url"
-                                          class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                        Next
-                                    </Link>
-                                </div>
-                                <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                            <!-- Details -->
+                            <div class="flex-1 min-w-0">
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                                     <div>
-                                        <p class="text-sm text-gray-700">
-                                            Showing <span class="font-medium">{{ transactions.from }}</span> to 
-                                            <span class="font-medium">{{ transactions.to }}</span> of 
-                                            <span class="font-medium">{{ transactions.total }}</span> transactions
+                                        <p class="font-semibold text-gray-900 truncate">{{ transaction.description }}</p>
+                                        <div class="flex items-center gap-2 mt-1">
+                                            <span class="text-xs text-gray-500">
+                                                {{ formatDate(transaction.created_at) }} • {{ formatTime(transaction.created_at) }}
+                                            </span>
+                                            <span 
+                                                class="px-2 py-0.5 text-xs font-medium rounded-full capitalize"
+                                                :class="getStatusBadge(transaction.status)"
+                                            >
+                                                {{ transaction.status }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p 
+                                            class="text-lg sm:text-xl font-bold"
+                                            :class="getTransactionColor(transaction.transaction_type)"
+                                        >
+                                            {{ getTransactionSign(transaction.transaction_type) }}{{ formatCurrency(transaction.amount) }}
+                                        </p>
+                                        <p class="text-xs text-gray-500 mt-0.5">
+                                            Balance: {{ formatCurrency(transaction.balance_after) }}
                                         </p>
                                     </div>
-                                    <div class="flex space-x-2">
-                                        <Link v-if="transactions.prev_page_url" :href="transactions.prev_page_url"
-                                              class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                            Previous
-                                        </Link>
-                                        <Link v-if="transactions.next_page_url" :href="transactions.next_page_url"
-                                              class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                            Next
-                                        </Link>
-                                    </div>
+                                </div>
+                                <!-- Reference Type -->
+                                <div v-if="transaction.reference_type" class="mt-2 pt-2 border-t border-gray-100">
+                                    <span class="text-xs text-gray-500">
+                                        Reference: <span class="font-medium capitalize">{{ (transaction?.reference_type || '').replace('_', ' ') }}</span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div v-else class="p-12 text-center">
-                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        <p class="mt-2 text-sm text-gray-500">No transactions found</p>
+
+                    <!-- Pagination -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-5">
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <p class="text-sm text-gray-600">
+                                Showing <span class="font-semibold">{{ transactions.from }}</span> to 
+                                <span class="font-semibold">{{ transactions.to }}</span> of 
+                                <span class="font-semibold">{{ transactions.total }}</span> transactions
+                            </p>
+                            <div class="flex gap-2">
+                                <Link 
+                                    v-if="transactions.prev_page_url" 
+                                    :href="transactions.prev_page_url"
+                                    class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                                >
+                                    ← Previous
+                                </Link>
+                                <span v-else class="px-4 py-2 bg-gray-50 text-gray-400 rounded-lg font-medium cursor-not-allowed">
+                                    ← Previous
+                                </span>
+                                <Link 
+                                    v-if="transactions.next_page_url" 
+                                    :href="transactions.next_page_url"
+                                    class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                                >
+                                    Next →
+                                </Link>
+                                <span v-else class="px-4 py-2 bg-gray-50 text-gray-400 rounded-lg font-medium cursor-not-allowed">
+                                    Next →
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div v-else class="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 sm:p-16 text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
+                        <DocumentTextIcon class="h-10 w-10 text-indigo-400" />
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">No Transactions Found</h3>
+                    <p class="text-gray-500 mb-6 max-w-sm mx-auto">
+                        {{ search || type ? 'No transactions match your search criteria.' : 'Your transaction history will appear here once you make your first transaction.' }}
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <button 
+                            v-if="search || type"
+                            @click="clearFilters"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-colors"
+                        >
+                            <ArrowPathIcon class="h-5 w-5" />
+                            Clear Filters
+                        </button>
+                        <Link 
+                            :href="route('wallet.index')"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition-colors"
+                        >
+                            <ChevronLeftIcon class="h-5 w-5" />
+                            Back to Wallet
+                        </Link>
                     </div>
                 </div>
             </div>

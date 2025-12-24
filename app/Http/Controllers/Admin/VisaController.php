@@ -276,4 +276,23 @@ class VisaController extends Controller
 
         return back()->with('success', 'Note added successfully.');
     }
+
+    /**
+     * Bulk update application status
+     */
+    public function bulkStatus(Request $request)
+    {
+        $validated = $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:visa_applications,id',
+            'status' => 'required|in:submitted,under_review,documents_requested,approved,rejected,completed',
+        ]);
+
+        VisaApplication::whereIn('id', $validated['ids'])->update([
+            'status' => $validated['status'],
+            'status_updated_at' => now(),
+        ]);
+
+        return back()->with('success', count($validated['ids']).' application(s) updated to '.$validated['status'].'.');
+    }
 }

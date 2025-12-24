@@ -17,27 +17,28 @@ const companyEmail = 'legal@bideshgomon.com'
   <div>
     <Head title="Terms of Service - BideshGomon" />
 
-    <div class="min-h-screen bg-gray-50 py-12">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
-        <div class="bg-white shadow rounded-lg overflow-hidden mb-6">
-          <div class="bg-gradient-to-r from-purple-600 to-purple-700 px-6 py-8">
-            <div class="flex items-center justify-center mb-4">
-              <ScaleIcon class="h-12 w-12 text-white" />
-            </div>
-            <h1 class="text-3xl font-bold text-white text-center">Terms of Service</h1>
-            <p class="text-purple-100 text-center mt-2">Last Updated: December 1, 2025</p>
+    <div class="min-h-screen bg-gray-50 dark:bg-neutral-900">
+      <!-- Compact Hero -->
+      <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+        <div class="max-w-4xl mx-auto flex items-center gap-4">
+          <ScaleIcon class="h-8 w-8 text-white" />
+          <div>
+            <h1 class="text-xl md:text-2xl font-bold text-white">Terms of Service</h1>
+            <p class="text-sm text-white/80 mt-0.5">Last Updated: December 1, 2025</p>
           </div>
+        </div>
+      </div>
 
-          <div class="px-6 py-4 bg-purple-50 border-b border-purple-100">
-            <p class="text-sm text-purple-800 text-center">
-              Please read these Terms carefully before using BideshGomon services. By using our platform, you agree to be bound by these Terms.
-            </p>
-          </div>
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Notice Card -->
+        <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-6">
+          <p class="text-sm text-amber-800 dark:text-amber-200">
+            Please read these Terms carefully before using BideshGomon services. By using our platform, you agree to be bound by these Terms.
+          </p>
         </div>
 
         <!-- Content -->
-        <div class="bg-white shadow rounded-lg p-8 space-y-8">
+        <div class="bg-white dark:bg-neutral-800 rounded-xl border border-gray-200 dark:border-neutral-700 p-8 space-y-8">
           <!-- Introduction -->
           <section>
             <h2 class="text-2xl font-semibold text-gray-900 mb-4">1. Agreement to Terms</h2>

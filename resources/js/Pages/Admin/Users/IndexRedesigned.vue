@@ -71,7 +71,7 @@
                         <select
                             v-model="filters.role"
                             @change="applyFilters"
-                            class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                            class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                         >
                             <option value="">All Roles</option>
                             <option value="admin">Admin</option>
@@ -86,7 +86,7 @@
                         <select
                             v-model="filters.status"
                             @change="applyFilters"
-                            class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                            class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                         >
                             <option value="">All Status</option>
                             <option value="active">Active</option>
@@ -100,7 +100,7 @@
                         <select
                             v-model="filters.email_verified"
                             @change="applyFilters"
-                            class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                            class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                         >
                             <option value="">All</option>
                             <option value="1">Verified</option>
@@ -184,7 +184,7 @@
                     </Link>
                     <Link
                         :href="route('admin.users.edit', row.id)"
-                        class="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                        class="text-growth-600 hover:text-blue-700 text-sm font-medium"
                     >
                         Edit
                     </Link>
@@ -197,7 +197,7 @@
                     </button>
                     <button
                         @click="deleteUser(row.id)"
-                        class="text-red-600 hover:text-red-700 text-sm font-medium"
+                        class="text-red-600 hover:text-growth-700 text-sm font-medium"
                     >
                         Delete
                     </button>

@@ -50,7 +50,7 @@ const submit = () => {
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         <!-- Stats Card -->
-                        <div class="mb-6 rounded-lg bg-brand-red-600 p-6 text-white border-2 border-blue-700">
+                        <div class="mb-6 rounded-lg bg-growth-600 p-6 text-white border-2 border-blue-700">
                             <div class="flex items-center justify-between">
                                 <div>
                                     <h3 class="text-lg font-semibold">Profile Views</h3>
@@ -71,7 +71,7 @@ const submit = () => {
                                     <input
                                         type="checkbox"
                                         v-model="form.profile_is_public"
-                                        class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:ring-brand-red-600"
+                                        class="rounded border-gray-300 text-growth-600 shadow-sm focus:ring-growth-600"
                                     />
                                     <span class="ml-3">
                                         <span class="font-medium text-gray-900">Enable Public Profile</span>
@@ -141,7 +141,7 @@ const submit = () => {
                                     <textarea
                                         v-model="form.profile_bio"
                                         rows="4"
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         placeholder="Tell others about yourself..."
                                     ></textarea>
                                 </div>
@@ -154,7 +154,7 @@ const submit = () => {
                                             <input
                                                 type="checkbox"
                                                 v-model="form.profile_visibility_settings[key]"
-                                                class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:ring-brand-red-600"
+                                                class="rounded border-gray-300 text-growth-600 shadow-sm focus:ring-growth-600"
                                             />
                                             <span class="ml-3 text-sm text-gray-700 capitalize">
                                                 {{ (key || '').replace(/_/g, ' ') }}

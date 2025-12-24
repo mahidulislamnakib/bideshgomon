@@ -454,4 +454,46 @@ class HotelController extends Controller
 
         return back()->with('success', 'Room deleted successfully.');
     }
+
+    /**
+     * Bulk update hotel status
+     */
+    public function bulkStatus(Request $request)
+    {
+        $validated = $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:hotels,id',
+            'status' => 'required|boolean',
+        ]);
+
+        Hotel::whereIn('id', $validated['ids'])->update(['is_active' => $validated['status']]);
+
+        $action = $validated['status'] ? 'activated' : 'deactivated';
+
+        return back()->with('success', count($validated['ids']).' hotel(s) '.$action.' successfully.');
+    }
+
+    /**
+     * Bulk delete hotels
+     */
+    public function bulkDelete(Request $request)
+    {
+        $validated = $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:hotels,id',
+        ]);
+
+        // Check if any hotel has bookings
+        $hotelsWithBookings = Hotel::whereIn('id', $validated['ids'])
+            ->whereHas('bookings')
+            ->count();
+
+        if ($hotelsWithBookings > 0) {
+            return back()->with('error', 'Cannot delete hotels with existing bookings.');
+        }
+
+        Hotel::whereIn('id', $validated['ids'])->delete();
+
+        return back()->with('success', count($validated['ids']).' hotel(s) deleted successfully.');
+    }
 }

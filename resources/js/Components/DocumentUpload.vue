@@ -158,7 +158,7 @@ const allRequiredUploaded = computed(() => {
     <!-- Required Documents Checklist -->
     <div v-if="requiredDocuments.length > 0" class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4">
       <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-        <DocumentIcon class="h-5 w-5 text-brand-red-600" />
+        <DocumentIcon class="h-5 w-5 text-growth-600" />
         Required Documents
       </h4>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -277,7 +277,7 @@ const allRequiredUploaded = computed(() => {
               <select
                 v-model="fileObj.documentType"
                 @click.stop
-                class="w-full text-xs px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-600 dark:text-white"
+                class="w-full text-xs px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-growth-600 dark:bg-gray-600 dark:text-white"
               >
                 <option value="">Select document type...</option>
                 <option v-for="docType in requiredDocuments" :key="docType" :value="docType">

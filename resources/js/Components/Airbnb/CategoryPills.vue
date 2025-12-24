@@ -7,7 +7,7 @@
             :class="[
                 'px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-colors',
                 selectedCategory === category.id
-                    ? 'bg-brand-red-600 text-white'
+                    ? 'bg-growth-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             ]"
         >

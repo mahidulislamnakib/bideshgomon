@@ -12,7 +12,7 @@
                         <ArrowUpTrayIcon class="-ml-1 mr-2 h-5 w-5 text-gray-500 dark:text-gray-400" />
                         Bulk Upload
                     </Link>
-                    <Link :href="route('admin.data.seo-settings.create')" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-red-600 hover:bg-red-700">
+                    <Link :href="route('admin.data.seo-settings.create')" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-growth-600 hover:bg-growth-700">
                         <PlusIcon class="-ml-1 mr-2 h-5 w-5" />
                         Add SEO Setting
                     </Link>
@@ -26,14 +26,14 @@
                         v-model="filters.search"
                         type="text"
                         placeholder="Search pages..."
-                        class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                        class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         @input="debouncedSearch"
                     />
                 </div>
                 <div>
                     <select
                         v-model="filters.index"
-                        class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                        class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         @change="applyFilters"
                     >
                         <option value="">All Indexing</option>
@@ -67,7 +67,7 @@
                         <tr v-for="setting in seoSettings.data" :key="setting.id" class="hover:bg-gray-50 dark:hover:bg-gray-700">
                             <td class="whitespace-nowrap py-4 pl-4 pr-3">
                                 <div class="flex items-center">
-                                    <MagnifyingGlassCircleIcon class="h-8 w-8 text-brand-red-600 mr-3" />
+                                    <MagnifyingGlassCircleIcon class="h-8 w-8 text-growth-600 mr-3" />
                                     <div>
                                         <div class="font-medium text-gray-900 dark:text-white">{{ setting.page_type }}</div>
                                         <div v-if="setting.canonical_url" class="text-xs text-gray-500 dark:text-gray-400 truncate max-w-xs">{{ setting.canonical_url }}</div>
@@ -99,11 +99,11 @@
                             </td>
                             <td class="whitespace-nowrap px-3 py-4">
                                 <div class="flex items-center gap-2">
-                                    <span v-if="setting.og_title" class="inline-flex items-center gap-1 text-xs text-brand-red-600 dark:text-blue-400">
+                                    <span v-if="setting.og_title" class="inline-flex items-center gap-1 text-xs text-growth-600 dark:text-blue-400">
                                         <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                                         OG
                                     </span>
-                                    <span v-if="setting.twitter_title" class="inline-flex items-center gap-1 text-xs text-brand-red-600 dark:text-sky-400">
+                                    <span v-if="setting.twitter_title" class="inline-flex items-center gap-1 text-xs text-growth-600 dark:text-sky-400">
                                         <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
                                         Twitter
                                     </span>
@@ -115,7 +115,7 @@
                             </td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                 <div class="flex justify-end gap-2">
-                                    <Link :href="route('admin.data.seo-settings.edit', setting.id)" class="text-brand-red-600 hover:text-red-900 dark:text-blue-400 dark:hover:text-blue-300">
+                                    <Link :href="route('admin.data.seo-settings.edit', setting.id)" class="text-growth-600 hover:text-red-900 dark:text-blue-400 dark:hover:text-blue-300">
                                         <PencilIcon class="h-5 w-5" />
                                     </Link>
                                     <button @click="confirmDelete(setting)" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">

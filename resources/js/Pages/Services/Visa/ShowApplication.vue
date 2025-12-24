@@ -153,7 +153,7 @@
                             <div v-else class="text-center py-8">
                                 <p class="text-sm text-gray-600">No documents uploaded yet</p>
                                 <button
-                                    class="mt-3 inline-flex items-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700"
+                                    class="mt-3 inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-lg hover:bg-growth-700"
                                 >
                                     Upload Documents
                                 </button>

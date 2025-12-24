@@ -107,7 +107,7 @@ const statusClass = computed(() => {
 const dotClass = computed(() => {
     const dots = {
         pending: 'bg-gold-500',
-        processing: 'bg-brand-red-600 animate-pulse',
+        processing: 'bg-growth-600 animate-pulse',
         approved: 'bg-growth-500',
         completed: 'bg-growth-500',
         rejected: 'bg-red-500',
@@ -116,11 +116,11 @@ const dotClass = computed(() => {
         inactive: 'bg-gray-400',
         paid: 'bg-growth-500',
         unpaid: 'bg-orange-500',
-        refunded: 'bg-brand-red-600',
+        refunded: 'bg-growth-600',
         high: 'bg-red-500',
         medium: 'bg-gold-500',
         low: 'bg-gray-500',
-        ocean: 'bg-brand-red-600',
+        ocean: 'bg-growth-600',
         sunrise: 'bg-sunrise-500',
         heritage: 'bg-heritage-500',
     };

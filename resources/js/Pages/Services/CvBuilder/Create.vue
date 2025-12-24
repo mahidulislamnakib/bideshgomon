@@ -19,8 +19,9 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 import { 
     ArrowLeftIcon, ArrowRightIcon, CheckCircleIcon, 
-    PlusIcon, TrashIcon, DocumentTextIcon 
+    PlusIcon, TrashIcon, DocumentTextIcon, SparklesIcon 
 } from '@heroicons/vue/24/outline';
+import axios from 'axios';
 
 const props = defineProps({
     template: Object,
@@ -37,6 +38,34 @@ const props = defineProps({
 const currentStep = ref(1);
 const totalSteps = 5;
 const showPaymentConfirmation = ref(false);
+const isGeneratingAi = ref(false);
+const aiError = ref('');
+
+// AI-powered summary generation
+const generateAiSummary = async () => {
+    isGeneratingAi.value = true;
+    aiError.value = '';
+    
+    try {
+        const response = await axios.post(route('cv-builder.generate-ai-summary'), {
+            full_name: form.full_name,
+            experience: form.experience,
+            skills: form.skills,
+            education: form.education,
+        });
+        
+        if (response.data.success && response.data.summary) {
+            form.professional_summary = response.data.summary;
+        } else {
+            aiError.value = 'Failed to generate summary. Please try again.';
+        }
+    } catch (error) {
+        console.error('AI generation error:', error);
+        aiError.value = error.response?.data?.message || 'Failed to generate summary. Please try again.';
+    } finally {
+        isGeneratingAi.value = false;
+    }
+};
 
 const isPremiumTemplate = computed(() => {
     return props.template.is_premium && props.template.price > 0;
@@ -175,7 +204,7 @@ const stepTitles = [
 
     <AuthenticatedLayout>
         <!-- Header -->
-        <div class="bg-brand-red-600 text-white">
+        <div class="bg-growth-600 text-white">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3">
@@ -184,10 +213,10 @@ const stepTitles = [
                         </Link>
                         <div>
                             <h1 class="text-xl font-bold">Create Your CV</h1>
-                            <p class="text-sm text-blue-100">{{ template.name }}</p>
+                            <p class="text-sm text-emerald-100">{{ template.name }}</p>
                         </div>
                     </div>
-                    <DocumentTextIcon class="h-10 w-10 text-blue-200 opacity-50" />
+                    <DocumentTextIcon class="h-10 w-10 text-emerald-200 opacity-50" />
                 </div>
 
                 <!-- Progress Bar -->
@@ -217,12 +246,12 @@ const stepTitles = [
                     <div class="flex flex-col items-center">
                         <div 
                             class="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-semibold transition-all text-xs sm:text-base"
-                            :class="currentStep > index + 1 ? 'bg-green-500 text-white' : currentStep === index + 1 ? 'bg-brand-red-600 text-white' : 'bg-gray-200 text-gray-500'"
+                            :class="currentStep > index + 1 ? 'bg-green-500 text-white' : currentStep === index + 1 ? 'bg-growth-600 text-white' : 'bg-gray-200 text-gray-500'"
                         >
                             <CheckCircleIcon v-if="currentStep > index + 1" class="h-4 w-4 sm:h-6 sm:w-6" />
                             <span v-else>{{ index + 1 }}</span>
                         </div>
-                        <div class="text-[10px] sm:text-xs mt-1 sm:mt-2 text-center max-w-[80px] leading-tight" :class="currentStep === index + 1 ? 'text-brand-red-600 font-semibold' : 'text-gray-500'">
+                        <div class="text-[10px] sm:text-xs mt-1 sm:mt-2 text-center max-w-[80px] leading-tight" :class="currentStep === index + 1 ? 'text-growth-600 font-semibold' : 'text-gray-500'">
                             {{ step }}
                         </div>
                     </div>
@@ -245,7 +274,7 @@ const stepTitles = [
                         <input 
                             v-model="form.title"
                             type="text"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                             placeholder="e.g., Software Developer CV"
                         />
                     </div>
@@ -256,7 +285,7 @@ const stepTitles = [
                             <input 
                                 v-model="form.full_name"
                                 type="text"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                             />
                         </div>
                         <div>
@@ -264,7 +293,7 @@ const stepTitles = [
                             <input 
                                 v-model="form.email"
                                 type="email"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                             />
                         </div>
                     </div>
@@ -275,7 +304,7 @@ const stepTitles = [
                             <input 
                                 v-model="form.phone"
                                 type="tel"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                             />
                         </div>
                         <div>
@@ -283,7 +312,7 @@ const stepTitles = [
                             <input 
                                 v-model="form.city"
                                 type="text"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                             />
                         </div>
                     </div>
@@ -292,7 +321,7 @@ const stepTitles = [
                         <label class="block text-sm font-medium text-gray-700 mb-1">Country</label>
                         <select 
                             v-model="form.country_id"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                         >
                             <option :value="null">Select Country</option>
                             <option v-for="country in countries" :key="country.id" :value="country.id">
@@ -306,7 +335,7 @@ const stepTitles = [
                         <input 
                             v-model="form.address"
                             type="text"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                         />
                     </div>
 
@@ -316,7 +345,7 @@ const stepTitles = [
                             <input 
                                 v-model="form.linkedin_url"
                                 type="url"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                                 placeholder="https://linkedin.com/in/username"
                             />
                         </div>
@@ -325,7 +354,7 @@ const stepTitles = [
                             <input 
                                 v-model="form.website_url"
                                 type="url"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                                 placeholder="https://yourwebsite.com"
                             />
                         </div>
@@ -334,14 +363,48 @@ const stepTitles = [
 
                 <!-- Step 2: Professional Summary -->
                 <div v-show="currentStep === 2" class="space-y-4">
-                    <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">Professional Summary</h2>
-                    <p class="text-xs sm:text-sm text-gray-600 mb-4">Write a compelling 2-3 paragraph summary highlighting your experience, skills, and career goals. (Minimum 50 characters)</p>
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+                        <div>
+                            <h2 class="text-lg sm:text-xl font-bold text-gray-900">Professional Summary</h2>
+                            <p class="text-xs sm:text-sm text-gray-600 mt-1">Write a compelling 2-3 paragraph summary highlighting your experience, skills, and career goals. (Minimum 50 characters)</p>
+                        </div>
+                        <button 
+                            @click="generateAiSummary"
+                            type="button"
+                            :disabled="isGeneratingAi"
+                            class="flex items-center justify-center space-x-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2.5 rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed text-sm font-medium"
+                        >
+                            <SparklesIcon class="h-5 w-5" :class="{ 'animate-pulse': isGeneratingAi }" />
+                            <span>{{ isGeneratingAi ? 'Generating...' : 'Generate with AI' }}</span>
+                        </button>
+                    </div>
+                    
+                    <!-- AI Error Alert -->
+                    <div v-if="aiError" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm flex items-start space-x-2">
+                        <svg class="h-5 w-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                        <span>{{ aiError }}</span>
+                    </div>
+                    
+                    <!-- AI Tip -->
+                    <div class="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-100 rounded-lg p-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <SparklesIcon class="h-6 w-6 text-purple-600" />
+                            </div>
+                            <div>
+                                <p class="text-sm text-purple-800 font-medium">AI-Powered Summary</p>
+                                <p class="text-xs text-purple-600 mt-1">Click "Generate with AI" to create a professional summary based on your experience, skills, and education. You can edit the generated text to personalize it further.</p>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div>
                         <textarea 
                             v-model="form.professional_summary"
                             rows="8"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                             placeholder="Experienced software developer with 5+ years in full-stack development..."
                         ></textarea>
                         <div class="text-sm text-gray-500 mt-1">
@@ -357,7 +420,7 @@ const stepTitles = [
                         <button 
                             @click="addEducation"
                             type="button"
-                            class="flex items-center space-x-2 bg-brand-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm"
+                            class="flex items-center space-x-2 bg-growth-600 text-white px-4 py-2 rounded-lg hover:bg-growth-700 transition-colors text-sm"
                         >
                             <PlusIcon class="h-4 w-4" />
                             <span>Add Education</span>
@@ -376,7 +439,7 @@ const stepTitles = [
                         <button 
                             @click="removeEducation(index)"
                             type="button"
-                            class="absolute top-2 right-2 text-red-500 hover:text-red-700"
+                            class="absolute top-2 right-2 text-red-500 hover:text-growth-700"
                         >
                             <TrashIcon class="h-5 w-5" />
                         </button>
@@ -449,7 +512,7 @@ const stepTitles = [
                         <button 
                             @click="addExperience"
                             type="button"
-                            class="flex items-center space-x-2 bg-brand-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm"
+                            class="flex items-center space-x-2 bg-growth-600 text-white px-4 py-2 rounded-lg hover:bg-growth-700 transition-colors text-sm"
                         >
                             <PlusIcon class="h-4 w-4" />
                             <span>Add Experience</span>
@@ -468,7 +531,7 @@ const stepTitles = [
                         <button 
                             @click="removeExperience(index)"
                             type="button"
-                            class="absolute top-2 right-2 text-red-500 hover:text-red-700"
+                            class="absolute top-2 right-2 text-red-500 hover:text-growth-700"
                         >
                             <TrashIcon class="h-5 w-5" />
                         </button>
@@ -528,7 +591,7 @@ const stepTitles = [
                             <input 
                                 v-model="exp.is_current"
                                 type="checkbox"
-                                class="h-4 w-4 text-brand-red-600 rounded"
+                                class="h-4 w-4 text-growth-600 rounded"
                             />
                             <label class="ml-2 text-sm text-gray-700">I currently work here</label>
                         </div>
@@ -554,7 +617,7 @@ const stepTitles = [
                             <button 
                                 @click="addSkill"
                                 type="button"
-                                class="flex items-center space-x-2 bg-brand-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm"
+                                class="flex items-center space-x-2 bg-growth-600 text-white px-4 py-2 rounded-lg hover:bg-growth-700 transition-colors text-sm"
                             >
                                 <PlusIcon class="h-4 w-4" />
                                 <span>Add Skill</span>
@@ -590,7 +653,7 @@ const stepTitles = [
                                     <button 
                                         @click="removeSkill(index)"
                                         type="button"
-                                        class="text-red-500 hover:text-red-700 p-2"
+                                        class="text-red-500 hover:text-growth-700 p-2"
                                     >
                                         <TrashIcon class="h-5 w-5" />
                                     </button>
@@ -606,7 +669,7 @@ const stepTitles = [
                             <button 
                                 @click="addLanguage"
                                 type="button"
-                                class="flex items-center space-x-2 bg-brand-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm"
+                                class="flex items-center space-x-2 bg-growth-600 text-white px-4 py-2 rounded-lg hover:bg-growth-700 transition-colors text-sm"
                             >
                                 <PlusIcon class="h-4 w-4" />
                                 <span>Add Language</span>
@@ -638,7 +701,7 @@ const stepTitles = [
                                     <button 
                                         @click="removeLanguage(index)"
                                         type="button"
-                                        class="text-red-500 hover:text-red-700 p-2"
+                                        class="text-red-500 hover:text-growth-700 p-2"
                                     >
                                         <TrashIcon class="h-5 w-5" />
                                     </button>
@@ -669,7 +732,7 @@ const stepTitles = [
                             <button 
                                 @click="removeCertification(index)"
                                 type="button"
-                                class="absolute top-2 right-2 text-red-500 hover:text-red-700"
+                                class="absolute top-2 right-2 text-red-500 hover:text-growth-700"
                             >
                                 <TrashIcon class="h-5 w-5" />
                             </button>
@@ -745,7 +808,7 @@ const stepTitles = [
                     @click="nextStep"
                     :disabled="!canProceed"
                     type="button"
-                    class="flex items-center space-x-2 px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                    class="flex items-center space-x-2 px-6 py-3 bg-growth-600 text-white rounded-lg hover:bg-growth-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     <span>Next Step</span>
                     <ArrowRightIcon class="h-5 w-5" />
@@ -787,7 +850,7 @@ const stepTitles = [
                     </div>
                     <div class="flex justify-between items-center py-2 border-b border-gray-200">
                         <span class="text-gray-600">Price:</span>
-                        <span class="font-bold text-lg text-brand-red-600">৳{{ template.price }}</span>
+                        <span class="font-bold text-lg text-growth-600">৳{{ template.price }}</span>
                     </div>
                     <div class="flex justify-between items-center py-2 border-b border-gray-200">
                         <span class="text-gray-600">Current Balance:</span>
@@ -813,7 +876,7 @@ const stepTitles = [
                         @click="submit"
                         :disabled="form.processing"
                         type="button"
-                        class="flex-1 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium disabled:opacity-50"
+                        class="flex-1 px-4 py-2 bg-growth-600 text-white rounded-lg hover:bg-growth-700 transition-colors font-medium disabled:opacity-50"
                     >
                         {{ form.processing ? 'Processing...' : 'Confirm & Pay' }}
                     </button>

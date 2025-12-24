@@ -104,7 +104,7 @@ const getHelpfulColor = (percentage) => {
             <div v-if="stats" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="stat-card">
                     <div class="stat-card-icon bg-blue-100">
-                        <QuestionMarkCircleIcon class="h-6 w-6 text-blue-600" />
+                        <QuestionMarkCircleIcon class="h-6 w-6 text-growth-600" />
                     </div>
                     <div>
                         <p class="stat-card-label">Total FAQs</p>
@@ -168,13 +168,13 @@ const getHelpfulColor = (percentage) => {
                                 @enter="performSearch"
                             />
                         </div>
-                        <select v-model="category_id" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" @change="performSearch">
+                        <select v-model="category_id" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white" @change="performSearch">
                             <option value="">All Categories</option>
                             <option v-for="category in categories" :key="category.id" :value="category.id">
                                 {{ category.name }}
                             </option>
                         </select>
-                        <select v-model="status" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" @change="performSearch">
+                        <select v-model="status" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white" @change="performSearch">
                             <option value="">All Status</option>
                             <option value="published">Published</option>
                             <option value="draft">Draft</option>
@@ -213,7 +213,7 @@ const getHelpfulColor = (percentage) => {
                                 <!-- Content -->
                                 <div class="flex-1 min-w-0">
                                     <!-- Question -->
-                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                                         {{ faq.question }}
                                     </h3>
                                     
@@ -261,21 +261,21 @@ const getHelpfulColor = (percentage) => {
                                 <div class="flex items-center gap-2 flex-shrink-0">
                                     <Link
                                         :href="route('admin.faqs.show', faq.id)"
-                                        class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                        class="p-2 text-growth-600 hover:bg-blue-50 rounded-2xl transition-colors"
                                         title="View"
                                     >
                                         <EyeIcon class="h-5 w-5" />
                                     </Link>
                                     <Link
                                         :href="route('admin.faqs.edit', faq.id)"
-                                        class="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                                        class="p-2 text-gray-600 hover:bg-gray-100 rounded-2xl transition-colors"
                                         title="Edit"
                                     >
                                         <PencilIcon class="h-5 w-5" />
                                     </Link>
                                     <button
                                         @click="deleteFaq(faq.id)"
-                                        class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                        class="p-2 text-red-600 hover:bg-red-50 rounded-2xl transition-colors"
                                         title="Delete"
                                     >
                                         <TrashIcon class="h-5 w-5" />
@@ -315,7 +315,7 @@ const getHelpfulColor = (percentage) => {
                                 :key="link.label"
                                 :href="link.url"
                                 :class="[
-                                    'px-3 py-2 text-sm rounded-lg transition-colors',
+                                    'px-3 py-2 text-sm rounded-2xl transition-colors',
                                     link.active 
                                         ? 'bg-red-600 text-white' 
                                         : link.url 

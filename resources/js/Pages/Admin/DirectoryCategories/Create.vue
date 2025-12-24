@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <AdminLayout>
         <Head title="Create Directory Category" />
 
@@ -9,21 +9,21 @@
                     <div class="flex items-center mb-4">
                         <Link
                             :href="route('admin.directory-categories.index')"
-                            class="text-gray-600 hover:text-gray-900 mr-4"
+                            class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white mr-4"
                         >
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                             </svg>
                         </Link>
                         <div>
-                            <h2 class="text-2xl font-bold text-gray-900">Create Directory Category</h2>
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Create Directory Category</h2>
                             <p class="mt-1 text-sm text-gray-600">Add a new category for organizing directories</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Form -->
-                <div class="bg-white rounded-lg shadow-sm">
+                <div class="bg-white rounded-2xl shadow-sm">
                     <form @submit.prevent="submit" class="p-6 space-y-6">
                         <!-- English Name -->
                         <div>
@@ -34,7 +34,7 @@
                                 id="name"
                                 v-model="form.name"
                                 type="text"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 :class="{ 'border-red-500': form.errors.name }"
                                 placeholder="e.g., Embassy, Airline, Training Center"
                                 required
@@ -51,7 +51,7 @@
                                 id="name_bn"
                                 v-model="form.name_bn"
                                 type="text"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 :class="{ 'border-red-500': form.errors.name_bn }"
                                 placeholder="বাংলায় নাম লিখুন"
                                 required
@@ -68,7 +68,7 @@
                                 id="description"
                                 v-model="form.description"
                                 rows="3"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 :class="{ 'border-red-500': form.errors.description }"
                                 placeholder="Brief description of this category..."
                             ></textarea>
@@ -86,7 +86,7 @@
                                     id="icon"
                                     v-model="form.icon"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.icon }"
                                     placeholder="e.g., fas fa-building, fas fa-plane"
                                 />
@@ -95,7 +95,7 @@
                                 
                                 <!-- Icon Preview -->
                                 <div v-if="form.icon" class="mt-3">
-                                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg text-white text-xl"
+                                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl text-white text-xl"
                                          :style="{ backgroundColor: form.color || '#3B82F6' }">
                                         <i :class="form.icon"></i>
                                     </div>
@@ -118,7 +118,7 @@
                                     <input
                                         v-model="form.color"
                                         type="text"
-                                        class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                        class="flex-1 rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         :class="{ 'border-red-500': form.errors.color }"
                                         placeholder="#3B82F6"
                                     />
@@ -132,7 +132,7 @@
                                         :key="color.value"
                                         @click.prevent="form.color = color.value"
                                         type="button"
-                                        class="w-8 h-8 rounded border-2 border-gray-300 hover:border-brand-red-600 transition-colors"
+                                        class="w-8 h-8 rounded border-2 border-gray-300 hover:border-growth-600 transition-colors"
                                         :style="{ backgroundColor: color.value }"
                                         :title="color.name"
                                     ></button>
@@ -150,7 +150,7 @@
                                 v-model.number="form.sort_order"
                                 type="number"
                                 min="0"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 :class="{ 'border-red-500': form.errors.sort_order }"
                             />
                             <p class="mt-1 text-xs text-gray-500">Lower numbers appear first</p>
@@ -163,7 +163,7 @@
                                 <input
                                     v-model="form.is_active"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="rounded border-gray-300 text-growth-600 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 />
                                 <span class="ml-2 text-sm text-gray-700">Active (visible to users)</span>
                             </label>
@@ -174,13 +174,13 @@
                         <div class="flex items-center justify-end space-x-3 pt-6 border-t">
                             <Link
                                 :href="route('admin.directory-categories.index')"
-                                class="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+                                class="px-4 py-2 bg-white border border-gray-300 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50"
                             >
                                 Cancel
                             </Link>
                             <button
                                 type="submit"
-                                class="px-4 py-2 bg-brand-red-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
+                                class="px-4 py-2 bg-growth-600 border border-transparent rounded-xl text-sm font-medium text-white hover:bg-growth-700 disabled:opacity-50"
                                 :disabled="form.processing"
                             >
                                 <span v-if="form.processing">Creating...</span>

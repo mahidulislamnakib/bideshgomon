@@ -13,7 +13,7 @@
                             </div>
                             <div v-else class="flex-shrink-0">
                                 <div class="h-16 w-16 bg-ocean-100 rounded-lg flex items-center justify-center">
-                                    <AcademicCapIcon class="h-8 w-8 text-brand-red-600" />
+                                    <AcademicCapIcon class="h-8 w-8 text-growth-600" />
                                 </div>
                             </div>
                             <div class="ml-4">
@@ -38,7 +38,7 @@
                             v-if="university.website" 
                             :href="university.website" 
                             target="_blank"
-                            class="inline-flex items-center px-4 py-2 border border-ocean-300 rounded-md shadow-sm text-sm font-medium text-ocean-700 bg-white hover:bg-ocean-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600"
+                            class="inline-flex items-center px-4 py-2 border border-ocean-300 rounded-md shadow-sm text-sm font-medium text-ocean-700 bg-white hover:bg-ocean-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600"
                         >
                             <GlobeAltIcon class="-ml-1 mr-2 h-5 w-5" />
                             Visit Website
@@ -216,14 +216,14 @@
                                 v-if="university.website" 
                                 :href="university.website" 
                                 target="_blank"
-                                class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600"
+                                class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600"
                             >
                                 Visit Official Website
                                 <ArrowTopRightOnSquareIcon class="ml-2 h-4 w-4" />
                             </a>
                             <Link
                                 :href="route('education.index')"
-                                class="w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600"
+                                class="w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600"
                             >
                                 <ArrowLeftIcon class="mr-2 h-4 w-4" />
                                 Back to Universities
@@ -277,7 +277,7 @@ const props = defineProps({
 
 function getRankingColor(ranking) {
     if (ranking <= 10) return 'text-amber-600'
-    if (ranking <= 50) return 'text-brand-red-600'
+    if (ranking <= 50) return 'text-growth-600'
     if (ranking <= 100) return 'text-green-600'
     return 'text-gray-600'
 }

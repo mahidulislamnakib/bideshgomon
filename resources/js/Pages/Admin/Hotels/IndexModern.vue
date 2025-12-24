@@ -22,7 +22,7 @@
             <div class="grid-stats mb-8">
                 <div class="stat-card">
                     <div class="stat-card-icon bg-blue-100">
-                        <BuildingOffice2Icon class="h-6 w-6 text-blue-600" />
+                        <BuildingOffice2Icon class="h-6 w-6 text-growth-600" />
                     </div>
                     <div>
                         <p class="stat-card-label">Total Hotels</p>
@@ -103,7 +103,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                            <select v-model="statusFilter" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" @change="applyFilters">
+                            <select v-model="statusFilter" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white" @change="applyFilters">
                                 <option value="">All Status</option>
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
@@ -111,7 +111,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Star Rating</label>
-                            <select v-model="starRating" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" @change="applyFilters">
+                            <select v-model="starRating" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white" @change="applyFilters">
                                 <option value="">All Ratings</option>
                                 <option value="5">5 Star</option>
                                 <option value="4">4 Star</option>
@@ -148,9 +148,9 @@
                                 v-if="hotel.featured_image"
                                 :src="hotel.featured_image"
                                 :alt="hotel.name"
-                                class="w-full lg:w-48 h-48 object-cover rounded-lg shadow-md"
+                                class="w-full lg:w-48 h-48 object-cover rounded-2xl shadow-md"
                             />
-                            <div v-else class="w-full lg:w-48 h-48 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center">
+                            <div v-else class="w-full lg:w-48 h-48 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center">
                                 <BuildingOffice2Icon class="h-16 w-16 text-blue-400" />
                             </div>
                         </div>
@@ -160,7 +160,7 @@
                             <div class="flex items-start justify-between gap-4">
                                 <div class="flex-1 min-w-0">
                                     <div class="flex items-center gap-3 mb-2">
-                                        <h3 class="text-xl font-bold text-gray-900">{{ hotel.name }}</h3>
+                                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ hotel.name }}</h3>
                                         <StatusBadge
                                             :status="hotel.is_active ? 'active' : 'inactive'"
                                             size="sm"
@@ -206,11 +206,11 @@
                                         <span
                                             v-for="amenity in hotel.amenities.slice(0, 5)"
                                             :key="amenity"
-                                            class="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-lg"
+                                            class="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-2xl"
                                         >
                                             {{ amenity }}
                                         </span>
-                                        <span v-if="hotel.amenities.length > 5" class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-lg">
+                                        <span v-if="hotel.amenities.length > 5" class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-2xl">
                                             +{{ hotel.amenities.length - 5 }} more
                                         </span>
                                     </div>
@@ -240,7 +240,7 @@
                                     </Link>
                                     <button
                                         @click="toggleStatus(hotel.id)"
-                                        class="px-4 py-2 text-sm font-medium rounded-lg border transition-colors whitespace-nowrap"
+                                        class="px-4 py-2 text-sm font-medium rounded-2xl border transition-colors whitespace-nowrap"
                                         :class="hotel.is_active 
                                             ? 'border-yellow-200 text-yellow-700 bg-yellow-50 hover:bg-yellow-100' 
                                             : 'border-green-200 text-green-700 bg-green-50 hover:bg-green-100'"
@@ -249,7 +249,7 @@
                                     </button>
                                     <button
                                         @click="deleteHotel(hotel.id)"
-                                        class="px-4 py-2 text-sm font-medium rounded-lg border border-red-200 text-red-700 bg-red-50 hover:bg-red-100 transition-colors"
+                                        class="px-4 py-2 text-sm font-medium rounded-2xl border border-red-200 text-red-700 bg-red-50 hover:bg-red-100 transition-colors"
                                     >
                                         <TrashIcon class="h-4 w-4 inline mr-1" />
                                         Delete
@@ -282,7 +282,7 @@
                             :key="link.label"
                             :href="link.url"
                             :class="[
-                                'px-3 py-2 text-sm font-medium rounded-lg transition-colors',
+                                'px-3 py-2 text-sm font-medium rounded-2xl transition-colors',
                                 link.active
                                     ? 'bg-red-600 text-white shadow-sm'
                                     : link.url

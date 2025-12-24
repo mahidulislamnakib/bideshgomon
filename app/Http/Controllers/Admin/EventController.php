@@ -193,4 +193,60 @@ class EventController extends Controller
 
         return back()->with('success', 'Event published status updated.');
     }
+
+    /**
+     * Bulk update published status
+     */
+    public function bulkPublish(Request $request)
+    {
+        $validated = $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:events,id',
+            'published' => 'required|boolean',
+        ]);
+
+        Event::whereIn('id', $validated['ids'])->update(['is_published' => $validated['published']]);
+
+        $action = $validated['published'] ? 'published' : 'unpublished';
+
+        return back()->with('success', count($validated['ids']).' event(s) '.$action.' successfully.');
+    }
+
+    /**
+     * Bulk toggle featured status
+     */
+    public function bulkFeature(Request $request)
+    {
+        $validated = $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:events,id',
+        ]);
+
+        Event::whereIn('id', $validated['ids'])->update(['is_featured' => true]);
+
+        return back()->with('success', count($validated['ids']).' event(s) marked as featured.');
+    }
+
+    /**
+     * Bulk delete events
+     */
+    public function bulkDelete(Request $request)
+    {
+        $validated = $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:events,id',
+        ]);
+
+        // Delete associated images
+        $events = Event::whereIn('id', $validated['ids'])->get();
+        foreach ($events as $event) {
+            if ($event->image) {
+                Storage::disk('public')->delete($event->image);
+            }
+        }
+
+        Event::whereIn('id', $validated['ids'])->delete();
+
+        return back()->with('success', count($validated['ids']).' event(s) deleted successfully.');
+    }
 }

@@ -204,7 +204,7 @@ const navItemClasses = computed(() => [
 
   // States
   props.active
-    ? 'bg-blue-600 text-white shadow-sm'
+    ? 'bg-growth-600 text-white shadow-sm'
     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white',
 
   props.disabled && 'opacity-50 cursor-not-allowed pointer-events-none',

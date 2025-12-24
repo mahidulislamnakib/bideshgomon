@@ -22,37 +22,48 @@ function markAll() {
 
 <template>
   <AuthenticatedLayout title="Notifications">
-    <div class="max-w-5xl mx-auto py-8 px-4">
-      <div class="flex items-center justify-between mb-6">
-        <h1 class="text-2xl font-bold">Notifications</h1>
-        <button @click="markAll" :disabled="readAllForm.processing || unreadCount===0" class="bg-brand-red-600 hover:bg-red-700 text-white text-sm px-4 py-2 rounded disabled:opacity-50">Mark All Read ({{ unreadCount }})</button>
-      </div>
-
-      <div v-if="notifications.data.length === 0" class="bg-white rounded shadow p-8 text-center">
-        <p class="text-gray-600">No notifications yet.</p>
-      </div>
-
-      <ul v-else class="space-y-3">
-        <li v-for="n in notifications.data" :key="n.id" class="bg-white shadow rounded p-4 flex justify-between items-start" :class="{'opacity-70': n.read_at}">
+    <div class="min-h-screen bg-gray-50 dark:bg-neutral-900">
+      <!-- Compact Hero -->
+      <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
           <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span :class="badgeClass(n.priority)" class="px-2 py-0.5 text-xs font-semibold rounded-full">{{ n.priority }}</span>
-              <h2 class="font-semibold text-sm">{{ n.title }}</h2>
-            </div>
-            <p class="text-sm text-gray-700 whitespace-pre-line">{{ n.body }}</p>
-            <div class="mt-2 text-xs text-gray-500">{{ formatDate(n.created_at) }} • {{ formatTime(n.created_at) }}</div>
+            <h1 class="text-xl md:text-2xl font-bold text-white">Notifications</h1>
+            <p class="text-sm text-white/80 mt-0.5">Stay updated on your activities</p>
           </div>
-          <div class="ml-4">
-            <button v-if="!n.read_at" @click="markRead(n.id)" :disabled="readForm.processing" class="text-xs bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded">Mark Read</button>
-            <span v-else class="text-xs text-gray-500">Read</span>
-          </div>
-        </li>
-      </ul>
+          <button @click="markAll" :disabled="readAllForm.processing || unreadCount===0" 
+            class="px-4 py-2 bg-white text-growth-600 text-sm font-medium rounded-lg hover:bg-gray-100 disabled:opacity-50 transition-colors">
+            Mark All Read ({{ unreadCount }})
+          </button>
+        </div>
+      </div>
 
-      <div class="mt-6 flex justify-between items-center" v-if="notifications.links.length > 3">
-        <div class="text-sm text-gray-600">Showing {{ notifications.data.length }} of {{ notifications.total }}</div>
-        <div class="flex gap-1">
-          <Link v-for="l in notifications.links" :key="l.url + l.label" :href="l.url" v-html="l.label" :class="['px-2 py-1 rounded text-xs', l.active ? 'bg-brand-red-600 text-white' : 'bg-gray-100 text-gray-700']" />
+      <div class="max-w-5xl mx-auto py-8 px-4">
+        <div v-if="notifications.data.length === 0" class="bg-white dark:bg-neutral-800 rounded-xl shadow p-8 text-center">
+          <p class="text-gray-600 dark:text-gray-400">No notifications yet.</p>
+        </div>
+
+        <ul v-else class="space-y-3">
+          <li v-for="n in notifications.data" :key="n.id" class="bg-white dark:bg-neutral-800 shadow rounded-xl p-4 flex justify-between items-start" :class="{'opacity-70': n.read_at}">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span :class="badgeClass(n.priority)" class="px-2 py-0.5 text-xs font-semibold rounded-full">{{ n.priority }}</span>
+                <h2 class="font-semibold text-sm">{{ n.title }}</h2>
+              </div>
+              <p class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">{{ n.body }}</p>
+              <div class="mt-2 text-xs text-gray-500 dark:text-gray-400">{{ formatDate(n.created_at) }} • {{ formatTime(n.created_at) }}</div>
+            </div>
+            <div class="ml-4">
+              <button v-if="!n.read_at" @click="markRead(n.id)" :disabled="readForm.processing" class="text-xs bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded">Mark Read</button>
+              <span v-else class="text-xs text-gray-500 dark:text-gray-400">Read</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="mt-6 flex justify-between items-center" v-if="notifications.links.length > 3">
+          <div class="text-sm text-gray-600 dark:text-gray-400">Showing {{ notifications.data.length }} of {{ notifications.total }}</div>
+          <div class="flex gap-1">
+            <Link v-for="l in notifications.links" :key="l.url + l.label" :href="l.url" v-html="l.label" :class="['px-2 py-1 rounded text-xs', l.active ? 'bg-growth-600 text-white' : 'bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300']" />
+          </div>
         </div>
       </div>
     </div>

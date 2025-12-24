@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <Head title="Create Visa Requirement" />
 
     <AdminLayout>
@@ -8,12 +8,12 @@
                 <div class="mb-8">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h1 class="text-3xl font-bold text-gray-900">Create Visa Requirement</h1>
-                            <p class="mt-2 text-gray-600">Add a new visa requirement for a country</p>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Create Visa Requirement</h1>
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">Add a new visa requirement for a country</p>
                         </div>
                         <Link 
                             :href="route('admin.visa-requirements.index')"
-                            class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition"
+                            class="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition"
                         >
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
@@ -24,20 +24,20 @@
                 </div>
 
                 <!-- Form -->
-                <div class="bg-white rounded-lg shadow">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow">
                     <form @submit.prevent="submitForm">
                         <div class="p-6 space-y-6">
                             <!-- Document Hub Notice -->
-                            <div class="bg-red-50 border-l-4 border-brand-red-600 p-4 mb-6">
+                            <div class="bg-red-50 dark:bg-red-900/20 border-l-4 border-growth-600 p-4 mb-6">
                                 <div class="flex items-start">
                                     <div class="flex-shrink-0">
-                                        <svg class="h-5 w-5 text-brand-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <svg class="h-5 w-5 text-growth-600" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
                                         </svg>
                                     </div>
                                     <div class="ml-3">
-                                        <h3 class="text-sm font-semibold text-brand-red-600">Using Legacy Document System</h3>
-                                        <p class="mt-1 text-sm text-blue-700">
+                                        <h3 class="text-sm font-semibold text-growth-600 dark:text-growth-400">Using Legacy Document System</h3>
+                                        <p class="mt-1 text-sm text-blue-700 dark:text-blue-400">
                                             This form uses the old text-based document system. For new requirements, consider using the 
                                             <Link :href="route('admin.document-assignments.index')" class="font-semibold underline hover:text-red-900">Document Hub System</Link> 
                                             for better management and standardization with ICAO, ISO, WHO, and UN standards.
@@ -48,15 +48,15 @@
 
                             <!-- Basic Information -->
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Basic Information</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Basic Information</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div class="md:col-span-2">
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Country *</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Country *</label>
                                         <select 
                                             v-model="form.country_id"
                                             @change="updateCountryInfo"
                                             required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         >
                                             <option value="">Select a country</option>
                                             <option v-for="country in props.countries" :key="country.id" :value="country.id">
@@ -68,11 +68,11 @@
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Visa Type *</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Visa Type *</label>
                                         <select 
                                             v-model="form.visa_type"
                                             required
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         >
                                             <option value="">Select Type</option>
                                             <option value="tourist">Tourist Visa</option>
@@ -87,11 +87,11 @@
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Visa Category</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Visa Category</label>
                                         <input 
                                             v-model="form.visa_category"
                                             type="text"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="e.g., B1/B2"
                                         />
                                     </div>
@@ -100,35 +100,35 @@
 
                             <!-- Requirements -->
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Requirements</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Requirements</h3>
                                 <div class="space-y-4">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                             Basic Documents (Common for All) *
-                                            <span class="text-xs text-gray-500">One document per line</span>
+                                            <span class="text-xs text-gray-500 dark:text-gray-400">One document per line</span>
                                         </label>
                                         <textarea 
                                             v-model="form.required_documents_text"
                                             required
                                             rows="8"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 font-mono text-sm"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 font-mono text-sm"
                                             placeholder="Valid passport with Old Passport if available (minimum 6 months validity)&#10;Recent passport-size photograph (white background, without glasses)&#10;Recent bank statement (last 6 months) and bank solvency certificate&#10;TIN Certificate and Income Tax Certificate&#10;Tour itinerary&#10;Air-ticket booking&#10;Hotel booking confirmation&#10;Cover letter to the visa officer"
                                         />
                                         <p v-if="form.errors.required_documents" class="mt-1 text-sm text-red-600">{{ form.errors.required_documents }}</p>
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-3">
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                                             Profession-Specific Documents *
-                                            <span class="text-xs text-gray-500">Select professions to add their requirements</span>
+                                            <span class="text-xs text-gray-500 dark:text-gray-400">Select professions to add their requirements</span>
                                         </label>
                                         
                                         <!-- Profession Selector -->
-                                        <div class="mb-4 p-4 bg-gray-50 rounded-md border border-gray-200">
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Add Documents For:</label>
+                                        <div class="mb-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+                                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Add Documents For:</label>
                                             <select 
                                                 v-model="selectedProfessionToAdd"
-                                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                                class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                                 @change="addProfessionSection"
                                             >
                                                 <option value="">Select a profession...</option>
@@ -139,13 +139,13 @@
                                         </div>
 
                                         <!-- Dynamic Profession Sections -->
-                                        <div v-if="professionDocs.length === 0" class="text-sm text-gray-500 italic p-4 bg-gray-50 rounded-md">
+                                        <div v-if="professionDocs.length === 0" class="text-sm text-gray-500 dark:text-gray-400 italic p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
                                             No profession-specific documents added yet. Select a profession above to add documents.
                                         </div>
 
-                                        <div v-for="(item, index) in professionDocs" :key="index" class="mb-4 p-4 bg-white border-2 border-indigo-100 rounded-md">
+                                        <div v-for="(item, index) in professionDocs" :key="index" class="mb-4 p-4 bg-white dark:bg-gray-700 border-2 border-indigo-100 dark:border-indigo-900 rounded-xl">
                                             <div class="flex items-center justify-between mb-2">
-                                                <h4 class="font-semibold text-indigo-700">{{ item.profession }}</h4>
+                                                <h4 class="font-semibold text-indigo-700 dark:text-indigo-400">{{ item.profession }}</h4>
                                                 <button 
                                                     type="button"
                                                     @click="removeProfessionSection(index)"
@@ -157,7 +157,7 @@
                                             <textarea 
                                                 v-model="item.documents"
                                                 rows="5"
-                                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 font-mono text-sm"
+                                                class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 font-mono text-sm"
                                                 :placeholder="`Enter ${item.profession} documents (one per line):\nNOC from current employer\nEmployee ID card photo\nSalary certificate`"
                                             />
                                         </div>
@@ -166,21 +166,21 @@
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Eligibility Criteria</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Eligibility Criteria</label>
                                         <textarea 
                                             v-model="form.eligibility_criteria"
                                             rows="3"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="Enter eligibility criteria..."
                                         />
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Important Notes / Special Requirements</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Important Notes / Special Requirements</label>
                                         <textarea 
                                             v-model="form.important_notes"
                                             rows="4"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="Special notes for all applicants...&#10;Example: If the applicant has visited this country previously, provide visa copy"
                                         />
                                     </div>
@@ -189,37 +189,37 @@
 
                             <!-- Financial Requirements -->
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Financial Requirements</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Financial Requirements</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Bank Balance</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Minimum Bank Balance</label>
                                         <input 
                                             v-model.number="form.min_bank_balance"
                                             type="number"
                                             min="0"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="e.g., 500000"
                                         />
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Bank Statement Months</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Bank Statement Months</label>
                                         <input 
                                             v-model.number="form.bank_statement_months"
                                             type="number"
                                             min="1"
                                             max="12"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="e.g., 6"
                                         />
                                     </div>
 
                                     <div class="md:col-span-2">
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Financial Requirements Details</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Financial Requirements Details</label>
                                         <textarea 
                                             v-model="form.financial_requirements"
                                             rows="3"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="Enter financial requirements..."
                                         />
                                     </div>
@@ -228,37 +228,37 @@
 
                             <!-- Fees -->
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Fees</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Fees</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Government Fee</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Government Fee</label>
                                         <input 
                                             v-model.number="form.government_fee"
                                             type="number"
                                             min="0"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="e.g., 16000"
                                         />
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Service Fee</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Service Fee</label>
                                         <input 
                                             v-model.number="form.service_fee"
                                             type="number"
                                             min="0"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="e.g., 15000"
                                         />
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Processing Fee (Standard)</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Processing Fee (Standard)</label>
                                         <input 
                                             v-model.number="form.processing_fee_standard"
                                             type="number"
                                             min="0"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="e.g., 5000"
                                         />
                                     </div>
@@ -267,25 +267,25 @@
 
                             <!-- Processing Time -->
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Processing Time</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Processing Time</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Processing Days (Standard)</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Processing Days (Standard)</label>
                                         <input 
                                             v-model.number="form.processing_days_standard"
                                             type="number"
                                             min="1"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="e.g., 15"
                                         />
                                     </div>
 
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Processing Time Info</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Processing Time Info</label>
                                         <input 
                                             v-model="form.processing_time_info"
                                             type="text"
-                                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                            class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                             placeholder="e.g., 2-4 weeks"
                                         />
                                     </div>
@@ -294,50 +294,50 @@
 
                             <!-- Additional Information -->
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Additional Information</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Additional Information</h3>
                                 <div class="space-y-4">
                                     <div class="flex items-center">
                                         <input 
                                             v-model="form.interview_required"
                                             type="checkbox"
-                                            class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                            class="rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                                         />
-                                        <label class="ml-2 text-sm font-medium text-gray-700">Interview Required</label>
+                                        <label class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">Interview Required</label>
                                     </div>
 
                                     <div class="flex items-center">
                                         <input 
                                             v-model="form.biometrics_required"
                                             type="checkbox"
-                                            class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                            class="rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                                         />
-                                        <label class="ml-2 text-sm font-medium text-gray-700">Biometrics Required</label>
+                                        <label class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">Biometrics Required</label>
                                     </div>
 
                                     <div class="flex items-center">
                                         <input 
                                             v-model="form.is_active"
                                             type="checkbox"
-                                            class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                            class="rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                                         />
-                                        <label class="ml-2 text-sm font-medium text-gray-700">Active</label>
+                                        <label class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">Active</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Form Actions -->
-                        <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3 rounded-b-lg">
+                        <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 flex justify-end space-x-3 rounded-b-lg">
                             <Link 
                                 :href="route('admin.visa-requirements.index')"
-                                class="px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition"
+                                class="px-4 py-2 bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-500 transition"
                             >
                                 Cancel
                             </Link>
                             <button 
                                 type="submit"
                                 :disabled="form.processing"
-                                class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 transition disabled:opacity-50"
+                                class="px-4 py-2 bg-growth-600 text-white rounded-xl hover:bg-growth-700 transition disabled:opacity-50"
                             >
                                 {{ form.processing ? 'Creating...' : 'Create Requirement' }}
                             </button>

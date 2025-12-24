@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <AdminLayout>
         <Head title="Edit Language Test" />
 
@@ -6,8 +6,8 @@
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
                 <div class="mb-6">
-                    <Link :href="route('admin.data.language-tests.index')" class="text-sm text-brand-red-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
-                        ← Back to Language Tests
+                    <Link :href="route('admin.data.language-tests.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+                        ? Back to Language Tests
                     </Link>
                     <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Edit Language Test</h1>
                 </div>
@@ -21,7 +21,7 @@
                             <select
                                 id="language_id"
                                 v-model="form.language_id"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                             >
                                 <option value="">-- Select Language (Optional) --</option>
                                 <option v-for="language in languages" :key="language.id" :value="language.id">{{ language.name }}</option>
@@ -40,7 +40,7 @@
                                 type="text"
                                 required
                                 placeholder="IELTS"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                                 :class="{ 'border-red-500': form.errors.name }"
                             />
                             <p v-if="form.errors.name" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.name }}</p>
@@ -53,8 +53,8 @@
                                 id="name_bn"
                                 v-model="form.name_bn"
                                 type="text"
-                                placeholder="আইইএলটিএস"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                placeholder="?????????"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                             />
                         </div>
 
@@ -70,7 +70,7 @@
                                 maxlength="50"
                                 required
                                 placeholder="ielts"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                                 :class="{ 'border-red-500': form.errors.code }"
                             />
                             <p v-if="form.errors.code" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.code }}</p>
@@ -86,7 +86,7 @@
                                 id="score_type"
                                 v-model="form.score_type"
                                 required
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                                 :class="{ 'border-red-500': form.errors.score_type }"
                             >
                                 <option value="">-- Select Score Type --</option>
@@ -107,7 +107,7 @@
                                 type="number"
                                 step="0.01"
                                 placeholder="0"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                                 :class="{ 'border-red-500': form.errors.min_score }"
                             />
                             <p v-if="form.errors.min_score" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.min_score }}</p>
@@ -122,7 +122,7 @@
                                 type="number"
                                 step="0.01"
                                 placeholder="9"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                                 :class="{ 'border-red-500': form.errors.max_score }"
                             />
                             <p v-if="form.errors.max_score" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.max_score }}</p>
@@ -136,7 +136,7 @@
                                 v-model="form.description"
                                 rows="3"
                                 placeholder="International English Language Testing System"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                             ></textarea>
                             <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Brief description of the test (max 500 characters)</p>
                         </div>
@@ -147,7 +147,7 @@
                                 <input
                                     v-model="form.is_active"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:ring-brand-red-600"
+                                    class="rounded border-gray-300 text-growth-600 shadow-sm focus:ring-growth-600"
                                 />
                                 <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Active</span>
                             </label>
@@ -165,7 +165,7 @@
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition-colors disabled:opacity-50"
+                            class="px-4 py-2 bg-growth-600 hover:bg-growth-700 text-white rounded-lg transition-colors disabled:opacity-50"
                         >
                             {{ form.processing ? 'Updating...' : 'Update Language Test' }}
                         </button>

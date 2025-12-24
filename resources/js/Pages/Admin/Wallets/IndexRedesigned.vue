@@ -74,7 +74,7 @@
                         <select
                             v-model="filters.balanceRange"
                             @change="applyFilters"
-                            class="w-full rounded-lg border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
+                            class="w-full rounded-2xl border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
                         >
                             <option value="">All Balances</option>
                             <option value="zero">Zero Balance</option>
@@ -88,7 +88,7 @@
                         <select
                             v-model="filters.activity"
                             @change="applyFilters"
-                            class="w-full rounded-lg border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
+                            class="w-full rounded-2xl border-neutral-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 text-sm"
                         >
                             <option value="">All</option>
                             <option value="active">Active (7 days)</option>
@@ -161,7 +161,7 @@
                     </button>
                     <button
                         @click="debitWallet(row)"
-                        class="text-red-600 hover:text-red-700 text-sm font-medium"
+                        class="text-red-600 hover:text-growth-700 text-sm font-medium"
                     >
                         Debit
                     </button>

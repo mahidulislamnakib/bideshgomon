@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <Head title="Edit Degree" />
   <AdminLayout>
     <div class="p-6">
@@ -14,7 +14,7 @@
             <label class="block text-sm font-medium text-gray-700 mb-1">
               Degree Name (English) <span class="text-red-500">*</span>
             </label>
-            <input v-model="form.name" type="text" required class="w-full px-3 py-2 border rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" :class="form.errors.name ? 'border-red-500' : 'border-gray-300'" placeholder="e.g., Bachelor of Science"/>
+            <input v-model="form.name" type="text" required class="w-full px-3 py-2 border rounded-md focus:ring-growth-600 focus:border-growth-600" :class="form.errors.name ? 'border-red-500' : 'border-gray-300'" placeholder="e.g., Bachelor of Science"/>
             <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">{{ form.errors.name }}</p>
           </div>
 
@@ -23,7 +23,7 @@
             <label class="block text-sm font-medium text-gray-700 mb-1">
               Degree Name (Bengali)
             </label>
-            <input v-model="form.name_bn" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" placeholder="e.g., ব্যাচেলর অফ সায়েন্স"/>
+            <input v-model="form.name_bn" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-growth-600 focus:border-growth-600" placeholder="e.g., ???????? ?? ????????"/>
             <p v-if="form.errors.name_bn" class="mt-1 text-sm text-red-600">{{ form.errors.name_bn }}</p>
           </div>
 
@@ -32,7 +32,7 @@
             <label class="block text-sm font-medium text-gray-700 mb-1">
               Short Name <span class="text-red-500">*</span>
             </label>
-            <input v-model="form.short_name" type="text" required class="w-full px-3 py-2 border rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" :class="form.errors.short_name ? 'border-red-500' : 'border-gray-300'" placeholder="e.g., BSc"/>
+            <input v-model="form.short_name" type="text" required class="w-full px-3 py-2 border rounded-md focus:ring-growth-600 focus:border-growth-600" :class="form.errors.short_name ? 'border-red-500' : 'border-gray-300'" placeholder="e.g., BSc"/>
             <p v-if="form.errors.short_name" class="mt-1 text-sm text-red-600">{{ form.errors.short_name }}</p>
           </div>
 
@@ -41,7 +41,7 @@
             <label class="block text-sm font-medium text-gray-700 mb-1">
               Level <span class="text-red-500">*</span>
             </label>
-            <select v-model="form.level" required class="w-full px-3 py-2 border rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" :class="form.errors.level ? 'border-red-500' : 'border-gray-300'">
+            <select v-model="form.level" required class="w-full px-3 py-2 border rounded-md focus:ring-growth-600 focus:border-growth-600" :class="form.errors.level ? 'border-red-500' : 'border-gray-300'">
               <option value="">Select Level</option>
               <option value="Certificate">Certificate</option>
               <option value="Diploma">Diploma</option>
@@ -57,7 +57,7 @@
             <label class="block text-sm font-medium text-gray-700 mb-1">
               Typical Duration (Years)
             </label>
-            <input v-model.number="form.typical_duration_years" type="number" min="1" max="10" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" placeholder="e.g., 4"/>
+            <input v-model.number="form.typical_duration_years" type="number" min="1" max="10" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-growth-600 focus:border-growth-600" placeholder="e.g., 4"/>
             <p class="mt-1 text-xs text-gray-500">Leave empty if duration varies</p>
             <p v-if="form.errors.typical_duration_years" class="mt-1 text-sm text-red-600">{{ form.errors.typical_duration_years }}</p>
           </div>
@@ -65,7 +65,7 @@
           <!-- Status -->
           <div class="mb-6">
             <label class="flex items-center">
-              <input v-model="form.is_active" type="checkbox" class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"/>
+              <input v-model="form.is_active" type="checkbox" class="rounded border-gray-300 text-growth-600 focus:ring-growth-600"/>
               <span class="ml-2 text-sm text-gray-700">Active</span>
             </label>
           </div>
@@ -75,7 +75,7 @@
             <Link :href="route('admin.data.degrees.index')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
               Cancel
             </Link>
-            <button type="submit" :disabled="form.processing" class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50">
+            <button type="submit" :disabled="form.processing" class="px-4 py-2 bg-growth-600 text-white rounded-md hover:bg-growth-700 disabled:opacity-50">
               {{ form.processing ? 'Updating...' : 'Update Degree' }}
             </button>
           </div>

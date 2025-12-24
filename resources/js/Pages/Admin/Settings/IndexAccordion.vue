@@ -239,7 +239,7 @@ const getConfiguredCount = (groupKey) => {
                 <div class="mb-8">
                     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
                         <div>
-                            <h1 class="text-3xl font-bold text-gray-900">Platform Settings</h1>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Platform Settings</h1>
                             <p class="mt-2 text-sm text-gray-600">
                                 Configure your platform settings and preferences
                             </p>
@@ -249,7 +249,7 @@ const getConfiguredCount = (groupKey) => {
                                 :href="route('admin.settings.clear-cache')"
                                 method="post"
                                 as="button"
-                                class="inline-flex items-center px-4 py-2 border border-emerald-300 rounded-lg shadow-sm text-sm font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition-colors"
+                                class="inline-flex items-center px-4 py-2 border border-emerald-300 rounded-2xl shadow-sm text-sm font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition-colors"
                             >
                                 <ArrowPathIcon class="h-5 w-5 mr-2" />
                                 Clear Cache
@@ -258,7 +258,7 @@ const getConfiguredCount = (groupKey) => {
                                 :href="route('admin.settings.seed')"
                                 method="post"
                                 as="button"
-                                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-2xl shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
                             >
                                 <ArrowPathIcon class="h-5 w-5 mr-2" />
                                 Reset to Defaults
@@ -283,7 +283,7 @@ const getConfiguredCount = (groupKey) => {
                             <div class="flex items-center gap-4">
                                 <!-- Icon with Color Badge -->
                                 <div :class="[
-                                    'rounded-lg p-3 transition-colors',
+                                    'rounded-2xl p-3 transition-colors',
                                     expandedGroups[groupKey] ? `bg-${groupConfig[groupKey]?.color || 'gray'}-100` : 'bg-gray-100'
                                 ]">
                                     <component 
@@ -297,7 +297,7 @@ const getConfiguredCount = (groupKey) => {
                                 
                                 <!-- Label and Description -->
                                 <div class="text-left">
-                                    <h3 class="text-base font-semibold text-gray-900">
+                                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">
                                         {{ label }}
                                     </h3>
                                     <p class="text-sm text-gray-500 mt-0.5">
@@ -331,7 +331,7 @@ const getConfiguredCount = (groupKey) => {
                                 <!-- API Keys Special Handling -->
                                 <div v-if="groupKey === 'api'" class="space-y-6">
                                     <!-- Warning Banner -->
-                                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4">
                                         <div class="flex">
                                             <ExclamationTriangleIcon class="h-5 w-5 text-amber-400 flex-shrink-0" />
                                             <div class="ml-3">
@@ -347,7 +347,7 @@ const getConfiguredCount = (groupKey) => {
                                     <div
                                         v-for="(apiGroupConfig, apiGroupKey) in apiServiceGroups"
                                         :key="apiGroupKey"
-                                        class="bg-white border border-gray-200 rounded-lg overflow-hidden"
+                                        class="bg-white border border-gray-200 rounded-2xl overflow-hidden"
                                     >
                                         <button
                                             type="button"
@@ -355,13 +355,13 @@ const getConfiguredCount = (groupKey) => {
                                             class="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
                                         >
                                             <div class="flex items-center gap-3">
-                                                <div :class="`rounded-lg p-2 bg-${apiGroupConfig.color}-100`">
+                                                <div :class="`rounded-2xl p-2 bg-${apiGroupConfig.color}-100`">
                                                     <component 
                                                         :is="apiGroupConfig.icon" 
                                                         :class="`h-5 w-5 text-${apiGroupConfig.color}-600`" 
                                                     />
                                                 </div>
-                                                <span class="text-sm font-semibold text-gray-900">
+                                                <span class="text-sm font-semibold text-gray-900 dark:text-white">
                                                     {{ apiGroupConfig.label }}
                                                 </span>
                                             </div>
@@ -382,7 +382,7 @@ const getConfiguredCount = (groupKey) => {
                                                 :key="setting.key"
                                                 class="p-4"
                                             >
-                                                <label :for="setting.key" class="block text-sm font-medium text-gray-900 mb-2">
+                                                <label :for="setting.key" class="block text-sm font-medium text-gray-900 dark:text-white mb-2">
                                                     {{ (setting.key || '').split('_').map(w => ((w || '').charAt(0).toUpperCase() || '') + (w || '').slice(1)).join(' ') }}
                                                 </label>
                                                 
@@ -392,7 +392,7 @@ const getConfiguredCount = (groupKey) => {
                                                         :type="setting.type === 'password' && !visiblePasswords[setting.key] ? 'password' : 'text'"
                                                         :value="form.settings.find(s => s.key === setting.key)?.value"
                                                         @input="updateSetting(setting.key, $event.target.value)"
-                                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                                         :placeholder="setting.description || ''"
                                                     />
                                                     <button
@@ -415,11 +415,11 @@ const getConfiguredCount = (groupKey) => {
                                     <div 
                                         v-for="setting in getGroupSettings(groupKey)"
                                         :key="setting.key"
-                                        class="bg-white p-4 rounded-lg border border-gray-200"
+                                        class="bg-white p-4 rounded-2xl border border-gray-200"
                                     >
                                         <div v-if="setting.type === 'boolean'" class="flex items-center justify-between">
                                             <div>
-                                                <label :for="setting.key" class="text-sm font-medium text-gray-900">
+                                                <label :for="setting.key" class="text-sm font-medium text-gray-900 dark:text-white">
                                                     {{ (setting.key || '').split('_').map(w => ((w || '').charAt(0).toUpperCase() || '') + (w || '').slice(1)).join(' ') }}
                                                 </label>
                                                 <p v-if="setting.description" class="text-sm text-gray-500 mt-1">
@@ -431,11 +431,11 @@ const getConfiguredCount = (groupKey) => {
                                                 type="checkbox"
                                                 :checked="form.settings.find(s => s.key === setting.key)?.value"
                                                 @change="updateSetting(setting.key, $event.target.checked)"
-                                                class="h-5 w-5 text-indigo-600 border-2 border-gray-200 rounded focus:ring-2 focus:ring-indigo-500 transition-all"
+                                                class="h-5 w-5 text-growth-600 border-2 border-gray-200 rounded focus:ring-2 focus:ring-growth-600 transition-all"
                                             />
                                         </div>
                                         <div v-else>
-                                            <label :for="setting.key" class="block text-sm font-medium text-gray-900 mb-2">
+                                            <label :for="setting.key" class="block text-sm font-medium text-gray-900 dark:text-white mb-2">
                                                 {{ (setting.key || '').split('_').map(w => ((w || '').charAt(0).toUpperCase() || '') + (w || '').slice(1)).join(' ') }}
                                             </label>
                                             <p v-if="setting.description" class="text-sm text-gray-500 mb-2">
@@ -446,7 +446,7 @@ const getConfiguredCount = (groupKey) => {
                                                 :type="getInputType(setting.type)"
                                                 :value="form.settings.find(s => s.key === setting.key)?.value"
                                                 @input="updateSetting(setting.key, $event.target.value)"
-                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                             />
                                         </div>
                                     </div>
@@ -457,7 +457,7 @@ const getConfiguredCount = (groupKey) => {
                                     <button
                                         type="submit"
                                         :disabled="form.processing"
-                                        class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                        class="inline-flex items-center px-6 py-3 border border-transparent rounded-2xl shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                     >
                                         <CheckIcon class="h-5 w-5 mr-2" />
                                         {{ form.processing ? 'Saving...' : 'Save ' + label }}

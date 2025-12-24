@@ -149,7 +149,7 @@ const variantClasses = computed(() => {
         primary: 'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 shadow-sm',
         secondary: 'bg-white text-neutral-700 border border-neutral-300 hover:bg-neutral-50 focus:ring-neutral-500',
         success: 'bg-success-600 text-white hover:bg-success-700 focus:ring-success-500 shadow-sm',
-        danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-sm',
+        danger: 'bg-red-600 text-white hover:bg-growth-700 focus:ring-red-500 shadow-sm',
         ghost: 'bg-transparent text-neutral-700 hover:bg-neutral-100 focus:ring-neutral-500'
     };
     return variants[props.variant];

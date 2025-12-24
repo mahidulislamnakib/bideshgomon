@@ -33,7 +33,7 @@ const spinnerClasses = computed(() => {
   }
   
   const variantClasses = {
-    primary: 'text-blue-600 dark:text-blue-500',
+    primary: 'text-growth-600 dark:text-growth-600',
     white: 'text-white',
     gray: 'text-gray-600 dark:text-gray-400',
     success: 'text-emerald-600 dark:text-emerald-500',

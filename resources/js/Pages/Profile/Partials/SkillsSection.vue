@@ -254,7 +254,7 @@ const getProficiencyColor = (level) => {
                     :key="userSkill.id"
                     class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                 >
-                    <div class="h-1 bg-brand-red-600"></div>
+                    <div class="h-1 bg-growth-600"></div>
                     <div class="p-4">
                         <div class="flex items-start justify-between gap-3 mb-3">
                             <div class="flex-1 min-w-0">
@@ -273,7 +273,7 @@ const getProficiencyColor = (level) => {
                             </div>
                             <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
                                 <div 
-                                    class="h-full bg-brand-red-600 transition-all duration-300"
+                                    class="h-full bg-growth-600 transition-all duration-300"
                                     :style="{ width: (userSkill.proficiency_level === 'Expert' ? '100' : userSkill.proficiency_level === 'Advanced' ? '75' : userSkill.proficiency_level === 'Intermediate' ? '50' : '25') + '%' }"
                                 ></div>
                             </div>
@@ -337,7 +337,7 @@ const getProficiencyColor = (level) => {
                             <select
                                 id="category-filter"
                                 v-model="selectedCategory"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option v-for="cat in categories" :key="cat" :value="cat">
                                     {{ cat }}
@@ -353,7 +353,7 @@ const getProficiencyColor = (level) => {
                             id="skill_id"
                             v-model="form.skill_id"
                             required
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             :disabled="isEditMode"
                         >
                             <option value="">Choose a skill...</option>

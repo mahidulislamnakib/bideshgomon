@@ -127,8 +127,12 @@ class AdminUserController extends Controller
             'wallet',
         ])->findOrFail($id);
 
+        // Calculate profile completion
+        $profileCompletion = $user->calculateProfileCompletion();
+
         return Inertia::render('Admin/Users/Show', [
             'user' => $user,
+            'profileCompletion' => min($profileCompletion, 100),
         ]);
     }
 

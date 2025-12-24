@@ -1,4 +1,4 @@
-ï»¿<template>
+<template>
     <AdminLayout>
         <Head title="Cities Management" />
 
@@ -14,7 +14,7 @@
                         <div class="flex items-center space-x-3">
                             <Link
                                 :href="route('admin.data.cities-bulk-upload')"
-                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+                                class="inline-flex items-center px-4 py-2 bg-growth-600 hover:bg-growth-700 text-white rounded-lg transition-colors"
                             >
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -44,7 +44,7 @@
                                 v-model="form.search"
                                 type="text"
                                 placeholder="Search by name, state/province..."
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                                 @input="debouncedFilter"
                             />
                         </div>
@@ -54,7 +54,7 @@
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Country</label>
                             <select
                                 v-model="form.country_id"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                                 @change="filter"
                             >
                                 <option value="">All Countries</option>
@@ -67,7 +67,7 @@
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Status</label>
                             <select
                                 v-model="form.is_active"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                                 @change="filter"
                             >
                                 <option value="">All Status</option>
@@ -126,12 +126,12 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                                        {{ city.country?.name || 'â€”' }}
+                                        {{ city.country?.name || '—' }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">{{ city.state_province || 'â€”' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">{{ city.state_province || '—' }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span v-if="city.is_capital" class="px-2 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300 text-xs font-semibold rounded">Capital</span>
-                                        <span v-else class="text-gray-400 dark:text-gray-500 text-xs">â€”</span>
+                                        <span v-else class="text-gray-400 dark:text-gray-500 text-xs">—</span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <button
@@ -146,7 +146,7 @@
                                         <div class="flex items-center justify-end space-x-2">
                                             <Link
                                                 :href="route('admin.data.cities.edit', city.id)"
-                                                class="text-brand-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-indigo-300"
+                                                class="text-growth-600 hover:text-red-900 dark:text-red-400 dark:hover:text-indigo-300"
                                             >
                                                 Edit
                                             </Link>

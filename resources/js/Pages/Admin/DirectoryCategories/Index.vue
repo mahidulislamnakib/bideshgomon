@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <AdminLayout>
         <Head title="Directory Categories" />
 
@@ -7,12 +7,12 @@
                 <!-- Header -->
                 <div class="mb-6 flex justify-between items-center">
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-900">Directory Categories</h2>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Directory Categories</h2>
                         <p class="mt-1 text-sm text-gray-600">Manage directory categories for embassies, airlines, training centers, etc.</p>
                     </div>
                     <Link
                         :href="route('admin.directory-categories.create')"
-                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150"
+                        class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-xl font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2 transition ease-in-out duration-150"
                     >
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
@@ -22,7 +22,7 @@
                 </div>
 
                 <!-- Filters -->
-                <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+                <div class="bg-white rounded-2xl shadow-sm p-4 mb-6">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <!-- Search -->
                         <div>
@@ -32,7 +32,7 @@
                                 @input="debouncedSearch"
                                 type="text"
                                 placeholder="Search categories..."
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             />
                         </div>
 
@@ -42,7 +42,7 @@
                             <select
                                 v-model="filters.status"
                                 @change="filterCategories"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="">All Status</option>
                                 <option value="active">Active</option>
@@ -56,7 +56,7 @@
                             <select
                                 v-model="filters.sort"
                                 @change="filterCategories"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="w-full rounded-xl border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="sort_order">Sort Order</option>
                                 <option value="name">Name (A-Z)</option>
@@ -68,7 +68,7 @@
                 </div>
 
                 <!-- Categories Table -->
-                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
                     <div v-if="categories.data.length > 0" class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
@@ -102,13 +102,13 @@
                                         <div class="flex items-center">
                                             <div
                                                 v-if="category.icon"
-                                                class="flex-shrink-0 h-10 w-10 rounded-lg flex items-center justify-center text-white"
+                                                class="flex-shrink-0 h-10 w-10 rounded-2xl flex items-center justify-center text-white"
                                                 :style="{ backgroundColor: category.color || '#3B82F6' }"
                                             >
                                                 <i :class="category.icon" class="text-xl"></i>
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">
+                                                <div class="text-sm font-medium text-gray-900 dark:text-white">
                                                     {{ category.name }}
                                                 </div>
                                                 <div class="text-sm text-gray-500">
@@ -118,12 +118,12 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-900 max-w-xs truncate">
+                                        <div class="text-sm text-gray-900 dark:text-white max-w-xs truncate">
                                             {{ category.description }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-brand-red-600">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-growth-600">
                                             {{ category.directories_count || 0 }}
                                         </span>
                                     </td>
@@ -144,7 +144,7 @@
                                         <div class="flex justify-end space-x-2">
                                             <Link
                                                 :href="route('admin.directory-categories.edit', category.id)"
-                                                class="text-brand-red-600 hover:text-red-900"
+                                                class="text-growth-600 hover:text-red-900"
                                                 title="Edit"
                                             >
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,12 +172,12 @@
                         <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
                         </svg>
-                        <h3 class="mt-2 text-sm font-medium text-gray-900">No categories found</h3>
+                        <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No categories found</h3>
                         <p class="mt-1 text-sm text-gray-500">Get started by creating a new directory category.</p>
                         <div class="mt-6">
                             <Link
                                 :href="route('admin.directory-categories.create')"
-                                class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
+                                class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-xl font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700"
                             >
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
@@ -194,14 +194,14 @@
                                 <Link
                                     v-if="categories.prev_page_url"
                                     :href="categories.prev_page_url"
-                                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50"
                                 >
                                     Previous
                                 </Link>
                                 <Link
                                     v-if="categories.next_page_url"
                                     :href="categories.next_page_url"
-                                    class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                                    class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50"
                                 >
                                     Next
                                 </Link>
@@ -219,7 +219,7 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                    <nav class="relative z-0 inline-flex rounded-xl shadow-sm -space-x-px" aria-label="Pagination">
                                         <Link
                                             v-if="categories.prev_page_url"
                                             :href="categories.prev_page_url"
@@ -252,7 +252,7 @@
         <!-- Delete Confirmation Modal -->
         <Modal :show="deleteModal.show" @close="closeDeleteModal">
             <div class="p-6">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Delete Category</h3>
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Delete Category</h3>
                 <p class="text-sm text-gray-600 mb-6">
                     Are you sure you want to delete "{{ deleteModal.category?.name }}"?
                     <span v-if="deleteModal.category?.directories_count > 0" class="block mt-2 text-red-600 font-medium">
@@ -266,7 +266,7 @@
                     <button
                         @click="closeDeleteModal"
                         type="button"
-                        class="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+                        class="px-4 py-2 bg-white border border-gray-300 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50"
                     >
                         Cancel
                     </button>
@@ -274,7 +274,7 @@
                         v-if="deleteModal.category?.directories_count === 0"
                         @click="deleteCategory"
                         type="button"
-                        class="px-4 py-2 bg-red-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-red-700"
+                        class="px-4 py-2 bg-red-600 border border-transparent rounded-xl text-sm font-medium text-white hover:bg-growth-700"
                     >
                         Delete
                     </button>

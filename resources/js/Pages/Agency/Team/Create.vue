@@ -8,7 +8,7 @@
                     <div class="p-6">
                         <div class="flex justify-between items-center mb-6">
                             <h2 class="text-2xl font-bold text-gray-900">Add Team Member</h2>
-                            <Link :href="route('agency.team.index')" class="text-brand-red-600 hover:text-red-900">
+                            <Link :href="route('agency.team.index')" class="text-growth-600 hover:text-red-900">
                                 Back to Team
                             </Link>
                         </div>
@@ -50,7 +50,7 @@
                                         v-model="form.name" 
                                         type="text" 
                                         required
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     />
                                     <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">{{ form.errors.name }}</p>
                                 </div>
@@ -61,7 +61,7 @@
                                         v-model="form.position" 
                                         type="text" 
                                         required
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     />
                                     <p v-if="form.errors.position" class="mt-1 text-sm text-red-600">{{ form.errors.position }}</p>
                                 </div>
@@ -71,7 +71,7 @@
                                     <input 
                                         v-model="form.email" 
                                         type="email" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     />
                                     <p v-if="form.errors.email" class="mt-1 text-sm text-red-600">{{ form.errors.email }}</p>
                                 </div>
@@ -81,7 +81,7 @@
                                     <input 
                                         v-model="form.phone" 
                                         type="text" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     />
                                     <p v-if="form.errors.phone" class="mt-1 text-sm text-red-600">{{ form.errors.phone }}</p>
                                 </div>
@@ -93,7 +93,7 @@
                                         type="number" 
                                         min="0"
                                         max="50"
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     />
                                     <p v-if="form.errors.years_experience" class="mt-1 text-sm text-red-600">{{ form.errors.years_experience }}</p>
                                 </div>
@@ -102,7 +102,7 @@
                                     <label class="block text-sm font-medium text-gray-700">Visibility</label>
                                     <select 
                                         v-model="form.is_visible" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     >
                                         <option :value="true">Visible on Profile</option>
                                         <option :value="false">Hidden</option>
@@ -116,7 +116,7 @@
                                 <textarea 
                                     v-model="form.bio" 
                                     rows="4" 
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 ></textarea>
                                 <p v-if="form.errors.bio" class="mt-1 text-sm text-red-600">{{ form.errors.bio }}</p>
                             </div>
@@ -130,7 +130,7 @@
                                             v-model="form.languages[index]" 
                                             type="text" 
                                             placeholder="e.g., English, Bengali"
-                                            class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                            class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         />
                                         <button 
                                             v-if="form.languages.length > 1"
@@ -145,7 +145,7 @@
                                 <button 
                                     type="button" 
                                     @click="addLanguage" 
-                                    class="mt-2 text-sm text-brand-red-600 hover:text-red-900"
+                                    class="mt-2 text-sm text-growth-600 hover:text-red-900"
                                 >
                                     + Add Language
                                 </button>
@@ -160,7 +160,7 @@
                                             v-model="form.qualifications[index]" 
                                             type="text" 
                                             placeholder="e.g., MBA, Certified Immigration Consultant"
-                                            class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                            class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         />
                                         <button 
                                             v-if="form.qualifications.length > 1"
@@ -175,7 +175,7 @@
                                 <button 
                                     type="button" 
                                     @click="addQualification" 
-                                    class="mt-2 text-sm text-brand-red-600 hover:text-red-900"
+                                    class="mt-2 text-sm text-growth-600 hover:text-red-900"
                                 >
                                     + Add Qualification
                                 </button>
@@ -192,7 +192,7 @@
                                 <button 
                                     type="submit" 
                                     :disabled="form.processing"
-                                    class="px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 disabled:opacity-50"
+                                    class="px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 disabled:opacity-50"
                                 >
                                     {{ form.processing ? 'Adding...' : 'Add Team Member' }}
                                 </button>

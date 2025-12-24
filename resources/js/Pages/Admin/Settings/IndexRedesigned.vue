@@ -105,9 +105,9 @@
                 @toggle="toggleSection('blog')"
                 color="primary"
             >
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
                     <div class="flex items-start gap-4">
-                        <DocumentTextIcon class="h-8 w-8 text-blue-600 flex-shrink-0" />
+                        <DocumentTextIcon class="h-8 w-8 text-growth-600 flex-shrink-0" />
                         <div class="flex-1">
                             <h3 class="text-lg font-semibold text-neutral-900 mb-2">Blog Management</h3>
                             <p class="text-sm text-neutral-600 mb-4">
@@ -116,14 +116,14 @@
                             <div class="flex gap-3">
                                 <Link
                                     :href="route('admin.blog.posts.index')"
-                                    class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+                                    class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-2xl hover:bg-growth-700 transition-colors shadow-sm"
                                 >
                                     <DocumentTextIcon class="h-5 w-5 mr-2" />
                                     Manage Posts
                                 </Link>
                                 <Link
                                     :href="route('admin.blog.categories.index')"
-                                    class="inline-flex items-center px-4 py-2 bg-white border border-blue-300 text-blue-700 text-sm font-medium rounded-lg hover:bg-blue-50 transition-colors"
+                                    class="inline-flex items-center px-4 py-2 bg-white border border-blue-300 text-blue-700 text-sm font-medium rounded-2xl hover:bg-blue-50 transition-colors"
                                 >
                                     Categories
                                 </Link>
@@ -142,7 +142,7 @@
                 @toggle="toggleSection('ads')"
                 color="warning"
             >
-                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                <div class="bg-purple-50 border border-purple-200 rounded-2xl p-6">
                     <div class="flex items-start gap-4">
                         <MegaphoneIcon class="h-8 w-8 text-purple-600 flex-shrink-0" />
                         <div class="flex-1">
@@ -152,7 +152,7 @@
                             </p>
                             <Link
                                 :href="route('admin.ads.index')"
-                                class="inline-flex items-center px-4 py-2 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors shadow-sm"
+                                class="inline-flex items-center px-4 py-2 bg-purple-600 text-white text-sm font-medium rounded-2xl hover:bg-purple-700 transition-colors shadow-sm"
                             >
                                 <MegaphoneIcon class="h-5 w-5 mr-2" />
                                 Manage Ads
@@ -171,7 +171,7 @@
                 @toggle="toggleSection('seo')"
                 color="success"
             >
-                <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+                <div class="bg-green-50 border border-green-200 rounded-2xl p-6 mb-6">
                     <div class="flex items-start gap-4">
                         <ShieldCheckIcon class="h-8 w-8 text-green-600 flex-shrink-0" />
                         <div class="flex-1">
@@ -181,7 +181,7 @@
                             </p>
                             <Link
                                 :href="route('seo-settings.index')"
-                                class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition-colors shadow-sm"
+                                class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-2xl hover:bg-green-700 transition-colors shadow-sm"
                             >
                                 <ShieldCheckIcon class="h-5 w-5 mr-2" />
                                 Manage SEO Settings
@@ -260,7 +260,7 @@
                 color="danger"
             >
                 <!-- Security Warning -->
-                <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
                     <div class="flex">
                         <ExclamationTriangleIcon class="h-5 w-5 text-amber-400 flex-shrink-0" />
                         <div class="ml-3">
@@ -300,7 +300,7 @@
         </div>
 
         <!-- Info Panel -->
-        <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <div class="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4">
             <div class="flex">
                 <div class="flex-shrink-0">
                     <CogIcon class="h-5 w-5 text-blue-400" />

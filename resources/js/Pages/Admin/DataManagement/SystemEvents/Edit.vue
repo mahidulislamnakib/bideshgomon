@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <AdminLayout>
     <Head title="Edit System Event" />
 
@@ -31,7 +31,7 @@
                   id="event_type"
                   v-model="form.event_type"
                   type="text"
-                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   required
                 />
                 <p v-if="form.errors.event_type" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.event_type }}</p>
@@ -45,7 +45,7 @@
                 <select
                   id="user_id"
                   v-model="form.user_id"
-                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                 >
                   <option value="">None</option>
                   <option v-for="user in users" :key="user.id" :value="user.id">
@@ -65,7 +65,7 @@
                     id="target_type"
                     v-model="form.target_type"
                     type="text"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   />
                   <p v-if="form.errors.target_type" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.target_type }}</p>
                 </div>
@@ -78,7 +78,7 @@
                     id="target_id"
                     v-model.number="form.target_id"
                     type="number"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   />
                   <p v-if="form.errors.target_id" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.target_id }}</p>
                 </div>
@@ -93,7 +93,7 @@
                   id="data"
                   v-model="form.data"
                   rows="6"
-                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 font-mono text-sm"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 font-mono text-sm"
                 ></textarea>
                 <p v-if="form.errors.data" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.data }}</p>
               </div>
@@ -109,7 +109,7 @@
                 <button
                   type="submit"
                   :disabled="form.processing"
-                  class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150"
+                  class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2 transition ease-in-out duration-150"
                 >
                   Update Event
                 </button>

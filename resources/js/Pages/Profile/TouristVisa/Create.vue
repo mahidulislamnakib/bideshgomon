@@ -94,7 +94,7 @@ const submit = () => {
                             <select
                                 id="destination_country_id"
                                 v-model="form.destination_country_id"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-growth-600"
                                 required
                             >
                                 <option value="">Select destination country</option>
@@ -116,7 +116,7 @@ const submit = () => {
                                 type="date"
                                 id="intended_travel_date"
                                 v-model="form.intended_travel_date"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-growth-600"
                                 :min="new Date().toISOString().split('T')[0]"
                             />
                             <p v-if="form.errors.intended_travel_date" class="mt-2 text-sm text-red-600">
@@ -136,7 +136,7 @@ const submit = () => {
                                 type="number"
                                 id="duration_days"
                                 v-model="form.duration_days"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-growth-600"
                                 min="1"
                                 max="365"
                                 placeholder="e.g., 14"
@@ -157,7 +157,7 @@ const submit = () => {
                             <select
                                 id="profession"
                                 v-model="form.profession"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-growth-600"
                                 required
                             >
                                 <option value="">Select your profession</option>
@@ -182,7 +182,7 @@ const submit = () => {
                                 id="user_notes"
                                 v-model="form.user_notes"
                                 rows="6"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-indigo-500"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-growth-600"
                                 placeholder="Any additional information or special requirements..."
                             ></textarea>
                             <p v-if="form.errors.user_notes" class="mt-2 text-sm text-red-600">
@@ -204,7 +204,7 @@ const submit = () => {
                         <div v-else-if="requirements" class="border border-indigo-200 rounded-lg bg-indigo-50">
                             <div class="p-4 border-b border-indigo-200 bg-indigo-100">
                                 <div class="flex items-start gap-2">
-                                    <svg class="w-5 h-5 text-brand-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 text-growth-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                     </svg>
                                     <div>
@@ -251,7 +251,7 @@ const submit = () => {
                                     </h4>
                                     <ul class="space-y-2">
                                         <li v-for="doc in requirements.optional_documents" :key="doc.id" class="flex items-start gap-3 bg-white rounded-lg p-3 border border-gray-200">
-                                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-5 h-5 text-growth-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                             <div class="flex-1 min-w-0">
@@ -301,14 +301,14 @@ const submit = () => {
                     <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex flex-col-reverse sm:flex-row gap-3 sm:justify-end">
                         <Link
                             :href="route('profile.tourist-visa.index')"
-                            class="inline-flex items-center justify-center px-6 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 transition-colors"
+                            class="inline-flex items-center justify-center px-6 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600 transition-colors"
                         >
                             Cancel
                         </Link>
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="inline-flex items-center justify-center px-6 py-2 bg-brand-red-600 border border-transparent rounded-lg text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            class="inline-flex items-center justify-center px-6 py-2 bg-growth-600 border border-transparent rounded-lg text-sm font-medium text-white hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                         >
                             <svg v-if="form.processing" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

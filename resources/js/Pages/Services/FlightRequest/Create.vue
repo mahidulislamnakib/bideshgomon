@@ -29,7 +29,7 @@
                                         {{ route.total_searches }} searches
                                     </div>
                                 </div>
-                                <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-growth-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                 </svg>
                             </div>
@@ -45,7 +45,7 @@
                             :class="[
                                 'pb-3 px-4 font-medium text-sm transition',
                                 form.trip_type === 'one_way'
-                                    ? 'border-b-2 border-blue-500 text-brand-red-600'
+                                    ? 'border-b-2 border-blue-500 text-growth-600'
                                     : 'text-gray-500 hover:text-gray-700'
                             ]"
                         >
@@ -56,7 +56,7 @@
                             :class="[
                                 'pb-3 px-4 font-medium text-sm transition',
                                 form.trip_type === 'round_trip'
-                                    ? 'border-b-2 border-blue-500 text-brand-red-600'
+                                    ? 'border-b-2 border-blue-500 text-growth-600'
                                     : 'text-gray-500 hover:text-gray-700'
                             ]"
                         >
@@ -67,7 +67,7 @@
                             :class="[
                                 'pb-3 px-4 font-medium text-sm transition',
                                 form.trip_type === 'multi_city'
-                                    ? 'border-b-2 border-blue-500 text-brand-red-600'
+                                    ? 'border-b-2 border-blue-500 text-growth-600'
                                     : 'text-gray-500 hover:text-gray-700'
                             ]"
                         >
@@ -85,7 +85,7 @@
                                         v-model="form.origin_airport_code"
                                         type="text"
                                         placeholder="e.g., DAC (Dhaka)"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                         required
                                     />
                                     <div v-if="form.errors.origin_airport_code" class="text-red-600 text-sm mt-1">
@@ -99,7 +99,7 @@
                                         v-model="form.destination_airport_code"
                                         type="text"
                                         placeholder="e.g., DXB (Dubai)"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                         required
                                     />
                                     <div v-if="form.errors.destination_airport_code" class="text-red-600 text-sm mt-1">
@@ -115,7 +115,7 @@
                                         v-model="form.travel_date"
                                         type="date"
                                         :min="getTodayDate()"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                         required
                                     />
                                     <div v-if="form.errors.travel_date" class="text-red-600 text-sm mt-1">
@@ -129,7 +129,7 @@
                                         v-model="form.return_date"
                                         type="date"
                                         :min="form.travel_date || getTodayDate()"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                         required
                                     />
                                     <div v-if="form.errors.return_date" class="text-red-600 text-sm mt-1">
@@ -165,7 +165,7 @@
                                             v-model="segment.origin"
                                             type="text"
                                             placeholder="e.g., DAC"
-                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                             required
                                         />
                                     </div>
@@ -176,7 +176,7 @@
                                             v-model="segment.destination"
                                             type="text"
                                             placeholder="e.g., DXB"
-                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                             required
                                         />
                                     </div>
@@ -187,7 +187,7 @@
                                             v-model="segment.date"
                                             type="date"
                                             :min="getTodayDate()"
-                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                             required
                                         />
                                     </div>
@@ -198,7 +198,7 @@
                                 v-if="form.multi_city_segments.length < 5"
                                 @click="addSegment"
                                 type="button"
-                                class="w-full py-2 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-blue-500 hover:text-brand-red-600 transition"
+                                class="w-full py-2 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-blue-500 hover:text-growth-600 transition"
                             >
                                 + Add Another Flight
                             </button>
@@ -210,7 +210,7 @@
                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Passengers</label>
                                 <select
                                     v-model.number="form.passengers_count"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                                 >
                                     <option v-for="n in 9" :key="n" :value="n">{{ n }} {{ n === 1 ? 'Passenger' : 'Passengers' }}</option>
                                 </select>
@@ -220,7 +220,7 @@
                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Class</label>
                                 <select
                                     v-model="form.flight_class"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                                 >
                                     <option value="economy">Economy</option>
                                     <option value="business">Business</option>
@@ -244,7 +244,7 @@
                                             v-model="passenger.name"
                                             type="text"
                                             placeholder="As per passport"
-                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                             required
                                         />
                                     </div>
@@ -256,7 +256,7 @@
                                             type="number"
                                             min="0"
                                             max="120"
-                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                             required
                                         />
                                     </div>
@@ -266,7 +266,7 @@
                                         <input
                                             v-model="passenger.passport_number"
                                             type="text"
-                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                         />
                                     </div>
                                 </div>
@@ -282,7 +282,7 @@
                                     <input
                                         v-model="form.contact_name"
                                         type="text"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                         required
                                     />
                                 </div>
@@ -292,7 +292,7 @@
                                     <input
                                         v-model="form.contact_email"
                                         type="email"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                         required
                                     />
                                 </div>
@@ -302,7 +302,7 @@
                                     <input
                                         v-model="form.contact_phone"
                                         type="tel"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                         required
                                     />
                                 </div>
@@ -321,7 +321,7 @@
                                         min="0"
                                         step="1000"
                                         placeholder="e.g., 50000"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                     />
                                 </div>
 
@@ -333,7 +333,7 @@
                                         min="0"
                                         step="1000"
                                         placeholder="e.g., 100000"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                     />
                                 </div>
                             </div>
@@ -349,7 +349,7 @@
                                     <input
                                         v-model="form.prefer_direct_flights"
                                         type="checkbox"
-                                        class="w-4 h-4 text-brand-red-600 border-gray-300 rounded focus:ring-brand-red-600"
+                                        class="w-4 h-4 text-growth-600 border-gray-300 rounded focus:ring-growth-600"
                                     />
                                     <span class="ml-2 text-sm text-gray-700">Prefer direct flights (no layovers)</span>
                                 </label>
@@ -360,7 +360,7 @@
                                         v-model="preferredAirlinesInput"
                                         type="text"
                                         placeholder="e.g., Emirates, Qatar Airways (comma separated)"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                                     />
                                 </div>
 
@@ -368,7 +368,7 @@
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Time of Day</label>
                                     <select
                                         v-model="form.preferred_time"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                                     >
                                         <option value="flexible">Flexible</option>
                                         <option value="morning">Morning (6 AM - 12 PM)</option>
@@ -384,7 +384,7 @@
                                         v-model="form.special_requests"
                                         rows="3"
                                         placeholder="Any special requirements or notes..."
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red-600 focus:border-transparent"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-growth-600 focus:border-transparent"
                                     ></textarea>
                                 </div>
                             </div>
@@ -401,7 +401,7 @@
                             <button
                                 type="submit"
                                 :disabled="form.processing"
-                                class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50"
+                                class="px-6 py-3 bg-growth-600 text-white rounded-lg hover:bg-growth-700 transition disabled:opacity-50"
                             >
                                 <span v-if="!form.processing">Submit Request</span>
                                 <span v-else>Submitting...</span>

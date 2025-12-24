@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { Head } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { useTranslations } from '@/Composables/useTranslations';
@@ -45,7 +45,7 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                         </h2>
                         <div class="flex items-center gap-4">
                             <span class="text-gray-700 dark:text-gray-300">Current Language:</span>
-                            <span class="px-4 py-2 bg-red-100 dark:bg-indigo-900 text-brand-red-600 dark:text-indigo-200 rounded-lg font-semibold flex items-center gap-2">
+                            <span class="px-4 py-2 bg-red-100 dark:bg-indigo-900 text-growth-600 dark:text-indigo-200 rounded-lg font-semibold flex items-center gap-2">
                                 <span v-if="locale === 'en'" v-html="flagUK"></span>
                                 <span v-else v-html="flagBD"></span>
                                 <span>{{ locale === 'en' ? 'English' : 'বাংলা' }}</span>
@@ -61,7 +61,7 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                     <div class="p-6">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                            📋 Navigation Labels
+                            🧭 Navigation Labels
                         </h3>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                             <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
@@ -96,10 +96,10 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                     <div class="p-6">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                            ⚡ Action Buttons
+                            ? Action Buttons
                         </h3>
                         <div class="flex flex-wrap gap-3">
-                            <button class="px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700">
+                            <button class="px-4 py-2 bg-growth-600 text-white rounded-lg hover:bg-growth-700">
                                 {{ trans('ui.create') }}
                             </button>
                             <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
@@ -108,13 +108,13 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                             <button class="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700">
                                 {{ trans('ui.edit') }}
                             </button>
-                            <button class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                            <button class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-growth-700">
                                 {{ trans('ui.delete') }}
                             </button>
                             <button class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
                                 {{ trans('ui.cancel') }}
                             </button>
-                            <button class="px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700">
+                            <button class="px-4 py-2 bg-growth-600 text-white rounded-lg hover:bg-growth-700">
                                 {{ trans('ui.search') }}
                             </button>
                         </div>
@@ -125,7 +125,7 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                     <div class="p-6">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                            🏷️ Status Labels
+                            ✅ Status Labels
                         </h3>
                         <div class="flex flex-wrap gap-3">
                             <span class="px-3 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full text-sm">
@@ -137,7 +137,7 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                             <span class="px-3 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 rounded-full text-sm">
                                 {{ trans('ui.pending') }}
                             </span>
-                            <span class="px-3 py-1 bg-red-100 text-brand-red-600 dark:bg-blue-900 dark:text-blue-200 rounded-full text-sm">
+                            <span class="px-3 py-1 bg-red-100 text-growth-600 dark:bg-blue-900 dark:text-blue-200 rounded-full text-sm">
                                 {{ trans('ui.approved') }}
                             </span>
                             <span class="px-3 py-1 bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 rounded-full text-sm">
@@ -159,27 +159,27 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                         <div class="space-y-3">
                             <div class="p-4 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 rounded">
                                 <p class="text-green-800 dark:text-green-200">
-                                    ✓ {{ trans('ui.success') }}
+                                    ? {{ trans('ui.success') }}
                                 </p>
                             </div>
                             <div class="p-4 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 rounded">
                                 <p class="text-red-800 dark:text-red-200">
-                                    ✗ {{ trans('ui.error') }}
+                                    ? {{ trans('ui.error') }}
                                 </p>
                             </div>
                             <div class="p-4 bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 rounded">
                                 <p class="text-yellow-800 dark:text-yellow-200">
-                                    ⚠ {{ trans('ui.warning') }}
+                                    ? {{ trans('ui.warning') }}
                                 </p>
                             </div>
-                            <div class="p-4 bg-red-50 dark:bg-blue-900/20 border-l-4 border-brand-red-600 rounded">
-                                <p class="text-brand-red-600 dark:text-blue-200">
-                                    ℹ {{ trans('ui.info') }}
+                            <div class="p-4 bg-red-50 dark:bg-blue-900/20 border-l-4 border-growth-600 rounded">
+                                <p class="text-growth-600 dark:text-blue-200">
+                                    ? {{ trans('ui.info') }}
                                 </p>
                             </div>
                             <div class="p-4 bg-gray-50 dark:bg-gray-700 border-l-4 border-gray-500 rounded">
                                 <p class="text-gray-800 dark:text-gray-200">
-                                    ⏳ {{ trans('ui.loading') }}
+                                    ? {{ trans('ui.loading') }}
                                 </p>
                             </div>
                         </div>
@@ -226,7 +226,7 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                             <div class="flex gap-3">
                                 <button 
                                     type="submit" 
-                                    class="px-6 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700"
+                                    class="px-6 py-2 bg-growth-600 text-white rounded-lg hover:bg-growth-700"
                                 >
                                     {{ trans('ui.submit') }}
                                 </button>
@@ -245,7 +245,7 @@ const flagBD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" c
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                            💻 How It Works
+                            💡 How It Works
                         </h3>
                         
                         <div class="space-y-4">
@@ -294,12 +294,12 @@ $request-&gt;validate([
                         </div>
 
                         <!-- Pro Tip -->
-                        <div class="mt-6 p-4 bg-red-50 dark:bg-indigo-900/20 border-l-4 border-brand-red-600 rounded">
-                            <p class="text-sm text-brand-red-600 dark:text-indigo-200">
+                        <div class="mt-6 p-4 bg-red-50 dark:bg-indigo-900/20 border-l-4 border-growth-600 rounded">
+                            <p class="text-sm text-growth-600 dark:text-indigo-200">
                                 <span class="font-semibold">💡 Pro Tip:</span>
                                 {{ locale === 'en' 
                                     ? 'Switch to Bengali using the language switcher in the top right corner to see all these labels change instantly!'
-                                    : 'ইংরেজিতে স্যুইচ করতে উপরের ডানদিকে ভাষা স্যুইচার ব্যবহার করুন!' 
+                                    : 'উপরের ডানদিকে ভাষা সুইচার ব্যবহার করে এই সব লেবেল তাৎক্ষণিক পরিবর্তন দেখুন!' 
                                 }}
                             </p>
                         </div>

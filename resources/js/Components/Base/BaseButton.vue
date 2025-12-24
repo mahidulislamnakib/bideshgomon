@@ -66,7 +66,7 @@ const buttonClasses = computed(() => {
     switch (props.variant) {
         case 'primary':
             classes.push(
-                'bg-brand-red-600 text-white hover:bg-brand-red-600',
+                'bg-growth-600 text-white hover:bg-growth-600',
                 'focus:ring-ocean-300 shadow-rhythm hover:shadow-rhythm-lg',
                 'active:scale-95'
             )
@@ -107,7 +107,7 @@ const buttonClasses = computed(() => {
             break
         case 'outline':
             classes.push(
-                'bg-transparent border-2 border-ocean-500 text-brand-red-600 hover:bg-ocean-50',
+                'bg-transparent border-2 border-ocean-500 text-growth-600 hover:bg-ocean-50',
                 'focus:ring-ocean-200'
             )
             break

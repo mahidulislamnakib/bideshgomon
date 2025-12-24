@@ -89,12 +89,12 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::get('events/{event}/registrations', [EventController::class, 'registrations'])->name('events.registrations');
 
     // Appointments Management
+    Route::get('appointments/calendar', [AdminAppointmentController::class, 'calendar'])->name('appointments.calendar');
     Route::resource('appointments', AdminAppointmentController::class)->except(['create', 'store']);
     Route::post('appointments/{appointment}/confirm', [AdminAppointmentController::class, 'confirm'])->name('appointments.confirm');
     Route::post('appointments/{appointment}/complete', [AdminAppointmentController::class, 'complete'])->name('appointments.complete');
     Route::post('appointments/{appointment}/cancel', [AdminAppointmentController::class, 'cancel'])->name('appointments.cancel');
     Route::post('appointments/{appointment}/assign', [AdminAppointmentController::class, 'assign'])->name('appointments.assign');
-    Route::get('appointments/calendar', [AdminAppointmentController::class, 'calendar'])->name('appointments.calendar');
 
     // Support Tickets Management
     Route::resource('support-tickets', AdminSupportTicketController::class)->except(['create', 'store', 'destroy']);

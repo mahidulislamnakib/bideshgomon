@@ -70,16 +70,18 @@ watch([search, university, subject, level, studyMode, tuitionMax, durationMax, s
     <Head title="Course Catalog" />
 
     <AuthenticatedLayout>
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <!-- Header -->
-                <div class="mb-8">
-                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Course Catalog</h1>
-                    <p class="mt-2 text-gray-600 dark:text-gray-400">Browse courses from top universities worldwide</p>
+        <div class="min-h-screen bg-gray-50 dark:bg-neutral-900">
+            <!-- Compact Hero -->
+            <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+                <div class="max-w-7xl mx-auto">
+                    <h1 class="text-xl md:text-2xl font-bold text-white">Course Catalog</h1>
+                    <p class="text-sm text-white/80 mt-0.5">Browse courses from top universities worldwide</p>
                 </div>
+            </div>
 
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
                 <!-- Stats Dashboard -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                     <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
@@ -132,22 +134,19 @@ watch([search, university, subject, level, studyMode, tuitionMax, durationMax, s
                         <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 sticky top-4">
                             <div class="flex justify-between items-center mb-6">
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Filters</h2>
-                                <button @click="clearFilters" class="text-sm text-brand-red-600 hover:text-ocean-700">Clear All</button>
+                                <button @click="clearFilters" class="text-sm text-growth-600 hover:text-ocean-700">Clear All</button>
                             </div>
 
                             <!-- Search -->
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Search</label>
-                                <div class="relative">
-                                    <MagnifyingGlassIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                                    <input v-model="search" type="text" placeholder="Course name or code..." class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
-                                </div>
+                                <input v-model="search" type="text" placeholder="Course name or code..." class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                             </div>
 
                             <!-- University -->
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">University</label>
-                                <select v-model="university" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <select v-model="university" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                     <option value="">All Universities</option>
                                     <option v-for="uni in universities" :key="uni.id" :value="uni.id">{{ uni.name }}</option>
                                 </select>
@@ -156,7 +155,7 @@ watch([search, university, subject, level, studyMode, tuitionMax, durationMax, s
                             <!-- Subject -->
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
-                                <select v-model="subject" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <select v-model="subject" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                     <option value="">All Subjects</option>
                                     <option v-for="subj in subjects" :key="subj" :value="subj">{{ subj }}</option>
                                 </select>
@@ -165,7 +164,7 @@ watch([search, university, subject, level, studyMode, tuitionMax, durationMax, s
                             <!-- Level -->
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Level</label>
-                                <select v-model="level" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <select v-model="level" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                     <option value="">All Levels</option>
                                     <option v-for="lvl in levels" :key="lvl" :value="lvl">{{ lvl }}</option>
                                 </select>
@@ -174,7 +173,7 @@ watch([search, university, subject, level, studyMode, tuitionMax, durationMax, s
                             <!-- Study Mode -->
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Study Mode</label>
-                                <select v-model="studyMode" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <select v-model="studyMode" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                     <option value="">All Modes</option>
                                     <option v-for="mode in studyModes" :key="mode" :value="mode">{{ mode }}</option>
                                 </select>
@@ -183,19 +182,19 @@ watch([search, university, subject, level, studyMode, tuitionMax, durationMax, s
                             <!-- Tuition Max -->
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Max Tuition (USD)</label>
-                                <input v-model="tuitionMax" type="number" placeholder="50000" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                                <input v-model="tuitionMax" type="number" placeholder="50000" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                             </div>
 
                             <!-- Duration Max -->
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Max Duration (months)</label>
-                                <input v-model="durationMax" type="number" placeholder="48" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                                <input v-model="durationMax" type="number" placeholder="48" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                             </div>
 
                             <!-- Scholarships -->
                             <div class="mb-4">
                                 <label class="flex items-center">
-                                    <input v-model="scholarships" type="checkbox" class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600" />
+                                    <input v-model="scholarships" type="checkbox" class="rounded border-gray-300 text-growth-600 focus:ring-growth-600" />
                                     <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Scholarships Available</span>
                                 </label>
                             </div>
@@ -203,7 +202,7 @@ watch([search, university, subject, level, studyMode, tuitionMax, durationMax, s
                             <!-- Sort -->
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Sort By</label>
-                                <select v-model="sort" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <select v-model="sort" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                     <option value="name">Course Name</option>
                                     <option value="tuition_fee">Tuition Fee</option>
                                     <option value="duration_months">Duration</option>
@@ -215,7 +214,7 @@ watch([search, university, subject, level, studyMode, tuitionMax, durationMax, s
                             <!-- Direction -->
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Order</label>
-                                <select v-model="direction" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <select v-model="direction" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                     <option value="asc">Ascending</option>
                                     <option value="desc">Descending</option>
                                 </select>
@@ -283,7 +282,7 @@ watch([search, university, subject, level, studyMode, tuitionMax, durationMax, s
                         <div v-if="courses.links.length > 3" class="mt-8 flex justify-center">
                             <nav class="flex items-center space-x-2">
                                 <Link v-for="link in courses.links" :key="link.label" :href="link.url" :class="{
-                                    'bg-brand-red-600 text-white': link.active,
+                                    'bg-growth-600 text-white': link.active,
                                     'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300': !link.active,
                                     'opacity-50 cursor-not-allowed': !link.url
                                 }" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-ocean-50 dark:hover:bg-gray-700" v-html="link.label"></Link>

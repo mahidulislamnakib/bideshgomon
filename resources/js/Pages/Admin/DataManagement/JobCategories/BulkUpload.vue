@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <AdminLayout>
         <Head title="Bulk Upload Job Categories" />
 
@@ -6,8 +6,8 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
                 <div class="mb-6">
-                    <Link :href="route('admin.data.job-categories.index')" class="text-sm text-brand-red-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
-                        ← Back to Job Categories
+                    <Link :href="route('admin.data.job-categories.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+                        ? Back to Job Categories
                     </Link>
                     <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Bulk Upload Job Categories</h1>
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Import multiple job categories with parent-child relationships from CSV file</p>
@@ -15,9 +15,9 @@
 
                 <!-- Instructions -->
                 <div class="bg-red-50 dark:bg-blue-900/20 border border-red-200 dark:border-blue-800 rounded-lg p-6 mb-6">
-                    <h2 class="text-lg font-semibold text-red-900 dark:text-blue-100 mb-3">📋 CSV Upload Instructions</h2>
+                    <h2 class="text-lg font-semibold text-red-900 dark:text-blue-100 mb-3">?? CSV Upload Instructions</h2>
                     
-                    <div class="space-y-3 text-sm text-brand-red-600 dark:text-blue-200">
+                    <div class="space-y-3 text-sm text-growth-600 dark:text-blue-200">
                         <div>
                             <strong>Required Column:</strong>
                             <ul class="list-disc ml-6 mt-1 space-y-1">
@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="bg-white dark:bg-blue-950 rounded p-3 border border-red-200 dark:border-blue-700">
-                            <strong class="block mb-2">💡 Creating Hierarchical Categories:</strong>
+                            <strong class="block mb-2">?? Creating Hierarchical Categories:</strong>
                             <p>Use the <code class="bg-red-100 dark:bg-blue-800 px-1 rounded">parent_code</code> column to establish parent-child relationships:</p>
                             <ul class="list-disc ml-6 mt-2 space-y-1">
                                 <li><strong>Root categories:</strong> Leave <code>parent_code</code> empty</li>
@@ -67,7 +67,7 @@
                                         <tr class="border-t">
                                             <td class="px-3 py-2 border-r"><em class="text-gray-500">(empty)</em></td>
                                             <td class="px-3 py-2 border-r">Information Technology</td>
-                                            <td class="px-3 py-2 border-r">তথ্য প্রযুক্তি</td>
+                                            <td class="px-3 py-2 border-r">???? ?????????</td>
                                             <td class="px-3 py-2 border-r">information-technology</td>
                                             <td class="px-3 py-2 border-r">IT related jobs</td>
                                             <td class="px-3 py-2 border-r">0</td>
@@ -76,7 +76,7 @@
                                         <tr class="border-t bg-red-50 dark:bg-blue-900/30">
                                             <td class="px-3 py-2 border-r"><strong>information-technology</strong></td>
                                             <td class="px-3 py-2 border-r">Software Development</td>
-                                            <td class="px-3 py-2 border-r">সফটওয়্যার উন্নয়ন</td>
+                                            <td class="px-3 py-2 border-r">?????????? ???????</td>
                                             <td class="px-3 py-2 border-r">software-development</td>
                                             <td class="px-3 py-2 border-r">Software engineering jobs</td>
                                             <td class="px-3 py-2 border-r">1</td>
@@ -85,7 +85,7 @@
                                         <tr class="border-t bg-red-50 dark:bg-blue-900/30">
                                             <td class="px-3 py-2 border-r"><strong>information-technology</strong></td>
                                             <td class="px-3 py-2 border-r">Network Administration</td>
-                                            <td class="px-3 py-2 border-r">নেটওয়ার্ক প্রশাসন</td>
+                                            <td class="px-3 py-2 border-r">?????????? ???????</td>
                                             <td class="px-3 py-2 border-r">network-administration</td>
                                             <td class="px-3 py-2 border-r">Network management jobs</td>
                                             <td class="px-3 py-2 border-r">2</td>
@@ -94,7 +94,7 @@
                                         <tr class="border-t">
                                             <td class="px-3 py-2 border-r"><em class="text-gray-500">(empty)</em></td>
                                             <td class="px-3 py-2 border-r">Healthcare</td>
-                                            <td class="px-3 py-2 border-r">স্বাস্থ্যসেবা</td>
+                                            <td class="px-3 py-2 border-r">?????????????</td>
                                             <td class="px-3 py-2 border-r">healthcare</td>
                                             <td class="px-3 py-2 border-r">Medical and healthcare jobs</td>
                                             <td class="px-3 py-2 border-r">0</td>
@@ -133,7 +133,7 @@
                                 <button
                                     type="submit"
                                     :disabled="uploadForm.processing || !selectedFile"
-                                    class="px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    class="px-4 py-2 bg-growth-600 hover:bg-growth-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {{ uploadForm.processing ? 'Uploading...' : 'Upload & Import' }}
                                 </button>
@@ -142,14 +142,14 @@
                                     :href="route('admin.data.job-categories.template')"
                                     class="px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
                                 >
-                                    📥 Download CSV Template
+                                    ?? Download CSV Template
                                 </a>
 
                                 <a
                                     :href="route('admin.data.job-categories.export')"
                                     class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
                                 >
-                                    📤 Export Current Data
+                                    ?? Export Current Data
                                 </a>
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                         </div>
                         <div class="bg-red-50 dark:bg-blue-900/20 border border-red-200 dark:border-blue-800 rounded-lg p-4">
                             <div class="text-2xl font-bold text-blue-700 dark:text-blue-400">{{ uploadResult.total }}</div>
-                            <div class="text-sm text-brand-red-600 dark:text-blue-300">Total Processed</div>
+                            <div class="text-sm text-growth-600 dark:text-blue-300">Total Processed</div>
                         </div>
                     </div>
 

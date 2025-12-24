@@ -576,7 +576,7 @@ const backToCards = () => {
                 >
                     <button
                         @click="backToCards"
-                        class="flex items-center gap-2 text-indigo-600 font-semibold text-sm active:scale-95 transition-transform"
+                        class="flex items-center gap-2 text-growth-600 font-semibold text-sm active:scale-95 transition-transform"
                     >
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -685,7 +685,7 @@ const backToCards = () => {
                                         </div>
                                         <p class="text-xs text-gray-500 truncate">{{ section.description }}</p>
                                     </div>
-                                    <ChevronRightIcon class="w-4 h-4 text-gray-300 group-hover:text-indigo-500 flex-shrink-0" />
+                                    <ChevronRightIcon class="w-4 h-4 text-gray-300 group-hover:text-growth-600 flex-shrink-0" />
                                 </button>
                             </div>
                         </div>
@@ -1104,7 +1104,9 @@ const backToCards = () => {
                         <!-- Languages Section -->
                         <LanguagesSection
                             v-if="activeSection === 'languages'"
-                            :user-profile="userProfile"
+                            :user-languages="userLanguages"
+                            :languages="languages"
+                            :language-tests="languageTests"
                         />
 
                         <!-- Privacy & Data Control -->
@@ -1167,7 +1169,7 @@ const backToCards = () => {
                                         <div class="mt-4">
                                             <a
                                                 :href="route('profile.public.settings')"
-                                                class="inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 border border-transparent rounded-xl font-semibold text-sm text-white shadow-sm hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all"
+                                                class="inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 border border-transparent rounded-xl font-semibold text-sm text-white shadow-sm hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2 transition-all"
                                             >
                                                 Manage Public Profile
                                             </a>
@@ -1205,7 +1207,7 @@ const backToCards = () => {
                     <div class="border-t border-gray-100 px-4 py-4 bg-gray-50 md:hidden">
                         <button
                             @click="backToCards"
-                            class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-white border border-gray-200 rounded-xl font-semibold text-sm text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all"
+                            class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-white border border-gray-200 rounded-xl font-semibold text-sm text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2 transition-all"
                         >
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>

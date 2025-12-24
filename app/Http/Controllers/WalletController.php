@@ -7,6 +7,8 @@ use App\Services\EmailNotificationService;
 use App\Services\WalletService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -51,6 +53,71 @@ class WalletController extends Controller
 
         $transactionCount = $wallet->transactions()->count();
 
+        // Get leaderboard data - top referrers
+        $topReferrers = [];
+        $userRank = null;
+
+        try {
+            if (class_exists('App\Models\Referral')) {
+                $period = now()->format('Y-m');
+                [$year, $month] = explode('-', $period);
+                $startDate = \Carbon\Carbon::create($year, $month, 1)->startOfMonth();
+                $endDate = \Carbon\Carbon::create($year, $month, 1)->endOfMonth();
+
+                // Get top 5 referrers for this month
+                $topReferrers = \App\Models\Referral::select(
+                    'referrals.referrer_id',
+                    DB::raw('COUNT(DISTINCT referrals.id) as referral_count'),
+                    DB::raw('COALESCE(SUM(CASE WHEN rewards.status = "paid" THEN rewards.amount ELSE 0 END), 0) as total_earnings')
+                )
+                    ->leftJoin('rewards', 'referrals.id', '=', 'rewards.referral_id')
+                    ->whereBetween('referrals.created_at', [$startDate, $endDate])
+                    ->where('referrals.status', 'completed')
+                    ->groupBy('referrals.referrer_id')
+                    ->orderByDesc('referral_count')
+                    ->orderByDesc('total_earnings')
+                    ->limit(5)
+                    ->get()
+                    ->map(function ($item, $index) {
+                        $referrer = \App\Models\User::find($item->referrer_id);
+
+                        return [
+                            'rank' => $index + 1,
+                            'id' => $item->referrer_id,
+                            'name' => $referrer->name ?? 'Unknown',
+                            'total_referrals' => (int) $item->referral_count,
+                            'total_earnings' => (float) $item->total_earnings,
+                        ];
+                    });
+
+                // Get current user's rank
+                $allReferrers = \App\Models\Referral::select(
+                    'referrals.referrer_id',
+                    DB::raw('COUNT(DISTINCT referrals.id) as referral_count')
+                )
+                    ->whereBetween('referrals.created_at', [$startDate, $endDate])
+                    ->where('referrals.status', 'completed')
+                    ->groupBy('referrals.referrer_id')
+                    ->orderByDesc('referral_count')
+                    ->get();
+
+                $rank = 1;
+                foreach ($allReferrers as $referrer) {
+                    if ($referrer->referrer_id === $user->id) {
+                        $userRank = [
+                            'rank' => $rank,
+                            'user_id' => $user->id,
+                            'referral_count' => (int) $referrer->referral_count,
+                        ];
+                        break;
+                    }
+                    $rank++;
+                }
+            }
+        } catch (\Exception $e) {
+            Log::warning('Failed to load leaderboard data: '.$e->getMessage());
+        }
+
         return Inertia::render('Wallet/Index', [
             'wallet' => $wallet,
             'balance' => (float) $wallet->balance,
@@ -59,6 +126,8 @@ class WalletController extends Controller
             'totalIn' => (float) $totalIn,
             'totalOut' => (float) $totalOut,
             'transactionCount' => $transactionCount,
+            'topReferrers' => $topReferrers,
+            'userRank' => $userRank,
         ]);
     }
 

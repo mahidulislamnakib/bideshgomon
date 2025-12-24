@@ -81,7 +81,7 @@
                 <!-- Author Info -->
                 <div class="mt-12 pt-8 border-t">
                     <div class="flex items-center gap-4">
-                        <div class="h-16 w-16 rounded-full bg-brand-red-600 flex items-center justify-center text-white text-xl font-bold">
+                        <div class="h-16 w-16 rounded-full bg-growth-600 flex items-center justify-center text-white text-xl font-bold">
                             {{ post.author.name.charAt(0) }}
                         </div>
                         <div>

@@ -97,7 +97,7 @@ const inputClasses = computed(() => {
   } else if (props.disabled) {
     stateClasses = 'border-gray-200 bg-gray-50 text-gray-500 cursor-not-allowed dark:border-gray-700 dark:bg-gray-800'
   } else {
-    stateClasses = 'border-gray-300 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400'
+    stateClasses = 'border-gray-300 text-gray-900 placeholder-gray-400 focus:border-growth-600 focus:ring-growth-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400'
   }
   
   return [

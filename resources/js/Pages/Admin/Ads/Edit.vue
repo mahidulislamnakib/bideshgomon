@@ -29,15 +29,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 -mt-8">
 
             <!-- Modern Form Card -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden max-w-4xl">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden max-w-4xl">
                 <form @submit.prevent="submit" class="p-8 space-y-8">
                     <!-- Basic Information -->
                     <div>
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="p-2 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg">
+                            <div class="p-2 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl">
                                 <DocumentTextIcon class="h-5 w-5 text-white" />
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900">Basic Information</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Basic Information</h3>
                         </div>
                         <div class="space-y-6">
                             <FormInput
@@ -57,7 +57,7 @@
                                     <textarea
                                         v-model="form.body"
                                         rows="5"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"
                                         :class="{ 'border-red-500 focus:ring-red-500 focus:border-red-500': form.errors.body }"
                                         placeholder="Enter detailed description for your ad campaign..."
                                     />
@@ -77,16 +77,16 @@
                     <!-- Image Upload -->
                     <div>
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="p-2 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg">
+                            <div class="p-2 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl">
                                 <PhotoIcon class="h-5 w-5 text-white" />
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900">Ad Image</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Ad Image</h3>
                         </div>
                         <div class="space-y-4">
                             <!-- Current Image -->
                             <div v-if="currentImage && !imagePreview" class="relative">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Current Image</label>
-                                <div class="w-full max-w-sm rounded-lg overflow-hidden border-2 border-gray-200">
+                                <div class="w-full max-w-sm rounded-2xl overflow-hidden border-2 border-gray-200">
                                     <img :src="getImageUrl(currentImage)" alt="Current ad image" class="w-full h-auto" />
                                 </div>
                                 <p class="mt-2 text-sm text-gray-500">Upload a new image to replace this one</p>
@@ -111,13 +111,13 @@
                             <!-- New Image Preview -->
                             <div v-if="imagePreview" class="relative">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">New Image Preview</label>
-                                <div class="w-full max-w-sm rounded-lg overflow-hidden border-2 border-green-500">
+                                <div class="w-full max-w-sm rounded-2xl overflow-hidden border-2 border-green-500">
                                     <img :src="imagePreview" alt="New image preview" class="w-full h-auto" />
                                 </div>
                                 <button
                                     type="button"
                                     @click="removeImage"
-                                    class="absolute top-8 right-2 p-1.5 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors"
+                                    class="absolute top-8 right-2 p-1.5 bg-red-600 text-white rounded-full hover:bg-growth-700 transition-colors"
                                 >
                                     <XMarkIcon class="h-5 w-5" />
                                 </button>
@@ -128,10 +128,10 @@
                     <!-- Call to Action -->
                     <div>
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg">
+                            <div class="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl">
                                 <CursorArrowRaysIcon class="h-5 w-5 text-white" />
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900">Call to Action</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Call to Action</h3>
                         </div>
                         <div class="space-y-6">
                             <FormInput
@@ -156,10 +156,10 @@
                     <!-- Placement & Scheduling -->
                     <div>
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="p-2 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg">
+                            <div class="p-2 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl">
                                 <CalendarIcon class="h-5 w-5 text-white" />
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900">Placement & Scheduling</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Placement & Scheduling</h3>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl border-2 border-gray-200">
@@ -173,7 +173,7 @@
                                 </label>
                                 <select
                                     v-model="form.placement"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white font-medium"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white font-medium"
                                     :class="{ 'border-red-500 focus:ring-red-500 focus:border-red-500': form.errors.placement }"
                                     required
                                 >
@@ -202,7 +202,7 @@
                                     type="number"
                                     min="0"
                                     max="100"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all font-medium"
                                     :class="{ 'border-red-500 focus:ring-red-500 focus:border-red-500': form.errors.priority }"
                                     placeholder="50"
                                 />
@@ -222,7 +222,7 @@
                                 <input
                                     v-model="form.start_at"
                                     type="datetime-local"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                     :class="{ 'border-red-500 focus:ring-red-500 focus:border-red-500': form.errors.start_at }"
                                 />
                                 <p v-if="form.errors.start_at" class="mt-2 text-sm text-red-600">{{ form.errors.start_at }}</p>
@@ -240,7 +240,7 @@
                                 <input
                                     v-model="form.end_at"
                                     type="datetime-local"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                     :class="{ 'border-red-500 focus:ring-red-500 focus:border-red-500': form.errors.end_at }"
                                 />
                                 <p v-if="form.errors.end_at" class="mt-2 text-sm text-red-600">{{ form.errors.end_at }}</p>
@@ -251,10 +251,10 @@
                     <!-- Status -->
                     <div>
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="p-2 bg-gradient-to-br from-pink-500 to-rose-600 rounded-lg">
+                            <div class="p-2 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl">
                                 <CheckCircleIcon class="h-5 w-5 text-white" />
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900">Status</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Status</h3>
                         </div>
                         <div class="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl border-2 border-gray-200">
                             <label class="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
@@ -267,7 +267,7 @@
                             </label>
                             <select
                                 v-model="form.status"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white font-medium"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white font-medium"
                                 :class="{ 'border-red-500 focus:ring-red-500 focus:border-red-500': form.errors.status }"
                                 required
                             >
@@ -286,7 +286,7 @@
                         <button
                             type="button"
                             @click="showTargeting = !showTargeting"
-                            class="flex items-center gap-2 text-lg font-semibold text-gray-900 hover:text-red-600 transition-colors"
+                            class="flex items-center gap-2 text-lg font-semibold text-gray-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors"
                         >
                             <ChevronRightIcon class="h-5 w-5 transition-transform" :class="{ 'rotate-90': showTargeting }" />
                             Targeting Options
@@ -297,7 +297,7 @@
                             <!-- Pages -->
                             <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-xl border-2 border-indigo-100">
                                 <label class="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                                    <div class="p-1.5 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg">
+                                    <div class="p-1.5 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl">
                                         <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                         </svg>
@@ -307,7 +307,7 @@
                                 <textarea
                                     v-model="targetingPages"
                                     rows="4"
-                                    class="w-full px-4 py-3 border-2 border-indigo-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none bg-white"
+                                    class="w-full px-4 py-3 border-2 border-indigo-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none bg-white"
                                     placeholder="user_dashboard, blog_posts, jobs_list, services_index (comma-separated)"
                                 />
                                 <p class="mt-3 text-sm text-indigo-700 flex items-start gap-2">
@@ -321,7 +321,7 @@
                             <!-- Roles -->
                             <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl border-2 border-blue-100">
                                 <label class="block text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                                    <div class="p-1.5 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg">
+                                    <div class="p-1.5 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl">
                                         <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                         </svg>
@@ -329,20 +329,20 @@
                                     Target Roles
                                 </label>
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                    <label class="flex items-center gap-2 cursor-pointer bg-white p-3 rounded-lg border-2 border-blue-100 hover:border-blue-300 transition-all group">
-                                        <input type="checkbox" value="user" v-model="targetingRoles" class="rounded text-blue-600 focus:ring-blue-500 w-4 h-4" />
+                                    <label class="flex items-center gap-2 cursor-pointer bg-white p-3 rounded-2xl border-2 border-blue-100 hover:border-blue-300 transition-all group">
+                                        <input type="checkbox" value="user" v-model="targetingRoles" class="rounded text-growth-600 focus:ring-growth-600 w-4 h-4" />
                                         <span class="text-sm font-medium text-gray-700 group-hover:text-blue-700">👤 User</span>
                                     </label>
-                                    <label class="flex items-center gap-2 cursor-pointer bg-white p-3 rounded-lg border-2 border-blue-100 hover:border-blue-300 transition-all group">
-                                        <input type="checkbox" value="admin" v-model="targetingRoles" class="rounded text-blue-600 focus:ring-blue-500 w-4 h-4" />
+                                    <label class="flex items-center gap-2 cursor-pointer bg-white p-3 rounded-2xl border-2 border-blue-100 hover:border-blue-300 transition-all group">
+                                        <input type="checkbox" value="admin" v-model="targetingRoles" class="rounded text-growth-600 focus:ring-growth-600 w-4 h-4" />
                                         <span class="text-sm font-medium text-gray-700 group-hover:text-blue-700">👑 Admin</span>
                                     </label>
-                                    <label class="flex items-center gap-2 cursor-pointer bg-white p-3 rounded-lg border-2 border-blue-100 hover:border-blue-300 transition-all group">
-                                        <input type="checkbox" value="agency" v-model="targetingRoles" class="rounded text-blue-600 focus:ring-blue-500 w-4 h-4" />
+                                    <label class="flex items-center gap-2 cursor-pointer bg-white p-3 rounded-2xl border-2 border-blue-100 hover:border-blue-300 transition-all group">
+                                        <input type="checkbox" value="agency" v-model="targetingRoles" class="rounded text-growth-600 focus:ring-growth-600 w-4 h-4" />
                                         <span class="text-sm font-medium text-gray-700 group-hover:text-blue-700">🏢 Agency</span>
                                     </label>
-                                    <label class="flex items-center gap-2 cursor-pointer bg-white p-3 rounded-lg border-2 border-blue-100 hover:border-blue-300 transition-all group">
-                                        <input type="checkbox" value="consultant" v-model="targetingRoles" class="rounded text-blue-600 focus:ring-blue-500 w-4 h-4" />
+                                    <label class="flex items-center gap-2 cursor-pointer bg-white p-3 rounded-2xl border-2 border-blue-100 hover:border-blue-300 transition-all group">
+                                        <input type="checkbox" value="consultant" v-model="targetingRoles" class="rounded text-growth-600 focus:ring-growth-600 w-4 h-4" />
                                         <span class="text-sm font-medium text-gray-700 group-hover:text-blue-700">💼 Consultant</span>
                                     </label>
                                 </div>
@@ -357,7 +357,7 @@
                             <!-- Devices -->
                             <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-2 border-green-100">
                                 <label class="block text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                                    <div class="p-1.5 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg">
+                                    <div class="p-1.5 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl">
                                         <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                         </svg>
@@ -365,21 +365,21 @@
                                     Target Devices
                                 </label>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                    <label class="flex items-center gap-3 cursor-pointer bg-white p-4 rounded-lg border-2 border-green-100 hover:border-green-300 transition-all group">
+                                    <label class="flex items-center gap-3 cursor-pointer bg-white p-4 rounded-2xl border-2 border-green-100 hover:border-green-300 transition-all group">
                                         <input type="checkbox" value="desktop" v-model="targetingDevices" class="rounded text-green-600 focus:ring-green-500 w-4 h-4" />
                                         <div>
                                             <div class="text-sm font-medium text-gray-700 group-hover:text-green-700">🖥️ Desktop</div>
                                             <div class="text-xs text-gray-500">Laptop & PC users</div>
                                         </div>
                                     </label>
-                                    <label class="flex items-center gap-3 cursor-pointer bg-white p-4 rounded-lg border-2 border-green-100 hover:border-green-300 transition-all group">
+                                    <label class="flex items-center gap-3 cursor-pointer bg-white p-4 rounded-2xl border-2 border-green-100 hover:border-green-300 transition-all group">
                                         <input type="checkbox" value="tablet" v-model="targetingDevices" class="rounded text-green-600 focus:ring-green-500 w-4 h-4" />
                                         <div>
                                             <div class="text-sm font-medium text-gray-700 group-hover:text-green-700">📱 Tablet</div>
                                             <div class="text-xs text-gray-500">iPad & Android tablets</div>
                                         </div>
                                     </label>
-                                    <label class="flex items-center gap-3 cursor-pointer bg-white p-4 rounded-lg border-2 border-green-100 hover:border-green-300 transition-all group">
+                                    <label class="flex items-center gap-3 cursor-pointer bg-white p-4 rounded-2xl border-2 border-green-100 hover:border-green-300 transition-all group">
                                         <input type="checkbox" value="mobile" v-model="targetingDevices" class="rounded text-green-600 focus:ring-green-500 w-4 h-4" />
                                         <div>
                                             <div class="text-sm font-medium text-gray-700 group-hover:text-green-700">📲 Mobile</div>
@@ -400,10 +400,10 @@
                     <!-- Performance Stats -->
                     <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 border border-indigo-100">
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg">
+                            <div class="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl">
                                 <ChartBarIcon class="h-5 w-5 text-white" />
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900">Performance Overview</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Performance Overview</h3>
                         </div>
                         <div class="grid grid-cols-3 gap-6">
                             <div class="bg-white rounded-xl p-4 shadow-sm">
@@ -422,7 +422,7 @@
                         <Link
                             v-if="ad && ad.id"
                             :href="route('admin.ads.analytics', ad.id)"
-                            class="mt-6 inline-flex items-center gap-2 text-sm text-indigo-600 hover:text-indigo-700 font-semibold group"
+                            class="mt-6 inline-flex items-center gap-2 text-sm text-growth-600 hover:text-indigo-700 font-semibold group"
                         >
                             View detailed analytics
                             <ArrowRightIcon class="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -433,14 +433,14 @@
                     <div class="flex items-center justify-end gap-4 pt-8 border-t border-gray-200">
                         <Link 
                             :href="route('admin.ads.index')" 
-                            class="px-6 py-3 text-sm font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all"
+                            class="px-6 py-3 text-sm font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-2xl hover:bg-gray-50 hover:border-gray-400 transition-all"
                         >
                             Cancel
                         </Link>
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:from-indigo-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all"
+                            class="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl hover:from-indigo-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all"
                         >
                             <span v-if="form.processing">Updating...</span>
                             <span v-else>Update Ad Campaign</span>

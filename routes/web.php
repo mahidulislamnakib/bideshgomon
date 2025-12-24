@@ -50,6 +50,59 @@ Route::get('/legal/refund-policy', function () {
     return Inertia::render('Legal/RefundPolicy');
 })->name('legal.refund');
 
+// Public Pages (Footer Links)
+Route::get('/about', function () {
+    return Inertia::render('Public/About');
+})->name('about');
+
+Route::get('/contact', function () {
+    return Inertia::render('Public/Contact');
+})->name('contact');
+
+Route::post('/contact', function (\Illuminate\Http\Request $request) {
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email',
+        'subject' => 'required|string',
+        'message' => 'required|string|max:2000',
+    ]);
+
+    // In a real app, send email or store in database
+    return back()->with('success', 'Thank you for your message. We will get back to you soon.');
+})->name('contact.submit');
+
+Route::get('/careers', function () {
+    return Inertia::render('Public/Careers');
+})->name('careers');
+
+Route::get('/pricing', function () {
+    return Inertia::render('Public/Pricing');
+})->name('pricing');
+
+Route::get('/press', function () {
+    return Inertia::render('Public/Press');
+})->name('press');
+
+Route::get('/talent', function () {
+    return Inertia::render('Public/Talent');
+})->name('talent');
+
+Route::get('/enterprise', function () {
+    return Inertia::render('Public/Enterprise');
+})->name('enterprise');
+
+Route::get('/success-stories', function () {
+    return Inertia::render('Public/SuccessStories');
+})->name('success-stories');
+
+Route::get('/help/faq', function () {
+    return Inertia::render('Help/Faq');
+})->name('help.faq');
+
+Route::get('/help/profile', function () {
+    return Inertia::render('Help/Profile');
+})->name('help.profile');
+
 // Success & Error Pages
 Route::get('/success/application/{application}', function () {
     // This will be handled by ApplicationController
@@ -410,6 +463,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}/download', [CvBuilderController::class, 'download'])->name('download');
         Route::post('/{id}/duplicate', [CvBuilderController::class, 'duplicate'])->name('duplicate');
         Route::post('/{id}/share', [CvBuilderController::class, 'toggleShare'])->name('toggle-share');
+        Route::post('/generate-ai-summary', [CvBuilderController::class, 'generateAiSummary'])->name('generate-ai-summary');
     });
 
     // User Services Routes
@@ -961,9 +1015,32 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/', function () {
             return Inertia::render('Admin/DataManagement/Index', [
                 'stats' => [
-                    'geographic' => 227,  // Countries + Cities + Airports + Currencies
-                    'professional' => 283, // Skills + Degrees + Languages + Job Categories
-                    'content' => 72,       // Service Categories + Blog Categories + Tags
+                    'geographic' => \App\Models\Country::count() + \App\Models\City::count() + \App\Models\Currency::count(),
+                    'professional' => \App\Models\Skill::count() + \App\Models\Degree::count() + \App\Models\Language::count() + \App\Models\JobCategory::count(),
+                    'content' => \App\Models\BlogCategory::count() + \App\Models\BlogTag::count() + \App\Models\VisaType::count(),
+                    'countries' => \App\Models\Country::count(),
+                    'cities' => \App\Models\City::count(),
+                    'airports' => \App\Models\Airport::count(),
+                    'currencies' => \App\Models\Currency::count(),
+                    'skills' => \App\Models\Skill::count(),
+                    'skillCategories' => \App\Models\SkillCategory::count(),
+                    'jobCategories' => \App\Models\JobCategory::count(),
+                    'degrees' => \App\Models\Degree::count(),
+                    'languages' => \App\Models\Language::count(),
+                    'languageTests' => \App\Models\LanguageTest::count(),
+                    'institutionTypes' => \App\Models\InstitutionType::count(),
+                    'serviceCategories' => \App\Models\ServiceCategory::count(),
+                    'blogCategories' => \App\Models\BlogCategory::count(),
+                    'blogTags' => \App\Models\BlogTag::count(),
+                    'documentTypes' => \App\Models\DocumentType::count(),
+                    'bankNames' => \App\Models\BankName::count(),
+                    'visaTypes' => \App\Models\VisaType::count(),
+                    'relationshipTypes' => \App\Models\RelationshipType::count(),
+                    'cvTemplates' => \App\Models\CvTemplate::count(),
+                    'emailTemplates' => \App\Models\EmailTemplate::count(),
+                    'seoSettings' => \App\Models\SeoSetting::count(),
+                    'smartSuggestions' => \App\Models\SmartSuggestion::count(),
+                    'systemEvents' => \App\Models\SystemEvent::count(),
                 ],
             ]);
         })->name('index');
@@ -1232,6 +1309,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::delete('/{hotel}', [AdminHotelController::class, 'destroy'])->name('destroy');
         Route::post('/{hotel}/toggle-status', [AdminHotelController::class, 'toggleStatus'])->name('toggle-status');
 
+        // Bulk Actions
+        Route::post('/bulk-status', [AdminHotelController::class, 'bulkStatus'])->name('bulk-status');
+        Route::post('/bulk-delete', [AdminHotelController::class, 'bulkDelete'])->name('bulk-delete');
+
         // Hotel Rooms
         Route::get('/{hotel}/rooms', [AdminHotelController::class, 'rooms'])->name('rooms');
         Route::post('/{hotel}/rooms', [AdminHotelController::class, 'storeRoom'])->name('rooms.store');
@@ -1252,7 +1333,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     // Visa Applications Management
     Route::prefix('visa-applications')->name('visa-applications.')->group(function () {
         Route::get('/', [AdminVisaController::class, 'index'])->name('index');
+        Route::get('/create', [AdminVisaController::class, 'create'])->name('create');
+        Route::post('/', [AdminVisaController::class, 'store'])->name('store');
+        Route::get('/export', [AdminVisaController::class, 'export'])->name('export');
         Route::get('/{application}', [AdminVisaController::class, 'show'])->name('show');
+        Route::get('/{application}/edit', [AdminVisaController::class, 'edit'])->name('edit');
+        Route::put('/{application}', [AdminVisaController::class, 'update'])->name('update');
         Route::post('/{application}/status', [AdminVisaController::class, 'updateStatus'])->name('update-status');
         Route::post('/{application}/assign', [AdminVisaController::class, 'assign'])->name('assign');
         Route::post('/{application}/approve', [AdminVisaController::class, 'approve'])->name('approve');
@@ -1262,6 +1348,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/{application}/priority', [AdminVisaController::class, 'updatePriority'])->name('update-priority');
         Route::post('/{application}/notes', [AdminVisaController::class, 'addNote'])->name('add-note');
         Route::post('/documents/{document}/verify', [AdminVisaController::class, 'verifyDocument'])->name('verify-document');
+
+        // Bulk Actions
+        Route::post('/bulk-status', [AdminVisaController::class, 'bulkStatus'])->name('bulk-status');
     });
 
     // Admin Document Verification
@@ -1317,6 +1406,10 @@ Route::get('/auth/google/callback', [SocialAuthController::class, 'handleGoogleC
 Route::get('/blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [\App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
 
+// Directory routes (public)
+Route::get('/directories', [\App\Http\Controllers\DirectoryController::class, 'index'])->name('directories.index');
+Route::get('/directories/{slug}', [\App\Http\Controllers\DirectoryController::class, 'show'])->name('directories.show');
+
 // Admin blog routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('blog-posts', \App\Http\Controllers\Admin\BlogPostController::class)->names([
@@ -1328,6 +1421,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         'update' => 'blog.posts.update',
         'destroy' => 'blog.posts.destroy',
     ])->parameters(['blog-posts' => 'post']);
+
+    // Additional blog post actions
+    Route::post('/blog-posts/{post}/duplicate', [\App\Http\Controllers\Admin\BlogPostController::class, 'duplicate'])->name('blog.posts.duplicate');
+    Route::post('/blog-posts/{post}/publish', [\App\Http\Controllers\Admin\BlogPostController::class, 'publish'])->name('blog.posts.publish');
+    Route::post('/blog-posts/{post}/unpublish', [\App\Http\Controllers\Admin\BlogPostController::class, 'unpublish'])->name('blog.posts.unpublish');
 
     Route::resource('blog-categories', \App\Http\Controllers\Admin\BlogCategoryController::class)->names([
         'index' => 'blog.categories.index',
@@ -1364,6 +1462,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     // Service Modules Management
     Route::prefix('service-modules')->name('admin.service-modules.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\ServiceModuleController::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\Admin\ServiceModuleController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\Admin\ServiceModuleController::class, 'store'])->name('store');
+        Route::get('/export', [\App\Http\Controllers\Admin\ServiceModuleController::class, 'export'])->name('export');
         Route::get('/{serviceModule}', [\App\Http\Controllers\Admin\ServiceModuleController::class, 'show'])->name('show');
         Route::put('/{serviceModule}', [\App\Http\Controllers\Admin\ServiceModuleController::class, 'update'])->name('update');
         Route::post('/{serviceModule}/toggle-active', [\App\Http\Controllers\Admin\ServiceModuleController::class, 'toggleActive'])->name('toggle-active');
@@ -1479,6 +1580,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/faq-categories/reorder', [\App\Http\Controllers\Admin\FaqCategoryController::class, 'reorder'])->name('admin.faq-categories.reorder');
 
     // Events Management
+    Route::post('/events/bulk-publish', [\App\Http\Controllers\Admin\EventController::class, 'bulkPublish'])->name('admin.events.bulk-publish');
+    Route::post('/events/bulk-feature', [\App\Http\Controllers\Admin\EventController::class, 'bulkFeature'])->name('admin.events.bulk-feature');
+    Route::post('/events/bulk-delete', [\App\Http\Controllers\Admin\EventController::class, 'bulkDelete'])->name('admin.events.bulk-delete');
     Route::resource('events', \App\Http\Controllers\Admin\EventController::class)->names('admin.events');
     Route::post('/events/{event}/toggle-featured', [\App\Http\Controllers\Admin\EventController::class, 'toggleFeatured'])->name('admin.events.toggle-featured');
     Route::post('/events/{event}/toggle-published', [\App\Http\Controllers\Admin\EventController::class, 'togglePublished'])->name('admin.events.toggle-published');
@@ -1505,12 +1609,13 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/support-tickets/{supportTicket}/update-priority', [\App\Http\Controllers\Admin\SupportTicketController::class, 'updatePriority'])->name('admin.support-tickets.update-priority');
 
     // Appointments Management
+    // Calendar route MUST come before resource route to avoid being matched as {appointment}
+    Route::get('/appointments/calendar', [\App\Http\Controllers\Admin\AppointmentController::class, 'calendar'])->name('admin.appointments.calendar');
     Route::resource('appointments', \App\Http\Controllers\Admin\AppointmentController::class)->names('admin.appointments');
     Route::post('/appointments/{appointment}/confirm', [\App\Http\Controllers\Admin\AppointmentController::class, 'confirm'])->name('admin.appointments.confirm');
     Route::post('/appointments/{appointment}/cancel', [\App\Http\Controllers\Admin\AppointmentController::class, 'cancel'])->name('admin.appointments.cancel');
     Route::post('/appointments/{appointment}/reschedule', [\App\Http\Controllers\Admin\AppointmentController::class, 'reschedule'])->name('admin.appointments.reschedule');
     Route::post('/appointments/{appointment}/complete', [\App\Http\Controllers\Admin\AppointmentController::class, 'complete'])->name('admin.appointments.complete');
-    Route::get('/appointments/calendar', [\App\Http\Controllers\Admin\AppointmentController::class, 'calendar'])->name('admin.appointments.calendar');
 
     // Marketing Campaigns Management
     Route::resource('marketing-campaigns', \App\Http\Controllers\Admin\MarketingCampaignController::class)->names('admin.marketing-campaigns');
@@ -1564,8 +1669,24 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/activity-log', [\App\Http\Controllers\Admin\ActivityLogController::class, 'index'])->name('admin.activity-log.index');
     Route::get('/activity-log/{activity}', [\App\Http\Controllers\Admin\ActivityLogController::class, 'show'])->name('admin.activity-log.show');
 
+    // Agency Management
+    Route::prefix('agencies')->name('admin.agencies.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\AdminAgencyController::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\Admin\AdminAgencyController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\Admin\AdminAgencyController::class, 'store'])->name('store');
+        Route::get('/export', [\App\Http\Controllers\Admin\AdminAgencyController::class, 'export'])->name('export');
+        Route::get('/{agency}', [\App\Http\Controllers\Admin\AdminAgencyController::class, 'show'])->name('show');
+        Route::get('/{agency}/edit', [\App\Http\Controllers\Admin\AdminAgencyController::class, 'edit'])->name('edit');
+        Route::put('/{agency}', [\App\Http\Controllers\Admin\AdminAgencyController::class, 'update'])->name('update');
+        Route::delete('/{agency}', [\App\Http\Controllers\Admin\AdminAgencyController::class, 'destroy'])->name('destroy');
+        Route::post('/{agency}/verify', [\App\Http\Controllers\Admin\AdminAgencyController::class, 'verify'])->name('verify');
+        Route::post('/{agency}/suspend', [\App\Http\Controllers\Admin\AdminAgencyController::class, 'suspend'])->name('suspend');
+        Route::post('/{agency}/unsuspend', [\App\Http\Controllers\Admin\AdminAgencyController::class, 'unsuspend'])->name('unsuspend');
+        Route::post('/{agency}/toggle-featured', [\App\Http\Controllers\Admin\AdminAgencyController::class, 'toggleFeatured'])->name('toggle-featured');
+    });
+
     // Agency Verification
-    Route::prefix('agency-verification')->name('agency-verification.')->group(function () {
+    Route::prefix('agency-verification')->name('admin.agency-verification.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\AgencyVerificationController::class, 'index'])->name('index');
         Route::get('/dashboard', [\App\Http\Controllers\Admin\AgencyVerificationController::class, 'dashboard'])->name('dashboard');
         Route::get('/{verificationRequest}', [\App\Http\Controllers\Admin\AgencyVerificationController::class, 'show'])->name('show');

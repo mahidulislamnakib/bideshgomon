@@ -58,7 +58,7 @@
                             <div class="flex items-center gap-4">
                                 <button
                                     type="submit"
-                                    class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
+                                    class="px-6 py-3 bg-growth-600 text-white rounded-lg hover:bg-growth-700 transition-colors font-medium"
                                 >
                                     Submit Form
                                 </button>

@@ -69,7 +69,7 @@ const bookRoom = (room) => {
                             </div>
                             <div class="text-right">
                                 <span class="text-sm text-gray-500">From</span>
-                                <div class="text-3xl font-bold text-brand-red-600">{{ formatPrice(hotel.price_from) }}</div>
+                                <div class="text-3xl font-bold text-growth-600">{{ formatPrice(hotel.price_from) }}</div>
                                 <p class="text-sm text-gray-500">per night</p>
                             </div>
                         </div>
@@ -166,12 +166,12 @@ const bookRoom = (room) => {
                                 </div>
                                 
                                 <div class="ml-6 text-right">
-                                    <div class="text-2xl font-bold text-brand-red-600 mb-2">
+                                    <div class="text-2xl font-bold text-growth-600 mb-2">
                                         {{ formatPrice(room.price_per_night) }}
                                     </div>
                                     <p class="text-sm text-gray-500 mb-4">per night</p>
                                     <button @click="bookRoom(room)" 
-                                        class="bg-brand-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition w-full">
+                                        class="bg-growth-600 text-white px-6 py-2 rounded-lg hover:bg-growth-700 transition w-full">
                                         Book Now
                                     </button>
                                 </div>
@@ -194,7 +194,7 @@ const bookRoom = (room) => {
                             <div class="p-4">
                                 <h3 class="font-semibold text-gray-900 mb-1">{{ similar.name }}</h3>
                                 <div class="text-yellow-500 text-sm mb-2">{{ '⭐'.repeat(similar.star_rating) }}</div>
-                                <div class="text-lg font-bold text-brand-red-600">{{ formatPrice(similar.price_from) }}</div>
+                                <div class="text-lg font-bold text-growth-600">{{ formatPrice(similar.price_from) }}</div>
                             </div>
                         </Link>
                     </div>

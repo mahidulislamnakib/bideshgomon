@@ -8,7 +8,7 @@
                 <div class="mb-8">
                     <div class="flex items-center gap-3 mb-2">
                         <div class="p-2 bg-teal-100 rounded-lg">
-                            <BellIcon class="w-8 h-8 text-brand-red-600" />
+                            <BellIcon class="w-8 h-8 text-growth-600" />
                         </div>
                         <div>
                             <h1 class="text-3xl font-bold text-gray-900">Notification Preferences</h1>
@@ -22,7 +22,7 @@
                     <div class="px-6 py-5 border-b-2 border-gray-200">
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-teal-100 rounded-lg">
-                                <ComputerDesktopIcon class="h-5 w-5 text-brand-red-600" />
+                                <ComputerDesktopIcon class="h-5 w-5 text-growth-600" />
                             </div>
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900">Communication Channels</h2>
@@ -46,8 +46,8 @@
                                             type="button"
                                             @click="togglePreference(index, 'email_enabled')"
                                             :class="[
-                                                pref.email_enabled ? 'bg-brand-red-600' : 'bg-gray-200',
-                                                'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2'
+                                                pref.email_enabled ? 'bg-growth-600' : 'bg-gray-200',
+                                                'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2'
                                             ]"
                                         >
                                             <span
@@ -67,8 +67,8 @@
                                             type="button"
                                             @click="togglePreference(index, 'in_app_enabled')"
                                             :class="[
-                                                pref.in_app_enabled ? 'bg-brand-red-600' : 'bg-gray-200',
-                                                'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2'
+                                                pref.in_app_enabled ? 'bg-growth-600' : 'bg-gray-200',
+                                                'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2'
                                             ]"
                                         >
                                             <span
@@ -82,21 +82,25 @@
                                         <span class="text-sm text-gray-700 font-medium">In-App</span>
                                     </div>
 
-                                    <!-- Push Toggle (Coming Soon) -->
-                                    <div class="relative flex items-center gap-2 opacity-60" title="Push notifications require additional browser permissions. Coming soon!">
+                                    <!-- Push Toggle -->
+                                    <div class="flex items-center gap-2">
                                         <button
                                             type="button"
-                                            disabled
-                                            class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-not-allowed rounded-full border-2 border-gray-300 transition-colors duration-200 ease-in-out bg-gray-100"
+                                            @click="togglePreference(index, 'push_enabled')"
+                                            :class="[
+                                                pref.push_enabled ? 'bg-growth-600' : 'bg-gray-200',
+                                                'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2'
+                                            ]"
                                         >
-                                            <span class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-gray-300 shadow-sm ring-0 transition duration-200 ease-in-out translate-x-0" />
+                                            <span
+                                                :class="[
+                                                    pref.push_enabled ? 'translate-x-5' : 'translate-x-0',
+                                                    'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-sm ring-0 transition duration-200 ease-in-out'
+                                                ]"
+                                            />
                                         </button>
-                                        <ComputerDesktopIcon class="h-4 w-4 text-gray-400" />
-                                        <span class="text-sm text-gray-500 font-medium">Push</span>
-                                        <span class="absolute -top-1 -right-1 flex h-3 w-3">
-                                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
-                                            <span class="relative inline-flex rounded-full h-3 w-3 bg-gray-400"></span>
-                                        </span>
+                                        <ComputerDesktopIcon class="h-4 w-4 text-gray-600" />
+                                        <span class="text-sm text-gray-700 font-medium">Push</span>
                                     </div>
                                 </div>
                             </div>
@@ -107,13 +111,13 @@
                         <div class="flex items-center gap-2 text-sm text-gray-600">
                             <InformationCircleIcon class="h-4 w-4 text-gray-500" />
                             <p>
-                                <span class="font-medium">Note:</span> Push notifications require browser permissions and are being implemented.
+                                <span class="font-medium">Note:</span> Push notifications require browser permissions to work.
                             </p>
                         </div>
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="inline-flex items-center gap-2 px-6 py-2.5 bg-brand-red-600 text-white rounded-lg font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="inline-flex items-center gap-2 px-6 py-2.5 bg-growth-600 text-white rounded-lg font-medium hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             <span v-if="form.processing">Saving...</span>
                             <span v-else>Save Preferences</span>
@@ -126,7 +130,7 @@
                     <div class="flex gap-4">
                         <div class="flex-shrink-0">
                             <div class="p-2 bg-teal-100 rounded-lg">
-                                <InformationCircleIcon class="h-5 w-5 text-brand-red-600" />
+                                <InformationCircleIcon class="h-5 w-5 text-growth-600" />
                             </div>
                         </div>
                         <div class="flex-1">
@@ -141,10 +145,10 @@
                                     <p><strong>In-App:</strong> See notifications in the notification bell icon</p>
                                 </div>
                                 <div class="flex items-start gap-2">
-                                    <ComputerDesktopIcon class="h-4 w-4 mt-0.5 flex-shrink-0 text-gray-400" />
+                                    <ComputerDesktopIcon class="h-4 w-4 mt-0.5 flex-shrink-0" />
                                     <div>
-                                        <p><strong>Push:</strong> Browser push notifications (Coming Soon)</p>
-                                        <p class="text-xs text-teal-700 mt-1 italic">Requires browser permission to send notifications even when the tab is closed. We're implementing this feature with proper security and privacy controls.</p>
+                                        <p><strong>Push:</strong> Browser push notifications</p>
+                                        <p class="text-xs text-teal-700 mt-1 italic">Requires browser permission to send notifications even when the tab is closed.</p>
                                     </div>
                                 </div>
                             </div>

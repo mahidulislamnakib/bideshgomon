@@ -77,7 +77,7 @@ const getVisibilityInfo = (value) => {
         <!-- GDPR Notice -->
         <div class="rounded-lg border border-blue-200 bg-blue-50 p-4">
             <div class="flex items-start">
-                <ShieldCheckIcon class="h-5 w-5 text-blue-600 mr-3 mt-0.5" />
+                <ShieldCheckIcon class="h-5 w-5 text-growth-600 mr-3 mt-0.5" />
                 <div>
                     <h4 class="text-sm font-medium text-blue-900">Your Privacy Rights</h4>
                     <p class="mt-1 text-sm text-blue-800">
@@ -91,7 +91,7 @@ const getVisibilityInfo = (value) => {
             <!-- Profile Visibility -->
             <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
                 <h4 class="mb-4 flex items-center gap-2 text-base font-semibold text-gray-900">
-                    <EyeIcon class="h-5 w-5 text-brand-red-600" />
+                    <EyeIcon class="h-5 w-5 text-growth-600" />
                     Profile Visibility
                 </h4>
 
@@ -111,7 +111,7 @@ const getVisibilityInfo = (value) => {
                                 type="radio"
                                 v-model="form.privacy_settings.profile_visibility"
                                 :value="option.value"
-                                class="mt-1 h-4 w-4 text-brand-red-600 focus:ring-brand-red-600"
+                                class="mt-1 h-4 w-4 text-growth-600 focus:ring-growth-600"
                             />
                             <div class="ml-3 flex-1">
                                 <div class="flex items-center gap-2">
@@ -119,7 +119,7 @@ const getVisibilityInfo = (value) => {
                                     <span class="font-medium text-gray-900">{{ option.label }}</span>
                                     <CheckCircleIcon 
                                         v-if="form.privacy_settings.profile_visibility === option.value"
-                                        class="h-5 w-5 text-brand-red-600"
+                                        class="h-5 w-5 text-growth-600"
                                     />
                                 </div>
                                 <p class="mt-1 text-sm text-gray-600">{{ option.description }}</p>
@@ -164,7 +164,7 @@ const getVisibilityInfo = (value) => {
                                 v-model="form.privacy_settings.show_email"
                                 class="peer sr-only"
                             />
-                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-brand-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300"></div>
+                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-growth-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-growth-300"></div>
                         </label>
                     </div>
 
@@ -172,7 +172,7 @@ const getVisibilityInfo = (value) => {
                     <div class="flex items-start justify-between rounded-lg border border-gray-200 p-4">
                         <div class="flex items-start gap-3">
                             <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100">
-                                <svg class="h-5 w-5 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-growth-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                 </svg>
                             </div>
@@ -187,7 +187,7 @@ const getVisibilityInfo = (value) => {
                                 v-model="form.privacy_settings.show_phone"
                                 class="peer sr-only"
                             />
-                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-brand-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300"></div>
+                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-growth-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-growth-300"></div>
                         </label>
                     </div>
 
@@ -211,7 +211,7 @@ const getVisibilityInfo = (value) => {
                                 v-model="form.privacy_settings.show_address"
                                 class="peer sr-only"
                             />
-                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-brand-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300"></div>
+                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-growth-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-growth-300"></div>
                         </label>
                     </div>
 
@@ -234,7 +234,7 @@ const getVisibilityInfo = (value) => {
                                 v-model="form.privacy_settings.show_dob"
                                 class="peer sr-only"
                             />
-                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-brand-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300"></div>
+                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-growth-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-growth-300"></div>
                         </label>
                     </div>
 
@@ -242,7 +242,7 @@ const getVisibilityInfo = (value) => {
                     <div class="flex items-start justify-between rounded-lg border border-gray-200 p-4">
                         <div class="flex items-start gap-3">
                             <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-100">
-                                <svg class="h-5 w-5 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-growth-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                                 </svg>
                             </div>
@@ -257,7 +257,7 @@ const getVisibilityInfo = (value) => {
                                 v-model="form.privacy_settings.show_social_links"
                                 class="peer sr-only"
                             />
-                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-brand-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300"></div>
+                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-growth-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-growth-300"></div>
                         </label>
                     </div>
                 </div>
@@ -293,7 +293,7 @@ const getVisibilityInfo = (value) => {
                                 v-model="form.privacy_settings.allow_search_engines"
                                 class="peer sr-only"
                             />
-                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-brand-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300"></div>
+                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-growth-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-growth-300"></div>
                         </label>
                     </div>
 
@@ -301,7 +301,7 @@ const getVisibilityInfo = (value) => {
                     <div class="flex items-start justify-between rounded-lg border border-gray-200 p-4">
                         <div class="flex items-start gap-3">
                             <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-100">
-                                <svg class="h-5 w-5 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-growth-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                                 </svg>
                             </div>
@@ -316,7 +316,7 @@ const getVisibilityInfo = (value) => {
                                 v-model="form.privacy_settings.show_in_directory"
                                 class="peer sr-only"
                             />
-                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-brand-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300"></div>
+                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-growth-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-growth-300"></div>
                         </label>
                     </div>
                 </div>
@@ -338,7 +338,7 @@ const getVisibilityInfo = (value) => {
         <!-- Data Download Section -->
         <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
             <h4 class="mb-4 flex items-center gap-2 text-base font-semibold text-gray-900">
-                <ArrowDownTrayIcon class="h-5 w-5 text-brand-red-600" />
+                <ArrowDownTrayIcon class="h-5 w-5 text-growth-600" />
                 Download Your Data
             </h4>
 

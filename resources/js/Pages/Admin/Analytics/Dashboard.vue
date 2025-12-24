@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <AdminLayout>
         <Head title="Analytics Dashboard" />
 
@@ -6,21 +6,21 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
                 <div class="mb-8">
-                    <h1 class="text-3xl font-bold text-gray-900">Analytics Dashboard</h1>
-                    <p class="mt-2 text-sm text-gray-600">Monitor key metrics and platform performance</p>
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Analytics Dashboard</h1>
+                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Monitor key metrics and platform performance</p>
                 </div>
 
                 <!-- Quick Stats Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <!-- Total Users -->
-                    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-brand-red-600">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 border-l-4 border-growth-600">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm font-medium text-gray-600">Total Users</p>
-                                <p class="text-3xl font-bold text-gray-900 mt-2">{{ stats.totalUsers?.toLocaleString() || 0 }}</p>
+                                <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Users</p>
+                                <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ stats.totalUsers?.toLocaleString() || 0 }}</p>
                                 <p class="text-sm text-green-600 mt-2">+{{ stats.newUsersToday || 0 }} today</p>
                             </div>
-                            <div class="text-brand-red-600">
+                            <div class="text-growth-600">
                                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                 </svg>
@@ -29,12 +29,12 @@
                     </div>
 
                     <!-- Total Revenue -->
-                    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 border-l-4 border-green-500">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm font-medium text-gray-600">Total Revenue</p>
-                                <p class="text-3xl font-bold text-gray-900 mt-2">৳{{ (stats.totalRevenue || 0).toLocaleString() }}</p>
-                                <p class="text-sm text-green-600 mt-2">+৳{{ (stats.revenueToday || 0).toLocaleString() }} today</p>
+                                <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Revenue</p>
+                                <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">?{{ (stats.totalRevenue || 0).toLocaleString() }}</p>
+                                <p class="text-sm text-green-600 mt-2">+?{{ (stats.revenueToday || 0).toLocaleString() }} today</p>
                             </div>
                             <div class="text-green-500">
                                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -45,12 +45,12 @@
                     </div>
 
                     <!-- Active Agencies -->
-                    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-purple-500">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 border-l-4 border-purple-500">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm font-medium text-gray-600">Active Agencies</p>
-                                <p class="text-3xl font-bold text-gray-900 mt-2">{{ stats.activeAgencies || 0 }}</p>
-                                <p class="text-sm text-brand-red-600 mt-2">{{ stats.pendingVerification || 0 }} pending</p>
+                                <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Active Agencies</p>
+                                <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ stats.activeAgencies || 0 }}</p>
+                                <p class="text-sm text-growth-600 mt-2">{{ stats.pendingVerification || 0 }} pending</p>
                             </div>
                             <div class="text-purple-500">
                                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -61,12 +61,12 @@
                     </div>
 
                     <!-- Pending Transactions -->
-                    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-orange-500">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 border-l-4 border-orange-500">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm font-medium text-gray-600">Pending Transactions</p>
-                                <p class="text-3xl font-bold text-gray-900 mt-2">{{ stats.pendingTransactions || 0 }}</p>
-                                <p class="text-sm text-orange-600 mt-2">৳{{ (stats.pendingAmount || 0).toLocaleString() }}</p>
+                                <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Pending Transactions</p>
+                                <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ stats.pendingTransactions || 0 }}</p>
+                                <p class="text-sm text-orange-600 mt-2">?{{ (stats.pendingAmount || 0).toLocaleString() }}</p>
                             </div>
                             <div class="text-orange-500">
                                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,16 +80,16 @@
                 <!-- Charts Row -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                     <!-- User Growth Chart -->
-                    <div class="bg-white rounded-lg shadow p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">User Growth (Last 7 Days)</h3>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">User Growth (Last 7 Days)</h3>
                         <div class="h-64">
                             <canvas ref="userGrowthChart"></canvas>
                         </div>
                     </div>
 
                     <!-- Revenue Chart -->
-                    <div class="bg-white rounded-lg shadow p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Revenue (Last 7 Days)</h3>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Revenue (Last 7 Days)</h3>
                         <div class="h-64">
                             <canvas ref="revenueChart"></canvas>
                         </div>
@@ -99,59 +99,59 @@
                 <!-- Recent Activity -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <!-- Recent Users -->
-                    <div class="bg-white rounded-lg shadow">
-                        <div class="px-6 py-4 border-b border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-900">Recent Users</h3>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow">
+                        <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Recent Users</h3>
                         </div>
-                        <div class="divide-y divide-gray-200">
-                            <div v-for="user in recentUsers" :key="user.id" class="px-6 py-4 hover:bg-gray-50">
+                        <div class="divide-y divide-gray-200 dark:divide-gray-700">
+                            <div v-for="user in recentUsers" :key="user.id" class="px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-700">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-3">
                                         <div class="flex-shrink-0">
-                                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-                                                <span class="text-brand-red-600 font-semibold">{{ user.name?.charAt(0) || '?' }}</span>
+                                            <div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
+                                                <span class="text-growth-600 font-semibold">{{ user.name?.charAt(0) || '?' }}</span>
                                             </div>
                                         </div>
                                         <div>
-                                            <p class="text-sm font-medium text-gray-900">{{ user.name }}</p>
-                                            <p class="text-xs text-gray-500">{{ user.email }}</p>
+                                            <p class="text-sm font-medium text-gray-900 dark:text-white">{{ user.name }}</p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">{{ user.email }}</p>
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <p class="text-xs text-gray-500">{{ formatDate(user.created_at) }}</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ formatDate(user.created_at) }}</p>
                                         <span :class="getRoleBadgeClass(user.role)" class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium">
                                             {{ user.role?.name || 'User' }}
                                         </span>
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="!recentUsers.length" class="px-6 py-12 text-center text-gray-500">
+                            <div v-if="!recentUsers.length" class="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
                                 No recent users
                             </div>
                         </div>
                     </div>
 
                     <!-- Recent Transactions -->
-                    <div class="bg-white rounded-lg shadow">
-                        <div class="px-6 py-4 border-b border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-900">Recent Transactions</h3>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow">
+                        <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Recent Transactions</h3>
                         </div>
-                        <div class="divide-y divide-gray-200">
-                            <div v-for="transaction in recentTransactions" :key="transaction.id" class="px-6 py-4 hover:bg-gray-50">
+                        <div class="divide-y divide-gray-200 dark:divide-gray-700">
+                            <div v-for="transaction in recentTransactions" :key="transaction.id" class="px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-700">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="text-sm font-medium text-gray-900">{{ transaction.description }}</p>
-                                        <p class="text-xs text-gray-500">{{ transaction.user?.name || 'Unknown' }}</p>
+                                        <p class="text-sm font-medium text-gray-900 dark:text-white">{{ transaction.description }}</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ transaction.user?.name || 'Unknown' }}</p>
                                     </div>
                                     <div class="text-right">
                                         <p :class="transaction.transaction_type === 'credit' ? 'text-green-600' : 'text-red-600'" class="text-sm font-semibold">
-                                            {{ transaction.transaction_type === 'credit' ? '+' : '-' }}৳{{ transaction.amount?.toLocaleString() || 0 }}
+                                            {{ transaction.transaction_type === 'credit' ? '+' : '-' }}?{{ transaction.amount?.toLocaleString() || 0 }}
                                         </p>
-                                        <p class="text-xs text-gray-500">{{ formatDate(transaction.created_at) }}</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ formatDate(transaction.created_at) }}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="!recentTransactions.length" class="px-6 py-12 text-center text-gray-500">
+                            <div v-if="!recentTransactions.length" class="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
                                 No recent transactions
                             </div>
                         </div>
@@ -220,7 +220,7 @@ onMounted(() => {
             data: {
                 labels: props.revenueData.labels || [],
                 datasets: [{
-                    label: 'Revenue (৳)',
+                    label: 'Revenue (?)',
                     data: props.revenueData.data || [],
                     backgroundColor: 'rgba(34, 197, 94, 0.8)',
                     borderColor: 'rgb(34, 197, 94)',
@@ -240,7 +240,7 @@ onMounted(() => {
                         beginAtZero: true,
                         ticks: {
                             callback: function(value) {
-                                return '৳' + value.toLocaleString()
+                                return '\u09F3' + value.toLocaleString()
                             }
                         }
                     }
@@ -274,7 +274,7 @@ const getRoleBadgeClass = (role) => {
     const classes = {
         admin: 'bg-red-100 text-red-800',
         agency: 'bg-purple-100 text-purple-800',
-        consultant: 'bg-red-100 text-brand-red-600',
+        consultant: 'bg-red-100 text-growth-600',
         user: 'bg-gray-100 text-gray-800',
     }
     return classes[roleSlug] || classes.user

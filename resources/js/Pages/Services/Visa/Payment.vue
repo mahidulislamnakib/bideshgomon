@@ -42,7 +42,7 @@
                                                 <div class="text-sm font-medium text-gray-900">{{ method.name }}</div>
                                             </div>
                                             <div v-if="form.payment_method === method.id" class="absolute top-2 right-2">
-                                                <svg class="h-5 w-5 text-brand-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                                <svg class="h-5 w-5 text-growth-600" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                                 </svg>
                                             </div>
@@ -60,7 +60,7 @@
                                         v-model="form.transaction_id"
                                         type="text"
                                         required
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
                                         placeholder="Enter your transaction ID"
                                     />
                                     <p class="mt-2 text-xs text-gray-600">
@@ -98,10 +98,10 @@
                                         v-model="form.agree_terms"
                                         type="checkbox"
                                         required
-                                        class="mt-1 rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                        class="mt-1 rounded border-gray-300 text-growth-600 focus:ring-growth-600"
                                     />
                                     <label class="ml-2 text-sm text-gray-700">
-                                        I agree to the <a href="#" class="text-brand-red-600 hover:text-blue-700">terms and conditions</a> and confirm that I have completed the payment
+                                        I agree to the <a href="#" class="text-growth-600 hover:text-blue-700">terms and conditions</a> and confirm that I have completed the payment
                                     </label>
                                 </div>
 
@@ -116,7 +116,7 @@
                                     <button
                                         type="submit"
                                         :disabled="form.processing || !form.payment_method || !form.transaction_id || !form.agree_terms"
-                                        class="inline-flex items-center px-6 py-3 bg-brand-red-600 text-white font-medium rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        class="inline-flex items-center px-6 py-3 bg-growth-600 text-white font-medium rounded-lg hover:bg-growth-700 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         <svg v-if="form.processing" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

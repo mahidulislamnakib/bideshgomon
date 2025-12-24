@@ -9,15 +9,15 @@
                     <div class="flex items-center mb-4">
                         <Link
                             :href="route('admin.directories.index')"
-                            class="text-gray-600 hover:text-gray-900 mr-4"
+                            class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white mr-4"
                         >
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                             </svg>
                         </Link>
                         <div>
-                            <h2 class="text-2xl font-bold text-gray-900">Edit Directory</h2>
-                            <p class="mt-1 text-sm text-gray-600">Update directory information</p>
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Edit Directory</h2>
+                            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Update directory information</p>
                         </div>
                     </div>
                 </div>
@@ -25,20 +25,20 @@
                 <!-- Form -->
                 <form @submit.prevent="submit" class="space-y-6">
                     <!-- Basic Information -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Basic Information</h3>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Basic Information</h3>
                         
                         <div class="space-y-4">
                             <!-- Category & Country -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label for="directory_category_id" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <label for="directory_category_id" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                         Category <span class="text-red-500">*</span>
                                     </label>
                                     <select
                                         id="directory_category_id"
                                         v-model="form.directory_category_id"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                        class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         :class="{ 'border-red-500': form.errors.directory_category_id }"
                                         required
                                     >
@@ -51,13 +51,13 @@
                                 </div>
 
                                 <div>
-                                    <label for="country_id" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <label for="country_id" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                         Country
                                     </label>
                                     <select
                                         id="country_id"
                                         v-model="form.country_id"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                        class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         :class="{ 'border-red-500': form.errors.country_id }"
                                     >
                                         <option value="">Select Country</option>
@@ -72,14 +72,14 @@
                             <!-- Names -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <label for="name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                         Name (English) <span class="text-red-500">*</span>
                                     </label>
                                     <input
                                         id="name"
                                         v-model="form.name"
                                         type="text"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                        class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         :class="{ 'border-red-500': form.errors.name }"
                                         required
                                     />
@@ -87,16 +87,16 @@
                                 </div>
 
                                 <div>
-                                    <label for="name_bn" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <label for="name_bn" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                         Name (Bengali) <span class="text-red-500">*</span>
                                     </label>
                                     <input
                                         id="name_bn"
                                         v-model="form.name_bn"
                                         type="text"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                        class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         :class="{ 'border-red-500': form.errors.name_bn }"
-                                        placeholder="??????? ???"
+                                        placeholder="বাংলায় নাম"
                                         required
                                     />
                                     <p v-if="form.errors.name_bn" class="mt-1 text-sm text-red-600">{{ form.errors.name_bn }}</p>
@@ -105,45 +105,45 @@
 
                             <!-- Slug (Read-only) -->
                             <div>
-                                <label for="slug" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <label for="slug" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                     Slug
                                 </label>
                                 <input
                                     id="slug"
                                     :value="directory.slug"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 bg-gray-50 shadow-sm cursor-not-allowed"
+                                    class="w-full rounded-xl border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 shadow-sm cursor-not-allowed"
                                     readonly
                                 />
-                                <p class="mt-1 text-xs text-gray-500">Auto-generated from name</p>
+                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Auto-generated from name</p>
                             </div>
 
                             <!-- Descriptions -->
                             <div>
-                                <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <label for="description" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                     Description (English)
                                 </label>
                                 <textarea
                                     id="description"
                                     v-model="form.description"
                                     rows="3"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.description }"
                                 ></textarea>
                                 <p v-if="form.errors.description" class="mt-1 text-sm text-red-600">{{ form.errors.description }}</p>
                             </div>
 
                             <div>
-                                <label for="description_bn" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <label for="description_bn" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                     Description (Bengali)
                                 </label>
                                 <textarea
                                     id="description_bn"
                                     v-model="form.description_bn"
                                     rows="3"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.description_bn }"
-                                    placeholder="??????? ?????"
+                                    placeholder="বাংলায় বিবরণ"
                                 ></textarea>
                                 <p v-if="form.errors.description_bn" class="mt-1 text-sm text-red-600">{{ form.errors.description_bn }}</p>
                             </div>
@@ -151,34 +151,34 @@
                     </div>
 
                     <!-- Contact Information -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Contact Information</h3>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Contact Information</h3>
                         
                         <div class="space-y-4">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                         Email
                                     </label>
                                     <input
                                         id="email"
                                         v-model="form.email"
                                         type="email"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                        class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         :class="{ 'border-red-500': form.errors.email }"
                                     />
                                     <p v-if="form.errors.email" class="mt-1 text-sm text-red-600">{{ form.errors.email }}</p>
                                 </div>
 
                                 <div>
-                                    <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <label for="phone" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                         Phone
                                     </label>
                                     <input
                                         id="phone"
                                         v-model="form.phone"
                                         type="text"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                        class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                         :class="{ 'border-red-500': form.errors.phone }"
                                     />
                                     <p v-if="form.errors.phone" class="mt-1 text-sm text-red-600">{{ form.errors.phone }}</p>
@@ -186,14 +186,14 @@
                             </div>
 
                             <div>
-                                <label for="website" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <label for="website" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                     Website URL
                                 </label>
                                 <input
                                     id="website"
                                     v-model="form.website"
                                     type="url"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.website }"
                                     placeholder="https://"
                                 />
@@ -201,30 +201,30 @@
                             </div>
 
                             <div>
-                                <label for="address" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <label for="address" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                     Address (English)
                                 </label>
                                 <textarea
                                     id="address"
                                     v-model="form.address"
                                     rows="2"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.address }"
                                 ></textarea>
                                 <p v-if="form.errors.address" class="mt-1 text-sm text-red-600">{{ form.errors.address }}</p>
                             </div>
 
                             <div>
-                                <label for="address_bn" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <label for="address_bn" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                     Address (Bengali)
                                 </label>
                                 <textarea
                                     id="address_bn"
                                     v-model="form.address_bn"
                                     rows="2"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.address_bn }"
-                                    placeholder="??????? ??????"
+                                    placeholder="বাংলায় ঠিকানা"
                                 ></textarea>
                                 <p v-if="form.errors.address_bn" class="mt-1 text-sm text-red-600">{{ form.errors.address_bn }}</p>
                             </div>
@@ -232,19 +232,19 @@
                     </div>
 
                     <!-- Location (GPS Coordinates) -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Location</h3>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Location</h3>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label for="latitude" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <label for="latitude" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                     Latitude
                                 </label>
                                 <input
                                     id="latitude"
                                     v-model="form.latitude"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.latitude }"
                                     placeholder="23.8103"
                                 />
@@ -252,14 +252,14 @@
                             </div>
 
                             <div>
-                                <label for="longitude" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <label for="longitude" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                     Longitude
                                 </label>
                                 <input
                                     id="longitude"
                                     v-model="form.longitude"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.longitude }"
                                     placeholder="90.4125"
                                 />
@@ -269,19 +269,19 @@
                     </div>
 
                     <!-- Images -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Images</h3>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Images</h3>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Logo -->
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Logo
                                 </label>
-                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-xl">
                                     <div class="space-y-1 text-center">
                                         <div v-if="logoPreview || directory.logo_url" class="mb-4">
-                                            <img :src="logoPreview || directory.logo_url" alt="Logo" class="mx-auto h-32 w-32 object-cover rounded-lg">
+                                            <img :src="logoPreview || directory.logo_url" alt="Logo" class="mx-auto h-32 w-32 object-cover rounded-2xl">
                                             <button
                                                 @click="removeLogo"
                                                 type="button"
@@ -293,8 +293,8 @@
                                         <svg v-else class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                                             <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
-                                        <div class="flex text-sm text-gray-600">
-                                            <label for="logo" class="relative cursor-pointer bg-white rounded-md font-medium text-brand-red-600 hover:text-brand-red-600 focus-within:outline-none">
+                                        <div class="flex text-sm text-gray-600 dark:text-gray-400">
+                                            <label for="logo" class="relative cursor-pointer bg-white dark:bg-gray-700 rounded-xl font-medium text-growth-600 hover:text-growth-600 focus-within:outline-none">
                                                 <span>Upload logo</span>
                                                 <input
                                                     id="logo"
@@ -306,7 +306,7 @@
                                             </label>
                                             <p class="pl-1">or drag and drop</p>
                                         </div>
-                                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 2MB</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, GIF up to 2MB</p>
                                     </div>
                                 </div>
                                 <p v-if="form.errors.logo" class="mt-1 text-sm text-red-600">{{ form.errors.logo }}</p>
@@ -314,13 +314,13 @@
 
                             <!-- Featured Image -->
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Featured Image
                                 </label>
-                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-xl">
                                     <div class="space-y-1 text-center">
                                         <div v-if="imagePreview || directory.image_url" class="mb-4">
-                                            <img :src="imagePreview || directory.image_url" alt="Image" class="mx-auto h-32 w-auto object-cover rounded-lg">
+                                            <img :src="imagePreview || directory.image_url" alt="Image" class="mx-auto h-32 w-auto object-cover rounded-2xl">
                                             <button
                                                 @click="removeImage"
                                                 type="button"
@@ -332,8 +332,8 @@
                                         <svg v-else class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                                             <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
-                                        <div class="flex text-sm text-gray-600">
-                                            <label for="image" class="relative cursor-pointer bg-white rounded-md font-medium text-brand-red-600 hover:text-brand-red-600 focus-within:outline-none">
+                                        <div class="flex text-sm text-gray-600 dark:text-gray-400">
+                                            <label for="image" class="relative cursor-pointer bg-white dark:bg-gray-700 rounded-xl font-medium text-growth-600 hover:text-growth-600 focus-within:outline-none">
                                                 <span>Upload image</span>
                                                 <input
                                                     id="image"
@@ -345,7 +345,7 @@
                                             </label>
                                             <p class="pl-1">or drag and drop</p>
                                         </div>
-                                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 5MB</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, GIF up to 5MB</p>
                                     </div>
                                 </div>
                                 <p v-if="form.errors.image" class="mt-1 text-sm text-red-600">{{ form.errors.image }}</p>
@@ -354,108 +354,140 @@
                     </div>
 
                     <!-- SEO -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">SEO</h3>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">SEO</h3>
                         
                         <div class="space-y-4">
                             <div>
-                                <label for="meta_title" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <label for="meta_title" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                     Meta Title
                                 </label>
                                 <input
                                     id="meta_title"
                                     v-model="form.meta_title"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.meta_title }"
                                     maxlength="60"
                                 />
-                                <p class="mt-1 text-xs text-gray-500">{{ form.meta_title?.length || 0 }}/60 characters</p>
+                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">{{ form.meta_title?.length || 0 }}/60 characters</p>
                                 <p v-if="form.errors.meta_title" class="mt-1 text-sm text-red-600">{{ form.errors.meta_title }}</p>
                             </div>
 
                             <div>
-                                <label for="meta_description" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <label for="meta_description" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                     Meta Description
                                 </label>
                                 <textarea
                                     id="meta_description"
                                     v-model="form.meta_description"
                                     rows="2"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.meta_description }"
                                     maxlength="160"
                                 ></textarea>
-                                <p class="mt-1 text-xs text-gray-500">{{ form.meta_description?.length || 0 }}/160 characters</p>
+                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">{{ form.meta_description?.length || 0 }}/160 characters</p>
                                 <p v-if="form.errors.meta_description" class="mt-1 text-sm text-red-600">{{ form.errors.meta_description }}</p>
                             </div>
 
                             <div>
-                                <label for="meta_keywords" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <label for="meta_keywords" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                     Meta Keywords
                                 </label>
                                 <input
                                     id="meta_keywords"
                                     v-model="form.meta_keywords"
                                     type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     :class="{ 'border-red-500': form.errors.meta_keywords }"
                                     placeholder="keyword1, keyword2, keyword3"
                                 />
-                                <p class="mt-1 text-xs text-gray-500">Separate keywords with commas</p>
+                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Separate keywords with commas</p>
                                 <p v-if="form.errors.meta_keywords" class="mt-1 text-sm text-red-600">{{ form.errors.meta_keywords }}</p>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Operating Hours -->
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Operating Hours</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Set business hours for each day. Leave blank or type "Closed" for days off.</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div v-for="day in ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']" :key="day">
+                                <label :for="`hours_${day}`" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 capitalize">{{ day }}</label>
+                                <input
+                                    :id="`hours_${day}`"
+                                    v-model="form.operating_hours[day]"
+                                    type="text"
+                                    class="w-full rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 text-sm"
+                                    placeholder="9:00 AM - 6:00 PM"
+                                />
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Fill Buttons -->
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <button type="button" @click="fillWeekdays" class="px-3 py-1.5 text-xs font-medium bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-2xl transition-colors">
+                                Fill Weekdays (Sun-Thu)
+                            </button>
+                            <button type="button" @click="fillAll" class="px-3 py-1.5 text-xs font-medium bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-2xl transition-colors">
+                                Fill All Days
+                            </button>
+                            <button type="button" @click="clearAll" class="px-3 py-1.5 text-xs font-medium bg-red-50 dark:bg-red-900/30 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 rounded-2xl transition-colors">
+                                Clear All
+                            </button>
+                        </div>
+                    </div>
+
                     <!-- Status & Settings -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Status & Settings</h3>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Status & Settings</h3>
                         
                         <div class="space-y-3">
                             <label class="flex items-center">
                                 <input
                                     v-model="form.is_published"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="rounded border-gray-300 dark:border-gray-600 text-growth-600 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 />
-                                <span class="ml-2 text-sm text-gray-700">Published (visible to public)</span>
+                                <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Published (visible to public)</span>
                             </label>
 
                             <label class="flex items-center">
                                 <input
                                     v-model="form.is_verified"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="rounded border-gray-300 dark:border-gray-600 text-growth-600 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 />
-                                <span class="ml-2 text-sm text-gray-700">Verified</span>
+                                <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Verified</span>
                             </label>
 
                             <label class="flex items-center">
                                 <input
                                     v-model="form.is_featured"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                    class="rounded border-gray-300 dark:border-gray-600 text-growth-600 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 />
-                                <span class="ml-2 text-sm text-gray-700">Featured</span>
+                                <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Featured</span>
                             </label>
                         </div>
 
                         <!-- Statistics -->
-                        <div class="mt-6 pt-6 border-t">
-                            <h4 class="text-sm font-medium text-gray-900 mb-3">Statistics</h4>
+                        <div class="mt-6 pt-6 border-t dark:border-gray-700">
+                            <h4 class="text-sm font-medium text-gray-900 dark:text-white mb-3">Statistics</h4>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <div>
-                                    <div class="text-2xl font-bold text-brand-red-600">{{ directory.views_count || 0 }}</div>
-                                    <div class="text-xs text-gray-600">Views</div>
+                                    <div class="text-2xl font-bold text-growth-600">{{ directory.views_count || 0 }}</div>
+                                    <div class="text-xs text-gray-600 dark:text-gray-400">Views</div>
                                 </div>
                                 <div>
-                                    <div class="text-sm text-gray-600">Created</div>
-                                    <div class="text-xs text-gray-500">{{ formatDate(directory.created_at) }}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">Created</div>
+                                    <div class="text-xs text-gray-500 dark:text-gray-400">{{ formatDate(directory.created_at) }}</div>
                                 </div>
                                 <div>
-                                    <div class="text-sm text-gray-600">Updated</div>
-                                    <div class="text-xs text-gray-500">{{ formatDate(directory.updated_at) }}</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">Updated</div>
+                                    <div class="text-xs text-gray-500 dark:text-gray-400">{{ formatDate(directory.updated_at) }}</div>
                                 </div>
                             </div>
                         </div>
@@ -465,13 +497,13 @@
                     <div class="flex items-center justify-end space-x-3">
                         <Link
                             :href="route('admin.directories.index')"
-                            class="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+                            class="px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600"
                         >
                             Cancel
                         </Link>
                         <button
                             type="submit"
-                            class="px-4 py-2 bg-brand-red-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
+                            class="px-4 py-2 bg-growth-600 border border-transparent rounded-xl text-sm font-medium text-white hover:bg-growth-700 disabled:opacity-50"
                             :disabled="form.processing"
                         >
                             <span v-if="form.processing">Updating...</span>
@@ -495,6 +527,17 @@ const props = defineProps({
     countries: Array
 });
 
+// Initialize operating hours with defaults
+const defaultHours = {
+    sunday: '',
+    monday: '',
+    tuesday: '',
+    wednesday: '',
+    thursday: '',
+    friday: '',
+    saturday: ''
+};
+
 const form = useForm({
     directory_category_id: props.directory.directory_category_id,
     country_id: props.directory.country_id,
@@ -514,10 +557,36 @@ const form = useForm({
     meta_title: props.directory.meta_title,
     meta_description: props.directory.meta_description,
     meta_keywords: props.directory.meta_keywords,
+    operating_hours: { ...defaultHours, ...(props.directory.operating_hours || {}) },
     is_published: props.directory.is_published,
     is_verified: props.directory.is_verified,
     is_featured: props.directory.is_featured
 });
+
+// Quick fill helpers for operating hours
+const fillWeekdays = () => {
+    const hours = '9:00 AM - 6:00 PM';
+    form.operating_hours.sunday = hours;
+    form.operating_hours.monday = hours;
+    form.operating_hours.tuesday = hours;
+    form.operating_hours.wednesday = hours;
+    form.operating_hours.thursday = hours;
+    form.operating_hours.friday = 'Closed';
+    form.operating_hours.saturday = 'Closed';
+};
+
+const fillAll = () => {
+    const hours = '9:00 AM - 6:00 PM';
+    Object.keys(form.operating_hours).forEach(day => {
+        form.operating_hours[day] = hours;
+    });
+};
+
+const clearAll = () => {
+    Object.keys(form.operating_hours).forEach(day => {
+        form.operating_hours[day] = '';
+    });
+};
 
 const logoPreview = ref(null);
 const imagePreview = ref(null);

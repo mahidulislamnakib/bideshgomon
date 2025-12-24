@@ -1,459 +1,11 @@
-<template>
-    <AdminLayout>
-        <Head title="Create Directory" />
-
-        <div class="py-12">
-            <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
-                <!-- Header -->
-                <div class="mb-6">
-                    <div class="flex items-center mb-4">
-                        <Link
-                            :href="route('admin.directories.index')"
-                            class="text-gray-600 hover:text-gray-900 mr-4"
-                        >
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-                            </svg>
-                        </Link>
-                        <div>
-                            <h2 class="text-2xl font-bold text-gray-900">Create Directory</h2>
-                            <p class="mt-1 text-sm text-gray-600">Add a new directory entry</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Form -->
-                <form @submit.prevent="submit" class="space-y-6">
-                    <!-- Basic Information -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Basic Information</h3>
-                        
-                        <div class="space-y-4">
-                            <!-- Category & Country -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="directory_category_id" class="block text-sm font-semibold text-gray-700 mb-2">
-                                        Category <span class="text-red-500">*</span>
-                                    </label>
-                                    <select
-                                        id="directory_category_id"
-                                        v-model="form.directory_category_id"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                        :class="{ 'border-red-500': form.errors.directory_category_id }"
-                                        required
-                                    >
-                                        <option value="">Select Category</option>
-                                        <option v-for="cat in categories" :key="cat.id" :value="cat.id">
-                                            {{ cat.name }}
-                                        </option>
-                                    </select>
-                                    <p v-if="form.errors.directory_category_id" class="mt-1 text-sm text-red-600">{{ form.errors.directory_category_id }}</p>
-                                </div>
-
-                                <div>
-                                    <label for="country_id" class="block text-sm font-semibold text-gray-700 mb-2">
-                                        Country
-                                    </label>
-                                    <select
-                                        id="country_id"
-                                        v-model="form.country_id"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                        :class="{ 'border-red-500': form.errors.country_id }"
-                                    >
-                                        <option value="">Select Country</option>
-                                        <option v-for="country in countries" :key="country.id" :value="country.id">
-                                            {{ country.name }}
-                                        </option>
-                                    </select>
-                                    <p v-if="form.errors.country_id" class="mt-1 text-sm text-red-600">{{ form.errors.country_id }}</p>
-                                </div>
-                            </div>
-
-                            <!-- Names -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
-                                        Name (English) <span class="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        id="name"
-                                        v-model="form.name"
-                                        type="text"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                        :class="{ 'border-red-500': form.errors.name }"
-                                        required
-                                    />
-                                    <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">{{ form.errors.name }}</p>
-                                </div>
-
-                                <div>
-                                    <label for="name_bn" class="block text-sm font-semibold text-gray-700 mb-2">
-                                        Name (Bengali) <span class="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        id="name_bn"
-                                        v-model="form.name_bn"
-                                        type="text"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                        :class="{ 'border-red-500': form.errors.name_bn }"
-                                        placeholder="??????? ???"
-                                        required
-                                    />
-                                    <p v-if="form.errors.name_bn" class="mt-1 text-sm text-red-600">{{ form.errors.name_bn }}</p>
-                                </div>
-                            </div>
-
-                            <!-- Descriptions -->
-                            <div>
-                                <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">
-                                    Description (English)
-                                </label>
-                                <textarea
-                                    id="description"
-                                    v-model="form.description"
-                                    rows="3"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                    :class="{ 'border-red-500': form.errors.description }"
-                                ></textarea>
-                                <p v-if="form.errors.description" class="mt-1 text-sm text-red-600">{{ form.errors.description }}</p>
-                            </div>
-
-                            <div>
-                                <label for="description_bn" class="block text-sm font-semibold text-gray-700 mb-2">
-                                    Description (Bengali)
-                                </label>
-                                <textarea
-                                    id="description_bn"
-                                    v-model="form.description_bn"
-                                    rows="3"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                    :class="{ 'border-red-500': form.errors.description_bn }"
-                                    placeholder="??????? ?????"
-                                ></textarea>
-                                <p v-if="form.errors.description_bn" class="mt-1 text-sm text-red-600">{{ form.errors.description_bn }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Contact Information -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Contact Information</h3>
-                        
-                        <div class="space-y-4">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
-                                        Email
-                                    </label>
-                                    <input
-                                        id="email"
-                                        v-model="form.email"
-                                        type="email"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                        :class="{ 'border-red-500': form.errors.email }"
-                                    />
-                                    <p v-if="form.errors.email" class="mt-1 text-sm text-red-600">{{ form.errors.email }}</p>
-                                </div>
-
-                                <div>
-                                    <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
-                                        Phone
-                                    </label>
-                                    <input
-                                        id="phone"
-                                        v-model="form.phone"
-                                        type="text"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                        :class="{ 'border-red-500': form.errors.phone }"
-                                    />
-                                    <p v-if="form.errors.phone" class="mt-1 text-sm text-red-600">{{ form.errors.phone }}</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label for="website" class="block text-sm font-semibold text-gray-700 mb-2">
-                                    Website URL
-                                </label>
-                                <input
-                                    id="website"
-                                    v-model="form.website"
-                                    type="url"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                    :class="{ 'border-red-500': form.errors.website }"
-                                    placeholder="https://"
-                                />
-                                <p v-if="form.errors.website" class="mt-1 text-sm text-red-600">{{ form.errors.website }}</p>
-                            </div>
-
-                            <div>
-                                <label for="address" class="block text-sm font-semibold text-gray-700 mb-2">
-                                    Address (English)
-                                </label>
-                                <textarea
-                                    id="address"
-                                    v-model="form.address"
-                                    rows="2"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                    :class="{ 'border-red-500': form.errors.address }"
-                                ></textarea>
-                                <p v-if="form.errors.address" class="mt-1 text-sm text-red-600">{{ form.errors.address }}</p>
-                            </div>
-
-                            <div>
-                                <label for="address_bn" class="block text-sm font-semibold text-gray-700 mb-2">
-                                    Address (Bengali)
-                                </label>
-                                <textarea
-                                    id="address_bn"
-                                    v-model="form.address_bn"
-                                    rows="2"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                    :class="{ 'border-red-500': form.errors.address_bn }"
-                                    placeholder="??????? ??????"
-                                ></textarea>
-                                <p v-if="form.errors.address_bn" class="mt-1 text-sm text-red-600">{{ form.errors.address_bn }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Location (GPS Coordinates) -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Location</h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="latitude" class="block text-sm font-semibold text-gray-700 mb-2">
-                                    Latitude
-                                </label>
-                                <input
-                                    id="latitude"
-                                    v-model="form.latitude"
-                                    type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                    :class="{ 'border-red-500': form.errors.latitude }"
-                                    placeholder="23.8103"
-                                />
-                                <p v-if="form.errors.latitude" class="mt-1 text-sm text-red-600">{{ form.errors.latitude }}</p>
-                            </div>
-
-                            <div>
-                                <label for="longitude" class="block text-sm font-semibold text-gray-700 mb-2">
-                                    Longitude
-                                </label>
-                                <input
-                                    id="longitude"
-                                    v-model="form.longitude"
-                                    type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                    :class="{ 'border-red-500': form.errors.longitude }"
-                                    placeholder="90.4125"
-                                />
-                                <p v-if="form.errors.longitude" class="mt-1 text-sm text-red-600">{{ form.errors.longitude }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Images -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Images</h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Logo -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    Logo
-                                </label>
-                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                    <div class="space-y-1 text-center">
-                                        <div v-if="logoPreview" class="mb-4">
-                                            <img :src="logoPreview" alt="Logo preview" class="mx-auto h-32 w-32 object-cover rounded-lg">
-                                            <button
-                                                @click="removeLogo"
-                                                type="button"
-                                                class="mt-2 text-sm text-red-600 hover:text-red-800"
-                                            >
-                                                Remove
-                                            </button>
-                                        </div>
-                                        <svg v-else class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                        <div class="flex text-sm text-gray-600">
-                                            <label for="logo" class="relative cursor-pointer bg-white rounded-md font-medium text-brand-red-600 hover:text-brand-red-600 focus-within:outline-none">
-                                                <span>Upload logo</span>
-                                                <input
-                                                    id="logo"
-                                                    type="file"
-                                                    class="sr-only"
-                                                    accept="image/*"
-                                                    @change="handleLogoUpload"
-                                                />
-                                            </label>
-                                            <p class="pl-1">or drag and drop</p>
-                                        </div>
-                                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 2MB</p>
-                                    </div>
-                                </div>
-                                <p v-if="form.errors.logo" class="mt-1 text-sm text-red-600">{{ form.errors.logo }}</p>
-                            </div>
-
-                            <!-- Featured Image -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    Featured Image
-                                </label>
-                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                    <div class="space-y-1 text-center">
-                                        <div v-if="imagePreview" class="mb-4">
-                                            <img :src="imagePreview" alt="Image preview" class="mx-auto h-32 w-auto object-cover rounded-lg">
-                                            <button
-                                                @click="removeImage"
-                                                type="button"
-                                                class="mt-2 text-sm text-red-600 hover:text-red-800"
-                                            >
-                                                Remove
-                                            </button>
-                                        </div>
-                                        <svg v-else class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                        <div class="flex text-sm text-gray-600">
-                                            <label for="image" class="relative cursor-pointer bg-white rounded-md font-medium text-brand-red-600 hover:text-brand-red-600 focus-within:outline-none">
-                                                <span>Upload image</span>
-                                                <input
-                                                    id="image"
-                                                    type="file"
-                                                    class="sr-only"
-                                                    accept="image/*"
-                                                    @change="handleImageUpload"
-                                                />
-                                            </label>
-                                            <p class="pl-1">or drag and drop</p>
-                                        </div>
-                                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 5MB</p>
-                                    </div>
-                                </div>
-                                <p v-if="form.errors.image" class="mt-1 text-sm text-red-600">{{ form.errors.image }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SEO -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">SEO</h3>
-                        
-                        <div class="space-y-4">
-                            <div>
-                                <label for="meta_title" class="block text-sm font-semibold text-gray-700 mb-2">
-                                    Meta Title
-                                </label>
-                                <input
-                                    id="meta_title"
-                                    v-model="form.meta_title"
-                                    type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                    :class="{ 'border-red-500': form.errors.meta_title }"
-                                    maxlength="60"
-                                />
-                                <p class="mt-1 text-xs text-gray-500">{{ form.meta_title?.length || 0 }}/60 characters</p>
-                                <p v-if="form.errors.meta_title" class="mt-1 text-sm text-red-600">{{ form.errors.meta_title }}</p>
-                            </div>
-
-                            <div>
-                                <label for="meta_description" class="block text-sm font-semibold text-gray-700 mb-2">
-                                    Meta Description
-                                </label>
-                                <textarea
-                                    id="meta_description"
-                                    v-model="form.meta_description"
-                                    rows="2"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                    :class="{ 'border-red-500': form.errors.meta_description }"
-                                    maxlength="160"
-                                ></textarea>
-                                <p class="mt-1 text-xs text-gray-500">{{ form.meta_description?.length || 0 }}/160 characters</p>
-                                <p v-if="form.errors.meta_description" class="mt-1 text-sm text-red-600">{{ form.errors.meta_description }}</p>
-                            </div>
-
-                            <div>
-                                <label for="meta_keywords" class="block text-sm font-semibold text-gray-700 mb-2">
-                                    Meta Keywords
-                                </label>
-                                <input
-                                    id="meta_keywords"
-                                    v-model="form.meta_keywords"
-                                    type="text"
-                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                    :class="{ 'border-red-500': form.errors.meta_keywords }"
-                                    placeholder="keyword1, keyword2, keyword3"
-                                />
-                                <p class="mt-1 text-xs text-gray-500">Separate keywords with commas</p>
-                                <p v-if="form.errors.meta_keywords" class="mt-1 text-sm text-red-600">{{ form.errors.meta_keywords }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Status & Settings -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Status & Settings</h3>
-                        
-                        <div class="space-y-3">
-                            <label class="flex items-center">
-                                <input
-                                    v-model="form.is_published"
-                                    type="checkbox"
-                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                />
-                                <span class="ml-2 text-sm text-gray-700">Published (visible to public)</span>
-                            </label>
-
-                            <label class="flex items-center">
-                                <input
-                                    v-model="form.is_verified"
-                                    type="checkbox"
-                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                />
-                                <span class="ml-2 text-sm text-gray-700">Verified</span>
-                            </label>
-
-                            <label class="flex items-center">
-                                <input
-                                    v-model="form.is_featured"
-                                    type="checkbox"
-                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
-                                />
-                                <span class="ml-2 text-sm text-gray-700">Featured</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Submit Buttons -->
-                    <div class="flex items-center justify-end space-x-3">
-                        <Link
-                            :href="route('admin.directories.index')"
-                            class="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
-                        >
-                            Cancel
-                        </Link>
-                        <button
-                            type="submit"
-                            class="px-4 py-2 bg-brand-red-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
-                            :disabled="form.processing"
-                        >
-                            <span v-if="form.processing">Creating...</span>
-                            <span v-else>Create Directory</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </AdminLayout>
-</template>
-
 <script setup>
 import { ref } from 'vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import { 
+    ArrowLeftIcon, BuildingOffice2Icon, PhotoIcon,
+    GlobeAltIcon, MapPinIcon, CheckCircleIcon
+} from '@heroicons/vue/24/outline';
 
 const props = defineProps({
     categories: Array,
@@ -471,7 +23,7 @@ const form = useForm({
     phone: '',
     website: '',
     address: '',
-    address_bn: '',
+    city: '',
     latitude: '',
     longitude: '',
     logo: null,
@@ -479,10 +31,44 @@ const form = useForm({
     meta_title: '',
     meta_description: '',
     meta_keywords: '',
+    operating_hours: {
+        sunday: '',
+        monday: '',
+        tuesday: '',
+        wednesday: '',
+        thursday: '',
+        friday: '',
+        saturday: ''
+    },
     is_published: false,
     is_verified: false,
     is_featured: false
 });
+
+// Quick fill helpers for operating hours
+const fillWeekdays = () => {
+    const hours = '9:00 AM - 6:00 PM';
+    form.operating_hours.sunday = hours;
+    form.operating_hours.monday = hours;
+    form.operating_hours.tuesday = hours;
+    form.operating_hours.wednesday = hours;
+    form.operating_hours.thursday = hours;
+    form.operating_hours.friday = 'Closed';
+    form.operating_hours.saturday = 'Closed';
+};
+
+const fillAll = () => {
+    const hours = '9:00 AM - 6:00 PM';
+    Object.keys(form.operating_hours).forEach(day => {
+        form.operating_hours[day] = hours;
+    });
+};
+
+const clearAll = () => {
+    Object.keys(form.operating_hours).forEach(day => {
+        form.operating_hours[day] = '';
+    });
+};
 
 const logoPreview = ref(null);
 const imagePreview = ref(null);
@@ -515,10 +101,369 @@ const removeImage = () => {
 
 const submit = () => {
     form.post(route('admin.directories.store'), {
-        preserveScroll: true,
-        onSuccess: () => {
-            // Will redirect to index on success
-        }
+        preserveScroll: true
     });
 };
 </script>
+
+<template>
+    <Head title="Create Directory" />
+
+    <AdminLayout>
+        <div class="min-h-screen bg-gray-50 dark:bg-neutral-900 pb-12">
+            <!-- Hero Header -->
+            <div class="relative overflow-hidden" style="background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #1f2937 100%);">
+                <div class="absolute inset-0 opacity-20">
+                    <div class="absolute top-0 left-0 w-96 h-96 bg-growth-500 rounded-full filter blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl translate-x-1/2 translate-y-1/2"></div>
+                </div>
+                
+                <div class="relative z-10 px-4 py-8 sm:px-6 lg:px-8">
+                    <div class="max-w-5xl mx-auto">
+                        <div class="flex items-center gap-4">
+                            <Link :href="route('admin.directories.index')" 
+                                class="p-2 bg-white/10 rounded-xl backdrop-blur hover:bg-white/20 transition-colors">
+                                <ArrowLeftIcon class="h-5 w-5 text-white" />
+                            </Link>
+                            <div>
+                                <h1 class="text-2xl lg:text-3xl font-bold text-white flex items-center gap-3">
+                                    <div class="p-2 bg-white/10 rounded-xl backdrop-blur">
+                                        <BuildingOffice2Icon class="h-7 w-7 text-white" />
+                                    </div>
+                                    Create Directory
+                                </h1>
+                                <p class="text-gray-400 mt-2">Add a new directory entry</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Content -->
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-10">
+                <form @submit.prevent="submit" class="space-y-6">
+                    
+                    <!-- Basic Information -->
+                    <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-neutral-100 dark:border-neutral-700 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                            <BuildingOffice2Icon class="h-5 w-5 text-growth-600" />
+                            Basic Information
+                        </h3>
+                        
+                        <div class="space-y-5">
+                            <!-- Category & Country -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Category <span class="text-red-500">*</span>
+                                    </label>
+                                    <select v-model="form.directory_category_id" required
+                                        class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent"
+                                        :class="{ 'border-red-500': form.errors.directory_category_id }">
+                                        <option value="">Select Category</option>
+                                        <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
+                                    </select>
+                                    <p v-if="form.errors.directory_category_id" class="mt-1 text-sm text-red-600">{{ form.errors.directory_category_id }}</p>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Country</label>
+                                    <select v-model="form.country_id"
+                                        class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent">
+                                        <option value="">Select Country</option>
+                                        <option v-for="country in countries" :key="country.id" :value="country.id">{{ country.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Names -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Name (English) <span class="text-red-500">*</span>
+                                    </label>
+                                    <input v-model="form.name" type="text" required
+                                        class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent"
+                                        :class="{ 'border-red-500': form.errors.name }" />
+                                    <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">{{ form.errors.name }}</p>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Name (Bengali)
+                                    </label>
+                                    <input v-model="form.name_bn" type="text" placeholder="বাংলায় নাম"
+                                        class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent" />
+                                </div>
+                            </div>
+
+                            <!-- Descriptions -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Description (English) <span class="text-red-500">*</span>
+                                </label>
+                                <textarea v-model="form.description" rows="3" required
+                                    class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent"
+                                    :class="{ 'border-red-500': form.errors.description }"></textarea>
+                                <p v-if="form.errors.description" class="mt-1 text-sm text-red-600">{{ form.errors.description }}</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Description (Bengali)
+                                </label>
+                                <textarea v-model="form.description_bn" rows="3" placeholder="বাংলায় বিবরণ"
+                                    class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-neutral-100 dark:border-neutral-700 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                            <GlobeAltIcon class="h-5 w-5 text-growth-600" />
+                            Contact Information
+                        </h3>
+                        
+                        <div class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                                    <input v-model="form.email" type="email"
+                                        class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent" />
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone</label>
+                                    <input v-model="form.phone" type="text"
+                                        class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Website URL</label>
+                                <input v-model="form.website" type="url" placeholder="https://"
+                                    class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent" />
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">City</label>
+                                    <input v-model="form.city" type="text"
+                                        class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent" />
+                                </div>
+
+                                <div class="md:col-span-1">
+                                    <!-- Empty for alignment -->
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Address <span class="text-red-500">*</span>
+                                </label>
+                                <textarea v-model="form.address" rows="2" required
+                                    class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent"
+                                    :class="{ 'border-red-500': form.errors.address }"></textarea>
+                                <p v-if="form.errors.address" class="mt-1 text-sm text-red-600">{{ form.errors.address }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-neutral-100 dark:border-neutral-700 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                            <MapPinIcon class="h-5 w-5 text-growth-600" />
+                            GPS Coordinates
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Latitude</label>
+                                <input v-model="form.latitude" type="text" placeholder="23.8103"
+                                    class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent" />
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Longitude</label>
+                                <input v-model="form.longitude" type="text" placeholder="90.4125"
+                                    class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Images -->
+                    <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-neutral-100 dark:border-neutral-700 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                            <PhotoIcon class="h-5 w-5 text-growth-600" />
+                            Images
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Logo -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Logo</label>
+                                <div class="border-2 border-dashed border-gray-300 dark:border-neutral-600 rounded-xl p-6 text-center hover:border-growth-500 transition-colors">
+                                    <div v-if="logoPreview" class="mb-4">
+                                        <img :src="logoPreview" alt="Logo preview" class="mx-auto h-24 w-24 object-cover rounded-xl"/>
+                                        <button @click="removeLogo" type="button" class="mt-2 text-sm text-red-600 hover:text-red-800 font-medium">
+                                            Remove
+                                        </button>
+                                    </div>
+                                    <template v-else>
+                                        <PhotoIcon class="mx-auto h-12 w-12 text-gray-400" />
+                                        <div class="mt-4">
+                                            <label class="cursor-pointer">
+                                                <span class="text-sm font-medium text-growth-600 hover:text-growth-700">Upload logo</span>
+                                                <input type="file" class="sr-only" accept="image/*" @change="handleLogoUpload" />
+                                            </label>
+                                        </div>
+                                        <p class="mt-1 text-xs text-gray-500">PNG, JPG up to 2MB</p>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <!-- Featured Image -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Featured Image</label>
+                                <div class="border-2 border-dashed border-gray-300 dark:border-neutral-600 rounded-xl p-6 text-center hover:border-growth-500 transition-colors">
+                                    <div v-if="imagePreview" class="mb-4">
+                                        <img :src="imagePreview" alt="Image preview" class="mx-auto h-24 w-auto object-cover rounded-xl"/>
+                                        <button @click="removeImage" type="button" class="mt-2 text-sm text-red-600 hover:text-red-800 font-medium">
+                                            Remove
+                                        </button>
+                                    </div>
+                                    <template v-else>
+                                        <PhotoIcon class="mx-auto h-12 w-12 text-gray-400" />
+                                        <div class="mt-4">
+                                            <label class="cursor-pointer">
+                                                <span class="text-sm font-medium text-growth-600 hover:text-growth-700">Upload image</span>
+                                                <input type="file" class="sr-only" accept="image/*" @change="handleImageUpload" />
+                                            </label>
+                                        </div>
+                                        <p class="mt-1 text-xs text-gray-500">PNG, JPG up to 5MB</p>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEO -->
+                    <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-neutral-100 dark:border-neutral-700 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6">SEO Settings</h3>
+                        
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Meta Title</label>
+                                <input v-model="form.meta_title" type="text" maxlength="60"
+                                    class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent" />
+                                <p class="mt-1 text-xs text-gray-500">{{ form.meta_title?.length || 0 }}/60 characters</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Meta Description</label>
+                                <textarea v-model="form.meta_description" rows="2" maxlength="160"
+                                    class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent"></textarea>
+                                <p class="mt-1 text-xs text-gray-500">{{ form.meta_description?.length || 0 }}/160 characters</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Meta Keywords</label>
+                                <input v-model="form.meta_keywords" type="text" placeholder="keyword1, keyword2, keyword3"
+                                    class="w-full px-4 py-2.5 border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-growth-500 focus:border-transparent" />
+                                <p class="mt-1 text-xs text-gray-500">Separate keywords with commas</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Operating Hours -->
+                    <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-neutral-100 dark:border-neutral-700 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                            <svg class="h-5 w-5 text-growth-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Operating Hours
+                        </h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Set business hours for each day. Leave blank or type "Closed" for days off.</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div v-for="day in ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']" :key="day">
+                                <label :for="`hours_${day}`" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 capitalize">{{ day }}</label>
+                                <input
+                                    :id="`hours_${day}`"
+                                    v-model="form.operating_hours[day]"
+                                    type="text"
+                                    class="w-full rounded-2xl border-gray-300 dark:border-neutral-600 dark:bg-neutral-700 dark:text-white shadow-sm focus:border-growth-500 focus:ring-growth-500 text-sm"
+                                    placeholder="9:00 AM - 6:00 PM"
+                                />
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Fill Buttons -->
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <button type="button" @click="fillWeekdays" class="px-3 py-1.5 text-xs font-medium bg-gray-100 dark:bg-neutral-700 hover:bg-gray-200 dark:hover:bg-neutral-600 text-gray-700 dark:text-gray-300 rounded-xl transition-colors">
+                                Fill Weekdays (Sun-Thu)
+                            </button>
+                            <button type="button" @click="fillAll" class="px-3 py-1.5 text-xs font-medium bg-gray-100 dark:bg-neutral-700 hover:bg-gray-200 dark:hover:bg-neutral-600 text-gray-700 dark:text-gray-300 rounded-xl transition-colors">
+                                Fill All Days
+                            </button>
+                            <button type="button" @click="clearAll" class="px-3 py-1.5 text-xs font-medium bg-red-50 dark:bg-red-900/30 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 rounded-xl transition-colors">
+                                Clear All
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Status & Settings -->
+                    <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-neutral-100 dark:border-neutral-700 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                            <CheckCircleIcon class="h-5 w-5 text-growth-600" />
+                            Status & Settings
+                        </h3>
+                        
+                        <div class="flex flex-wrap gap-6">
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input v-model="form.is_published" type="checkbox" 
+                                    class="w-5 h-5 rounded border-gray-300 text-growth-600 focus:ring-growth-500" />
+                                <div>
+                                    <span class="text-sm font-medium text-gray-900 dark:text-white">Published</span>
+                                    <p class="text-xs text-gray-500">Visible to public</p>
+                                </div>
+                            </label>
+
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input v-model="form.is_verified" type="checkbox" 
+                                    class="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                                <div>
+                                    <span class="text-sm font-medium text-gray-900 dark:text-white">Verified</span>
+                                    <p class="text-xs text-gray-500">Show verified badge</p>
+                                </div>
+                            </label>
+
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input v-model="form.is_featured" type="checkbox" 
+                                    class="w-5 h-5 rounded border-gray-300 text-yellow-600 focus:ring-yellow-500" />
+                                <div>
+                                    <span class="text-sm font-medium text-gray-900 dark:text-white">Featured</span>
+                                    <p class="text-xs text-gray-500">Show in featured section</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Submit Buttons -->
+                    <div class="flex items-center justify-end gap-4">
+                        <Link :href="route('admin.directories.index')" 
+                            class="px-6 py-2.5 bg-white dark:bg-neutral-700 border border-gray-300 dark:border-neutral-600 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-600 transition-colors">
+                            Cancel
+                        </Link>
+                        <button type="submit" :disabled="form.processing"
+                            class="px-6 py-2.5 bg-gradient-to-r from-growth-500 to-teal-600 text-white rounded-xl font-semibold hover:from-growth-600 hover:to-teal-700 transition-all shadow-lg shadow-growth-500/25 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span v-if="form.processing">Creating...</span>
+                            <span v-else>Create Directory</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </AdminLayout>
+</template>

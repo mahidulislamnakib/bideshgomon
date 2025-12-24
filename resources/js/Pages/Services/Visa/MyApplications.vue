@@ -12,7 +12,7 @@
                     </div>
                     <Link
                         :href="route('visa.index')"
-                        class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700"
+                        class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-lg hover:bg-growth-700"
                     >
                         New Application
                     </Link>
@@ -71,7 +71,7 @@
                                         <Link
                                             v-if="application.payment_status === 'pending'"
                                             :href="route('visa.payment', application.id)"
-                                            class="inline-flex items-center px-3 py-1.5 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700"
+                                            class="inline-flex items-center px-3 py-1.5 bg-growth-600 text-white text-sm font-medium rounded-lg hover:bg-growth-700"
                                         >
                                             Make Payment
                                         </Link>
@@ -80,7 +80,7 @@
 
                                 <div class="ml-4">
                                     <div v-if="application.documents_count" class="text-center">
-                                        <div class="text-2xl font-bold text-brand-red-600">{{ application.documents_count }}</div>
+                                        <div class="text-2xl font-bold text-growth-600">{{ application.documents_count }}</div>
                                         <div class="text-xs text-gray-600">Documents</div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                     <div class="mt-6">
                         <Link
                             :href="route('visa.index')"
-                            class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700"
+                            class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-lg hover:bg-growth-700"
                         >
                             Browse Visa Services
                         </Link>
@@ -119,7 +119,7 @@
                                 :href="link.url"
                                 :class="[
                                     'px-3 py-2 text-sm font-medium rounded-lg',
-                                    link.active ? 'bg-brand-red-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100',
+                                    link.active ? 'bg-growth-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100',
                                     !link.url ? 'opacity-50 cursor-not-allowed' : ''
                                 ]"
                                 v-html="link.label"

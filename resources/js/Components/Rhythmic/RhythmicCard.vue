@@ -166,15 +166,15 @@ const iconBgClass = computed(() => {
 const titleColorClass = computed(() => {
     const variants = {
         default: 'text-gray-900 dark:text-gray-100',
-        light: 'text-gray-900',
+        light: 'text-gray-900 dark:text-gray-100',
         dark: 'text-white',
-        gradient: 'text-gray-900',
-        ocean: 'text-ocean-900',
-        sky: 'text-sky-900',
-        growth: 'text-growth-900',
-        sunrise: 'text-sunrise-900',
-        gold: 'text-gold-900',
-        heritage: 'text-heritage-900',
+        gradient: 'text-gray-900 dark:text-gray-100',
+        ocean: 'text-gray-900 dark:text-gray-100',
+        sky: 'text-gray-900 dark:text-gray-100',
+        growth: 'text-gray-900 dark:text-gray-100',
+        sunrise: 'text-gray-900 dark:text-gray-100',
+        gold: 'text-gray-900 dark:text-gray-100',
+        heritage: 'text-gray-900 dark:text-gray-100',
     };
     return variants[props.variant] || variants.default;
 });

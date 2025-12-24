@@ -102,7 +102,7 @@ const getActivityIcon = (type) => {
 
 const getActivityColorClass = (type) => {
     const colors = {
-        user_registered: { bg: 'bg-blue-100', text: 'text-blue-600' },
+        user_registered: { bg: 'bg-blue-100', text: 'text-growth-600' },
         application_submitted: { bg: 'bg-yellow-100', text: 'text-yellow-600' },
         application_approved: { bg: 'bg-success-100', text: 'text-success-600' },
         application_rejected: { bg: 'bg-red-100', text: 'text-red-600' },

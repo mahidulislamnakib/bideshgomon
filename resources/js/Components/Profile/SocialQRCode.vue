@@ -55,7 +55,7 @@ onMounted(generateQRCode);
         <button
             @click="downloadQR"
             type="button"
-            class="inline-flex items-center gap-2 rounded-md bg-brand-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2"
+            class="inline-flex items-center gap-2 rounded-md bg-growth-600 px-4 py-2 text-sm font-medium text-white hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2"
         >
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

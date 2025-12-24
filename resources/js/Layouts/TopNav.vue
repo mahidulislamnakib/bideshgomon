@@ -26,17 +26,14 @@
                 </button>
 
                 <!-- Search Bar -->
-                <div class="hidden md:flex flex-1 max-w-xl relative">
-                    <div class="relative w-full">
-                        <MagnifyingGlassIcon class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400" />
-                        <input
-                            v-model="searchQuery"
-                            type="text"
-                            placeholder="Search users, services, applications..."
-                            class="w-full pl-10 pr-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                            @keydown.enter="handleSearch"
-                        />
-                    </div>
+                <div class="hidden md:flex flex-1 max-w-xl">
+                    <input
+                        v-model="searchQuery"
+                        type="text"
+                        placeholder="Search users, services, applications..."
+                        class="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                        @keydown.enter="handleSearch"
+                    />
                 </div>
             </div>
 
@@ -214,17 +211,14 @@
             @click="showMobileSearch = false"
         >
             <div @click.stop class="bg-white rounded-lg p-4 mt-16">
-                <div class="relative">
-                    <MagnifyingGlassIcon class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400" />
-                    <input
-                        v-model="searchQuery"
-                        type="text"
-                        placeholder="Search..."
-                        class="w-full pl-10 pr-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                        @keydown.enter="handleSearch"
-                        autofocus
-                    />
-                </div>
+                <input
+                    v-model="searchQuery"
+                    type="text"
+                    placeholder="Search..."
+                    class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    @keydown.enter="handleSearch"
+                    autofocus
+                />
             </div>
         </div>
     </header>

@@ -41,7 +41,7 @@ const navItems = [
     { label: 'Document Services', href: '/services?category=documents' },
     { label: 'Travel Services', href: '/services?category=travel' },
   ]},
-  { label: 'Why BideshGomon', href: '/about' },
+  { label: 'Why Bidesh Gomon', href: '/about' },
 ]
 
 // Helper function to safely get route URL

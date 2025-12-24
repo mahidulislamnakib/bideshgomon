@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <AdminLayout>
         <Head title="Add Country" />
 
@@ -6,8 +6,8 @@
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
                 <div class="mb-6">
-                    <Link :href="route('admin.data.countries.index')" class="text-sm text-brand-red-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
-                        ← Back to Countries
+                    <Link :href="route('admin.data.countries.index')" class="text-sm text-growth-600 hover:text-red-900 dark:text-red-400 mb-2 inline-block">
+                        ? Back to Countries
                     </Link>
                     <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Add New Country</h1>
                 </div>
@@ -25,7 +25,7 @@
                                 v-model="form.name"
                                 type="text"
                                 required
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                                 :class="{ 'border-red-500': form.errors.name }"
                             />
                             <p v-if="form.errors.name" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.name }}</p>
@@ -38,7 +38,7 @@
                                 id="name_bn"
                                 v-model="form.name_bn"
                                 type="text"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                             />
                         </div>
 
@@ -50,7 +50,7 @@
                                 v-model="form.nationality"
                                 type="text"
                                 placeholder="Bangladeshi"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                             />
                         </div>
 
@@ -66,7 +66,7 @@
                                 maxlength="2"
                                 required
                                 placeholder="BD"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600 uppercase"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600 uppercase"
                                 :class="{ 'border-red-500': form.errors.iso_code_2 }"
                             />
                             <p v-if="form.errors.iso_code_2" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.iso_code_2 }}</p>
@@ -84,7 +84,7 @@
                                 maxlength="3"
                                 required
                                 placeholder="BGD"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600 uppercase"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600 uppercase"
                                 :class="{ 'border-red-500': form.errors.iso_code_3 }"
                             />
                             <p v-if="form.errors.iso_code_3" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.iso_code_3 }}</p>
@@ -101,7 +101,7 @@
                                 type="text"
                                 required
                                 placeholder="+880"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                                 :class="{ 'border-red-500': form.errors.phone_code }"
                             />
                             <p v-if="form.errors.phone_code" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.phone_code }}</p>
@@ -119,7 +119,7 @@
                                 maxlength="3"
                                 required
                                 placeholder="BDT"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600 uppercase"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600 uppercase"
                                 :class="{ 'border-red-500': form.errors.currency_code }"
                             />
                             <p v-if="form.errors.currency_code" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.currency_code }}</p>
@@ -132,8 +132,8 @@
                                 id="flag_emoji"
                                 v-model="form.flag_emoji"
                                 type="text"
-                                placeholder="🇧🇩"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                placeholder="????"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                             />
                         </div>
 
@@ -145,7 +145,7 @@
                                 v-model="form.region"
                                 type="text"
                                 placeholder="South Asia"
-                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-brand-red-600 focus:border-brand-red-600"
+                                class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-growth-600 focus:border-growth-600"
                             />
                         </div>
 
@@ -155,7 +155,7 @@
                                 <input
                                     v-model="form.is_active"
                                     type="checkbox"
-                                    class="rounded border-gray-300 text-brand-red-600 shadow-sm focus:ring-brand-red-600"
+                                    class="rounded border-gray-300 text-growth-600 shadow-sm focus:ring-growth-600"
                                 />
                                 <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Active</span>
                             </label>
@@ -173,7 +173,7 @@
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition-colors disabled:opacity-50"
+                            class="px-4 py-2 bg-growth-600 hover:bg-growth-700 text-white rounded-lg transition-colors disabled:opacity-50"
                         >
                             {{ form.processing ? 'Saving...' : 'Save Country' }}
                         </button>

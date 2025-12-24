@@ -138,7 +138,7 @@ const currentStep = computed(() => {
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="flex items-center gap-3">
               <div class="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                <CalendarIcon class="h-6 w-6 text-brand-red-600 dark:text-blue-400" />
+                <CalendarIcon class="h-6 w-6 text-growth-600 dark:text-blue-400" />
               </div>
               <div>
                 <p class="text-sm text-gray-600 dark:text-gray-400">Submitted</p>
@@ -150,7 +150,7 @@ const currentStep = computed(() => {
 
             <div class="flex items-center gap-3">
               <div class="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                <DocumentTextIcon class="h-6 w-6 text-brand-red-600 dark:text-blue-400" />
+                <DocumentTextIcon class="h-6 w-6 text-growth-600 dark:text-blue-400" />
               </div>
               <div>
                 <p class="text-sm text-gray-600 dark:text-gray-400">Quotes Received</p>
@@ -261,7 +261,7 @@ const currentStep = computed(() => {
                 <Link
                   v-if="application.quotes?.length > 0"
                   :href="route('user.applications.quotes', application.id)"
-                  class="text-brand-red-600 dark:text-blue-400 hover:underline text-sm font-medium"
+                  class="text-growth-600 dark:text-blue-400 hover:underline text-sm font-medium"
                 >
                   View All →
                 </Link>

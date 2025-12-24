@@ -76,26 +76,24 @@ const getTomorrowDate = () => {
     <Head title="Flight Booking" />
 
     <AuthenticatedLayout>
-        <div class="min-h-screen bg-gray-50 pb-20">
-            <!-- Hero Section with Search -->
-            <div class="bg-brand-red-600 text-white px-4 pt-8 pb-24">
-                <div class="max-w-4xl mx-auto">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="bg-white/20 p-3 rounded-xl">
-                            <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h1 class="text-3xl font-bold">Flight Booking</h1>
-                            <p class="text-sky-100 text-lg">Find the best flights to your destination</p>
-                        </div>
+        <div class="min-h-screen bg-gray-50 dark:bg-neutral-900 pb-20">
+            <!-- Compact Hero -->
+            <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+                <div class="max-w-7xl mx-auto flex items-center gap-4">
+                    <div class="bg-white/20 p-2 rounded-xl">
+                        <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold text-white">Flight Booking</h1>
+                        <p class="text-sm text-white/80 mt-0.5">Find the best flights to your destination</p>
                     </div>
                 </div>
             </div>
 
             <!-- Search Form Card -->
-            <div class="max-w-4xl mx-auto px-4 -mt-16">
+            <div class="max-w-4xl mx-auto px-4 py-6">
                 <div class="bg-white rounded-3xl p-6 shadow-2xl mb-6">
                     <!-- Trip Type Tabs -->
                     <div class="flex space-x-2 mb-6 p-1 bg-gray-100 rounded-xl">
@@ -104,7 +102,7 @@ const getTomorrowDate = () => {
                             @click="tripType = 'one_way'"
                             :class="[
                                 'flex-1 px-4 py-2 rounded-lg text-sm font-semibold transition-all',
-                                tripType === 'one_way' ? 'bg-brand-red-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-200'
+                                tripType === 'one_way' ? 'bg-growth-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-200'
                             ]"
                         >
                             One Way
@@ -114,7 +112,7 @@ const getTomorrowDate = () => {
                             @click="tripType = 'round_trip'"
                             :class="[
                                 'flex-1 px-4 py-2 rounded-lg text-sm font-semibold transition-all',
-                                tripType === 'round_trip' ? 'bg-brand-red-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-200'
+                                tripType === 'round_trip' ? 'bg-growth-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-200'
                             ]"
                         >
                             Round Trip
@@ -124,7 +122,7 @@ const getTomorrowDate = () => {
                             @click="tripType = 'multi_city'"
                             :class="[
                                 'flex-1 px-4 py-2 rounded-lg text-sm font-semibold transition-all',
-                                tripType === 'multi_city' ? 'bg-brand-red-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-200'
+                                tripType === 'multi_city' ? 'bg-growth-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-200'
                             ]"
                         >
                             Multi-City
@@ -290,7 +288,7 @@ const getTomorrowDate = () => {
                                 v-if="multiCityFlights.length < 5"
                                 type="button"
                                 @click="addFlight"
-                                class="w-full py-3 border-2 border-dashed border-sky-300 text-brand-red-600 rounded-xl hover:border-sky-500 hover:bg-sky-50 transition-all flex items-center justify-center space-x-2 font-medium"
+                                class="w-full py-3 border-2 border-dashed border-sky-300 text-growth-600 rounded-xl hover:border-sky-500 hover:bg-sky-50 transition-all flex items-center justify-center space-x-2 font-medium"
                             >
                                 <PlusIcon class="h-5 w-5" />
                                 <span>Add Another Flight</span>
@@ -329,7 +327,7 @@ const getTomorrowDate = () => {
                         <button
                             type="submit"
                             :disabled="searchForm.processing"
-                            class="w-full bg-brand-red-600 hover:bg-red-700 text-white py-4 rounded-xl font-semibold text-lg transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                            class="w-full bg-growth-600 hover:bg-growth-700 text-white py-4 rounded-xl font-semibold text-lg transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                         >
                             <MagnifyingGlassIcon class="h-6 w-6" />
                             <span>{{ searchForm.processing ? 'Searching...' : 'Search Flights' }}</span>
@@ -362,7 +360,7 @@ const getTomorrowDate = () => {
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="text-2xl font-bold text-brand-red-600">
+                                    <div class="text-2xl font-bold text-growth-600">
                                         {{ formatCurrency(flightRoute.economy_price) }}
                                     </div>
                                     <div class="text-xs text-gray-500">per person</div>
@@ -394,7 +392,7 @@ const getTomorrowDate = () => {
                                     <ClockIcon class="h-4 w-4 mr-1" />
                                     {{ flightRoute.departure_time }}
                                 </span>
-                                <span class="text-brand-red-600 font-medium group-hover:underline">
+                                <span class="text-growth-600 font-medium group-hover:underline">
                                     View Details →
                                 </span>
                             </div>

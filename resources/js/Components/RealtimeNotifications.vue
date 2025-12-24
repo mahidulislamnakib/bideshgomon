@@ -35,7 +35,7 @@ const showToast = (notification) => {
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 max-w-sm border-l-4 border-blue-600">
       <div class="flex items-start gap-3">
         <div class="flex-shrink-0">
-          <svg class="w-6 h-6 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-6 h-6 text-growth-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
           </svg>
         </div>
@@ -121,7 +121,7 @@ onUnmounted(() => {
     <!-- Notification Bell Button -->
     <button
       @click="showNotifications = !showNotifications"
-      class="relative p-2 text-gray-600 dark:text-gray-400 hover:text-brand-red-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-xl transition-all transform hover:scale-105"
+      class="relative p-2 text-gray-600 dark:text-gray-400 hover:text-growth-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-xl transition-all transform hover:scale-105"
       title="Notifications"
     >
       <BellIcon class="w-6 h-6" />
@@ -150,7 +150,7 @@ onUnmounted(() => {
           <button
             v-if="notifications.length > 0"
             @click="markAllAsRead"
-            class="text-xs text-brand-red-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
+            class="text-xs text-growth-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
           >
             Mark all read
           </button>
@@ -196,7 +196,7 @@ onUnmounted(() => {
                 />
                 <ExclamationCircleIcon
                   v-else
-                  class="w-6 h-6 text-brand-red-600 dark:text-blue-400"
+                  class="w-6 h-6 text-growth-600 dark:text-blue-400"
                 />
               </div>
 
@@ -212,7 +212,7 @@ onUnmounted(() => {
 
               <!-- Unread indicator -->
               <div v-if="!notification.read" class="flex-shrink-0">
-                <div class="w-2 h-2 bg-brand-red-600 rounded-full"></div>
+                <div class="w-2 h-2 bg-growth-600 rounded-full"></div>
               </div>
             </div>
           </div>
@@ -226,7 +226,7 @@ onUnmounted(() => {
       >
         <button
           @click="clearAll"
-          class="w-full text-sm text-center text-gray-600 dark:text-gray-400 hover:text-brand-red-600 dark:hover:text-indigo-400"
+          class="w-full text-sm text-center text-gray-600 dark:text-gray-400 hover:text-growth-600 dark:hover:text-indigo-400"
         >
           Clear all notifications
         </button>

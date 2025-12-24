@@ -90,7 +90,7 @@ const getBadgeClass = (color) => {
                             <div class="text-lg font-bold text-gray-900">{{ formatCurrency(package.max_coverage) }}</div>
                         </div>
                         <div class="bg-blue-50 rounded-2xl p-4 text-center">
-                            <ClockIcon class="h-8 w-8 text-brand-red-600 mx-auto mb-2" />
+                            <ClockIcon class="h-8 w-8 text-growth-600 mx-auto mb-2" />
                             <div class="text-sm text-gray-600">Duration</div>
                             <div class="text-lg font-bold text-gray-900">{{ package.min_days }}-{{ package.max_days }} days</div>
                         </div>

@@ -134,7 +134,7 @@ const progressPercentage = computed(() => {
 
 const progressColorClass = computed(() => {
     const variants = {
-        ocean: 'bg-brand-red-600',
+        ocean: 'bg-growth-600',
         growth: 'bg-growth-500',
         sunrise: 'bg-sunrise-500',
     };
@@ -143,7 +143,7 @@ const progressColorClass = computed(() => {
 
 const progressTextColorClass = computed(() => {
     const variants = {
-        ocean: 'text-brand-red-600',
+        ocean: 'text-growth-600',
         growth: 'text-growth-600',
         sunrise: 'text-sunrise-600',
     };
@@ -172,7 +172,7 @@ const getStepClass = (index) => {
     if (index < props.currentStep) {
         // Completed steps
         const variants = {
-            ocean: 'bg-brand-red-600',
+            ocean: 'bg-growth-600',
             growth: 'bg-growth-500',
             sunrise: 'bg-sunrise-500',
         };
@@ -180,7 +180,7 @@ const getStepClass = (index) => {
     } else if (index === props.currentStep) {
         // Current step
         const variants = {
-            ocean: 'bg-brand-red-600 scale-110 shadow-glow-ocean',
+            ocean: 'bg-growth-600 scale-110 shadow-glow-ocean',
             growth: 'bg-growth-500 scale-110 shadow-glow-growth',
             sunrise: 'bg-sunrise-500 scale-110 shadow-glow-sunrise',
         };

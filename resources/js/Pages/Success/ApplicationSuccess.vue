@@ -125,7 +125,7 @@ const downloadReceipt = () => {
             <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t">
               <button
                 @click="downloadReceipt"
-                class="flex-1 inline-flex items-center justify-center px-6 py-3 bg-brand-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
+                class="flex-1 inline-flex items-center justify-center px-6 py-3 bg-growth-600 text-white font-semibold rounded-lg hover:bg-growth-700 transition"
               >
                 <ArrowDownTrayIcon class="h-5 w-5 mr-2" />
                 Download Receipt
@@ -133,7 +133,7 @@ const downloadReceipt = () => {
 
               <Link
                 :href="route('applications.show', application.id)"
-                class="flex-1 inline-flex items-center justify-center px-6 py-3 bg-white text-brand-red-600 font-semibold rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition"
+                class="flex-1 inline-flex items-center justify-center px-6 py-3 bg-white text-growth-600 font-semibold rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition"
               >
                 <DocumentTextIcon class="h-5 w-5 mr-2" />
                 View Application
@@ -236,7 +236,7 @@ const downloadReceipt = () => {
               :href="route('applications.index')"
               class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition text-center"
             >
-              <DocumentTextIcon class="h-8 w-8 text-brand-red-600 mb-2" />
+              <DocumentTextIcon class="h-8 w-8 text-growth-600 mb-2" />
               <span class="font-semibold text-gray-900">My Applications</span>
               <span class="text-sm text-gray-600 mt-1">View all applications</span>
             </Link>
@@ -265,11 +265,11 @@ const downloadReceipt = () => {
         <div class="text-center mt-8 text-gray-600">
           <p class="mb-2">Need help? Our support team is here for you.</p>
           <div class="flex justify-center gap-4 text-sm">
-            <a href="mailto:support@bideshgomon.com" class="text-brand-red-600 hover:underline">
+            <a href="mailto:support@bideshgomon.com" class="text-growth-600 hover:underline">
               Email Support
             </a>
             <span>•</span>
-            <a href="tel:+8801712345678" class="text-brand-red-600 hover:underline">
+            <a href="tel:+8801712345678" class="text-growth-600 hover:underline">
               +880 1712-345678
             </a>
           </div>

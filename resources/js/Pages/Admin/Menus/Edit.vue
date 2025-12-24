@@ -39,27 +39,27 @@ const submit = () => {
                 <div class="mb-8">
                     <Link
                         :href="route('menus.index')"
-                        class="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 mb-4"
+                        class="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-4"
                     >
                         <ArrowLeftIcon class="h-4 w-4 mr-2" />
                         Back to Menus
                     </Link>
-                    <h1 class="text-3xl font-bold text-gray-900">Edit Menu Item</h1>
-                    <p class="mt-2 text-sm text-gray-600">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Edit Menu Item</h1>
+                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
                         Editing: <strong>{{ menu.label }}</strong>
                     </p>
                 </div>
 
                 <!-- Form (Same as Create) -->
-                <form @submit.prevent="submit" class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-6">
+                <form @submit.prevent="submit" class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 space-y-6">
                     <!-- Location -->
                     <div>
-                        <label class="block text-sm font-semibold text-gray-900 mb-2">
+                        <label class="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                             Menu Location *
                         </label>
                         <select
                             v-model="form.location"
-                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             required
                         >
                             <option v-for="(label, value) in locations" :key="value" :value="value">
@@ -71,13 +71,13 @@ const submit = () => {
 
                     <!-- Label -->
                     <div>
-                        <label class="block text-sm font-semibold text-gray-900 mb-2">
+                        <label class="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                             Label *
                         </label>
                         <input
                             v-model="form.label"
                             type="text"
-                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             placeholder="Home, Services, Contact, etc."
                             required
                         />
@@ -87,61 +87,61 @@ const submit = () => {
                     <!-- Link Type -->
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-900 mb-2">
+                            <label class="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                                 Route Name
                             </label>
                             <select
                                 v-model="form.route_name"
-                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="">Select a route...</option>
                                 <option v-for="route in availableRoutes" :key="route" :value="route">
                                     {{ route }}
                                 </option>
                             </select>
-                            <p class="mt-1 text-xs text-gray-500">Recommended: Use Laravel route name</p>
+                            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Recommended: Use Laravel route name</p>
                             <p v-if="form.errors.route_name" class="mt-1 text-sm text-red-600">{{ form.errors.route_name }}</p>
                         </div>
 
                         <div>
-                            <label class="block text-sm font-semibold text-gray-900 mb-2">
+                            <label class="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                                 Custom URL
                             </label>
                             <input
                                 v-model="form.url"
                                 type="text"
-                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 placeholder="/custom-page or https://example.com"
                             />
-                            <p class="mt-1 text-xs text-gray-500">Only if route is not available</p>
+                            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Only if route is not available</p>
                             <p v-if="form.errors.url" class="mt-1 text-sm text-red-600">{{ form.errors.url }}</p>
                         </div>
                     </div>
 
                     <!-- Icon -->
                     <div>
-                        <label class="block text-sm font-semibold text-gray-900 mb-2">
+                        <label class="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                             Icon (Heroicon name)
                         </label>
                         <input
                             v-model="form.icon"
                             type="text"
-                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             placeholder="HomeIcon, BriefcaseIcon, etc."
                         />
-                        <p class="mt-1 text-xs text-gray-500">Optional: Heroicons v2 outline icon name</p>
+                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Optional: Heroicons v2 outline icon name</p>
                         <p v-if="form.errors.icon" class="mt-1 text-sm text-red-600">{{ form.errors.icon }}</p>
                     </div>
 
                     <!-- Parent Menu & Order -->
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-900 mb-2">
+                            <label class="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                                 Parent Menu
                             </label>
                             <select
                                 v-model="form.parent_id"
-                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option :value="null">None (Top Level)</option>
                                 <option v-for="parent in parentMenus" :key="parent.id" :value="parent.id">
@@ -152,31 +152,31 @@ const submit = () => {
                         </div>
 
                         <div>
-                            <label class="block text-sm font-semibold text-gray-900 mb-2">
+                            <label class="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                                 Order
                             </label>
                             <input
                                 v-model.number="form.order"
                                 type="number"
-                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 min="0"
                             />
-                            <p class="mt-1 text-xs text-gray-500">Lower numbers appear first</p>
+                            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Lower numbers appear first</p>
                             <p v-if="form.errors.order" class="mt-1 text-sm text-red-600">{{ form.errors.order }}</p>
                         </div>
                     </div>
 
                     <!-- Settings -->
-                    <div class="space-y-4 pt-4 border-t border-gray-200">
-                        <h3 class="text-sm font-semibold text-gray-900">Settings</h3>
+                    <div class="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Settings</h3>
 
                         <div class="flex items-center">
                             <input
                                 v-model="form.is_active"
                                 type="checkbox"
-                                class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded"
+                                class="h-4 w-4 text-growth-600 focus:ring-growth-600 border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded"
                             />
-                            <label class="ml-2 block text-sm text-gray-700">
+                            <label class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                                 Active (visible on website)
                             </label>
                         </div>
@@ -185,20 +185,20 @@ const submit = () => {
                             <input
                                 v-model="form.is_external"
                                 type="checkbox"
-                                class="h-4 w-4 text-brand-red-600 focus:ring-brand-red-600 border-gray-300 rounded"
+                                class="h-4 w-4 text-growth-600 focus:ring-growth-600 border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded"
                             />
-                            <label class="ml-2 block text-sm text-gray-700">
+                            <label class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                                 External Link
                             </label>
                         </div>
 
                         <div v-if="form.is_external">
-                            <label class="block text-sm font-semibold text-gray-900 mb-2">
+                            <label class="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                                 Target
                             </label>
                             <select
                                 v-model="form.target"
-                                class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="block w-full rounded-2xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="_self">Same Window (_self)</option>
                                 <option value="_blank">New Tab (_blank)</option>
@@ -207,17 +207,17 @@ const submit = () => {
                     </div>
 
                     <!-- Actions -->
-                    <div class="flex justify-end gap-3 pt-6 border-t border-gray-200">
+                    <div class="flex justify-end gap-3 pt-6 border-t border-gray-200 dark:border-gray-700">
                         <Link
                             :href="route('menus.index')"
-                            class="px-6 py-3 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                            class="px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-2xl shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
                         >
                             Cancel
                         </Link>
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50 transition-colors"
+                            class="inline-flex items-center px-6 py-3 border border-transparent rounded-2xl shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600 disabled:opacity-50 transition-colors"
                         >
                             <CheckIcon class="h-5 w-5 mr-2" />
                             {{ form.processing ? 'Saving...' : 'Update Menu Item' }}

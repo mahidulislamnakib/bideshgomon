@@ -39,10 +39,15 @@ class UserDocumentController extends Controller
                 'title' => $validated['title'],
                 'document_type' => $validated['document_type'],
                 'description' => $validated['description'] ?? null,
+                // Original migration columns (required)
+                'original_filename' => $file->getClientOriginalName(),
+                'storage_path' => $path,
+                // New columns
                 'file_path' => $path,
                 'file_name' => $file->getClientOriginalName(),
                 'file_type' => $file->getClientOriginalExtension(),
                 'file_size' => $file->getSize(),
+                'size_bytes' => $file->getSize(),
                 'mime_type' => $file->getMimeType(),
                 'issue_date' => $validated['issue_date'] ?? null,
                 'expiry_date' => $validated['expiry_date'] ?? null,

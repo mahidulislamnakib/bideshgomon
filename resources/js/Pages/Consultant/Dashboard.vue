@@ -61,7 +61,7 @@ const getStatusColor = (status) => {
                     <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
                         <div class="flex items-center">
                             <div class="p-2 bg-indigo-100 rounded-lg">
-                                <DocumentTextIcon class="h-5 w-5 text-brand-red-600" />
+                                <DocumentTextIcon class="h-5 w-5 text-growth-600" />
                             </div>
                             <div class="ml-3 min-w-0">
                                 <p class="text-xs text-gray-600 truncate">Total Applications</p>
@@ -100,7 +100,7 @@ const getStatusColor = (status) => {
                 <!-- Permissions Info -->
                 <div v-if="permissions" class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                     <div class="flex items-start gap-3">
-                        <ShieldCheckIcon class="h-5 w-5 text-brand-red-600 flex-shrink-0 mt-0.5" />
+                        <ShieldCheckIcon class="h-5 w-5 text-growth-600 flex-shrink-0 mt-0.5" />
                         <div class="flex-1 min-w-0">
                             <h3 class="text-sm font-semibold text-blue-900 mb-2">Your Permissions</h3>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-blue-800">
@@ -175,7 +175,7 @@ const getStatusColor = (status) => {
                                     <td class="px-4 py-3 whitespace-nowrap text-right text-sm">
                                         <Link 
                                             :href="route('agency.applications.show', application.id)"
-                                            class="text-brand-red-600 hover:text-red-900 font-medium"
+                                            class="text-growth-600 hover:text-red-900 font-medium"
                                         >
                                             View
                                         </Link>

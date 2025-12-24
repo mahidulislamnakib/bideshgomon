@@ -76,7 +76,7 @@ const markNotHelpful = (faqId) => {
                     <div class="p-6">
                         <div class="flex items-center gap-3 mb-3">
                             <div class="p-2 bg-indigo-100 rounded-lg">
-                                <QuestionMarkCircleIcon class="w-8 h-8 text-brand-red-600" />
+                                <QuestionMarkCircleIcon class="w-8 h-8 text-growth-600" />
                             </div>
                             <div>
                                 <h1 class="text-2xl font-bold text-gray-900">FAQs</h1>
@@ -100,7 +100,7 @@ const markNotHelpful = (faqId) => {
                                     v-model="searchQuery"
                                     type="text"
                                     placeholder="Search questions or answers..."
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     @keyup.enter="applyFilters"
                                 />
                             </div>
@@ -113,7 +113,7 @@ const markNotHelpful = (faqId) => {
                                 </label>
                                 <select
                                     v-model="selectedCategory"
-                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                     @change="applyFilters"
                                 >
                                     <option value="">All Categories</option>
@@ -128,7 +128,7 @@ const markNotHelpful = (faqId) => {
                         <div class="flex gap-3 mt-4">
                             <button
                                 @click="applyFilters"
-                                class="inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
+                                class="inline-flex items-center gap-2 px-4 py-2 bg-growth-600 text-white rounded-lg hover:bg-growth-700 transition-colors font-medium"
                             >
                                 <MagnifyingGlassIcon class="w-4 h-4" />
                                 Search
@@ -185,7 +185,7 @@ const markNotHelpful = (faqId) => {
                             <p class="mt-1 text-sm text-gray-500">No FAQs match your search criteria.</p>
                             <button
                                 @click="clearFilters"
-                                class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
+                                class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-growth-600 text-white rounded-lg hover:bg-growth-700 transition-colors font-medium"
                             >
                                 <XMarkIcon class="w-4 h-4" />
                                 Clear filters
@@ -261,7 +261,7 @@ const markNotHelpful = (faqId) => {
                     <div class="flex items-center justify-between flex-wrap gap-4">
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-indigo-100 rounded-lg">
-                                <ChatBubbleLeftRightIcon class="w-6 h-6 text-brand-red-600" />
+                                <ChatBubbleLeftRightIcon class="w-6 h-6 text-growth-600" />
                             </div>
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-900">Still have questions?</h3>
@@ -270,7 +270,7 @@ const markNotHelpful = (faqId) => {
                         </div>
                         <Link
                             :href="route('support.create')"
-                            class="inline-flex items-center gap-2 px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 font-medium transition-colors"
+                            class="inline-flex items-center gap-2 px-6 py-3 bg-growth-600 text-white rounded-lg hover:bg-growth-700 font-medium transition-colors"
                         >
                             <ChatBubbleLeftRightIcon class="w-5 h-5" />
                             Contact Support

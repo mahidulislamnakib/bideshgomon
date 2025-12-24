@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <AdminLayout>
     <Head title="Edit Smart Suggestion" />
 
@@ -25,11 +25,11 @@
             <div v-if="suggestion.is_completed || suggestion.is_dismissed" class="mb-6 p-4 rounded-md" :class="suggestion.is_completed ? 'bg-red-50 dark:bg-blue-900' : 'bg-gray-50 dark:bg-gray-900'">
               <div class="flex">
                 <div class="flex-shrink-0">
-                  <span v-if="suggestion.is_completed" class="text-2xl">✓</span>
-                  <span v-else class="text-2xl">✕</span>
+                  <span v-if="suggestion.is_completed" class="text-2xl">?</span>
+                  <span v-else class="text-2xl">?</span>
                 </div>
                 <div class="ml-3">
-                  <h3 class="text-sm font-medium" :class="suggestion.is_completed ? 'text-brand-red-600 dark:text-blue-200' : 'text-gray-800 dark:text-gray-200'">
+                  <h3 class="text-sm font-medium" :class="suggestion.is_completed ? 'text-growth-600 dark:text-blue-200' : 'text-gray-800 dark:text-gray-200'">
                     {{ suggestion.is_completed ? 'Completed' : 'Dismissed' }}
                   </h3>
                   <div class="mt-2 text-sm" :class="suggestion.is_completed ? 'text-blue-700 dark:text-blue-300' : 'text-gray-700 dark:text-gray-300'">
@@ -70,15 +70,15 @@
                   <select
                     id="category"
                     v-model="form.category"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     required
                   >
                     <option value="">Select category</option>
-                    <option value="visa">🛂 Visa</option>
-                    <option value="profile">👤 Profile</option>
-                    <option value="document">📄 Document</option>
-                    <option value="application">📝 Application</option>
-                    <option value="assessment">⭐ Assessment</option>
+                    <option value="visa">?? Visa</option>
+                    <option value="profile">?? Profile</option>
+                    <option value="document">?? Document</option>
+                    <option value="application">?? Application</option>
+                    <option value="assessment">? Assessment</option>
                   </select>
                   <p v-if="form.errors.category" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.category }}</p>
                 </div>
@@ -90,13 +90,13 @@
                   <select
                     id="priority"
                     v-model="form.priority"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     required
                   >
-                    <option value="urgent">🔴 Urgent</option>
-                    <option value="high">🟠 High</option>
-                    <option value="medium">🟡 Medium</option>
-                    <option value="low">🔵 Low</option>
+                    <option value="urgent">?? Urgent</option>
+                    <option value="high">?? High</option>
+                    <option value="medium">?? Medium</option>
+                    <option value="low">?? Low</option>
                   </select>
                   <p v-if="form.errors.priority" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.priority }}</p>
                 </div>
@@ -112,7 +112,7 @@
                     id="suggestion_type"
                     v-model="form.suggestion_type"
                     type="text"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     required
                   />
                   <p v-if="form.errors.suggestion_type" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.suggestion_type }}</p>
@@ -126,7 +126,7 @@
                     id="title"
                     v-model="form.title"
                     type="text"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     required
                   />
                   <p v-if="form.errors.title" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.title }}</p>
@@ -142,7 +142,7 @@
                   id="description"
                   v-model="form.description"
                   rows="4"
-                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   required
                 ></textarea>
                 <p v-if="form.errors.description" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.description }}</p>
@@ -158,7 +158,7 @@
                     id="action_type"
                     v-model="form.action_type"
                     type="text"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   />
                   <p v-if="form.errors.action_type" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.action_type }}</p>
                 </div>
@@ -171,7 +171,7 @@
                     id="action_url"
                     v-model="form.action_url"
                     type="text"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   />
                   <p v-if="form.errors.action_url" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.action_url }}</p>
                 </div>
@@ -186,7 +186,7 @@
                   id="data"
                   v-model="form.data"
                   rows="4"
-                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 font-mono text-sm"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 font-mono text-sm"
                 ></textarea>
                 <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Enter valid JSON for additional context data</p>
                 <p v-if="form.errors.data" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.data }}</p>
@@ -202,7 +202,7 @@
                     id="expires_at"
                     v-model="form.expires_at"
                     type="datetime-local"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   />
                   <p v-if="form.errors.expires_at" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.expires_at }}</p>
                 </div>
@@ -235,7 +235,7 @@
                     <input
                       v-model="form.is_completed"
                       type="checkbox"
-                      class="rounded border-gray-300 dark:border-gray-600 text-brand-red-600 shadow-sm focus:ring-brand-red-600"
+                      class="rounded border-gray-300 dark:border-gray-600 text-growth-600 shadow-sm focus:ring-growth-600"
                     />
                     <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Mark as Completed</span>
                   </label>
@@ -246,7 +246,7 @@
                     <input
                       v-model="form.is_dismissed"
                       type="checkbox"
-                      class="rounded border-gray-300 dark:border-gray-600 text-brand-red-600 shadow-sm focus:ring-brand-red-600"
+                      class="rounded border-gray-300 dark:border-gray-600 text-growth-600 shadow-sm focus:ring-growth-600"
                     />
                     <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Mark as Dismissed</span>
                   </label>
@@ -264,7 +264,7 @@
                 <button
                   type="submit"
                   :disabled="form.processing"
-                  class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150"
+                  class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2 transition ease-in-out duration-150"
                 >
                   Update Suggestion
                 </button>

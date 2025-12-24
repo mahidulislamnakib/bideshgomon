@@ -107,7 +107,7 @@ if (typeof window !== 'undefined') {
                         @click="switchLanguage(language.code)"
                         class="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150"
                         :class="{
-                            'text-brand-red-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20': 
+                            'text-growth-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20': 
                                 language.code === currentLocale,
                             'text-gray-700 dark:text-gray-300': 
                                 language.code !== currentLocale
@@ -120,7 +120,7 @@ if (typeof window !== 'undefined') {
                         </div>
                         <svg
                             v-if="language.code === currentLocale"
-                            class="w-5 h-5 text-brand-red-600 dark:text-indigo-400"
+                            class="w-5 h-5 text-growth-600 dark:text-indigo-400"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                         >

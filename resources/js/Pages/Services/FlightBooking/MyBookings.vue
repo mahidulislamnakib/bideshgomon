@@ -104,7 +104,7 @@ const getPaymentStatusColor = (status) => {
     <AuthenticatedLayout>
         <div class="min-h-screen bg-gray-50 pb-24">
             <!-- Header -->
-            <div class="bg-brand-red-600 text-white px-4 pt-6 pb-20">
+            <div class="bg-growth-600 text-white px-4 pt-6 pb-20">
                 <div class="max-w-4xl mx-auto">
                     <Link
                         :href="route('flight-booking.index')"
@@ -127,7 +127,7 @@ const getPaymentStatusColor = (status) => {
                         @click="filterBookings('all')"
                         :class="[
                             'flex-1 min-w-[80px] px-4 py-3 rounded-xl text-sm font-semibold transition-all touch-manipulation',
-                            filter === 'all' ? 'bg-brand-red-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'
+                            filter === 'all' ? 'bg-growth-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'
                         ]"
                     >
                         All
@@ -136,7 +136,7 @@ const getPaymentStatusColor = (status) => {
                         @click="filterBookings('upcoming')"
                         :class="[
                             'flex-1 min-w-[80px] px-4 py-3 rounded-xl text-sm font-semibold transition-all touch-manipulation',
-                            filter === 'upcoming' ? 'bg-brand-red-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'
+                            filter === 'upcoming' ? 'bg-growth-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'
                         ]"
                     >
                         Upcoming
@@ -145,7 +145,7 @@ const getPaymentStatusColor = (status) => {
                         @click="filterBookings('past')"
                         :class="[
                             'flex-1 min-w-[80px] px-4 py-3 rounded-xl text-sm font-semibold transition-all touch-manipulation',
-                            filter === 'past' ? 'bg-brand-red-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'
+                            filter === 'past' ? 'bg-growth-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'
                         ]"
                     >
                         Past
@@ -154,7 +154,7 @@ const getPaymentStatusColor = (status) => {
                         @click="filterBookings('cancelled')"
                         :class="[
                             'flex-1 min-w-[80px] px-4 py-3 rounded-xl text-sm font-semibold transition-all touch-manipulation',
-                            filter === 'cancelled' ? 'bg-brand-red-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'
+                            filter === 'cancelled' ? 'bg-growth-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'
                         ]"
                     >
                         Cancelled
@@ -213,7 +213,7 @@ const getPaymentStatusColor = (status) => {
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="text-2xl font-bold text-brand-red-600">{{ formatCurrency(booking.total_amount) }}</div>
+                                    <div class="text-2xl font-bold text-growth-600">{{ formatCurrency(booking.total_amount) }}</div>
                                 </div>
                             </div>
 
@@ -258,7 +258,7 @@ const getPaymentStatusColor = (status) => {
                             <div class="flex space-x-3">
                                 <Link
                                     :href="route('flight-booking.booking-details', booking.id)"
-                                    class="flex-1 bg-brand-red-600 text-white text-center py-3 rounded-xl font-semibold hover:bg-red-700 transition-all text-sm"
+                                    class="flex-1 bg-growth-600 text-white text-center py-3 rounded-xl font-semibold hover:bg-growth-700 transition-all text-sm"
                                 >
                                     View Details
                                 </Link>
@@ -286,7 +286,7 @@ const getPaymentStatusColor = (status) => {
                                     <span class="text-blue-700 font-medium">Refund Amount:</span>
                                     <span class="font-bold text-blue-900">{{ formatCurrency(booking.refund_amount) }}</span>
                                 </div>
-                                <div v-if="booking.cancellation_reason" class="text-xs text-brand-red-600 mt-1">
+                                <div v-if="booking.cancellation_reason" class="text-xs text-growth-600 mt-1">
                                     Reason: {{ booking.cancellation_reason }}
                                 </div>
                             </div>
@@ -308,7 +308,7 @@ const getPaymentStatusColor = (status) => {
                     </p>
                     <Link
                         :href="route('flight-booking.index')"
-                        class="inline-flex items-center px-6 py-3 bg-brand-red-600 hover:bg-red-700 text-white rounded-xl font-semibold transition-all shadow-md"
+                        class="inline-flex items-center px-6 py-3 bg-growth-600 hover:bg-growth-700 text-white rounded-xl font-semibold transition-all shadow-md"
                     >
                         Search Flights
                         <ArrowRightIcon class="h-5 w-5 ml-2" />

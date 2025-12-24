@@ -17,7 +17,7 @@
         <div class="bg-white rounded-lg border border-gray-200 p-6">
             <div class="flex items-center gap-3 mb-4">
                 <div class="p-2 bg-blue-100 rounded-lg">
-                    <GlobeAltIcon class="w-6 h-6 text-blue-600" />
+                    <GlobeAltIcon class="w-6 h-6 text-growth-600" />
                 </div>
                 <div>
                     <h4 class="font-semibold text-gray-900">Preferred Destinations</h4>
@@ -56,7 +56,7 @@
                             @blur="hideCountryDropdown"
                             type="text"
                             placeholder="Search and select countries..."
-                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-brand-red-600"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         />
                         <div
                             v-if="showCountryDropdown && filteredCountries.length > 0"
@@ -72,7 +72,7 @@
                                 ]"
                             >
                                 <span class="text-sm">{{ country.name }}</span>
-                                <span v-if="form.preferred_destinations?.includes(country.name)" class="text-brand-red-600 text-xs">✓ Selected</span>
+                                <span v-if="form.preferred_destinations?.includes(country.name)" class="text-growth-600 text-xs">✓ Selected</span>
                             </button>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                             v-for="destination in form.preferred_destinations"
                             :key="destination"
                             @click="toggleDestination(destination)"
-                            class="px-3 py-1 bg-brand-red-600 text-white text-sm rounded-full hover:bg-red-700 transition-all flex items-center gap-1"
+                            class="px-3 py-1 bg-growth-600 text-white text-sm rounded-full hover:bg-growth-700 transition-all flex items-center gap-1"
                         >
                             {{ destination }}
                             <span class="text-xs">×</span>
@@ -210,7 +210,7 @@
         <div class="bg-white rounded-lg border border-gray-200 p-6">
             <div class="flex items-center gap-3 mb-4">
                 <div class="p-2 bg-indigo-100 rounded-lg">
-                    <GlobeAltIcon class="w-6 h-6 text-brand-red-600" />
+                    <GlobeAltIcon class="w-6 h-6 text-growth-600" />
                 </div>
                 <div>
                     <h4 class="font-semibold text-gray-900">Regional Settings</h4>
@@ -225,7 +225,7 @@
                     </label>
                     <select
                         v-model="form.language"
-                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     >
                         <option v-for="language in languages" :key="language.id" :value="language.id">
                             {{ language.name }}
@@ -239,7 +239,7 @@
                     </label>
                     <select
                         v-model="form.timezone"
-                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     >
                         <option value="Asia/Dhaka">Asia/Dhaka (GMT+6)</option>
                         <option value="Asia/Dubai">Asia/Dubai (GMT+4)</option>
@@ -255,7 +255,7 @@
                     </label>
                     <select
                         v-model="form.currency"
-                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-brand-red-600"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     >
                         <option v-for="currency in currencies" :key="currency.id" :value="currency.code">
                             {{ currency.symbol }} {{ currency.code }} - {{ currency.name }}
@@ -325,7 +325,7 @@
             <button
                 @click="savePreferences"
                 :disabled="form.processing"
-                class="px-6 py-3 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                class="px-6 py-3 bg-growth-600 text-white rounded-lg hover:bg-growth-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
             >
                 <span v-if="!form.processing">Save Preferences</span>
                 <span v-else>Saving...</span>
@@ -476,7 +476,7 @@ const notificationChannels = [
         icon: EnvelopeIcon,
         label: 'Email Notifications',
         description: 'Receive notifications via email',
-        color: 'text-brand-red-600'
+        color: 'text-growth-600'
     },
     {
         key: 'sms',

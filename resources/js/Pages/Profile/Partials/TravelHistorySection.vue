@@ -336,7 +336,7 @@ const formatDate = (date) => {
                             <select
                                 id="purpose"
                                 v-model="form.purpose"
-                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm transition-all bg-white"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 focus:ring-2 focus:ring-growth-600 focus:border-growth-600 rounded-xl shadow-sm transition-all bg-white"
                             >
                                 <option v-for="(label, value) in purposes" :key="value" :value="value">
                                     {{ label }}
@@ -392,7 +392,7 @@ const formatDate = (date) => {
                             <select
                                 id="accommodation_type"
                                 v-model="form.accommodation_type"
-                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm transition-all bg-white"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 focus:ring-2 focus:ring-growth-600 focus:border-growth-600 rounded-xl shadow-sm transition-all bg-white"
                             >
                                 <option v-for="(label, value) in accommodationTypes" :key="value" :value="value">
                                     {{ label }}
@@ -422,7 +422,7 @@ const formatDate = (date) => {
                             <select
                                 id="transportation_mode"
                                 v-model="form.transportation_mode"
-                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm transition-all bg-white"
+                                class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 focus:ring-2 focus:ring-growth-600 focus:border-growth-600 rounded-xl shadow-sm transition-all bg-white"
                             >
                                 <option v-for="(label, value) in transportationModes" :key="value" :value="value">
                                     {{ label }}
@@ -503,7 +503,7 @@ const formatDate = (date) => {
                             id="notes"
                             v-model="form.notes"
                             rows="3"
-                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm transition-all resize-none"
+                            class="mt-1 block w-full px-4 py-3 border-2 border-gray-200 focus:ring-2 focus:ring-growth-600 focus:border-growth-600 rounded-xl shadow-sm transition-all resize-none"
                             placeholder="Any additional information about this trip..."
                         ></textarea>
                         <InputError class="mt-2" :message="form.errors.notes" />

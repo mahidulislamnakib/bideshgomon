@@ -43,7 +43,7 @@ const toggle = () => {
 }
 
 // --- State Management ---
-const educationList = ref(props.educations || [])
+const educationList = ref((props.educations || []).filter(e => e && e.id))
 const isLoading = ref(false)
 const showModal = ref(false)
 const isEditMode = ref(false)
@@ -290,7 +290,7 @@ const formatDate = (dateString) => {
     <div v-else class="space-y-4">
       <div
         v-for="edu in educationList"
-        :key="edu.id"
+        :key="edu?.id"
         class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
       >
         <!-- Card Header -->
@@ -301,13 +301,13 @@ const formatDate = (dateString) => {
           <div class="flex items-start justify-between gap-3 mb-3">
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2 mb-1">
-                <AcademicCapIcon class="w-6 h-6 md:w-7 md:h-7 text-brand-red-600 dark:text-blue-400 flex-shrink-0" />
+                <AcademicCapIcon class="w-6 h-6 md:w-7 md:h-7 text-growth-600 dark:text-blue-400 flex-shrink-0" />
                 <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white truncate">
-                  {{ edu.degree_name || edu.custom_degree || 'Degree' }}
+                  {{ edu?.degree_name || edu?.custom_degree || 'Degree' }}
                 </h3>
               </div>
-              <p class="text-sm sm:text-base font-semibold text-brand-red-600 dark:text-blue-400">
-                {{ edu.institution_name || edu.custom_university || 'Institution' }}
+              <p class="text-sm sm:text-base font-semibold text-growth-600 dark:text-blue-400">
+                {{ edu?.institution_name || edu?.custom_university || 'Institution' }}
               </p>
             </div>
             
@@ -389,7 +389,7 @@ const formatDate = (dateString) => {
       <div class="p-6 bg-white dark:bg-gray-800">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-100 dark:bg-blue-900/30 rounded-lg md:rounded-xl flex items-center justify-center">
-            <AcademicCapIcon class="w-7 h-7 md:w-8 md:h-8 text-brand-red-600 dark:text-blue-400" />
+            <AcademicCapIcon class="w-7 h-7 md:w-8 md:h-8 text-growth-600 dark:text-blue-400" />
           </div>
           <h2 class="text-xl font-bold text-gray-900 dark:text-white">
             {{ isEditMode ? 'Edit Education Record' : 'Add New Education' }}
@@ -406,7 +406,7 @@ const formatDate = (dateString) => {
             <InputLabel for="institution_name" value="Institute / University *" />
             <TextInput
               id="institution_name"
-              v-model="form.value.institution_name"
+              v-model="form.institution_name"
               type="text"
               class="mt-1 block w-full py-3 px-4 text-base rounded-lg touch-manipulation"
               placeholder="e.g., University of Dhaka, BUET, Harvard University, NSU"
@@ -424,8 +424,8 @@ const formatDate = (dateString) => {
               <InputLabel for="degree" value="Degree / Qualification *" class="block text-sm font-semibold text-gray-700 mb-2" />
               <select 
                 id="degree" 
-                v-model="form.value.degree" 
-                class="mt-1 block w-full px-4 py-3 text-base rounded-xl border-2 border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:focus:border-indigo-600 shadow-sm touch-manipulation transition-all bg-white"
+                v-model="form.degree" 
+                class="mt-1 block w-full px-4 py-3 text-base rounded-xl border-2 border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:ring-2 focus:ring-growth-600 focus:border-growth-600 dark:focus:border-growth-600 shadow-sm touch-manipulation transition-all bg-white"
                 required
               >
                 <option value="">Select Degree</option>
@@ -441,7 +441,7 @@ const formatDate = (dateString) => {
 
             <div>
               <InputLabel for="field_of_study" value="Field of Study" class="block text-sm font-semibold text-gray-700 mb-2" />
-                <select id="field_of_study" v-model="form.value.field_of_study" class="mt-1 block w-full px-4 py-3 text-base rounded-xl border-2 border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:focus:border-indigo-600 shadow-sm touch-manipulation transition-all bg-white">
+                <select id="field_of_study" v-model="form.field_of_study" class="mt-1 block w-full px-4 py-3 text-base rounded-xl border-2 border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:ring-2 focus:ring-growth-600 focus:border-growth-600 dark:focus:border-growth-600 shadow-sm touch-manipulation transition-all bg-white">
                   <option value="">
                     Select Field of Study
                   </option>
@@ -458,7 +458,7 @@ const formatDate = (dateString) => {
             <InputLabel for="gpa_or_grade" value="Result / Grade" />
             <TextInput
               id="gpa_or_grade"
-              v-model="form.value.gpa_or_grade"
+              v-model="form.gpa_or_grade"
               type="text"
               class="mt-1 block w-full py-3 px-4 text-base rounded-lg touch-manipulation"
               placeholder="e.g., CGPA: 3.8/4.0, First Class, 85%"
@@ -475,7 +475,7 @@ const formatDate = (dateString) => {
               <InputLabel for="start_date" value="Start Date *" />
               <DateInput
                 id="start_date"
-                v-model="form.value.start_date"
+                v-model="form.start_date"
                 class="mt-1 block w-full"
                 required
               />
@@ -485,9 +485,9 @@ const formatDate = (dateString) => {
               <InputLabel for="end_date" value="End Date" />
               <DateInput
                 id="end_date"
-                v-model="form.value.end_date"
+                v-model="form.end_date"
                 class="mt-1 block w-full"
-                :disabled="form.value.currently_studying"
+                :disabled="form.currently_studying"
               />
               <p class="mt-1 text-xs text-gray-500">
                 Leave empty if currently studying
@@ -500,7 +500,7 @@ const formatDate = (dateString) => {
           <div class="flex items-center">
             <Checkbox
               id="is_completed"
-              v-model:checked="form.value.is_completed"
+              v-model:checked="form.is_completed"
             />
             <InputLabel for="is_completed" value="I have completed this education" class="ml-2 cursor-pointer" />
           </div>
@@ -511,7 +511,7 @@ const formatDate = (dateString) => {
               <InputLabel for="country" value="Country" />
               <TextInput
                 id="country"
-                v-model="form.value.country"
+                v-model="form.country"
                 type="text"
                 class="mt-1 block w-full py-3 px-4 text-base rounded-lg touch-manipulation"
                 placeholder="Bangladesh, USA, UK, etc."
@@ -522,7 +522,7 @@ const formatDate = (dateString) => {
               <InputLabel for="city" value="City" />
               <TextInput
                 id="city"
-                v-model="form.value.city"
+                v-model="form.city"
                 type="text"
                 class="mt-1 block w-full py-3 px-4 text-base rounded-lg touch-manipulation"
                 placeholder="Dhaka, Boston, London, etc."

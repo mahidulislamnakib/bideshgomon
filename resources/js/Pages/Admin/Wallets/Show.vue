@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { 
@@ -104,21 +104,21 @@ const getStatusColor = (status) => {
                 <div class="flex gap-2">
                     <button
                         @click="showCreditModal = true"
-                        class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                        class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                     >
                         <PlusCircleIcon class="h-5 w-5 mr-2" />
                         Credit
                     </button>
                     <button
                         @click="showDebitModal = true"
-                        class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                        class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                     >
                         <MinusCircleIcon class="h-5 w-5 mr-2" />
                         Debit
                     </button>
                     <button
                         @click="toggleStatus"
-                        class="inline-flex items-center px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                        class="inline-flex items-center px-4 py-2 bg-yellow-600 text-white rounded-xl hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                     >
                         {{ wallet.status === 'active' ? 'Suspend' : 'Activate' }}
                     </button>
@@ -129,12 +129,12 @@ const getStatusColor = (status) => {
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <!-- Wallet Info -->
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-2xl">
                     <div class="p-6">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-4">
-                                <div class="bg-red-100 dark:bg-indigo-900/20 p-4 rounded-lg">
-                                    <WalletIcon class="h-12 w-12 text-brand-red-600 dark:text-red-400" />
+                                <div class="bg-red-100 dark:bg-indigo-900/20 p-4 rounded-2xl">
+                                    <WalletIcon class="h-12 w-12 text-growth-600 dark:text-red-400" />
                                 </div>
                                 <div>
                                     <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ wallet.user?.name }}</h3>
@@ -153,7 +153,7 @@ const getStatusColor = (status) => {
                 </div>
 
                 <!-- Transactions -->
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-2xl">
                     <div class="p-6">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Transaction History</h3>
                         
@@ -243,19 +243,19 @@ const getStatusColor = (status) => {
                                             v-if="link.url"
                                             :href="link.url"
                                             :class="{
-                                                'bg-brand-red-600 text-white': link.active,
+                                                'bg-growth-600 text-white': link.active,
                                                 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600': !link.active
                                             }"
-                                            class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm"
+                                            class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-xl text-sm"
                                             v-html="link.label"
                                         />
                                         <span
                                             v-else
                                             :class="{
-                                                'bg-brand-red-600 text-white': link.active,
+                                                'bg-growth-600 text-white': link.active,
                                                 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300': !link.active
                                             }"
-                                            class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm opacity-50 cursor-not-allowed"
+                                            class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-xl text-sm opacity-50 cursor-not-allowed"
                                             v-html="link.label"
                                         />
                                     </template>
@@ -278,7 +278,7 @@ const getStatusColor = (status) => {
             <div class="flex items-center justify-center min-h-screen px-4">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" @click="showCreditModal = false"></div>
                 
-                <div class="relative bg-white dark:bg-gray-800 rounded-lg max-w-lg w-full p-6">
+                <div class="relative bg-white dark:bg-gray-800 rounded-2xl max-w-lg w-full p-6">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Credit Wallet</h3>
                     
                     <form @submit.prevent="credit" class="space-y-4">
@@ -289,7 +289,7 @@ const getStatusColor = (status) => {
                                 type="number"
                                 step="0.01"
                                 required
-                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600 dark:bg-gray-700 dark:text-white"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-growth-600 focus:border-growth-600 dark:bg-gray-700 dark:text-white"
                             />
                             <div v-if="creditForm.errors.amount" class="text-red-600 text-sm mt-1">{{ creditForm.errors.amount }}</div>
                         </div>
@@ -300,7 +300,7 @@ const getStatusColor = (status) => {
                                 v-model="creditForm.description"
                                 type="text"
                                 required
-                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600 dark:bg-gray-700 dark:text-white"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-growth-600 focus:border-growth-600 dark:bg-gray-700 dark:text-white"
                             />
                             <div v-if="creditForm.errors.description" class="text-red-600 text-sm mt-1">{{ creditForm.errors.description }}</div>
                         </div>
@@ -310,7 +310,7 @@ const getStatusColor = (status) => {
                             <textarea
                                 v-model="creditForm.note"
                                 rows="3"
-                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600 dark:bg-gray-700 dark:text-white"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-growth-600 focus:border-growth-600 dark:bg-gray-700 dark:text-white"
                             ></textarea>
                         </div>
 
@@ -318,14 +318,14 @@ const getStatusColor = (status) => {
                             <button
                                 type="button"
                                 @click="showCreditModal = false"
-                                class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600"
+                                class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-600"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
                                 :disabled="creditForm.processing"
-                                class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50"
+                                class="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 disabled:opacity-50"
                             >
                                 Credit Wallet
                             </button>
@@ -340,7 +340,7 @@ const getStatusColor = (status) => {
             <div class="flex items-center justify-center min-h-screen px-4">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" @click="showDebitModal = false"></div>
                 
-                <div class="relative bg-white dark:bg-gray-800 rounded-lg max-w-lg w-full p-6">
+                <div class="relative bg-white dark:bg-gray-800 rounded-2xl max-w-lg w-full p-6">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Debit Wallet</h3>
                     
                     <form @submit.prevent="debit" class="space-y-4">
@@ -351,7 +351,7 @@ const getStatusColor = (status) => {
                                 type="number"
                                 step="0.01"
                                 required
-                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600 dark:bg-gray-700 dark:text-white"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-growth-600 focus:border-growth-600 dark:bg-gray-700 dark:text-white"
                             />
                             <div v-if="debitForm.errors.amount" class="text-red-600 text-sm mt-1">{{ debitForm.errors.amount }}</div>
                             <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Available: {{ formatCurrency(wallet.balance) }}</div>
@@ -363,7 +363,7 @@ const getStatusColor = (status) => {
                                 v-model="debitForm.description"
                                 type="text"
                                 required
-                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600 dark:bg-gray-700 dark:text-white"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-growth-600 focus:border-growth-600 dark:bg-gray-700 dark:text-white"
                             />
                             <div v-if="debitForm.errors.description" class="text-red-600 text-sm mt-1">{{ debitForm.errors.description }}</div>
                         </div>
@@ -373,7 +373,7 @@ const getStatusColor = (status) => {
                             <textarea
                                 v-model="debitForm.note"
                                 rows="3"
-                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600 dark:bg-gray-700 dark:text-white"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-growth-600 focus:border-growth-600 dark:bg-gray-700 dark:text-white"
                             ></textarea>
                         </div>
 
@@ -381,14 +381,14 @@ const getStatusColor = (status) => {
                             <button
                                 type="button"
                                 @click="showDebitModal = false"
-                                class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600"
+                                class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-600"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
                                 :disabled="debitForm.processing"
-                                class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50"
+                                class="px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-growth-700 disabled:opacity-50"
                             >
                                 Debit Wallet
                             </button>

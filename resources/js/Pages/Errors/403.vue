@@ -301,15 +301,15 @@ const pricingPlans = [
         <div class="text-center mt-12 text-gray-600">
           <p class="mb-2">Have questions about Premium?</p>
           <div class="flex justify-center gap-6 text-sm">
-            <a href="mailto:support@bideshgomon.com" class="text-brand-red-600 hover:underline">
+            <a href="mailto:support@bideshgomon.com" class="text-growth-600 hover:underline">
               Email Us
             </a>
             <span>•</span>
-            <a href="tel:+8801712345678" class="text-brand-red-600 hover:underline">
+            <a href="tel:+8801712345678" class="text-growth-600 hover:underline">
               +880 1712-345678
             </a>
             <span>•</span>
-            <Link :href="route('welcome')" class="text-brand-red-600 hover:underline">
+            <Link :href="route('welcome')" class="text-growth-600 hover:underline">
               Learn More
             </Link>
           </div>

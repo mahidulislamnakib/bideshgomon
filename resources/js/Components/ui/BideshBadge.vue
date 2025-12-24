@@ -52,7 +52,7 @@ const badgeClasses = computed(() => {
       success: 'border border-[#64ac44] text-[#64ac44] bg-transparent',
       warning: 'border border-yellow-500 text-yellow-700 bg-transparent',
       danger: 'border border-red-600 text-red-600 bg-transparent',
-      info: 'border border-blue-500 text-brand-red-600 bg-transparent'
+      info: 'border border-blue-500 text-growth-600 bg-transparent'
     };
     classes.push(outlineVariantClasses[props.variant]);
   } else {
@@ -62,7 +62,7 @@ const badgeClasses = computed(() => {
       success: 'bg-[#64ac44] text-white',
       warning: 'bg-yellow-500 text-white',
       danger: 'bg-red-600 text-white',
-      info: 'bg-brand-red-600 text-white'
+      info: 'bg-growth-600 text-white'
     };
     classes.push(solidVariantClasses[props.variant]);
   }

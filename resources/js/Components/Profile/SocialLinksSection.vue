@@ -27,7 +27,7 @@ const socialPlatforms = [
         label: 'LinkedIn', 
         icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>',
         placeholder: 'https://linkedin.com/in/username',
-        color: 'bg-brand-red-600'
+        color: 'bg-blue-700'
     },
     { 
         key: 'github', 
@@ -41,7 +41,7 @@ const socialPlatforms = [
         label: 'Facebook', 
         icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>',
         placeholder: 'https://facebook.com/username',
-        color: 'bg-brand-red-600'
+        color: 'bg-growth-600'
     },
     { 
         key: 'twitter', 
@@ -104,7 +104,7 @@ const socialPlatforms = [
         label: 'Discord', 
         icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>',
         placeholder: 'username#1234',
-        color: 'bg-brand-red-600'
+        color: 'bg-growth-600'
     },
     { 
         key: 'medium', 
@@ -118,7 +118,7 @@ const socialPlatforms = [
         label: 'Behance', 
         icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 7.5v9c0 .401.325.75.75.75h6.75c3.176 0 5.25-1.555 5.25-4.146 0-1.545-.934-2.715-2.496-3.216C11.565 9.38 12 8.433 12 7.259c0-2.149-1.688-3.509-4.5-3.509H.75c-.425 0-.75.35-.75.75zm3 1.5h3.75c1.313 0 2.25.653 2.25 1.714 0 1.06-.937 1.786-2.25 1.786H3V9zm0 5.25h4.5c1.491 0 2.344.75 2.344 2.063 0 1.312-.853 2.187-2.344 2.187H3v-4.25zM15 3.75h9v1.5h-9v-1.5zm-1.5 6.938c0-3.573 2.438-6.188 6.188-6.188 3.75 0 6.063 2.663 6.063 6.188 0 .337-.024.675-.075 1.012H16.95c.15 2.137 1.35 3.3 3.15 3.3 1.35 0 2.325-.525 3.075-1.65l2.55 1.35c-1.2 1.95-3.225 2.925-5.625 2.925-3.9 0-6.6-2.7-6.6-6.937zm3.225-.562h7.05c-.225-1.838-1.425-2.888-3.375-2.888-1.875 0-3.225 1.05-3.675 2.888z"/></svg>',
         placeholder: 'https://behance.net/username',
-        color: 'bg-brand-red-600'
+        color: 'bg-blue-500'
     },
     { 
         key: 'dribbble', 
@@ -178,11 +178,11 @@ const openQRModal = (platform, value) => {
     // Format the value for QR code
     if (platform === 'whatsapp') {
         // Remove any non-numeric characters and ensure it starts with country code
-        const cleanNumber = value.replace(/\D/g, '');
+        const cleanNumber = (value || '').replace(/\D/g, '');
         qrValue.value = `https://wa.me/${cleanNumber}`;
     } else if (platform === 'telegram') {
         // Remove @ if present and create telegram link
-        const username = value.replace('@', '');
+        const username = (value || '').replace('@', '');
         qrValue.value = `https://t.me/${username}`;
     }
     
@@ -222,12 +222,12 @@ const canGenerateQR = (platform) => {
         <div class="grid grid-cols-3 gap-4">
             <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200">
                 <div class="flex items-center gap-3">
-                    <svg class="w-8 h-8 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-8 h-8 text-growth-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                     <div>
                         <div class="text-2xl font-bold text-blue-700">{{ professionalCount }}</div>
-                        <div class="text-xs text-brand-red-600">Professional</div>
+                        <div class="text-xs text-growth-600">Professional</div>
                     </div>
                 </div>
             </div>
@@ -300,7 +300,7 @@ const canGenerateQR = (platform) => {
             <!-- Connected Profiles Preview -->
             <div v-if="hasAnyLinks" class="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-6 border-2 border-gray-200">
                 <h4 class="mb-4 text-lg font-semibold text-gray-900 flex items-center gap-2">
-                    <svg class="w-6 h-6 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 text-growth-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
@@ -311,7 +311,7 @@ const canGenerateQR = (platform) => {
                         v-for="platform in socialPlatforms"
                         :key="platform.key"
                         v-show="form.social_links[platform.key]"
-                        :href="platform.key === 'whatsapp' ? `https://wa.me/${form.social_links[platform.key].replace(/\D/g, '')}` : (platform.key === 'telegram' ? `https://t.me/${form.social_links[platform.key].replace('@', '')}` : form.social_links[platform.key])"
+                        :href="platform.key === 'whatsapp' ? `https://wa.me/${(form.social_links[platform.key] || '').replace(/\D/g, '')}` : (platform.key === 'telegram' ? `https://t.me/${(form.social_links[platform.key] || '').replace('@', '')}` : (form.social_links[platform.key] || ''))"
                         target="_blank"
                         rel="noopener noreferrer"
                         :class="[platform.color, 'group relative overflow-hidden rounded-lg p-4 text-white hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1']"
@@ -335,7 +335,7 @@ const canGenerateQR = (platform) => {
             <!-- Benefits Section -->
             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
                 <h4 class="mb-3 flex items-center gap-2 text-lg font-semibold text-blue-900">
-                    <svg class="h-6 w-6 text-brand-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="h-6 w-6 text-growth-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                     </svg>
                     Why Connect Your Profiles?

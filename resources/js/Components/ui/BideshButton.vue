@@ -93,14 +93,14 @@ const buttonClasses = computed(() => {
   
   // Variant
   const variantClasses = {
-    primary: 'bg-[#e4282b] text-white hover:bg-red-700 focus:ring-[#e4282b] shadow-sm',
+    primary: 'bg-[#e4282b] text-white hover:bg-growth-700 focus:ring-[#e4282b] shadow-sm',
     success: 'bg-[#64ac44] text-white hover:bg-green-700 focus:ring-[#64ac44] shadow-sm',
     secondary: 'bg-[#505050] text-white hover:bg-gray-700 focus:ring-[#505050] shadow-sm',
     'outline-primary': 'border-2 border-[#e4282b] text-[#e4282b] hover:bg-[#e4282b] hover:text-white focus:ring-[#e4282b]',
     'outline-success': 'border-2 border-[#64ac44] text-[#64ac44] hover:bg-[#64ac44] hover:text-white focus:ring-[#64ac44]',
     'outline-secondary': 'border-2 border-[#505050] text-[#505050] hover:bg-[#505050] hover:text-white focus:ring-[#505050]',
     ghost: 'text-[#505050] hover:bg-gray-100 focus:ring-gray-300',
-    danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-sm'
+    danger: 'bg-red-600 text-white hover:bg-growth-700 focus:ring-red-500 shadow-sm'
   };
   classes.push(variantClasses[props.variant]);
   

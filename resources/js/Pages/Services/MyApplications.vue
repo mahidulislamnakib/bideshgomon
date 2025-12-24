@@ -151,7 +151,7 @@ const statusOptions = [
                 id="status-filter"
                 v-model="statusFilter"
                 @change="applyFilters"
-                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
               >
                 <option v-for="option in statusOptions" :key="option.value" :value="option.value">
                   {{ option.label }}
@@ -171,7 +171,7 @@ const statusOptions = [
                   type="text"
                   placeholder="Search by application number or service name..."
                   @keyup.enter="applyFilters"
-                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                 />
                 <button
                   type="button"
@@ -200,7 +200,7 @@ const statusOptions = [
                     <div>
                       <Link
                         :href="route('applications.show', application.id)"
-                        class="text-lg font-semibold text-gray-900 hover:text-brand-red-600"
+                        class="text-lg font-semibold text-gray-900 hover:text-growth-600"
                       >
                         {{ application.service.name }}
                       </Link>
@@ -314,7 +314,7 @@ const statusOptions = [
           <Link
             v-if="!statusFilter && !searchQuery"
             :href="route('services.index')"
-            class="mt-6 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-brand-red-600 border border-transparent rounded-md hover:bg-red-700"
+            class="mt-6 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-growth-600 border border-transparent rounded-md hover:bg-growth-700"
           >
             Browse Services
           </Link>

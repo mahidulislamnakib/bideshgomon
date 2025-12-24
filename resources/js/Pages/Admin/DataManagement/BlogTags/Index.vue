@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <Head title="Blog Tags" />
   <AdminLayout>
     <div class="p-6">
@@ -9,7 +9,7 @@
 
       <!-- Actions Bar -->
       <div class="mb-6 flex flex-col sm:flex-row gap-4">
-        <Link :href="route('admin.data.blog-tags.create')" class="inline-flex items-center px-4 py-2 bg-brand-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700">
+        <Link :href="route('admin.data.blog-tags.create')" class="inline-flex items-center px-4 py-2 bg-growth-600 text-white text-sm font-medium rounded-md hover:bg-growth-700">
           <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
           </svg>
@@ -36,12 +36,12 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
-            <input v-model="filters.search" type="text" placeholder="Search tags..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" @input="debounceSearch"/>
+            <input v-model="filters.search" type="text" placeholder="Search tags..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-growth-600 focus:border-growth-600" @input="debounceSearch"/>
           </div>
 
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Sort By</label>
-            <select v-model="filters.sort" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-brand-red-600 focus:border-brand-red-600" @change="applyFilters">
+            <select v-model="filters.sort" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-growth-600 focus:border-growth-600" @change="applyFilters">
               <option value="name">Name</option>
               <option value="posts">Post Count</option>
               <option value="latest">Latest First</option>
@@ -69,14 +69,14 @@
           <tbody class="bg-white divide-y divide-gray-200">
             <tr v-for="tag in blogTags.data" :key="tag.id" class="hover:bg-gray-50">
               <td class="px-6 py-4 whitespace-nowrap">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-brand-red-600">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-growth-600">
                   {{ tag.name }}
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ tag.slug }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ tag.posts_count || 0 }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <Link :href="route('admin.data.blog-tags.edit', tag.id)" class="text-brand-red-600 hover:text-red-900 mr-3">Edit</Link>
+                <Link :href="route('admin.data.blog-tags.edit', tag.id)" class="text-growth-600 hover:text-red-900 mr-3">Edit</Link>
                 <button @click="confirmDelete(tag)" class="text-red-600 hover:text-red-900">Delete</button>
               </td>
             </tr>
@@ -105,13 +105,13 @@
                   :href="link.url"
                   v-html="link.label"
                   class="px-3 py-1 border rounded-md text-sm"
-                  :class="link.active ? 'bg-brand-red-600 text-white border-brand-red-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'"
+                  :class="link.active ? 'bg-growth-600 text-white border-growth-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'"
                 />
                 <span
                   v-else
                   v-html="link.label"
                   class="px-3 py-1 border rounded-md text-sm opacity-50 cursor-not-allowed"
-                  :class="link.active ? 'bg-brand-red-600 text-white border-brand-red-600' : 'bg-white text-gray-700 border-gray-300'"
+                  :class="link.active ? 'bg-growth-600 text-white border-growth-600' : 'bg-white text-gray-700 border-gray-300'"
                 />
               </template>
             </div>

@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <AdminLayout>
     <Head title="Bulk Upload Smart Suggestions" />
 
@@ -23,7 +23,7 @@
 
             <!-- Instructions -->
             <div class="mb-6 bg-red-50 dark:bg-blue-900 border border-red-200 dark:border-blue-700 rounded-lg p-4">
-              <h3 class="text-sm font-medium text-brand-red-600 dark:text-blue-200 mb-2">📋 Instructions</h3>
+              <h3 class="text-sm font-medium text-growth-600 dark:text-blue-200 mb-2">?? Instructions</h3>
               <ul class="text-sm text-blue-700 dark:text-blue-300 space-y-1 list-disc list-inside">
                 <li>Download the template CSV file and fill in your data</li>
                 <li><strong>user_id</strong>: Must be a valid user ID from your database</li>
@@ -47,7 +47,7 @@
                 </a>
                 <a
                   :href="route('admin.data.smart-suggestions.template') + '?sample=true'"
-                  class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700"
+                  class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700"
                 >
                   Download Sample Data
                 </a>
@@ -73,7 +73,7 @@
                   <button
                     type="submit"
                     :disabled="form.processing || !form.file"
-                    class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150 disabled:opacity-50"
+                    class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2 transition ease-in-out duration-150 disabled:opacity-50"
                   >
                     {{ form.processing ? 'Processing...' : 'Upload and Process' }}
                   </button>
@@ -83,7 +83,7 @@
 
             <!-- CSV Format Guide -->
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-              <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-3">📝 CSV Format Guide</h3>
+              <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-3">?? CSV Format Guide</h3>
               
               <div class="space-y-4">
                 <div>
@@ -112,21 +112,21 @@
                 <div>
                   <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category Examples:</h4>
                   <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-                    <div class="p-2 bg-gray-50 dark:bg-gray-700 rounded">🛂 visa</div>
-                    <div class="p-2 bg-gray-50 dark:bg-gray-700 rounded">👤 profile</div>
-                    <div class="p-2 bg-gray-50 dark:bg-gray-700 rounded">📄 document</div>
-                    <div class="p-2 bg-gray-50 dark:bg-gray-700 rounded">📝 application</div>
-                    <div class="p-2 bg-gray-50 dark:bg-gray-700 rounded">⭐ assessment</div>
+                    <div class="p-2 bg-gray-50 dark:bg-gray-700 rounded">?? visa</div>
+                    <div class="p-2 bg-gray-50 dark:bg-gray-700 rounded">?? profile</div>
+                    <div class="p-2 bg-gray-50 dark:bg-gray-700 rounded">?? document</div>
+                    <div class="p-2 bg-gray-50 dark:bg-gray-700 rounded">?? application</div>
+                    <div class="p-2 bg-gray-50 dark:bg-gray-700 rounded">? assessment</div>
                   </div>
                 </div>
 
                 <div>
                   <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Priority Levels:</h4>
                   <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                    <div class="p-2 bg-red-50 dark:bg-red-900 text-red-700 dark:text-red-200 rounded">🔴 urgent</div>
-                    <div class="p-2 bg-orange-50 dark:bg-orange-900 text-orange-700 dark:text-orange-200 rounded">🟠 high</div>
-                    <div class="p-2 bg-yellow-50 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-200 rounded">🟡 medium</div>
-                    <div class="p-2 bg-red-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200 rounded">🔵 low</div>
+                    <div class="p-2 bg-red-50 dark:bg-red-900 text-red-700 dark:text-red-200 rounded">?? urgent</div>
+                    <div class="p-2 bg-orange-50 dark:bg-orange-900 text-orange-700 dark:text-orange-200 rounded">?? high</div>
+                    <div class="p-2 bg-yellow-50 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-200 rounded">?? medium</div>
+                    <div class="p-2 bg-red-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200 rounded">?? low</div>
                   </div>
                 </div>
 

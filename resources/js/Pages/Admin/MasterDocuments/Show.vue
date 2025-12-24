@@ -1,24 +1,24 @@
-﻿<template>
+<template>
     <AdminLayout>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-2xl">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <!-- Header -->
                         <div class="mb-6 flex items-center justify-between">
                             <div>
                                 <h2 class="text-2xl font-bold text-gray-800">{{ document.document_name }}</h2>
                                 <p class="mt-1 text-sm text-gray-600">
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-brand-red-600">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-growth-600">
                                         {{ document.category?.name }}
                                     </span>
                                 </p>
                             </div>
                             <div class="flex items-center space-x-3">
-                                <Link :href="route('admin.master-documents.edit', document.id)" class="px-4 py-2 bg-brand-red-600 hover:bg-red-700 text-white rounded-lg transition">
+                                <Link :href="route('admin.master-documents.edit', document.id)" class="px-4 py-2 bg-growth-600 hover:bg-growth-700 text-white rounded-2xl transition">
                                     Edit Document
                                 </Link>
-                                <Link :href="route('admin.master-documents.index')" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition">
+                                <Link :href="route('admin.master-documents.index')" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-2xl transition">
                                     Back to List
                                 </Link>
                             </div>
@@ -29,7 +29,7 @@
                             <!-- Main Information -->
                             <div class="lg:col-span-2 space-y-6">
                                 <!-- Description -->
-                                <div class="bg-gray-50 rounded-lg p-6">
+                                <div class="bg-gray-50 rounded-2xl p-6">
                                     <h3 class="text-lg font-semibold text-gray-800 mb-3">Description</h3>
                                     <p class="text-gray-700 leading-relaxed">
                                         {{ document.description || 'No description provided' }}
@@ -37,7 +37,7 @@
                                 </div>
 
                                 <!-- Specifications -->
-                                <div class="bg-gray-50 rounded-lg p-6">
+                                <div class="bg-gray-50 rounded-2xl p-6">
                                     <h3 class="text-lg font-semibold text-gray-800 mb-3">Specifications</h3>
                                     <div class="text-gray-700 leading-relaxed whitespace-pre-line">
                                         {{ document.specifications || 'No specifications provided' }}
@@ -45,20 +45,20 @@
                                 </div>
 
                                 <!-- International Standard -->
-                                <div v-if="document.international_standard" class="bg-red-50 rounded-lg p-6 border border-red-200">
+                                <div v-if="document.international_standard" class="bg-red-50 rounded-2xl p-6 border border-red-200">
                                     <h3 class="text-lg font-semibold text-red-900 mb-2 flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                         International Standard
                                     </h3>
-                                    <p class="text-brand-red-600 font-medium">{{ document.international_standard }}</p>
+                                    <p class="text-growth-600 font-medium">{{ document.international_standard }}</p>
                                 </div>
 
                                 <!-- Example URL -->
-                                <div v-if="document.example_url" class="bg-gray-50 rounded-lg p-6">
+                                <div v-if="document.example_url" class="bg-gray-50 rounded-2xl p-6">
                                     <h3 class="text-lg font-semibold text-gray-800 mb-3">Reference Link</h3>
-                                    <a :href="document.example_url" target="_blank" class="text-brand-red-600 hover:text-brand-red-600 underline flex items-center">
+                                    <a :href="document.example_url" target="_blank" class="text-growth-600 hover:text-growth-600 underline flex items-center">
                                         {{ document.example_url }}
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -67,7 +67,7 @@
                                 </div>
 
                                 <!-- Country Assignments -->
-                                <div class="bg-white rounded-lg border border-gray-200 p-6">
+                                <div class="bg-white rounded-2xl border border-gray-200 p-6">
                                     <h3 class="text-lg font-semibold text-gray-800 mb-4">
                                         Country Assignments
                                         <span class="ml-2 text-sm font-normal text-gray-500">({{ document.country_requirements?.length || 0 }} countries)</span>
@@ -76,10 +76,10 @@
                                         <div
                                             v-for="assignment in document.country_requirements"
                                             :key="assignment.id"
-                                            class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
+                                            class="flex items-center justify-between p-3 bg-gray-50 rounded-2xl hover:bg-gray-100 transition"
                                         >
                                             <div>
-                                                <Link :href="route('admin.document-assignments.show', assignment.country_id)" class="text-brand-red-600 hover:text-brand-red-600 font-medium">
+                                                <Link :href="route('admin.document-assignments.show', assignment.country_id)" class="text-growth-600 hover:text-growth-600 font-medium">
                                                     {{ assignment.country?.name }}
                                                 </Link>
                                                 <span class="ml-2 text-xs text-gray-500">
@@ -101,7 +101,7 @@
                             <!-- Sidebar -->
                             <div class="space-y-6">
                                 <!-- Status Card -->
-                                <div class="bg-white rounded-lg border border-gray-200 p-6">
+                                <div class="bg-white rounded-2xl border border-gray-200 p-6">
                                     <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Status</h3>
                                     <div class="space-y-3">
                                         <div class="flex items-center justify-between">
@@ -115,13 +115,13 @@
                                         </div>
                                         <div class="flex items-center justify-between">
                                             <span class="text-sm text-gray-600">Sort Order</span>
-                                            <span class="text-sm font-medium text-gray-900">{{ document.sort_order }}</span>
+                                            <span class="text-sm font-medium text-gray-900 dark:text-white">{{ document.sort_order }}</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Requirements Card -->
-                                <div class="bg-white rounded-lg border border-gray-200 p-6">
+                                <div class="bg-white rounded-2xl border border-gray-200 p-6">
                                     <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Requirements</h3>
                                     <div class="space-y-3">
                                         <div class="flex items-center justify-between">
@@ -146,16 +146,16 @@
                                 </div>
 
                                 <!-- Validity Card -->
-                                <div v-if="document.typical_validity_days" class="bg-white rounded-lg border border-gray-200 p-6">
+                                <div v-if="document.typical_validity_days" class="bg-white rounded-2xl border border-gray-200 p-6">
                                     <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Validity</h3>
                                     <div class="text-center">
-                                        <div class="text-3xl font-bold text-brand-red-600">{{ document.typical_validity_days }}</div>
+                                        <div class="text-3xl font-bold text-growth-600">{{ document.typical_validity_days }}</div>
                                         <div class="text-sm text-gray-600 mt-1">days</div>
                                     </div>
                                 </div>
 
                                 <!-- Metadata Card -->
-                                <div class="bg-white rounded-lg border border-gray-200 p-6">
+                                <div class="bg-white rounded-2xl border border-gray-200 p-6">
                                     <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Metadata</h3>
                                     <div class="space-y-2 text-xs text-gray-600">
                                         <div>

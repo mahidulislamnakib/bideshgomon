@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <AdminLayout>
     <Head title="Create Smart Suggestion" />
 
@@ -30,7 +30,7 @@
                 <select
                   id="user_id"
                   v-model="form.user_id"
-                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   required
                 >
                   <option value="">Select a user</option>
@@ -50,15 +50,15 @@
                   <select
                     id="category"
                     v-model="form.category"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     required
                   >
                     <option value="">Select category</option>
-                    <option value="visa">🛂 Visa</option>
-                    <option value="profile">👤 Profile</option>
-                    <option value="document">📄 Document</option>
-                    <option value="application">📝 Application</option>
-                    <option value="assessment">⭐ Assessment</option>
+                    <option value="visa">?? Visa</option>
+                    <option value="profile">?? Profile</option>
+                    <option value="document">?? Document</option>
+                    <option value="application">?? Application</option>
+                    <option value="assessment">? Assessment</option>
                   </select>
                   <p v-if="form.errors.category" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.category }}</p>
                 </div>
@@ -70,13 +70,13 @@
                   <select
                     id="priority"
                     v-model="form.priority"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     required
                   >
-                    <option value="urgent">🔴 Urgent</option>
-                    <option value="high">🟠 High</option>
-                    <option value="medium">🟡 Medium</option>
-                    <option value="low">🔵 Low</option>
+                    <option value="urgent">?? Urgent</option>
+                    <option value="high">?? High</option>
+                    <option value="medium">?? Medium</option>
+                    <option value="low">?? Low</option>
                   </select>
                   <p v-if="form.errors.priority" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.priority }}</p>
                 </div>
@@ -92,7 +92,7 @@
                     id="suggestion_type"
                     v-model="form.suggestion_type"
                     type="text"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     placeholder="e.g., profile_completion"
                     required
                   />
@@ -107,7 +107,7 @@
                     id="title"
                     v-model="form.title"
                     type="text"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     placeholder="Brief title"
                     required
                   />
@@ -124,7 +124,7 @@
                   id="description"
                   v-model="form.description"
                   rows="4"
-                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   placeholder="Detailed description of the suggestion"
                   required
                 ></textarea>
@@ -141,7 +141,7 @@
                     id="action_type"
                     v-model="form.action_type"
                     type="text"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     placeholder="e.g., navigate, external"
                   />
                   <p v-if="form.errors.action_type" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.action_type }}</p>
@@ -155,7 +155,7 @@
                     id="action_url"
                     v-model="form.action_url"
                     type="text"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                     placeholder="/profile/edit or https://..."
                   />
                   <p v-if="form.errors.action_url" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.action_url }}</p>
@@ -171,7 +171,7 @@
                   id="data"
                   v-model="form.data"
                   rows="4"
-                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 font-mono text-sm"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 font-mono text-sm"
                   placeholder='{"key": "value", "another_key": 123}'
                 ></textarea>
                 <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Optional: Enter valid JSON for additional context data</p>
@@ -188,7 +188,7 @@
                     id="expires_at"
                     v-model="form.expires_at"
                     type="datetime-local"
-                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                   />
                   <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Leave blank for no expiration</p>
                   <p v-if="form.errors.expires_at" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.expires_at }}</p>
@@ -226,7 +226,7 @@
                 <button
                   type="submit"
                   :disabled="form.processing"
-                  class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-brand-red-600 focus:ring-offset-2 transition ease-in-out duration-150"
+                  class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-growth-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-growth-600 focus:ring-offset-2 transition ease-in-out duration-150"
                 >
                   Create Suggestion
                 </button>

@@ -2,122 +2,78 @@
     <AuthenticatedLayout>
         <Head title="Compare Packages" />
 
-        <!-- Header -->
-        <div class="bg-gradient-to-r from-sky-600 to-sky-700 text-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <h1 class="text-3xl font-bold mb-2">Package Comparison</h1>
-                <p class="text-sky-100">Compare features, pricing, and benefits to find your perfect package</p>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- Filters -->
-            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <!-- Service Filter -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Service Type</label>
+        <div class="min-h-screen bg-gray-50 dark:bg-neutral-950">
+            <!-- Compact Hero -->
+            <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+                <div class="max-w-7xl mx-auto">
+                    <h1 class="text-xl md:text-2xl font-bold text-white">Package Comparison</h1>
+                    <p class="text-sm text-white/80 mt-0.5">Compare features, pricing, and benefits</p>
+                    
+                    <!-- Filters in Hero -->
+                    <div class="flex flex-wrap items-center gap-3 mt-4">
                         <select
                             v-model="filters.service"
                             @change="applyFilters"
-                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-brand-red-600"
+                            class="px-3 py-2 text-sm border-0 bg-white/95 dark:bg-neutral-800 rounded-lg focus:ring-2 focus:ring-white/50"
                         >
                             <option value="">All Services</option>
                             <option v-for="service in services" :key="service.id" :value="service.slug">
                                 {{ service.name }}
                             </option>
                         </select>
-                    </div>
-
-                    <!-- Min Price -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Min Price</label>
                         <input
                             v-model.number="filters.min_price"
                             @change="applyFilters"
                             type="number"
-                            placeholder="0"
-                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-brand-red-600"
+                            placeholder="Min ৳"
+                            class="w-24 px-3 py-2 text-sm border-0 bg-white/95 dark:bg-neutral-800 rounded-lg focus:ring-2 focus:ring-white/50"
                         />
-                    </div>
-
-                    <!-- Max Price -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Max Price</label>
                         <input
                             v-model.number="filters.max_price"
                             @change="applyFilters"
                             type="number"
-                            placeholder="100000"
-                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-brand-red-600"
+                            placeholder="Max ৳"
+                            class="w-24 px-3 py-2 text-sm border-0 bg-white/95 dark:bg-neutral-800 rounded-lg focus:ring-2 focus:ring-white/50"
                         />
-                    </div>
-
-                    <!-- Popular First -->
-                    <div class="flex items-end">
-                        <label class="flex items-center space-x-2 cursor-pointer">
+                        <label class="flex items-center gap-2 text-sm text-white cursor-pointer">
                             <input
                                 v-model="filters.popular_first"
                                 @change="applyFilters"
                                 type="checkbox"
-                                class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                class="rounded border-0 text-growth-600 focus:ring-white/50"
                             />
-                            <span class="text-sm font-medium text-gray-700">Popular First</span>
+                            Popular First
                         </label>
+                        <button
+                            v-if="hasActiveFilters"
+                            @click="clearAllFilters"
+                            class="px-3 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors"
+                        >
+                            Reset
+                        </button>
                     </div>
                 </div>
+            </div>
 
-                <!-- Active Filters Display -->
-                <div v-if="hasActiveFilters" class="mt-4 flex items-center space-x-2">
-                    <span class="text-sm text-gray-600">Active filters:</span>
-                    <button
-                        v-if="filters.service"
-                        @click="clearFilter('service')"
-                        class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-sky-100 text-sky-800"
-                    >
-                        {{ getServiceName(filters.service) }}
-                        <XMarkIcon class="h-3 w-3 ml-1" />
-                    </button>
-                    <button
-                        v-if="filters.min_price"
-                        @click="clearFilter('min_price')"
-                        class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-sky-100 text-sky-800"
-                    >
-                        Min: ৳{{ filters.min_price.toLocaleString() }}
-                        <XMarkIcon class="h-3 w-3 ml-1" />
-                    </button>
-                    <button
-                        v-if="filters.max_price"
-                        @click="clearFilter('max_price')"
-                        class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-sky-100 text-sky-800"
-                    >
-                        Max: ৳{{ filters.max_price.toLocaleString() }}
-                        <XMarkIcon class="h-3 w-3 ml-1" />
-                    </button>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 pb-8">
+                <!-- Results Count -->
+                <p class="text-xs text-gray-500 dark:text-gray-400 py-4">{{ packages.length }} packages found</p>
+
+                <!-- No Results -->
+                <div v-if="packages.length === 0" class="text-center py-12">
+                    <FunnelIcon class="mx-auto h-12 w-12 text-gray-400" />
+                    <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No packages found</h3>
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Try adjusting your filters</p>
                     <button
                         @click="clearAllFilters"
-                        class="text-sm text-brand-red-600 hover:text-sky-700 font-medium"
+                        class="mt-4 px-4 py-2 text-sm font-medium text-growth-600 hover:text-growth-700"
                     >
-                        Clear All
+                        Clear Filters
                     </button>
                 </div>
-            </div>
 
-            <!-- No Results -->
-            <div v-if="packages.length === 0" class="bg-white rounded-lg shadow-sm p-12 text-center">
-                <FunnelIcon class="mx-auto h-12 w-12 text-gray-400" />
-                <h3 class="mt-2 text-sm font-medium text-gray-900">No packages found</h3>
-                <p class="mt-1 text-sm text-gray-500">Try adjusting your filters</p>
-                <button
-                    @click="clearAllFilters"
-                    class="mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700"
-                >
-                    Clear Filters
-                </button>
-            </div>
-
-            <!-- Comparison Table (Desktop) -->
-            <div v-else class="hidden lg:block bg-white rounded-lg shadow-sm overflow-hidden">
+                <!-- Comparison Table (Desktop) -->
+                <div v-else class="hidden lg:block bg-white rounded-lg shadow-sm overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -147,7 +103,7 @@
                                         <p class="text-xs text-gray-500">{{ pkg.service_module.name }}</p>
 
                                         <!-- Price -->
-                                        <div class="text-2xl font-bold text-brand-red-600">
+                                        <div class="text-2xl font-bold text-growth-600">
                                             ৳{{ pkg.price.toLocaleString() }}
                                             <span v-if="pkg.price_unit !== 'fixed'" class="text-sm text-gray-500">
                                                 / {{ pkg.price_unit.replace('_', ' ') }}
@@ -168,7 +124,7 @@
                                         <!-- CTA Button -->
                                         <Link
                                             :href="route('packages.show', pkg.slug)"
-                                            class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 w-full"
+                                            class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 w-full"
                                         >
                                             View Details
                                         </Link>
@@ -221,12 +177,12 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+                </div>
 
-            <!-- Mobile Cards -->
-            <div class="lg:hidden space-y-6">
-                <div
-                    v-for="pkg in packages"
+                <!-- Mobile Cards -->
+                <div class="lg:hidden space-y-6">
+                    <div
+                        v-for="pkg in packages"
                     :key="pkg.id"
                     class="bg-white rounded-lg shadow-sm overflow-hidden"
                 >
@@ -243,7 +199,7 @@
                         <p class="text-sm text-gray-600">{{ pkg.service_module.name }}</p>
                         
                         <div class="mt-4">
-                            <div class="text-3xl font-bold text-brand-red-600">
+                            <div class="text-3xl font-bold text-growth-600">
                                 ৳{{ pkg.price.toLocaleString() }}
                                 <span v-if="pkg.price_unit !== 'fixed'" class="text-base text-gray-500">
                                     / {{ pkg.price_unit.replace('_', ' ') }}
@@ -281,10 +237,11 @@
                         <!-- CTA -->
                         <Link
                             :href="route('packages.show', pkg.slug)"
-                            class="block text-center px-4 py-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700"
+                            class="block text-center px-4 py-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700"
                         >
                             View Full Details
                         </Link>
+                    </div>
                     </div>
                 </div>
             </div>

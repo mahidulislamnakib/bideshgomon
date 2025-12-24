@@ -46,7 +46,7 @@ const submit = () => {
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="mb-6">
-                    <Link :href="route('hotels.show', hotel.id)" class="text-brand-red-600 hover:text-indigo-800">
+                    <Link :href="route('hotels.show', hotel.id)" class="text-growth-600 hover:text-indigo-800">
                         ← Back to Hotel
                     </Link>
                 </div>
@@ -65,19 +65,19 @@ const submit = () => {
                                         <div>
                                             <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
                                             <input v-model="form.guest_name" type="text" required
-                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" />
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all" />
                                             <span v-if="form.errors.guest_name" class="text-sm text-red-600">{{ form.errors.guest_name }}</span>
                                         </div>
                                         <div>
                                             <label class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
                                             <input v-model="form.guest_email" type="email" required
-                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" />
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all" />
                                             <span v-if="form.errors.guest_email" class="text-sm text-red-600">{{ form.errors.guest_email }}</span>
                                         </div>
                                         <div>
                                             <label class="block text-sm font-semibold text-gray-700 mb-2">Phone *</label>
                                             <input v-model="form.guest_phone" type="tel" required
-                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" />
+                                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all" />
                                             <span v-if="form.errors.guest_phone" class="text-sm text-red-600">{{ form.errors.guest_phone }}</span>
                                         </div>
                                     </div>
@@ -92,12 +92,12 @@ const submit = () => {
                                             <div>
                                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
                                                 <input v-model="guest.name" type="text" required
-                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" />
+                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all" />
                                             </div>
                                             <div>
                                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Age</label>
                                                 <input v-model="guest.age" type="number" min="1" max="120"
-                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" />
+                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all" />
                                             </div>
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@ const submit = () => {
                                     <label class="block text-sm font-semibold text-gray-700 mb-2">Special Requests (Optional)</label>
                                     <textarea v-model="form.special_requests" rows="4"
                                         placeholder="Any special requirements or requests..."
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"></textarea>
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all resize-none"></textarea>
                                 </div>
 
                                 <!-- Terms & Conditions -->
@@ -119,7 +119,7 @@ const submit = () => {
                                     </div>
                                     
                                     <label class="flex items-start">
-                                        <input type="checkbox" required class="mt-1 rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600" />
+                                        <input type="checkbox" required class="mt-1 rounded border-gray-300 text-growth-600 focus:ring-growth-600" />
                                         <span class="ml-2 text-sm text-gray-700">
                                             I agree to the hotel's cancellation policy and house rules. I understand that payment will be processed immediately.
                                         </span>
@@ -128,7 +128,7 @@ const submit = () => {
 
                                 <!-- Submit Button -->
                                 <button type="submit" :disabled="form.processing"
-                                    class="w-full bg-brand-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                                    class="w-full bg-growth-600 text-white py-3 px-6 rounded-lg hover:bg-growth-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
                                     <span v-if="form.processing">Processing...</span>
                                     <span v-else>Proceed to Payment</span>
                                 </button>
@@ -176,7 +176,7 @@ const submit = () => {
                                 </div>
                                 <div class="border-t pt-2 flex justify-between items-center">
                                     <span class="font-semibold text-gray-900">Total</span>
-                                    <span class="text-2xl font-bold text-brand-red-600">{{ formatPrice(booking_details.total_amount) }}</span>
+                                    <span class="text-2xl font-bold text-growth-600">{{ formatPrice(booking_details.total_amount) }}</span>
                                 </div>
                             </div>
 

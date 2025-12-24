@@ -95,7 +95,7 @@ const getStrengthLabel = (score) => {
 
     <AuthenticatedLayout>
         <!-- Header -->
-        <div class="bg-brand-red-600 text-white">
+        <div class="bg-growth-600 text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-4">
@@ -111,7 +111,7 @@ const getStrengthLabel = (score) => {
                     </div>
                     <button
                         @click="refreshSuggestions"
-                        class="inline-flex items-center gap-2 bg-white text-brand-red-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+                        class="inline-flex items-center gap-2 bg-white text-growth-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors font-medium"
                     >
                         <ArrowPathIcon class="h-5 w-5" />
                         <span>Refresh</span>
@@ -127,7 +127,7 @@ const getStrengthLabel = (score) => {
                 <!-- Total Suggestions -->
                 <div class="bg-white rounded-xl border-2 border-gray-200 p-4 hover:border-indigo-400 transition-colors">
                     <div class="flex items-center justify-between mb-2">
-                        <LightBulbIcon class="h-6 w-6 text-brand-red-600" />
+                        <LightBulbIcon class="h-6 w-6 text-growth-600" />
                     </div>
                     <p class="text-2xl font-bold text-gray-900">{{ counts.total }}</p>
                     <p class="text-xs text-gray-600">Total Active</p>
@@ -305,7 +305,7 @@ const getStrengthLabel = (score) => {
                             <div class="flex items-center gap-2 ml-4">
                                 <Link
                                     :href="suggestion.action_url"
-                                    class="px-3 py-1.5 bg-brand-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors"
+                                    class="px-3 py-1.5 bg-growth-600 text-white text-sm font-medium rounded-lg hover:bg-growth-700 transition-colors"
                                 >
                                     View
                                 </Link>
@@ -338,7 +338,7 @@ const getStrengthLabel = (score) => {
                 </p>
                 <Link
                     :href="route('profile.show')"
-                    class="inline-flex items-center px-6 py-3 bg-brand-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors"
+                    class="inline-flex items-center px-6 py-3 bg-growth-600 text-white font-medium rounded-lg hover:bg-growth-700 transition-colors"
                 >
                     View Profile
                 </Link>

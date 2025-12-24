@@ -39,49 +39,47 @@ const currentWorkId = ref(null)
 // Form
 const form = ref({
   company_name: '',
-  job_title: '',
+  position: '',
   employment_type: '',
-  job_category: '',
   start_date: '',
   end_date: '',
   is_current_employment: false,
   country: 'Bangladesh',
   city: '',
-  responsibilities: '',
-  achievements: '',
-  salary_range: '',
+  job_description: '',
+  salary: '',
+  currency: 'BDT',
+  salary_period: 'monthly',
+  supervisor_name: '',
+  supervisor_phone: '',
+  supervisor_email: '',
   reason_for_leaving: '',
 })
 
 const formErrors = ref({})
 const isProcessing = ref(false)
 
-// Define employment types locally
+// Define employment types locally (must match database enum values)
 const employmentTypes = [
-  'Full-time',
-  'Part-time',
-  'Contract',
-  'Freelance',
-  'Internship',
-  'Temporary'
+  { value: 'full_time', label: 'Full-time' },
+  { value: 'part_time', label: 'Part-time' },
+  { value: 'contract', label: 'Contract' },
+  { value: 'freelance', label: 'Freelance' },
+  { value: 'internship', label: 'Internship' },
 ]
 
-// Define job categories locally
-const jobCategories = [
-  'Information Technology',
-  'Engineering',
-  'Healthcare',
-  'Education',
-  'Finance',
-  'Marketing',
-  'Sales',
-  'Customer Service',
-  'Administration',
-  'Manufacturing',
-  'Construction',
-  'Hospitality',
-  'Other'
+// Currency options
+const currencies = ['BDT', 'USD', 'GBP', 'EUR', 'AUD', 'CAD']
+const salaryPeriods = [
+  { value: 'monthly', label: 'Monthly' },
+  { value: 'yearly', label: 'Yearly' },
 ]
+
+// Helper to get employment type label
+const getEmploymentTypeLabel = (value) => {
+  const type = employmentTypes.find(t => t.value === value)
+  return type ? type.label : value
+}
 
 const countries = computed(() => props.countries ? props.countries.map(c => c.name) : [])
 
@@ -104,17 +102,20 @@ const openModal = (work = null) => {
     currentWorkId.value = work.id
     form.value = {
       company_name: work.company_name || '',
-      job_title: work.job_title || '',
+      position: work.position || '',
       employment_type: work.employment_type || '',
-      job_category: work.job_category || '',
       start_date: work.start_date ? work.start_date.substring(0, 10) : '',
       end_date: work.end_date ? work.end_date.substring(0, 10) : '',
       is_current_employment: work.is_current_employment || false,
       country: work.country || 'Bangladesh',
       city: work.city || '',
-      responsibilities: work.responsibilities || '',
-      achievements: work.achievements || '',
-      salary_range: work.salary_range || '',
+      job_description: work.job_description || '',
+      salary: work.salary || '',
+      currency: work.currency || 'BDT',
+      salary_period: work.salary_period || 'monthly',
+      supervisor_name: work.supervisor_name || '',
+      supervisor_phone: work.supervisor_phone || '',
+      supervisor_email: work.supervisor_email || '',
       reason_for_leaving: work.reason_for_leaving || '',
     }
   } else {
@@ -122,17 +123,20 @@ const openModal = (work = null) => {
     currentWorkId.value = null
     form.value = {
       company_name: '',
-      job_title: '',
+      position: '',
       employment_type: '',
-      job_category: '',
       start_date: '',
       end_date: '',
       is_current_employment: false,
       country: 'Bangladesh',
       city: '',
-      responsibilities: '',
-      achievements: '',
-      salary_range: '',
+      job_description: '',
+      salary: '',
+      currency: 'BDT',
+      salary_period: 'monthly',
+      supervisor_name: '',
+      supervisor_phone: '',
+      supervisor_email: '',
       reason_for_leaving: '',
     }
   }
@@ -145,17 +149,20 @@ const closeModal = () => {
   showModal.value = false
   form.value = {
     company_name: '',
-    job_title: '',
+    position: '',
     employment_type: '',
-    job_category: '',
     start_date: '',
     end_date: '',
     is_current_employment: false,
     country: 'Bangladesh',
     city: '',
-    responsibilities: '',
-    achievements: '',
-    salary_range: '',
+    job_description: '',
+    salary: '',
+    currency: 'BDT',
+    salary_period: 'monthly',
+    supervisor_name: '',
+    supervisor_phone: '',
+    supervisor_email: '',
     reason_for_leaving: '',
   }
   formErrors.value = {}
@@ -223,12 +230,12 @@ const calculateDuration = (startDate, endDate, isCurrent) => {
 // Format date for display
 const { formatDate } = useBangladeshFormat();
 
-// Sort by start date (most recent first)
+// Sort by start date (most recent first), filtering out any null/undefined entries
 const sortedWorkList = computed(() => {
-  return [...workList.value].sort((a, b) => {
+  return [...workList.value].filter(w => w && w.id).sort((a, b) => {
     if (a.is_current_employment) return -1
     if (b.is_current_employment) return 1
-    return new Date(b.start_date) - new Date(a.start_date)
+    return new Date(b.start_date || 0) - new Date(a.start_date || 0)
   })
 })
 </script>
@@ -277,7 +284,7 @@ const sortedWorkList = computed(() => {
     <div v-else class="space-y-4">
       <div
         v-for="(work, index) in sortedWorkList"
-        :key="work.id"
+        :key="work?.id || index"
         class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
       >
         <!-- Card Header -->
@@ -285,10 +292,10 @@ const sortedWorkList = computed(() => {
           <div class="flex items-start justify-between gap-3 mb-2">
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2 mb-1">
-                <BriefcaseIcon class="w-6 h-6 md:w-7 md:h-7 text-brand-red-600 dark:text-indigo-400 flex-shrink-0" />
-                <h3 class="text-base font-bold text-gray-900 dark:text-white truncate">{{ work.job_title }}</h3>
+                <BriefcaseIcon class="w-6 h-6 md:w-7 md:h-7 text-growth-600 dark:text-indigo-400 flex-shrink-0" />
+                <h3 class="text-base font-bold text-gray-900 dark:text-white truncate">{{ work?.position || 'Position' }}</h3>
               </div>
-              <p class="text-sm font-semibold text-brand-red-600 dark:text-indigo-400">{{ work.company_name }}</p>
+              <p class="text-sm font-semibold text-growth-600 dark:text-indigo-400">{{ work?.company_name || 'Company' }}</p>
             </div>
             <span
               v-if="work.is_current_employment"
@@ -317,7 +324,7 @@ const sortedWorkList = computed(() => {
               </svg>
               <span>{{ formatDate(work.start_date) }} - {{ work.is_current_employment ? 'Present' : formatDate(work.end_date) }}</span>
             </div>
-            <div class="flex items-center gap-2 text-sm font-medium text-brand-red-600 dark:text-indigo-400">
+            <div class="flex items-center gap-2 text-sm font-medium text-growth-600 dark:text-indigo-400">
               <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -331,31 +338,28 @@ const sortedWorkList = computed(() => {
               v-if="work.employment_type"
               class="inline-flex items-center px-2.5 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-medium rounded-full"
             >
-              {{ work.employment_type }}
+              {{ getEmploymentTypeLabel(work.employment_type) }}
             </span>
             <span
-              v-if="work.job_category"
-              class="inline-flex items-center px-2.5 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-medium rounded-full"
+              v-if="work.salary"
+              class="inline-flex items-center px-2.5 py-1 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs font-medium rounded-full"
             >
-              {{ work.job_category }}
+              {{ work.currency }} {{ Number(work.salary).toLocaleString() }}/{{ work.salary_period }}
             </span>
           </div>
           
-          <!-- Responsibilities -->
-          <div v-if="work.responsibilities" class="pt-2">
-            <h4 class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1.5 uppercase tracking-wide">Responsibilities</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line leading-relaxed">{{ work.responsibilities }}</p>
+          <!-- Job Description -->
+          <div v-if="work.job_description" class="pt-2">
+            <h4 class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1.5 uppercase tracking-wide">Job Description</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line leading-relaxed">{{ work.job_description }}</p>
           </div>
           
-          <!-- Achievements -->
-          <div v-if="work.achievements" class="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-3 rounded-r">
-            <h4 class="text-xs font-semibold text-green-800 dark:text-green-300 mb-1 flex items-center gap-1.5 uppercase tracking-wide">
-              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-              Achievements
-            </h4>
-            <p class="text-sm text-green-700 dark:text-green-200 whitespace-pre-line leading-relaxed">{{ work.achievements }}</p>
+          <!-- Supervisor Info -->
+          <div v-if="work.supervisor_name" class="pt-2">
+            <h4 class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1.5 uppercase tracking-wide">Supervisor</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">{{ work.supervisor_name }}
+              <span v-if="work.supervisor_email" class="text-gray-500"> • {{ work.supervisor_email }}</span>
+            </p>
           </div>
         </div>
 
@@ -383,7 +387,7 @@ const sortedWorkList = computed(() => {
       <!-- Add More Button -->
       <button
         @click="openModal()"
-        class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-brand-red-600 hover:bg-red-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-base"
+        class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-growth-600 hover:bg-growth-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-base"
       >
         <PlusIcon class="h-5 w-5" />
         <span>ADD MORE EXPERIENCE</span>
@@ -404,7 +408,7 @@ const sortedWorkList = computed(() => {
               <InputLabel for="company_name" value="Company Name *" />
               <TextInput
                 id="company_name"
-                v-model="form.value.company_name"
+                v-model="form.company_name"
                 type="text"
                 class="mt-1 block w-full"
                 required
@@ -413,44 +417,31 @@ const sortedWorkList = computed(() => {
             </div>
 
             <div>
-              <InputLabel for="job_title" value="Job Title *" />
+              <InputLabel for="position" value="Job Title / Position *" />
               <TextInput
-                id="job_title"
-                v-model="form.value.job_title"
+                id="position"
+                v-model="form.position"
                 type="text"
                 class="mt-1 block w-full"
                 required
               />
-              <InputError class="mt-2" :message="formErrors.job_title" />
+              <InputError class="mt-2" :message="formErrors.position" />
             </div>
           </div>
 
-          <!-- Employment Type & Job Category -->
+          <!-- Employment Type -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <InputLabel for="employment_type" value="Employment Type" />
               <select
                 id="employment_type"
-                v-model="form.value.employment_type"
-                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
+                v-model="form.employment_type"
+                class="mt-1 block w-full border-gray-300 focus:border-growth-600 focus:ring-growth-600 rounded-md shadow-sm"
               >
                 <option value="">Select Type</option>
-                <option v-for="type in employmentTypes" :key="type" :value="type">{{ type }}</option>
+                <option v-for="type in employmentTypes" :key="type.value" :value="type.value">{{ type.label }}</option>
               </select>
               <InputError class="mt-2" :message="formErrors.employment_type" />
-            </div>
-
-            <div>
-              <InputLabel for="job_category" value="Job Category" />
-              <select
-                id="job_category"
-                v-model="form.value.job_category"
-                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
-              >
-                <option value="">Select Category</option>
-                <option v-for="category in jobCategories" :key="category" :value="category">{{ category }}</option>
-              </select>
-              <InputError class="mt-2" :message="formErrors.job_category" />
             </div>
           </div>
 
@@ -460,7 +451,7 @@ const sortedWorkList = computed(() => {
               <InputLabel for="start_date" value="Start Date *" />
               <DateInput
                 id="start_date"
-                v-model="form.value.start_date"
+                v-model="form.start_date"
                 class="mt-1 block w-full"
                 required
               />
@@ -471,7 +462,7 @@ const sortedWorkList = computed(() => {
               <InputLabel for="end_date" :value="form.is_current_employment ? 'End Date (Optional)' : 'End Date *'" />
               <DateInput
                 id="end_date"
-                v-model="form.value.end_date"
+                v-model="form.end_date"
                 class="mt-1 block w-full"
                 :disabled="form.is_current_employment"
                 :required="!form.is_current_employment"
@@ -484,8 +475,8 @@ const sortedWorkList = computed(() => {
           <div class="flex items-center">
             <Checkbox
               id="is_current_employment"
-              v-model:checked="form.value.is_current_employment"
-              @update:checked="val => { if (val) form.value.end_date = '' }"
+              v-model:checked="form.is_current_employment"
+              @update:checked="val => { if (val) form.end_date = '' }"
             />
             <InputLabel for="is_current_employment" value="I currently work here" class="ml-2" />
           </div>
@@ -496,8 +487,8 @@ const sortedWorkList = computed(() => {
               <InputLabel for="country" value="Country *" />
               <select
                 id="country"
-                v-model="form.value.country"
-                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
+                v-model="form.country"
+                class="mt-1 block w-full border-gray-300 focus:border-growth-600 focus:ring-growth-600 rounded-md shadow-sm"
                 required
               >
                 <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
@@ -509,7 +500,7 @@ const sortedWorkList = computed(() => {
               <InputLabel for="city" value="City" />
               <TextInput
                 id="city"
-                v-model="form.value.city"
+                v-model="form.city"
                 type="text"
                 class="mt-1 block w-full"
               />
@@ -517,57 +508,108 @@ const sortedWorkList = computed(() => {
             </div>
           </div>
 
-          <!-- Responsibilities -->
+          <!-- Job Description -->
           <div>
-            <InputLabel for="responsibilities" value="Key Responsibilities" />
+            <InputLabel for="job_description" value="Job Description & Responsibilities" />
             <textarea
-              id="responsibilities"
-              v-model="form.value.responsibilities"
+              id="job_description"
+              v-model="form.job_description"
               rows="3"
-              class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
+              class="mt-1 block w-full border-gray-300 focus:border-growth-600 focus:ring-growth-600 rounded-md shadow-sm"
               placeholder="Describe your main responsibilities and duties..."
             ></textarea>
-            <InputError class="mt-2" :message="formErrors.responsibilities" />
+            <InputError class="mt-2" :message="formErrors.job_description" />
           </div>
 
-          <!-- Achievements -->
-          <div>
-            <InputLabel for="achievements" value="Achievements & Accomplishments" />
-            <textarea
-              id="achievements"
-              v-model="form.value.achievements"
-              rows="2"
-              class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-brand-red-600 rounded-md shadow-sm"
-              placeholder="Notable achievements, awards, or accomplishments..."
-            ></textarea>
-            <InputError class="mt-2" :message="formErrors.achievements" />
-          </div>
-
-          <!-- Salary Range & Reason for Leaving -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Salary Information -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <InputLabel for="salary_range" value="Salary Range (Optional)" />
+              <InputLabel for="salary" value="Salary (Optional)" />
               <TextInput
-                id="salary_range"
-                v-model="form.value.salary_range"
-                type="text"
+                id="salary"
+                v-model="form.salary"
+                type="number"
                 class="mt-1 block w-full"
-                placeholder="e.g., 50,000 - 60,000 BDT"
+                placeholder="e.g., 50000"
               />
-              <InputError class="mt-2" :message="formErrors.salary_range" />
+              <InputError class="mt-2" :message="formErrors.salary" />
             </div>
 
-            <div v-if="!form.is_current_employment">
-              <InputLabel for="reason_for_leaving" value="Reason for Leaving" />
+            <div>
+              <InputLabel for="currency" value="Currency" />
+              <select
+                id="currency"
+                v-model="form.currency"
+                class="mt-1 block w-full border-gray-300 focus:border-growth-600 focus:ring-growth-600 rounded-md shadow-sm"
+              >
+                <option v-for="curr in currencies" :key="curr" :value="curr">{{ curr }}</option>
+              </select>
+              <InputError class="mt-2" :message="formErrors.currency" />
+            </div>
+
+            <div>
+              <InputLabel for="salary_period" value="Period" />
+              <select
+                id="salary_period"
+                v-model="form.salary_period"
+                class="mt-1 block w-full border-gray-300 focus:border-growth-600 focus:ring-growth-600 rounded-md shadow-sm"
+              >
+                <option v-for="period in salaryPeriods" :key="period.value" :value="period.value">{{ period.label }}</option>
+              </select>
+              <InputError class="mt-2" :message="formErrors.salary_period" />
+            </div>
+          </div>
+
+          <!-- Supervisor Information -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <InputLabel for="supervisor_name" value="Supervisor Name" />
               <TextInput
-                id="reason_for_leaving"
-                v-model="form.value.reason_for_leaving"
+                id="supervisor_name"
+                v-model="form.supervisor_name"
                 type="text"
                 class="mt-1 block w-full"
-                placeholder="e.g., Career growth"
+                placeholder="e.g., John Smith"
               />
-              <InputError class="mt-2" :message="formErrors.reason_for_leaving" />
+              <InputError class="mt-2" :message="formErrors.supervisor_name" />
             </div>
+
+            <div>
+              <InputLabel for="supervisor_email" value="Supervisor Email" />
+              <TextInput
+                id="supervisor_email"
+                v-model="form.supervisor_email"
+                type="email"
+                class="mt-1 block w-full"
+                placeholder="e.g., john@company.com"
+              />
+              <InputError class="mt-2" :message="formErrors.supervisor_email" />
+            </div>
+
+            <div>
+              <InputLabel for="supervisor_phone" value="Supervisor Phone" />
+              <TextInput
+                id="supervisor_phone"
+                v-model="form.supervisor_phone"
+                type="tel"
+                class="mt-1 block w-full"
+                placeholder="e.g., +880 1712-345678"
+              />
+              <InputError class="mt-2" :message="formErrors.supervisor_phone" />
+            </div>
+          </div>
+
+          <!-- Reason for Leaving -->
+          <div v-if="!form.is_current_employment">
+            <InputLabel for="reason_for_leaving" value="Reason for Leaving" />
+            <TextInput
+              id="reason_for_leaving"
+              v-model="form.reason_for_leaving"
+              type="text"
+              class="mt-1 block w-full"
+              placeholder="e.g., Career growth, better opportunity"
+            />
+            <InputError class="mt-2" :message="formErrors.reason_for_leaving" />
           </div>
 
           <!-- Actions -->

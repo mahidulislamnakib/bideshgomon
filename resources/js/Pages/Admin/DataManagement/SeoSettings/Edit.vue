@@ -1,9 +1,9 @@
-﻿<template>
+<template>
     <AdminLayout>
         <div class="px-4 sm:px-6 lg:px-8 py-8">
             <!-- Header -->
             <div class="mb-6">
-                <Link :href="route('admin.data.seo-settings.index')" class="text-sm font-medium text-brand-red-600 hover:text-brand-red-600 dark:text-blue-400 flex items-center gap-1 mb-4">
+                <Link :href="route('admin.data.seo-settings.index')" class="text-sm font-medium text-growth-600 hover:text-growth-600 dark:text-blue-400 flex items-center gap-1 mb-4">
                     <ChevronLeftIcon class="h-4 w-4" />
                     Back to SEO Settings
                 </Link>
@@ -23,7 +23,7 @@
                             type="text"
                             id="page_type"
                             v-model="form.page_type"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             placeholder="home, about, contact, jobs, etc."
                             required
                         />
@@ -38,7 +38,7 @@
                             id="title"
                             v-model="form.title"
                             maxlength="70"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         />
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">{{ form.title?.length || 0 }}/70 characters (60-70 recommended)</p>
                         <p v-if="form.errors.title" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.title }}</p>
@@ -51,7 +51,7 @@
                             v-model="form.description"
                             maxlength="160"
                             rows="3"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         ></textarea>
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">{{ form.description?.length || 0 }}/160 characters (150-160 recommended)</p>
                         <p v-if="form.errors.description" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.description }}</p>
@@ -63,7 +63,7 @@
                             id="keywords"
                             v-model="form.keywords"
                             rows="2"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             placeholder="keyword1, keyword2, keyword3"
                         ></textarea>
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Comma-separated keywords</p>
@@ -76,7 +76,7 @@
                             type="url"
                             id="canonical_url"
                             v-model="form.canonical_url"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             placeholder="https://bideshgomon.com/page"
                         />
                         <p v-if="form.errors.canonical_url" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.errors.canonical_url }}</p>
@@ -94,7 +94,7 @@
                                 type="text"
                                 id="og_title"
                                 v-model="form.og_title"
-                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             />
                         </div>
                         <div>
@@ -102,7 +102,7 @@
                             <select
                                 id="og_type"
                                 v-model="form.og_type"
-                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="website">Website</option>
                                 <option value="article">Article</option>
@@ -118,7 +118,7 @@
                             id="og_description"
                             v-model="form.og_description"
                             rows="2"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         ></textarea>
                     </div>
 
@@ -128,7 +128,7 @@
                             type="url"
                             id="og_image"
                             v-model="form.og_image"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             placeholder="https://example.com/image.jpg"
                         />
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Recommended: 1200x630px</p>
@@ -145,7 +145,7 @@
                             <select
                                 id="twitter_card"
                                 v-model="form.twitter_card"
-                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             >
                                 <option value="summary">Summary</option>
                                 <option value="summary_large_image">Summary Large Image</option>
@@ -159,7 +159,7 @@
                                 type="text"
                                 id="twitter_site"
                                 v-model="form.twitter_site"
-                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                                 placeholder="@bideshgomon"
                             />
                         </div>
@@ -171,7 +171,7 @@
                             type="text"
                             id="twitter_title"
                             v-model="form.twitter_title"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         />
                     </div>
 
@@ -181,7 +181,7 @@
                             id="twitter_description"
                             v-model="form.twitter_description"
                             rows="2"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                         ></textarea>
                     </div>
 
@@ -191,7 +191,7 @@
                             type="url"
                             id="twitter_image"
                             v-model="form.twitter_image"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             placeholder="https://example.com/image.jpg"
                         />
                     </div>
@@ -207,7 +207,7 @@
                             id="schema_markup"
                             v-model="form.schema_markup"
                             rows="5"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600 font-mono text-sm"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600 font-mono text-sm"
                             placeholder='{"@context":"https://schema.org","@type":"Organization","name":"Example"}'
                         ></textarea>
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Valid JSON-LD schema markup</p>
@@ -220,7 +220,7 @@
                                 type="checkbox"
                                 id="index"
                                 v-model="form.index"
-                                class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-brand-red-600 focus:ring-brand-red-600"
+                                class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                             />
                             <label for="index" class="text-sm font-medium text-gray-900 dark:text-white">Allow Indexing</label>
                         </div>
@@ -229,7 +229,7 @@
                                 type="checkbox"
                                 id="follow"
                                 v-model="form.follow"
-                                class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-brand-red-600 focus:ring-brand-red-600"
+                                class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-growth-600 focus:ring-growth-600"
                             />
                             <label for="follow" class="text-sm font-medium text-gray-900 dark:text-white">Follow Links</label>
                         </div>
@@ -241,7 +241,7 @@
                             type="text"
                             id="robots"
                             v-model="form.robots"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-brand-red-600 focus:ring-brand-red-600"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-growth-600 focus:ring-growth-600"
                             placeholder="noarchive, nosnippet, max-snippet:160"
                         />
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Comma-separated additional directives</p>
@@ -256,7 +256,7 @@
                     <button
                         type="submit"
                         :disabled="form.processing"
-                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-red-600 disabled:opacity-50"
+                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-growth-600 hover:bg-growth-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-growth-600 disabled:opacity-50"
                     >
                         <span v-if="form.processing">Updating...</span>
                         <span v-else>Update SEO Setting</span>

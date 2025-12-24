@@ -107,18 +107,21 @@ const getRankingColor = (ranking) => {
     <Head title="University Search - Find Your Dream University" />
 
     <AuthenticatedLayout>
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <!-- Header Section -->
-                <div class="mb-8">
-                    <h1 class="text-3xl font-bold text-gray-900">University Search</h1>
-                    <p class="mt-2 text-gray-600">Explore {{ stats.total }} universities across {{ stats.countries }} countries</p>
-                    
-                    <!-- Stats -->
-                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="min-h-screen bg-gray-50 dark:bg-neutral-900">
+            <!-- Compact Hero -->
+            <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+                <div class="max-w-7xl mx-auto">
+                    <h1 class="text-xl md:text-2xl font-bold text-white">University Search</h1>
+                    <p class="text-sm text-white/80 mt-0.5">Explore {{ stats.total }} universities across {{ stats.countries }} countries</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+                <!-- Stats -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                         <div class="bg-white rounded-lg shadow px-5 py-4">
                             <div class="flex items-center">
-                                <AcademicCapIcon class="h-8 w-8 text-brand-red-600" />
+                                <AcademicCapIcon class="h-8 w-8 text-growth-600" />
                                 <div class="ml-4">
                                     <p class="text-sm text-gray-500">Total Universities</p>
                                     <p class="text-2xl font-semibold text-gray-900">{{ stats.total }}</p>
@@ -127,7 +130,7 @@ const getRankingColor = (ranking) => {
                         </div>
                         <div class="bg-white rounded-lg shadow px-5 py-4">
                             <div class="flex items-center">
-                                <GlobeAltIcon class="h-8 w-8 text-brand-red-600" />
+                                <GlobeAltIcon class="h-8 w-8 text-growth-600" />
                                 <div class="ml-4">
                                     <p class="text-sm text-gray-500">Countries</p>
                                     <p class="text-2xl font-semibold text-gray-900">{{ stats.countries }}</p>
@@ -144,7 +147,6 @@ const getRankingColor = (ranking) => {
                             </div>
                         </div>
                     </div>
-                </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
                     <!-- Filters Sidebar -->
@@ -157,7 +159,7 @@ const getRankingColor = (ranking) => {
                                 </h3>
                                 <button
                                     @click="resetFilters"
-                                    class="text-sm text-brand-red-600 hover:text-ocean-700"
+                                    class="text-sm text-growth-600 hover:text-ocean-700"
                                 >
                                     Reset
                                 </button>
@@ -166,16 +168,13 @@ const getRankingColor = (ranking) => {
                             <!-- Search -->
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Search</label>
-                                <div class="relative">
-                                    <input
-                                        v-model="filters.search"
-                                        @keyup.enter="applyFilters"
-                                        type="text"
-                                        placeholder="University name, city..."
-                                        class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                                    />
-                                    <MagnifyingGlassIcon class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                                </div>
+                                <input
+                                    v-model="filters.search"
+                                    @keyup.enter="applyFilters"
+                                    type="text"
+                                    placeholder="University name, city..."
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all"
+                                />
                             </div>
 
                             <!-- Country Filter -->
@@ -184,7 +183,7 @@ const getRankingColor = (ranking) => {
                                 <select
                                     v-model="filters.country_id"
                                     @change="applyFilters"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                                 >
                                     <option value="">All Countries</option>
                                     <option v-for="country in countries" :key="country.id" :value="country.id">
@@ -203,7 +202,7 @@ const getRankingColor = (ranking) => {
                                         type="number"
                                         placeholder="Min"
                                         min="1"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                                     />
                                     <input
                                         v-model="filters.ranking_max"
@@ -211,7 +210,7 @@ const getRankingColor = (ranking) => {
                                         type="number"
                                         placeholder="Max"
                                         min="1"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                                     />
                                 </div>
                             </div>
@@ -226,7 +225,7 @@ const getRankingColor = (ranking) => {
                                     placeholder="e.g., 50000"
                                     min="0"
                                     step="1000"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                                 />
                             </div>
 
@@ -236,7 +235,7 @@ const getRankingColor = (ranking) => {
                                 <select
                                     v-model="filters.type"
                                     @change="applyFilters"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white"
                                 >
                                     <option value="">All Types</option>
                                     <option value="public">Public</option>
@@ -251,7 +250,7 @@ const getRankingColor = (ranking) => {
                                         v-model="filters.scholarships"
                                         @change="applyFilters"
                                         type="checkbox"
-                                        class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                        class="rounded border-gray-300 text-growth-600 focus:ring-growth-600"
                                     />
                                     <span class="ml-2 text-sm text-gray-700">Scholarships Available</span>
                                 </label>
@@ -259,7 +258,7 @@ const getRankingColor = (ranking) => {
 
                             <button
                                 @click="applyFilters"
-                                class="w-full bg-brand-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+                                class="w-full bg-growth-600 text-white px-4 py-2 rounded-lg hover:bg-growth-700 transition"
                             >
                                 Apply Filters
                             </button>
@@ -280,7 +279,7 @@ const getRankingColor = (ranking) => {
                                 <button
                                     @click="compareUniversities"
                                     :disabled="comparisonList.length < 2"
-                                    class="bg-brand-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                    class="bg-growth-600 text-white px-4 py-2 rounded-lg hover:bg-growth-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     Compare
                                 </button>
@@ -300,7 +299,7 @@ const getRankingColor = (ranking) => {
                             <p class="mt-1 text-sm text-gray-500">Try adjusting your filters to see more results.</p>
                             <button
                                 @click="resetFilters"
-                                class="mt-4 text-brand-red-600 hover:text-ocean-700 text-sm font-medium"
+                                class="mt-4 text-growth-600 hover:text-ocean-700 text-sm font-medium"
                             >
                                 Reset all filters
                             </button>
@@ -320,7 +319,7 @@ const getRankingColor = (ranking) => {
                                             type="checkbox"
                                             :checked="isInComparison(university.id)"
                                             @change="toggleComparison(university)"
-                                            class="rounded border-gray-300 text-brand-red-600 focus:ring-brand-red-600"
+                                            class="rounded border-gray-300 text-growth-600 focus:ring-growth-600"
                                         />
                                         <span class="ml-2 text-xs text-gray-600">Compare</span>
                                     </label>
@@ -333,7 +332,7 @@ const getRankingColor = (ranking) => {
                                             <img :src="university.logo" :alt="university.name" class="w-12 h-12 object-contain" />
                                         </div>
                                         <div v-else class="flex-shrink-0 w-16 h-16 bg-ocean-50 rounded-lg flex items-center justify-center">
-                                            <AcademicCapIcon class="h-8 w-8 text-brand-red-600" />
+                                            <AcademicCapIcon class="h-8 w-8 text-growth-600" />
                                         </div>
                                         <div class="flex-1">
                                             <h3 class="text-lg font-semibold text-gray-900 line-clamp-2">{{ university.name }}</h3>
@@ -397,7 +396,7 @@ const getRankingColor = (ranking) => {
                                     :class="[
                                         'px-4 py-2 rounded-lg text-sm font-medium transition',
                                         link.active
-                                            ? 'bg-brand-red-600 text-white'
+                                            ? 'bg-growth-600 text-white'
                                             : link.url
                                             ? 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
                                             : 'bg-gray-100 text-gray-400 cursor-not-allowed'

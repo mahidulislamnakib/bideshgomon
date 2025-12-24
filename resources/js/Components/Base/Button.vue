@@ -168,9 +168,9 @@ const sizeConfig = {
 // Variant styles
 const variantConfig = {
   primary: {
-    base: 'bg-blue-600 text-white shadow-sm',
-    hover: 'hover:bg-blue-700',
-    focus: 'focus:ring-blue-500',
+    base: 'bg-growth-600 text-white shadow-sm',
+    hover: 'hover:bg-growth-700',
+    focus: 'focus:ring-growth-600',
     disabled: 'disabled:bg-blue-300',
   },
   secondary: {
@@ -187,7 +187,7 @@ const variantConfig = {
   },
   danger: {
     base: 'bg-red-600 text-white shadow-sm',
-    hover: 'hover:bg-red-700',
+    hover: 'hover:bg-growth-700',
     focus: 'focus:ring-red-500',
     disabled: 'disabled:bg-red-300',
   },
@@ -198,9 +198,9 @@ const variantConfig = {
     disabled: 'disabled:text-gray-400',
   },
   link: {
-    base: 'bg-transparent text-blue-600',
+    base: 'bg-transparent text-growth-600',
     hover: 'hover:text-blue-700 hover:underline',
-    focus: 'focus:ring-blue-500',
+    focus: 'focus:ring-growth-600',
     disabled: 'disabled:text-blue-300',
   },
 }

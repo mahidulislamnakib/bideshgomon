@@ -7,7 +7,7 @@
             <div class="absolute inset-0 bg-grid-gray-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="flex items-start gap-6">
-                    <div class="flex-shrink-0 p-4 rounded-2xl bg-brand-red-600 shadow-xl shadow-blue-200 border-2 border-blue-700">
+                    <div class="flex-shrink-0 p-4 rounded-2xl bg-growth-600 shadow-xl shadow-blue-200 border-2 border-blue-700">
                         <DocumentMagnifyingGlassIcon class="h-14 w-14 text-white" />
                     </div>
                     <div class="flex-1">
@@ -19,15 +19,15 @@
                         </p>
                         <div class="flex flex-wrap gap-6 text-sm">
                             <div class="flex items-center gap-2 text-gray-600">
-                                <SparklesIcon class="h-5 w-5 text-brand-red-600" />
+                                <SparklesIcon class="h-5 w-5 text-growth-600" />
                                 <span>98% accuracy rate</span>
                             </div>
                             <div class="flex items-center gap-2 text-gray-600">
-                                <ClockIcon class="h-5 w-5 text-brand-red-600" />
+                                <ClockIcon class="h-5 w-5 text-growth-600" />
                                 <span>Process in 5-30 seconds</span>
                             </div>
                             <div class="flex items-center gap-2 text-gray-600">
-                                <CheckCircleIcon class="h-5 w-5 text-brand-red-600" />
+                                <CheckCircleIcon class="h-5 w-5 text-growth-600" />
                                 <span>Auto-fill your profile</span>
                             </div>
                         </div>
@@ -69,13 +69,13 @@
                                     :value="type.value"
                                     class="sr-only"
                                 />
-                                <component :is="type.icon" class="h-8 w-8" :class="form.document_type === type.value ? 'text-brand-red-600' : 'text-gray-400'" />
+                                <component :is="type.icon" class="h-8 w-8" :class="form.document_type === type.value ? 'text-growth-600' : 'text-gray-400'" />
                                 <span class="text-sm font-medium text-center" :class="form.document_type === type.value ? 'text-indigo-900' : 'text-gray-700'">
                                     {{ type.label }}
                                 </span>
                                 <CheckCircleIcon 
                                     v-if="form.document_type === type.value"
-                                    class="absolute top-2 right-2 h-5 w-5 text-brand-red-600"
+                                    class="absolute top-2 right-2 h-5 w-5 text-growth-600"
                                 />
                             </label>
                         </div>
@@ -108,11 +108,11 @@
                             />
 
                             <div v-if="!previewUrl" class="py-8">
-                                <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-brand-red-600 flex items-center justify-center border-2 border-blue-700">
+                                <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-growth-600 flex items-center justify-center border-2 border-blue-700">
                                     <CloudArrowUpIcon class="h-10 w-10 text-white" />
                                 </div>
                                 <p class="text-lg font-semibold text-gray-900 mb-2">
-                                    <span class="text-brand-red-600">Click to upload</span> or drag and drop
+                                    <span class="text-growth-600">Click to upload</span> or drag and drop
                                 </p>
                                 <p class="text-sm text-gray-500 mb-4">PNG, JPG up to 10MB</p>
                                 <div class="flex items-center justify-center gap-4 text-xs text-gray-400">
@@ -147,24 +147,24 @@
                     <!-- Tips -->
                     <div class="bg-blue-50 rounded-2xl p-6 border-2 border-blue-100">
                         <div class="flex items-center gap-2 mb-4">
-                            <LightBulbIcon class="h-6 w-6 text-brand-red-600" />
+                            <LightBulbIcon class="h-6 w-6 text-growth-600" />
                             <h3 class="font-semibold text-gray-900">Pro Tips for Best Results</h3>
                         </div>
                         <ul class="space-y-3 text-sm text-gray-600">
                             <li class="flex items-start gap-3">
-                                <CheckCircleIcon class="h-5 w-5 text-brand-red-600 flex-shrink-0 mt-0.5" />
+                                <CheckCircleIcon class="h-5 w-5 text-growth-600 flex-shrink-0 mt-0.5" />
                                 <span>Ensure good lighting and avoid shadows on your document</span>
                             </li>
                             <li class="flex items-start gap-3">
-                                <CheckCircleIcon class="h-5 w-5 text-brand-red-600 flex-shrink-0 mt-0.5" />
+                                <CheckCircleIcon class="h-5 w-5 text-growth-600 flex-shrink-0 mt-0.5" />
                                 <span>Capture the entire document within the frame for complete data</span>
                             </li>
                             <li class="flex items-start gap-3">
-                                <CheckCircleIcon class="h-5 w-5 text-brand-red-600 flex-shrink-0 mt-0.5" />
+                                <CheckCircleIcon class="h-5 w-5 text-growth-600 flex-shrink-0 mt-0.5" />
                                 <span>Keep the document flat on a contrasting surface to avoid glare</span>
                             </li>
                             <li class="flex items-start gap-3">
-                                <CheckCircleIcon class="h-5 w-5 text-brand-red-600 flex-shrink-0 mt-0.5" />
+                                <CheckCircleIcon class="h-5 w-5 text-growth-600 flex-shrink-0 mt-0.5" />
                                 <span>Use a high-resolution image for maximum OCR accuracy</span>
                             </li>
                         </ul>
@@ -177,8 +177,8 @@
                         @click="uploadDocument"
                         :class="[
                             'w-full py-4 px-6 rounded-2xl font-semibold text-white shadow-lg transition-all duration-200',
-                            'bg-brand-red-600',
-                            'hover:bg-red-700 hover:shadow-xl hover:scale-[1.02]',
+                            'bg-growth-600',
+                            'hover:bg-growth-700 hover:shadow-xl hover:scale-[1.02]',
                             'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
                             'flex items-center justify-center gap-3'
                         ]"
@@ -192,7 +192,7 @@
             <!-- Previous Scans -->
             <div>
                 <div class="flex items-center gap-3 mb-6">
-                    <div class="w-1 h-8 bg-brand-red-600 rounded-full"></div>
+                    <div class="w-1 h-8 bg-growth-600 rounded-full"></div>
                     <h2 class="text-2xl font-bold text-gray-900">Scan History</h2>
                 </div>
 
@@ -253,10 +253,10 @@
 
                                 <!-- Processing -->
                                 <div v-else-if="scan.status === 'processing'" class="flex items-center gap-3 p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                                    <ArrowPathIcon class="h-5 w-5 animate-spin text-brand-red-600" />
+                                    <ArrowPathIcon class="h-5 w-5 animate-spin text-growth-600" />
                                     <div>
                                         <span class="font-medium text-indigo-900 text-sm">Processing document with AI...</span>
-                                        <p class="text-xs text-brand-red-600 mt-1">Estimated: 5-30 seconds</p>
+                                        <p class="text-xs text-growth-600 mt-1">Estimated: 5-30 seconds</p>
                                     </div>
                                 </div>
 
@@ -272,7 +272,7 @@
                                 <Link
                                     v-if="scan.status === 'completed'"
                                     :href="route('document-scanner.show', scan.id)"
-                                    class="px-4 py-2 bg-brand-red-600 text-white rounded-xl hover:bg-red-700 transition-all flex items-center gap-2 text-sm font-medium"
+                                    class="px-4 py-2 bg-growth-600 text-white rounded-xl hover:bg-growth-700 transition-all flex items-center gap-2 text-sm font-medium"
                                 >
                                     <EyeIcon class="h-4 w-4" />
                                     View Details
@@ -303,13 +303,13 @@
                 <!-- Empty State -->
                 <div v-else class="bg-white rounded-2xl shadow-md p-12 text-center border border-gray-100">
                     <div class="w-20 h-20 mx-auto mb-6 rounded-3xl bg-blue-100 flex items-center justify-center border-2 border-blue-200">
-                        <DocumentMagnifyingGlassIcon class="h-12 w-12 text-brand-red-600" />
+                        <DocumentMagnifyingGlassIcon class="h-12 w-12 text-growth-600" />
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">No scans yet</h3>
                     <p class="text-gray-500 mb-6 max-w-md mx-auto">Upload your first document to get started with AI-powered data extraction</p>
                     <button
                         @click="scrollToUpload"
-                        class="px-6 py-3 bg-brand-red-600 text-white rounded-xl hover:bg-red-700 transition-all font-medium inline-flex items-center gap-2"
+                        class="px-6 py-3 bg-growth-600 text-white rounded-xl hover:bg-growth-700 transition-all font-medium inline-flex items-center gap-2"
                     >
                         <CloudArrowUpIcon class="h-5 w-5" />
                         Upload Document

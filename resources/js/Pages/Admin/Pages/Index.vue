@@ -1,16 +1,20 @@
-﻿<script setup>
+<script setup>
 import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import BaseCard from '@/Components/Base/BaseCard.vue';
 import BaseInput from '@/Components/Base/BaseInput.vue';
 import BaseSelect from '@/Components/Base/BaseSelect.vue';
+import PageSkeleton from '@/Components/ui/PageSkeleton.vue';
+import EmptyState from '@/Components/Base/EmptyState.vue';
 
 const props = defineProps({
     pages: Object,
     filters: Object,
     pageTypes: Object,
 });
+
+const loading = ref(false);
 
 const searchQuery = ref(props.filters.search || '');
 const selectedType = ref(props.filters.type || '');
@@ -65,18 +69,22 @@ const formatDate = (date) => {
     <Head title="CMS Pages" />
 
     <AdminLayout>
-        <div class="space-y-6">
+        <!-- Loading Skeleton -->
+        <PageSkeleton v-if="loading" />
+
+        <!-- Main Content -->
+        <div v-else class="space-y-6">
             <!-- Header -->
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-display-md font-bold text-gray-900">CMS Pages</h1>
+                    <h1 class="text-display-md font-bold text-gray-900 dark:text-white">CMS Pages</h1>
                     <p class="mt-1 text-gray-600">Manage website pages, terms, privacy policy, and more</p>
                 </div>
                 <Link
                     :href="route('admin.pages.create')"
-                    class="inline-flex items-center px-4 py-2 bg-brand-red-600 border border-transparent rounded-md font-semibold text-sm text-white hover:bg-red-700 transition-colors"
+                    class="inline-flex items-center px-4 py-2 bg-growth-600 border border-transparent rounded-xl font-semibold text-sm text-white hover:bg-growth-700 transition-colors"
                 >
-                    📄 Create Page
+                    ➕ Create Page
                 </Link>
             </div>
 
@@ -110,25 +118,23 @@ const formatDate = (date) => {
                     />
                 </div>
                 <div class="flex gap-2 mt-4">
-                    <button @click="applyFilters" class="px-4 py-2 bg-brand-red-600 text-white rounded-md hover:bg-red-700">Search</button>
-                    <button @click="clearFilters" class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50">Reset</button>
+                    <button @click="applyFilters" class="px-4 py-2 bg-growth-600 text-white rounded-xl hover:bg-growth-700">Search</button>
+                    <button @click="clearFilters" class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-xl hover:bg-gray-50">Reset</button>
                 </div>
             </BaseCard>
 
             <!-- Pages List -->
             <BaseCard padding="none">
-                    <div v-if="pages.data.length === 0" class="text-center py-12">
-                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        <p class="mt-4 text-gray-500">No pages found</p>
-                        <Link
-                            :href="route('admin.pages.create')"
-                            class="mt-4 inline-block text-brand-red-600 hover:text-red-700"
-                        >
-                            Create your first page
-                        </Link>
-                    </div>
+                    <EmptyState
+                        v-if="pages.data.length === 0"
+                        icon="DocumentIcon"
+                        title="No pages found"
+                        description="Create custom pages to add content to your website."
+                        :action="{
+                            label: 'Create Page',
+                            onClick: () => router.visit(route('admin.pages.create')),
+                        }"
+                    />
 
                     <table v-else class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -145,7 +151,7 @@ const formatDate = (date) => {
                                 <td class="px-6 py-4">
                                     <div class="flex items-center">
                                         <div>
-                                            <div class="text-sm font-medium text-gray-900">
+                                            <div class="text-sm font-medium text-gray-900 dark:text-white">
                                                 {{ page.title }}
                                             </div>
                                             <div class="text-sm text-gray-500">
@@ -155,7 +161,7 @@ const formatDate = (date) => {
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-brand-red-600">
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-growth-600">
                                         {{ pageTypes[page.page_type] || page.page_type }}
                                     </span>
                                 </td>
@@ -164,7 +170,7 @@ const formatDate = (date) => {
                                         'px-2 py-1 text-xs font-semibold rounded-full',
                                         page.is_published ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
                                     ]">
-                                        {{ page.is_published ? '✓ Published' : '○ Draft' }}
+                                        {{ page.is_published ? '? Published' : '? Draft' }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -178,14 +184,14 @@ const formatDate = (date) => {
                                         <Link
                                             :href="route('page.show', page.slug)"
                                             target="_blank"
-                                            class="text-gray-600 hover:text-gray-900"
+                                            class="text-gray-600 hover:text-gray-900 dark:text-white"
                                             title="View"
                                         >
                                             👁️
                                         </Link>
                                         <Link
                                             :href="route('admin.pages.edit', page.id)"
-                                            class="text-brand-red-600 hover:text-red-900"
+                                            class="text-growth-600 hover:text-red-900"
                                             title="Edit"
                                         >
                                             ✏️
@@ -195,7 +201,7 @@ const formatDate = (date) => {
                                             class="text-yellow-600 hover:text-yellow-900"
                                             :title="page.is_published ? 'Unpublish' : 'Publish'"
                                         >
-                                            {{ page.is_published ? '📕' : '📗' }}
+                                            {{ page.is_published ? '📤' : '📥' }}
                                         </button>
                                         <button
                                             @click="duplicatePage(page)"
@@ -229,9 +235,9 @@ const formatDate = (date) => {
                                     :key="link.label"
                                     :href="link.url"
                                     :class="[
-                                        'px-3 py-2 text-sm font-medium rounded-md transition-colors',
+                                        'px-3 py-2 text-sm font-medium rounded-xl transition-colors',
                                         link.active
-                                            ? 'bg-brand-red-600 text-white'
+                                            ? 'bg-growth-600 text-white'
                                             : link.url
                                             ? 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
                                             : 'bg-gray-100 text-gray-400 cursor-not-allowed'

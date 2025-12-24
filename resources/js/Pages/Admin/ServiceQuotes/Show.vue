@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import {
@@ -184,9 +184,9 @@ const formatCurrency = (amount) => {
                 <div>
                   <Link
                     :href="route('service-applications.show', quote.service_application?.id)"
-                    class="text-brand-red-600 hover:text-indigo-700 dark:text-red-400 text-sm font-medium"
+                    class="text-growth-600 hover:text-indigo-700 dark:text-red-400 text-sm font-medium"
                   >
-                    View Full Application →
+                    View Full Application ?
                   </Link>
                 </div>
               </div>
@@ -239,7 +239,7 @@ const formatCurrency = (amount) => {
                   </label>
                   <select
                     v-model="statusForm.status"
-                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-700 dark:text-white"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-growth-600 dark:bg-gray-700 dark:text-white"
                   >
                     <option value="pending">Pending</option>
                     <option value="accepted">Accepted</option>
@@ -254,7 +254,7 @@ const formatCurrency = (amount) => {
                   <textarea
                     v-model="statusForm.admin_notes"
                     rows="3"
-                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-red-600 dark:bg-gray-700 dark:text-white"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-growth-600 dark:bg-gray-700 dark:text-white"
                     placeholder="Add notes about this status update..."
                   ></textarea>
                 </div>
@@ -262,7 +262,7 @@ const formatCurrency = (amount) => {
                 <button
                   type="submit"
                   :disabled="statusForm.processing"
-                  class="w-full bg-brand-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:opacity-50"
+                  class="w-full bg-growth-600 hover:bg-growth-700 text-white font-semibold py-2 px-4 rounded-2xl transition-colors disabled:opacity-50"
                 >
                   <span v-if="statusForm.processing">Updating...</span>
                   <span v-else>Update Status</span>

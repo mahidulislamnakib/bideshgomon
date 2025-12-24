@@ -37,7 +37,7 @@
                         :class="[
                             'pb-3 px-4 font-medium text-sm transition',
                             filter === 'all'
-                                ? 'border-b-2 border-blue-500 text-brand-red-600'
+                                ? 'border-b-2 border-blue-500 text-growth-600'
                                 : 'text-gray-500 hover:text-gray-700'
                         ]"
                     >
@@ -48,7 +48,7 @@
                         :class="[
                             'pb-3 px-4 font-medium text-sm transition',
                             filter === 'needs_quote'
-                                ? 'border-b-2 border-blue-500 text-brand-red-600'
+                                ? 'border-b-2 border-blue-500 text-growth-600'
                                 : 'text-gray-500 hover:text-gray-700'
                         ]"
                     >
@@ -59,7 +59,7 @@
                         :class="[
                             'pb-3 px-4 font-medium text-sm transition',
                             filter === 'pending'
-                                ? 'border-b-2 border-blue-500 text-brand-red-600'
+                                ? 'border-b-2 border-blue-500 text-growth-600'
                                 : 'text-gray-500 hover:text-gray-700'
                         ]"
                     >
@@ -70,7 +70,7 @@
                         :class="[
                             'pb-3 px-4 font-medium text-sm transition',
                             filter === 'accepted'
-                                ? 'border-b-2 border-blue-500 text-brand-red-600'
+                                ? 'border-b-2 border-blue-500 text-growth-600'
                                 : 'text-gray-500 hover:text-gray-700'
                         ]"
                     >
@@ -149,7 +149,7 @@
                             <div class="ml-6 flex flex-col space-y-2">
                                 <Link
                                     :href="route('agency.flight-requests.show', request.id)"
-                                    class="px-4 py-2 bg-brand-red-600 text-white rounded-lg hover:bg-red-700 transition text-sm text-center"
+                                    class="px-4 py-2 bg-growth-600 text-white rounded-lg hover:bg-growth-700 transition text-sm text-center"
                                 >
                                     View Details
                                 </Link>
@@ -197,7 +197,7 @@
                                 :class="[
                                     'px-4 py-2 border rounded-lg text-sm',
                                     link.active
-                                        ? 'bg-brand-red-600 text-white border-blue-600'
+                                        ? 'bg-growth-600 text-white border-blue-600'
                                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                                 ]"
                                 v-html="link.label"

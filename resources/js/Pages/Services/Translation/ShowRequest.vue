@@ -30,7 +30,7 @@
                                 <div class="flex justify-between"><dt class="text-sm">Base Price</dt><dd class="font-medium">৳{{ request.price_per_page * request.page_count }}</dd></div>
                                 <div class="flex justify-between"><dt class="text-sm">Certification</dt><dd class="font-medium">৳{{ request.certification_fee }}</dd></div>
                                 <div class="flex justify-between"><dt class="text-sm">Urgency</dt><dd class="font-medium">৳{{ request.urgency_fee }}</dd></div>
-                                <div class="flex justify-between pt-2 border-t"><dt class="font-semibold">Total</dt><dd class="text-xl font-bold text-brand-red-600">৳{{ request.total_amount }}</dd></div>
+                                <div class="flex justify-between pt-2 border-t"><dt class="font-semibold">Total</dt><dd class="text-xl font-bold text-growth-600">৳{{ request.total_amount }}</dd></div>
                             </dl>
                         </div>
                     </div>

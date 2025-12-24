@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { Link } from '@inertiajs/vue3'
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 
@@ -46,11 +46,11 @@ const getProgressPercentage = () => {
           <div>
             <Link
               :href="route('admin.marketing-campaigns.index')"
-              class="text-brand-red-600 hover:text-brand-red-dark text-sm mb-2 inline-block"
+              class="text-growth-600 hover:text-growth-700 text-sm mb-2 inline-block"
             >
               ← Back to Campaigns
             </Link>
-            <h1 class="text-3xl font-bold text-gray-900">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
               {{ campaign.name }}
             </h1>
             <div class="flex flex-wrap items-center gap-3 mt-2">
@@ -66,7 +66,7 @@ const getProgressPercentage = () => {
             <Link
               v-if="['draft', 'scheduled', 'paused'].includes(campaign.status)"
               :href="route('admin.marketing-campaigns.edit', campaign.id)"
-              class="px-4 py-2 bg-brand-red-600 hover:bg-red-700 transition-colors text-white rounded-lg hover:bg-brand-red-dark transition"
+              class="px-4 py-2 bg-growth-600 hover:bg-growth-700 transition-colors text-white rounded-2xl hover:bg-growth-700 transition"
             >
               Edit Campaign
             </Link>
@@ -76,26 +76,26 @@ const getProgressPercentage = () => {
 
       <!-- Stats Overview -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-        <div class="bg-white rounded-lg shadow-sm p-6">
+        <div class="bg-white rounded-2xl shadow-sm p-6">
           <div class="text-sm text-gray-600 mb-1">
             Total Recipients
           </div>
-          <div class="text-3xl font-bold text-gray-900">
+          <div class="text-3xl font-bold text-gray-900 dark:text-white">
             {{ campaign.total_recipients.toLocaleString() }}
           </div>
         </div>
-        <div class="bg-white rounded-lg shadow-sm p-6">
+        <div class="bg-white rounded-2xl shadow-sm p-6">
           <div class="text-sm text-gray-600 mb-1">
             Sent
           </div>
-          <div class="text-3xl font-bold text-brand-red-600">
+          <div class="text-3xl font-bold text-growth-600">
             {{ campaign.sent_count.toLocaleString() }}
           </div>
           <div class="text-sm text-gray-500 mt-1">
             {{ getProgressPercentage() }}% of total
           </div>
         </div>
-        <div class="bg-white rounded-lg shadow-sm p-6">
+        <div class="bg-white rounded-2xl shadow-sm p-6">
           <div class="text-sm text-gray-600 mb-1">
             Delivered
           </div>
@@ -106,7 +106,7 @@ const getProgressPercentage = () => {
             {{ campaign.sent_count > 0 ? ((campaign.delivered_count / campaign.sent_count) * 100).toFixed(1) : 0 }}% delivery rate
           </div>
         </div>
-        <div class="bg-white rounded-lg shadow-sm p-6">
+        <div class="bg-white rounded-2xl shadow-sm p-6">
           <div class="text-sm text-gray-600 mb-1">
             Bounced
           </div>
@@ -121,13 +121,13 @@ const getProgressPercentage = () => {
 
       <!-- Engagement Metrics -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <div class="bg-white rounded-lg shadow-sm p-6">
+        <div class="bg-white rounded-2xl shadow-sm p-6">
           <div class="flex items-center justify-between mb-4">
-            <div class="text-lg font-semibold text-gray-900">
+            <div class="text-lg font-semibold text-gray-900 dark:text-white">
               Opens
             </div>
             <div class="text-2xl">
-              👁️
+              📧
             </div>
           </div>
           <div class="text-3xl font-bold text-purple-600 mb-2">
@@ -143,16 +143,16 @@ const getProgressPercentage = () => {
             ></div>
           </div>
         </div>
-        <div class="bg-white rounded-lg shadow-sm p-6">
+        <div class="bg-white rounded-2xl shadow-sm p-6">
           <div class="flex items-center justify-between mb-4">
-            <div class="text-lg font-semibold text-gray-900">
+            <div class="text-lg font-semibold text-gray-900 dark:text-white">
               Clicks
             </div>
             <div class="text-2xl">
               👆
             </div>
           </div>
-          <div class="text-3xl font-bold text-brand-red-600 mb-2">
+          <div class="text-3xl font-bold text-growth-600 mb-2">
             {{ campaign.clicked_count.toLocaleString() }}
           </div>
           <div class="text-sm text-gray-600">
@@ -160,14 +160,14 @@ const getProgressPercentage = () => {
           </div>
           <div class="mt-4 bg-gray-200 rounded-full h-2">
             <div
-              class="bg-brand-red-600 hover:bg-red-700 transition-colors h-2 rounded-full"
+              class="bg-growth-600 hover:bg-growth-700 transition-colors h-2 rounded-full"
               :style="{ width: campaign.click_rate + '%' }"
             ></div>
           </div>
         </div>
-        <div class="bg-white rounded-lg shadow-sm p-6">
+        <div class="bg-white rounded-2xl shadow-sm p-6">
           <div class="flex items-center justify-between mb-4">
-            <div class="text-lg font-semibold text-gray-900">
+            <div class="text-lg font-semibold text-gray-900 dark:text-white">
               Unsubscribes
             </div>
             <div class="text-2xl">
@@ -191,8 +191,8 @@ const getProgressPercentage = () => {
 
       <!-- Campaign Details -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="bg-white rounded-lg shadow-sm p-6">
-          <h2 class="text-lg font-semibold text-gray-900 mb-4">
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             Campaign Details
           </h2>
           <div class="space-y-3">
@@ -219,8 +219,8 @@ const getProgressPercentage = () => {
           </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow-sm p-6">
-          <h2 class="text-lg font-semibold text-gray-900 mb-4">
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             Timeline
           </h2>
           <div class="space-y-3">
@@ -249,8 +249,8 @@ const getProgressPercentage = () => {
       </div>
 
       <!-- Progress Bar (for active campaigns) -->
-      <div v-if="['scheduled', 'sending'].includes(campaign.status)" class="bg-white rounded-lg shadow-sm p-6 mb-6">
-        <h2 class="text-lg font-semibold text-gray-900 mb-4">
+      <div v-if="['scheduled', 'sending'].includes(campaign.status)" class="bg-white rounded-2xl shadow-sm p-6 mb-6">
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
           Campaign Progress
         </h2>
         <div class="mb-2 flex justify-between text-sm">
@@ -259,7 +259,7 @@ const getProgressPercentage = () => {
         </div>
         <div class="bg-gray-200 rounded-full h-4">
           <div
-            class="bg-brand-red-600 hover:bg-red-700 transition-colors h-4 rounded-full transition-all duration-500"
+            class="bg-growth-600 hover:bg-growth-700 transition-colors h-4 rounded-full transition-all duration-500"
             :style="{ width: getProgressPercentage() + '%' }"
           ></div>
         </div>
@@ -269,11 +269,11 @@ const getProgressPercentage = () => {
       </div>
 
       <!-- Audience Filters (if segment) -->
-      <div v-if="campaign.audience_type === 'segment' && campaign.audience_filters && Object.keys(campaign.audience_filters).length > 0" class="bg-white rounded-lg shadow-sm p-6">
-        <h2 class="text-lg font-semibold text-gray-900 mb-4">
+      <div v-if="campaign.audience_type === 'segment' && campaign.audience_filters && Object.keys(campaign.audience_filters).length > 0" class="bg-white rounded-2xl shadow-sm p-6">
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
           Audience Filters
         </h2>
-        <div class="bg-gray-50 rounded-lg p-4">
+        <div class="bg-gray-50 rounded-2xl p-4">
           <pre class="text-sm text-gray-700">{{ JSON.stringify(campaign.audience_filters, null, 2) }}</pre>
         </div>
       </div>

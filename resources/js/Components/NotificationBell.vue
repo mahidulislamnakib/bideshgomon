@@ -162,7 +162,7 @@ const toggleDropdown = () => {
       class="relative p-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-colors"
       @click="toggleDropdown"
     >
-      <BellAlertIcon v-if="unreadCount > 0" class="h-6 w-6 text-brand-red-600 animate-bounce" />
+      <BellAlertIcon v-if="unreadCount > 0" class="h-6 w-6 text-growth-600 animate-bounce" />
       <BellIcon v-else class="h-6 w-6" />
 
       <!-- Unread Badge -->
@@ -188,7 +188,7 @@ const toggleDropdown = () => {
         <button
           v-if="unreadCount > 0"
           :disabled="loading"
-          class="text-sm text-brand-red-600 hover:text-blue-700 font-medium"
+          class="text-sm text-growth-600 hover:text-blue-700 font-medium"
           @click="markAllAsRead"
         >
           {{ loading ? 'Marking...' : 'Mark all read' }}
@@ -223,7 +223,7 @@ const toggleDropdown = () => {
                 </p>
               </div>
               <div v-if="!notification.is_read" class="flex-shrink-0">
-                <div class="h-2 w-2 bg-brand-red-600 rounded-full"></div>
+                <div class="h-2 w-2 bg-growth-600 rounded-full"></div>
               </div>
             </div>
           </div>
@@ -243,7 +243,7 @@ const toggleDropdown = () => {
       <!-- Footer -->
       <div class="px-4 py-3 border-t border-gray-200 bg-gray-50">
         <button
-          class="w-full text-center text-sm text-brand-red-600 hover:text-blue-700 font-medium"
+          class="w-full text-center text-sm text-growth-600 hover:text-blue-700 font-medium"
           @click="viewAllNotifications"
         >
           View all notifications

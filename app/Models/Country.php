@@ -33,4 +33,9 @@ class Country extends Model
     {
         return $this->hasMany(VisaRequirement::class);
     }
+
+    public function directories()
+    {
+        return $this->hasMany(Directory::class);
+    }
 }

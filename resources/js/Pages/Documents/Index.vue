@@ -34,10 +34,17 @@ function handleFile(e) {
 
 <template>
   <AuthenticatedLayout title="My Documents">
-    <div class="max-w-6xl mx-auto py-8 px-4">
-      <h1 class="text-2xl font-bold mb-6">Document Verification</h1>
+    <div class="min-h-screen bg-gray-50 dark:bg-neutral-900">
+      <!-- Compact Hero -->
+      <div class="bg-gradient-to-r from-growth-600 to-teal-600 px-4 py-6 sm:px-6">
+        <div class="max-w-6xl mx-auto">
+          <h1 class="text-xl md:text-2xl font-bold text-white">Document Verification</h1>
+          <p class="text-sm text-white/80 mt-0.5">Upload and manage your important documents</p>
+        </div>
+      </div>
 
-      <div class="bg-white shadow rounded-lg p-6 mb-8">
+      <div class="max-w-6xl mx-auto py-8 px-4">
+        <div class="bg-white dark:bg-neutral-800 shadow rounded-lg p-6 mb-8">
         <h2 class="text-lg font-semibold mb-4">Upload New Document</h2>
         <form @submit.prevent="submit" class="space-y-4">
           <div>
@@ -63,12 +70,12 @@ function handleFile(e) {
               <label for="is_primary" class="text-sm">Set as primary</label>
             </div>
           </div>
-          <button :disabled="form.processing" class="bg-brand-red-600 hover:bg-red-700 text-white px-4 py-2 rounded disabled:opacity-50">Upload</button>
+          <button :disabled="form.processing" class="bg-growth-600 hover:bg-growth-700 text-white px-4 py-2 rounded disabled:opacity-50">Upload</button>
           <p v-if="form.recentlySuccessful" class="text-green-600 text-sm">Uploaded successfully.</p>
         </form>
-      </div>
+        </div>
 
-      <div class="bg-white shadow rounded-lg p-6">
+        <div class="bg-white dark:bg-neutral-800 shadow rounded-lg p-6">
         <h2 class="text-lg font-semibold mb-4">My Documents</h2>
         <div v-if="documents.data.length === 0" class="text-center py-12">
           <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h5.586a1 1 0 01.707.293l1.414 1.414A1 1 0 0012.414 5H20a1 1 0 011 1v10a1 1 0 01-1 1h-5"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 7h18M3 10h18M3 13h18M3 16h9"/></svg>
@@ -113,11 +120,12 @@ function handleFile(e) {
           <div class="mt-4 flex items-center justify-between" v-if="documents.links.length > 3">
             <div class="text-sm text-gray-600">Showing {{ documents.data.length }} of {{ documents.total }}</div>
             <div class="flex gap-1">
-              <Link v-for="l in documents.links" :key="l.url + l.label" :href="l.url" v-html="l.label" :class="['px-2 py-1 rounded text-xs', l.active ? 'bg-brand-red-600 text-white' : 'bg-gray-100 text-gray-700']" />
+              <Link v-for="l in documents.links" :key="l.url + l.label" :href="l.url" v-html="l.label" :class="['px-2 py-1 rounded text-xs', l.active ? 'bg-growth-600 text-white' : 'bg-gray-100 text-gray-700']" />
             </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
   </AuthenticatedLayout>
 </template>

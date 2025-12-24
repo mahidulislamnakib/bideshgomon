@@ -22,7 +22,7 @@
             <div class="grid-stats mb-8">
                 <div class="stat-card">
                     <div class="stat-card-icon bg-blue-100">
-                        <DocumentTextIcon class="h-6 w-6 text-blue-600" />
+                        <DocumentTextIcon class="h-6 w-6 text-growth-600" />
                     </div>
                     <div>
                         <p class="stat-card-label">Total Posts</p>
@@ -93,7 +93,7 @@
                     <div v-if="showFilters" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-gray-200">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                            <select v-model="statusFilter" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" @change="applyFilters">
+                            <select v-model="statusFilter" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white" @change="applyFilters">
                                 <option value="">All Status</option>
                                 <option value="draft">Draft</option>
                                 <option value="published">Published</option>
@@ -102,14 +102,14 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
-                            <select v-model="categoryFilter" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" @change="applyFilters">
+                            <select v-model="categoryFilter" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white" @change="applyFilters">
                                 <option value="">All Categories</option>
                                 <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Author</label>
-                            <select v-model="authorFilter" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white" @change="applyFilters">
+                            <select v-model="authorFilter" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-growth-600 focus:border-growth-600 transition-all bg-white" @change="applyFilters">
                                 <option value="">All Authors</option>
                                 <option v-for="author in authors" :key="author.id" :value="author.id">{{ author.name }}</option>
                             </select>
@@ -196,7 +196,7 @@
                                         <HeartIcon class="h-4 w-4" />
                                         <span class="font-medium">{{ formatNumber(post.likes_count || 0) }}</span>
                                     </div>
-                                    <div class="flex items-center gap-1 text-blue-600">
+                                    <div class="flex items-center gap-1 text-growth-600">
                                         <ChatBubbleLeftIcon class="h-4 w-4" />
                                         <span class="font-medium">{{ formatNumber(post.comments_count || 0) }}</span>
                                     </div>
@@ -223,7 +223,7 @@
                                     </Link>
                                     <Link
                                         :href="route('admin.blog.posts.edit', post.id)"
-                                        class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                        class="p-2 text-growth-600 hover:bg-blue-50 rounded-lg transition-colors"
                                         title="Edit"
                                     >
                                         <PencilIcon class="h-5 w-5" />

@@ -291,7 +291,7 @@ const canProceedStep2 = computed(() => {
                             <button
                                 v-if="form.travelers.length > 1"
                                 @click="removeTraveler(index)"
-                                class="text-red-600 text-sm hover:text-red-700"
+                                class="text-red-600 text-sm hover:text-growth-700"
                             >
                                 Remove
                             </button>
@@ -412,7 +412,7 @@ const canProceedStep2 = computed(() => {
                     <!-- Payment Info -->
                     <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6">
                         <div class="flex items-start space-x-3">
-                            <CreditCardIcon class="h-6 w-6 text-brand-red-600 flex-shrink-0 mt-1" />
+                            <CreditCardIcon class="h-6 w-6 text-growth-600 flex-shrink-0 mt-1" />
                             <div>
                                 <h3 class="font-bold text-blue-900 mb-2">Payment via Wallet</h3>
                                 <p class="text-sm text-blue-800">
