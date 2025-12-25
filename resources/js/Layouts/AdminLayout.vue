@@ -329,6 +329,12 @@ const moduleGroups = [
     icon: BanknotesIcon,
     items: [
       {
+        name: 'Accounting',
+        href: route('admin.accounting.dashboard'),
+        icon: CurrencyDollarIcon,
+        current: route().current('admin.accounting.*'),
+      },
+      {
         name: 'Wallets',
         href: route('admin.wallets.index'),
         icon: BanknotesIcon,
@@ -455,6 +461,12 @@ const moreItems = [
     href: route('admin.sitemap'),
     icon: MapIcon,
     current: route().current('admin.sitemap'),
+  },
+  {
+    name: 'UI Components',
+    href: route('component.gallery'),
+    icon: SparklesIcon,
+    current: route().current('component.gallery'),
   },
 ]
 

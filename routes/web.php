@@ -79,6 +79,16 @@ Route::get('/pricing', function () {
     return Inertia::render('Public/Pricing');
 })->name('pricing');
 
+// Component Library Showcase (Development)
+Route::get('/ui-components', function () {
+    return Inertia::render('DesignSystemShowcase');
+})->name('ui.components');
+
+// Component Gallery - All 229 Components
+Route::get('/component-gallery', function () {
+    return Inertia::render('ComponentGallery');
+})->name('component.gallery');
+
 Route::get('/press', function () {
     return Inertia::render('Public/Press');
 })->name('press');
@@ -1737,6 +1747,30 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::get('/{application}', [\App\Http\Controllers\Admin\ServiceApplicationController::class, 'show'])->name('show');
         Route::post('/{application}/assign-agency', [\App\Http\Controllers\Admin\ServiceApplicationController::class, 'assignAgency'])->name('assign-agency');
         Route::post('/{application}/update-status', [\App\Http\Controllers\Admin\ServiceApplicationController::class, 'updateStatus'])->name('update-status');
+    });
+
+    // Accounting & Invoice Management
+    Route::prefix('accounting')->name('admin.accounting.')->group(function () {
+        // Dashboard
+        Route::get('/', [\App\Http\Controllers\Admin\AccountingController::class, 'dashboard'])->name('dashboard');
+        
+        // Invoices
+        Route::resource('invoices', \App\Http\Controllers\Admin\InvoiceController::class);
+        Route::post('invoices/{invoice}/send', [\App\Http\Controllers\Admin\InvoiceController::class, 'send'])->name('invoices.send');
+        Route::post('invoices/{invoice}/duplicate', [\App\Http\Controllers\Admin\InvoiceController::class, 'duplicate'])->name('invoices.duplicate');
+        Route::post('invoices/{invoice}/cancel', [\App\Http\Controllers\Admin\InvoiceController::class, 'cancel'])->name('invoices.cancel');
+        Route::get('invoices/{invoice}/print', [\App\Http\Controllers\Admin\InvoiceController::class, 'print'])->name('invoices.print');
+        Route::get('invoices/{invoice}/pdf', [\App\Http\Controllers\Admin\InvoiceController::class, 'pdf'])->name('invoices.pdf');
+        
+        // Payments
+        Route::get('payments', [\App\Http\Controllers\Admin\PaymentController::class, 'index'])->name('payments.index');
+        Route::post('invoices/{invoice}/payments', [\App\Http\Controllers\Admin\PaymentController::class, 'store'])->name('payments.store');
+        Route::get('payments/{payment}', [\App\Http\Controllers\Admin\PaymentController::class, 'show'])->name('payments.show');
+        Route::delete('payments/{payment}', [\App\Http\Controllers\Admin\PaymentController::class, 'destroy'])->name('payments.destroy');
+        
+        // Reports
+        Route::get('reports', [\App\Http\Controllers\Admin\AccountingController::class, 'reports'])->name('reports.index');
+        Route::get('reports/export', [\App\Http\Controllers\Admin\AccountingController::class, 'export'])->name('reports.export');
     });
 });
 
