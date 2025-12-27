@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Payment extends Model
 {
@@ -29,17 +29,27 @@ class Payment extends Model
     ];
 
     const METHOD_BKASH = 'bkash';
+
     const METHOD_NAGAD = 'nagad';
+
     const METHOD_ROCKET = 'rocket';
+
     const METHOD_BANK = 'bank_transfer';
+
     const METHOD_CASH = 'cash';
+
     const METHOD_CARD = 'card';
+
     const METHOD_CHECK = 'check';
+
     const METHOD_OTHER = 'other';
 
     const STATUS_PENDING = 'pending';
+
     const STATUS_COMPLETED = 'completed';
+
     const STATUS_FAILED = 'failed';
+
     const STATUS_REFUNDED = 'refunded';
 
     /**

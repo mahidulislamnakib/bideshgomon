@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Payment;
 use App\Services\InvoiceService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
-use Carbon\Carbon;
 
 class AccountingController extends Controller
 {
@@ -89,7 +89,7 @@ class AccountingController extends Controller
     public function reports(Request $request): Response
     {
         $period = $request->get('period', 'month');
-        
+
         // Determine date range based on period
         [$startDate, $endDate] = $this->getPeriodDates($period);
 
@@ -154,6 +154,7 @@ class AccountingController extends Controller
             ->get()
             ->map(function ($item) use ($totalPayments) {
                 $item->percentage = $totalPayments > 0 ? round(($item->total / $totalPayments) * 100, 1) : 0;
+
                 return $item;
             });
 
@@ -182,10 +183,10 @@ class AccountingController extends Controller
 
         // Monthly summary
         $driver = config('database.default');
-        $monthExpr = $driver === 'sqlite' 
-            ? "CAST(strftime('%m', issue_date) AS INTEGER)" 
+        $monthExpr = $driver === 'sqlite'
+            ? "CAST(strftime('%m', issue_date) AS INTEGER)"
             : 'MONTH(issue_date)';
-        
+
         $monthlySummary = Invoice::whereYear('issue_date', now()->year)
             ->whereNotIn('status', [Invoice::STATUS_CANCELLED])
             ->selectRaw("
@@ -201,6 +202,7 @@ class AccountingController extends Controller
             ->map(function ($item) {
                 $item->monthName = Carbon::create(now()->year, $item->month, 1)->format('F Y');
                 $item->collectionRate = $item->invoiced > 0 ? round(($item->collected / $item->invoiced) * 100, 0) : 0;
+
                 return $item;
             });
 
@@ -259,7 +261,7 @@ class AccountingController extends Controller
 
         // This would typically use Laravel Excel or similar
         // For now, return JSON that can be processed client-side
-        
+
         if ($type === 'invoices') {
             $data = Invoice::with(['client:id,name', 'items'])
                 ->whereBetween('issue_date', [$startDate, $endDate])

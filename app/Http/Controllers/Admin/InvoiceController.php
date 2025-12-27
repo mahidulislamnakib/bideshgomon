@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
-use App\Models\User;
 use App\Models\Service;
+use App\Models\User;
 use App\Services\InvoiceService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
-use Illuminate\Http\RedirectResponse;
 
 class InvoiceController extends Controller
 {
@@ -37,7 +37,7 @@ class InvoiceController extends Controller
             $query->where(function ($q) use ($search) {
                 $q->where('invoice_number', 'like', "%{$search}%")
                     ->orWhere('client_name', 'like', "%{$search}%")
-                    ->orWhereHas('client', fn($q) => $q->where('name', 'like', "%{$search}%"));
+                    ->orWhereHas('client', fn ($q) => $q->where('name', 'like', "%{$search}%"));
             });
         }
 
@@ -177,6 +177,7 @@ class InvoiceController extends Controller
                 ->get(),
         ]);
     }
+
     /**
      * Update invoice
      */
@@ -228,7 +229,7 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice): RedirectResponse
     {
         // Only allow deletion of draft or cancelled invoices
-        if (!in_array($invoice->status, [Invoice::STATUS_DRAFT, Invoice::STATUS_CANCELLED])) {
+        if (! in_array($invoice->status, [Invoice::STATUS_DRAFT, Invoice::STATUS_CANCELLED])) {
             return back()->with('error', 'Only draft or cancelled invoices can be deleted.');
         }
 
@@ -305,7 +306,7 @@ class InvoiceController extends Controller
             $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.invoice', [
                 'invoice' => $invoice,
             ]);
-            
+
             return $pdf->download("Invoice-{$invoice->invoice_number}.pdf");
         }
 

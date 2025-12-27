@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Payment;
 use App\Services\InvoiceService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
-use Illuminate\Http\RedirectResponse;
 
 class PaymentController extends Controller
 {
@@ -38,7 +38,7 @@ class PaymentController extends Controller
             $query->where(function ($q) use ($search) {
                 $q->where('transaction_id', 'like', "%{$search}%")
                     ->orWhere('reference_number', 'like', "%{$search}%")
-                    ->orWhereHas('invoice', fn($q) => $q->where('invoice_number', 'like', "%{$search}%"));
+                    ->orWhereHas('invoice', fn ($q) => $q->where('invoice_number', 'like', "%{$search}%"));
             });
         }
 
@@ -105,7 +105,7 @@ class PaymentController extends Controller
             'invoice_id' => 'required|exists:invoices,id',
             'amount' => 'required|numeric|min:0.01',
             'payment_date' => 'required|date',
-            'payment_method' => 'required|in:' . implode(',', array_keys(Payment::getPaymentMethods())),
+            'payment_method' => 'required|in:'.implode(',', array_keys(Payment::getPaymentMethods())),
             'transaction_id' => 'nullable|string|max:100',
             'reference_number' => 'nullable|string|max:100',
             'notes' => 'nullable|string|max:500',
@@ -117,7 +117,7 @@ class PaymentController extends Controller
         $maxPayment = $invoice->total_amount - $invoice->paid_amount;
         if ($validated['amount'] > $maxPayment) {
             return back()->withErrors([
-                'amount' => "Payment amount cannot exceed outstanding balance of ৳" . number_format($maxPayment, 2),
+                'amount' => 'Payment amount cannot exceed outstanding balance of ৳'.number_format($maxPayment, 2),
             ]);
         }
 

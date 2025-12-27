@@ -3,11 +3,10 @@
 namespace App\Services;
 
 use App\Models\Invoice;
-use App\Models\InvoiceItem;
 use App\Models\Payment;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceService
 {
@@ -46,7 +45,7 @@ class InvoiceService
     /**
      * Update an existing invoice
      */
-    public function updateInvoice(Invoice $invoice, array $data, array $items = null): Invoice
+    public function updateInvoice(Invoice $invoice, array $data, ?array $items = null): Invoice
     {
         return DB::transaction(function () use ($invoice, $data, $items) {
             $invoice->update($data);
@@ -96,6 +95,7 @@ class InvoiceService
         if ($invoice->status === Invoice::STATUS_DRAFT) {
             $invoice->update(['status' => Invoice::STATUS_SENT]);
         }
+
         return $invoice;
     }
 
@@ -105,6 +105,7 @@ class InvoiceService
     public function cancelInvoice(Invoice $invoice): Invoice
     {
         $invoice->update(['status' => Invoice::STATUS_CANCELLED]);
+
         return $invoice;
     }
 
@@ -187,13 +188,13 @@ class InvoiceService
     public function getRevenueByMonth(int $year): Collection
     {
         $driver = config('database.default');
-        
+
         if ($driver === 'sqlite') {
             $monthExpr = "CAST(strftime('%m', issue_date) AS INTEGER)";
         } else {
             $monthExpr = 'MONTH(issue_date)';
         }
-        
+
         return Invoice::selectRaw("{$monthExpr} as month, SUM(total_amount) as total, SUM(paid_amount) as paid")
             ->whereYear('issue_date', $year)
             ->whereNotIn('status', [Invoice::STATUS_CANCELLED])

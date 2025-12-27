@@ -1753,7 +1753,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::prefix('accounting')->name('admin.accounting.')->group(function () {
         // Dashboard
         Route::get('/', [\App\Http\Controllers\Admin\AccountingController::class, 'dashboard'])->name('dashboard');
-        
+
+        // Clients
+        Route::resource('clients', \App\Http\Controllers\Admin\ClientController::class);
+        Route::post('clients/{client}/toggle-active', [\App\Http\Controllers\Admin\ClientController::class, 'toggleActive'])->name('clients.toggle-active');
+
         // Invoices
         Route::resource('invoices', \App\Http\Controllers\Admin\InvoiceController::class);
         Route::post('invoices/{invoice}/send', [\App\Http\Controllers\Admin\InvoiceController::class, 'send'])->name('invoices.send');
@@ -1761,13 +1765,60 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('invoices/{invoice}/cancel', [\App\Http\Controllers\Admin\InvoiceController::class, 'cancel'])->name('invoices.cancel');
         Route::get('invoices/{invoice}/print', [\App\Http\Controllers\Admin\InvoiceController::class, 'print'])->name('invoices.print');
         Route::get('invoices/{invoice}/pdf', [\App\Http\Controllers\Admin\InvoiceController::class, 'pdf'])->name('invoices.pdf');
-        
+
+        // Quotations
+        Route::resource('quotations', \App\Http\Controllers\Admin\QuotationController::class);
+        Route::post('quotations/{quotation}/send', [\App\Http\Controllers\Admin\QuotationController::class, 'send'])->name('quotations.send');
+        Route::post('quotations/{quotation}/accept', [\App\Http\Controllers\Admin\QuotationController::class, 'accept'])->name('quotations.accept');
+        Route::post('quotations/{quotation}/reject', [\App\Http\Controllers\Admin\QuotationController::class, 'reject'])->name('quotations.reject');
+        Route::post('quotations/{quotation}/convert', [\App\Http\Controllers\Admin\QuotationController::class, 'convert'])->name('quotations.convert');
+        Route::post('quotations/{quotation}/duplicate', [\App\Http\Controllers\Admin\QuotationController::class, 'duplicate'])->name('quotations.duplicate');
+        Route::get('quotations/{quotation}/pdf', [\App\Http\Controllers\Admin\QuotationController::class, 'pdf'])->name('quotations.pdf');
+
+        // Credit Notes
+        Route::resource('credit-notes', \App\Http\Controllers\Admin\CreditNoteController::class)->except(['edit', 'update']);
+        Route::post('credit-notes/{creditNote}/approve', [\App\Http\Controllers\Admin\CreditNoteController::class, 'approve'])->name('credit-notes.approve');
+        Route::post('credit-notes/{creditNote}/apply', [\App\Http\Controllers\Admin\CreditNoteController::class, 'apply'])->name('credit-notes.apply');
+        Route::post('credit-notes/{creditNote}/void', [\App\Http\Controllers\Admin\CreditNoteController::class, 'void'])->name('credit-notes.void');
+
+        // Recurring Invoices
+        Route::resource('recurring-invoices', \App\Http\Controllers\Admin\RecurringInvoiceController::class);
+        Route::post('recurring-invoices/{recurringInvoice}/pause', [\App\Http\Controllers\Admin\RecurringInvoiceController::class, 'pause'])->name('recurring-invoices.pause');
+        Route::post('recurring-invoices/{recurringInvoice}/resume', [\App\Http\Controllers\Admin\RecurringInvoiceController::class, 'resume'])->name('recurring-invoices.resume');
+        Route::post('recurring-invoices/{recurringInvoice}/cancel', [\App\Http\Controllers\Admin\RecurringInvoiceController::class, 'cancel'])->name('recurring-invoices.cancel');
+        Route::post('recurring-invoices/{recurringInvoice}/generate', [\App\Http\Controllers\Admin\RecurringInvoiceController::class, 'generateInvoice'])->name('recurring-invoices.generate');
+
         // Payments
         Route::get('payments', [\App\Http\Controllers\Admin\PaymentController::class, 'index'])->name('payments.index');
         Route::post('invoices/{invoice}/payments', [\App\Http\Controllers\Admin\PaymentController::class, 'store'])->name('payments.store');
         Route::get('payments/{payment}', [\App\Http\Controllers\Admin\PaymentController::class, 'show'])->name('payments.show');
         Route::delete('payments/{payment}', [\App\Http\Controllers\Admin\PaymentController::class, 'destroy'])->name('payments.destroy');
-        
+
+        // Expenses
+        Route::resource('expenses', \App\Http\Controllers\Admin\ExpenseController::class);
+        Route::post('expenses/{expense}/approve', [\App\Http\Controllers\Admin\ExpenseController::class, 'approve'])->name('expenses.approve');
+        Route::post('expenses/{expense}/reject', [\App\Http\Controllers\Admin\ExpenseController::class, 'reject'])->name('expenses.reject');
+        Route::post('expenses/{expense}/mark-paid', [\App\Http\Controllers\Admin\ExpenseController::class, 'markPaid'])->name('expenses.mark-paid');
+
+        // Expense Categories
+        Route::get('expense-categories', [\App\Http\Controllers\Admin\ExpenseCategoryController::class, 'index'])->name('expense-categories.index');
+        Route::post('expense-categories', [\App\Http\Controllers\Admin\ExpenseCategoryController::class, 'store'])->name('expense-categories.store');
+        Route::put('expense-categories/{category}', [\App\Http\Controllers\Admin\ExpenseCategoryController::class, 'update'])->name('expense-categories.update');
+        Route::delete('expense-categories/{category}', [\App\Http\Controllers\Admin\ExpenseCategoryController::class, 'destroy'])->name('expense-categories.destroy');
+
+        // Bank Accounts
+        Route::resource('bank-accounts', \App\Http\Controllers\Admin\BankAccountController::class);
+        Route::post('bank-accounts/{bankAccount}/adjust-balance', [\App\Http\Controllers\Admin\BankAccountController::class, 'adjustBalance'])->name('bank-accounts.adjust-balance');
+        Route::post('bank-accounts/{bankAccount}/set-primary', [\App\Http\Controllers\Admin\BankAccountController::class, 'setPrimary'])->name('bank-accounts.set-primary');
+        Route::post('bank-accounts/{bankAccount}/toggle-active', [\App\Http\Controllers\Admin\BankAccountController::class, 'toggleActive'])->name('bank-accounts.toggle-active');
+
+        // Tax Settings
+        Route::get('tax-settings', [\App\Http\Controllers\Admin\TaxSettingController::class, 'index'])->name('tax-settings.index');
+        Route::post('tax-settings', [\App\Http\Controllers\Admin\TaxSettingController::class, 'store'])->name('tax-settings.store');
+        Route::put('tax-settings/{taxSetting}', [\App\Http\Controllers\Admin\TaxSettingController::class, 'update'])->name('tax-settings.update');
+        Route::post('tax-settings/{taxSetting}/set-default', [\App\Http\Controllers\Admin\TaxSettingController::class, 'setDefault'])->name('tax-settings.set-default');
+        Route::delete('tax-settings/{taxSetting}', [\App\Http\Controllers\Admin\TaxSettingController::class, 'destroy'])->name('tax-settings.destroy');
+
         // Reports
         Route::get('reports', [\App\Http\Controllers\Admin\AccountingController::class, 'reports'])->name('reports.index');
         Route::get('reports/export', [\App\Http\Controllers\Admin\AccountingController::class, 'export'])->name('reports.export');

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Invoice extends Model
 {
@@ -45,10 +45,15 @@ class Invoice extends Model
     ];
 
     const STATUS_DRAFT = 'draft';
+
     const STATUS_SENT = 'sent';
+
     const STATUS_PAID = 'paid';
+
     const STATUS_PARTIAL = 'partial';
+
     const STATUS_OVERDUE = 'overdue';
+
     const STATUS_CANCELLED = 'cancelled';
 
     /**
@@ -58,9 +63,9 @@ class Invoice extends Model
     {
         $year = now()->format('Y');
         $prefix = "BG-{$year}-";
-        
+
         $lastInvoice = static::withTrashed()
-            ->where('invoice_number', 'like', $prefix . '%')
+            ->where('invoice_number', 'like', $prefix.'%')
             ->orderBy('invoice_number', 'desc')
             ->first();
 
@@ -71,7 +76,7 @@ class Invoice extends Model
             $newNumber = 1;
         }
 
-        return $prefix . str_pad($newNumber, 4, '0', STR_PAD_LEFT);
+        return $prefix.str_pad($newNumber, 4, '0', STR_PAD_LEFT);
     }
 
     /**
@@ -103,8 +108,8 @@ class Invoice extends Model
      */
     public function getIsOverdueAttribute(): bool
     {
-        return $this->due_date->isPast() && 
-               !in_array($this->status, [self::STATUS_PAID, self::STATUS_CANCELLED]);
+        return $this->due_date->isPast() &&
+               ! in_array($this->status, [self::STATUS_PAID, self::STATUS_CANCELLED]);
     }
 
     /**

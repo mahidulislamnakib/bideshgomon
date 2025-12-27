@@ -31,6 +31,7 @@ import {
   BriefcaseIcon,
   ClipboardDocumentListIcon,
   DocumentTextIcon,
+  DocumentIcon,
   NewspaperIcon,
   ChartBarIcon,
   MegaphoneIcon,
@@ -69,6 +70,10 @@ import {
   EllipsisHorizontalIcon,
   PlusCircleIcon,
   CubeIcon,
+  ReceiptRefundIcon,
+  ReceiptPercentIcon,
+  ArrowPathIcon,
+  CreditCardIcon,
 } from '@heroicons/vue/24/outline'
 
 const showingNavigationDropdown = ref(false)
@@ -329,10 +334,64 @@ const moduleGroups = [
     icon: BanknotesIcon,
     items: [
       {
-        name: 'Accounting',
+        name: 'Dashboard',
         href: route('admin.accounting.dashboard'),
-        icon: CurrencyDollarIcon,
-        current: route().current('admin.accounting.*'),
+        icon: ChartBarIcon,
+        current: route().current('admin.accounting.dashboard'),
+      },
+      {
+        name: 'Clients',
+        href: route('admin.accounting.clients.index'),
+        icon: UserGroupIcon,
+        current: route().current('admin.accounting.clients.*'),
+      },
+      {
+        name: 'Invoices',
+        href: route('admin.accounting.invoices.index'),
+        icon: DocumentTextIcon,
+        current: route().current('admin.accounting.invoices.*'),
+      },
+      {
+        name: 'Quotations',
+        href: route('admin.accounting.quotations.index'),
+        icon: DocumentIcon,
+        current: route().current('admin.accounting.quotations.*'),
+      },
+      {
+        name: 'Credit Notes',
+        href: route('admin.accounting.credit-notes.index'),
+        icon: ReceiptRefundIcon,
+        current: route().current('admin.accounting.credit-notes.*'),
+      },
+      {
+        name: 'Recurring',
+        href: route('admin.accounting.recurring-invoices.index'),
+        icon: ArrowPathIcon,
+        current: route().current('admin.accounting.recurring-invoices.*'),
+      },
+      {
+        name: 'Expenses',
+        href: route('admin.accounting.expenses.index'),
+        icon: CreditCardIcon,
+        current: route().current('admin.accounting.expenses.*'),
+      },
+      {
+        name: 'Bank Accounts',
+        href: route('admin.accounting.bank-accounts.index'),
+        icon: BuildingLibraryIcon,
+        current: route().current('admin.accounting.bank-accounts.*'),
+      },
+      {
+        name: 'Tax Settings',
+        href: route('admin.accounting.tax-settings.index'),
+        icon: ReceiptPercentIcon,
+        current: route().current('admin.accounting.tax-settings.*'),
+      },
+      {
+        name: 'Categories',
+        href: route('admin.accounting.expense-categories.index'),
+        icon: FolderIcon,
+        current: route().current('admin.accounting.expense-categories.*'),
       },
       {
         name: 'Wallets',
