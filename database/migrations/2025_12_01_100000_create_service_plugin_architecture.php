@@ -17,6 +17,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('service_categories')) {
+            return;
+        }
         // Service Categories (Immigration, Jobs, Travel, Education, etc.)
         Schema::create('service_categories', function (Blueprint $table) {
             $table->id();

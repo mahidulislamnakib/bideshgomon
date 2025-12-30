@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('master_documents')) {
+            return;
+        }
         Schema::create('master_documents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->nullable()->constrained('document_categories')->onDelete('set null');

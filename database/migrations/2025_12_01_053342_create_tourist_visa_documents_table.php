@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('tourist_visa_documents')) {
+            return;
+        }
         Schema::create('tourist_visa_documents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tourist_visa_id')->constrained()->onDelete('cascade');
